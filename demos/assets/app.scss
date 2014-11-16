@@ -1,5 +1,6 @@
-$slick-font-path: "/fonts";
+$slick-font-path: "/fonts/";
 @import "slick-carousel/slick/slick";
+@import "./style";
 
 .container {
   max-width: 960px;

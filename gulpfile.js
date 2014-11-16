@@ -9,9 +9,13 @@ gulp.task('clean', function () {
       .pipe(rimraf());
 });
 
-gulp.task('fonts', function () {
+gulp.task('copy', function () {
   gulp.src('./bower_components/slick-carousel/slick/fonts/*')
       .pipe(gulp.dest('./demos/build/fonts'));
+  gulp.src('./bower_components/slick-carousel/slick/ajax-loader.gif')
+      .pipe(gulp.dest('./demos/build'));
+  gulp.src('./demos/assets/jquery.scripts.js')
+      .pipe(gulp.dest('./demos/build'));
 });
 
 gulp.task('sass', function () {
@@ -22,11 +26,11 @@ gulp.task('sass', function () {
               .pipe(gulp.dest('./demos/build'));
 });
 
- gulp.task('watch', function () {
+ gulp.task('watch', ['sass'], function () {
   gulp.watch(['./demos/assets/**/*.{scss,sass}'], ['sass']);
 }); 
 
-gulp.task('server', ['clean', 'fonts'], function (callback) {
+gulp.task('server', ['clean', 'copy'], function (callback) {
   var myConfig = require('./webpack.config.js');
   
   var webpackCompiler = webpack(myConfig, function(err, stats) {

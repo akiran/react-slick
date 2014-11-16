@@ -1,7 +1,7 @@
 {
   "name": "react-slick",
   "version": "0.0.1",
-  "description": "",
+  "description": " React port of slick carousel",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon -i demos/assets demos/app.js"
