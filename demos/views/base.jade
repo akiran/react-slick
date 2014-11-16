@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+  head
+    block css
+    block extra-css
+    block head
+    block extra-head
+    
+  body
+    block content
+      #rapp    
+    block js
+      script(src="#{settings.staticUrl}/webpack-dev-server.js")  
+    block extra-js

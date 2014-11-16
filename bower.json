@@ -1,0 +1,20 @@
+{
+  "name": "react-slick",
+  "main": "index.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/akiran/react-slick",
+  "authors": [
+    "Kiran Abburi"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "slick-carousel": "~1.3.15"
+  }
+}
