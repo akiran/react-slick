@@ -30,7 +30,7 @@ gulp.task('sass', function () {
   gulp.watch(['./demos/assets/**/*.{scss,sass}'], ['sass']);
 }); 
 
-gulp.task('server', ['clean', 'copy'], function (callback) {
+gulp.task('server', ['copy'], function (callback) {
   var myConfig = require('./webpack.config.js');
   
   var webpackCompiler = webpack(myConfig, function(err, stats) {
