@@ -13,14 +13,18 @@ var Slider = React.createClass({
       slideCount: 0,
       slideWidth: 0,
       currentSlide: 0,
-      animSlide: 0,
+      animSlide: 0, // Includes the position of cloned slides
       currentDirection: 0,
       direction: 1, // 0 -> left, 1 -> right,
       slideOffset: 0
     };
   },
   getDefaultProps: function () {
+    return {
+      settings: {
 
+      }
+    };
   },
   componentDidMount: function () {
     this.setState({
@@ -29,7 +33,24 @@ var Slider = React.createClass({
     });
   },
   getDots: function () {
-    return <div></div>;
+    
+    var classes, dotOptions;
+    var dots = React.Children.map(this.props.children, function (child, index) {
+      classes = {
+        'slick-active': (this.state.currentSlide === index)
+      };
+      dotOptions = {
+        event: 'dots',
+        index: index
+      };
+      return <li className={cx(classes)}><button onClick={this.slideHandler.bind(this, dotOptions)}>{index}</button></li>;
+    }.bind(this));
+
+    return (
+      <ul className='slick-dots' style={{display: 'block'}}>
+        {dots}
+      </ul>
+    );
   },
   getSlides: function () {
     var slides;
@@ -59,13 +80,22 @@ var Slider = React.createClass({
     );
   },
   render: function () {
+    var nextOptions = {
+      event: 'next',
+      index: this.state.currentSlide + 1
+    };
+    var previousOptions = {
+      event: 'previous',
+      index: this.state.currentSlide - 1
+    }; 
     return (
       <div className='slick-initialized slick-slider'>
         <div className='slick-list'>
           {this.getTrack()}
         </div>
-        <button ref='previous' type="button" data-role="none" className="slick-prev" style={{display: 'block'}} onClick={this.slideHandler.bind(this, {event: 'previous'})}> Previous</button>
-        <button ref='next' type="button" data-role="none" className="slick-next" style={{display: 'block'}} onClick={this.slideHandler.bind(this, {event: 'next'})}>Next</button>
+        <button ref='previous' type="button" data-role="none" className="slick-prev" style={{display: 'block'}} onClick={this.slideHandler.bind(this, previousOptions)}> Previous</button>
+        <button ref='next' type="button" data-role="none" className="slick-next" style={{display: 'block'}} onClick={this.slideHandler.bind(this, nextOptions)}>Next</button>
+        {this.getDots()}
       </div>
     );
   }
