@@ -15,44 +15,95 @@ var Slider = React.createClass({
       currentLeft: null,
       currentSlide: 0,
       direction: 1,
-      // $dots: null,
       // listWidth: null,
       // listHeight: null,
       // loadIndex: 0,
-      // $nextArrow: null,
-      // $prevArrow: null,
       slideCount: null,
       slideWidth: null,
-      // $slideTrack: null,
-      // $slides: null,
       // sliding: false,
-      slideOffset: 0, // move the slide for animation
+      // slideOffset: 0, 
       swipeLeft: null,
-      // $list: null,
       touchObject: {
         startX: 0,
+        startY: 0,
         curX: 0,
+        curY: 0
       },
-      // transformsEnabled: false, // Not supporting this
+       
       // added for react
       trackStyle: {}
 
+      // Removed
+      // transformsEnabled: false,
+      // $nextArrow: null,
+      // $prevArrow: null,
+      // $dots: null,
+      // $list: null,
+      // $slideTrack: null,
+      // $slides: null,
     };
   },
   getDefaultProps: function () {
     return {
       settings: {
+        accessibility: true,
+        adaptiveHeight: false,
+        // appendArrows: $(element),
+        // appendDots: $(element),
+        arrows: true,
+        asNavFor: null,
+        // prevArrow: '<button type="button" data-role="none" class="slick-prev">Previous</button>',
+        // nextArrow: '<button type="button" data-role="none" class="slick-next">Next</button>',
+        autoplay: false,
+        autoplaySpeed: 3000,
+        centerMode: false,
+        centerPadding: '50px',
+        cssEase: 'ease',
+        // customPaging: function(slider, i) {
+        //     return '<button type="button" data-role="none">' + (i + 1) + '</button>';
+        // },
+        dots: false,
+        dotsClass: 'slick-dots',
+        draggable: true,
+        easing: 'linear',
+        fade: false,
+        focusOnSelect: false,
+        infinite: true,
+        initialSlide: 0,
+        lazyLoad: 'ondemand',
+        onBeforeChange: null,
+        onAfterChange: null,
+        onInit: null,
+        onReInit: null,
+        onSetPosition: null,
+        pauseOnHover: true,
+        pauseOnDotsHover: false,
+        respondTo: 'window',
+        responsive: null,
+        rtl: false,
+        slide: 'div',
         slidesToShow: 1,
         slidesToScroll: 1,
+        speed: 500,
+        swipe: true,
+        swipeToSlide: false,
+        touchMove: true,
+        touchThreshold: 5,
+        // useCSS: true,
+        variableWidth: false,
+        vertical: false,
+        // waitForAnimate: true
       }
     };
   },
   componentDidMount: function () {
     var slideCount = this.getSlideCount();
     var slideWidth = this.getDOMNode().getBoundingClientRect().width;
+    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
+      listWidth: listWidth
     }, function () {
       // getCSS function needs previously set state
       var trackStyle = this.getCSS(this.getLeft(0));
@@ -108,7 +159,7 @@ var Slider = React.createClass({
   render: function () {
     return (
       <div className='slick-initialized slick-slider' >
-        <div className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.swipe} onMouseUp={this.swipeEnd} onMouseLeave={this.swipeEnd}>
+        <div ref='list' className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
           {this.renderTrack()}
         </div>
         <button ref='previous' type="button" data-role="none" className="slick-prev" style={{display: 'block'}} onClick={this.changeSlide.bind(this, {message: 'previous'})}> Previous</button>
