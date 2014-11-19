@@ -22,7 +22,8 @@ var Slider = React.createClass({
   getDefaultProps: function () {
     return {
       settings: {
-
+        slidesToShow: 1,
+        slidesToScroll: 1,
       }
     };
   },
@@ -40,10 +41,10 @@ var Slider = React.createClass({
         'slick-active': (this.state.currentSlide === index)
       };
       dotOptions = {
-        event: 'dots',
+        message: 'index',
         index: index
       };
-      return <li className={cx(classes)}><button onClick={this.slideHandler.bind(this, dotOptions)}>{index}</button></li>;
+      return <li className={cx(classes)}><button onClick={this.changeSlide.bind(this, dotOptions)}>{index}</button></li>;
     }.bind(this));
 
     return (
@@ -80,21 +81,13 @@ var Slider = React.createClass({
     );
   },
   render: function () {
-    var nextOptions = {
-      event: 'next',
-      index: this.state.currentSlide + 1
-    };
-    var previousOptions = {
-      event: 'previous',
-      index: this.state.currentSlide - 1
-    }; 
     return (
-      <div className='slick-initialized slick-slider'>
-        <div className='slick-list'>
+      <div className='slick-initialized slick-slider' >
+        <div className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.swipe} onMouseUp={this.swipeEnd} onMouseLeave={this.swipeEnd}>
           {this.getTrack()}
         </div>
-        <button ref='previous' type="button" data-role="none" className="slick-prev" style={{display: 'block'}} onClick={this.slideHandler.bind(this, previousOptions)}> Previous</button>
-        <button ref='next' type="button" data-role="none" className="slick-next" style={{display: 'block'}} onClick={this.slideHandler.bind(this, nextOptions)}>Next</button>
+        <button ref='previous' type="button" data-role="none" className="slick-prev" style={{display: 'block'}} onClick={this.changeSlide.bind(this, {message: 'previous'})}> Previous</button>
+        <button ref='next' type="button" data-role="none" className="slick-next" style={{display: 'block'}} onClick={this.changeSlide.bind(this, {message: 'next'})}>Next</button>
         {this.getDots()}
       </div>
     );
