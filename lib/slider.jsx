@@ -97,7 +97,7 @@ var Slider = React.createClass({
     };
   },
   componentDidMount: function () {
-    var slideCount = this.getSlideCount();
+    var slideCount = React.Children.count(this.props.children);
     var slideWidth = this.getDOMNode().getBoundingClientRect().width;
     var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
     this.setState({
@@ -141,7 +141,7 @@ var Slider = React.createClass({
     return slides;
   },
   renderTrack: function () {
-    var count = this.getSlideCount();
+    var count = React.Children.count(this.props.children);
     var lastSlideClone = cloneWithProps(this.props.children[count - 1], {});
     var firstSlideClone = cloneWithProps(this.props.children[0], {});
     return (

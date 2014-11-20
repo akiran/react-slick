@@ -1,5 +1,4 @@
 // Karma configuration
-// Generated on Tue Nov 18 2014 21:29:11 GMT+0530 (IST)
 
 module.exports = function(config) {
   config.set({
@@ -15,28 +14,67 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      
+      // "test/utils/sinon.js",
+      "bower_components/react/react-with-addons.js",
+      "bower_components/jquery/dist/jquery.js",
+      "bower_components/should/should.js",
+      'test/**/*.js',
+      'test/**/*.jsx',
     ],
 
 
     // list of files to exclude
     exclude: [
-      
     ],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-    
+      './test/**/*.js': ['webpack'],
+      './test/**/*.jsx': ['webpack'],
     },
 
+    webpack: {
+      cache: true,
+      module: {
+        loaders: [
+            { loader: "jsx-loader" },
+        ]
+      },
+      resolve : {
+          extensions: ['', '.js', '.jsx']
+      },
+      externals: {
+        react: "React",
+        "react/addons": "React",
+        // sinon: "sinon",
+        jquery: "$",
+        should: 'should'
+      },
+      // postLoaders: [{
+      //   test: "", // every file
+      //   loader: "coverjs-loader"
+      // }]
+    },
+    
+    webpackServer: {
+      hot: true,
+      quiet: true,
+      noInfo: true,
+      watchDelay: 300,
+    },
+    // webpackPort: 8080, // Defaults to config.port + 1
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
-
+    // coverageReporter: {
+    //   type : 'html',
+    //   dir : 'coverage/'
+    // },
+    reportSlowerThan: 20,
 
     // web server port
     port: 9876,
@@ -48,7 +86,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_WARN,
 
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -62,6 +100,9 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
+    // plugins: [
+    //   require("karma-webpack")
+    // ]
   });
 };
