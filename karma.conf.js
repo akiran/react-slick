@@ -14,7 +14,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // "test/utils/sinon.js",
+      "testlib/sinon.js",
       "bower_components/react/react-with-addons.js",
       "bower_components/jquery/dist/jquery.js",
       "bower_components/should/should.js",
@@ -36,7 +36,7 @@ module.exports = function(config) {
     },
 
     webpack: {
-      cache: true,
+      // cache: true,
       module: {
         loaders: [
             { loader: "jsx-loader" },
@@ -48,7 +48,7 @@ module.exports = function(config) {
       externals: {
         react: "React",
         "react/addons": "React",
-        // sinon: "sinon",
+        "sinon": "sinon",
         jquery: "$",
         should: 'should'
       },
@@ -57,9 +57,8 @@ module.exports = function(config) {
       //   loader: "coverjs-loader"
       // }]
     },
-    
     webpackServer: {
-      hot: true,
+      // hot: true,
       quiet: true,
       noInfo: true,
       watchDelay: 300,
