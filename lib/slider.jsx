@@ -63,12 +63,14 @@ var Slider = React.createClass({
       };
       slides.push(<div key={index} className={cx(slideClasses)} style={this.getSlideStyle()}>{child}</div>);
 
-      if (index >= (count - this.props.slidesToShow)) {
-        preCloneSlides.push(<div key={-(count - index)} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
-      }
+      if (this.props.infinite) {
+        if (index >= (count - this.props.slidesToShow)) {
+          preCloneSlides.push(<div key={-(count - index)} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
+        }
 
-      if (index < this.props.slidesToShow) {
-        postCloneSlides.push(<div key={count + index} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
+        if (index < this.props.slidesToShow) {
+          postCloneSlides.push(<div key={count + index} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
+        }
       }
     }.bind(this));
 
@@ -81,14 +83,34 @@ var Slider = React.createClass({
       </div>
     );
   },
+  renderArrows: function () {
+    var prevClasses = { 'slick-prev': true};
+    var nextClasses = { 'slick-next': true};
+    var prevHandler = this.changeSlide.bind(this, {message: 'previous'});
+    var nextHandler = this.changeSlide.bind(this, {message: 'next'});
+
+    if (this.props.infinite === false) {
+      if (this.state.currentSlide === 0) {
+        prevClasses['slick-disabled'] = true;
+        prevHandler = null;
+      }
+      if (this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow)) {
+        nextClasses['slick-disabled'] = true;
+        nextHandler = null;
+      }
+    }
+
+    var prevArrow = <button ref='previous' type="button" data-role="none" className={cx(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
+    var nextArrow = <button ref='next' type="button" data-role="none" className={cx(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
+    return [prevArrow, nextArrow];
+  },
   render: function () {
     return (
       <div className='slick-initialized slick-slider' >
         <div ref='list' className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
           {this.renderTrack()}
         </div>
-        <button ref='previous' type="button" data-role="none" className="slick-prev" style={{display: 'block'}} onClick={this.changeSlide.bind(this, {message: 'previous'})}> Previous</button>
-        <button ref='next' type="button" data-role="none" className="slick-next" style={{display: 'block'}} onClick={this.changeSlide.bind(this, {message: 'next'})}>Next</button>
+        {this.renderArrows()}
         {this.renderDots()}
       </div>
     );

@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "after-transition": "0.0.4",
+    "object-assign": "^1.0.0",
     "react": "^0.12.1"
   },
   "bugs": {
