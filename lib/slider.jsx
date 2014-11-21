@@ -34,7 +34,7 @@ var Slider = React.createClass({
     if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
       for (var i=0; i <= this.getDotCount(); i += 1) {
         classes = {
-          'slick-active': (this.state.currentSlide === i)
+          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll)
         };
         dotOptions = {
           message: 'index',
