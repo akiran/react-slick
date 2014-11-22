@@ -38,6 +38,9 @@
   },
   "dependencies": {
     "after-transition": "0.0.4",
+    "enquire.js": "^2.1.1",
+    "json2mq": "^0.1.0",
+    "lodash": "^2.4.1",
     "object-assign": "^1.0.0",
     "react": "^0.12.1"
   },

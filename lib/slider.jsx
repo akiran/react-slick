@@ -1,118 +1,52 @@
 var React = require('react');
-var cloneWithProps = require('react/lib/cloneWithProps');
-var cx = require('react/lib/cx');
-var EventHandlersMixin = require('./mixins/event-handlers');
-var HelpersMixin = require('./mixins/helpers');
-var initialState = require('./initial-state');
-var defaultProps = require('./default-props');
+var InnerSlider = require('./inner-slider');
+var enquire = require('enquire.js')
+var _ = require('lodash');
+var json2mq = require('json2mq');
+var assign = require('object-assign');
 
 var Slider = React.createClass({
-  mixins: [EventHandlersMixin, HelpersMixin],
   getInitialState: function () {
-    return initialState;
-  },
-  getDefaultProps: function () {
-    return defaultProps;
+    return {
+      breakpoint: null
+    };
   },
   componentDidMount: function () {
-    var slideCount = React.Children.count(this.props.children);
-    var slideWidth = this.getDOMNode().getBoundingClientRect().width/this.props.slidesToShow;
-    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
-    this.setState({
-      slideCount: slideCount,
-      slideWidth: slideWidth,
-      listWidth: listWidth
-    }, function () {
-      // getCSS function needs previously set state
-      var trackStyle = this.getCSS(this.getLeft(0));
-      this.setState({trackStyle: trackStyle});
-    });
-  },
-  renderDots: function () {
-    var classes, dotOptions;
-    var dots = [];
-    if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
-      for (var i=0; i <= this.getDotCount(); i += 1) {
-        classes = {
-          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll)
-        };
-        dotOptions = {
-          message: 'index',
-          index: i
-        };
-        dots.push(<li key={i} className={cx(classes)}><button onClick={this.changeSlide.bind(this, dotOptions)}>{i}</button></li>);
+    var breakpoints = _.sortBy(_.pluck(this.props.responsive, 'breakpoint'));
+    var _props = this.props; 
+    breakpoints.forEach(function (breakpoint, index) {
+      var query;
+      if (index === 0) {
+        query = json2mq({minWidth: 0, maxWidth: breakpoint});
+      } else {
+        query = json2mq({minWidth: breakpoints[index-1], maxWidth: breakpoint});
       }
-      return (
-        <ul className={this.props.dotsClass} style={{display: 'block'}}>
-          {dots}
-        </ul>
-      );
-    } else {
-      return null;
-    }
-  },
-  renderSlides: function () {
-    var slides = [];
-    var preCloneSlides = [];
-    var postCloneSlides = [];
-    var count = React.Children.count(this.props.children);
-    React.Children.forEach(this.props.children, function (child, index) {
-      var slideClasses = {
-        'slick-slide': true,
-        'slick-active': (this.state.currentSlide === index)
-      };
-      slides.push(<div key={index} className={cx(slideClasses)} style={this.getSlideStyle()}>{child}</div>);
-
-      if (this.props.infinite) {
-        if (index >= (count - this.props.slidesToShow)) {
-          preCloneSlides.push(<div key={-(count - index)} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
-        }
-
-        if (index < this.props.slidesToShow) {
-          postCloneSlides.push(<div key={count + index} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
-        }
-      }
+      enquire.register(query, {
+        match: function () {
+          this.setState({breakpoint: breakpoint});
+        }.bind(this)
+      });
     }.bind(this));
 
-    return preCloneSlides.concat(slides, postCloneSlides);
-  },
-  renderTrack: function () {
-    return (
-      <div ref='track' className='slick-track' style={this.state.trackStyle}>
-        { this.renderSlides() }
-      </div>
-    );
-  },
-  renderArrows: function () {
-    var prevClasses = { 'slick-prev': true};
-    var nextClasses = { 'slick-next': true};
-    var prevHandler = this.changeSlide.bind(this, {message: 'previous'});
-    var nextHandler = this.changeSlide.bind(this, {message: 'next'});
-
-    if (this.props.infinite === false) {
-      if (this.state.currentSlide === 0) {
-        prevClasses['slick-disabled'] = true;
-        prevHandler = null;
-      }
-      if (this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow)) {
-        nextClasses['slick-disabled'] = true;
-        nextHandler = null;
-      }
-    }
-
-    var prevArrow = <button ref='previous' type="button" data-role="none" className={cx(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
-    var nextArrow = <button ref='next' type="button" data-role="none" className={cx(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
-    return [prevArrow, nextArrow];
+    // Register media query for full screen. Need to support resize from small to large
+    var query = json2mq({minWidth: breakpoints.slice(-1)[0]})
+    enquire.register(query, {
+      match: function () {
+        this.setState({breakpoint: null});
+      }.bind(this)
+    });
   },
   render: function () {
+    var settings;
+    var newProps;
+    if (this.state.breakpoint) {
+      newProps = _.filter(this.props.responsive, {breakpoint: this.state.breakpoint});
+      settings = _.assign({}, this.props, newProps[0].settings);
+    } else {
+      settings = this.props;
+    }
     return (
-      <div className='slick-initialized slick-slider' >
-        <div ref='list' className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
-          {this.renderTrack()}
-        </div>
-        {this.renderArrows()}
-        {this.renderDots()}
-      </div>
+        <InnerSlider {...settings}/>
     );
   }
 });
