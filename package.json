@@ -42,7 +42,8 @@
     "json2mq": "^0.1.0",
     "lodash": "^2.4.1",
     "object-assign": "^1.0.0",
-    "react": "^0.12.1"
+    "react": "^0.12.1",
+    "react-responsive-mixin": "^0.1.0"
   },
   "bugs": {
     "url": "https://github.com/akiran/react-slick/issues"

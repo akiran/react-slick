@@ -4,8 +4,10 @@ var enquire = require('enquire.js')
 var _ = require('lodash');
 var json2mq = require('json2mq');
 var assign = require('object-assign');
+var ResponsiveMixin = require('react-responsive-mixin');
 
 var Slider = React.createClass({
+  mixins: [ResponsiveMixin],
   getInitialState: function () {
     return {
       breakpoint: null
@@ -21,20 +23,16 @@ var Slider = React.createClass({
       } else {
         query = json2mq({minWidth: breakpoints[index-1], maxWidth: breakpoint});
       }
-      enquire.register(query, {
-        match: function () {
-          this.setState({breakpoint: breakpoint});
-        }.bind(this)
-      });
+      this.media(query, function () {
+        this.setState({breakpoint: breakpoint});
+      }.bind(this))
     }.bind(this));
 
     // Register media query for full screen. Need to support resize from small to large
     var query = json2mq({minWidth: breakpoints.slice(-1)[0]})
-    enquire.register(query, {
-      match: function () {
-        this.setState({breakpoint: null});
-      }.bind(this)
-    });
+    this.media(query, function () {
+       this.setState({breakpoint: null});
+    }.bind(this))
   },
   render: function () {
     var settings;

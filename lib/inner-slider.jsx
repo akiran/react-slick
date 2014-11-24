@@ -20,9 +20,6 @@ var Slider = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     this.initialize(nextProps);
   },
-  // componentDidUpdate: function () {
-  //   this.initialize();
-  // },
   renderDots: function () {
     var classes, dotOptions;
     var dots = [];
