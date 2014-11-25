@@ -5,6 +5,7 @@ var EventHandlersMixin = require('./mixins/event-handlers');
 var HelpersMixin = require('./mixins/helpers');
 var initialState = require('./initial-state');
 var defaultProps = require('./default-props');
+var _ = require('lodash');
 
 var Slider = React.createClass({
   mixins: [EventHandlersMixin, HelpersMixin],
@@ -50,17 +51,35 @@ var Slider = React.createClass({
     var postCloneSlides = [];
     var count = React.Children.count(this.props.children);
     React.Children.forEach(this.props.children, function (child, index) {
-      slides.push(<div key={index} className={this.getSlideClasses(index)} style={this.getSlideStyle()}>{child}</div>);
+      slides.push(cloneWithProps(child, {
+        key: index,
+        className: this.getSlideClasses(index),
+        style: _.assign({}, this.getSlideStyle(), child.props.style)
+      }));
 
-      if (this.props.infinite) {
-        if (index >= (count - this.props.slidesToShow)) {
-          key = -(count - index);
-          preCloneSlides.push(<div key={key} className={this.getSlideClasses(key)} style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
+      if (this.props.infinite === true) {
+        if (this.props.centerMode === true) {
+            infiniteCount = this.props.slidesToShow + 1;
+        } else {
+            infiniteCount = this.props.slidesToShow;
         }
 
-        if (index < this.props.slidesToShow) {
+        if (index >= (count - infiniteCount)) {
+          key = -(count - index);
+          preCloneSlides.push(cloneWithProps(child, {
+            key: key,
+            className: this.getSlideClasses(key),
+            style: _.assign({}, this.getSlideStyle(), child.props.style)
+          }));
+        }
+
+        if (index < infiniteCount) {
           key = count + index;
-          postCloneSlides.push(<div key={key} className={this.getSlideClasses(key)} style={this.getSlideStyle(key)}>{cloneWithProps(child, {})}</div>);
+          postCloneSlides.push(cloneWithProps(child, {
+            key: key,
+            className: this.getSlideClasses(key),
+            style: _.assign({}, this.getSlideStyle(), child.props.style)
+          }));
         }
       }
     }.bind(this));
