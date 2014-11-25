@@ -26,7 +26,7 @@ var Slider = React.createClass({
     if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
       for (var i=0; i <= this.getDotCount(); i += 1) {
         classes = {
-          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll)
+          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll),
         };
         dotOptions = {
           message: 'index',
@@ -44,24 +44,23 @@ var Slider = React.createClass({
     }
   },
   renderSlides: function () {
+    var key;
     var slides = [];
     var preCloneSlides = [];
     var postCloneSlides = [];
     var count = React.Children.count(this.props.children);
     React.Children.forEach(this.props.children, function (child, index) {
-      var slideClasses = {
-        'slick-slide': true,
-        'slick-active': (this.state.currentSlide === index)
-      };
-      slides.push(<div key={index} className={cx(slideClasses)} style={this.getSlideStyle()}>{child}</div>);
+      slides.push(<div key={index} className={this.getSlideClasses(index)} style={this.getSlideStyle()}>{child}</div>);
 
       if (this.props.infinite) {
         if (index >= (count - this.props.slidesToShow)) {
-          preCloneSlides.push(<div key={-(count - index)} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
+          key = -(count - index);
+          preCloneSlides.push(<div key={key} className={this.getSlideClasses(key)} style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
         }
 
         if (index < this.props.slidesToShow) {
-          postCloneSlides.push(<div key={count + index} className='slick-slide slick-cloned' style={this.getSlideStyle()}>{cloneWithProps(child, {})}</div>);
+          key = count + index;
+          postCloneSlides.push(<div key={key} className={this.getSlideClasses(key)} style={this.getSlideStyle(key)}>{cloneWithProps(child, {})}</div>);
         }
       }
     }.bind(this));
@@ -98,7 +97,7 @@ var Slider = React.createClass({
   },
   render: function () {
     return (
-      <div className='slick-initialized slick-slider' >
+      <div className={'slick-initialized slick-slider ' + this.props.className} >
         <div ref='list' className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
           {this.renderTrack()}
         </div>

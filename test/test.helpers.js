@@ -6,6 +6,22 @@ var helpers = require('../lib/mixins/helpers');
 var initialState = require('../lib/initial-state');
 var defaultProps = require('../lib/default-props');
 
+describe('helpers.getDotCount', function () {
+  it('dot count with slidesToShow = 1', function () {
+    var hlepers = require('../lib/mixins/helpers');
+    helpers.state = assign(initialState, { slideCount: 6 });
+    helpers.props = assign(defaultProps, {slidesToScroll: 1});
+    helpers.getDotCount().should.equal(5);
+  });
+  
+  it('dot count with slidesToShow = 4', function () {
+    var hlepers = require('../lib/mixins/helpers');
+    helpers.state = assign(initialState, { slideCount: 16 });
+    helpers.props = assign(defaultProps, {slidesToScroll: 4});
+    helpers.getDotCount().should.equal(3);
+  });
+});
+
 describe('helpers.getLeft', function () {
   it('return left with slidesToShow = 1 ', function () {
     var hlepers = require('../lib/mixins/helpers');
@@ -22,24 +38,7 @@ describe('helpers.getLeft', function () {
     helpers.getLeft(0).should.equal(-400);
     helpers.getLeft(1).should.equal(-500);
   });
-
 });
 
-describe('helpers.getDotCount', function () {
-  it('dot count with slidesToShow = 1', function () {
-    var hlepers = require('../lib/mixins/helpers');
-    helpers.state = assign(initialState, { slideCount: 6 });
-    helpers.props = assign(defaultProps, {slidesToScroll: 1});
-    helpers.getDotCount().should.equal(5);
-  });
-  
-  it('dot count with slidesToShow = 4', function () {
-    var hlepers = require('../lib/mixins/helpers');
-    helpers.state = assign(initialState, { slideCount: 16 });
-    helpers.props = assign(defaultProps, {slidesToScroll: 4});
-    helpers.getDotCount().should.equal(3);
-  });
 
-
-});
 
