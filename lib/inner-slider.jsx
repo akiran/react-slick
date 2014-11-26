@@ -53,6 +53,7 @@ var Slider = React.createClass({
     React.Children.forEach(this.props.children, function (child, index) {
       slides.push(cloneWithProps(child, {
         key: index,
+        'data-index': index,
         className: this.getSlideClasses(index),
         style: _.assign({}, this.getSlideStyle(), child.props.style)
       }));
@@ -68,6 +69,7 @@ var Slider = React.createClass({
           key = -(count - index);
           preCloneSlides.push(cloneWithProps(child, {
             key: key,
+            'data-index': key,
             className: this.getSlideClasses(key),
             style: _.assign({}, this.getSlideStyle(), child.props.style)
           }));
@@ -77,6 +79,7 @@ var Slider = React.createClass({
           key = count + index;
           postCloneSlides.push(cloneWithProps(child, {
             key: key,
+            'data-index': key,
             className: this.getSlideClasses(key),
             style: _.assign({}, this.getSlideStyle(), child.props.style)
           }));
@@ -117,7 +120,7 @@ var Slider = React.createClass({
   render: function () {
     return (
       <div className={'slick-initialized slick-slider ' + this.props.className} >
-        <div ref='list' className='slick-list' onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
+        <div ref='list' className='slick-list' style={this.getListStyle()} onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
           {this.renderTrack()}
         </div>
         {this.renderArrows()}
