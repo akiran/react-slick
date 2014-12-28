@@ -1,6 +1,6 @@
 var React = require('react');
 require('./docs.scss');
-var Slider = require('../lib/slider');
+var Slider = require('../');
 
 var SingleItem = React.createClass({
   render: function () {
