@@ -1,7 +1,6 @@
 var React = require('react');
 require('./docs.scss');
 var Slider = require('../lib/slider');
-var enquire = require('enquire.js');
 
 var SingleItem = React.createClass({
   render: function () {
@@ -268,19 +267,5 @@ var App = React.createClass({
     );
   }
 });
-
-// var App = React.createClass({
-//   render: function () {
-//     return (
-//       <div>
-//         <section className='blue'>
-//           <div className='content'>
-//             <SingleItem />
-//           </div>
-//         </section>
-//       </div>
-//     );
-//   }
-// });
 
 module.exports = App;
