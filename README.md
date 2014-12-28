@@ -1,7 +1,7 @@
 # react-slick
-### [React](http://facebook.github.io/react/) port of [slick carousel](http://kenwheeler.github.io/slick/)
+Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-### Installtion
+### Installation
 ```bash
   npm install react-slick
 ```
