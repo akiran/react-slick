@@ -1,5 +1,4 @@
 var React = require('react');
-require('./docs.scss');
 var Slider = require('../');
 
 var SingleItem = React.createClass({
@@ -251,8 +250,8 @@ var AdaptiveHeight = React.createClass({
 var App = React.createClass({
   render: function () {
     return (
-        <section className='blue'>
-          <div className='content'>
+        <div className='grid-container'>
+          <div className='small-8 grid-content content'>
             <SingleItem />
             <hr />
             <MultipleItems />
@@ -263,7 +262,7 @@ var App = React.createClass({
             <VariableWidth />
             <AdaptiveHeight />
           </div>
-        </section>
+        </div>
     );
   }
 });

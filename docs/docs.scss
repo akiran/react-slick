@@ -1,4 +1,5 @@
 $slick-font-path: "/fonts/";
-
+$slick-arrow-color: #333;
+@import "foundation-apps/scss/foundation";
 @import "slick-carousel/slick/slick";
 @import "./style";
