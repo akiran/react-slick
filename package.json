@@ -20,6 +20,7 @@
     "express": "^4.10.2",
     "gulp": "^3.8.10",
     "gulp-rimraf": "^0.1.1",
+    "gulp-ruby-sass": "^0.7.1",
     "jade": "^1.7.0",
     "jquery": "^2.1.1",
     "jsx-loader": "^0.12.2",

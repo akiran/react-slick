@@ -20,6 +20,7 @@
   "devDependencies": {
     "react": "~0.12.1",
     "jquery": "~2.1.1",
-    "should": "~4.3.0"
+    "should": "~4.3.0",
+    "foundation-apps": "~1.0.2"
   }
 }

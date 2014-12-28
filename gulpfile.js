@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var rimraf = require('gulp-rimraf');
-var sass = require('gulp-sass');
+var sass = require('gulp-ruby-sass');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 
@@ -19,12 +19,17 @@ gulp.task('copy', function () {
 });
 
 gulp.task('sass', function () {
-  return  gulp.src(['./docs/**/*.{scss,sass}'])
-              .pipe(sass({ includePaths : ['bower_components', 'node_modules'], errLogToConsole: true}))
-              // .pipe(argv.minify ? minifyCSS(): gutil.noop()) 
-              // .pipe(argv.gzip ? gzip({ append: false }): gutil.noop()) 
+  return  gulp.src(['./docs/**/*.scss'])
+              .pipe(sass({ loadPath : ['bower_components', 'node_modules'],}))
+               .on('error', function (err) { console.log(err.message); })
               .pipe(gulp.dest('./build'));
 });
+
+// gulp.task('sass', function () {
+//   return  gulp.src(['./docs/**/*.{scss,sass}'])
+//               .pipe(sass({ includePaths : ['bower_components', 'node_modules'], errLogToConsole: true}))
+//               .pipe(gulp.dest('./build'));
+// });
 
 gulp.task('watch', ['copy', 'sass'], function () {
   gulp.watch(['./docs/**/*.{scss,sass}'], ['sass']);
