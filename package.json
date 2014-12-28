@@ -4,6 +4,7 @@
   "description": " React port of slick carousel",
   "main": "index.js",
   "scripts": {
+    "postinstall": "bower install",
     "start": "./node_modules/.bin/gulp server"
   },
   "author": "Kiran Abburi",
