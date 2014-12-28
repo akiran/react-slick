@@ -250,19 +250,17 @@ var AdaptiveHeight = React.createClass({
 var App = React.createClass({
   render: function () {
     return (
-        <div className='grid-container'>
-          <div className='small-8 grid-content content'>
-            <SingleItem />
-            <hr />
-            <MultipleItems />
-            <Responsive />
-            <UnevenSets />
-            <CenterMode />
-            <AutoPlay />
-            <VariableWidth />
-            <AdaptiveHeight />
-          </div>
-        </div>
+      <div className='small-6 grid-content content'>
+        <SingleItem />
+        <hr />
+        <MultipleItems />
+        <Responsive />
+        <UnevenSets />
+        <CenterMode />
+        <AutoPlay />
+        <VariableWidth />
+        <AdaptiveHeight />
+      </div>
     );
   }
 });

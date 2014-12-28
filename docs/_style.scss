@@ -1,5 +1,5 @@
-h3{
-  background:#333;
+h3 {
+  background:$primary-color;
   color: #fff;
   font-size:36px;
   line-height:100px;
@@ -9,7 +9,7 @@ h3{
   text-align:center;
 }
 .variable-width .slick-slide p {
-  background: #333;
+  background: $primary-color;
   height: 100px;
   color:#fff;
   margin: 5px;
