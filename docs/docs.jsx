@@ -6,10 +6,12 @@ var Docs = React.createClass({
     return (
       <div className='vertical grid-frame'>
           <div className='title-bar primary'>
-              <span className='title'>React Foundation Apps</span>
+              <span className='title'>React Slick</span>
           </div>
-          <div className='grid-block'>
-            <Demos />
+          <div className='grid-content'>
+            <div className='grid-container'>
+              <Demos />
+            </div>
           </div>
         </div>
     );

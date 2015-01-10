@@ -250,7 +250,7 @@ var AdaptiveHeight = React.createClass({
 var App = React.createClass({
   render: function () {
     return (
-      <div className='small-6 grid-content content'>
+      <div className='grid-content content'>
         <SingleItem />
         <hr />
         <MultipleItems />
