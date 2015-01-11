@@ -46,6 +46,6 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, 'localhost', function (err, result) {
+  }).listen(8000, '192.168.0.101', function (err, result) {
   });
 });

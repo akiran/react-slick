@@ -55,7 +55,11 @@ var Slider = React.createClass({
         key: index,
         'data-index': index,
         className: this.getSlideClasses(index),
-        style: _.assign({}, this.getSlideStyle(), child.props.style)
+        style: _.assign({}, this.getSlideStyle(), child.props.style),
+        // onTouchStart: this.swipeStart,
+        // onTouchMove: this.state.dragging ? this.swipeMove: null,
+        // onTouchEnd: this.swipeEnd,
+        // onTouchCancel: this.swipeEnd
       }));
 
       if (this.props.infinite === true) {
@@ -71,7 +75,11 @@ var Slider = React.createClass({
             key: key,
             'data-index': key,
             className: this.getSlideClasses(key),
-            style: _.assign({}, this.getSlideStyle(), child.props.style)
+            style: _.assign({}, this.getSlideStyle(), child.props.style),
+            // onTouchStart: this.swipeStart,
+            // onTouchMove: this.state.dragging ? this.swipeMove: null,
+            // onTouchEnd: this.swipeEnd,
+            // onTouchCancel: this.swipeEnd
           }));
         }
 
@@ -81,7 +89,11 @@ var Slider = React.createClass({
             key: key,
             'data-index': key,
             className: this.getSlideClasses(key),
-            style: _.assign({}, this.getSlideStyle(), child.props.style)
+            style: _.assign({}, this.getSlideStyle(), child.props.style),
+            // onTouchStart: this.swipeStart,
+            // onTouchMove: this.state.dragging ? this.swipeMove: null,
+            // onTouchEnd: this.swipeEnd,
+            // onTouchCancel: this.swipeEnd
           }));
         }
       }
@@ -120,7 +132,18 @@ var Slider = React.createClass({
   render: function () {
     return (
       <div className={'slick-initialized slick-slider ' + this.props.className} >
-        <div ref='list' className='slick-list' style={this.getListStyle()} onMouseDown={this.swipeStart} onMouseMove={this.state.dragging ? this.swipeMove: null} onMouseUp={this.swipeEnd} onMouseLeave={this.state.dragging ? this.swipeEnd: null}>
+        <div 
+          ref='list'
+          className='slick-list'
+          style={this.getListStyle()}
+          onMouseDown={this.swipeStart}
+          onMouseMove={this.state.dragging ? this.swipeMove: null}
+          onMouseUp={this.swipeEnd}
+          onMouseLeave={this.state.dragging ? this.swipeEnd: null}
+          onTouchStart={this.swipeStart}
+          onTouchMove={this.state.dragging ? this.swipeMove: null}
+          onTouchEnd={this.swipeEnd}
+          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
           {this.renderTrack()}
         </div>
         {this.renderArrows()}

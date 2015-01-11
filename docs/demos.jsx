@@ -249,10 +249,10 @@ var AdaptiveHeight = React.createClass({
 
 var App = React.createClass({
   render: function () {
+    //need to add variable width and center mode demo
     return (
-      <div className='grid-content content'>
+      <div className='content'>
         <SingleItem />
-        <hr />
         <MultipleItems />
         <Responsive />
         <UnevenSets />
