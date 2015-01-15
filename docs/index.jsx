@@ -3,6 +3,6 @@ var Router = require('react-router');
 var routes = require('./routes');
 
 React.initializeTouchEvents(true);
-Router.run(routes, function (Handler) {
+Router.run(routes, Router.HistoryLocation, function (Handler) {
   React.render(<Handler />, document.getElementById('rapp'));
 });

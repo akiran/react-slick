@@ -1,6 +1,5 @@
 var React = require('react');
 var InnerSlider = require('./inner-slider');
-// var enquire = require('enquire.js')
 var _ = require('lodash');
 var json2mq = require('json2mq');
 var assign = require('object-assign');

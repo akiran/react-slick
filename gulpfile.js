@@ -38,6 +38,13 @@ gulp.task('watch', ['copy', 'sass'], function () {
 
 gulp.task('server', ['copy', 'sass'], function (callback) {
   var myConfig = require('./webpack.config.js');
+  myConfig.plugins = myConfig.plugins.concat(
+    new webpack.DefinePlugin({
+      "process.env": {
+        "NODE_ENV": JSON.stringify("dev_docs")
+      }
+    })
+  );
   
   var webpackCompiler = webpack(myConfig, function(err, stats) {
   });
@@ -46,6 +53,6 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, '192.168.0.101', function (err, result) {
+  }).listen(8000, process.env.HOST_IP || 'localhost', function (err, result) {
   });
 });
