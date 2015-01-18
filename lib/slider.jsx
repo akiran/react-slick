@@ -1,6 +1,6 @@
 var React = require('react');
 var InnerSlider = require('./inner-slider');
-var _ = require('lodash');
+var _ = require('lodash');  //TBD import only required functions from lodash
 var json2mq = require('json2mq');
 var assign = require('object-assign');
 var ResponsiveMixin = require('react-responsive-mixin');

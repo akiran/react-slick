@@ -56,10 +56,6 @@ var Slider = React.createClass({
         'data-index': index,
         className: this.getSlideClasses(index),
         style: _.assign({}, this.getSlideStyle(), child.props.style),
-        // onTouchStart: this.swipeStart,
-        // onTouchMove: this.state.dragging ? this.swipeMove: null,
-        // onTouchEnd: this.swipeEnd,
-        // onTouchCancel: this.swipeEnd
       }));
 
       if (this.props.infinite === true) {
@@ -76,10 +72,6 @@ var Slider = React.createClass({
             'data-index': key,
             className: this.getSlideClasses(key),
             style: _.assign({}, this.getSlideStyle(), child.props.style),
-            // onTouchStart: this.swipeStart,
-            // onTouchMove: this.state.dragging ? this.swipeMove: null,
-            // onTouchEnd: this.swipeEnd,
-            // onTouchCancel: this.swipeEnd
           }));
         }
 
@@ -90,10 +82,6 @@ var Slider = React.createClass({
             'data-index': key,
             className: this.getSlideClasses(key),
             style: _.assign({}, this.getSlideStyle(), child.props.style),
-            // onTouchStart: this.swipeStart,
-            // onTouchMove: this.state.dragging ? this.swipeMove: null,
-            // onTouchEnd: this.swipeEnd,
-            // onTouchCancel: this.swipeEnd
           }));
         }
       }
