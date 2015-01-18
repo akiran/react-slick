@@ -43,7 +43,7 @@ var Slider = React.createClass({
       settings = this.props;
     }
     return (
-        <InnerSlider {...settings}/>
+      <InnerSlider {...settings}/>
     );
   }
 });
