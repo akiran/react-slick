@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": " React port of slick carousel",
   "main": "index.jsx",
   "scripts": {
@@ -13,6 +13,14 @@
     "type": "git",
     "url": "https://github.com/akiran/react-slick"
   },
+  "keywords": [
+    "slick",
+    "carousel",
+    "Image slider",
+    "orbit",
+    "slider",
+    "react-component"
+  ],
   "devDependencies": {
     "autoprefixer-core": "^5.0.0",
     "coverjs-loader": "^0.5.0",
