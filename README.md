@@ -9,6 +9,8 @@ Also install slick-carousel for css and font
 ```bash
   bower install slick-carousel
 ```
+### [Demos](http://webrafter.com/opensource/react-slick)
+
 ### Starter Kit
 Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly 
 get started with react-slick.
