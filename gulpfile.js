@@ -1,12 +1,13 @@
 var gulp = require('gulp');
-var rimraf = require('gulp-rimraf');
+var del = require('del');
 var sass = require('gulp-ruby-sass');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
+var runSequence = require('run-sequence');
+var assign = require('object-assign');
 
 gulp.task('clean', function () {
-  gulp.src('./build/*')
-      .pipe(rimraf());
+  return del(['./build/*']);
 });
 
 gulp.task('copy', function () {
@@ -56,3 +57,36 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
   }).listen(8000, process.env.HOST_IP || 'localhost', function (err, result) {
   });
 });
+
+
+// gulp tasks for building dist files
+gulp.task('dist-clean', function () {
+  return del(['./dist/*']);
+});
+
+var distConfig = require('./webpack.config.dist.js');
+gulp.task('dist-unmin', function (cb) {
+  var unminConfig = assign({}, distConfig);
+  unminConfig.output.filename = 'react-slick.js';
+  return webpack(unminConfig, function (err, stat) {
+    cb();
+  });
+});
+
+
+gulp.task('dist-min', function (cb) {
+  var minConfig = assign({}, distConfig);
+  minConfig.output.filename = 'react-slick.min.js';
+  minConfig.plugins = minConfig.plugins.concat(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
+    })
+  );
+  return webpack(minConfig, function (err, stat) {
+    cb();
+  });
+});
+
+gulp.task('dist', runSequence('dist-clean', 'dist-unmin', 'dist-min'));
