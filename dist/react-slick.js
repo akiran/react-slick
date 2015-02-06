@@ -55,8 +55,8 @@ var Slider =
 	var InnerSlider = __webpack_require__(3);
 	var _ = __webpack_require__(7);  //TBD import only required functions from lodash
 	var json2mq = __webpack_require__(4);
-	var assign = __webpack_require__(5);
-	var ResponsiveMixin = __webpack_require__(6);
+	var assign = __webpack_require__(6);
+	var ResponsiveMixin = __webpack_require__(5);
 
 	var Slider = React.createClass({displayName: "Slider",
 	  mixins: [ResponsiveMixin],
@@ -319,6 +319,38 @@ var Slider =
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var enquire = __webpack_require__(17);
+	var json2mq = __webpack_require__(15);
+
+	var ResponsiveMixin = {
+	  media: function (query, handler) {
+	    query = json2mq(query);
+	    if (typeof handler === 'function') {
+	      handler = {
+	        match: handler
+	      };
+	    }
+	    enquire.register(query, handler);
+
+	    // Queue the handlers to unregister them at unmount  
+	    if (! this._responsiveMediaHandlers) {
+	      this._responsiveMediaHandlers = [];
+	    }
+	    this._responsiveMediaHandlers.push({query: query, handler: handler});
+	  },
+	  componentWillUnmount: function () {
+	    this._responsiveMediaHandlers.forEach(function(obj) {
+	      enquire.unregister(obj.query, obj.handler);
+	    })
+	  }
+	};
+
+	module.exports = ResponsiveMixin;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	function ToObject(val) {
@@ -346,38 +378,6 @@ var Slider =
 		return to;
 	};
 
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var enquire = __webpack_require__(18);
-	var json2mq = __webpack_require__(15);
-
-	var ResponsiveMixin = {
-	  media: function (query, handler) {
-	    query = json2mq(query);
-	    if (typeof handler === 'function') {
-	      handler = {
-	        match: handler
-	      };
-	    }
-	    enquire.register(query, handler);
-
-	    // Queue the handlers to unregister them at unmount  
-	    if (! this._responsiveMediaHandlers) {
-	      this._responsiveMediaHandlers = [];
-	    }
-	    this._responsiveMediaHandlers.push({query: query, handler: handler});
-	  },
-	  componentWillUnmount: function () {
-	    this._responsiveMediaHandlers.forEach(function(obj) {
-	      enquire.unregister(obj.query, obj.handler);
-	    })
-	  }
-	};
-
-	module.exports = ResponsiveMixin;
 
 /***/ },
 /* 7 */
@@ -7541,7 +7541,7 @@ var Slider =
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)(module), (function() { return this; }())))
 
 /***/ },
 /* 8 */
@@ -7648,7 +7648,7 @@ var Slider =
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assign = __webpack_require__(5);
+	var assign = __webpack_require__(6);
 	var React = __webpack_require__(2);
 	var cx = __webpack_require__(13);
 	var ReactTransitionEvents = __webpack_require__(14);
@@ -8289,22 +8289,6 @@ var Slider =
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * enquire.js v2.1.1 - Awesome Media Queries in JavaScript
 	 * Copyright (c) 2014 Nick Williams - http://wicky.nillia.ms/enquire.js
@@ -8598,6 +8582,22 @@ var Slider =
 		return new MediaQueryDispatch();
 
 	}));
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
 
 /***/ },
 /* 19 */

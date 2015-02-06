@@ -69,6 +69,7 @@ gulp.task('dist-unmin', function (cb) {
   var unminConfig = assign({}, distConfig);
   unminConfig.output.filename = 'react-slick.js';
   return webpack(unminConfig, function (err, stat) {
+    console.log(err);
     cb();
   });
 });
@@ -85,6 +86,7 @@ gulp.task('dist-min', function (cb) {
     })
   );
   return webpack(minConfig, function (err, stat) {
+    console.log(err);
     cb();
   });
 });
