@@ -7605,48 +7605,53 @@ var Slider =
 	    e.preventDefault();
 	  },
 	  swipeMove: function (e) {
-	    if (this.state.dragging) {
-	      var swipeLeft, swipeLength, swipeDirection;
-	      var curLeft;
-	      var touchObject = this.state.touchObject;
-
-	      curLeft = this.getLeft(this.state.currentSlide);
-	      touchObject.curX =  (e.touches )? e.touches[0].pageX : e.clientX;
-	      touchObject.curY =  (e.touches )? e.touches[0].pageY : e.clientY;
-	      touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
-	      
-	      positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
-	      swipeLeft = curLeft + touchObject.swipeLength * positionOffset;
-	      this.setState({
-	        touchObject: touchObject,
-	        swipeLeft: swipeLeft,
-	        trackStyle: this.getCSS(swipeLeft),
-	      });
+	    if (!this.state.dragging) {
+	      return;
 	    }
+	    if (this.state.animating) {
+	      return;
+	    }
+	    var swipeLeft, swipeLength, swipeDirection;
+	    var curLeft;
+	    var touchObject = this.state.touchObject;
+
+	    curLeft = this.getLeft(this.state.currentSlide);
+	    touchObject.curX =  (e.touches )? e.touches[0].pageX : e.clientX;
+	    touchObject.curY =  (e.touches )? e.touches[0].pageY : e.clientY;
+	    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
+	    
+	    positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+	    swipeLeft = curLeft + touchObject.swipeLength * positionOffset;
+	    this.setState({
+	      touchObject: touchObject,
+	      swipeLeft: swipeLeft,
+	      trackStyle: this.getCSS(swipeLeft),
+	    });
 	    e.preventDefault();
 	  },
 	  swipeEnd: function (e) {
-	    if (this.state.dragging) {
-	      var touchObject = this.state.touchObject;
-	      var minSwipe = this.state.listWidth/this.props.touchThreshold;
-	      var swipeDirection = this.swipeDirection(touchObject);
-	      this.setState({
-	        dragging: false,
-	        touchObject: {} 
-	      }); 
-	      if (touchObject.swipeLength > minSwipe) {
-	        if (swipeDirection === 'left') {
-	          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-	        } else if (swipeDirection === 'right') {
-	          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
-	        } else {
-	          this.slideHandler(this.state.currentSlide, null, true);
-	        }
+	    if (!this.state.dragging) {
+	      return;
+	    }
+	    var touchObject = this.state.touchObject;
+	    var minSwipe = this.state.listWidth/this.props.touchThreshold;
+	    var swipeDirection = this.swipeDirection(touchObject);
+	    this.setState({
+	      dragging: false,
+	      touchObject: {} 
+	    }); 
+	    if (touchObject.swipeLength > minSwipe) {
+	      if (swipeDirection === 'left') {
+	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	      } else if (swipeDirection === 'right') {
+	        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
 	      } else {
 	        this.slideHandler(this.state.currentSlide, null, true);
 	      }
-	      e.preventDefault();
+	    } else {
+	      this.slideHandler(this.state.currentSlide, null, true);
 	    }
+	    e.preventDefault();
 	  },
 	};
 
@@ -8607,8 +8612,8 @@ var Slider =
 
 	"use strict";
 
-	var ReactContext = __webpack_require__(24);
-	var ReactCurrentOwner = __webpack_require__(25);
+	var ReactContext = __webpack_require__(28);
+	var ReactCurrentOwner = __webpack_require__(29);
 
 	var warning = __webpack_require__(22);
 
@@ -8855,10 +8860,10 @@ var Slider =
 
 	"use strict";
 
-	var assign = __webpack_require__(26);
-	var emptyFunction = __webpack_require__(27);
-	var invariant = __webpack_require__(28);
-	var joinClasses = __webpack_require__(29);
+	var assign = __webpack_require__(24);
+	var emptyFunction = __webpack_require__(25);
+	var invariant = __webpack_require__(26);
+	var joinClasses = __webpack_require__(27);
 	var warning = __webpack_require__(22);
 
 	var didWarn = false;
@@ -9064,7 +9069,7 @@ var Slider =
 
 	"use strict";
 
-	var emptyFunction = __webpack_require__(27);
+	var emptyFunction = __webpack_require__(25);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -9148,110 +9153,6 @@ var Slider =
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactContext
-	 */
-
-	"use strict";
-
-	var assign = __webpack_require__(26);
-
-	/**
-	 * Keeps track of the current context.
-	 *
-	 * The context is automatically passed down the component ownership hierarchy
-	 * and is accessible via `this.context` on ReactCompositeComponents.
-	 */
-	var ReactContext = {
-
-	  /**
-	   * @internal
-	   * @type {object}
-	   */
-	  current: {},
-
-	  /**
-	   * Temporarily extends the current context while executing scopedCallback.
-	   *
-	   * A typical use case might look like
-	   *
-	   *  render: function() {
-	   *    var children = ReactContext.withContext({foo: 'foo'}, () => (
-	   *
-	   *    ));
-	   *    return <div>{children}</div>;
-	   *  }
-	   *
-	   * @param {object} newContext New context to merge into the existing context
-	   * @param {function} scopedCallback Callback to run with the new context
-	   * @return {ReactComponent|array<ReactComponent>}
-	   */
-	  withContext: function(newContext, scopedCallback) {
-	    var result;
-	    var previousContext = ReactContext.current;
-	    ReactContext.current = assign({}, previousContext, newContext);
-	    try {
-	      result = scopedCallback();
-	    } finally {
-	      ReactContext.current = previousContext;
-	    }
-	    return result;
-	  }
-
-	};
-
-	module.exports = ReactContext;
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactCurrentOwner
-	 */
-
-	"use strict";
-
-	/**
-	 * Keeps track of the current owner.
-	 *
-	 * The current owner is the component who should own any components that are
-	 * currently being constructed.
-	 *
-	 * The depth indicate how many composite components are above this render level.
-	 */
-	var ReactCurrentOwner = {
-
-	  /**
-	   * @internal
-	   * @type {ReactComponent}
-	   */
-	  current: null
-
-	};
-
-	module.exports = ReactCurrentOwner;
-
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
 	 * Copyright 2014, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -9299,7 +9200,7 @@ var Slider =
 
 
 /***/ },
-/* 27 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9337,7 +9238,7 @@ var Slider =
 
 
 /***/ },
-/* 28 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9396,7 +9297,7 @@ var Slider =
 
 
 /***/ },
-/* 29 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9438,6 +9339,110 @@ var Slider =
 	}
 
 	module.exports = joinClasses;
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactContext
+	 */
+
+	"use strict";
+
+	var assign = __webpack_require__(24);
+
+	/**
+	 * Keeps track of the current context.
+	 *
+	 * The context is automatically passed down the component ownership hierarchy
+	 * and is accessible via `this.context` on ReactCompositeComponents.
+	 */
+	var ReactContext = {
+
+	  /**
+	   * @internal
+	   * @type {object}
+	   */
+	  current: {},
+
+	  /**
+	   * Temporarily extends the current context while executing scopedCallback.
+	   *
+	   * A typical use case might look like
+	   *
+	   *  render: function() {
+	   *    var children = ReactContext.withContext({foo: 'foo'}, () => (
+	   *
+	   *    ));
+	   *    return <div>{children}</div>;
+	   *  }
+	   *
+	   * @param {object} newContext New context to merge into the existing context
+	   * @param {function} scopedCallback Callback to run with the new context
+	   * @return {ReactComponent|array<ReactComponent>}
+	   */
+	  withContext: function(newContext, scopedCallback) {
+	    var result;
+	    var previousContext = ReactContext.current;
+	    ReactContext.current = assign({}, previousContext, newContext);
+	    try {
+	      result = scopedCallback();
+	    } finally {
+	      ReactContext.current = previousContext;
+	    }
+	    return result;
+	  }
+
+	};
+
+	module.exports = ReactContext;
+
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCurrentOwner
+	 */
+
+	"use strict";
+
+	/**
+	 * Keeps track of the current owner.
+	 *
+	 * The current owner is the component who should own any components that are
+	 * currently being constructed.
+	 *
+	 * The depth indicate how many composite components are above this render level.
+	 */
+	var ReactCurrentOwner = {
+
+	  /**
+	   * @internal
+	   * @type {ReactComponent}
+	   */
+	  current: null
+
+	};
+
+	module.exports = ReactCurrentOwner;
 
 
 /***/ },
