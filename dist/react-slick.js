@@ -7585,6 +7585,12 @@ var Slider =
 	  },
 	  swipeStart: function (e) {
 	    var touches, posX, posY;
+
+	    if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
+	      return;
+	    } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
+	      return;
+	    }
 	    posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
 	    posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;
 	    this.setState({
@@ -7620,25 +7626,27 @@ var Slider =
 	    e.preventDefault();
 	  },
 	  swipeEnd: function (e) {
-	    var touchObject = this.state.touchObject;
-	    var minSwipe = this.state.listWidth/this.props.touchThreshold;
-	    var swipeDirection = this.swipeDirection(touchObject);
-	    this.setState({
-	      dragging: false,
-	      touchObject: {} 
-	    }); 
-	    if (touchObject.swipeLength > minSwipe) {
-	      if (swipeDirection === 'left') {
-	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-	      } else if (swipeDirection === 'right') {
-	        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+	    if (this.state.dragging) {
+	      var touchObject = this.state.touchObject;
+	      var minSwipe = this.state.listWidth/this.props.touchThreshold;
+	      var swipeDirection = this.swipeDirection(touchObject);
+	      this.setState({
+	        dragging: false,
+	        touchObject: {} 
+	      }); 
+	      if (touchObject.swipeLength > minSwipe) {
+	        if (swipeDirection === 'left') {
+	          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	        } else if (swipeDirection === 'right') {
+	          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+	        } else {
+	          this.slideHandler(this.state.currentSlide, null, true);
+	        }
 	      } else {
 	        this.slideHandler(this.state.currentSlide, null, true);
 	      }
-	    } else {
-	      this.slideHandler(this.state.currentSlide, null, true);
+	      e.preventDefault();
 	    }
-	    e.preventDefault();
 	  },
 	};
 
