@@ -55,8 +55,8 @@ var Slider =
 	var InnerSlider = __webpack_require__(3);
 	var _ = __webpack_require__(7);  //TBD import only required functions from lodash
 	var json2mq = __webpack_require__(4);
-	var assign = __webpack_require__(6);
-	var ResponsiveMixin = __webpack_require__(5);
+	var assign = __webpack_require__(5);
+	var ResponsiveMixin = __webpack_require__(6);
 
 	var Slider = React.createClass({displayName: "Slider",
 	  mixins: [ResponsiveMixin],
@@ -319,38 +319,6 @@ var Slider =
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var enquire = __webpack_require__(17);
-	var json2mq = __webpack_require__(15);
-
-	var ResponsiveMixin = {
-	  media: function (query, handler) {
-	    query = json2mq(query);
-	    if (typeof handler === 'function') {
-	      handler = {
-	        match: handler
-	      };
-	    }
-	    enquire.register(query, handler);
-
-	    // Queue the handlers to unregister them at unmount  
-	    if (! this._responsiveMediaHandlers) {
-	      this._responsiveMediaHandlers = [];
-	    }
-	    this._responsiveMediaHandlers.push({query: query, handler: handler});
-	  },
-	  componentWillUnmount: function () {
-	    this._responsiveMediaHandlers.forEach(function(obj) {
-	      enquire.unregister(obj.query, obj.handler);
-	    })
-	  }
-	};
-
-	module.exports = ResponsiveMixin;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	function ToObject(val) {
@@ -378,6 +346,38 @@ var Slider =
 		return to;
 	};
 
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var enquire = __webpack_require__(18);
+	var json2mq = __webpack_require__(15);
+
+	var ResponsiveMixin = {
+	  media: function (query, handler) {
+	    query = json2mq(query);
+	    if (typeof handler === 'function') {
+	      handler = {
+	        match: handler
+	      };
+	    }
+	    enquire.register(query, handler);
+
+	    // Queue the handlers to unregister them at unmount  
+	    if (! this._responsiveMediaHandlers) {
+	      this._responsiveMediaHandlers = [];
+	    }
+	    this._responsiveMediaHandlers.push({query: query, handler: handler});
+	  },
+	  componentWillUnmount: function () {
+	    this._responsiveMediaHandlers.forEach(function(obj) {
+	      enquire.unregister(obj.query, obj.handler);
+	    })
+	  }
+	};
+
+	module.exports = ResponsiveMixin;
 
 /***/ },
 /* 7 */
@@ -7541,7 +7541,7 @@ var Slider =
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(18)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)(module), (function() { return this; }())))
 
 /***/ },
 /* 8 */
@@ -7648,7 +7648,7 @@ var Slider =
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assign = __webpack_require__(6);
+	var assign = __webpack_require__(5);
 	var React = __webpack_require__(2);
 	var cx = __webpack_require__(13);
 	var ReactTransitionEvents = __webpack_require__(14);
@@ -7680,6 +7680,7 @@ var Slider =
 	  getLeft: function (slideIndex) {
 	    var slideOffset = 0;
 	    var targetLeft;
+	    var targetSlide;
 	    if (this.props.infinite === true)   {
 	      if (this.state.slideCount > this.props.slidesToShow) {
 	       slideOffset = (this.state.slideWidth * this.props.slidesToShow) * -1;
@@ -7706,7 +7707,6 @@ var Slider =
 
 	    if (this.props.variableWidth === true) {
 	        var targetSlideIndex;
-	        var totalSlides;
 	        if(this.state.slideCount <= this.props.slidesToShow || this.props.infinite === false) {
 	            targetSlide = this.refs.track.getDOMNode().childNodes[slideIndex];
 	        } else {
@@ -7731,8 +7731,7 @@ var Slider =
 	  },
 	  getAnimateCSS: function (targetLeft) {
 	    var style = this.getCSS(targetLeft);
-	    style.transition = 'transform 500ms ease';
-	    // style.WebkitTransition = 'transform 500ms ease';
+	    style.transition = 'transform ' + this.props.speed + 'ms ' + this.props.cssEase;
 	    return style;
 	  },
 	  getCSS: function (targetLeft) {
@@ -7945,22 +7944,14 @@ var Slider =
 
 	var defaultProps = {
 	    className: '',
-	    accessibility: true,
+	    // accessibility: true,
 	    adaptiveHeight: false,
-	    // appendArrows: $(element),
-	    // appendDots: $(element),
 	    arrows: true,
-	    // asNavFor: null,
-	    // prevArrow: '<button type="button" data-role="none" class="slick-prev">Previous</button>',
-	    // nextArrow: '<button type="button" data-role="none" class="slick-next">Next</button>',
 	    autoplay: false,
 	    autoplaySpeed: 3000,
 	    centerMode: false,
 	    centerPadding: '50px',
 	    cssEase: 'ease',
-	    // customPaging: function(slider, i) {
-	    //     return '<button type="button" data-role="none">' + (i + 1) + '</button>';
-	    // },
 	    dots: false,
 	    dotsClass: 'slick-dots',
 	    draggable: true,
@@ -7969,15 +7960,7 @@ var Slider =
 	    focusOnSelect: false,
 	    infinite: true,
 	    initialSlide: 0,
-	    lazyLoad: 'ondemand',
-	    onBeforeChange: null,
-	    onAfterChange: null,
-	    onInit: null,
-	    onReInit: null,
-	    onSetPosition: null,
-	    pauseOnHover: true,
-	    pauseOnDotsHover: false,
-	    respondTo: 'window',
+	    // lazyLoad: 'ondemand',
 	    responsive: null,
 	    rtl: false,
 	    slide: 'div',
@@ -8289,6 +8272,22 @@ var Slider =
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * enquire.js v2.1.1 - Awesome Media Queries in JavaScript
 	 * Copyright (c) 2014 Nick Williams - http://wicky.nillia.ms/enquire.js
@@ -8582,22 +8581,6 @@ var Slider =
 		return new MediaQueryDispatch();
 
 	}));
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
 
 /***/ },
 /* 19 */
