@@ -1,5 +1,5 @@
 var React = require('react');
-var InnerSlider = require('./inner-slider');
+var InnerSlider = require('./inner-slider.jsx');
 var _ = require('lodash');  //TBD import only required functions from lodash
 var json2mq = require('json2mq');
 var assign = require('object-assign');
@@ -14,7 +14,7 @@ var Slider = React.createClass({
   },
   componentDidMount: function () {
     var breakpoints = _.sortBy(_.pluck(this.props.responsive, 'breakpoint'));
-    var _props = this.props; 
+    var _props = this.props;
     breakpoints.forEach(function (breakpoint, index) {
       var query;
       if (index === 0) {
