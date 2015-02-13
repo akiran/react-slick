@@ -52,7 +52,10 @@
   },
   "dependencies": {
     "json2mq": "^0.2.0",
-    "lodash": "^2.4.1",
+    "lodash.assign": "^3.0.0",
+    "lodash.filter": "^3.0.0",
+    "lodash.pluck": "^3.0.2",
+    "lodash.sortby": "^3.0.0",
     "object-assign": "^2.0.0",
     "react-responsive-mixin": "^0.3.1"
   },
