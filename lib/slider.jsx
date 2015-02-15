@@ -1,7 +1,8 @@
 "use strict";
 
 var React = require('react');
-var InnerSlider = require('./inner-slider');
+
+var InnerSlider = require('./inner-slider.jsx');
 var _sortBy = require('lodash.sortby');
 var _pluck = require('lodash.pluck');
 var _filter = require('lodash.filter');
