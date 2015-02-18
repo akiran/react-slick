@@ -101,25 +101,29 @@ var Slider = React.createClass({
     );
   },
   renderArrows: function () {
-    var prevClasses = { 'slick-prev': true};
-    var nextClasses = { 'slick-next': true};
-    var prevHandler = this.changeSlide.bind(this, {message: 'previous'});
-    var nextHandler = this.changeSlide.bind(this, {message: 'next'});
+    if (this.props.arrows === true) {
+      var prevClasses = { 'slick-prev': true};
+      var nextClasses = { 'slick-next': true};
+      var prevHandler = this.changeSlide.bind(this, {message: 'previous'});
+      var nextHandler = this.changeSlide.bind(this, {message: 'next'});
 
-    if (this.props.infinite === false) {
-      if (this.state.currentSlide === 0) {
-        prevClasses['slick-disabled'] = true;
-        prevHandler = null;
+      if (this.props.infinite === false) {
+        if (this.state.currentSlide === 0) {
+          prevClasses['slick-disabled'] = true;
+          prevHandler = null;
+        }
+        if (this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow)) {
+          nextClasses['slick-disabled'] = true;
+          nextHandler = null;
+        }
       }
-      if (this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow)) {
-        nextClasses['slick-disabled'] = true;
-        nextHandler = null;
-      }
+
+      var prevArrow = <button key={0} ref='previous' type="button" data-role="none" className={cx(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
+      var nextArrow = <button key={1} ref='next' type="button" data-role="none" className={cx(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
+      return [prevArrow, nextArrow];
+    } else {
+      return null;
     }
-
-    var prevArrow = <button key={0} ref='previous' type="button" data-role="none" className={cx(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
-    var nextArrow = <button key={1} ref='next' type="button" data-role="none" className={cx(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
-    return [prevArrow, nextArrow];
   },
   render: function () {
     return (
