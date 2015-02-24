@@ -136,7 +136,9 @@ var CenterMode = React.createClass({
       infinite: true,
       centerPadding: '60px',
       slidesToShow: 3,
-      speed: 500,
+      speed: 500,   afterChange:function(a){
+        alert("Slider Changed to :"+a);
+      }
     }
     return (
       <div>
