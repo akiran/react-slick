@@ -54,7 +54,6 @@ var Slider = React.createClass({
     var count = React.Children.count(this.props.children);
     React.Children.forEach(this.props.children, function (child, index) {
       var infiniteCount;
-
       slides.push(cloneWithProps(child, {
         key: index,
         'data-index': index,
@@ -112,9 +111,19 @@ var Slider = React.createClass({
           prevClasses['slick-disabled'] = true;
           prevHandler = null;
         }
-        if (this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow)) {
-          nextClasses['slick-disabled'] = true;
-          nextHandler = null;
+
+        if (this.props.centerMode && !this.props.infinite)
+        {
+         if (this.state.currentSlide >= (this.state.slideCount - 1)) {
+            nextClasses['slick-disabled'] = true;
+            nextHandler = null;
+          }
+        }else
+        {
+          if (this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow)) {
+            nextClasses['slick-disabled'] = true;
+            nextHandler = null;
+          }
         }
       }
 
