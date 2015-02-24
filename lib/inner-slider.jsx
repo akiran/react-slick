@@ -54,7 +54,7 @@ var Slider = React.createClass({
     var count = React.Children.count(this.props.children);
     React.Children.forEach(this.props.children, function (child, index) {
       var infiniteCount;
-
+      console.log("Rendering Slide:",index);
       slides.push(cloneWithProps(child, {
         key: index,
         'data-index': index,
