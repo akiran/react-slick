@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": " React port of slick carousel",
   "main": "index.jsx",
   "scripts": {
@@ -49,7 +49,8 @@
     "sinon": "^1.12.2",
     "style-loader": "^0.8.3",
     "webpack": "^1.5.1",
-    "webpack-dev-server": "^1.7.0"
+    "webpack-dev-server": "^1.7.0",
+    "reactify": "^1.0.0"
   },
   "dependencies": {
     "json2mq": "^0.2.0",
