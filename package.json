@@ -52,6 +52,7 @@
     "reactify": "^1.0.0"
   },
   "dependencies": {
+    "classnames": "^1.2.0",
     "json2mq": "^0.2.0",
     "lodash.assign": "^3.0.0",
     "lodash.filter": "^3.0.0",

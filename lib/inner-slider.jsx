@@ -2,7 +2,7 @@
 
 var React = require('react');
 var cloneWithProps = require('react/lib/cloneWithProps');
-var cx = require('react/lib/cx');
+var classnames = require('classnames');
 var EventHandlersMixin = require('./mixins/event-handlers');
 var HelpersMixin = require('./mixins/helpers');
 var initialState = require('./initial-state');
@@ -24,18 +24,18 @@ var Slider = React.createClass({
     this.initialize(nextProps);
   },
   renderDots: function () {
-    var classes, dotOptions;
+    var dotOptions;
     var dots = [];
     if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
       for (var i=0; i <= this.getDotCount(); i += 1) {
-        classes = {
+        var className = classnames({
           'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll),
-        };
+        });
         dotOptions = {
           message: 'index',
           index: i
         };
-        dots.push(<li key={i} className={cx(classes)}><button onClick={this.changeSlide.bind(this, dotOptions)}>{i}</button></li>);
+        dots.push(<li key={i} className={className}><button onClick={this.changeSlide.bind(this, dotOptions)}>{i}</button></li>);
       }
       return (
         <ul className={this.props.dotsClass} style={{display: 'block'}}>
@@ -127,16 +127,17 @@ var Slider = React.createClass({
         }
       }
 
-      var prevArrow = <button key={0} ref='previous' type="button" data-role="none" className={cx(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
-      var nextArrow = <button key={1} ref='next' type="button" data-role="none" className={cx(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
+      var prevArrow = <button key={0} ref='previous' type="button" data-role="none" className={classnames(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
+      var nextArrow = <button key={1} ref='next' type="button" data-role="none" className={classnames(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
       return [prevArrow, nextArrow];
     } else {
       return null;
     }
   },
   render: function () {
+    var className = classnames('slick-initialized', 'slick-slider', this.props.className);
     return (
-      <div className={'slick-initialized slick-slider ' + this.props.className} >
+      <div className={className} >
         <div
           ref='list'
           className='slick-list'
