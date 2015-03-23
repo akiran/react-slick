@@ -132,7 +132,7 @@ var Slider = React.createClass({
         key: '0',
         ref: 'previous',
         'data-role': "none",
-        className: cx(prevClasses),
+        className: classnames(prevClasses),
         style: {display: 'block'},
         onClick: prevHandler
       }
@@ -147,7 +147,7 @@ var Slider = React.createClass({
         key: '1',
         ref: 'next',
         'data-role': "none",
-        className: cx(nextClasses),
+        className: classnames(nextClasses),
         style: {display: 'block'},
         onClick: nextHandler
       }
