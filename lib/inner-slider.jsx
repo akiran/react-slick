@@ -38,11 +38,7 @@ var Slider = React.createClass({
           message: 'index',
           index: i
         };
-        dots.push(
-          <li key={i} className={className}>
-            {this.props.customPaging(onClick(dotOptions), i, this.props.children[i])}
-          </li>
-        );
+        dots.push(<li key={i} className={className}>{this.props.customPaging(onClick(dotOptions), i, this.props.children[i])}</li>);
       }
       return (
         <ul className={this.props.dotsClass} style={{display: 'block'}}>
