@@ -12,7 +12,7 @@ Also install slick-carousel for css and font
 ### [Demos](http://webrafter.com/opensource/react-slick)
 
 ### Starter Kit
-Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly 
+Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly
 get started with react-slick.
 
 ### Example
@@ -45,22 +45,23 @@ var SimpleSlider = React.createClass({
 
 |    Property    | Type |          Description          | Working |
 | -------------  | ---- |          -----------          | ------- |
-| className      | String |Additional class name for the inner slider div | Yes | 
-| adaptiveHeight | | | | 
+| className      | String |Additional class name for the inner slider div | Yes |
+| adaptiveHeight | | | |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
-| cssEase        | | | | 
-| dots           |bool | Should we show the dots at the bottom of the gallery | Yes |
-| dotsClass      | string | Class applied to the dots if they are enabled | Yes | 
+| cssEase        | | | |
+| customPaging   | function | Custom paging templates. | Yes |
+| dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
+| dotsClass      | string | Class applied to the dots if they are enabled | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
 | easing         | string | | |
-| fade           | bool | | | 
-| focusOnSelect  | bool | | | 
+| fade           | bool | | |
+| focusOnSelect  | bool | | |
 | infinite       | should the gallery wrap around it's contents | Yes |
-| initialSlide   | int | which item should be the first to be displayed | Yes (since pull req #17) | 
+| initialSlide   | int | which item should be the first to be displayed | Yes (since pull req #17) |
 | responsive     | | | |
 | rtl            | bool | | |
 | slide         | string |||

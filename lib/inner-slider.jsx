@@ -26,6 +26,9 @@ var Slider = React.createClass({
   renderDots: function () {
     var dotOptions;
     var dots = [];
+    var onClick = function(dotOptions) {
+      return function() { this.changeSlide(dotOptions); }.bind(this);
+    }.bind(this);
     if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
       for (var i=0; i <= this.getDotCount(); i += 1) {
         var className = classnames({
@@ -35,7 +38,11 @@ var Slider = React.createClass({
           message: 'index',
           index: i
         };
-        dots.push(<li key={i} className={className}><button onClick={this.changeSlide.bind(this, dotOptions)}>{i}</button></li>);
+        dots.push(
+          <li key={i} className={className}>
+            {this.props.customPaging(onClick(dotOptions), i, this.props.children[i])}
+          </li>
+        );
       }
       return (
         <ul className={this.props.dotsClass} style={{display: 'block'}}>

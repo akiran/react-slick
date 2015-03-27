@@ -1,3 +1,5 @@
+var React = require('react');
+
 var defaultProps = {
     className: '',
     // accessibility: true,
@@ -8,6 +10,9 @@ var defaultProps = {
     centerMode: false,
     centerPadding: '50px',
     cssEase: 'ease',
+    customPaging: function(onClick, index, element) {
+      return <button onClick={onClick}>{index}</button>;
+    },
     dots: false,
     dotsClass: 'slick-dots',
     draggable: true,
