@@ -11,41 +11,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -76,13 +76,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Slider = React.createClass({
 	  displayName: "Slider",
+
 	  mixins: [ResponsiveMixin],
-	  getInitialState: function () {
+	  getInitialState: function getInitialState() {
 	    return {
 	      breakpoint: null
 	    };
 	  },
-	  componentDidMount: function () {
+	  componentDidMount: function componentDidMount() {
 	    var breakpoints = _sortBy(_pluck(this.props.responsive, "breakpoint"));
 
 	    breakpoints.forEach((function (breakpoint, index) {
@@ -104,7 +105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ breakpoint: null });
 	    }).bind(this));
 	  },
-	  render: function () {
+	  render: function render() {
 	    var settings;
 	    var newProps;
 	    if (this.state.breakpoint) {
@@ -132,8 +133,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	"use strict";
 
 	var React = __webpack_require__(2);
-	var cloneWithProps = __webpack_require__(14);
-	var cx = __webpack_require__(15);
+	var cloneWithProps = __webpack_require__(15);
+	var classnames = __webpack_require__(14);
 	var EventHandlersMixin = __webpack_require__(10);
 	var HelpersMixin = __webpack_require__(11);
 	var initialState = __webpack_require__(12);
@@ -142,38 +143,40 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Slider = React.createClass({
 	  displayName: "Slider",
+
 	  mixins: [EventHandlersMixin, HelpersMixin],
-	  getInitialState: function () {
+	  getInitialState: function getInitialState() {
 	    return initialState;
 	  },
-	  getDefaultProps: function () {
+	  getDefaultProps: function getDefaultProps() {
 	    return defaultProps;
 	  },
-	  componentDidMount: function () {
+	  componentDidMount: function componentDidMount() {
 	    this.initialize(this.props);
 	  },
-	  componentWillReceiveProps: function (nextProps) {
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    this.initialize(nextProps);
 	  },
-	  renderDots: function () {
-	    var classes, dotOptions;
+	  renderDots: function renderDots() {
+	    var dotOptions;
 	    var dots = [];
+	    var onClick = (function (dotOptions) {
+	      return (function () {
+	        this.changeSlide(dotOptions);
+	      }).bind(this);
+	    }).bind(this);
 	    if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
 	      for (var i = 0; i <= this.getDotCount(); i += 1) {
-	        classes = {
-	          "slick-active": this.state.currentSlide === i * this.props.slidesToScroll };
+	        var className = classnames({
+	          "slick-active": this.state.currentSlide === i * this.props.slidesToScroll });
 	        dotOptions = {
 	          message: "index",
 	          index: i
 	        };
 	        dots.push(React.createElement(
 	          "li",
-	          { key: i, className: cx(classes) },
-	          React.createElement(
-	            "button",
-	            { onClick: this.changeSlide.bind(this, dotOptions) },
-	            i
-	          )
+	          { key: i, className: className },
+	          this.props.customPaging(onClick(dotOptions), i, this.props.children[i])
 	        ));
 	      }
 	      return React.createElement(
@@ -185,7 +188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return null;
 	    }
 	  },
-	  renderSlides: function () {
+	  renderSlides: function renderSlides() {
 	    var key;
 	    var slides = [];
 	    var preCloneSlides = [];
@@ -193,7 +196,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var count = React.Children.count(this.props.children);
 	    React.Children.forEach(this.props.children, (function (child, index) {
 	      var infiniteCount;
-
 	      slides.push(cloneWithProps(child, {
 	        key: index,
 	        "data-index": index,
@@ -229,14 +231,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return preCloneSlides.concat(slides, postCloneSlides);
 	  },
-	  renderTrack: function () {
+	  renderTrack: function renderTrack() {
 	    return React.createElement(
 	      "div",
 	      { ref: "track", className: "slick-track", style: this.state.trackStyle },
 	      this.renderSlides()
 	    );
 	  },
-	  renderArrows: function () {
+	  renderArrows: function renderArrows() {
 	    if (this.props.arrows === true) {
 	      var prevClasses = { "slick-prev": true };
 	      var nextClasses = { "slick-next": true };
@@ -248,20 +250,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	          prevClasses["slick-disabled"] = true;
 	          prevHandler = null;
 	        }
-	        if (this.state.currentSlide >= this.state.slideCount - this.props.slidesToShow) {
-	          nextClasses["slick-disabled"] = true;
-	          nextHandler = null;
+
+	        if (this.props.centerMode && !this.props.infinite) {
+	          if (this.state.currentSlide >= this.state.slideCount - 1) {
+	            nextClasses["slick-disabled"] = true;
+	            nextHandler = null;
+	          }
+	        } else {
+	          if (this.state.currentSlide >= this.state.slideCount - this.props.slidesToShow) {
+	            nextClasses["slick-disabled"] = true;
+	            nextHandler = null;
+	          }
 	        }
 	      }
 
 	      var prevArrow = React.createElement(
 	        "button",
-	        { key: 0, ref: "previous", type: "button", "data-role": "none", className: cx(prevClasses), style: { display: "block" }, onClick: prevHandler },
+	        { key: 0, ref: "previous", type: "button", "data-role": "none", className: classnames(prevClasses), style: { display: "block" }, onClick: prevHandler },
 	        " Previous"
 	      );
 	      var nextArrow = React.createElement(
 	        "button",
-	        { key: 1, ref: "next", type: "button", "data-role": "none", className: cx(nextClasses), style: { display: "block" }, onClick: nextHandler },
+	        { key: 1, ref: "next", type: "button", "data-role": "none", className: classnames(nextClasses), style: { display: "block" }, onClick: nextHandler },
 	        "Next"
 	      );
 	      return [prevArrow, nextArrow];
@@ -269,10 +279,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return null;
 	    }
 	  },
-	  render: function () {
+	  render: function render() {
+	    var className = classnames("slick-initialized", "slick-slider", this.props.className);
 	    return React.createElement(
 	      "div",
-	      { className: "slick-initialized slick-slider " + this.props.className },
+	      { className: className },
 	      React.createElement(
 	        "div",
 	        {
@@ -302,18 +313,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.1.0 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 	var baseCallback = __webpack_require__(17),
 	    baseCompareAscending = __webpack_require__(18),
 	    baseEach = __webpack_require__(19),
-	    baseSortBy = __webpack_require__(20),
-	    isIterateeCall = __webpack_require__(21);
+	    baseSortBy = __webpack_require__(21),
+	    isIterateeCall = __webpack_require__(20),
+	    isArray = __webpack_require__(24),
+	    keys = __webpack_require__(22);
 
 	/**
 	 * Used by `_.sortBy` to compare transformed elements of a collection and stable
@@ -330,13 +343,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
 	 * for more details.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on ES `ToLength`. See the
+	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+	 * for more details.
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -353,10 +370,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * The `iteratee` is bound to `thisArg` and invoked with three arguments;
 	 * (value, index|key, collection).
 	 *
-	 * If a property name is provided for `predicate` the created "_.property"
+	 * If a property name is provided for `predicate` the created `_.property`
 	 * style callback returns the property value of the given element.
 	 *
-	 * If an object is provided for `predicate` the created "_.matches" style
+	 * If a value is also provided for `thisArg` the created `_.matchesProperty`
+	 * style callback returns `true` for elements that have a matching property
+	 * value, else `false`.
+	 *
+	 * If an object is provided for `predicate` the created `_.matches` style
 	 * callback returns `true` for elements that have the properties of the given
 	 * object, else `false`.
 	 *
@@ -366,15 +387,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Array|Object|string} collection The collection to iterate over.
 	 * @param {Array|Function|Object|string} [iteratee=_.identity] The function
 	 *  invoked per iteration. If a property name or an object is provided it is
-	 *  used to create a "_.property" or "_.matches" style callback respectively.
+	 *  used to create a `_.property` or `_.matches` style callback respectively.
 	 * @param {*} [thisArg] The `this` binding of `iteratee`.
 	 * @returns {Array} Returns the new sorted array.
 	 * @example
 	 *
-	 * _.sortBy([1, 2, 3], function(n) { return Math.sin(n); });
+	 * _.sortBy([1, 2, 3], function(n) {
+	 *   return Math.sin(n);
+	 * });
 	 * // => [3, 1, 2]
 	 *
-	 * _.sortBy([1, 2, 3], function(n) { return this.sin(n); }, Math);
+	 * _.sortBy([1, 2, 3], function(n) {
+	 *   return this.sin(n);
+	 * }, Math);
 	 * // => [3, 1, 2]
 	 *
 	 * var users = [
@@ -383,13 +408,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   { 'user': 'barney' }
 	 * ];
 	 *
-	 * // using the "_.property" callback shorthand
+	 * // using the `_.property` callback shorthand
 	 * _.pluck(_.sortBy(users, 'user'), 'user');
 	 * // => ['barney', 'fred', 'pebbles']
 	 */
 	function sortBy(collection, iteratee, thisArg) {
+	  if (collection == null) {
+	    return [];
+	  }
 	  var index = -1,
-	      length = collection ? collection.length : 0,
+	      length = collection.length,
 	      result = isLength(length) ? Array(length) : [];
 
 	  if (thisArg && isIterateeCall(collection, iteratee, thisArg)) {
@@ -417,8 +445,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseProperty = __webpack_require__(22),
-	    map = __webpack_require__(23);
+	var baseProperty = __webpack_require__(23),
+	    map = __webpack_require__(25);
 
 	/**
 	 * Gets the value of `key` from all elements in `collection`.
@@ -528,8 +556,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseAssign = __webpack_require__(24),
-	    createAssigner = __webpack_require__(25);
+	var baseAssign = __webpack_require__(30),
+	    createAssigner = __webpack_require__(31);
 
 	/**
 	 * Assigns own enumerable properties of source object(s) to the destination
@@ -569,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(31);
+	var camel2hyphen = __webpack_require__(33);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -625,8 +653,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(30);
-	var enquire = canUseDOM && __webpack_require__(32);
+	var canUseDOM = __webpack_require__(32);
+	var enquire = canUseDOM && __webpack_require__(34);
 	var json2mq = __webpack_require__(8);
 
 	var ResponsiveMixin = {
@@ -684,7 +712,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 
-	    this.autoPlay();
 	  },
 	  // Accessiblity handler for previous and next
 	  keyHandler: function (e) {
@@ -777,9 +804,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assign = __webpack_require__(33);
+	var assign = __webpack_require__(35);
 	var React = __webpack_require__(2);
-	var cx = __webpack_require__(15);
+	var classnames = __webpack_require__(14);
 	var ReactTransitionEvents = __webpack_require__(16);
 
 	var helpers = {
@@ -794,11 +821,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideWidth: slideWidth,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
-	      currentSlide: 0
+	      currentSlide: props.initialSlide
+	    
+	    
 	    }, function () {
 	      // getCSS function needs previously set state
-	      var trackStyle = this.getCSS(this.getLeft(0));
+	      var trackStyle = this.getCSS(this.getLeft(this.state.currentSlide));
 	      this.setState({trackStyle: trackStyle});
+
+	      this.autoPlay(); // once we're set up, trigger the initial autoplay.
 	    });
 	  },
 	  getDotCount: function () {
@@ -860,6 +891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  getAnimateCSS: function (targetLeft) {
 	    var style = this.getCSS(targetLeft);
+	    style.WebkitTransition = '-webkit-transform ' + this.props.speed + 'ms ' + this.props.cssEase;
 	    style.transition = 'transform ' + this.props.speed + 'ms ' + this.props.cssEase;
 	    return style;
 	  },
@@ -878,6 +910,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      width: trackWidth,
 	      WebkitTransform: 'translate3d(' + targetLeft + 'px, 0px, 0px)',
 	      transform: 'translate3d(' + targetLeft + 'px, 0px, 0px)',
+	      transition: '',
+	      WebkitTransition: ''
 	    };
 	    
 	    return style;
@@ -915,7 +949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      slickActive = (this.state.currentSlide === index);
 	    }
-	    return cx({
+	    return classnames({
 	      'slick-slide': true,
 	      'slick-active': slickActive,
 	      'slick-center': slickCenter,
@@ -973,20 +1007,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.infinite === false) {
 	      targetLeft = currentLeft;
 	    }
+
+	    if(this.props.afterChange!==null){
+	      this.props.afterChange(currentSlide);
+	    }
+
+	    var callback = function() {  
+	        this.setState({
+	          animating: false,
+	          trackStyle: this.getCSS(currentLeft),
+	          swipeLeft: null
+	        });
+	    }.bind(this)
+
 	    this.setState({
 	      animating: true,
 	      currentSlide: currentSlide,
 	      currentLeft: currentLeft,
 	      trackStyle: this.getAnimateCSS(targetLeft)
 	    }, function () {
-	      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), function() {  
-	        this.setState({
-	          animating: false,
-	          trackStyle: this.getCSS(currentLeft),
-	          swipeLeft: null
-	        });
-	      }.bind(this));
+	      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
+	      setTimeout(callback, this.props.speed);
 	    });
+
+	    this.autoPlay();
 	  },
 	  swipeDirection: function (touchObject) {
 	    var xDist, yDist, r, swipeAngle;
@@ -1013,10 +1057,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  autoPlay: function () {
 	    var play = function () {
-	      this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	      if (this.isMounted())
+	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
 	    }.bind(this);
 	    if (this.props.autoplay) {
-	      window.setInterval(play, this.props.autoplaySpeed);
+	      window.clearTimeout(this.state.autoPlayTimer);
+	      this.setState({
+	        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+	      });
 	    }
 	  },
 	};
@@ -1030,7 +1078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var initialState = {
 	    animating: false,
 	    dragging: false,
-	    // autoPlayTimer: null,
+	    autoPlayTimer: null,
 	    currentDirection: 0,
 	    currentLeft: null,
 	    currentSlide: 0,
@@ -1071,20 +1119,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	var React = __webpack_require__(2);
+
 	var defaultProps = {
-	    className: '',
+	    className: "",
 	    // accessibility: true,
 	    adaptiveHeight: false,
 	    arrows: true,
 	    autoplay: false,
 	    autoplaySpeed: 3000,
 	    centerMode: false,
-	    centerPadding: '50px',
-	    cssEase: 'ease',
+	    centerPadding: "50px",
+	    cssEase: "ease",
+	    customPaging: function customPaging(onClick, index, element) {
+	        return React.createElement(
+	            "button",
+	            { onClick: onClick },
+	            index
+	        );
+	    },
 	    dots: false,
-	    dotsClass: 'slick-dots',
+	    dotsClass: "slick-dots",
 	    draggable: true,
-	    easing: 'linear',
+	    easing: "linear",
 	    fade: false,
 	    focusOnSelect: false,
 	    infinite: true,
@@ -1092,7 +1151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // lazyLoad: 'ondemand',
 	    responsive: null,
 	    rtl: false,
-	    slide: 'div',
+	    slide: "div",
 	    slidesToShow: 1,
 	    slidesToScroll: 1,
 	    speed: 500,
@@ -1103,13 +1162,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // useCSS: true,
 	    variableWidth: false,
 	    vertical: false,
-	    // waitForAnimate: true
+	    // waitForAnimate: true,
+	    afterChange: null
 	};
 
 	module.exports = defaultProps;
 
 /***/ },
 /* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	function classNames() {
+		var classes = '';
+		var arg;
+
+		for (var i = 0; i < arguments.length; i++) {
+			arg = arguments[i];
+			if (!arg) {
+				continue;
+			}
+
+			if ('string' === typeof arg || 'number' === typeof arg) {
+				classes += ' ' + arg;
+			} else if (Object.prototype.toString.call(arg) === '[object Array]') {
+				classes += ' ' + classNames.apply(null, arg);
+			} else if ('object' === typeof arg) {
+				for (var key in arg) {
+					if (!arg.hasOwnProperty(key) || !arg[key]) {
+						continue;
+					}
+					classes += ' ' + key;
+				}
+			}
+		}
+		return classes.substr(1);
+	}
+
+	// safely export classNames in case the script is included directly on a page
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	}
+
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1126,11 +1222,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var ReactElement = __webpack_require__(34);
-	var ReactPropTransferer = __webpack_require__(35);
+	var ReactElement = __webpack_require__(36);
+	var ReactPropTransferer = __webpack_require__(37);
 
-	var keyOf = __webpack_require__(36);
-	var warning = __webpack_require__(37);
+	var keyOf = __webpack_require__(38);
+	var warning = __webpack_require__(39);
 
 	var CHILDREN_PROP = keyOf({children: null});
 
@@ -1144,8 +1240,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {object} a clone of child with props merged in.
 	 */
 	function cloneWithProps(child, props) {
-	  if ("production" !== (undefined)) {
-	    ("production" !== (undefined) ? warning(
+	  if (true) {
+	    (true ? warning(
 	      !child.ref,
 	      'You are calling cloneWithProps() on a child with a ref. This is ' +
 	      'dangerous because you\'re creating a new child which will not be ' +
@@ -1170,49 +1266,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule cx
-	 */
-
-	/**
-	 * This function is used to mark string literals representing CSS class names
-	 * so that they can be transformed statically. This allows for modularization
-	 * and minification of CSS class names.
-	 *
-	 * In static_upstream, this function is actually implemented, but it should
-	 * eventually be replaced with something more descriptive, and the transform
-	 * that is used in the main stack should be ported for use elsewhere.
-	 *
-	 * @param string|object className to modularize, or an object of key/values.
-	 *                      In the object case, the values are conditions that
-	 *                      determine if the className keys should be included.
-	 * @param [string ...]  Variable list of classNames in the string case.
-	 * @return string       Renderable space-separated CSS className.
-	 */
-	function cx(classNames) {
-	  if (typeof classNames == 'object') {
-	    return Object.keys(classNames).filter(function(className) {
-	      return classNames[className];
-	    }).join(' ');
-	  } else {
-	    return Array.prototype.join.call(arguments, ' ');
-	  }
-	}
-
-	module.exports = cx;
-
-
-/***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1229,7 +1282,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var ExecutionEnvironment = __webpack_require__(38);
+	var ExecutionEnvironment = __webpack_require__(40);
 
 	/**
 	 * EVENT_NAME_MAP is used to determine which event fired when a
@@ -1332,22 +1385,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.1.2 (Custom Build) <https://lodash.com/>
+	 * lodash 3.1.3 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseIsEqual = __webpack_require__(40),
-	    bindCallback = __webpack_require__(39),
-	    keys = __webpack_require__(41);
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
+	var baseIsEqual = __webpack_require__(41),
+	    bindCallback = __webpack_require__(42),
+	    keys = __webpack_require__(22);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -1362,9 +1409,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function baseCallback(func, thisArg, argCount) {
 	  var type = typeof func;
 	  if (type == 'function') {
-	    return (typeof thisArg != 'undefined')
-	      ? bindCallback(func, thisArg, argCount)
-	      : func;
+	    return typeof thisArg == 'undefined'
+	      ? func
+	      : bindCallback(func, thisArg, argCount);
 	  }
 	  if (func == null) {
 	    return identity;
@@ -1379,7 +1426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
-	 * shorthands or `this` binding.
+	 * shorthands and `this` binding.
 	 *
 	 * @private
 	 * @param {Object} object The object to inspect.
@@ -1390,30 +1437,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `object` is a match, else `false`.
 	 */
 	function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
-	  var length = props.length;
-	  if (object == null) {
-	    return !length;
-	  }
 	  var index = -1,
+	      length = props.length,
 	      noCustomizer = !customizer;
 
 	  while (++index < length) {
 	    if ((noCustomizer && strictCompareFlags[index])
 	          ? values[index] !== object[props[index]]
-	          : !hasOwnProperty.call(object, props[index])
+	          : !(props[index] in object)
 	        ) {
 	      return false;
 	    }
 	  }
 	  index = -1;
 	  while (++index < length) {
-	    var key = props[index];
-	    if (noCustomizer && strictCompareFlags[index]) {
-	      var result = hasOwnProperty.call(object, key);
-	    } else {
-	      var objValue = object[key],
-	          srcValue = values[index];
+	    var key = props[index],
+	        objValue = object[key],
+	        srcValue = values[index];
 
+	    if (noCustomizer && strictCompareFlags[index]) {
+	      var result = typeof objValue != 'undefined' || (key in object);
+	    } else {
 	      result = customizer ? customizer(objValue, srcValue, key) : undefined;
 	      if (typeof result == 'undefined') {
 	        result = baseIsEqual(srcValue, objValue, customizer, true);
@@ -1437,13 +1481,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var props = keys(source),
 	      length = props.length;
 
+	  if (!length) {
+	    return constant(true);
+	  }
 	  if (length == 1) {
 	    var key = props[0],
 	        value = source[key];
 
 	    if (isStrictComparable(value)) {
 	      return function(object) {
-	        return object != null && object[key] === value && hasOwnProperty.call(object, key);
+	        return object != null && object[key] === value &&
+	          (typeof value != 'undefined' || (key in toObject(object)));
 	      };
 	    }
 	  }
@@ -1456,7 +1504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    strictCompareFlags[length] = isStrictComparable(value);
 	  }
 	  return function(object) {
-	    return baseIsMatch(object, props, values, strictCompareFlags);
+	    return object != null && baseIsMatch(toObject(object), props, values, strictCompareFlags);
 	  };
 	}
 
@@ -1472,7 +1520,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function baseMatchesProperty(key, value) {
 	  if (isStrictComparable(value)) {
 	    return function(object) {
-	      return object != null && object[key] === value;
+	      return object != null && object[key] === value &&
+	        (typeof value != 'undefined' || (key in toObject(object)));
 	    };
 	  }
 	  return function(object) {
@@ -1506,10 +1555,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 * Converts `value` to an object if it is not one.
 	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {Object} Returns the object.
+	 */
+	function toObject(value) {
+	  return isObject(value) ? value : Object(value);
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
 	 *
 	 * @static
 	 * @memberOf _
@@ -1531,7 +1589,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	/**
+	 * Creates a function that returns `value`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Utility
+	 * @param {*} value The value to return from the new function.
+	 * @returns {Function} Returns the new function.
+	 * @example
+	 *
+	 * var object = { 'user': 'fred' };
+	 * var getter = _.constant(object);
+	 *
+	 * getter() === object;
+	 * // => true
+	 */
+	function constant(value) {
+	  return function() {
+	    return value;
+	  };
 	}
 
 	/**
@@ -1545,6 +1625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 *
 	 * var object = { 'user': 'fred' };
+	 *
 	 * _.identity(object) === object;
 	 * // => true
 	 */
@@ -1600,19 +1681,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.2 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var keys = __webpack_require__(42);
+	var keys = __webpack_require__(22);
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -1625,21 +1705,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Function} iteratee The function invoked per iteration.
 	 * @returns {Array|Object|string} Returns `collection`.
 	 */
-	function baseEach(collection, iteratee) {
-	  var length = collection ? collection.length : 0;
-	  if (!isLength(length)) {
-	    return baseForOwn(collection, iteratee);
-	  }
-	  var index = -1,
-	      iterable = toObject(collection);
-
-	  while (++index < length) {
-	    if (iteratee(iterable[index], index, iterable) === false) {
-	      break;
-	    }
-	  }
-	  return collection;
-	}
+	var baseEach = createBaseEach(baseForOwn);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -1653,20 +1719,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Function} keysFunc The function to get the keys of `object`.
 	 * @returns {Object} Returns `object`.
 	 */
-	function baseFor(object, iteratee, keysFunc) {
-	  var index = -1,
-	      iterable = toObject(object),
-	      props = keysFunc(object),
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index];
-	    if (iteratee(iterable[key], key, iterable) === false) {
-	      break;
-	    }
-	  }
-	  return object;
-	}
+	var baseFor = createBaseFor();
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -1682,7 +1735,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
+	 * Creates a `baseEach` or `baseEachRight` function.
+	 *
+	 * @private
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseEach(eachFunc, fromRight) {
+	  return function(collection, iteratee) {
+	    var length = collection ? collection.length : 0;
+	    if (!isLength(length)) {
+	      return eachFunc(collection, iteratee);
+	    }
+	    var index = fromRight ? length : -1,
+	        iterable = toObject(collection);
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      if (iteratee(iterable[index], index, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return collection;
+	  };
+	}
+
+	/**
+	 * Creates a base function for `_.forIn` or `_.forInRight`.
+	 *
+	 * @private
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseFor(fromRight) {
+	  return function(object, iteratee, keysFunc) {
+	    var iterable = toObject(object),
+	        props = keysFunc(object),
+	        length = props.length,
+	        index = fromRight ? length : -1;
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      var key = props[index];
+	      if (iteratee(iterable[key], key, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return object;
+	  };
+	}
+
+	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -1704,10 +1809,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -1729,7 +1832,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	module.exports = baseEach;
@@ -1740,54 +1843,17 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 
 	/**
-	 * The base implementation of `_.sortBy` and `_.sortByAll` which uses `comparer`
-	 * to define the sort order of `array` and replaces criteria objects with their
-	 * corresponding values.
-	 *
-	 * @private
-	 * @param {Array} array The array to sort.
-	 * @param {Function} comparer The function to define sort order.
-	 * @returns {Array} Returns `array`.
-	 */
-	function baseSortBy(array, comparer) {
-	  var length = array.length;
-
-	  array.sort(comparer);
-	  while (length--) {
-	    array[length] = array[length].value;
-	  }
-	  return array;
-	}
-
-	module.exports = baseSortBy;
-
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -1825,15 +1891,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else {
 	    prereq = type == 'string' && index in object;
 	  }
-	  return prereq && object[index] === value;
+	  if (prereq) {
+	    var other = object[index];
+	    return value === value ? (value === other) : (other !== other);
+	  }
+	  return false;
 	}
 
 	/**
 	 * Checks if `value` is a valid array-like length.
 	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -1844,10 +1912,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -1869,14 +1935,289 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	module.exports = isIterateeCall;
 
 
 /***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/**
+	 * The base implementation of `_.sortBy` and `_.sortByAll` which uses `comparer`
+	 * to define the sort order of `array` and replaces criteria objects with their
+	 * corresponding values.
+	 *
+	 * @private
+	 * @param {Array} array The array to sort.
+	 * @param {Function} comparer The function to define sort order.
+	 * @returns {Array} Returns `array`.
+	 */
+	function baseSortBy(array, comparer) {
+	  var length = array.length;
+
+	  array.sort(comparer);
+	  while (length--) {
+	    array[length] = array[length].value;
+	  }
+	  return array;
+	}
+
+	module.exports = baseSortBy;
+
+
+/***/ },
 /* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isArguments = __webpack_require__(43),
+	    isArray = __webpack_require__(24),
+	    isNative = __webpack_require__(44);
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Native method references. */
+	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * An object environment feature flags.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @type Object
+	 */
+	var support = {};
+
+	(function(x) {
+
+	  /**
+	   * Detect if `arguments` object indexes are non-enumerable.
+	   *
+	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
+	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
+	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
+	   * checks for indexes that exceed their function's formal parameters with
+	   * associated values of `0`.
+	   *
+	   * @memberOf _.support
+	   * @type boolean
+	   */
+	  try {
+	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
+	  } catch(e) {
+	    support.nonEnumArgs = true;
+	  }
+	}(0, 0));
+
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  value = +value;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	  return value > -1 && value % 1 == 0 && value < length;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * A fallback implementation of `Object.keys` which creates an array of the
+	 * own enumerable property names of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function shimKeys(object) {
+	  var props = keysIn(object),
+	      propsLength = props.length,
+	      length = propsLength && object.length;
+
+	  var allowIndexes = length && isLength(length) &&
+	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
+
+	  var index = -1,
+	      result = [];
+
+	  while (++index < propsLength) {
+	    var key = props[index];
+	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	/**
+	 * Creates an array of the own enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects. See the
+	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
+	 * for more details.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keys(new Foo);
+	 * // => ['a', 'b'] (iteration order is not guaranteed)
+	 *
+	 * _.keys('hi');
+	 * // => ['0', '1']
+	 */
+	var keys = !nativeKeys ? shimKeys : function(object) {
+	  if (object) {
+	    var Ctor = object.constructor,
+	        length = object.length;
+	  }
+	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
+	      (typeof object != 'function' && (length && isLength(length)))) {
+	    return shimKeys(object);
+	  }
+	  return isObject(object) ? nativeKeys(object) : [];
+	};
+
+	/**
+	 * Creates an array of the own and inherited enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keysIn(new Foo);
+	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+	 */
+	function keysIn(object) {
+	  if (object == null) {
+	    return [];
+	  }
+	  if (!isObject(object)) {
+	    object = Object(object);
+	  }
+	  var length = object.length;
+	  length = (length && isLength(length) &&
+	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
+
+	  var Ctor = object.constructor,
+	      index = -1,
+	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
+	      result = Array(length),
+	      skipIndexes = length > 0;
+
+	  while (++index < length) {
+	    result[index] = (index + '');
+	  }
+	  for (var key in object) {
+	    if (!(skipIndexes && isIndex(key, length)) &&
+	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = keys;
+
+
+/***/ },
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1905,7 +2246,171 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 23 */
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var arrayTag = '[object Array]',
+	    funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
+	 */
+	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+	    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reNative = RegExp('^' +
+	  escapeRegExp(objToString)
+	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as an `Array` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isArray([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArray(function() { return arguments; }());
+	 * // => false
+	 */
+	var isArray = nativeIsArray || function(value) {
+	  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
+	};
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (objToString.call(value) == funcTag) {
+	    return reNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reHostCtor.test(value);
+	}
+
+	/**
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to escape.
+	 * @returns {string} Returns the escaped string.
+	 * @example
+	 *
+	 * _.escapeRegExp('[lodash](https://lodash.com/)');
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
+	 */
+	function escapeRegExp(string) {
+	  string = baseToString(string);
+	  return (string && reHasRegExpChars.test(string))
+	    ? string.replace(reRegExpChars, '\\$&')
+	    : string;
+	}
+
+	module.exports = isArray;
+
+
+/***/ },
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1916,10 +2421,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var arrayMap = __webpack_require__(43),
-	    baseCallback = __webpack_require__(44),
-	    baseEach = __webpack_require__(45),
-	    isArray = __webpack_require__(46);
+	var arrayMap = __webpack_require__(45),
+	    baseCallback = __webpack_require__(46),
+	    baseEach = __webpack_require__(47),
+	    isArray = __webpack_require__(48);
 
 	/**
 	 * The base implementation of `_.map` without support for callback shorthands
@@ -1987,109 +2492,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var baseCopy = __webpack_require__(47),
-	    keys = __webpack_require__(48);
-
-	/**
-	 * The base implementation of `_.assign` without support for argument juggling,
-	 * multiple sources, and `this` binding `customizer` functions.
-	 *
-	 * @private
-	 * @param {Object} object The destination object.
-	 * @param {Object} source The source object.
-	 * @param {Function} [customizer] The function to customize assigning values.
-	 * @returns {Object} Returns the destination object.
-	 */
-	function baseAssign(object, source, customizer) {
-	  var props = keys(source);
-	  if (!customizer) {
-	    return baseCopy(source, object, props);
-	  }
-	  var index = -1,
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index],
-	        value = object[key],
-	        result = customizer(value, source[key], key, object, source);
-
-	    if ((result === result ? result !== value : value === value) ||
-	        (typeof value == 'undefined' && !(key in object))) {
-	      object[key] = result;
-	    }
-	  }
-	  return object;
-	}
-
-	module.exports = baseAssign;
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var bindCallback = __webpack_require__(49),
-	    isIterateeCall = __webpack_require__(50);
-
-	/**
-	 * Creates a function that assigns properties of source object(s) to a given
-	 * destination object.
-	 *
-	 * @private
-	 * @param {Function} assigner The function to assign values.
-	 * @returns {Function} Returns the new assigner function.
-	 */
-	function createAssigner(assigner) {
-	  return function() {
-	    var length = arguments.length,
-	        object = arguments[0];
-
-	    if (length < 2 || object == null) {
-	      return object;
-	    }
-	    if (length > 3 && isIterateeCall(arguments[1], arguments[2], arguments[3])) {
-	      length = 2;
-	    }
-	    // Juggle arguments.
-	    if (length > 3 && typeof arguments[length - 2] == 'function') {
-	      var customizer = bindCallback(arguments[--length - 1], arguments[length--], 5);
-	    } else if (length > 2 && typeof arguments[length - 1] == 'function') {
-	      customizer = arguments[--length];
-	    }
-	    var index = 0;
-	    while (++index < length) {
-	      var source = arguments[index];
-	      if (source) {
-	        assigner(object, source, customizer);
-	      }
-	    }
-	    return object;
-	  };
-	}
-
-	module.exports = createAssigner;
-
-
-/***/ },
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2134,22 +2536,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.1.2 (Custom Build) <https://lodash.com/>
+	 * lodash 3.1.3 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseIsEqual = __webpack_require__(51),
-	    bindCallback = __webpack_require__(52),
-	    keys = __webpack_require__(53);
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
+	var baseIsEqual = __webpack_require__(49),
+	    bindCallback = __webpack_require__(51),
+	    keys = __webpack_require__(50);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -2164,9 +2560,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function baseCallback(func, thisArg, argCount) {
 	  var type = typeof func;
 	  if (type == 'function') {
-	    return (typeof thisArg != 'undefined')
-	      ? bindCallback(func, thisArg, argCount)
-	      : func;
+	    return typeof thisArg == 'undefined'
+	      ? func
+	      : bindCallback(func, thisArg, argCount);
 	  }
 	  if (func == null) {
 	    return identity;
@@ -2181,7 +2577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
-	 * shorthands or `this` binding.
+	 * shorthands and `this` binding.
 	 *
 	 * @private
 	 * @param {Object} object The object to inspect.
@@ -2192,30 +2588,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `object` is a match, else `false`.
 	 */
 	function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
-	  var length = props.length;
-	  if (object == null) {
-	    return !length;
-	  }
 	  var index = -1,
+	      length = props.length,
 	      noCustomizer = !customizer;
 
 	  while (++index < length) {
 	    if ((noCustomizer && strictCompareFlags[index])
 	          ? values[index] !== object[props[index]]
-	          : !hasOwnProperty.call(object, props[index])
+	          : !(props[index] in object)
 	        ) {
 	      return false;
 	    }
 	  }
 	  index = -1;
 	  while (++index < length) {
-	    var key = props[index];
-	    if (noCustomizer && strictCompareFlags[index]) {
-	      var result = hasOwnProperty.call(object, key);
-	    } else {
-	      var objValue = object[key],
-	          srcValue = values[index];
+	    var key = props[index],
+	        objValue = object[key],
+	        srcValue = values[index];
 
+	    if (noCustomizer && strictCompareFlags[index]) {
+	      var result = typeof objValue != 'undefined' || (key in object);
+	    } else {
 	      result = customizer ? customizer(objValue, srcValue, key) : undefined;
 	      if (typeof result == 'undefined') {
 	        result = baseIsEqual(srcValue, objValue, customizer, true);
@@ -2239,13 +2632,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var props = keys(source),
 	      length = props.length;
 
+	  if (!length) {
+	    return constant(true);
+	  }
 	  if (length == 1) {
 	    var key = props[0],
 	        value = source[key];
 
 	    if (isStrictComparable(value)) {
 	      return function(object) {
-	        return object != null && object[key] === value && hasOwnProperty.call(object, key);
+	        return object != null && object[key] === value &&
+	          (typeof value != 'undefined' || (key in toObject(object)));
 	      };
 	    }
 	  }
@@ -2258,7 +2655,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    strictCompareFlags[length] = isStrictComparable(value);
 	  }
 	  return function(object) {
-	    return baseIsMatch(object, props, values, strictCompareFlags);
+	    return object != null && baseIsMatch(toObject(object), props, values, strictCompareFlags);
 	  };
 	}
 
@@ -2274,7 +2671,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function baseMatchesProperty(key, value) {
 	  if (isStrictComparable(value)) {
 	    return function(object) {
-	      return object != null && object[key] === value;
+	      return object != null && object[key] === value &&
+	        (typeof value != 'undefined' || (key in toObject(object)));
 	    };
 	  }
 	  return function(object) {
@@ -2308,10 +2706,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 * Converts `value` to an object if it is not one.
 	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {Object} Returns the object.
+	 */
+	function toObject(value) {
+	  return isObject(value) ? value : Object(value);
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
 	 *
 	 * @static
 	 * @memberOf _
@@ -2333,7 +2740,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	/**
+	 * Creates a function that returns `value`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Utility
+	 * @param {*} value The value to return from the new function.
+	 * @returns {Function} Returns the new function.
+	 * @example
+	 *
+	 * var object = { 'user': 'fred' };
+	 * var getter = _.constant(object);
+	 *
+	 * getter() === object;
+	 * // => true
+	 */
+	function constant(value) {
+	  return function() {
+	    return value;
+	  };
 	}
 
 	/**
@@ -2347,6 +2776,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 *
 	 * var object = { 'user': 'fred' };
+	 *
 	 * _.identity(object) === object;
 	 * // => true
 	 */
@@ -2369,7 +2799,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseEach = __webpack_require__(54);
+	var baseEach = __webpack_require__(52);
 
 	/**
 	 * The base implementation of `_.filter` without support for callback
@@ -2398,10 +2828,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
@@ -2414,9 +2844,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var reHostCtor = /^\[object .+?Constructor\]$/;
 
 	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
 	 */
 	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
 	    reHasRegExpChars = RegExp(reRegExpChars.source);
@@ -2444,7 +2874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
@@ -2454,9 +2884,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var fnToString = Function.prototype.toString;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
@@ -2470,14 +2899,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -2500,11 +2930,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * _.isArray([1, 2, 3]);
 	 * // => true
 	 *
-	 * (function() { return _.isArray(arguments); })();
+	 * _.isArray(function() { return arguments; }());
 	 * // => false
 	 */
 	var isArray = nativeIsArray || function(value) {
-	  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
+	  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
 	};
 
 	/**
@@ -2530,12 +2960,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (objToString.call(value) == funcTag) {
 	    return reNative.test(fnToString.call(value));
 	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
+	  return isObjectLike(value) && reHostCtor.test(value);
 	}
 
 	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
 	 *
 	 * @static
 	 * @memberOf _
@@ -2545,7 +2975,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 *
 	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
 	 */
 	function escapeRegExp(string) {
 	  string = baseToString(string);
@@ -2561,6 +2991,116 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * lodash 3.0.2 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var baseCopy = __webpack_require__(53),
+	    keys = __webpack_require__(54);
+
+	/**
+	 * The base implementation of `_.assign` without support for argument juggling,
+	 * multiple sources, and `this` binding `customizer` functions.
+	 *
+	 * @private
+	 * @param {Object} object The destination object.
+	 * @param {Object} source The source object.
+	 * @param {Function} [customizer] The function to customize assigning values.
+	 * @returns {Object} Returns the destination object.
+	 */
+	function baseAssign(object, source, customizer) {
+	  var props = keys(source);
+	  if (!customizer) {
+	    return baseCopy(source, object, props);
+	  }
+	  var index = -1,
+	      length = props.length;
+
+	  while (++index < length) {
+	    var key = props[index],
+	        value = object[key],
+	        result = customizer(value, source[key], key, object, source);
+
+	    if ((result === result ? (result !== value) : (value === value)) ||
+	        (typeof value == 'undefined' && !(key in object))) {
+	      object[key] = result;
+	    }
+	  }
+	  return object;
+	}
+
+	module.exports = baseAssign;
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var bindCallback = __webpack_require__(55),
+	    isIterateeCall = __webpack_require__(56);
+
+	/**
+	 * Creates a function that assigns properties of source object(s) to a given
+	 * destination object.
+	 *
+	 * @private
+	 * @param {Function} assigner The function to assign values.
+	 * @returns {Function} Returns the new assigner function.
+	 */
+	function createAssigner(assigner) {
+	  return function() {
+	    var args = arguments,
+	        length = args.length,
+	        object = args[0];
+
+	    if (length < 2 || object == null) {
+	      return object;
+	    }
+	    var customizer = args[length - 2],
+	        thisArg = args[length - 1],
+	        guard = args[3];
+
+	    if (length > 3 && typeof customizer == 'function') {
+	      customizer = bindCallback(customizer, thisArg, 5);
+	      length -= 2;
+	    } else {
+	      customizer = (length > 2 && typeof thisArg == 'function') ? thisArg : null;
+	      length -= (customizer ? 1 : 0);
+	    }
+	    if (guard && isIterateeCall(args[1], args[2], guard)) {
+	      customizer = length == 3 ? null : customizer;
+	      length = 2;
+	    }
+	    var index = 0;
+	    while (++index < length) {
+	      var source = args[index];
+	      if (source) {
+	        assigner(object, source, customizer);
+	      }
+	    }
+	    return object;
+	  };
+	}
+
+	module.exports = createAssigner;
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var canUseDOM = !!(
 	  typeof window !== 'undefined' &&
 	  window.document &&
@@ -2570,7 +3110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var camel2hyphen = function (str) {
@@ -2584,7 +3124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -2882,7 +3422,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}));
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2914,7 +3454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2930,10 +3470,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var ReactContext = __webpack_require__(55);
-	var ReactCurrentOwner = __webpack_require__(56);
+	var ReactContext = __webpack_require__(57);
+	var ReactCurrentOwner = __webpack_require__(58);
 
-	var warning = __webpack_require__(37);
+	var warning = __webpack_require__(39);
 
 	var RESERVED_PROPS = {
 	  key: true,
@@ -2961,7 +3501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    set: function(value) {
-	      ("production" !== (undefined) ? warning(
+	      (true ? warning(
 	        false,
 	        'Don\'t set the ' + key + ' property of the component. ' +
 	        'Mutate the existing props object instead.'
@@ -3020,7 +3560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // through the owner.
 	  this._context = context;
 
-	  if ("production" !== (undefined)) {
+	  if (true) {
 	    // The validation flag and props are currently mutative. We put them on
 	    // an external backing store so that we can freeze the whole object.
 	    // This can be replaced with a WeakMap once they are implemented in
@@ -3045,7 +3585,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _isReactElement: true
 	};
 
-	if ("production" !== (undefined)) {
+	if (true) {
 	  defineMutationMembrane(ReactElement.prototype);
 	}
 
@@ -3060,8 +3600,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (config != null) {
 	    ref = config.ref === undefined ? null : config.ref;
-	    if ("production" !== (undefined)) {
-	      ("production" !== (undefined) ? warning(
+	    if (true) {
+	      (true ? warning(
 	        config.key !== null,
 	        'createElement(...): Encountered component with a `key` of null. In ' +
 	        'a future version, this will be treated as equivalent to the string ' +
@@ -3132,7 +3672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    newProps
 	  );
 
-	  if ("production" !== (undefined)) {
+	  if (true) {
 	    // If the key on the original is valid, then the clone is valid
 	    newElement._store.validated = oldElement._store.validated;
 	  }
@@ -3162,7 +3702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3178,11 +3718,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var assign = __webpack_require__(57);
-	var emptyFunction = __webpack_require__(58);
-	var invariant = __webpack_require__(59);
-	var joinClasses = __webpack_require__(60);
-	var warning = __webpack_require__(37);
+	var assign = __webpack_require__(59);
+	var emptyFunction = __webpack_require__(60);
+	var invariant = __webpack_require__(61);
+	var joinClasses = __webpack_require__(62);
+	var warning = __webpack_require__(39);
 
 	var didWarn = false;
 
@@ -3295,7 +3835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @protected
 	     */
 	    transferPropsTo: function(element) {
-	      ("production" !== (undefined) ? invariant(
+	      (true ? invariant(
 	        element._owner === this,
 	        '%s: You can\'t call transferPropsTo() on a component that you ' +
 	        'don\'t own, %s. This usually means you are calling ' +
@@ -3306,10 +3846,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        element.type.displayName
 	      ) : invariant(element._owner === this));
 
-	      if ("production" !== (undefined)) {
+	      if (true) {
 	        if (!didWarn) {
 	          didWarn = true;
-	          ("production" !== (undefined) ? warning(
+	          (true ? warning(
 	            false,
 	            'transferPropsTo is deprecated. ' +
 	            'See http://fb.me/react-transferpropsto for more information.'
@@ -3331,7 +3871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3371,7 +3911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3387,7 +3927,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var emptyFunction = __webpack_require__(58);
+	var emptyFunction = __webpack_require__(60);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -3398,7 +3938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var warning = emptyFunction;
 
-	if ("production" !== (undefined)) {
+	if (true) {
 	  warning = function(condition, format ) {for (var args=[],$__0=2,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
 	    if (format === undefined) {
 	      throw new Error(
@@ -3418,7 +3958,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3467,7 +4007,321 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 39 */
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isArray = __webpack_require__(24),
+	    isTypedArray = __webpack_require__(63),
+	    keys = __webpack_require__(22);
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]',
+	    arrayTag = '[object Array]',
+	    boolTag = '[object Boolean]',
+	    dateTag = '[object Date]',
+	    errorTag = '[object Error]',
+	    funcTag = '[object Function]',
+	    numberTag = '[object Number]',
+	    objectTag = '[object Object]',
+	    regexpTag = '[object RegExp]',
+	    stringTag = '[object String]';
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * The base implementation of `_.isEqual` without support for `this` binding
+	 * `customizer` functions.
+	 *
+	 * @private
+	 * @param {*} value The value to compare.
+	 * @param {*} other The other value to compare.
+	 * @param {Function} [customizer] The function to customize comparing values.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA] Tracks traversed `value` objects.
+	 * @param {Array} [stackB] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+	 */
+	function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
+	  // Exit early for identical values.
+	  if (value === other) {
+	    // Treat `+0` vs. `-0` as not equal.
+	    return value !== 0 || (1 / value == 1 / other);
+	  }
+	  var valType = typeof value,
+	      othType = typeof other;
+
+	  // Exit early for unlike primitive values.
+	  if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
+	      value == null || other == null) {
+	    // Return `false` unless both values are `NaN`.
+	    return value !== value && other !== other;
+	  }
+	  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isLoose, stackA, stackB);
+	}
+
+	/**
+	 * A specialized version of `baseIsEqual` for arrays and objects which performs
+	 * deep comparisons and tracks traversed objects enabling objects with circular
+	 * references to be compared.
+	 *
+	 * @private
+	 * @param {Object} object The object to compare.
+	 * @param {Object} other The other object to compare.
+	 * @param {Function} equalFunc The function to determine equivalents of values.
+	 * @param {Function} [customizer] The function to customize comparing objects.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA=[]] Tracks traversed `value` objects.
+	 * @param {Array} [stackB=[]] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
+	  var objIsArr = isArray(object),
+	      othIsArr = isArray(other),
+	      objTag = arrayTag,
+	      othTag = arrayTag;
+
+	  if (!objIsArr) {
+	    objTag = objToString.call(object);
+	    if (objTag == argsTag) {
+	      objTag = objectTag;
+	    } else if (objTag != objectTag) {
+	      objIsArr = isTypedArray(object);
+	    }
+	  }
+	  if (!othIsArr) {
+	    othTag = objToString.call(other);
+	    if (othTag == argsTag) {
+	      othTag = objectTag;
+	    } else if (othTag != objectTag) {
+	      othIsArr = isTypedArray(other);
+	    }
+	  }
+	  var objIsObj = (objTag == objectTag || (isLoose && objTag == funcTag)),
+	      othIsObj = (othTag == objectTag || (isLoose && othTag == funcTag)),
+	      isSameTag = objTag == othTag;
+
+	  if (isSameTag && !(objIsArr || objIsObj)) {
+	    return equalByTag(object, other, objTag);
+	  }
+	  if (isLoose) {
+	    if (!isSameTag && !(objIsObj && othIsObj)) {
+	      return false;
+	    }
+	  } else {
+	    var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+	        othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+	    if (valWrapped || othWrapped) {
+	      return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isLoose, stackA, stackB);
+	    }
+	    if (!isSameTag) {
+	      return false;
+	    }
+	  }
+	  // Assume cyclic values are equal.
+	  // For more information on detecting circular references see https://es5.github.io/#JO.
+	  stackA || (stackA = []);
+	  stackB || (stackB = []);
+
+	  var length = stackA.length;
+	  while (length--) {
+	    if (stackA[length] == object) {
+	      return stackB[length] == other;
+	    }
+	  }
+	  // Add `object` and `other` to the stack of traversed objects.
+	  stackA.push(object);
+	  stackB.push(other);
+
+	  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isLoose, stackA, stackB);
+
+	  stackA.pop();
+	  stackB.pop();
+
+	  return result;
+	}
+
+	/**
+	 * A specialized version of `baseIsEqualDeep` for arrays with support for
+	 * partial deep comparisons.
+	 *
+	 * @private
+	 * @param {Array} array The array to compare.
+	 * @param {Array} other The other array to compare.
+	 * @param {Function} equalFunc The function to determine equivalents of values.
+	 * @param {Function} [customizer] The function to customize comparing arrays.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA] Tracks traversed `value` objects.
+	 * @param {Array} [stackB] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+	 */
+	function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stackB) {
+	  var index = -1,
+	      arrLength = array.length,
+	      othLength = other.length,
+	      result = true;
+
+	  if (arrLength != othLength && !(isLoose && othLength > arrLength)) {
+	    return false;
+	  }
+	  // Deep compare the contents, ignoring non-numeric properties.
+	  while (result && ++index < arrLength) {
+	    var arrValue = array[index],
+	        othValue = other[index];
+
+	    result = undefined;
+	    if (customizer) {
+	      result = isLoose
+	        ? customizer(othValue, arrValue, index)
+	        : customizer(arrValue, othValue, index);
+	    }
+	    if (typeof result == 'undefined') {
+	      // Recursively compare arrays (susceptible to call stack limits).
+	      if (isLoose) {
+	        var othIndex = othLength;
+	        while (othIndex--) {
+	          othValue = other[othIndex];
+	          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
+	          if (result) {
+	            break;
+	          }
+	        }
+	      } else {
+	        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
+	      }
+	    }
+	  }
+	  return !!result;
+	}
+
+	/**
+	 * A specialized version of `baseIsEqualDeep` for comparing objects of
+	 * the same `toStringTag`.
+	 *
+	 * **Note:** This function only supports comparing values with tags of
+	 * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+	 *
+	 * @private
+	 * @param {Object} value The object to compare.
+	 * @param {Object} other The other object to compare.
+	 * @param {string} tag The `toStringTag` of the objects to compare.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function equalByTag(object, other, tag) {
+	  switch (tag) {
+	    case boolTag:
+	    case dateTag:
+	      // Coerce dates and booleans to numbers, dates to milliseconds and booleans
+	      // to `1` or `0` treating invalid dates coerced to `NaN` as not equal.
+	      return +object == +other;
+
+	    case errorTag:
+	      return object.name == other.name && object.message == other.message;
+
+	    case numberTag:
+	      // Treat `NaN` vs. `NaN` as equal.
+	      return (object != +object)
+	        ? other != +other
+	        // But, treat `-0` vs. `+0` as not equal.
+	        : (object == 0 ? ((1 / object) == (1 / other)) : object == +other);
+
+	    case regexpTag:
+	    case stringTag:
+	      // Coerce regexes to strings and treat strings primitives and string
+	      // objects as equal. See https://es5.github.io/#x15.10.6.4 for more details.
+	      return object == (other + '');
+	  }
+	  return false;
+	}
+
+	/**
+	 * A specialized version of `baseIsEqualDeep` for objects with support for
+	 * partial deep comparisons.
+	 *
+	 * @private
+	 * @param {Object} object The object to compare.
+	 * @param {Object} other The other object to compare.
+	 * @param {Function} equalFunc The function to determine equivalents of values.
+	 * @param {Function} [customizer] The function to customize comparing values.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA] Tracks traversed `value` objects.
+	 * @param {Array} [stackB] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
+	  var objProps = keys(object),
+	      objLength = objProps.length,
+	      othProps = keys(other),
+	      othLength = othProps.length;
+
+	  if (objLength != othLength && !isLoose) {
+	    return false;
+	  }
+	  var skipCtor = isLoose,
+	      index = -1;
+
+	  while (++index < objLength) {
+	    var key = objProps[index],
+	        result = isLoose ? key in other : hasOwnProperty.call(other, key);
+
+	    if (result) {
+	      var objValue = object[key],
+	          othValue = other[key];
+
+	      result = undefined;
+	      if (customizer) {
+	        result = isLoose
+	          ? customizer(othValue, objValue, key)
+	          : customizer(objValue, othValue, key);
+	      }
+	      if (typeof result == 'undefined') {
+	        // Recursively compare objects (susceptible to call stack limits).
+	        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isLoose, stackA, stackB);
+	      }
+	    }
+	    if (!result) {
+	      return false;
+	    }
+	    skipCtor || (skipCtor = key == 'constructor');
+	  }
+	  if (!skipCtor) {
+	    var objCtor = object.constructor,
+	        othCtor = other.constructor;
+
+	    // Non `Object` object instances with different constructors are not equal.
+	    if (objCtor != othCtor &&
+	        ('constructor' in object && 'constructor' in other) &&
+	        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+	          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+
+	module.exports = baseIsEqual;
+
+
+/***/ },
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3537,7 +4391,207 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 40 */
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]';
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as an `arguments` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isArguments(function() { return arguments; }());
+	 * // => true
+	 *
+	 * _.isArguments([1, 2, 3]);
+	 * // => false
+	 */
+	function isArguments(value) {
+	  var length = isObjectLike(value) ? value.length : undefined;
+	  return isLength(length) && objToString.call(value) == argsTag;
+	}
+
+	module.exports = isArguments;
+
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
+	 */
+	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+	    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reNative = RegExp('^' +
+	  escapeRegExp(objToString)
+	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (objToString.call(value) == funcTag) {
+	    return reNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reHostCtor.test(value);
+	}
+
+	/**
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to escape.
+	 * @returns {string} Returns the escaped string.
+	 * @example
+	 *
+	 * _.escapeRegExp('[lodash](https://lodash.com/)');
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
+	 */
+	function escapeRegExp(string) {
+	  string = baseToString(string);
+	  return (string && reHasRegExpChars.test(string))
+	    ? string.replace(reRegExpChars, '\\$&')
+	    : string;
+	}
+
+	module.exports = isNative;
+
+
+/***/ },
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3548,9 +4602,627 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArray = __webpack_require__(61),
-	    isTypedArray = __webpack_require__(62),
-	    keys = __webpack_require__(41);
+
+	/**
+	 * A specialized version of `_.map` for arrays without support for callback
+	 * shorthands or `this` binding.
+	 *
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Array} Returns the new mapped array.
+	 */
+	function arrayMap(array, iteratee) {
+	  var index = -1,
+	      length = array.length,
+	      result = Array(length);
+
+	  while (++index < length) {
+	    result[index] = iteratee(array[index], index, array);
+	  }
+	  return result;
+	}
+
+	module.exports = arrayMap;
+
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.1.3 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var baseIsEqual = __webpack_require__(65),
+	    bindCallback = __webpack_require__(64),
+	    keys = __webpack_require__(66);
+
+	/**
+	 * The base implementation of `_.callback` which supports specifying the
+	 * number of arguments to provide to `func`.
+	 *
+	 * @private
+	 * @param {*} [func=_.identity] The value to convert to a callback.
+	 * @param {*} [thisArg] The `this` binding of `func`.
+	 * @param {number} [argCount] The number of arguments to provide to `func`.
+	 * @returns {Function} Returns the callback.
+	 */
+	function baseCallback(func, thisArg, argCount) {
+	  var type = typeof func;
+	  if (type == 'function') {
+	    return typeof thisArg == 'undefined'
+	      ? func
+	      : bindCallback(func, thisArg, argCount);
+	  }
+	  if (func == null) {
+	    return identity;
+	  }
+	  if (type == 'object') {
+	    return baseMatches(func);
+	  }
+	  return typeof thisArg == 'undefined'
+	    ? baseProperty(func + '')
+	    : baseMatchesProperty(func + '', thisArg);
+	}
+
+	/**
+	 * The base implementation of `_.isMatch` without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Object} object The object to inspect.
+	 * @param {Array} props The source property names to match.
+	 * @param {Array} values The source values to match.
+	 * @param {Array} strictCompareFlags Strict comparison flags for source values.
+	 * @param {Function} [customizer] The function to customize comparing objects.
+	 * @returns {boolean} Returns `true` if `object` is a match, else `false`.
+	 */
+	function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
+	  var index = -1,
+	      length = props.length,
+	      noCustomizer = !customizer;
+
+	  while (++index < length) {
+	    if ((noCustomizer && strictCompareFlags[index])
+	          ? values[index] !== object[props[index]]
+	          : !(props[index] in object)
+	        ) {
+	      return false;
+	    }
+	  }
+	  index = -1;
+	  while (++index < length) {
+	    var key = props[index],
+	        objValue = object[key],
+	        srcValue = values[index];
+
+	    if (noCustomizer && strictCompareFlags[index]) {
+	      var result = typeof objValue != 'undefined' || (key in object);
+	    } else {
+	      result = customizer ? customizer(objValue, srcValue, key) : undefined;
+	      if (typeof result == 'undefined') {
+	        result = baseIsEqual(srcValue, objValue, customizer, true);
+	      }
+	    }
+	    if (!result) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+
+	/**
+	 * The base implementation of `_.matches` which does not clone `source`.
+	 *
+	 * @private
+	 * @param {Object} source The object of property values to match.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseMatches(source) {
+	  var props = keys(source),
+	      length = props.length;
+
+	  if (!length) {
+	    return constant(true);
+	  }
+	  if (length == 1) {
+	    var key = props[0],
+	        value = source[key];
+
+	    if (isStrictComparable(value)) {
+	      return function(object) {
+	        return object != null && object[key] === value &&
+	          (typeof value != 'undefined' || (key in toObject(object)));
+	      };
+	    }
+	  }
+	  var values = Array(length),
+	      strictCompareFlags = Array(length);
+
+	  while (length--) {
+	    value = source[props[length]];
+	    values[length] = value;
+	    strictCompareFlags[length] = isStrictComparable(value);
+	  }
+	  return function(object) {
+	    return object != null && baseIsMatch(toObject(object), props, values, strictCompareFlags);
+	  };
+	}
+
+	/**
+	 * The base implementation of `_.matchesProperty` which does not coerce `key`
+	 * to a string.
+	 *
+	 * @private
+	 * @param {string} key The key of the property to get.
+	 * @param {*} value The value to compare.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseMatchesProperty(key, value) {
+	  if (isStrictComparable(value)) {
+	    return function(object) {
+	      return object != null && object[key] === value &&
+	        (typeof value != 'undefined' || (key in toObject(object)));
+	    };
+	  }
+	  return function(object) {
+	    return object != null && baseIsEqual(value, object[key], null, true);
+	  };
+	}
+
+	/**
+	 * The base implementation of `_.property` which does not coerce `key` to a string.
+	 *
+	 * @private
+	 * @param {string} key The key of the property to get.
+	 * @returns {Function} Returns the new function.
+	 */
+	function baseProperty(key) {
+	  return function(object) {
+	    return object == null ? undefined : object[key];
+	  };
+	}
+
+	/**
+	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` if suitable for strict
+	 *  equality comparisons, else `false`.
+	 */
+	function isStrictComparable(value) {
+	  return value === value && (value === 0 ? ((1 / value) > 0) : !isObject(value));
+	}
+
+	/**
+	 * Converts `value` to an object if it is not one.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {Object} Returns the object.
+	 */
+	function toObject(value) {
+	  return isObject(value) ? value : Object(value);
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	/**
+	 * Creates a function that returns `value`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Utility
+	 * @param {*} value The value to return from the new function.
+	 * @returns {Function} Returns the new function.
+	 * @example
+	 *
+	 * var object = { 'user': 'fred' };
+	 * var getter = _.constant(object);
+	 *
+	 * getter() === object;
+	 * // => true
+	 */
+	function constant(value) {
+	  return function() {
+	    return value;
+	  };
+	}
+
+	/**
+	 * This method returns the first argument provided to it.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Utility
+	 * @param {*} value Any value.
+	 * @returns {*} Returns `value`.
+	 * @example
+	 *
+	 * var object = { 'user': 'fred' };
+	 *
+	 * _.identity(object) === object;
+	 * // => true
+	 */
+	function identity(value) {
+	  return value;
+	}
+
+	module.exports = baseCallback;
+
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.2 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var keys = __webpack_require__(67);
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * The base implementation of `_.forEach` without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Array|Object|string} Returns `collection`.
+	 */
+	var baseEach = createBaseEach(baseForOwn);
+
+	/**
+	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
+	 * over `object` properties returned by `keysFunc` invoking `iteratee` for
+	 * each property. Iterator functions may exit iteration early by explicitly
+	 * returning `false`.
+	 *
+	 * @private
+	 * @param {Object} object The object to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @param {Function} keysFunc The function to get the keys of `object`.
+	 * @returns {Object} Returns `object`.
+	 */
+	var baseFor = createBaseFor();
+
+	/**
+	 * The base implementation of `_.forOwn` without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Object} object The object to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Object} Returns `object`.
+	 */
+	function baseForOwn(object, iteratee) {
+	  return baseFor(object, iteratee, keys);
+	}
+
+	/**
+	 * Creates a `baseEach` or `baseEachRight` function.
+	 *
+	 * @private
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseEach(eachFunc, fromRight) {
+	  return function(collection, iteratee) {
+	    var length = collection ? collection.length : 0;
+	    if (!isLength(length)) {
+	      return eachFunc(collection, iteratee);
+	    }
+	    var index = fromRight ? length : -1,
+	        iterable = toObject(collection);
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      if (iteratee(iterable[index], index, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return collection;
+	  };
+	}
+
+	/**
+	 * Creates a base function for `_.forIn` or `_.forInRight`.
+	 *
+	 * @private
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseFor(fromRight) {
+	  return function(object, iteratee, keysFunc) {
+	    var iterable = toObject(object),
+	        props = keysFunc(object),
+	        length = props.length,
+	        index = fromRight ? length : -1;
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      var key = props[index];
+	      if (iteratee(iterable[key], key, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return object;
+	  };
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Converts `value` to an object if it is not one.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {Object} Returns the object.
+	 */
+	function toObject(value) {
+	  return isObject(value) ? value : Object(value);
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	module.exports = baseEach;
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var arrayTag = '[object Array]',
+	    funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
+	 */
+	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+	    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reNative = RegExp('^' +
+	  escapeRegExp(objToString)
+	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as an `Array` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isArray([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isArray(function() { return arguments; }());
+	 * // => false
+	 */
+	var isArray = nativeIsArray || function(value) {
+	  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
+	};
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (objToString.call(value) == funcTag) {
+	    return reNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reHostCtor.test(value);
+	}
+
+	/**
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to escape.
+	 * @returns {string} Returns the escaped string.
+	 * @example
+	 *
+	 * _.escapeRegExp('[lodash](https://lodash.com/)');
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
+	 */
+	function escapeRegExp(string) {
+	  string = baseToString(string);
+	  return (string && reHasRegExpChars.test(string))
+	    ? string.replace(reRegExpChars, '\\$&')
+	    : string;
+	}
+
+	module.exports = isArray;
+
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isArray = __webpack_require__(29),
+	    isTypedArray = __webpack_require__(68),
+	    keys = __webpack_require__(50);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -3558,6 +5230,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    boolTag = '[object Boolean]',
 	    dateTag = '[object Date]',
 	    errorTag = '[object Error]',
+	    funcTag = '[object Function]',
 	    numberTag = '[object Number]',
 	    objectTag = '[object Object]',
 	    regexpTag = '[object RegExp]',
@@ -3570,9 +5243,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var hasOwnProperty = objectProto.hasOwnProperty;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
@@ -3584,12 +5256,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {*} value The value to compare.
 	 * @param {*} other The other value to compare.
 	 * @param {Function} [customizer] The function to customize comparing values.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
 	 * @param {Array} [stackA] Tracks traversed `value` objects.
 	 * @param {Array} [stackB] Tracks traversed `other` objects.
 	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
 	 */
-	function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
+	function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
 	  // Exit early for identical values.
 	  if (value === other) {
 	    // Treat `+0` vs. `-0` as not equal.
@@ -3604,7 +5276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Return `false` unless both values are `NaN`.
 	    return value !== value && other !== other;
 	  }
-	  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isWhere, stackA, stackB);
+	  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isLoose, stackA, stackB);
 	}
 
 	/**
@@ -3617,12 +5289,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} other The other object to compare.
 	 * @param {Function} equalFunc The function to determine equivalents of values.
 	 * @param {Function} [customizer] The function to customize comparing objects.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
 	 * @param {Array} [stackA=[]] Tracks traversed `value` objects.
 	 * @param {Array} [stackB=[]] Tracks traversed `other` objects.
 	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
 	 */
-	function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
+	function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
 	  var objIsArr = isArray(object),
 	      othIsArr = isArray(other),
 	      objTag = arrayTag,
@@ -3644,21 +5316,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	      othIsArr = isTypedArray(other);
 	    }
 	  }
-	  var objIsObj = objTag == objectTag,
-	      othIsObj = othTag == objectTag,
+	  var objIsObj = (objTag == objectTag || (isLoose && objTag == funcTag)),
+	      othIsObj = (othTag == objectTag || (isLoose && othTag == funcTag)),
 	      isSameTag = objTag == othTag;
 
 	  if (isSameTag && !(objIsArr || objIsObj)) {
 	    return equalByTag(object, other, objTag);
 	  }
-	  var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-	      othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+	  if (isLoose) {
+	    if (!isSameTag && !(objIsObj && othIsObj)) {
+	      return false;
+	    }
+	  } else {
+	    var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+	        othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
 
-	  if (valWrapped || othWrapped) {
-	    return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isWhere, stackA, stackB);
-	  }
-	  if (!isSameTag) {
-	    return false;
+	    if (valWrapped || othWrapped) {
+	      return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isLoose, stackA, stackB);
+	    }
+	    if (!isSameTag) {
+	      return false;
+	    }
 	  }
 	  // Assume cyclic values are equal.
 	  // For more information on detecting circular references see https://es5.github.io/#JO.
@@ -3675,7 +5353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  stackA.push(object);
 	  stackB.push(other);
 
-	  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isWhere, stackA, stackB);
+	  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isLoose, stackA, stackB);
 
 	  stackA.pop();
 	  stackB.pop();
@@ -3692,18 +5370,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Array} other The other array to compare.
 	 * @param {Function} equalFunc The function to determine equivalents of values.
 	 * @param {Function} [customizer] The function to customize comparing arrays.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
 	 * @param {Array} [stackA] Tracks traversed `value` objects.
 	 * @param {Array} [stackB] Tracks traversed `other` objects.
 	 * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
 	 */
-	function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
+	function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stackB) {
 	  var index = -1,
 	      arrLength = array.length,
 	      othLength = other.length,
 	      result = true;
 
-	  if (arrLength != othLength && !(isWhere && othLength > arrLength)) {
+	  if (arrLength != othLength && !(isLoose && othLength > arrLength)) {
 	    return false;
 	  }
 	  // Deep compare the contents, ignoring non-numeric properties.
@@ -3713,23 +5391,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    result = undefined;
 	    if (customizer) {
-	      result = isWhere
+	      result = isLoose
 	        ? customizer(othValue, arrValue, index)
 	        : customizer(arrValue, othValue, index);
 	    }
 	    if (typeof result == 'undefined') {
 	      // Recursively compare arrays (susceptible to call stack limits).
-	      if (isWhere) {
+	      if (isLoose) {
 	        var othIndex = othLength;
 	        while (othIndex--) {
 	          othValue = other[othIndex];
-	          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
+	          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
 	          if (result) {
 	            break;
 	          }
 	        }
 	      } else {
-	        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
+	        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
 	      }
 	    }
 	  }
@@ -3785,26 +5463,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} other The other object to compare.
 	 * @param {Function} equalFunc The function to determine equivalents of values.
 	 * @param {Function} [customizer] The function to customize comparing values.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
 	 * @param {Array} [stackA] Tracks traversed `value` objects.
 	 * @param {Array} [stackB] Tracks traversed `other` objects.
 	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
 	 */
-	function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
+	function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
 	  var objProps = keys(object),
 	      objLength = objProps.length,
 	      othProps = keys(other),
 	      othLength = othProps.length;
 
-	  if (objLength != othLength && !isWhere) {
+	  if (objLength != othLength && !isLoose) {
 	    return false;
 	  }
-	  var hasCtor,
+	  var skipCtor = isLoose,
 	      index = -1;
 
 	  while (++index < objLength) {
 	    var key = objProps[index],
-	        result = hasOwnProperty.call(other, key);
+	        result = isLoose ? key in other : hasOwnProperty.call(other, key);
 
 	    if (result) {
 	      var objValue = object[key],
@@ -3812,27 +5490,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      result = undefined;
 	      if (customizer) {
-	        result = isWhere
+	        result = isLoose
 	          ? customizer(othValue, objValue, key)
 	          : customizer(objValue, othValue, key);
 	      }
 	      if (typeof result == 'undefined') {
 	        // Recursively compare objects (susceptible to call stack limits).
-	        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isWhere, stackA, stackB);
+	        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isLoose, stackA, stackB);
 	      }
 	    }
 	    if (!result) {
 	      return false;
 	    }
-	    hasCtor || (hasCtor = key == 'constructor');
+	    skipCtor || (skipCtor = key == 'constructor');
 	  }
-	  if (!hasCtor) {
+	  if (!skipCtor) {
 	    var objCtor = object.constructor,
 	        othCtor = other.constructor;
 
 	    // Non `Object` object instances with different constructors are not equal.
-	    if (objCtor != othCtor && ('constructor' in object && 'constructor' in other) &&
-	        !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+	    if (objCtor != othCtor &&
+	        ('constructor' in object && 'constructor' in other) &&
+	        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+	          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
 	      return false;
 	    }
 	  }
@@ -3843,20 +5523,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 41 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(63),
-	    isArray = __webpack_require__(64),
-	    isNative = __webpack_require__(65);
+	var isArguments = __webpack_require__(69),
+	    isArray = __webpack_require__(29),
+	    isNative = __webpack_require__(70);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -3871,9 +5551,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -3924,9 +5603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Checks if `value` is a valid array-like length.
 	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -3965,10 +5642,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -3990,7 +5665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	/**
@@ -4026,7 +5701,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        length = object.length;
 	  }
 	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
+	      (typeof object != 'function' && (length && isLength(length)))) {
 	    return shimKeys(object);
 	  }
 	  return isObject(object) ? nativeKeys(object) : [];
@@ -4087,251 +5762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var isArguments = __webpack_require__(66),
-	    isArray = __webpack_require__(67),
-	    isNative = __webpack_require__(68);
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/** Native method references. */
-	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * An object environment feature flags.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @type Object
-	 */
-	var support = {};
-
-	(function(x) {
-
-	  /**
-	   * Detect if `arguments` object indexes are non-enumerable.
-	   *
-	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
-	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
-	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-	   * checks for indexes that exceed their function's formal parameters with
-	   * associated values of `0`.
-	   *
-	   * @memberOf _.support
-	   * @type boolean
-	   */
-	  try {
-	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
-	  } catch(e) {
-	    support.nonEnumArgs = true;
-	  }
-	}(0, 0));
-
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  value = +value;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	  return value > -1 && value % 1 == 0 && value < length;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * A fallback implementation of `Object.keys` which creates an array of the
-	 * own enumerable property names of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 */
-	function shimKeys(object) {
-	  var props = keysIn(object),
-	      propsLength = props.length,
-	      length = propsLength && object.length;
-
-	  var allowIndexes = length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
-
-	  var index = -1,
-	      result = [];
-
-	  while (++index < propsLength) {
-	    var key = props[index];
-	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
-	}
-
-	/**
-	 * Creates an array of the own enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
-	 * for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keys(new Foo);
-	 * // => ['a', 'b'] (iteration order is not guaranteed)
-	 *
-	 * _.keys('hi');
-	 * // => ['0', '1']
-	 */
-	var keys = !nativeKeys ? shimKeys : function(object) {
-	  if (object) {
-	    var Ctor = object.constructor,
-	        length = object.length;
-	  }
-	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
-	    return shimKeys(object);
-	  }
-	  return isObject(object) ? nativeKeys(object) : [];
-	};
-
-	/**
-	 * Creates an array of the own and inherited enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keysIn(new Foo);
-	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-	 */
-	function keysIn(object) {
-	  if (object == null) {
-	    return [];
-	  }
-	  if (!isObject(object)) {
-	    object = Object(object);
-	  }
-	  var length = object.length;
-	  length = (length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
-
-	  var Ctor = object.constructor,
-	      index = -1,
-	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-	      result = Array(length),
-	      skipIndexes = length > 0;
-
-	  while (++index < length) {
-	    result[index] = (index + '');
-	  }
-	  for (var key in object) {
-	    if (!(skipIndexes && isIndex(key, length)) &&
-	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	module.exports = keys;
-
-
-/***/ },
-/* 43 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4344,233 +5775,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	/**
-	 * A specialized version of `_.map` for arrays without support for callback
-	 * shorthands or `this` binding.
+	 * A specialized version of `baseCallback` which only supports `this` binding
+	 * and specifying the number of arguments to provide to `func`.
 	 *
 	 * @private
-	 * @param {Array} array The array to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @returns {Array} Returns the new mapped array.
-	 */
-	function arrayMap(array, iteratee) {
-	  var index = -1,
-	      length = array.length,
-	      result = Array(length);
-
-	  while (++index < length) {
-	    result[index] = iteratee(array[index], index, array);
-	  }
-	  return result;
-	}
-
-	module.exports = arrayMap;
-
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.1.2 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var baseIsEqual = __webpack_require__(69),
-	    bindCallback = __webpack_require__(70),
-	    keys = __webpack_require__(71);
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * The base implementation of `_.callback` which supports specifying the
-	 * number of arguments to provide to `func`.
-	 *
-	 * @private
-	 * @param {*} [func=_.identity] The value to convert to a callback.
-	 * @param {*} [thisArg] The `this` binding of `func`.
+	 * @param {Function} func The function to bind.
+	 * @param {*} thisArg The `this` binding of `func`.
 	 * @param {number} [argCount] The number of arguments to provide to `func`.
 	 * @returns {Function} Returns the callback.
 	 */
-	function baseCallback(func, thisArg, argCount) {
-	  var type = typeof func;
-	  if (type == 'function') {
-	    return (typeof thisArg != 'undefined')
-	      ? bindCallback(func, thisArg, argCount)
-	      : func;
-	  }
-	  if (func == null) {
+	function bindCallback(func, thisArg, argCount) {
+	  if (typeof func != 'function') {
 	    return identity;
 	  }
-	  if (type == 'object') {
-	    return baseMatches(func);
+	  if (typeof thisArg == 'undefined') {
+	    return func;
 	  }
-	  return typeof thisArg == 'undefined'
-	    ? baseProperty(func + '')
-	    : baseMatchesProperty(func + '', thisArg);
-	}
-
-	/**
-	 * The base implementation of `_.isMatch` without support for callback
-	 * shorthands or `this` binding.
-	 *
-	 * @private
-	 * @param {Object} object The object to inspect.
-	 * @param {Array} props The source property names to match.
-	 * @param {Array} values The source values to match.
-	 * @param {Array} strictCompareFlags Strict comparison flags for source values.
-	 * @param {Function} [customizer] The function to customize comparing objects.
-	 * @returns {boolean} Returns `true` if `object` is a match, else `false`.
-	 */
-	function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
-	  var length = props.length;
-	  if (object == null) {
-	    return !length;
-	  }
-	  var index = -1,
-	      noCustomizer = !customizer;
-
-	  while (++index < length) {
-	    if ((noCustomizer && strictCompareFlags[index])
-	          ? values[index] !== object[props[index]]
-	          : !hasOwnProperty.call(object, props[index])
-	        ) {
-	      return false;
-	    }
-	  }
-	  index = -1;
-	  while (++index < length) {
-	    var key = props[index];
-	    if (noCustomizer && strictCompareFlags[index]) {
-	      var result = hasOwnProperty.call(object, key);
-	    } else {
-	      var objValue = object[key],
-	          srcValue = values[index];
-
-	      result = customizer ? customizer(objValue, srcValue, key) : undefined;
-	      if (typeof result == 'undefined') {
-	        result = baseIsEqual(srcValue, objValue, customizer, true);
-	      }
-	    }
-	    if (!result) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-
-	/**
-	 * The base implementation of `_.matches` which does not clone `source`.
-	 *
-	 * @private
-	 * @param {Object} source The object of property values to match.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseMatches(source) {
-	  var props = keys(source),
-	      length = props.length;
-
-	  if (length == 1) {
-	    var key = props[0],
-	        value = source[key];
-
-	    if (isStrictComparable(value)) {
-	      return function(object) {
-	        return object != null && object[key] === value && hasOwnProperty.call(object, key);
-	      };
-	    }
-	  }
-	  var values = Array(length),
-	      strictCompareFlags = Array(length);
-
-	  while (length--) {
-	    value = source[props[length]];
-	    values[length] = value;
-	    strictCompareFlags[length] = isStrictComparable(value);
-	  }
-	  return function(object) {
-	    return baseIsMatch(object, props, values, strictCompareFlags);
-	  };
-	}
-
-	/**
-	 * The base implementation of `_.matchesProperty` which does not coerce `key`
-	 * to a string.
-	 *
-	 * @private
-	 * @param {string} key The key of the property to get.
-	 * @param {*} value The value to compare.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseMatchesProperty(key, value) {
-	  if (isStrictComparable(value)) {
-	    return function(object) {
-	      return object != null && object[key] === value;
+	  switch (argCount) {
+	    case 1: return function(value) {
+	      return func.call(thisArg, value);
+	    };
+	    case 3: return function(value, index, collection) {
+	      return func.call(thisArg, value, index, collection);
+	    };
+	    case 4: return function(accumulator, value, index, collection) {
+	      return func.call(thisArg, accumulator, value, index, collection);
+	    };
+	    case 5: return function(value, other, key, object, source) {
+	      return func.call(thisArg, value, other, key, object, source);
 	    };
 	  }
-	  return function(object) {
-	    return object != null && baseIsEqual(value, object[key], null, true);
+	  return function() {
+	    return func.apply(thisArg, arguments);
 	  };
-	}
-
-	/**
-	 * The base implementation of `_.property` which does not coerce `key` to a string.
-	 *
-	 * @private
-	 * @param {string} key The key of the property to get.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseProperty(key) {
-	  return function(object) {
-	    return object == null ? undefined : object[key];
-	  };
-	}
-
-	/**
-	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` if suitable for strict
-	 *  equality comparisons, else `false`.
-	 */
-	function isStrictComparable(value) {
-	  return value === value && (value === 0 ? ((1 / value) > 0) : !isObject(value));
-	}
-
-	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
 	}
 
 	/**
@@ -4591,27 +5828,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return value;
 	}
 
-	module.exports = baseCallback;
+	module.exports = bindCallback;
 
 
 /***/ },
-/* 45 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.2 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var keys = __webpack_require__(72);
+	var keys = __webpack_require__(71);
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -4624,21 +5860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Function} iteratee The function invoked per iteration.
 	 * @returns {Array|Object|string} Returns `collection`.
 	 */
-	function baseEach(collection, iteratee) {
-	  var length = collection ? collection.length : 0;
-	  if (!isLength(length)) {
-	    return baseForOwn(collection, iteratee);
-	  }
-	  var index = -1,
-	      iterable = toObject(collection);
-
-	  while (++index < length) {
-	    if (iteratee(iterable[index], index, iterable) === false) {
-	      break;
-	    }
-	  }
-	  return collection;
-	}
+	var baseEach = createBaseEach(baseForOwn);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -4652,20 +5874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Function} keysFunc The function to get the keys of `object`.
 	 * @returns {Object} Returns `object`.
 	 */
-	function baseFor(object, iteratee, keysFunc) {
-	  var index = -1,
-	      iterable = toObject(object),
-	      props = keysFunc(object),
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index];
-	    if (iteratee(iterable[key], key, iterable) === false) {
-	      break;
-	    }
-	  }
-	  return object;
-	}
+	var baseFor = createBaseFor();
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -4681,7 +5890,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
+	 * Creates a `baseEach` or `baseEachRight` function.
+	 *
+	 * @private
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseEach(eachFunc, fromRight) {
+	  return function(collection, iteratee) {
+	    var length = collection ? collection.length : 0;
+	    if (!isLength(length)) {
+	      return eachFunc(collection, iteratee);
+	    }
+	    var index = fromRight ? length : -1,
+	        iterable = toObject(collection);
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      if (iteratee(iterable[index], index, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return collection;
+	  };
+	}
+
+	/**
+	 * Creates a base function for `_.forIn` or `_.forInRight`.
+	 *
+	 * @private
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseFor(fromRight) {
+	  return function(object, iteratee, keysFunc) {
+	    var iterable = toObject(object),
+	        props = keysFunc(object),
+	        length = props.length,
+	        index = fromRight ? length : -1;
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      var key = props[index];
+	      if (iteratee(iterable[key], key, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return object;
+	  };
+	}
+
+	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -4703,10 +5964,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -4728,178 +5987,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	module.exports = baseEach;
 
 
 /***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var arrayTag = '[object Array]',
-	    funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `Array` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isArray([1, 2, 3]);
-	 * // => true
-	 *
-	 * (function() { return _.isArray(arguments); })();
-	 * // => false
-	 */
-	var isArray = nativeIsArray || function(value) {
-	  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
-	};
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isArray;
-
-
-/***/ },
-/* 47 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4939,20 +6034,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 48 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(73),
-	    isArray = __webpack_require__(74),
-	    isNative = __webpack_require__(75);
+	var isArguments = __webpack_require__(72),
+	    isArray = __webpack_require__(73),
+	    isNative = __webpack_require__(74);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -4967,9 +6062,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -5020,9 +6114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Checks if `value` is a valid array-like length.
 	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -5061,10 +6153,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -5086,7 +6176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	/**
@@ -5122,7 +6212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        length = object.length;
 	  }
 	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
+	      (typeof object != 'function' && (length && isLength(length)))) {
 	    return shimKeys(object);
 	  }
 	  return isObject(object) ? nativeKeys(object) : [];
@@ -5183,7 +6273,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 49 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5253,22 +6343,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -5306,15 +6395,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else {
 	    prereq = type == 'string' && index in object;
 	  }
-	  return prereq && object[index] === value;
+	  if (prereq) {
+	    var other = object[index];
+	    return value === value ? (value === other) : (other !== other);
+	  }
+	  return false;
 	}
 
 	/**
 	 * Checks if `value` is a valid array-like length.
 	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -5325,10 +6416,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -5350,774 +6439,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	module.exports = isIterateeCall;
 
 
 /***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var isArray = __webpack_require__(29),
-	    isTypedArray = __webpack_require__(76),
-	    keys = __webpack_require__(53);
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]',
-	    arrayTag = '[object Array]',
-	    boolTag = '[object Boolean]',
-	    dateTag = '[object Date]',
-	    errorTag = '[object Error]',
-	    numberTag = '[object Number]',
-	    objectTag = '[object Object]',
-	    regexpTag = '[object RegExp]',
-	    stringTag = '[object String]';
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * The base implementation of `_.isEqual` without support for `this` binding
-	 * `customizer` functions.
-	 *
-	 * @private
-	 * @param {*} value The value to compare.
-	 * @param {*} other The other value to compare.
-	 * @param {Function} [customizer] The function to customize comparing values.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA] Tracks traversed `value` objects.
-	 * @param {Array} [stackB] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
-	 */
-	function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
-	  // Exit early for identical values.
-	  if (value === other) {
-	    // Treat `+0` vs. `-0` as not equal.
-	    return value !== 0 || (1 / value == 1 / other);
-	  }
-	  var valType = typeof value,
-	      othType = typeof other;
-
-	  // Exit early for unlike primitive values.
-	  if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
-	      value == null || other == null) {
-	    // Return `false` unless both values are `NaN`.
-	    return value !== value && other !== other;
-	  }
-	  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isWhere, stackA, stackB);
-	}
-
-	/**
-	 * A specialized version of `baseIsEqual` for arrays and objects which performs
-	 * deep comparisons and tracks traversed objects enabling objects with circular
-	 * references to be compared.
-	 *
-	 * @private
-	 * @param {Object} object The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {Function} equalFunc The function to determine equivalents of values.
-	 * @param {Function} [customizer] The function to customize comparing objects.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA=[]] Tracks traversed `value` objects.
-	 * @param {Array} [stackB=[]] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
-	 */
-	function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
-	  var objIsArr = isArray(object),
-	      othIsArr = isArray(other),
-	      objTag = arrayTag,
-	      othTag = arrayTag;
-
-	  if (!objIsArr) {
-	    objTag = objToString.call(object);
-	    if (objTag == argsTag) {
-	      objTag = objectTag;
-	    } else if (objTag != objectTag) {
-	      objIsArr = isTypedArray(object);
-	    }
-	  }
-	  if (!othIsArr) {
-	    othTag = objToString.call(other);
-	    if (othTag == argsTag) {
-	      othTag = objectTag;
-	    } else if (othTag != objectTag) {
-	      othIsArr = isTypedArray(other);
-	    }
-	  }
-	  var objIsObj = objTag == objectTag,
-	      othIsObj = othTag == objectTag,
-	      isSameTag = objTag == othTag;
-
-	  if (isSameTag && !(objIsArr || objIsObj)) {
-	    return equalByTag(object, other, objTag);
-	  }
-	  var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-	      othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-	  if (valWrapped || othWrapped) {
-	    return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isWhere, stackA, stackB);
-	  }
-	  if (!isSameTag) {
-	    return false;
-	  }
-	  // Assume cyclic values are equal.
-	  // For more information on detecting circular references see https://es5.github.io/#JO.
-	  stackA || (stackA = []);
-	  stackB || (stackB = []);
-
-	  var length = stackA.length;
-	  while (length--) {
-	    if (stackA[length] == object) {
-	      return stackB[length] == other;
-	    }
-	  }
-	  // Add `object` and `other` to the stack of traversed objects.
-	  stackA.push(object);
-	  stackB.push(other);
-
-	  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isWhere, stackA, stackB);
-
-	  stackA.pop();
-	  stackB.pop();
-
-	  return result;
-	}
-
-	/**
-	 * A specialized version of `baseIsEqualDeep` for arrays with support for
-	 * partial deep comparisons.
-	 *
-	 * @private
-	 * @param {Array} array The array to compare.
-	 * @param {Array} other The other array to compare.
-	 * @param {Function} equalFunc The function to determine equivalents of values.
-	 * @param {Function} [customizer] The function to customize comparing arrays.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA] Tracks traversed `value` objects.
-	 * @param {Array} [stackB] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
-	 */
-	function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
-	  var index = -1,
-	      arrLength = array.length,
-	      othLength = other.length,
-	      result = true;
-
-	  if (arrLength != othLength && !(isWhere && othLength > arrLength)) {
-	    return false;
-	  }
-	  // Deep compare the contents, ignoring non-numeric properties.
-	  while (result && ++index < arrLength) {
-	    var arrValue = array[index],
-	        othValue = other[index];
-
-	    result = undefined;
-	    if (customizer) {
-	      result = isWhere
-	        ? customizer(othValue, arrValue, index)
-	        : customizer(arrValue, othValue, index);
-	    }
-	    if (typeof result == 'undefined') {
-	      // Recursively compare arrays (susceptible to call stack limits).
-	      if (isWhere) {
-	        var othIndex = othLength;
-	        while (othIndex--) {
-	          othValue = other[othIndex];
-	          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
-	          if (result) {
-	            break;
-	          }
-	        }
-	      } else {
-	        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
-	      }
-	    }
-	  }
-	  return !!result;
-	}
-
-	/**
-	 * A specialized version of `baseIsEqualDeep` for comparing objects of
-	 * the same `toStringTag`.
-	 *
-	 * **Note:** This function only supports comparing values with tags of
-	 * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
-	 *
-	 * @private
-	 * @param {Object} value The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {string} tag The `toStringTag` of the objects to compare.
-	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
-	 */
-	function equalByTag(object, other, tag) {
-	  switch (tag) {
-	    case boolTag:
-	    case dateTag:
-	      // Coerce dates and booleans to numbers, dates to milliseconds and booleans
-	      // to `1` or `0` treating invalid dates coerced to `NaN` as not equal.
-	      return +object == +other;
-
-	    case errorTag:
-	      return object.name == other.name && object.message == other.message;
-
-	    case numberTag:
-	      // Treat `NaN` vs. `NaN` as equal.
-	      return (object != +object)
-	        ? other != +other
-	        // But, treat `-0` vs. `+0` as not equal.
-	        : (object == 0 ? ((1 / object) == (1 / other)) : object == +other);
-
-	    case regexpTag:
-	    case stringTag:
-	      // Coerce regexes to strings and treat strings primitives and string
-	      // objects as equal. See https://es5.github.io/#x15.10.6.4 for more details.
-	      return object == (other + '');
-	  }
-	  return false;
-	}
-
-	/**
-	 * A specialized version of `baseIsEqualDeep` for objects with support for
-	 * partial deep comparisons.
-	 *
-	 * @private
-	 * @param {Object} object The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {Function} equalFunc The function to determine equivalents of values.
-	 * @param {Function} [customizer] The function to customize comparing values.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA] Tracks traversed `value` objects.
-	 * @param {Array} [stackB] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
-	 */
-	function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
-	  var objProps = keys(object),
-	      objLength = objProps.length,
-	      othProps = keys(other),
-	      othLength = othProps.length;
-
-	  if (objLength != othLength && !isWhere) {
-	    return false;
-	  }
-	  var hasCtor,
-	      index = -1;
-
-	  while (++index < objLength) {
-	    var key = objProps[index],
-	        result = hasOwnProperty.call(other, key);
-
-	    if (result) {
-	      var objValue = object[key],
-	          othValue = other[key];
-
-	      result = undefined;
-	      if (customizer) {
-	        result = isWhere
-	          ? customizer(othValue, objValue, key)
-	          : customizer(objValue, othValue, key);
-	      }
-	      if (typeof result == 'undefined') {
-	        // Recursively compare objects (susceptible to call stack limits).
-	        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isWhere, stackA, stackB);
-	      }
-	    }
-	    if (!result) {
-	      return false;
-	    }
-	    hasCtor || (hasCtor = key == 'constructor');
-	  }
-	  if (!hasCtor) {
-	    var objCtor = object.constructor,
-	        othCtor = other.constructor;
-
-	    // Non `Object` object instances with different constructors are not equal.
-	    if (objCtor != othCtor && ('constructor' in object && 'constructor' in other) &&
-	        !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-
-	module.exports = baseIsEqual;
-
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/**
-	 * A specialized version of `baseCallback` which only supports `this` binding
-	 * and specifying the number of arguments to provide to `func`.
-	 *
-	 * @private
-	 * @param {Function} func The function to bind.
-	 * @param {*} thisArg The `this` binding of `func`.
-	 * @param {number} [argCount] The number of arguments to provide to `func`.
-	 * @returns {Function} Returns the callback.
-	 */
-	function bindCallback(func, thisArg, argCount) {
-	  if (typeof func != 'function') {
-	    return identity;
-	  }
-	  if (typeof thisArg == 'undefined') {
-	    return func;
-	  }
-	  switch (argCount) {
-	    case 1: return function(value) {
-	      return func.call(thisArg, value);
-	    };
-	    case 3: return function(value, index, collection) {
-	      return func.call(thisArg, value, index, collection);
-	    };
-	    case 4: return function(accumulator, value, index, collection) {
-	      return func.call(thisArg, accumulator, value, index, collection);
-	    };
-	    case 5: return function(value, other, key, object, source) {
-	      return func.call(thisArg, value, other, key, object, source);
-	    };
-	  }
-	  return function() {
-	    return func.apply(thisArg, arguments);
-	  };
-	}
-
-	/**
-	 * This method returns the first argument provided to it.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Utility
-	 * @param {*} value Any value.
-	 * @returns {*} Returns `value`.
-	 * @example
-	 *
-	 * var object = { 'user': 'fred' };
-	 * _.identity(object) === object;
-	 * // => true
-	 */
-	function identity(value) {
-	  return value;
-	}
-
-	module.exports = bindCallback;
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var isArguments = __webpack_require__(77),
-	    isArray = __webpack_require__(29),
-	    isNative = __webpack_require__(78);
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/** Native method references. */
-	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * An object environment feature flags.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @type Object
-	 */
-	var support = {};
-
-	(function(x) {
-
-	  /**
-	   * Detect if `arguments` object indexes are non-enumerable.
-	   *
-	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
-	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
-	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-	   * checks for indexes that exceed their function's formal parameters with
-	   * associated values of `0`.
-	   *
-	   * @memberOf _.support
-	   * @type boolean
-	   */
-	  try {
-	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
-	  } catch(e) {
-	    support.nonEnumArgs = true;
-	  }
-	}(0, 0));
-
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  value = +value;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	  return value > -1 && value % 1 == 0 && value < length;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * A fallback implementation of `Object.keys` which creates an array of the
-	 * own enumerable property names of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 */
-	function shimKeys(object) {
-	  var props = keysIn(object),
-	      propsLength = props.length,
-	      length = propsLength && object.length;
-
-	  var allowIndexes = length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
-
-	  var index = -1,
-	      result = [];
-
-	  while (++index < propsLength) {
-	    var key = props[index];
-	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
-	}
-
-	/**
-	 * Creates an array of the own enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
-	 * for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keys(new Foo);
-	 * // => ['a', 'b'] (iteration order is not guaranteed)
-	 *
-	 * _.keys('hi');
-	 * // => ['0', '1']
-	 */
-	var keys = !nativeKeys ? shimKeys : function(object) {
-	  if (object) {
-	    var Ctor = object.constructor,
-	        length = object.length;
-	  }
-	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
-	    return shimKeys(object);
-	  }
-	  return isObject(object) ? nativeKeys(object) : [];
-	};
-
-	/**
-	 * Creates an array of the own and inherited enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keysIn(new Foo);
-	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-	 */
-	function keysIn(object) {
-	  if (object == null) {
-	    return [];
-	  }
-	  if (!isObject(object)) {
-	    object = Object(object);
-	  }
-	  var length = object.length;
-	  length = (length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
-
-	  var Ctor = object.constructor,
-	      index = -1,
-	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-	      result = Array(length),
-	      skipIndexes = length > 0;
-
-	  while (++index < length) {
-	    result[index] = (index + '');
-	  }
-	  for (var key in object) {
-	    if (!(skipIndexes && isIndex(key, length)) &&
-	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	module.exports = keys;
-
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var keys = __webpack_require__(79);
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * The base implementation of `_.forEach` without support for callback
-	 * shorthands and `this` binding.
-	 *
-	 * @private
-	 * @param {Array|Object|string} collection The collection to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @returns {Array|Object|string} Returns `collection`.
-	 */
-	function baseEach(collection, iteratee) {
-	  var length = collection ? collection.length : 0;
-	  if (!isLength(length)) {
-	    return baseForOwn(collection, iteratee);
-	  }
-	  var index = -1,
-	      iterable = toObject(collection);
-
-	  while (++index < length) {
-	    if (iteratee(iterable[index], index, iterable) === false) {
-	      break;
-	    }
-	  }
-	  return collection;
-	}
-
-	/**
-	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
-	 * over `object` properties returned by `keysFunc` invoking `iteratee` for
-	 * each property. Iterator functions may exit iteration early by explicitly
-	 * returning `false`.
-	 *
-	 * @private
-	 * @param {Object} object The object to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @param {Function} keysFunc The function to get the keys of `object`.
-	 * @returns {Object} Returns `object`.
-	 */
-	function baseFor(object, iteratee, keysFunc) {
-	  var index = -1,
-	      iterable = toObject(object),
-	      props = keysFunc(object),
-	      length = props.length;
-
-	  while (++index < length) {
-	    var key = props[index];
-	    if (iteratee(iterable[key], key, iterable) === false) {
-	      break;
-	    }
-	  }
-	  return object;
-	}
-
-	/**
-	 * The base implementation of `_.forOwn` without support for callback
-	 * shorthands and `this` binding.
-	 *
-	 * @private
-	 * @param {Object} object The object to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @returns {Object} Returns `object`.
-	 */
-	function baseForOwn(object, iteratee) {
-	  return baseFor(object, iteratee, keys);
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Converts `value` to an object if it is not one.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {Object} Returns the object.
-	 */
-	function toObject(value) {
-	  return isObject(value) ? value : Object(value);
-	}
-
-	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
-	}
-
-	module.exports = baseEach;
-
-
-/***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6133,7 +6462,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	var assign = __webpack_require__(57);
+	var assign = __webpack_require__(59);
 
 	/**
 	 * Keeps track of the current context.
@@ -6183,7 +6512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6221,7 +6550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6272,7 +6601,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6310,7 +6639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6338,7 +6667,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if ("production" !== (undefined)) {
+	  if (true) {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
 	    }
@@ -6369,7 +6698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6414,178 +6743,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var arrayTag = '[object Array]',
-	    funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `Array` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isArray([1, 2, 3]);
-	 * // => true
-	 *
-	 * (function() { return _.isArray(arguments); })();
-	 * // => false
-	 */
-	var isArray = nativeIsArray || function(value) {
-	  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
-	};
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isArray;
-
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
@@ -6639,28 +6804,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -6687,1050 +6852,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * // => false
 	 */
 	function isTypedArray(value) {
-	  return (isObjectLike(value) && isLength(value.length) && typedArrayTags[objToString.call(value)]) || false;
+	  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objToString.call(value)];
 	}
 
 	module.exports = isTypedArray;
 
 
 /***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]';
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `arguments` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * (function() { return _.isArguments(arguments); })();
-	 * // => true
-	 *
-	 * _.isArguments([1, 2, 3]);
-	 * // => false
-	 */
-	function isArguments(value) {
-	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
-	}
-
-	module.exports = isArguments;
-
-
-/***/ },
 /* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var arrayTag = '[object Array]',
-	    funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `Array` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isArray([1, 2, 3]);
-	 * // => true
-	 *
-	 * (function() { return _.isArray(arguments); })();
-	 * // => false
-	 */
-	var isArray = nativeIsArray || function(value) {
-	  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
-	};
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isArray;
-
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isNative;
-
-
-/***/ },
-/* 66 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]';
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `arguments` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * (function() { return _.isArguments(arguments); })();
-	 * // => true
-	 *
-	 * _.isArguments([1, 2, 3]);
-	 * // => false
-	 */
-	function isArguments(value) {
-	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
-	}
-
-	module.exports = isArguments;
-
-
-/***/ },
-/* 67 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var arrayTag = '[object Array]',
-	    funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `Array` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * _.isArray([1, 2, 3]);
-	 * // => true
-	 *
-	 * (function() { return _.isArray(arguments); })();
-	 * // => false
-	 */
-	var isArray = nativeIsArray || function(value) {
-	  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
-	};
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isArray;
-
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isNative;
-
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var isArray = __webpack_require__(46),
-	    isTypedArray = __webpack_require__(80),
-	    keys = __webpack_require__(71);
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]',
-	    arrayTag = '[object Array]',
-	    boolTag = '[object Boolean]',
-	    dateTag = '[object Date]',
-	    errorTag = '[object Error]',
-	    numberTag = '[object Number]',
-	    objectTag = '[object Object]',
-	    regexpTag = '[object RegExp]',
-	    stringTag = '[object String]';
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * The base implementation of `_.isEqual` without support for `this` binding
-	 * `customizer` functions.
-	 *
-	 * @private
-	 * @param {*} value The value to compare.
-	 * @param {*} other The other value to compare.
-	 * @param {Function} [customizer] The function to customize comparing values.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA] Tracks traversed `value` objects.
-	 * @param {Array} [stackB] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
-	 */
-	function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
-	  // Exit early for identical values.
-	  if (value === other) {
-	    // Treat `+0` vs. `-0` as not equal.
-	    return value !== 0 || (1 / value == 1 / other);
-	  }
-	  var valType = typeof value,
-	      othType = typeof other;
-
-	  // Exit early for unlike primitive values.
-	  if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
-	      value == null || other == null) {
-	    // Return `false` unless both values are `NaN`.
-	    return value !== value && other !== other;
-	  }
-	  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isWhere, stackA, stackB);
-	}
-
-	/**
-	 * A specialized version of `baseIsEqual` for arrays and objects which performs
-	 * deep comparisons and tracks traversed objects enabling objects with circular
-	 * references to be compared.
-	 *
-	 * @private
-	 * @param {Object} object The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {Function} equalFunc The function to determine equivalents of values.
-	 * @param {Function} [customizer] The function to customize comparing objects.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA=[]] Tracks traversed `value` objects.
-	 * @param {Array} [stackB=[]] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
-	 */
-	function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
-	  var objIsArr = isArray(object),
-	      othIsArr = isArray(other),
-	      objTag = arrayTag,
-	      othTag = arrayTag;
-
-	  if (!objIsArr) {
-	    objTag = objToString.call(object);
-	    if (objTag == argsTag) {
-	      objTag = objectTag;
-	    } else if (objTag != objectTag) {
-	      objIsArr = isTypedArray(object);
-	    }
-	  }
-	  if (!othIsArr) {
-	    othTag = objToString.call(other);
-	    if (othTag == argsTag) {
-	      othTag = objectTag;
-	    } else if (othTag != objectTag) {
-	      othIsArr = isTypedArray(other);
-	    }
-	  }
-	  var objIsObj = objTag == objectTag,
-	      othIsObj = othTag == objectTag,
-	      isSameTag = objTag == othTag;
-
-	  if (isSameTag && !(objIsArr || objIsObj)) {
-	    return equalByTag(object, other, objTag);
-	  }
-	  var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-	      othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-	  if (valWrapped || othWrapped) {
-	    return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isWhere, stackA, stackB);
-	  }
-	  if (!isSameTag) {
-	    return false;
-	  }
-	  // Assume cyclic values are equal.
-	  // For more information on detecting circular references see https://es5.github.io/#JO.
-	  stackA || (stackA = []);
-	  stackB || (stackB = []);
-
-	  var length = stackA.length;
-	  while (length--) {
-	    if (stackA[length] == object) {
-	      return stackB[length] == other;
-	    }
-	  }
-	  // Add `object` and `other` to the stack of traversed objects.
-	  stackA.push(object);
-	  stackB.push(other);
-
-	  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isWhere, stackA, stackB);
-
-	  stackA.pop();
-	  stackB.pop();
-
-	  return result;
-	}
-
-	/**
-	 * A specialized version of `baseIsEqualDeep` for arrays with support for
-	 * partial deep comparisons.
-	 *
-	 * @private
-	 * @param {Array} array The array to compare.
-	 * @param {Array} other The other array to compare.
-	 * @param {Function} equalFunc The function to determine equivalents of values.
-	 * @param {Function} [customizer] The function to customize comparing arrays.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA] Tracks traversed `value` objects.
-	 * @param {Array} [stackB] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
-	 */
-	function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stackB) {
-	  var index = -1,
-	      arrLength = array.length,
-	      othLength = other.length,
-	      result = true;
-
-	  if (arrLength != othLength && !(isWhere && othLength > arrLength)) {
-	    return false;
-	  }
-	  // Deep compare the contents, ignoring non-numeric properties.
-	  while (result && ++index < arrLength) {
-	    var arrValue = array[index],
-	        othValue = other[index];
-
-	    result = undefined;
-	    if (customizer) {
-	      result = isWhere
-	        ? customizer(othValue, arrValue, index)
-	        : customizer(arrValue, othValue, index);
-	    }
-	    if (typeof result == 'undefined') {
-	      // Recursively compare arrays (susceptible to call stack limits).
-	      if (isWhere) {
-	        var othIndex = othLength;
-	        while (othIndex--) {
-	          othValue = other[othIndex];
-	          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
-	          if (result) {
-	            break;
-	          }
-	        }
-	      } else {
-	        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isWhere, stackA, stackB);
-	      }
-	    }
-	  }
-	  return !!result;
-	}
-
-	/**
-	 * A specialized version of `baseIsEqualDeep` for comparing objects of
-	 * the same `toStringTag`.
-	 *
-	 * **Note:** This function only supports comparing values with tags of
-	 * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
-	 *
-	 * @private
-	 * @param {Object} value The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {string} tag The `toStringTag` of the objects to compare.
-	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
-	 */
-	function equalByTag(object, other, tag) {
-	  switch (tag) {
-	    case boolTag:
-	    case dateTag:
-	      // Coerce dates and booleans to numbers, dates to milliseconds and booleans
-	      // to `1` or `0` treating invalid dates coerced to `NaN` as not equal.
-	      return +object == +other;
-
-	    case errorTag:
-	      return object.name == other.name && object.message == other.message;
-
-	    case numberTag:
-	      // Treat `NaN` vs. `NaN` as equal.
-	      return (object != +object)
-	        ? other != +other
-	        // But, treat `-0` vs. `+0` as not equal.
-	        : (object == 0 ? ((1 / object) == (1 / other)) : object == +other);
-
-	    case regexpTag:
-	    case stringTag:
-	      // Coerce regexes to strings and treat strings primitives and string
-	      // objects as equal. See https://es5.github.io/#x15.10.6.4 for more details.
-	      return object == (other + '');
-	  }
-	  return false;
-	}
-
-	/**
-	 * A specialized version of `baseIsEqualDeep` for objects with support for
-	 * partial deep comparisons.
-	 *
-	 * @private
-	 * @param {Object} object The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {Function} equalFunc The function to determine equivalents of values.
-	 * @param {Function} [customizer] The function to customize comparing values.
-	 * @param {boolean} [isWhere] Specify performing partial comparisons.
-	 * @param {Array} [stackA] Tracks traversed `value` objects.
-	 * @param {Array} [stackB] Tracks traversed `other` objects.
-	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
-	 */
-	function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, stackB) {
-	  var objProps = keys(object),
-	      objLength = objProps.length,
-	      othProps = keys(other),
-	      othLength = othProps.length;
-
-	  if (objLength != othLength && !isWhere) {
-	    return false;
-	  }
-	  var hasCtor,
-	      index = -1;
-
-	  while (++index < objLength) {
-	    var key = objProps[index],
-	        result = hasOwnProperty.call(other, key);
-
-	    if (result) {
-	      var objValue = object[key],
-	          othValue = other[key];
-
-	      result = undefined;
-	      if (customizer) {
-	        result = isWhere
-	          ? customizer(othValue, objValue, key)
-	          : customizer(objValue, othValue, key);
-	      }
-	      if (typeof result == 'undefined') {
-	        // Recursively compare objects (susceptible to call stack limits).
-	        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isWhere, stackA, stackB);
-	      }
-	    }
-	    if (!result) {
-	      return false;
-	    }
-	    hasCtor || (hasCtor = key == 'constructor');
-	  }
-	  if (!hasCtor) {
-	    var objCtor = object.constructor,
-	        othCtor = other.constructor;
-
-	    // Non `Object` object instances with different constructors are not equal.
-	    if (objCtor != othCtor && ('constructor' in object && 'constructor' in other) &&
-	        !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-
-	module.exports = baseIsEqual;
-
-
-/***/ },
-/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7800,20 +6929,334 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 71 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(81),
-	    isArray = __webpack_require__(46),
-	    isNative = __webpack_require__(82);
+	var isArray = __webpack_require__(48),
+	    isTypedArray = __webpack_require__(75),
+	    keys = __webpack_require__(66);
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]',
+	    arrayTag = '[object Array]',
+	    boolTag = '[object Boolean]',
+	    dateTag = '[object Date]',
+	    errorTag = '[object Error]',
+	    funcTag = '[object Function]',
+	    numberTag = '[object Number]',
+	    objectTag = '[object Object]',
+	    regexpTag = '[object RegExp]',
+	    stringTag = '[object String]';
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * The base implementation of `_.isEqual` without support for `this` binding
+	 * `customizer` functions.
+	 *
+	 * @private
+	 * @param {*} value The value to compare.
+	 * @param {*} other The other value to compare.
+	 * @param {Function} [customizer] The function to customize comparing values.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA] Tracks traversed `value` objects.
+	 * @param {Array} [stackB] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+	 */
+	function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
+	  // Exit early for identical values.
+	  if (value === other) {
+	    // Treat `+0` vs. `-0` as not equal.
+	    return value !== 0 || (1 / value == 1 / other);
+	  }
+	  var valType = typeof value,
+	      othType = typeof other;
+
+	  // Exit early for unlike primitive values.
+	  if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
+	      value == null || other == null) {
+	    // Return `false` unless both values are `NaN`.
+	    return value !== value && other !== other;
+	  }
+	  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isLoose, stackA, stackB);
+	}
+
+	/**
+	 * A specialized version of `baseIsEqual` for arrays and objects which performs
+	 * deep comparisons and tracks traversed objects enabling objects with circular
+	 * references to be compared.
+	 *
+	 * @private
+	 * @param {Object} object The object to compare.
+	 * @param {Object} other The other object to compare.
+	 * @param {Function} equalFunc The function to determine equivalents of values.
+	 * @param {Function} [customizer] The function to customize comparing objects.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA=[]] Tracks traversed `value` objects.
+	 * @param {Array} [stackB=[]] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
+	  var objIsArr = isArray(object),
+	      othIsArr = isArray(other),
+	      objTag = arrayTag,
+	      othTag = arrayTag;
+
+	  if (!objIsArr) {
+	    objTag = objToString.call(object);
+	    if (objTag == argsTag) {
+	      objTag = objectTag;
+	    } else if (objTag != objectTag) {
+	      objIsArr = isTypedArray(object);
+	    }
+	  }
+	  if (!othIsArr) {
+	    othTag = objToString.call(other);
+	    if (othTag == argsTag) {
+	      othTag = objectTag;
+	    } else if (othTag != objectTag) {
+	      othIsArr = isTypedArray(other);
+	    }
+	  }
+	  var objIsObj = (objTag == objectTag || (isLoose && objTag == funcTag)),
+	      othIsObj = (othTag == objectTag || (isLoose && othTag == funcTag)),
+	      isSameTag = objTag == othTag;
+
+	  if (isSameTag && !(objIsArr || objIsObj)) {
+	    return equalByTag(object, other, objTag);
+	  }
+	  if (isLoose) {
+	    if (!isSameTag && !(objIsObj && othIsObj)) {
+	      return false;
+	    }
+	  } else {
+	    var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+	        othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+	    if (valWrapped || othWrapped) {
+	      return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isLoose, stackA, stackB);
+	    }
+	    if (!isSameTag) {
+	      return false;
+	    }
+	  }
+	  // Assume cyclic values are equal.
+	  // For more information on detecting circular references see https://es5.github.io/#JO.
+	  stackA || (stackA = []);
+	  stackB || (stackB = []);
+
+	  var length = stackA.length;
+	  while (length--) {
+	    if (stackA[length] == object) {
+	      return stackB[length] == other;
+	    }
+	  }
+	  // Add `object` and `other` to the stack of traversed objects.
+	  stackA.push(object);
+	  stackB.push(other);
+
+	  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isLoose, stackA, stackB);
+
+	  stackA.pop();
+	  stackB.pop();
+
+	  return result;
+	}
+
+	/**
+	 * A specialized version of `baseIsEqualDeep` for arrays with support for
+	 * partial deep comparisons.
+	 *
+	 * @private
+	 * @param {Array} array The array to compare.
+	 * @param {Array} other The other array to compare.
+	 * @param {Function} equalFunc The function to determine equivalents of values.
+	 * @param {Function} [customizer] The function to customize comparing arrays.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA] Tracks traversed `value` objects.
+	 * @param {Array} [stackB] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+	 */
+	function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stackB) {
+	  var index = -1,
+	      arrLength = array.length,
+	      othLength = other.length,
+	      result = true;
+
+	  if (arrLength != othLength && !(isLoose && othLength > arrLength)) {
+	    return false;
+	  }
+	  // Deep compare the contents, ignoring non-numeric properties.
+	  while (result && ++index < arrLength) {
+	    var arrValue = array[index],
+	        othValue = other[index];
+
+	    result = undefined;
+	    if (customizer) {
+	      result = isLoose
+	        ? customizer(othValue, arrValue, index)
+	        : customizer(arrValue, othValue, index);
+	    }
+	    if (typeof result == 'undefined') {
+	      // Recursively compare arrays (susceptible to call stack limits).
+	      if (isLoose) {
+	        var othIndex = othLength;
+	        while (othIndex--) {
+	          othValue = other[othIndex];
+	          result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
+	          if (result) {
+	            break;
+	          }
+	        }
+	      } else {
+	        result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
+	      }
+	    }
+	  }
+	  return !!result;
+	}
+
+	/**
+	 * A specialized version of `baseIsEqualDeep` for comparing objects of
+	 * the same `toStringTag`.
+	 *
+	 * **Note:** This function only supports comparing values with tags of
+	 * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+	 *
+	 * @private
+	 * @param {Object} value The object to compare.
+	 * @param {Object} other The other object to compare.
+	 * @param {string} tag The `toStringTag` of the objects to compare.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function equalByTag(object, other, tag) {
+	  switch (tag) {
+	    case boolTag:
+	    case dateTag:
+	      // Coerce dates and booleans to numbers, dates to milliseconds and booleans
+	      // to `1` or `0` treating invalid dates coerced to `NaN` as not equal.
+	      return +object == +other;
+
+	    case errorTag:
+	      return object.name == other.name && object.message == other.message;
+
+	    case numberTag:
+	      // Treat `NaN` vs. `NaN` as equal.
+	      return (object != +object)
+	        ? other != +other
+	        // But, treat `-0` vs. `+0` as not equal.
+	        : (object == 0 ? ((1 / object) == (1 / other)) : object == +other);
+
+	    case regexpTag:
+	    case stringTag:
+	      // Coerce regexes to strings and treat strings primitives and string
+	      // objects as equal. See https://es5.github.io/#x15.10.6.4 for more details.
+	      return object == (other + '');
+	  }
+	  return false;
+	}
+
+	/**
+	 * A specialized version of `baseIsEqualDeep` for objects with support for
+	 * partial deep comparisons.
+	 *
+	 * @private
+	 * @param {Object} object The object to compare.
+	 * @param {Object} other The other object to compare.
+	 * @param {Function} equalFunc The function to determine equivalents of values.
+	 * @param {Function} [customizer] The function to customize comparing values.
+	 * @param {boolean} [isLoose] Specify performing partial comparisons.
+	 * @param {Array} [stackA] Tracks traversed `value` objects.
+	 * @param {Array} [stackB] Tracks traversed `other` objects.
+	 * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+	 */
+	function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
+	  var objProps = keys(object),
+	      objLength = objProps.length,
+	      othProps = keys(other),
+	      othLength = othProps.length;
+
+	  if (objLength != othLength && !isLoose) {
+	    return false;
+	  }
+	  var skipCtor = isLoose,
+	      index = -1;
+
+	  while (++index < objLength) {
+	    var key = objProps[index],
+	        result = isLoose ? key in other : hasOwnProperty.call(other, key);
+
+	    if (result) {
+	      var objValue = object[key],
+	          othValue = other[key];
+
+	      result = undefined;
+	      if (customizer) {
+	        result = isLoose
+	          ? customizer(othValue, objValue, key)
+	          : customizer(objValue, othValue, key);
+	      }
+	      if (typeof result == 'undefined') {
+	        // Recursively compare objects (susceptible to call stack limits).
+	        result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isLoose, stackA, stackB);
+	      }
+	    }
+	    if (!result) {
+	      return false;
+	    }
+	    skipCtor || (skipCtor = key == 'constructor');
+	  }
+	  if (!skipCtor) {
+	    var objCtor = object.constructor,
+	        othCtor = other.constructor;
+
+	    // Non `Object` object instances with different constructors are not equal.
+	    if (objCtor != othCtor &&
+	        ('constructor' in object && 'constructor' in other) &&
+	        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+	          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+
+	module.exports = baseIsEqual;
+
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isArguments = __webpack_require__(76),
+	    isArray = __webpack_require__(48),
+	    isNative = __webpack_require__(77);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -7828,9 +7271,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
@@ -7881,9 +7323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Checks if `value` is a valid array-like length.
 	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -7922,10 +7362,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is the language type of `Object`.
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
 	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
 	 *
 	 * @static
 	 * @memberOf _
@@ -7947,7 +7385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Avoid a V8 JIT bug in Chrome 19-20.
 	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
 	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	  return type == 'function' || (!!value && type == 'object');
 	}
 
 	/**
@@ -7983,7 +7421,801 @@ return /******/ (function(modules) { // webpackBootstrap
 	        length = object.length;
 	  }
 	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
+	      (typeof object != 'function' && (length && isLength(length)))) {
+	    return shimKeys(object);
+	  }
+	  return isObject(object) ? nativeKeys(object) : [];
+	};
+
+	/**
+	 * Creates an array of the own and inherited enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keysIn(new Foo);
+	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+	 */
+	function keysIn(object) {
+	  if (object == null) {
+	    return [];
+	  }
+	  if (!isObject(object)) {
+	    object = Object(object);
+	  }
+	  var length = object.length;
+	  length = (length && isLength(length) &&
+	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
+
+	  var Ctor = object.constructor,
+	      index = -1,
+	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
+	      result = Array(length),
+	      skipIndexes = length > 0;
+
+	  while (++index < length) {
+	    result[index] = (index + '');
+	  }
+	  for (var key in object) {
+	    if (!(skipIndexes && isIndex(key, length)) &&
+	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = keys;
+
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isArguments = __webpack_require__(78),
+	    isArray = __webpack_require__(48),
+	    isNative = __webpack_require__(79);
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Native method references. */
+	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * An object environment feature flags.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @type Object
+	 */
+	var support = {};
+
+	(function(x) {
+
+	  /**
+	   * Detect if `arguments` object indexes are non-enumerable.
+	   *
+	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
+	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
+	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
+	   * checks for indexes that exceed their function's formal parameters with
+	   * associated values of `0`.
+	   *
+	   * @memberOf _.support
+	   * @type boolean
+	   */
+	  try {
+	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
+	  } catch(e) {
+	    support.nonEnumArgs = true;
+	  }
+	}(0, 0));
+
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  value = +value;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	  return value > -1 && value % 1 == 0 && value < length;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * A fallback implementation of `Object.keys` which creates an array of the
+	 * own enumerable property names of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function shimKeys(object) {
+	  var props = keysIn(object),
+	      propsLength = props.length,
+	      length = propsLength && object.length;
+
+	  var allowIndexes = length && isLength(length) &&
+	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
+
+	  var index = -1,
+	      result = [];
+
+	  while (++index < propsLength) {
+	    var key = props[index];
+	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	/**
+	 * Creates an array of the own enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects. See the
+	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
+	 * for more details.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keys(new Foo);
+	 * // => ['a', 'b'] (iteration order is not guaranteed)
+	 *
+	 * _.keys('hi');
+	 * // => ['0', '1']
+	 */
+	var keys = !nativeKeys ? shimKeys : function(object) {
+	  if (object) {
+	    var Ctor = object.constructor,
+	        length = object.length;
+	  }
+	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
+	      (typeof object != 'function' && (length && isLength(length)))) {
+	    return shimKeys(object);
+	  }
+	  return isObject(object) ? nativeKeys(object) : [];
+	};
+
+	/**
+	 * Creates an array of the own and inherited enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keysIn(new Foo);
+	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
+	 */
+	function keysIn(object) {
+	  if (object == null) {
+	    return [];
+	  }
+	  if (!isObject(object)) {
+	    object = Object(object);
+	  }
+	  var length = object.length;
+	  length = (length && isLength(length) &&
+	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
+
+	  var Ctor = object.constructor,
+	      index = -1,
+	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
+	      result = Array(length),
+	      skipIndexes = length > 0;
+
+	  while (++index < length) {
+	    result[index] = (index + '');
+	  }
+	  for (var key in object) {
+	    if (!(skipIndexes && isIndex(key, length)) &&
+	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = keys;
+
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]',
+	    arrayTag = '[object Array]',
+	    boolTag = '[object Boolean]',
+	    dateTag = '[object Date]',
+	    errorTag = '[object Error]',
+	    funcTag = '[object Function]',
+	    mapTag = '[object Map]',
+	    numberTag = '[object Number]',
+	    objectTag = '[object Object]',
+	    regexpTag = '[object RegExp]',
+	    setTag = '[object Set]',
+	    stringTag = '[object String]',
+	    weakMapTag = '[object WeakMap]';
+
+	var arrayBufferTag = '[object ArrayBuffer]',
+	    float32Tag = '[object Float32Array]',
+	    float64Tag = '[object Float64Array]',
+	    int8Tag = '[object Int8Array]',
+	    int16Tag = '[object Int16Array]',
+	    int32Tag = '[object Int32Array]',
+	    uint8Tag = '[object Uint8Array]',
+	    uint8ClampedTag = '[object Uint8ClampedArray]',
+	    uint16Tag = '[object Uint16Array]',
+	    uint32Tag = '[object Uint32Array]';
+
+	/** Used to identify `toStringTag` values of typed arrays. */
+	var typedArrayTags = {};
+	typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+	typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+	typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+	typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+	typedArrayTags[uint32Tag] = true;
+	typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+	typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+	typedArrayTags[dateTag] = typedArrayTags[errorTag] =
+	typedArrayTags[funcTag] = typedArrayTags[mapTag] =
+	typedArrayTags[numberTag] = typedArrayTags[objectTag] =
+	typedArrayTags[regexpTag] = typedArrayTags[setTag] =
+	typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as a typed array.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isTypedArray(new Uint8Array);
+	 * // => true
+	 *
+	 * _.isTypedArray([]);
+	 * // => false
+	 */
+	function isTypedArray(value) {
+	  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objToString.call(value)];
+	}
+
+	module.exports = isTypedArray;
+
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]';
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as an `arguments` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isArguments(function() { return arguments; }());
+	 * // => true
+	 *
+	 * _.isArguments([1, 2, 3]);
+	 * // => false
+	 */
+	function isArguments(value) {
+	  var length = isObjectLike(value) ? value.length : undefined;
+	  return isLength(length) && objToString.call(value) == argsTag;
+	}
+
+	module.exports = isArguments;
+
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
+	 */
+	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+	    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reNative = RegExp('^' +
+	  escapeRegExp(objToString)
+	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (objToString.call(value) == funcTag) {
+	    return reNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reHostCtor.test(value);
+	}
+
+	/**
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to escape.
+	 * @returns {string} Returns the escaped string.
+	 * @example
+	 *
+	 * _.escapeRegExp('[lodash](https://lodash.com/)');
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
+	 */
+	function escapeRegExp(string) {
+	  string = baseToString(string);
+	  return (string && reHasRegExpChars.test(string))
+	    ? string.replace(reRegExpChars, '\\$&')
+	    : string;
+	}
+
+	module.exports = isNative;
+
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.5 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+	var isArguments = __webpack_require__(80),
+	    isArray = __webpack_require__(29),
+	    isNative = __webpack_require__(81);
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Native method references. */
+	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * An object environment feature flags.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @type Object
+	 */
+	var support = {};
+
+	(function(x) {
+
+	  /**
+	   * Detect if `arguments` object indexes are non-enumerable.
+	   *
+	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
+	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
+	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
+	   * checks for indexes that exceed their function's formal parameters with
+	   * associated values of `0`.
+	   *
+	   * @memberOf _.support
+	   * @type boolean
+	   */
+	  try {
+	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
+	  } catch(e) {
+	    support.nonEnumArgs = true;
+	  }
+	}(0, 0));
+
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  value = +value;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	  return value > -1 && value % 1 == 0 && value < length;
+	}
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * A fallback implementation of `Object.keys` which creates an array of the
+	 * own enumerable property names of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 */
+	function shimKeys(object) {
+	  var props = keysIn(object),
+	      propsLength = props.length,
+	      length = propsLength && object.length;
+
+	  var allowIndexes = length && isLength(length) &&
+	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
+
+	  var index = -1,
+	      result = [];
+
+	  while (++index < propsLength) {
+	    var key = props[index];
+	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
+	      result.push(key);
+	    }
+	  }
+	  return result;
+	}
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return type == 'function' || (!!value && type == 'object');
+	}
+
+	/**
+	 * Creates an array of the own enumerable property names of `object`.
+	 *
+	 * **Note:** Non-object values are coerced to objects. See the
+	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
+	 * for more details.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to inspect.
+	 * @returns {Array} Returns the array of property names.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 *   this.b = 2;
+	 * }
+	 *
+	 * Foo.prototype.c = 3;
+	 *
+	 * _.keys(new Foo);
+	 * // => ['a', 'b'] (iteration order is not guaranteed)
+	 *
+	 * _.keys('hi');
+	 * // => ['0', '1']
+	 */
+	var keys = !nativeKeys ? shimKeys : function(object) {
+	  if (object) {
+	    var Ctor = object.constructor,
+	        length = object.length;
+	  }
+	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
+	      (typeof object != 'function' && (length && isLength(length)))) {
 	    return shimKeys(object);
 	  }
 	  return isObject(object) ? nativeKeys(object) : [];
@@ -8048,254 +8280,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-	var isArguments = __webpack_require__(83),
-	    isArray = __webpack_require__(46),
-	    isNative = __webpack_require__(84);
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/** Native method references. */
-	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * An object environment feature flags.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @type Object
-	 */
-	var support = {};
-
-	(function(x) {
-
-	  /**
-	   * Detect if `arguments` object indexes are non-enumerable.
-	   *
-	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
-	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
-	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-	   * checks for indexes that exceed their function's formal parameters with
-	   * associated values of `0`.
-	   *
-	   * @memberOf _.support
-	   * @type boolean
-	   */
-	  try {
-	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
-	  } catch(e) {
-	    support.nonEnumArgs = true;
-	  }
-	}(0, 0));
-
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  value = +value;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	  return value > -1 && value % 1 == 0 && value < length;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * A fallback implementation of `Object.keys` which creates an array of the
-	 * own enumerable property names of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 */
-	function shimKeys(object) {
-	  var props = keysIn(object),
-	      propsLength = props.length,
-	      length = propsLength && object.length;
-
-	  var allowIndexes = length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
-
-	  var index = -1,
-	      result = [];
-
-	  while (++index < propsLength) {
-	    var key = props[index];
-	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
-	 * @example
-	 *
-	 * _.isObject({});
-	 * // => true
-	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
-	 * // => false
-	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
-	}
-
-	/**
-	 * Creates an array of the own enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
-	 * for more details.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keys(new Foo);
-	 * // => ['a', 'b'] (iteration order is not guaranteed)
-	 *
-	 * _.keys('hi');
-	 * // => ['0', '1']
-	 */
-	var keys = !nativeKeys ? shimKeys : function(object) {
-	  if (object) {
-	    var Ctor = object.constructor,
-	        length = object.length;
-	  }
-	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
-	    return shimKeys(object);
-	  }
-	  return isObject(object) ? nativeKeys(object) : [];
-	};
-
-	/**
-	 * Creates an array of the own and inherited enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keysIn(new Foo);
-	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-	 */
-	function keysIn(object) {
-	  if (object == null) {
-	    return [];
-	  }
-	  if (!isObject(object)) {
-	    object = Object(object);
-	  }
-	  var length = object.length;
-	  length = (length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
-
-	  var Ctor = object.constructor,
-	      index = -1,
-	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-	      result = Array(length),
-	      skipIndexes = length > 0;
-
-	  while (++index < length) {
-	    result[index] = (index + '');
-	  }
-	  for (var key in object) {
-	    if (!(skipIndexes && isIndex(key, length)) &&
-	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	module.exports = keys;
-
-
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
@@ -8311,28 +8299,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -8352,7 +8340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
 	 * @example
 	 *
-	 * (function() { return _.isArguments(arguments); })();
+	 * _.isArguments(function() { return arguments; }());
 	 * // => true
 	 *
 	 * _.isArguments([1, 2, 3]);
@@ -8360,21 +8348,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function isArguments(value) {
 	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
+	  return isLength(length) && objToString.call(value) == argsTag;
 	}
 
 	module.exports = isArguments;
 
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
@@ -8387,9 +8375,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var reHostCtor = /^\[object .+?Constructor\]$/;
 
 	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
 	 */
 	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
 	    reHasRegExpChars = RegExp(reRegExpChars.source);
@@ -8417,7 +8405,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
@@ -8427,9 +8415,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var fnToString = Function.prototype.toString;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
@@ -8443,14 +8430,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -8473,11 +8461,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * _.isArray([1, 2, 3]);
 	 * // => true
 	 *
-	 * (function() { return _.isArray(arguments); })();
+	 * _.isArray(function() { return arguments; }());
 	 * // => false
 	 */
 	var isArray = nativeIsArray || function(value) {
-	  return (isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag) || false;
+	  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
 	};
 
 	/**
@@ -8503,12 +8491,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (objToString.call(value) == funcTag) {
 	    return reNative.test(fnToString.call(value));
 	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
+	  return isObjectLike(value) && reHostCtor.test(value);
 	}
 
 	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
 	 *
 	 * @static
 	 * @memberOf _
@@ -8518,7 +8506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 *
 	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
 	 */
 	function escapeRegExp(string) {
 	  string = baseToString(string);
@@ -8531,14 +8519,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
@@ -8550,9 +8538,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var reHostCtor = /^\[object .+?Constructor\]$/;
 
 	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
 	 */
 	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
 	    reHasRegExpChars = RegExp(reRegExpChars.source);
@@ -8580,7 +8568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
@@ -8590,9 +8578,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var fnToString = Function.prototype.toString;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
@@ -8625,12 +8612,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (objToString.call(value) == funcTag) {
 	    return reNative.test(fnToString.call(value));
 	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
+	  return isObjectLike(value) && reHostCtor.test(value);
 	}
 
 	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
 	 *
 	 * @static
 	 * @memberOf _
@@ -8640,7 +8627,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 *
 	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
 	 */
 	function escapeRegExp(string) {
 	  string = baseToString(string);
@@ -8650,6 +8637,122 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = isNative;
+
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modern modularize exports="npm" -o ./`
+	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
+	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 * Available under MIT license <https://lodash.com/license>
+	 */
+
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]',
+	    arrayTag = '[object Array]',
+	    boolTag = '[object Boolean]',
+	    dateTag = '[object Date]',
+	    errorTag = '[object Error]',
+	    funcTag = '[object Function]',
+	    mapTag = '[object Map]',
+	    numberTag = '[object Number]',
+	    objectTag = '[object Object]',
+	    regexpTag = '[object RegExp]',
+	    setTag = '[object Set]',
+	    stringTag = '[object String]',
+	    weakMapTag = '[object WeakMap]';
+
+	var arrayBufferTag = '[object ArrayBuffer]',
+	    float32Tag = '[object Float32Array]',
+	    float64Tag = '[object Float64Array]',
+	    int8Tag = '[object Int8Array]',
+	    int16Tag = '[object Int16Array]',
+	    int32Tag = '[object Int32Array]',
+	    uint8Tag = '[object Uint8Array]',
+	    uint8ClampedTag = '[object Uint8ClampedArray]',
+	    uint16Tag = '[object Uint16Array]',
+	    uint32Tag = '[object Uint32Array]';
+
+	/** Used to identify `toStringTag` values of typed arrays. */
+	var typedArrayTags = {};
+	typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+	typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+	typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+	typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+	typedArrayTags[uint32Tag] = true;
+	typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+	typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+	typedArrayTags[dateTag] = typedArrayTags[errorTag] =
+	typedArrayTags[funcTag] = typedArrayTags[mapTag] =
+	typedArrayTags[numberTag] = typedArrayTags[objectTag] =
+	typedArrayTags[regexpTag] = typedArrayTags[setTag] =
+	typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as a typed array.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isTypedArray(new Uint8Array);
+	 * // => true
+	 *
+	 * _.isTypedArray([]);
+	 * // => false
+	 */
+	function isTypedArray(value) {
+	  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objToString.call(value)];
+	}
+
+	module.exports = isTypedArray;
 
 
 /***/ },
@@ -8657,54 +8760,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 
 	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]',
-	    arrayTag = '[object Array]',
-	    boolTag = '[object Boolean]',
-	    dateTag = '[object Date]',
-	    errorTag = '[object Error]',
-	    funcTag = '[object Function]',
-	    mapTag = '[object Map]',
-	    numberTag = '[object Number]',
-	    objectTag = '[object Object]',
-	    regexpTag = '[object RegExp]',
-	    setTag = '[object Set]',
-	    stringTag = '[object String]',
-	    weakMapTag = '[object WeakMap]';
-
-	var arrayBufferTag = '[object ArrayBuffer]',
-	    float32Tag = '[object Float32Array]',
-	    float64Tag = '[object Float64Array]',
-	    int8Tag = '[object Int8Array]',
-	    int16Tag = '[object Int16Array]',
-	    int32Tag = '[object Int32Array]',
-	    uint8Tag = '[object Uint8Array]',
-	    uint8ClampedTag = '[object Uint8ClampedArray]',
-	    uint16Tag = '[object Uint16Array]',
-	    uint32Tag = '[object Uint32Array]';
-
-	/** Used to identify `toStringTag` values of typed arrays. */
-	var typedArrayTags = {};
-	typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
-	typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
-	typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
-	typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
-	typedArrayTags[uint32Tag] = true;
-	typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
-	typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
-	typedArrayTags[dateTag] = typedArrayTags[errorTag] =
-	typedArrayTags[funcTag] = typedArrayTags[mapTag] =
-	typedArrayTags[numberTag] = typedArrayTags[objectTag] =
-	typedArrayTags[regexpTag] = typedArrayTags[setTag] =
-	typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+	var argsTag = '[object Arguments]';
 
 	/**
 	 * Checks if `value` is object-like.
@@ -8714,28 +8779,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -8746,7 +8811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is classified as a typed array.
+	 * Checks if `value` is classified as an `arguments` object.
 	 *
 	 * @static
 	 * @memberOf _
@@ -8755,17 +8820,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
 	 * @example
 	 *
-	 * _.isTypedArray(new Uint8Array);
+	 * _.isArguments(function() { return arguments; }());
 	 * // => true
 	 *
-	 * _.isTypedArray([]);
+	 * _.isArguments([1, 2, 3]);
 	 * // => false
 	 */
-	function isTypedArray(value) {
-	  return (isObjectLike(value) && isLength(value.length) && typedArrayTags[objToString.call(value)]) || false;
+	function isArguments(value) {
+	  var length = isObjectLike(value) ? value.length : undefined;
+	  return isLength(length) && objToString.call(value) == argsTag;
 	}
 
-	module.exports = isTypedArray;
+	module.exports = isArguments;
 
 
 /***/ },
@@ -8773,16 +8839,42 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 
 	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]';
+	var funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
+	 */
+	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+	    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
 
 	/**
 	 * Checks if `value` is object-like.
@@ -8792,59 +8884,75 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+	/** Used to detect if a method is native. */
+	var reNative = RegExp('^' +
+	  escapeRegExp(objToString)
+	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
 
 	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `arguments` object.
+	 * Checks if `value` is a native function.
 	 *
 	 * @static
 	 * @memberOf _
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
 	 * @example
 	 *
-	 * (function() { return _.isArguments(arguments); })();
+	 * _.isNative(Array.prototype.push);
 	 * // => true
 	 *
-	 * _.isArguments([1, 2, 3]);
+	 * _.isNative(_);
 	 * // => false
 	 */
-	function isArguments(value) {
-	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (objToString.call(value) == funcTag) {
+	    return reNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reHostCtor.test(value);
 	}
 
-	module.exports = isArguments;
+	/**
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to escape.
+	 * @returns {string} Returns the escaped string.
+	 * @example
+	 *
+	 * _.escapeRegExp('[lodash](https://lodash.com/)');
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
+	 */
+	function escapeRegExp(string) {
+	  string = baseToString(string);
+	  return (string && reHasRegExpChars.test(string))
+	    ? string.replace(reRegExpChars, '\\$&')
+	    : string;
+	}
+
+	module.exports = isNative;
 
 
 /***/ },
@@ -8852,42 +8960,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 
 	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
+	var argsTag = '[object Arguments]';
 
 	/**
 	 * Checks if `value` is object-like.
@@ -8897,76 +8979,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
+	/**
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
+	 */
+	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
-	 * Checks if `value` is a native function.
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+
+	/**
+	 * Checks if `value` is classified as an `arguments` object.
 	 *
 	 * @static
 	 * @memberOf _
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
 	 * @example
 	 *
-	 * _.isNative(Array.prototype.push);
+	 * _.isArguments(function() { return arguments; }());
 	 * // => true
 	 *
-	 * _.isNative(_);
+	 * _.isArguments([1, 2, 3]);
 	 * // => false
 	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
+	function isArguments(value) {
+	  var length = isObjectLike(value) ? value.length : undefined;
+	  return isLength(length) && objToString.call(value) == argsTag;
 	}
 
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isNative;
+	module.exports = isArguments;
 
 
 /***/ },
@@ -8974,243 +9039,120 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.3 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(85),
-	    isArray = __webpack_require__(29),
-	    isNative = __webpack_require__(86);
+
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]';
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reHostCtor = /^\[object .+?Constructor\]$/;
+
+	/**
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
+	 */
+	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+	    reHasRegExpChars = RegExp(reRegExpChars.source);
+
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-
-	/** Native method references. */
-	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-	/* Native method references for those with the same name as other `lodash` methods. */
-	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+	var objToString = objectProto.toString;
+
+	/** Used to detect if a method is native. */
+	var reNative = RegExp('^' +
+	  escapeRegExp(objToString)
+	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
 
 	/**
-	 * An object environment feature flags.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @type Object
-	 */
-	var support = {};
-
-	(function(x) {
-
-	  /**
-	   * Detect if `arguments` object indexes are non-enumerable.
-	   *
-	   * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
-	   * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
-	   * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-	   * checks for indexes that exceed their function's formal parameters with
-	   * associated values of `0`.
-	   *
-	   * @memberOf _.support
-	   * @type boolean
-	   */
-	  try {
-	    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
-	  } catch(e) {
-	    support.nonEnumArgs = true;
-	  }
-	}(0, 0));
-
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  value = +value;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	  return value > -1 && value % 1 == 0 && value < length;
-	}
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * **Note:** This function is based on ES `ToLength`. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * A fallback implementation of `Object.keys` which creates an array of the
-	 * own enumerable property names of `object`.
-	 *
-	 * @private
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 */
-	function shimKeys(object) {
-	  var props = keysIn(object),
-	      propsLength = props.length,
-	      length = propsLength && object.length;
-
-	  var allowIndexes = length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object)));
-
-	  var index = -1,
-	      result = [];
-
-	  while (++index < propsLength) {
-	    var key = props[index];
-	    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
-	}
-
-	/**
-	 * Checks if `value` is the language type of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
-	 *
-	 * **Note:** See the [ES5 spec](https://es5.github.io/#x8) for more details.
+	 * Checks if `value` is a native function.
 	 *
 	 * @static
 	 * @memberOf _
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
 	 * @example
 	 *
-	 * _.isObject({});
+	 * _.isNative(Array.prototype.push);
 	 * // => true
 	 *
-	 * _.isObject([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObject(1);
+	 * _.isNative(_);
 	 * // => false
 	 */
-	function isObject(value) {
-	  // Avoid a V8 JIT bug in Chrome 19-20.
-	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-	  var type = typeof value;
-	  return type == 'function' || (value && type == 'object') || false;
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (objToString.call(value) == funcTag) {
+	    return reNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reHostCtor.test(value);
 	}
 
 	/**
-	 * Creates an array of the own enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects. See the
-	 * [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.keys)
-	 * for more details.
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
 	 *
 	 * @static
 	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
+	 * @category String
+	 * @param {string} [string=''] The string to escape.
+	 * @returns {string} Returns the escaped string.
 	 * @example
 	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keys(new Foo);
-	 * // => ['a', 'b'] (iteration order is not guaranteed)
-	 *
-	 * _.keys('hi');
-	 * // => ['0', '1']
+	 * _.escapeRegExp('[lodash](https://lodash.com/)');
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
 	 */
-	var keys = !nativeKeys ? shimKeys : function(object) {
-	  if (object) {
-	    var Ctor = object.constructor,
-	        length = object.length;
-	  }
-	  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-	     (typeof object != 'function' && (length && isLength(length)))) {
-	    return shimKeys(object);
-	  }
-	  return isObject(object) ? nativeKeys(object) : [];
-	};
-
-	/**
-	 * Creates an array of the own and inherited enumerable property names of `object`.
-	 *
-	 * **Note:** Non-object values are coerced to objects.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Object
-	 * @param {Object} object The object to inspect.
-	 * @returns {Array} Returns the array of property names.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 *   this.b = 2;
-	 * }
-	 *
-	 * Foo.prototype.c = 3;
-	 *
-	 * _.keysIn(new Foo);
-	 * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
-	 */
-	function keysIn(object) {
-	  if (object == null) {
-	    return [];
-	  }
-	  if (!isObject(object)) {
-	    object = Object(object);
-	  }
-	  var length = object.length;
-	  length = (length && isLength(length) &&
-	    (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
-
-	  var Ctor = object.constructor,
-	      index = -1,
-	      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-	      result = Array(length),
-	      skipIndexes = length > 0;
-
-	  while (++index < length) {
-	    result[index] = (index + '');
-	  }
-	  for (var key in object) {
-	    if (!(skipIndexes && isIndex(key, length)) &&
-	        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-	      result.push(key);
-	    }
-	  }
-	  return result;
+	function escapeRegExp(string) {
+	  string = baseToString(string);
+	  return (string && reHasRegExpChars.test(string))
+	    ? string.replace(reRegExpChars, '\\$&')
+	    : string;
 	}
 
-	module.exports = keys;
+	module.exports = isNative;
 
 
 /***/ },
@@ -9218,54 +9160,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 
 	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]',
-	    arrayTag = '[object Array]',
-	    boolTag = '[object Boolean]',
-	    dateTag = '[object Date]',
-	    errorTag = '[object Error]',
-	    funcTag = '[object Function]',
-	    mapTag = '[object Map]',
-	    numberTag = '[object Number]',
-	    objectTag = '[object Object]',
-	    regexpTag = '[object RegExp]',
-	    setTag = '[object Set]',
-	    stringTag = '[object String]',
-	    weakMapTag = '[object WeakMap]';
-
-	var arrayBufferTag = '[object ArrayBuffer]',
-	    float32Tag = '[object Float32Array]',
-	    float64Tag = '[object Float64Array]',
-	    int8Tag = '[object Int8Array]',
-	    int16Tag = '[object Int16Array]',
-	    int32Tag = '[object Int32Array]',
-	    uint8Tag = '[object Uint8Array]',
-	    uint8ClampedTag = '[object Uint8ClampedArray]',
-	    uint16Tag = '[object Uint16Array]',
-	    uint32Tag = '[object Uint32Array]';
-
-	/** Used to identify `toStringTag` values of typed arrays. */
-	var typedArrayTags = {};
-	typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
-	typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
-	typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
-	typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
-	typedArrayTags[uint32Tag] = true;
-	typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
-	typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
-	typedArrayTags[dateTag] = typedArrayTags[errorTag] =
-	typedArrayTags[funcTag] = typedArrayTags[mapTag] =
-	typedArrayTags[numberTag] = typedArrayTags[objectTag] =
-	typedArrayTags[regexpTag] = typedArrayTags[setTag] =
-	typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
+	var argsTag = '[object Arguments]';
 
 	/**
 	 * Checks if `value` is object-like.
@@ -9275,28 +9179,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
 	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
+	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
+	 * of an array-like value.
 	 */
 	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 	/**
 	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This function is based on [`ToLength`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength).
 	 *
 	 * @private
 	 * @param {*} value The value to check.
@@ -9307,7 +9211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Checks if `value` is classified as a typed array.
+	 * Checks if `value` is classified as an `arguments` object.
 	 *
 	 * @static
 	 * @memberOf _
@@ -9316,17 +9220,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
 	 * @example
 	 *
-	 * _.isTypedArray(new Uint8Array);
+	 * _.isArguments(function() { return arguments; }());
 	 * // => true
 	 *
-	 * _.isTypedArray([]);
+	 * _.isArguments([1, 2, 3]);
 	 * // => false
 	 */
-	function isTypedArray(value) {
-	  return (isObjectLike(value) && isLength(value.length) && typedArrayTags[objToString.call(value)]) || false;
+	function isArguments(value) {
+	  var length = isObjectLike(value) ? value.length : undefined;
+	  return isLength(length) && objToString.call(value) == argsTag;
 	}
 
-	module.exports = isTypedArray;
+	module.exports = isArguments;
 
 
 /***/ },
@@ -9334,89 +9239,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+	 * lodash 3.0.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modern modularize exports="npm" -o ./`
 	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]';
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `arguments` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * (function() { return _.isArguments(arguments); })();
-	 * // => true
-	 *
-	 * _.isArguments([1, 2, 3]);
-	 * // => false
-	 */
-	function isArguments(value) {
-	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
-	}
-
-	module.exports = isArguments;
-
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+	 * Based on Underscore.js 1.8.2 <http://underscorejs.org/LICENSE>
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
@@ -9428,9 +9254,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var reHostCtor = /^\[object .+?Constructor\]$/;
 
 	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
+	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
+	 * In addition to special characters the forward slash is escaped to allow for
+	 * easier `eval` use and `Function` compilation.
 	 */
 	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
 	    reHasRegExpChars = RegExp(reRegExpChars.source);
@@ -9458,7 +9284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
 	 */
 	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
+	  return !!value && typeof value == 'object';
 	}
 
 	/** Used for native method references. */
@@ -9468,9 +9294,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var fnToString = Function.prototype.toString;
 
 	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
 	 */
 	var objToString = objectProto.toString;
 
@@ -9503,12 +9328,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (objToString.call(value) == funcTag) {
 	    return reNative.test(fnToString.call(value));
 	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
+	  return isObjectLike(value) && reHostCtor.test(value);
 	}
 
 	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
+	 * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+	 * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
 	 *
 	 * @static
 	 * @memberOf _
@@ -9518,409 +9343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @example
 	 *
 	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isNative;
-
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]';
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `arguments` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * (function() { return _.isArguments(arguments); })();
-	 * // => true
-	 *
-	 * _.isArguments([1, 2, 3]);
-	 * // => false
-	 */
-	function isArguments(value) {
-	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
-	}
-
-	module.exports = isArguments;
-
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
-	 */
-	function escapeRegExp(string) {
-	  string = baseToString(string);
-	  return (string && reHasRegExpChars.test(string))
-	    ? string.replace(reRegExpChars, '\\$&')
-	    : string;
-	}
-
-	module.exports = isNative;
-
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var argsTag = '[object Arguments]';
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/**
-	 * Used as the maximum length of an array-like value.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
-	 * for more details.
-	 */
-	var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
-
-	/**
-	 * Checks if `value` is a valid array-like length.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
-	 */
-	function isLength(value) {
-	  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-	}
-
-	/**
-	 * Checks if `value` is classified as an `arguments` object.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
-	 * @example
-	 *
-	 * (function() { return _.isArguments(arguments); })();
-	 * // => true
-	 *
-	 * _.isArguments([1, 2, 3]);
-	 * // => false
-	 */
-	function isArguments(value) {
-	  var length = isObjectLike(value) ? value.length : undefined;
-	  return (isLength(length) && objToString.call(value) == argsTag) || false;
-	}
-
-	module.exports = isArguments;
-
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * lodash 3.0.0 (Custom Build) <https://lodash.com/>
-	 * Build: `lodash modern modularize exports="npm" -o ./`
-	 * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
-	 * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
-	 */
-
-	/** `Object#toString` result references. */
-	var funcTag = '[object Function]';
-
-	/** Used to detect host constructors (Safari > 5). */
-	var reHostCtor = /^\[object .+?Constructor\]$/;
-
-	/**
-	 * Used to match `RegExp` special characters.
-	 * See this [article on `RegExp` characters](http://www.regular-expressions.info/characters.html#special)
-	 * for more details.
-	 */
-	var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
-	    reHasRegExpChars = RegExp(reRegExpChars.source);
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	/**
-	 * Checks if `value` is object-like.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 */
-	function isObjectLike(value) {
-	  return (value && typeof value == 'object') || false;
-	}
-
-	/** Used for native method references. */
-	var objectProto = Object.prototype;
-
-	/** Used to resolve the decompiled source of functions. */
-	var fnToString = Function.prototype.toString;
-
-	/**
-	 * Used to resolve the `toStringTag` of values.
-	 * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
-	 * for more details.
-	 */
-	var objToString = objectProto.toString;
-
-	/** Used to detect if a method is native. */
-	var reNative = RegExp('^' +
-	  escapeRegExp(objToString)
-	  .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-	);
-
-	/**
-	 * Checks if `value` is a native function.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
-	 * @example
-	 *
-	 * _.isNative(Array.prototype.push);
-	 * // => true
-	 *
-	 * _.isNative(_);
-	 * // => false
-	 */
-	function isNative(value) {
-	  if (value == null) {
-	    return false;
-	  }
-	  if (objToString.call(value) == funcTag) {
-	    return reNative.test(fnToString.call(value));
-	  }
-	  return (isObjectLike(value) && reHostCtor.test(value)) || false;
-	}
-
-	/**
-	 * Escapes the `RegExp` special characters "\", "^", "$", ".", "|", "?", "*",
-	 * "+", "(", ")", "[", "]", "{" and "}" in `string`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @category String
-	 * @param {string} [string=''] The string to escape.
-	 * @returns {string} Returns the escaped string.
-	 * @example
-	 *
-	 * _.escapeRegExp('[lodash](https://lodash.com/)');
-	 * // => '\[lodash\]\(https://lodash\.com/\)'
+	 * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
 	 */
 	function escapeRegExp(string) {
 	  string = baseToString(string);
@@ -9935,3 +9358,4 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }
 /******/ ])
 });
+;
