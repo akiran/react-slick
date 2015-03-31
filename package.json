@@ -4,7 +4,8 @@
   "description": " React port of slick carousel",
   "main": "index.jsx",
   "scripts": {
-    "start": "./node_modules/.bin/gulp server"
+    "start": "./node_modules/.bin/gulp server",
+    "prepublish": "./node_modules/.bin/gulp dist"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
