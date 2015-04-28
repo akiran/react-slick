@@ -100,6 +100,7 @@ var Slider = React.createClass({
     );
   },
   renderArrows: function () {
+
     if (this.props.arrows === true) {
       var prevClasses = { 'slick-prev': true};
       var nextClasses = { 'slick-next': true};
@@ -127,8 +128,36 @@ var Slider = React.createClass({
         }
       }
 
-      var prevArrow = <button key={0} ref='previous' type="button" data-role="none" className={classnames(prevClasses)} style={{display: 'block'}} onClick={prevHandler}> Previous</button>;
-      var nextArrow = <button key={1} ref='next' type="button" data-role="none" className={classnames(nextClasses)} style={{display: 'block'}} onClick={nextHandler}>Next</button>;
+      var prevArrowProps = {
+        key: '0',
+        ref: 'previous',
+        'data-role': "none",
+        className: classnames(prevClasses),
+        style: {display: 'block'},
+        onClick: prevHandler
+      }
+
+      if (this.props.prevArrow) {
+        var prevArrow = <this.props.prevArrow {...prevArrowProps} />;
+      } else {
+        var prevArrow = <button type="button" {...prevArrowProps}> Previous</button>;
+      }
+
+      var nextArrowProps = {
+        key: '1',
+        ref: 'next',
+        'data-role': "none",
+        className: classnames(nextClasses),
+        style: {display: 'block'},
+        onClick: nextHandler
+      }
+
+      if (this.props.nextArrow) {
+        var nextArrow = <this.props.nextArrow {...nextArrowProps} />;
+      } else {
+        var nextArrow = <button type="button" {...nextArrowProps}> Next</button>;
+      }
+
       return [prevArrow, nextArrow];
     } else {
       return null;
