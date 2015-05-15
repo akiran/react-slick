@@ -80,3 +80,14 @@ var SimpleSlider = React.createClass({
 | variableWidth | bool |||
 | vertical | bool |||
 | afterChange | function | callback function called when the current index changes | Yes (since pull req #17) |
+
+### Development
+Want to run demos locally
+```
+git clone https://github.com/akiran/react-slick
+npm install
+npm start
+open http://localhost:8000
+```
+
+

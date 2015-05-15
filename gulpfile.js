@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var del = require('del');
-var sass = require('gulp-ruby-sass');
+var sass = require('gulp-sass');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var runSequence = require('run-sequence');
@@ -13,24 +13,24 @@ gulp.task('clean', function () {
 gulp.task('copy', function () {
   gulp.src('./docs/index.html')
     .pipe(gulp.dest('./build'));
-  gulp.src('./bower_components/slick-carousel/slick/fonts/*')
+  gulp.src('./node_modules/slick-carousel/slick/fonts/*')
       .pipe(gulp.dest('./build/fonts'));
-  return gulp.src('./bower_components/slick-carousel/slick/ajax-loader.gif')
+  return gulp.src('./node_modules/slick-carousel/slick/ajax-loader.gif')
       .pipe(gulp.dest('./build'));
 });
 
-gulp.task('sass', function () {
-  return  gulp.src(['./docs/**/*.scss'])
-              .pipe(sass({ loadPath : ['bower_components', 'node_modules'],}))
-               .on('error', function (err) { console.log(err.message); })
-              .pipe(gulp.dest('./build'));
-});
-
 // gulp.task('sass', function () {
-//   return  gulp.src(['./docs/**/*.{scss,sass}'])
-//               .pipe(sass({ includePaths : ['bower_components', 'node_modules'], errLogToConsole: true}))
+//   return  gulp.src(['./docs/**/*.scss'])
+//               .pipe(sass({ loadPath : ['bower_components', 'node_modules'],}))
+//                .on('error', function (err) { console.log(err.message); })
 //               .pipe(gulp.dest('./build'));
 // });
+
+gulp.task('sass', function () {
+  return  gulp.src(['./docs/**/*.{scss,sass}'])
+              .pipe(sass({ includePaths : ['bower_components', 'node_modules'], errLogToConsole: true}))
+              .pipe(gulp.dest('./build'));
+});
 
 gulp.task('watch', ['copy', 'sass'], function () {
   gulp.watch(['./docs/**/*.{scss,sass}'], ['sass']);
