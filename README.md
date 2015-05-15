@@ -9,7 +9,13 @@ Also install slick-carousel for css and font
 ```bash
   bower install slick-carousel
 ```
+or add cdn link in your html
+```
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.css" />
+```
+
 ### [Demos](http://webrafter.com/opensource/react-slick)
+
 
 ### Starter Kit
 Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly 
