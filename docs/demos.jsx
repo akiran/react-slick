@@ -137,10 +137,10 @@ var CenterMode = React.createClass({
       centerMode: true,
       infinite: true,
       centerPadding: '60px',
-      slidesToShow: 3,
+      slidesToShow: 7,
       speed: 500,
-      afterChange: function (a) {
-        alert('Slider Changed to :' + a);
+      afterChange: function (currentSlide) {
+        alert('Slider Changed to :' + (currentSlide + 1));
       }
     };
     return (
@@ -154,6 +154,9 @@ var CenterMode = React.createClass({
           <div><h3>4</h3></div>
           <div><h3>5</h3></div>
           <div><h3>6</h3></div>
+          <div><h3>7</h3></div>
+          <div><h3>8</h3></div>
+          <div><h3>9</h3></div>
         </Slider>
       </div>
     );
@@ -176,7 +179,7 @@ var CenterModeWithInitial = React.createClass({
     };
     return (
       <div>
-        <h2>Center Mode With InitalSlideSet</h2>
+        <h2>Center Mode With InitialSlide</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
@@ -288,7 +291,7 @@ var App = React.createClass({
     //need to add variable width and center mode demo
     return (
       <div className='content'>
-          <SingleItem />
+        <SingleItem />
         <MultipleItems />
         <Responsive />
         <UnevenSets />
