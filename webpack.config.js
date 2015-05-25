@@ -9,21 +9,21 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'build'),
-    filename: '[name]',
+    filename: '[name]'
   },
   module: {
     loaders: [
       {test: /\.jsx$/, loaders: ['babel']},
       {
         test: /\.scss$/,
-        loader: "style!css!postcss!sass?outputStyle=expanded&includePaths[]=" + 
-            (path.resolve(__dirname, './node_modules')) + "&includePaths[]=" + (path.resolve(__dirname, './bower_components'))
+        loader: 'style!css!postcss!sass?outputStyle=expanded&includePaths[]=' +
+            (path.resolve(__dirname, './node_modules')) + '&includePaths[]=' + (path.resolve(__dirname, './bower_components'))
       },
-      { test: /\.md$/, loader: "html!markdown" },
-    ],
+      { test: /\.md$/, loader: 'html!markdown' }
+    ]
   },
   postcss: [ autoprefixer({ browsers: ['last 2 version'] }) ],
-  resolve : {
+  resolve: {
     alias: {
 
     },

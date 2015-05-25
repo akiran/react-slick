@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-var React = require('react');
+import React from 'react';
 
-var InnerSlider = require('./inner-slider.jsx');
-var _sortBy = require('lodash.sortby');
-var _pluck = require('lodash.pluck');
-var _filter = require('lodash.filter');
-var _assign = require('lodash.assign');
-var json2mq = require('json2mq');
-var ResponsiveMixin = require('react-responsive-mixin');
+import InnerSlider from './inner-slider.jsx';
+import _sortBy from 'lodash.sortby';
+import _pluck from 'lodash.pluck';
+import _filter from 'lodash.filter';
+import _assign from 'lodash.assign';
+import json2mq from 'json2mq';
+import ResponsiveMixin from 'react-responsive-mixin';
 
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
