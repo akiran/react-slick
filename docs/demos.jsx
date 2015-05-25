@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var Slider = require('../');
 
@@ -8,7 +10,7 @@ var SingleItem = React.createClass({
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1,
+      slidesToScroll: 1
     };
     return (
       <div>
@@ -38,7 +40,7 @@ var MultipleItems = React.createClass({
     };
     return (
       <div>
-        <h2> Multiple items </h2> 
+        <h2> Multiple items </h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
@@ -84,7 +86,7 @@ var Responsive = React.createClass({
                 slidesToScroll: 1
             }
         }]
-    }
+    };
     return (
       <div>
         <h2> Responsive </h2>
@@ -111,7 +113,7 @@ var UnevenSets = React.createClass({
       speed: 500,
       slidesToScroll: 4,
       slidesToShow: 4
-    }
+    };
     return (
       <div>
         <h2>Uneven sets</h2>
@@ -136,10 +138,11 @@ var CenterMode = React.createClass({
       infinite: true,
       centerPadding: '60px',
       slidesToShow: 3,
-      speed: 500,   afterChange:function(a){
-        alert("Slider Changed to :"+a);
+      speed: 500,
+      afterChange: function (a) {
+        alert('Slider Changed to :' + a);
       }
-    }
+    };
     return (
       <div>
         <h2>Center Mode</h2>
@@ -166,10 +169,11 @@ var CenterModeWithInitial = React.createClass({
       centerPadding: '60px',
       slidesToShow: 3,
       initialSlide: 3,
-      speed: 500,   afterChange:function(index){
-        console.log('%c Slider Changed to:'+index, 'background: #222; color: #bada55');
+      speed: 500,
+      afterChange: function (index) {
+        console.log(`%c Slider Changed to: + ${index}, background: #222; color: #bada55`);
       }
-    }
+    };
     return (
       <div>
         <h2>Center Mode With InitalSlideSet</h2>
@@ -195,8 +199,8 @@ var AutoPlay = React.createClass({
       slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 2000,
-    }
+      autoplaySpeed: 2000
+    };
     return (
       <div>
         <h2>Auto Play</h2>
@@ -223,7 +227,7 @@ var VariableWidth = React.createClass({
       slidesToShow: 1,
       slidesToScroll: 1,
       variableWidth: true
-    }
+    };
     return (
       <div>
         <h2>Variable width</h2>
@@ -249,7 +253,7 @@ var AdaptiveHeight = React.createClass({
       slidesToShow: 1,
       slidesToScroll: 1,
       adaptiveHeight: true
-    }
+    };
     return (
       <div>
         <h2>Adaptive height</h2>

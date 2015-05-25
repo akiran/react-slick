@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "no-extra-parens": 0,
+    "react/jsx-uses-vars": 1,
+    "global-strict": true,
+    "quotes": [2, "single"],
+    "no-underscore-dangle": false,
+    "space-infix-ops": false,
+    "no-alert": false
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+      "react"
+  ]
+}

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var React = require('react');
 var cloneWithProps = require('react/lib/cloneWithProps');
@@ -29,7 +29,7 @@ var Slider = React.createClass({
     if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
       for (var i=0; i <= this.getDotCount(); i += 1) {
         var className = classnames({
-          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll),
+          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll)
         });
         dotOptions = {
           message: 'index',
@@ -58,7 +58,7 @@ var Slider = React.createClass({
         key: index,
         'data-index': index,
         className: this.getSlideClasses(index),
-        style: _assign({}, this.getSlideStyle(), child.props.style),
+        style: _assign({}, this.getSlideStyle(), child.props.style)
       }));
 
       if (this.props.infinite === true) {
@@ -74,7 +74,7 @@ var Slider = React.createClass({
             key: key,
             'data-index': key,
             className: this.getSlideClasses(key),
-            style: _assign({}, this.getSlideStyle(), child.props.style),
+            style: _assign({}, this.getSlideStyle(), child.props.style)
           }));
         }
 
@@ -84,7 +84,7 @@ var Slider = React.createClass({
             key: key,
             'data-index': key,
             className: this.getSlideClasses(key),
-            style: _assign({}, this.getSlideStyle(), child.props.style),
+            style: _assign({}, this.getSlideStyle(), child.props.style)
           }));
         }
       }
@@ -131,31 +131,33 @@ var Slider = React.createClass({
       var prevArrowProps = {
         key: '0',
         ref: 'previous',
-        'data-role': "none",
+        'data-role': 'none',
         className: classnames(prevClasses),
         style: {display: 'block'},
         onClick: prevHandler
-      }
+      };
+      var prevArrow;
 
       if (this.props.prevArrow) {
-        var prevArrow = <this.props.prevArrow {...prevArrowProps} />;
+        prevArrow = <this.props.prevArrow {...prevArrowProps} />;
       } else {
-        var prevArrow = <button type="button" {...prevArrowProps}> Previous</button>;
+        prevArrow = <button type="button" {...prevArrowProps}> Previous</button>;
       }
 
       var nextArrowProps = {
         key: '1',
         ref: 'next',
-        'data-role': "none",
+        'data-role': 'none',
         className: classnames(nextClasses),
         style: {display: 'block'},
         onClick: nextHandler
-      }
+      };
+      var nextArrow;
 
       if (this.props.nextArrow) {
-        var nextArrow = <this.props.nextArrow {...nextArrowProps} />;
+        nextArrow = <this.props.nextArrow {...nextArrowProps} />;
       } else {
-        var nextArrow = <button type="button" {...nextArrowProps}> Next</button>;
+        nextArrow = <button type="button" {...nextArrowProps}> Next</button>;
       }
 
       return [prevArrow, nextArrow];
