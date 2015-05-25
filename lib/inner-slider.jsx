@@ -19,6 +19,10 @@ var Slider = React.createClass({
   },
   componentDidMount: function () {
     this.initialize(this.props);
+    this.adaptHeight();
+  },
+  componentDidUpdate: function () {
+    this.adaptHeight();
   },
   componentWillReceiveProps: function(nextProps) {
     this.initialize(nextProps);
@@ -172,7 +176,6 @@ var Slider = React.createClass({
         <div
           ref='list'
           className='slick-list'
-          style={this.getListStyle()}
           onMouseDown={this.swipeStart}
           onMouseMove={this.state.dragging ? this.swipeMove: null}
           onMouseUp={this.swipeEnd}
