@@ -14,6 +14,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.jsx$/, loaders: ['babel']},
+      {test: /\.js$/, loaders: ['babel'], exclude: /node_modules/},
       {
         test: /\.scss$/,
         loader: 'style!css!postcss!sass?outputStyle=expanded&includePaths[]=' +

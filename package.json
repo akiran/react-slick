@@ -5,7 +5,7 @@
   "main": "./lib",
   "scripts": {
     "start": "./node_modules/.bin/gulp server",
-    "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib"
+    "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib && ./node_modules/.bin/gulp dist"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
