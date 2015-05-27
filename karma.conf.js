@@ -39,7 +39,7 @@ module.exports = function(config) {
       // cache: true,
       module: {
         loaders: [
-            { loader: "jsx-loader" },
+            { loader: "babel" },
         ]
       },
       resolve : {
