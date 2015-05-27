@@ -3,10 +3,7 @@
 import React from 'react';
 
 import InnerSlider from './inner-slider';
-import _sortBy from 'lodash.sortby';
-import _pluck from 'lodash.pluck';
-import _filter from 'lodash.filter';
-import _assign from 'lodash.assign';
+import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
 
@@ -18,33 +15,36 @@ var Slider = React.createClass({
     };
   },
   componentDidMount: function () {
-    var breakpoints = _sortBy(_pluck(this.props.responsive, 'breakpoint'));
+    if (this.props.responsive) {
+      var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
+      breakpoints.sort((x, y) => x - y);
 
-    breakpoints.forEach(function (breakpoint, index) {
-      var query;
-      if (index === 0) {
-        query = json2mq({minWidth: 0, maxWidth: breakpoint});
-      } else {
-        query = json2mq({minWidth: breakpoints[index-1], maxWidth: breakpoint});
-      }
-      this.media(query, function () {
-        this.setState({breakpoint: breakpoint});
-      }.bind(this));
-    }.bind(this));
+      breakpoints.forEach((breakpoint, index) => {
+        var bQuery;
+        if (index === 0) {
+          bQuery = json2mq({minWidth: 0, maxWidth: breakpoint});
+        } else {
+          bQuery = json2mq({minWidth: breakpoints[index-1], maxWidth: breakpoint});
+        }
+        this.media(bQuery, () => {
+          this.setState({breakpoint: breakpoint});
+        });
+      });
 
-    // Register media query for full screen. Need to support resize from small to large
-    var query = json2mq({minWidth: breakpoints.slice(-1)[0]});
+      // Register media query for full screen. Need to support resize from small to large
+      var query = json2mq({minWidth: breakpoints.slice(-1)[0]});
 
-    this.media(query, function () {
-       this.setState({breakpoint: null});
-    }.bind(this));
+      this.media(query, () => {
+        this.setState({breakpoint: null});
+      });
+    }
   },
   render: function () {
     var settings;
     var newProps;
     if (this.state.breakpoint) {
-      newProps = _filter(this.props.responsive, {breakpoint: this.state.breakpoint});
-      settings = _assign({}, this.props, newProps[0].settings);
+      newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
+      settings = assign({}, this.props, newProps[0].settings);
     } else {
       settings = this.props;
     }

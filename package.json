@@ -49,10 +49,6 @@
   "dependencies": {
     "classnames": "^2.1.1",
     "json2mq": "^0.2.0",
-    "lodash.assign": "^3.2.0",
-    "lodash.filter": "^3.1.1",
-    "lodash.pluck": "^3.1.2",
-    "lodash.sortby": "^3.1.4",
     "object-assign": "^2.0.0",
     "react-responsive-mixin": "^0.3.3",
     "slick-carousel": "^1.5.5"
