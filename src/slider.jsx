@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import InnerSlider from './inner-slider.jsx';
+import InnerSlider from './inner-slider';
 import _sortBy from 'lodash.sortby';
 import _pluck from 'lodash.pluck';
 import _filter from 'lodash.filter';

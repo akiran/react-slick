@@ -2,10 +2,10 @@
   "name": "react-slick",
   "version": "0.4.1",
   "description": " React port of slick carousel",
-  "main": "index.jsx",
+  "main": "./lib",
   "scripts": {
     "start": "./node_modules/.bin/gulp server",
-    "prepublish": "./node_modules/.bin/gulp dist"
+    "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
@@ -23,6 +23,7 @@
   ],
   "devDependencies": {
     "autoprefixer-core": "^5.1.11",
+    "babel": "^5.4.7",
     "babel-core": "^5.4.7",
     "babel-loader": "^5.1.3",
     "deepmerge": "^0.2.10",
