@@ -38,6 +38,7 @@
     "karma-webpack": "^1.5.1",
     "mocha": "^2.2.5",
     "node-sass": "^3.1.2",
+    "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
     "react-router": "^0.13.3",
     "run-sequence": "^1.1.0",
