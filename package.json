@@ -29,6 +29,7 @@
     "deepmerge": "^0.2.10",
     "del": "^1.2.0",
     "express": "^5.0.0-alpha.1",
+    "foundation-apps": "^1.1.0",
     "gulp": "^3.8.11",
     "gulp-sass": "^2.0.1",
     "karma": "^0.12.33",
@@ -52,7 +53,6 @@
     "lodash.pluck": "^3.1.2",
     "lodash.sortby": "^3.1.4",
     "object-assign": "^2.0.0",
-    "react": "^0.13.3",
     "react-responsive-mixin": "^0.3.3",
     "slick-carousel": "^1.5.5"
   },

@@ -168,7 +168,7 @@ var CenterModeWithInitial = React.createClass({
     var settings = {
       className: 'center',
       centerMode: true,
-      infinite: false,
+      infinite: true,
       centerPadding: '60px',
       slidesToShow: 3,
       initialSlide: 3,
