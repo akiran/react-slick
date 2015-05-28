@@ -18,10 +18,10 @@ var EventHandlers = {
       if (this.state.slideCount > this.props.slidesToShow) {
         this.slideHandler(this.state.currentSlide + slideOffset, false);
       }
-    } else if (options.message === 'index') {
+    } else if (options.message === 'dots') {
       // Click on dots
-      var targetSlide = options.index*this.props.slidesToScroll;
-      if (targetSlide !== this.state.currentSlide) {
+      var targetSlide = options.index * options.slidesToScroll;
+      if (targetSlide !== options.currentSlide) {
         this.slideHandler(targetSlide);
       }
     }

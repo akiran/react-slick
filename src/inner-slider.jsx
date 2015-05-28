@@ -9,6 +9,8 @@ import initialState from './initial-state';
 import defaultProps from './default-props';
 import assign from 'object-assign';
 
+import Dots from './dots';
+
 var Slider = React.createClass({
   mixins: [EventHandlersMixin, HelpersMixin],
   getInitialState: function () {
@@ -26,29 +28,6 @@ var Slider = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     this.initialize(nextProps);
-  },
-  renderDots: function () {
-    var dotOptions;
-    var dots = [];
-    if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
-      for (var i=0; i <= this.getDotCount(); i += 1) {
-        var className = classnames({
-          'slick-active': (this.state.currentSlide === i * this.props.slidesToScroll)
-        });
-        dotOptions = {
-          message: 'index',
-          index: i
-        };
-        dots.push(<li key={i} className={className}><button onClick={this.changeSlide.bind(this, dotOptions)}>{i}</button></li>);
-      }
-      return (
-        <ul className={this.props.dotsClass} style={{display: 'block'}}>
-          {dots}
-        </ul>
-      );
-    } else {
-      return null;
-    }
   },
   renderSlides: function () {
     var key;
@@ -171,6 +150,8 @@ var Slider = React.createClass({
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
+    var dotCount = this.getDotCount();
+
     return (
       <div className={className} >
         <div
@@ -187,7 +168,16 @@ var Slider = React.createClass({
           {this.renderTrack()}
         </div>
         {this.renderArrows()}
-        {this.renderDots()}
+        <Dots
+          self={this}
+          dotCount={dotCount}
+          dots={this.props.dots}
+          dotsClass={this.props.dotsClass}
+          slideCount={this.state.slideCount}
+          slidesToShow={this.props.slidesToShow}
+          currentSlide={this.state.currentSlide}
+          slidesToScroll={this.props.slidesToScroll}
+        />
       </div>
     );
   }
