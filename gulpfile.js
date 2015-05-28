@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var del = require('del');
 var sass = require('gulp-sass');
@@ -27,26 +29,26 @@ gulp.task('copy', function () {
 // });
 
 gulp.task('sass', function () {
-  return  gulp.src(['./docs/**/*.{scss,sass}'])
-              .pipe(sass({ includePaths : ['bower_components', 'node_modules'], errLogToConsole: true}))
+  return gulp.src(['./docs/**/*.{scss,sass}'])
+              .pipe(sass({ includePaths: ['bower_components', 'node_modules'], errLogToConsole: true}))
               .pipe(gulp.dest('./build'));
 });
 
 gulp.task('watch', ['copy', 'sass'], function () {
   gulp.watch(['./docs/**/*.{scss,sass}'], ['sass']);
   gulp.watch(['./docs/index.html'], ['copy']);
-}); 
+});
 
 gulp.task('server', ['copy', 'sass'], function (callback) {
   var myConfig = require('./webpack.config.js');
   myConfig.plugins = myConfig.plugins.concat(
     new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify("dev_docs")
+      'process.env': {
+        'NODE_ENV': JSON.stringify('dev_docs')
       }
     })
   );
-  
+
   var webpackCompiler = webpack(myConfig, function(err, stats) {
   });
 
@@ -54,8 +56,7 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, process.env.HOST_IP || 'localhost', function (err, result) {
-  });
+  }).listen(8000, process.env.HOST_IP || 'localhost');
 });
 
 
@@ -69,7 +70,7 @@ gulp.task('dist-unmin', function (cb) {
   var unminConfig = assign({}, distConfig);
   unminConfig.output.filename = 'react-slick.js';
   return webpack(unminConfig, function (err, stat) {
-    console.log(err);
+    console.error(err);
     cb();
   });
 });
@@ -86,11 +87,11 @@ gulp.task('dist-min', function (cb) {
     })
   );
   return webpack(minConfig, function (err, stat) {
-    console.log(err);
+    console.error(err);
     cb();
   });
 });
 
 gulp.task('dist', function (cb) {
-  runSequence('dist-clean', 'dist-unmin', 'dist-min', cb)
+  runSequence('dist-clean', 'dist-unmin', 'dist-min', cb);
 });

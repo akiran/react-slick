@@ -190,17 +190,27 @@ var helpers = {
       targetLeft = currentLeft;
     }
 
-    if(this.props.afterChange!==null){
-      this.props.afterChange(currentSlide);
+    if (this.props.beforeChange) {
+      this.props.beforeChange(currentSlide);
     }
 
-    var callback = function() {
-        this.setState({
-          animating: false,
-          trackStyle: this.getCSS(currentLeft),
-          swipeLeft: null
-        });
-    }.bind(this);
+    var nextStateChanges = {
+      animating: false,
+      trackStyle: this.getCSS(currentLeft),
+      swipeLeft: null
+    };
+
+    // var callback1 = () => {
+    //   this.setState(nextStateChanges);
+    // };
+
+    var callback2 = () => {
+      this.setState(nextStateChanges);
+
+      if (this.props.afterChange) {
+        this.props.afterChange(currentSlide);
+      }
+    };
 
     this.setState({
       animating: true,
@@ -208,8 +218,9 @@ var helpers = {
       currentLeft: currentLeft,
       trackStyle: this.getAnimateCSS(targetLeft)
     }, function () {
-      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
-      setTimeout(callback, this.props.speed);
+      //TO FIX: Below line cause callback1 to be called multiple time
+      //ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback1);
+      setTimeout(callback2, this.props.speed);
     });
 
     this.autoPlay();

@@ -1,13 +1,13 @@
 'use strict';
 
-var React = require('react');
-var cloneWithProps = require('react/lib/cloneWithProps');
-var classnames = require('classnames');
-var EventHandlersMixin = require('./mixins/event-handlers');
-var HelpersMixin = require('./mixins/helpers');
-var initialState = require('./initial-state');
-var defaultProps = require('./default-props');
-var _assign = require('lodash.assign');
+import React from 'react';
+import cloneWithProps from 'react/lib/cloneWithProps';
+import classnames from 'classnames';
+import EventHandlersMixin from './mixins/event-handlers';
+import HelpersMixin from './mixins/helpers';
+import initialState from './initial-state';
+import defaultProps from './default-props';
+import assign from 'object-assign';
 
 var Slider = React.createClass({
   mixins: [EventHandlersMixin, HelpersMixin],
@@ -62,7 +62,7 @@ var Slider = React.createClass({
         key: index,
         'data-index': index,
         className: this.getSlideClasses(index),
-        style: _assign({}, this.getSlideStyle(), child.props.style)
+        style: assign({}, this.getSlideStyle(), child.props.style)
       }));
 
       if (this.props.infinite === true) {
@@ -78,7 +78,7 @@ var Slider = React.createClass({
             key: key,
             'data-index': key,
             className: this.getSlideClasses(key),
-            style: _assign({}, this.getSlideStyle(), child.props.style)
+            style: assign({}, this.getSlideStyle(), child.props.style)
           }));
         }
 
@@ -88,7 +88,7 @@ var Slider = React.createClass({
             key: key,
             'data-index': key,
             className: this.getSlideClasses(key),
-            style: _assign({}, this.getSlideStyle(), child.props.style)
+            style: assign({}, this.getSlideStyle(), child.props.style)
           }));
         }
       }

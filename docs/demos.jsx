@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var Slider = require('../lib/slider');
+var Slider = require('../src/slider');
 
 var SingleItem = React.createClass({
   render: function () {
@@ -139,8 +139,11 @@ var CenterMode = React.createClass({
       centerPadding: '60px',
       slidesToShow: 7,
       speed: 500,
+      beforeChange: function (index) {
+        alert('Slider will change from:' + index);
+      },
       afterChange: function (currentSlide) {
-        alert('Slider Changed to :' + (currentSlide + 1));
+        console.log('Slider Changed to :' + (currentSlide + 1));
       }
     };
     return (
@@ -174,7 +177,7 @@ var CenterModeWithInitial = React.createClass({
       initialSlide: 3,
       speed: 500,
       afterChange: function (index) {
-        console.log(`%c Slider Changed to: + ${index}, background: #222; color: #bada55`);
+        console.log(`Slider Changed to: ${index + 1}, background: #222; color: #bada55`);
       }
     };
     return (
