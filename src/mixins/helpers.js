@@ -200,9 +200,9 @@ var helpers = {
       swipeLeft: null
     };
 
-    var callback1 = () => {
-      this.setState(nextStateChanges);
-    };
+    // var callback1 = () => {
+    //   this.setState(nextStateChanges);
+    // };
 
     var callback2 = () => {
       this.setState(nextStateChanges);
@@ -218,7 +218,8 @@ var helpers = {
       currentLeft: currentLeft,
       trackStyle: this.getAnimateCSS(targetLeft)
     }, function () {
-      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback1);
+      //TO FIX: Below line cause callback1 to be called multiple time
+      //ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback1);
       setTimeout(callback2, this.props.speed);
     });
 
