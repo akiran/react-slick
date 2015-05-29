@@ -1,9 +1,105 @@
 'use strict';
 
-var assign = require('object-assign');
-var React = require('react');
-var classnames = require('classnames');
-var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
+import React from 'react';
+import classnames from 'classnames';
+// import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
+
+var getDotCount = function(spec) {
+  var dots;
+  dots = Math.floor(spec.slideCount / spec.slidesToScroll);
+  return dots;
+};
+
+var getTrackCSS = function(spec) {
+  var trackWidth;
+  if (spec.variableWidth) {
+    trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+  } else if (spec.centerMode) {
+    trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+  } else {
+    trackWidth = (spec.slideCount + 2* spec.slidesToShow )* spec.slideWidth;
+  }
+  var style = {
+    opacity: 1,
+    width: trackWidth,
+    WebkitTransform: 'translate3d(' + spec.targetLeft + 'px, 0px, 0px)',
+    transform: 'translate3d(' + spec.targetLeft + 'px, 0px, 0px)',
+    transition: '',
+    WebkitTransition: ''
+  };
+
+  return style;
+};
+
+var getTrackAnimateCSS = function (spec) {
+  var style = getTrackCSS(spec);
+  style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase;
+  style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase;
+  return style;
+};
+
+//  {
+//    infinite: this.props.infinite,
+//    slideCount: this.state.slideCount,
+//    slidesToShow: this.props.slidesToShow,
+//    slidesToScroll: this.props.slidesToScroll,
+//    slideWidth: this.slidesToShow,
+//    slideIndex: index, //
+//
+//  }
+
+var getTrackLeft = function (spec) {
+  var slideOffset = 0;
+  var targetLeft;
+  var targetSlide;
+  if (this.props.infinite === true) {
+    if (this.state.slideCount > this.props.slidesToShow) {
+     slideOffset = (this.state.slideWidth * this.props.slidesToShow) * -1;
+    }
+    if (this.state.slideCount % this.props.slidesToScroll !== 0) {
+      if (spec.slideIndex + this.props.slidesToScroll > this.state.slideCount && this.state.slideCount > this.props.slidesToShow) {
+          if(spec.slideIndex > this.state.slideCount) {
+            slideOffset = ((this.props.slidesToShow - (spec.slideIndex - this.state.slideCount)) * this.state.slideWidth) * -1;
+          } else {
+            slideOffset = ((this.state.slideCount % this.props.slidesToScroll) * this.state.slideWidth) * -1;
+          }
+      }
+    }
+  } else {
+
+  }
+
+  if (this.props.centerMode === true && this.props.infinite === true) {
+      slideOffset += this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) - this.state.slideWidth;
+  } else if (this.props.centerMode === true) {
+      slideOffset = this.state.slideWidth * Math.floor(this.props.slidesToShow / 2);
+  }
+
+  targetLeft = ((spec.slideIndex * this.state.slideWidth) * -1) + slideOffset;
+
+  if (this.props.variableWidth === true) {
+      var targetSlideIndex;
+      if(this.state.slideCount <= this.props.slidesToShow || this.props.infinite === false) {
+          targetSlide = this.refs.track.getDOMNode().childNodes[spec.slideIndex];
+      } else {
+          targetSlideIndex = (spec.slideIndex + this.props.slidesToShow);
+          targetSlide = this.refs.track.getDOMNode().childNodes[targetSlideIndex];
+      }
+      targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+      if (this.props.centerMode === true) {
+          if(this.props.infinite === false) {
+              targetSlide = this.refs.track.getDOMNode().childNodes[spec.slideIndex];
+          } else {
+              targetSlide = this.refs.track.getDOMNode().childNodes[(spec.slideIndex + this.props.slidesToShow + 1)];
+          }
+
+          targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+          targetLeft += (this.state.listWidth - targetSlide.offsetWidth) / 2;
+      }
+  }
+
+  return targetLeft;
+};
 
 var helpers = {
   initialize: function (props) {
@@ -19,19 +115,22 @@ var helpers = {
       trackWidth: trackWidth,
       currentSlide: props.initialSlide
 
-
     }, function () {
+
+      var targetLeft = this.getLeft(this.state.currentSlide);
       // getCSS function needs previously set state
-      var trackStyle = this.getCSS(this.getLeft(this.state.currentSlide));
+      var trackStyle = getTrackCSS({
+        variableWidth: this.props.variableWidth,
+        slideCount: this.state.slideCount,
+        slidesToShow: this.props.slidesToShow,
+        slideWidth: this.state.slideWidth,
+        targetLeft: targetLeft
+      });
+
       this.setState({trackStyle: trackStyle});
 
-      this.autoPlay(); // once we're set up, trigger the initial autoplay.
+      // this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
-  },
-  getDotCount: function () {
-    var pagerQty;
-    pagerQty = Math.ceil(this.state.slideCount /this.props.slidesToScroll);
-    return pagerQty - 1;
   },
   getLeft: function (slideIndex) {
     var slideOffset = 0;
@@ -53,6 +152,7 @@ var helpers = {
     } else {
 
     }
+
     if (this.props.centerMode === true && this.props.infinite === true) {
         slideOffset += this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) - this.state.slideWidth;
     } else if (this.props.centerMode === true) {
@@ -117,35 +217,11 @@ var helpers = {
       width: this.state.slideWidth
     };
   },
-  getSlideClasses: function (index) {
-    var slickActive, slickCenter, slickCloned;
-    var currentSlide = this.state.currentSlide;
-    var centerOffset;
-
-    slickCloned = (index < 0) || (index >= this.state.slideCount);
-    if (this.props.centerMode) {
-      centerOffset = Math.floor(this.props.slidesToShow / 2);
-      slickCenter = (currentSlide === index);
-      if ((index > currentSlide - centerOffset - 1) && (index <= currentSlide + centerOffset)) {
-        slickActive = true;
-      }
-    } else {
-      slickActive = (currentSlide === index);
-    }
-    return classnames({
-      'slick-slide': true,
-      'slick-active': slickActive,
-      'slick-center': slickCenter,
-      'slick-cloned': slickCloned
-    });
-  },
   adaptHeight: function () {
-    if (this.props.adaptiveHeight) {
-      var selector = '[data-index="' + this.state.currentSlide +'"]';
-      if (this.refs.list) {
-        var slickList = this.refs.list.getDOMNode();
-        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
-      }
+    var selector = '[data-index="' + this.state.currentSlide +'"]';
+    if (this.refs.list) {
+      var slickList = this.refs.list.getDOMNode();
+      slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
     }
   },
   slideHandler: function (index, sync, dontAnimate) {
@@ -196,7 +272,13 @@ var helpers = {
 
     var nextStateChanges = {
       animating: false,
-      trackStyle: this.getCSS(currentLeft),
+      trackStyle: getTrackCSS({
+        variableWidth: this.props.variableWidth,
+        slideCount: this.state.slideCount,
+        slidesToShow: this.props.slidesToShow,
+        slideWidth: this.state.slideWidth,
+        targetLeft: targetLeft
+      }),
       swipeLeft: null
     };
 

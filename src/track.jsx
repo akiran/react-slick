@@ -46,8 +46,7 @@ var Track = React.createClass({
           slidesToShow: this.props.slidesToShow,
           centerMode: this.props.centerMode
         }),
-        // style: assign({}, this.getSlideStyle(), child.props.style)
-        style: assign({}, child.props.style)
+        style: assign({}, {width: this.props.slideWidth}, child.props.style)
       }));
 
       if (this.props.infinite === true) {
@@ -69,8 +68,7 @@ var Track = React.createClass({
               slidesToShow: this.props.slidesToShow,
               centerMode: this.props.centerMode
             }),
-            // style: assign({}, this.getSlideStyle(), child.props.style)
-            style: assign({}, child.props.style)
+            style: assign({}, {width: this.props.slideWidth}, child.props.style)
           }));
         }
 
@@ -86,8 +84,7 @@ var Track = React.createClass({
               slidesToShow: this.props.slidesToShow,
               centerMode: this.props.centerMode
             }),
-            // style: assign({}, this.getSlideStyle(), child.props.style)
-            style: assign({}, child.props.style)
+            style: assign({}, {width: this.props.slideWidth}, child.props.style)
           }));
         }
       }
@@ -97,9 +94,8 @@ var Track = React.createClass({
   },
   render: function () {
     var slides = this.renderSlides();
-    console.log(this.props);
     return (
-      <div ref='track' className='slick-track'>
+      <div className='slick-track' style={this.props.trackStyle}>
         { slides }
       </div>
     );
