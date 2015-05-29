@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-// import classnames from 'classnames';
 // import EventHandlersMixin from './mixins/event-handlers';
 // import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
@@ -29,6 +28,8 @@ var Slider = React.createClass({
   // },
   render: function () {
     return (
+      <div
+        className="slick-list">
       <Track
         infinite={this.props.infinite}
         centerMode={this.props.centerMode}
@@ -36,6 +37,7 @@ var Slider = React.createClass({
         slidesToShow={this.props.slidesToShow}>
         {this.props.children}
       </Track>
+      </div>
     );
   }
 });

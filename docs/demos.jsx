@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var Slider = require('../src/slider');
+import React from 'react';
+import Slider from '../src/slider';
 
 var SingleItem = React.createClass({
   render: function () {

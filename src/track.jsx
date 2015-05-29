@@ -3,6 +3,29 @@
 import React from 'react';
 import cloneWithProps from 'react/lib/cloneWithProps';
 import assign from 'object-assign';
+import classnames from 'classnames';
+
+function getSlideClasses(spec) {
+  var slickActive, slickCenter, slickCloned;
+  var centerOffset;
+
+  slickCloned = (spec.index < 0) || (spec.index >= spec.slideCount);
+  if (spec.centerMode) {
+    centerOffset = Math.floor(spec.slidesToShow / 2);
+    slickCenter = (spec.currentSlide === spec.index);
+    if ((spec.index > spec.currentSlide - centerOffset - 1) && (spec.index <= spec.currentSlide + centerOffset)) {
+      slickActive = true;
+    }
+  } else {
+    slickActive = (spec.currentSlide === spec.index);
+  }
+  return classnames({
+    'slick-slide': true,
+    'slick-active': slickActive,
+    'slick-center': slickCenter,
+    'slick-cloned': slickCloned
+  });
+}
 
 var Track = React.createClass({
   renderSlides: function () {
@@ -16,7 +39,13 @@ var Track = React.createClass({
       slides.push(cloneWithProps(child, {
         key: index,
         'data-index': index,
-        // className: this.getSlideClasses(index),
+        className: getSlideClasses({
+          index: index,
+          currentSlide: this.props.currentSlide,
+          slideCount: this.props.slideCount,
+          slidesToShow: this.props.slidesToShow,
+          centerMode: this.props.centerMode
+        }),
         // style: assign({}, this.getSlideStyle(), child.props.style)
         style: assign({}, child.props.style)
       }));
@@ -33,7 +62,13 @@ var Track = React.createClass({
           preCloneSlides.push(cloneWithProps(child, {
             key: key,
             'data-index': key,
-            // className: this.getSlideClasses(key),
+            className: getSlideClasses({
+              index: key,
+              currentSlide: this.props.currentSlide,
+              slideCount: this.props.slideCount,
+              slidesToShow: this.props.slidesToShow,
+              centerMode: this.props.centerMode
+            }),
             // style: assign({}, this.getSlideStyle(), child.props.style)
             style: assign({}, child.props.style)
           }));
@@ -44,7 +79,13 @@ var Track = React.createClass({
           postCloneSlides.push(cloneWithProps(child, {
             key: key,
             'data-index': key,
-            // className: this.getSlideClasses(key),
+            className: getSlideClasses({
+              index: key,
+              currentSlide: this.props.currentSlide,
+              slideCount: this.props.slideCount,
+              slidesToShow: this.props.slidesToShow,
+              centerMode: this.props.centerMode
+            }),
             // style: assign({}, this.getSlideStyle(), child.props.style)
             style: assign({}, child.props.style)
           }));
@@ -55,9 +96,11 @@ var Track = React.createClass({
     return preCloneSlides.concat(slides, postCloneSlides);
   },
   render: function () {
+    var slides = this.renderSlides();
+    console.log(this.props);
     return (
       <div ref='track' className='slick-track'>
-        { this.renderSlides() }
+        { slides }
       </div>
     );
   }

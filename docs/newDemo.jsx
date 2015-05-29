@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var Slider = require('../src/slider');
+import React from 'react';
+import Slider from '../src/slider';
 
 var SingleItem = React.createClass({
 
@@ -15,7 +15,7 @@ var SingleItem = React.createClass({
     };
     return (
       <div>
-        <h2> Single Item</h2>
+        <h2> Single Item Demos</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
