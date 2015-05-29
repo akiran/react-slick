@@ -9,7 +9,7 @@ var Dots = React.createClass({
   mixins: [EventHandlersMixin],
 
   slideHandler: function (targetSlide) {
-    (this.props.slideHandler(targetSlide)).bind(this.props.self);
+    this.props.slideHandler(targetSlide);
   },
   render: function () {
     var dotOptions;

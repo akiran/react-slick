@@ -50,7 +50,7 @@
     "classnames": "^2.1.1",
     "json2mq": "^0.2.0",
     "object-assign": "^2.0.0",
-    "react-responsive-mixin": "^0.3.3",
+    "react-responsive-mixin": "^0.3.4",
     "slick-carousel": "^1.5.5"
   },
   "peerDependencies": {

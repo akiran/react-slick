@@ -1,7 +1,8 @@
 'use strict';
 
 var React = require('react');
-var Demos = require('./demos');
+// var Demos = require('./demos');
+var Demos = require('./newDemo');
 
 var Docs = React.createClass({
   render: function () {
