@@ -22,8 +22,8 @@ var getTrackCSS = function(spec) {
   var style = {
     opacity: 1,
     width: trackWidth,
-    WebkitTransform: 'translate3d(' + spec.targetLeft + 'px, 0px, 0px)',
-    transform: 'translate3d(' + spec.targetLeft + 'px, 0px, 0px)',
+    WebkitTransform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
+    transform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
     transition: '',
     WebkitTransition: ''
   };
@@ -38,63 +38,50 @@ var getTrackAnimateCSS = function (spec) {
   return style;
 };
 
-//  {
-//    infinite: this.props.infinite,
-//    slideCount: this.state.slideCount,
-//    slidesToShow: this.props.slidesToShow,
-//    slidesToScroll: this.props.slidesToScroll,
-//    slideWidth: this.slidesToShow,
-//    slideIndex: index, //
-//
-//  }
-
 var getTrackLeft = function (spec) {
   var slideOffset = 0;
   var targetLeft;
   var targetSlide;
-  if (this.props.infinite === true) {
-    if (this.state.slideCount > this.props.slidesToShow) {
-     slideOffset = (this.state.slideWidth * this.props.slidesToShow) * -1;
+  if (spec.infinite === true) {
+    if (spec.slideCount > spec.slidesToShow) {
+     slideOffset = (spec.slideWidth * spec.slidesToShow) * -1;
     }
-    if (this.state.slideCount % this.props.slidesToScroll !== 0) {
-      if (spec.slideIndex + this.props.slidesToScroll > this.state.slideCount && this.state.slideCount > this.props.slidesToShow) {
-          if(spec.slideIndex > this.state.slideCount) {
-            slideOffset = ((this.props.slidesToShow - (spec.slideIndex - this.state.slideCount)) * this.state.slideWidth) * -1;
+    if (spec.slideCount % spec.slidesToScroll !== 0) {
+      if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
+          if(spec.slideIndex > spec.slideCount) {
+            slideOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideWidth) * -1;
           } else {
-            slideOffset = ((this.state.slideCount % this.props.slidesToScroll) * this.state.slideWidth) * -1;
+            slideOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideWidth) * -1;
           }
       }
     }
-  } else {
-
+  }
+  if (spec.centerMode === true && spec.infinite === true) {
+      slideOffset += spec.slideWidth * Math.floor(spec.slidesToShow / 2) - spec.slideWidth;
+  } else if (spec.centerMode === true) {
+      slideOffset = spec.slideWidth * Math.floor(spec.slidesToShow / 2);
   }
 
-  if (this.props.centerMode === true && this.props.infinite === true) {
-      slideOffset += this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) - this.state.slideWidth;
-  } else if (this.props.centerMode === true) {
-      slideOffset = this.state.slideWidth * Math.floor(this.props.slidesToShow / 2);
-  }
+  targetLeft = ((spec.slideIndex * spec.slideWidth) * -1) + slideOffset;
 
-  targetLeft = ((spec.slideIndex * this.state.slideWidth) * -1) + slideOffset;
-
-  if (this.props.variableWidth === true) {
+  if (spec.variableWidth === true) {
       var targetSlideIndex;
-      if(this.state.slideCount <= this.props.slidesToShow || this.props.infinite === false) {
-          targetSlide = this.refs.track.getDOMNode().childNodes[spec.slideIndex];
+      if(spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
+          targetSlide = spec.track.getDOMNode().childNodes[spec.slideIndex];
       } else {
-          targetSlideIndex = (spec.slideIndex + this.props.slidesToShow);
-          targetSlide = this.refs.track.getDOMNode().childNodes[targetSlideIndex];
+          targetSlideIndex = (spec.slideIndex + spec.slidesToShow);
+          targetSlide = spec.track.getDOMNode().childNodes[targetSlideIndex];
       }
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-      if (this.props.centerMode === true) {
-          if(this.props.infinite === false) {
-              targetSlide = this.refs.track.getDOMNode().childNodes[spec.slideIndex];
+      if (spec.centerMode === true) {
+          if(spec.infinite === false) {
+              targetSlide = spec.track.getDOMNode().childNodes[spec.slideIndex];
           } else {
-              targetSlide = this.refs.track.getDOMNode().childNodes[(spec.slideIndex + this.props.slidesToShow + 1)];
+              targetSlide = spec.track.getDOMNode().childNodes[(spec.slideIndex + spec.slidesToShow + 1)];
           }
 
           targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-          targetLeft += (this.state.listWidth - targetSlide.offsetWidth) / 2;
+          targetLeft += (spec.listWidth - targetSlide.offsetWidth) / 2;
       }
   }
 
@@ -117,14 +104,24 @@ var helpers = {
 
     }, function () {
 
-      var targetLeft = this.getLeft(this.state.currentSlide);
+      var targetLeft = getTrackLeft({
+       slideIndex: this.state.currentSlide,
+       infinite: this.props.infinite,
+       centerMode: this.props.centerMode,
+       slideCount: this.state.slideCount,
+       slidesToShow: this.props.slidesToShow,
+       slidesToScroll: this.props.slidesToScroll,
+       slideWidth: this.state.slideWidth,
+       track: this.refs.track,
+       listWidth: this.state.listWidth
+      });
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS({
         variableWidth: this.props.variableWidth,
         slideCount: this.state.slideCount,
         slidesToShow: this.props.slidesToShow,
         slideWidth: this.state.slideWidth,
-        targetLeft: targetLeft
+        left: targetLeft
       });
 
       this.setState({trackStyle: trackStyle});
