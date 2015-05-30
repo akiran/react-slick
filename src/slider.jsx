@@ -2,12 +2,12 @@
 
 import React from 'react';
 import InnerSlider from './inner-slider';
-// import assign from 'object-assign';
+import assign from 'object-assign';
 // import json2mq from 'json2mq';
-// import ResponsiveMixin from 'react-responsive-mixin';
+import ResponsiveMixin from 'react-responsive-mixin';
 
 var Slider = React.createClass({
-  // mixins: [ResponsiveMixin],
+  mixins: [ResponsiveMixin],
   getInitialState: function () {
     return {
       breakpoint: null
@@ -40,13 +40,13 @@ var Slider = React.createClass({
   },
   render: function () {
     var settings;
-    // var newProps;
-    // if (this.state.breakpoint) {
-    //   newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
-    //   settings = assign({}, this.props, newProps[0].settings);
-    // } else {
-    //   settings = this.props;
-    // }
+    var newProps;
+    if (this.state.breakpoint) {
+      newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
+      settings = assign({}, this.props, newProps[0].settings);
+    } else {
+      settings = this.props;
+    }
     return (
       <InnerSlider {...settings}>
         {this.props.children}

@@ -1,24 +1,29 @@
 'use strict';
 
 import React from 'react';
-import classnames from 'classnames';
-// import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
+import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 
-var getDotCount = function(spec) {
-  var dots;
-  dots = Math.floor(spec.slideCount / spec.slidesToScroll);
-  return dots;
+var checkSpecKeys = function (spec, keysArray) {
+  return keysArray.reduce((value, key) => {
+    return value && spec.hasOwnProperty(key);
+  }, true) ? null : console.error("Keys Missing", spec);
 };
 
 var getTrackCSS = function(spec) {
+  checkSpecKeys(spec, [
+    'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'left'
+  ]);
+
   var trackWidth;
+
   if (spec.variableWidth) {
     trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
   } else if (spec.centerMode) {
     trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
   } else {
-    trackWidth = (spec.slideCount + 2* spec.slidesToShow )* spec.slideWidth;
+    trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
   }
+
   var style = {
     opacity: 1,
     width: trackWidth,
@@ -39,6 +44,11 @@ var getTrackAnimateCSS = function (spec) {
 };
 
 var getTrackLeft = function (spec) {
+
+  checkSpecKeys(spec, [
+   'slideIndex', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
+   'slidesToScroll', 'slideWidth', 'trackRef', 'listWidth']);
+
   var slideOffset = 0;
   var targetLeft;
   var targetSlide;
@@ -67,17 +77,17 @@ var getTrackLeft = function (spec) {
   if (spec.variableWidth === true) {
       var targetSlideIndex;
       if(spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
-          targetSlide = spec.track.getDOMNode().childNodes[spec.slideIndex];
+          targetSlide = spec.trackRef.getDOMNode().childNodes[spec.slideIndex];
       } else {
           targetSlideIndex = (spec.slideIndex + spec.slidesToShow);
-          targetSlide = spec.track.getDOMNode().childNodes[targetSlideIndex];
+          targetSlide = spec.trackRef.getDOMNode().childNodes[targetSlideIndex];
       }
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (spec.centerMode === true) {
           if(spec.infinite === false) {
-              targetSlide = spec.track.getDOMNode().childNodes[spec.slideIndex];
+              targetSlide = spec.trackRef.getDOMNode().childNodes[spec.slideIndex];
           } else {
-              targetSlide = spec.track.getDOMNode().childNodes[(spec.slideIndex + spec.slidesToShow + 1)];
+              targetSlide = spec.trackRef.getDOMNode().childNodes[(spec.slideIndex + spec.slidesToShow + 1)];
           }
 
           targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
@@ -106,27 +116,27 @@ var helpers = {
 
       var targetLeft = getTrackLeft({
        slideIndex: this.state.currentSlide,
-       infinite: this.props.infinite,
-       centerMode: this.props.centerMode,
+       infinite: props.infinite,
+       centerMode: props.centerMode,
        slideCount: this.state.slideCount,
-       slidesToShow: this.props.slidesToShow,
+       slidesToShow: props.slidesToShow,
        slidesToScroll: this.props.slidesToScroll,
        slideWidth: this.state.slideWidth,
-       track: this.refs.track,
+       trackRef: this.refs.track,
        listWidth: this.state.listWidth
       });
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS({
-        variableWidth: this.props.variableWidth,
+        variableWidth: props.variableWidth,
         slideCount: this.state.slideCount,
-        slidesToShow: this.props.slidesToShow,
+        slidesToShow: props.slidesToShow,
         slideWidth: this.state.slideWidth,
         left: targetLeft
       });
 
       this.setState({trackStyle: trackStyle});
 
-      // this.autoPlay(); // once we're set up, trigger the initial autoplay.
+      this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
   getLeft: function (slideIndex) {
@@ -146,8 +156,6 @@ var helpers = {
             }
         }
       }
-    } else {
-
     }
 
     if (this.props.centerMode === true && this.props.infinite === true) {
@@ -209,11 +217,6 @@ var helpers = {
 
     return style;
   },
-  getSlideStyle: function () {
-    return {
-      width: this.state.slideWidth
-    };
-  },
   adaptHeight: function () {
     var selector = '[data-index="' + this.state.currentSlide +'"]';
     if (this.refs.list) {
@@ -256,8 +259,29 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    targetLeft = this.getLeft(targetSlide, this.state);
-    currentLeft = this.getLeft(currentSlide, this.state);
+    targetLeft = getTrackLeft({
+     slideIndex: targetSlide,
+     infinite: this.props.infinite,
+     centerMode: this.props.centerMode,
+     slideCount: this.state.slideCount,
+     slidesToShow: this.props.slidesToShow,
+     slidesToScroll: this.props.slidesToScroll,
+     slideWidth: this.state.slideWidth,
+     trackRef: this.refs.track,
+     listWidth: this.state.listWidth
+    });
+
+    currentLeft = getTrackLeft({
+     slideIndex: currentSlide,
+     infinite: this.props.infinite,
+     centerMode: this.props.centerMode,
+     slideCount: this.state.slideCount,
+     slidesToShow: this.props.slidesToShow,
+     slidesToScroll: this.props.slidesToScroll,
+     slideWidth: this.state.slideWidth,
+     trackRef: this.refs.track,
+     listWidth: this.state.listWidth
+    });
 
     if (this.props.infinite === false) {
       targetLeft = currentLeft;
@@ -274,32 +298,34 @@ var helpers = {
         slideCount: this.state.slideCount,
         slidesToShow: this.props.slidesToShow,
         slideWidth: this.state.slideWidth,
-        targetLeft: targetLeft
+        left: currentLeft
       }),
       swipeLeft: null
     };
 
-    // var callback1 = () => {
-    //   this.setState(nextStateChanges);
-    // };
-
-    var callback2 = () => {
+    var callback = () => {
       this.setState(nextStateChanges);
-
       if (this.props.afterChange) {
         this.props.afterChange(currentSlide);
       }
+      ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
     };
 
     this.setState({
       animating: true,
       currentSlide: currentSlide,
       currentLeft: currentLeft,
-      trackStyle: this.getAnimateCSS(targetLeft)
+      trackStyle: getTrackAnimateCSS({
+        variableWidth: this.props.variableWidth,
+        slideCount: this.state.slideCount,
+        slidesToShow: this.props.slidesToShow,
+        slideWidth: this.state.slideWidth,
+        left: targetLeft,
+        speed: this.props.speed,
+        cssEase: this.props.cssEase
+      })
     }, function () {
-      //TO FIX: Below line cause callback1 to be called multiple time
-      //ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback1);
-      setTimeout(callback2, this.props.speed);
+      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
     });
 
     this.autoPlay();
@@ -315,10 +341,7 @@ var helpers = {
     if (swipeAngle < 0) {
         swipeAngle = 360 - Math.abs(swipeAngle);
     }
-    if ((swipeAngle <= 45) && (swipeAngle >= 0)) {
-        return (this.props.rtl === false ? 'left' : 'right');
-    }
-    if ((swipeAngle <= 360) && (swipeAngle >= 315)) {
+    if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
         return (this.props.rtl === false ? 'left' : 'right');
     }
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
@@ -328,11 +351,11 @@ var helpers = {
     return 'vertical';
   },
   autoPlay: function () {
-    var play = function () {
-      if (this.isMounted()) {
+    var play = () => {
+      if (this.state.mounted) {
         this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
       }
-    }.bind(this);
+    };
     if (this.props.autoplay) {
       window.clearTimeout(this.state.autoPlayTimer);
       this.setState({

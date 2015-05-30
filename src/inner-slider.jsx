@@ -19,7 +19,9 @@ var Slider = React.createClass({
     return defaultProps;
   },
   componentDidMount: function () {
-    // console.log(this.getDOMNode());
+    this.setState({
+      mounted: true
+    });
     this.initialize(this.props);
     if (this.props.adaptiveHeight) {
       this.adaptHeight();
@@ -28,9 +30,9 @@ var Slider = React.createClass({
   componentDidUpdate: function () {
     // this.adaptHeight();
   },
-  // componentWillReceiveProps: function(nextProps) {
-  //   // this.initialize(nextProps);
-  // },
+  componentWillReceiveProps: function(nextProps) {
+    this.initialize(nextProps);
+  },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
     return (

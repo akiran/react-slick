@@ -5,7 +5,7 @@ import cloneWithProps from 'react/lib/cloneWithProps';
 import assign from 'object-assign';
 import classnames from 'classnames';
 
-function getSlideClasses(spec) {
+var getSlideClasses = (spec) => {
   var slickActive, slickCenter, slickCloned;
   var centerOffset;
 
@@ -25,8 +25,9 @@ function getSlideClasses(spec) {
     'slick-center': slickCenter,
     'slick-cloned': slickCloned
   });
-}
-var renderSlides = function (spec) {
+};
+
+var renderSlides = (spec) => {
   var key;
   var slides = [];
   var preCloneSlides = [];
@@ -48,11 +49,8 @@ var renderSlides = function (spec) {
     }));
 
     if (spec.infinite) {
-      if (spec.centerMode) {
-          infiniteCount = spec.slidesToShow + 1;
-      } else {
-          infiniteCount = spec.slidesToShow;
-      }
+
+      infiniteCount = spec.centerMode ? spec.slidesToShow + 1 : spec.slidesToShow;
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
