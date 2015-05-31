@@ -11,21 +11,22 @@ var getDotCount = function(spec) {
 
 var Dots = React.createClass({
 
+  clickHandler: function (options, e) {
+    e.preventDefault();
+    this.props.clickHandler(options);
+  },
   slideHandler: function (targetSlide) {
     this.props.slideHandler(targetSlide);
   },
   render: function () {
     var dots;
-
     if (this.props.dots === true && this.props.slideCount > this.props.slidesToShow) {
       var dotCount = getDotCount({
         slideCount: this.props.slideCount,
         slidesToScroll: this.props.slidesToScroll
       });
 
-      dots = new Array(dotCount);
-
-      dots = dots.map((x, i) => {
+      dots = Array.apply(null, {length: dotCount}).map((x, i) => {
         var className = classnames({
           'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll)
         });
@@ -37,7 +38,7 @@ var Dots = React.createClass({
         };
         return (
           <li key={i} className={className}>
-            <button onClick={this.changeSlide.bind(this, dotOptions)}>{i}</button>
+            <button onClick={this.clickHandler.bind(this, dotOptions)}>{i}</button>
           </li>
         );
       });

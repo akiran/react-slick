@@ -33,18 +33,13 @@ var renderSlides = (spec) => {
   var preCloneSlides = [];
   var postCloneSlides = [];
   var count = React.Children.count(spec.children);
+
   React.Children.forEach(spec.children, (child, index) => {
     var infiniteCount;
     slides.push(cloneWithProps(child, {
       key: index,
       'data-index': index,
-      className: getSlideClasses({
-        index: index,
-        currentSlide: spec.currentSlide,
-        slideCount: spec.slideCount,
-        slidesToShow: spec.slidesToShow,
-        centerMode: spec.centerMode
-      }),
+      className: getSlideClasses(assign({index: index}, spec)),
       style: assign({}, {width: spec.slideWidth}, child.props.style)
     }));
 
@@ -57,13 +52,7 @@ var renderSlides = (spec) => {
         preCloneSlides.push(cloneWithProps(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses({
-            index: key,
-            currentSlide: spec.currentSlide,
-            slideCount: spec.slideCount,
-            slidesToShow: spec.slidesToShow,
-            centerMode: spec.centerMode
-          }),
+          className: getSlideClasses(assign({index: key}, spec)),
           style: assign({}, {width: spec.slideWidth}, child.props.style)
         }));
       }
@@ -73,13 +62,7 @@ var renderSlides = (spec) => {
         postCloneSlides.push(cloneWithProps(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses({
-            index: key,
-            currentSlide: spec.currentSlide,
-            slideCount: spec.slideCount,
-            slidesToShow: spec.slidesToShow,
-            centerMode: spec.centerMode
-          }),
+          className: getSlideClasses(assign({index: key}, spec)),
           style: assign({}, {width: spec.slideWidth}, child.props.style)
         }));
       }

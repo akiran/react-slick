@@ -1,9 +1,9 @@
 'use strict';
+import {getTrackCSS, getTrackLeft} from './helpers2';
 
 var EventHandlers = {
   // Event handler for previous and next
-  changeSlide: function (options, e) {
-    // console.log('changeSlide');
+  changeSlide: function (options) {
     var indexOffset, slideOffset, unevenOffset;
     unevenOffset = (this.state.slideCount % this.props.slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
@@ -25,7 +25,6 @@ var EventHandlers = {
         this.slideHandler(targetSlide);
       }
     }
-
   },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
@@ -67,7 +66,17 @@ var EventHandlers = {
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
 
-    curLeft = this.getLeft(this.state.currentSlide);
+    curLeft = getTrackLeft({
+      slideIndex: this.state.currentSlide,
+      infinite: this.props.infinite,
+      centerMode: this.props.centerMode,
+      slideCount: this.state.slideCount,
+      slidesToShow: this.props.slidesToShow,
+      slidesToScroll: this.props.slidesToScroll,
+      slideWidth: this.state.slideWidth,
+      trackRef: this.refs.track,
+      listWidth: this.state.listWidth
+    });
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
@@ -77,7 +86,13 @@ var EventHandlers = {
     this.setState({
       touchObject: touchObject,
       swipeLeft: swipeLeft,
-      trackStyle: this.getCSS(swipeLeft)
+      trackStyle: getTrackCSS({
+        variableWidth: this.props.variableWidth,
+        slideCount: this.state.slideCount,
+        slidesToShow: this.props.slidesToShow,
+        slideWidth: this.state.slideWidth,
+        left: swipeLeft
+      })
     });
     e.preventDefault();
   },
