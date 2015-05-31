@@ -72,7 +72,7 @@ var renderSlides = (spec) => {
   return preCloneSlides.concat(slides, postCloneSlides);
 };
 
-var Track = React.createClass({
+export var Track = React.createClass({
   render: function () {
     var slides = renderSlides(this.props);
     return (
@@ -82,5 +82,3 @@ var Track = React.createClass({
     );
   }
 });
-
-module.exports = Track;

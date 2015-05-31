@@ -1,5 +1,5 @@
 'use strict';
-import {getTrackCSS, getTrackLeft} from './helpers2';
+import {getTrackCSS, getTrackLeft} from './trackHelper';
 
 var EventHandlers = {
   // Event handler for previous and next

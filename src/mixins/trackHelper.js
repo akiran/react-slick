@@ -34,6 +34,10 @@ export var getTrackCSS = function(spec) {
 };
 
 export var getTrackAnimateCSS = function (spec) {
+  checkSpecKeys(spec, [
+    'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'left', 'speed', 'cssEase'
+  ]);
+
   var style = getTrackCSS(spec);
   style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase;
   style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase;

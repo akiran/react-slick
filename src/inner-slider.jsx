@@ -7,10 +7,11 @@ import initialState from './initial-state';
 import defaultProps from './default-props';
 import classnames from 'classnames';
 
-import Track from './track';
-import Dots from './dots';
+import {Track} from './track';
+import {Dots} from './dots';
+import {PrevArrow, NextArrow} from './arrows';
 
-var Slider = React.createClass({
+export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   getInitialState: function () {
     return initialState;
@@ -19,16 +20,15 @@ var Slider = React.createClass({
     return defaultProps;
   },
   componentDidMount: function () {
+    // Hack for autoplay -- Inspect Later
     this.setState({
       mounted: true
     });
     this.initialize(this.props);
-    if (this.props.adaptiveHeight) {
-      this.adaptHeight();
-    }
+    this.adaptHeight();
   },
   componentDidUpdate: function () {
-    // this.adaptHeight();
+    this.adaptHeight();
   },
   componentWillReceiveProps: function(nextProps) {
     this.initialize(nextProps);
@@ -46,15 +46,38 @@ var Slider = React.createClass({
       variableWidth: this.props.variableWidth
     };
 
-    var dotProps = {
-      dots: this.props.dots,
-      dotsClass: this.props.dotsClass,
+    var dots;
+
+    if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
+      var dotProps = {
+        dotsClass: this.props.dotsClass,
+        slideCount: this.state.slideCount,
+        slidesToShow: this.props.slidesToShow,
+        currentSlide: this.state.currentSlide,
+        slidesToScroll: this.props.slidesToScroll,
+        clickHandler: this.changeSlide
+      };
+
+      dots = (<Dots {...dotProps} />);
+    }
+
+    var prevArrow, nextArrow;
+
+    var arrowProps = {
+      infinite: this.props.infinite,
+      centerMode: this.props.centerMode,
+      currentSlide: this.state.currentSlide,
       slideCount: this.state.slideCount,
       slidesToShow: this.props.slidesToShow,
-      currentSlide: this.state.currentSlide,
-      slidesToScroll: this.props.slidesToScroll,
+      prevArrow: this.props.prevArrow,
+      nextArrow: this.props.nextArrow,
       clickHandler: this.changeSlide
     };
+
+    if (this.props.arrows) {
+      prevArrow = (<PrevArrow {...arrowProps} />);
+      nextArrow = (<NextArrow {...arrowProps} />);
+    }
 
     return (
       <div className={className}>
@@ -65,10 +88,10 @@ var Slider = React.createClass({
             {this.props.children}
           </Track>
         </div>
-        <Dots {...dotProps}/>
+        {prevArrow}
+        {nextArrow}
+        {dots}
       </div>
     );
   }
 });
-
-module.exports = Slider;

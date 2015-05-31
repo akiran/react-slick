@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
-import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './helpers2';
+import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 
 var helpers = {
   initialize: function (props) {
@@ -33,11 +33,11 @@ var helpers = {
       });
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS({
-        variableWidth: props.variableWidth,
+        left: targetLeft,
         slideCount: this.state.slideCount,
         slidesToShow: props.slidesToShow,
         slideWidth: this.state.slideWidth,
-        left: targetLeft
+        variableWidth: props.variableWidth
       });
 
       this.setState({trackStyle: trackStyle});
@@ -46,10 +46,12 @@ var helpers = {
     });
   },
   adaptHeight: function () {
-    var selector = '[data-index="' + this.state.currentSlide +'"]';
-    if (this.refs.list) {
-      var slickList = this.refs.list.getDOMNode();
-      slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+    if (this.props.adaptiveHeight) {
+      var selector = '[data-index="' + this.state.currentSlide +'"]';
+      if (this.refs.list) {
+        var slickList = this.refs.list.getDOMNode();
+        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+      }
     }
   },
   slideHandler: function (index, sync, dontAnimate) {

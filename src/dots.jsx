@@ -9,40 +9,41 @@ var getDotCount = function(spec) {
   return dots;
 };
 
-var Dots = React.createClass({
+
+export var Dots = React.createClass({
 
   clickHandler: function (options, e) {
+    // In Autoplay the focus stays on clicked button even after transition
+    // to next slide. That only goes away by click somewhere outside
     e.preventDefault();
     this.props.clickHandler(options);
   },
-  slideHandler: function (targetSlide) {
-    this.props.slideHandler(targetSlide);
-  },
   render: function () {
-    var dots;
-    if (this.props.dots === true && this.props.slideCount > this.props.slidesToShow) {
-      var dotCount = getDotCount({
-        slideCount: this.props.slideCount,
-        slidesToScroll: this.props.slidesToScroll
+
+    var dotCount = getDotCount({
+      slideCount: this.props.slideCount,
+      slidesToScroll: this.props.slidesToScroll
+    });
+
+    var dots = Array.apply(null, {length: dotCount}).map((x, i) => {
+
+      var className = classnames({
+        'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll)
       });
 
-      dots = Array.apply(null, {length: dotCount}).map((x, i) => {
-        var className = classnames({
-          'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll)
-        });
-        var dotOptions = {
-          message: 'dots',
-          index: i,
-          slidesToScroll: this.props.slidesToScroll,
-          currentSlide: this.props.currentSlide
-        };
-        return (
-          <li key={i} className={className}>
-            <button onClick={this.clickHandler.bind(this, dotOptions)}>{i}</button>
-          </li>
-        );
-      });
-    }
+      var dotOptions = {
+        message: 'dots',
+        index: i,
+        slidesToScroll: this.props.slidesToScroll,
+        currentSlide: this.props.currentSlide
+      };
+
+      return (
+        <li key={i} className={className}>
+          <button onClick={this.clickHandler.bind(this, dotOptions)}>{i}</button>
+        </li>
+      );
+    });
 
     return (
       <ul className={this.props.dotsClass} style={{display: 'block'}}>
@@ -52,6 +53,3 @@ var Dots = React.createClass({
 
   }
 });
-
-
-module.exports = Dots;
