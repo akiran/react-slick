@@ -13,11 +13,9 @@ export var PrevArrow = React.createClass({
     var prevClasses = {'slick-prev': true};
     var prevHandler = this.clickHandler.bind(this, {message: 'previous'});
 
-    if (this.props.infinite === false) {
-      if (this.props.currentSlide === 0) {
-        prevClasses['slick-disabled'] = true;
-        prevHandler = null;
-      }
+    if (!this.props.infinite && this.props.currentSlide === 0) {
+      prevClasses['slick-disabled'] = true;
+      prevHandler = null;
     }
 
     var prevArrowProps = {
@@ -36,7 +34,6 @@ export var PrevArrow = React.createClass({
       prevArrow = <button key='0' type='button' {...prevArrowProps}> Previous</button>;
     }
 
-
     return prevArrow;
   }
 });
@@ -52,12 +49,9 @@ export var NextArrow = React.createClass({
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
 
     if (this.props.infinite === false) {
-      if (this.props.centerMode)
-      {
-        if (this.props.currentSlide >= (this.props.slideCount - 1)) {
-          nextClasses['slick-disabled'] = true;
-          nextHandler = null;
-        }
+      if (this.props.centerMode && this.props.currentSlide >= (this.props.slideCount - 1)) {
+        nextClasses['slick-disabled'] = true;
+        nextHandler = null;
       } else {
         if (this.props.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
           nextClasses['slick-disabled'] = true;
@@ -65,7 +59,6 @@ export var NextArrow = React.createClass({
         }
       }
     }
-
     var nextArrowProps = {
       key: '1',
       ref: 'next',

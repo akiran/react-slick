@@ -45,7 +45,7 @@ var renderSlides = (spec) => {
 
     if (spec.infinite) {
 
-      infiniteCount = spec.centerMode ? spec.slidesToShow + 1 : spec.slidesToShow;
+      infiniteCount = spec.slidesToShow;
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);

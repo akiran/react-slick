@@ -64,11 +64,7 @@ var helpers = {
       return;
     }
 
-    // To prevent the slider from sticking in animating state, If we click on already active dot
-    if (this.props.fade === true && this.state.currentSlide === index) {
-      return;
-    }
-    if (this.state.slideCount <= this.props.slidesToShow) {
+    if (this.props.fade === true || this.state.currentSlide === index) {
       return;
     }
 
@@ -195,4 +191,4 @@ var helpers = {
   }
 };
 
-module.exports = helpers;
+export default helpers;

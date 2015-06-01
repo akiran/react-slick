@@ -53,7 +53,8 @@ export var getTrackLeft = function (spec) {
   var slideOffset = 0;
   var targetLeft;
   var targetSlide;
-  if (spec.infinite === true) {
+
+  if (spec.infinite) {
     if (spec.slideCount > spec.slidesToShow) {
      slideOffset = (spec.slideWidth * spec.slidesToShow) * -1;
     }
@@ -67,10 +68,13 @@ export var getTrackLeft = function (spec) {
       }
     }
   }
-  if (spec.centerMode === true && spec.infinite === true) {
-      slideOffset += spec.slideWidth * Math.floor(spec.slidesToShow / 2) - spec.slideWidth;
-  } else if (spec.centerMode === true) {
+
+  if (spec.centerMode) {
+    if(spec.infinite) {
+      slideOffset += spec.slideWidth * Math.floor(spec.slidesToShow / 2);
+    } else {
       slideOffset = spec.slideWidth * Math.floor(spec.slidesToShow / 2);
+    }
   }
 
   targetLeft = ((spec.slideIndex * spec.slideWidth) * -1) + slideOffset;

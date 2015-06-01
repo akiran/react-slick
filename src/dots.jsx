@@ -3,7 +3,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-var getDotCount = function(spec) {
+var getDotCount = function (spec) {
   var dots;
   dots = Math.ceil(spec.slideCount / spec.slidesToScroll);
   return dots;
