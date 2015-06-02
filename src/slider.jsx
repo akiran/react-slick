@@ -1,8 +1,7 @@
 'use strict';
 
 import React from 'react';
-
-import InnerSlider from './inner-slider';
+import {InnerSlider} from './inner-slider';
 import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
@@ -49,7 +48,9 @@ var Slider = React.createClass({
       settings = this.props;
     }
     return (
-      <InnerSlider {...settings}/>
+      <InnerSlider {...settings}>
+        {this.props.children}
+      </InnerSlider>
     );
   }
 });

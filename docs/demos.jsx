@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var Slider = require('../src/slider');
+import React from 'react';
+import Slider from '../src/slider';
 
 var SingleItem = React.createClass({
   render: function () {
@@ -140,7 +140,7 @@ var CenterMode = React.createClass({
       slidesToShow: 7,
       speed: 500,
       beforeChange: function (index) {
-        alert('Slider will change from:' + index);
+        console.log('Slider will change from:' + index);
       },
       afterChange: function (currentSlide) {
         console.log('Slider Changed to :' + (currentSlide + 1));

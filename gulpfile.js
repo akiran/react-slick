@@ -21,13 +21,6 @@ gulp.task('copy', function () {
       .pipe(gulp.dest('./build'));
 });
 
-// gulp.task('sass', function () {
-//   return  gulp.src(['./docs/**/*.scss'])
-//               .pipe(sass({ loadPath : ['bower_components', 'node_modules'],}))
-//                .on('error', function (err) { console.log(err.message); })
-//               .pipe(gulp.dest('./build'));
-// });
-
 gulp.task('sass', function () {
   return gulp.src(['./docs/**/*.{scss,sass}'])
               .pipe(sass({ includePaths: ['bower_components', 'node_modules'], errLogToConsole: true}))
@@ -40,7 +33,7 @@ gulp.task('watch', ['copy', 'sass'], function () {
 });
 
 gulp.task('server', ['copy', 'sass'], function (callback) {
-  var myConfig = require('./webpack.config.js');
+  var myConfig = require('./webpack.config');
   myConfig.plugins = myConfig.plugins.concat(
     new webpack.DefinePlugin({
       'process.env': {
@@ -49,14 +42,16 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     })
   );
 
-  var webpackCompiler = webpack(myConfig, function(err, stats) {
-  });
-
-  new WebpackDevServer(webpackCompiler, {
+  new WebpackDevServer(webpack(myConfig), {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, process.env.HOST_IP || 'localhost');
+  }).listen(8000, process.env.HOST_IP || 'localhost', function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  callback();
 });
 
 

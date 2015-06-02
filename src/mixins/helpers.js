@@ -1,9 +1,9 @@
 'use strict';
 
-var assign = require('object-assign');
-var React = require('react');
-var classnames = require('classnames');
-var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
+import React from 'react';
+import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
+import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import assign from 'object-assign';
 
 var helpers = {
   initialize: function (props) {
@@ -19,124 +19,18 @@ var helpers = {
       trackWidth: trackWidth,
       currentSlide: props.initialSlide
 
-
     }, function () {
+
+      var targetLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.refs.track
+      }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = this.getCSS(this.getLeft(this.state.currentSlide));
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+
       this.setState({trackStyle: trackStyle});
 
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
-    });
-  },
-  getDotCount: function () {
-    var pagerQty;
-    pagerQty = Math.ceil(this.state.slideCount /this.props.slidesToScroll);
-    return pagerQty - 1;
-  },
-  getLeft: function (slideIndex) {
-    var slideOffset = 0;
-    var targetLeft;
-    var targetSlide;
-    if (this.props.infinite === true) {
-      if (this.state.slideCount > this.props.slidesToShow) {
-       slideOffset = (this.state.slideWidth * this.props.slidesToShow) * -1;
-      }
-      if (this.state.slideCount % this.props.slidesToScroll !== 0) {
-        if (slideIndex + this.props.slidesToScroll > this.state.slideCount && this.state.slideCount > this.props.slidesToShow) {
-            if(slideIndex > this.state.slideCount) {
-              slideOffset = ((this.props.slidesToShow - (slideIndex - this.state.slideCount)) * this.state.slideWidth) * -1;
-            } else {
-              slideOffset = ((this.state.slideCount % this.props.slidesToScroll) * this.state.slideWidth) * -1;
-            }
-        }
-      }
-    } else {
-
-    }
-    if (this.props.centerMode === true && this.props.infinite === true) {
-        slideOffset += this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) - this.state.slideWidth;
-    } else if (this.props.centerMode === true) {
-        slideOffset = this.state.slideWidth * Math.floor(this.props.slidesToShow / 2);
-    }
-
-    targetLeft = ((slideIndex * this.state.slideWidth) * -1) + slideOffset;
-
-    if (this.props.variableWidth === true) {
-        var targetSlideIndex;
-        if(this.state.slideCount <= this.props.slidesToShow || this.props.infinite === false) {
-            targetSlide = this.refs.track.getDOMNode().childNodes[slideIndex];
-        } else {
-            targetSlideIndex = (slideIndex + this.props.slidesToShow);
-            targetSlide = this.refs.track.getDOMNode().childNodes[targetSlideIndex];
-        }
-        targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-        if (this.props.centerMode === true) {
-            if(this.props.infinite === false) {
-                targetSlide = this.refs.track.getDOMNode().childNodes[slideIndex];
-            } else {
-                targetSlide = this.refs.track.getDOMNode().childNodes[(slideIndex + this.props.slidesToShow + 1)];
-            }
-
-            targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-            targetLeft += (this.state.listWidth - targetSlide.offsetWidth) / 2;
-        }
-    }
-
-    return targetLeft;
-
-  },
-  getAnimateCSS: function (targetLeft) {
-    var style = this.getCSS(targetLeft);
-    style.WebkitTransition = '-webkit-transform ' + this.props.speed + 'ms ' + this.props.cssEase;
-    style.transition = 'transform ' + this.props.speed + 'ms ' + this.props.cssEase;
-    return style;
-  },
-  getCSS: function (targetLeft) {
-    // implemented this instead of setCSS
-    var trackWidth;
-    if (this.props.variableWidth) {
-      trackWidth = (this.state.slideCount + 2*this.props.slidesToShow)*this.state.slideWidth;
-    } else if (this.props.centerMode) {
-      trackWidth = (this.state.slideCount + 2*(this.props.slidesToShow + 1)) *this.state.slideWidth;
-    } else {
-      trackWidth = (this.state.slideCount + 2*this.props.slidesToShow )*this.state.slideWidth;
-    }
-    var style = {
-      opacity: 1,
-      width: trackWidth,
-      WebkitTransform: 'translate3d(' + targetLeft + 'px, 0px, 0px)',
-      transform: 'translate3d(' + targetLeft + 'px, 0px, 0px)',
-      transition: '',
-      WebkitTransition: ''
-    };
-
-    return style;
-  },
-  getSlideStyle: function () {
-    return {
-      width: this.state.slideWidth
-    };
-  },
-  getSlideClasses: function (index) {
-    var slickActive, slickCenter, slickCloned;
-    var currentSlide = this.state.currentSlide;
-    var centerOffset;
-
-    slickCloned = (index < 0) || (index >= this.state.slideCount);
-    if (this.props.centerMode) {
-      centerOffset = Math.floor(this.props.slidesToShow / 2);
-      slickCenter = (currentSlide === index);
-      if ((index > currentSlide - centerOffset - 1) && (index <= currentSlide + centerOffset)) {
-        slickActive = true;
-      }
-    } else {
-      slickActive = (currentSlide === index);
-    }
-    return classnames({
-      'slick-slide': true,
-      'slick-active': slickActive,
-      'slick-center': slickCenter,
-      'slick-cloned': slickCloned
     });
   },
   adaptHeight: function () {
@@ -158,11 +52,7 @@ var helpers = {
       return;
     }
 
-    // To prevent the slider from sticking in animating state, If we click on already active dot
-    if (this.props.fade === true && this.state.currentSlide === index) {
-      return;
-    }
-    if (this.state.slideCount <= this.props.slidesToShow) {
+    if (this.props.fade === true || this.state.currentSlide === index) {
       return;
     }
 
@@ -183,8 +73,15 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    targetLeft = this.getLeft(targetSlide, this.state);
-    currentLeft = this.getLeft(currentSlide, this.state);
+    targetLeft = getTrackLeft(assign({
+      slideIndex: targetSlide,
+      trackRef: this.refs.track
+    }, this.props, this.state));
+
+    currentLeft = getTrackLeft(assign({
+      slideIndex: currentSlide,
+      trackRef: this.refs.track
+    }, this.props, this.state));
 
     if (this.props.infinite === false) {
       targetLeft = currentLeft;
@@ -196,31 +93,25 @@ var helpers = {
 
     var nextStateChanges = {
       animating: false,
-      trackStyle: this.getCSS(currentLeft),
+      trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
       swipeLeft: null
     };
 
-    // var callback1 = () => {
-    //   this.setState(nextStateChanges);
-    // };
-
-    var callback2 = () => {
+    var callback = () => {
       this.setState(nextStateChanges);
-
       if (this.props.afterChange) {
         this.props.afterChange(currentSlide);
       }
+      ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
     };
 
     this.setState({
       animating: true,
       currentSlide: currentSlide,
       currentLeft: currentLeft,
-      trackStyle: this.getAnimateCSS(targetLeft)
+      trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
     }, function () {
-      //TO FIX: Below line cause callback1 to be called multiple time
-      //ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback1);
-      setTimeout(callback2, this.props.speed);
+      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
     });
 
     this.autoPlay();
@@ -236,10 +127,7 @@ var helpers = {
     if (swipeAngle < 0) {
         swipeAngle = 360 - Math.abs(swipeAngle);
     }
-    if ((swipeAngle <= 45) && (swipeAngle >= 0)) {
-        return (this.props.rtl === false ? 'left' : 'right');
-    }
-    if ((swipeAngle <= 360) && (swipeAngle >= 315)) {
+    if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
         return (this.props.rtl === false ? 'left' : 'right');
     }
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
@@ -249,11 +137,11 @@ var helpers = {
     return 'vertical';
   },
   autoPlay: function () {
-    var play = function () {
-      if (this.isMounted()) {
+    var play = () => {
+      if (this.state.mounted) {
         this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
       }
-    }.bind(this);
+    };
     if (this.props.autoplay) {
       window.clearTimeout(this.state.autoPlayTimer);
       this.setState({
@@ -263,4 +151,4 @@ var helpers = {
   }
 };
 
-module.exports = helpers;
+export default helpers;
