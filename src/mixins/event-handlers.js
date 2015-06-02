@@ -10,14 +10,10 @@ var EventHandlers = {
 
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-      if (this.state.slideCount > this.props.slidesToShow || (this.props.centerMode && !this.props.infinite)) {
-        this.slideHandler(this.state.currentSlide - slideOffset, false);
-      }
+      this.slideHandler(this.state.currentSlide - slideOffset, false);
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : indexOffset;
-      if (this.state.slideCount > this.props.slidesToShow || (this.props.centerMode && !this.props.infinite)) {
-        this.slideHandler(this.state.currentSlide + slideOffset, false);
-      }
+      this.slideHandler(this.state.currentSlide + slideOffset, false);
     } else if (options.message === 'dots') {
       // Click on dots
       var targetSlide = options.index * options.slidesToScroll;
