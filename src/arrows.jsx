@@ -48,7 +48,7 @@ export var NextArrow = React.createClass({
     var nextClasses = {'slick-next': true};
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
 
-    if (this.props.infinite === false) {
+    if (!this.props.infinite) {
       if (this.props.centerMode && this.props.currentSlide >= (this.props.slideCount - 1)) {
         nextClasses['slick-disabled'] = true;
         nextHandler = null;

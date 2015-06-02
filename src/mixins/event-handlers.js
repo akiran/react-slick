@@ -75,7 +75,8 @@ var EventHandlers = {
       slidesToScroll: this.props.slidesToScroll,
       slideWidth: this.state.slideWidth,
       trackRef: this.refs.track,
-      listWidth: this.state.listWidth
+      listWidth: this.state.listWidth,
+      variableWidth: this.props.variableWidth
     });
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;

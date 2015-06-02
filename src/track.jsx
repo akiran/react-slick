@@ -43,8 +43,9 @@ var renderSlides = (spec) => {
       style: assign({}, {width: spec.slideWidth}, child.props.style)
     }));
 
+    // variableWidth doesn't clone children properly. centerMode clones too many
+    // children than necessary.
     if (spec.infinite) {
-
       infiniteCount = spec.slidesToShow;
 
       if (index >= (count - infiniteCount)) {

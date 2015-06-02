@@ -29,7 +29,8 @@ var helpers = {
        slidesToScroll: this.props.slidesToScroll,
        slideWidth: this.state.slideWidth,
        trackRef: this.refs.track,
-       listWidth: this.state.listWidth
+       listWidth: this.state.listWidth,
+       variableWidth: this.props.variableWidth
       });
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS({
@@ -94,7 +95,8 @@ var helpers = {
      slidesToScroll: this.props.slidesToScroll,
      slideWidth: this.state.slideWidth,
      trackRef: this.refs.track,
-     listWidth: this.state.listWidth
+     listWidth: this.state.listWidth,
+     variableWidth: this.props.variableWidth
     });
 
     currentLeft = getTrackLeft({
@@ -106,7 +108,8 @@ var helpers = {
      slidesToScroll: this.props.slidesToScroll,
      slideWidth: this.state.slideWidth,
      trackRef: this.refs.track,
-     listWidth: this.state.listWidth
+     listWidth: this.state.listWidth,
+     variableWidth: this.props.variableWidth
     });
 
     if (this.props.infinite === false) {

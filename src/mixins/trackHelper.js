@@ -48,7 +48,7 @@ export var getTrackLeft = function (spec) {
 
   checkSpecKeys(spec, [
    'slideIndex', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
-   'slidesToScroll', 'slideWidth', 'trackRef', 'listWidth']);
+   'slidesToScroll', 'slideWidth', 'trackRef', 'listWidth', 'variableWidth']);
 
   var slideOffset = 0;
   var targetLeft;
