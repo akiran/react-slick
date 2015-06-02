@@ -1,5 +1,6 @@
 'use strict';
 import {getTrackCSS, getTrackLeft} from './trackHelper';
+import assign from 'object-assign';
 
 var EventHandlers = {
   // Event handler for previous and next
@@ -62,18 +63,10 @@ var EventHandlers = {
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
 
-    curLeft = getTrackLeft({
+    curLeft = getTrackLeft(assign({
       slideIndex: this.state.currentSlide,
-      infinite: this.props.infinite,
-      centerMode: this.props.centerMode,
-      slideCount: this.state.slideCount,
-      slidesToShow: this.props.slidesToShow,
-      slidesToScroll: this.props.slidesToScroll,
-      slideWidth: this.state.slideWidth,
-      trackRef: this.refs.track,
-      listWidth: this.state.listWidth,
-      variableWidth: this.props.variableWidth
-    });
+      trackRef: this.refs.track
+    }, this.props, this.state));
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
@@ -83,13 +76,7 @@ var EventHandlers = {
     this.setState({
       touchObject: touchObject,
       swipeLeft: swipeLeft,
-      trackStyle: getTrackCSS({
-        variableWidth: this.props.variableWidth,
-        slideCount: this.state.slideCount,
-        slidesToShow: this.props.slidesToShow,
-        slideWidth: this.state.slideWidth,
-        left: swipeLeft
-      })
+      trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
     });
     e.preventDefault();
   },

@@ -8,7 +8,7 @@ var checkSpecKeys = function (spec, keysArray) {
 
 export var getTrackCSS = function(spec) {
   checkSpecKeys(spec, [
-    'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'left'
+    'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth'
   ]);
 
   var trackWidth;
@@ -35,7 +35,7 @@ export var getTrackCSS = function(spec) {
 
 export var getTrackAnimateCSS = function (spec) {
   checkSpecKeys(spec, [
-    'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'left', 'speed', 'cssEase'
+    'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'speed', 'cssEase'
   ]);
 
   var style = getTrackCSS(spec);
@@ -47,8 +47,8 @@ export var getTrackAnimateCSS = function (spec) {
 export var getTrackLeft = function (spec) {
 
   checkSpecKeys(spec, [
-   'slideIndex', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
-   'slidesToScroll', 'slideWidth', 'trackRef', 'listWidth', 'variableWidth']);
+   'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
+   'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth']);
 
   var slideOffset = 0;
   var targetLeft;

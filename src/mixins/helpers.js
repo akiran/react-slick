@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import assign from 'object-assign';
 
 var helpers = {
   initialize: function (props) {
@@ -20,26 +21,12 @@ var helpers = {
 
     }, function () {
 
-      var targetLeft = getTrackLeft({
-       slideIndex: this.state.currentSlide,
-       infinite: props.infinite,
-       centerMode: props.centerMode,
-       slideCount: this.state.slideCount,
-       slidesToShow: props.slidesToShow,
-       slidesToScroll: this.props.slidesToScroll,
-       slideWidth: this.state.slideWidth,
-       trackRef: this.refs.track,
-       listWidth: this.state.listWidth,
-       variableWidth: this.props.variableWidth
-      });
+      var targetLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.refs.track
+      }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS({
-        left: targetLeft,
-        slideCount: this.state.slideCount,
-        slidesToShow: props.slidesToShow,
-        slideWidth: this.state.slideWidth,
-        variableWidth: props.variableWidth
-      });
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
       this.setState({trackStyle: trackStyle});
 
@@ -86,31 +73,15 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    targetLeft = getTrackLeft({
-     slideIndex: targetSlide,
-     infinite: this.props.infinite,
-     centerMode: this.props.centerMode,
-     slideCount: this.state.slideCount,
-     slidesToShow: this.props.slidesToShow,
-     slidesToScroll: this.props.slidesToScroll,
-     slideWidth: this.state.slideWidth,
-     trackRef: this.refs.track,
-     listWidth: this.state.listWidth,
-     variableWidth: this.props.variableWidth
-    });
+    targetLeft = getTrackLeft(assign({
+      slideIndex: targetSlide,
+      trackRef: this.refs.track
+    }, this.props, this.state));
 
-    currentLeft = getTrackLeft({
-     slideIndex: currentSlide,
-     infinite: this.props.infinite,
-     centerMode: this.props.centerMode,
-     slideCount: this.state.slideCount,
-     slidesToShow: this.props.slidesToShow,
-     slidesToScroll: this.props.slidesToScroll,
-     slideWidth: this.state.slideWidth,
-     trackRef: this.refs.track,
-     listWidth: this.state.listWidth,
-     variableWidth: this.props.variableWidth
-    });
+    currentLeft = getTrackLeft(assign({
+      slideIndex: currentSlide,
+      trackRef: this.refs.track
+    }, this.props, this.state));
 
     if (this.props.infinite === false) {
       targetLeft = currentLeft;
@@ -122,13 +93,7 @@ var helpers = {
 
     var nextStateChanges = {
       animating: false,
-      trackStyle: getTrackCSS({
-        variableWidth: this.props.variableWidth,
-        slideCount: this.state.slideCount,
-        slidesToShow: this.props.slidesToShow,
-        slideWidth: this.state.slideWidth,
-        left: currentLeft
-      }),
+      trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
       swipeLeft: null
     };
 
@@ -144,15 +109,7 @@ var helpers = {
       animating: true,
       currentSlide: currentSlide,
       currentLeft: currentLeft,
-      trackStyle: getTrackAnimateCSS({
-        variableWidth: this.props.variableWidth,
-        slideCount: this.state.slideCount,
-        slidesToShow: this.props.slidesToShow,
-        slideWidth: this.state.slideWidth,
-        left: targetLeft,
-        speed: this.props.speed,
-        cssEase: this.props.cssEase
-      })
+      trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
     }, function () {
       ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
     });
