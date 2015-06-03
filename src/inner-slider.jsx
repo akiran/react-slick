@@ -40,6 +40,7 @@ export var InnerSlider = React.createClass({
       infinite: this.props.infinite,
       centerMode: this.props.centerMode,
       currentSlide: this.state.currentSlide,
+      lazyLoad: this.props.lazyLoad,
       slideWidth: this.state.slideWidth,
       slidesToShow: this.props.slidesToShow,
       trackStyle: this.state.trackStyle,
