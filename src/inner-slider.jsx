@@ -19,11 +19,25 @@ export var InnerSlider = React.createClass({
   getDefaultProps: function () {
     return defaultProps;
   },
-  componentDidMount: function () {
-    // Hack for autoplay -- Inspect Later
+  componentWillMount: function () {
     this.setState({
       mounted: true
     });
+    var lazyLoadedList = [];
+    for (var i = 0; i < this.props.children.length; i++) {
+      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
+        lazyLoadedList.push(i);
+      }
+    }
+
+    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
+      this.setState({
+        lazyLoadedList: lazyLoadedList
+      });
+    }
+  },
+  componentDidMount: function () {
+    // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
   },
@@ -41,6 +55,7 @@ export var InnerSlider = React.createClass({
       centerMode: this.props.centerMode,
       currentSlide: this.state.currentSlide,
       lazyLoad: this.props.lazyLoad,
+      lazyLoadedList: this.state.lazyLoadedList,
       slideWidth: this.state.slideWidth,
       slidesToShow: this.props.slidesToShow,
       trackStyle: this.state.trackStyle,

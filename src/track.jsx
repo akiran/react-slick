@@ -35,37 +35,72 @@ var renderSlides = (spec) => {
   var count = React.Children.count(spec.children);
 
   React.Children.forEach(spec.children, (child, index) => {
-    var infiniteCount;
-    slides.push(cloneWithProps(child, {
-      key: index,
-      'data-index': index,
-      className: getSlideClasses(assign({index: index}, spec)),
-      style: assign({}, {width: spec.slideWidth}, child.props.style)
-    }));
+    if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
+      var infiniteCount;
+      slides.push(cloneWithProps(child, {
+        key: index,
+        'data-index': index,
+        className: getSlideClasses(assign({index: index}, spec)),
+        style: assign({}, {width: spec.slideWidth}, child.props.style)
+      }));
 
-    // variableWidth doesn't clone children properly. centerMode clones too many
-    // children than necessary.
-    if (spec.infinite) {
-      infiniteCount = spec.slidesToShow;
+      // variableWidth doesn't clone children properly. centerMode clones too many
+      // children than necessary.
+      if (spec.infinite) {
+        infiniteCount = spec.slidesToShow;
 
-      if (index >= (count - infiniteCount)) {
-        key = -(count - index);
-        preCloneSlides.push(cloneWithProps(child, {
-          key: key,
-          'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
-          style: assign({}, {width: spec.slideWidth}, child.props.style)
-        }));
+        if (index >= (count - infiniteCount)) {
+          key = -(count - index);
+          preCloneSlides.push(cloneWithProps(child, {
+            key: key,
+            'data-index': key,
+            className: getSlideClasses(assign({index: key}, spec)),
+            style: assign({}, {width: spec.slideWidth}, child.props.style)
+          }));
+        }
+
+        if (index < infiniteCount) {
+          key = count + index;
+          postCloneSlides.push(cloneWithProps(child, {
+            key: key,
+            'data-index': key,
+            className: getSlideClasses(assign({index: key}, spec)),
+            style: assign({}, {width: spec.slideWidth}, child.props.style)
+          }));
+        }
       }
+    } else {
+      slides.push(cloneWithProps((<div></div>), {
+        key: index,
+        'data-index': index,
+        className: getSlideClasses(assign({index: index}, spec)),
+        style: assign({}, {width: spec.slideWidth}, child.props.style)
+      }));
 
-      if (index < infiniteCount) {
-        key = count + index;
-        postCloneSlides.push(cloneWithProps(child, {
-          key: key,
-          'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
-          style: assign({}, {width: spec.slideWidth}, child.props.style)
-        }));
+      // variableWidth doesn't clone children properly. centerMode clones too many
+      // children than necessary.
+      if (spec.infinite) {
+        infiniteCount = spec.slidesToShow;
+
+        if (index >= (count - infiniteCount)) {
+          key = -(count - index);
+          preCloneSlides.push(cloneWithProps((<div></div>), {
+            key: key,
+            'data-index': key,
+            className: getSlideClasses(assign({index: key}, spec)),
+            style: assign({}, {width: spec.slideWidth}, child.props.style)
+          }));
+        }
+
+        if (index < infiniteCount) {
+          key = count + index;
+          postCloneSlides.push(cloneWithProps((<div></div>), {
+            key: key,
+            'data-index': key,
+            className: getSlideClasses(assign({index: key}, spec)),
+            style: assign({}, {width: spec.slideWidth}, child.props.style)
+          }));
+        }
       }
     }
   });

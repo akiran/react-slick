@@ -5,23 +5,25 @@ import assign from 'object-assign';
 var EventHandlers = {
   // Event handler for previous and next
   changeSlide: function (options) {
-    var indexOffset, slideOffset, unevenOffset;
+    var indexOffset, slideOffset, unevenOffset, targetSlide;
     unevenOffset = (this.state.slideCount % this.props.slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
 
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-      this.slideHandler(this.state.currentSlide - slideOffset, false);
+      targetSlide = this.state.currentSlide - slideOffset;
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : indexOffset;
-      this.slideHandler(this.state.currentSlide + slideOffset, false);
+      targetSlide = this.state.currentSlide + slideOffset;
     } else if (options.message === 'dots') {
       // Click on dots
-      var targetSlide = options.index * options.slidesToScroll;
-      if (targetSlide !== options.currentSlide) {
-        this.slideHandler(targetSlide);
+      targetSlide = options.index * options.slidesToScroll;
+      if (targetSlide === options.currentSlide) {
+        return;
       }
     }
+
+    this.slideHandler(targetSlide);
   },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {

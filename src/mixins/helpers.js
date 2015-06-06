@@ -91,6 +91,22 @@ var helpers = {
       this.props.beforeChange(currentSlide);
     }
 
+    if (this.props.lazyLoad) {
+      var loaded = true;
+      var slidesToLoad = [];
+      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
+        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
+        if (!loaded) {
+          slidesToLoad.push(i);
+        }
+      }
+      if (!loaded) {
+        this.setState({
+          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+        });
+      }
+    }
+
     var nextStateChanges = {
       animating: false,
       trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
