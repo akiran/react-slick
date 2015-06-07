@@ -105,10 +105,10 @@ var EventHandlers = {
       } else if (swipeDirection === 'right') {
         this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
       } else {
-        this.slideHandler(this.state.currentSlide, null, true);
+        this.slideHandler(this.state.currentSlide);
       }
     } else {
-      this.slideHandler(this.state.currentSlide, null, true);
+      this.slideHandler(this.state.currentSlide);
     }
   }
 };

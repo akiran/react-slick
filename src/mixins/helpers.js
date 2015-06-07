@@ -42,7 +42,7 @@ var helpers = {
       }
     }
   },
-  slideHandler: function (index, sync, dontAnimate) {
+  slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
     var targetSlide, currentSlide;
@@ -67,6 +67,12 @@ var helpers = {
         targetSlide = index - this.state.slideCount;
       } else {
         targetSlide = index;
+      }
+
+      if (this.props.lazyLoad && this.state.lazyLoadedList.indexOf(targetSlide) < 0) {
+        this.setState({
+          lazyLoadedList: this.state.lazyLoadedList.concat(targetSlide)
+        });
       }
 
       callback = () => {
