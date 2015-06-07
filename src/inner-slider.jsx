@@ -51,6 +51,9 @@ export var InnerSlider = React.createClass({
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
 
     var trackProps = {
+      fade: this.props.fade,
+      cssEase: this.props.cssEase,
+      speed: this.props.speed,
       infinite: this.props.infinite,
       centerMode: this.props.centerMode,
       currentSlide: this.state.currentSlide,

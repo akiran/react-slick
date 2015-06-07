@@ -304,10 +304,35 @@ var LazyLoad = React.createClass({
       <div>
         <h2> Lazy Load</h2>
         <Slider {...settings}>
-          <div><img src="img/abstract01.jpg" data-src="img/abstract04.jpg" /></div>
-          <div><img src="img/abstract02.jpg" data-src="img/abstract03.jpg" /></div>
-          <div><img src="img/abstract03.jpg" data-src="img/abstract02.jpg" /></div>
-          <div><img src="img/abstract04.jpg" data-src="img/abstract01.jpg" /></div>
+          <div><img src="img/abstract01.jpg" /></div>
+          <div><img src="img/abstract02.jpg" /></div>
+          <div><img src="img/abstract03.jpg" /></div>
+          <div><img src="img/abstract04.jpg" /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
+var Fade = React.createClass({
+
+  render: function () {
+    var settings = {
+      dots: true,
+      fade: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div>
+        <h2>Fade</h2>
+        <Slider {...settings}>
+          <div><img src="img/abstract01.jpg" /></div>
+          <div><img src="img/abstract02.jpg" /></div>
+          <div><img src="img/abstract03.jpg" /></div>
+          <div><img src="img/abstract04.jpg" /></div>
         </Slider>
       </div>
     );
@@ -329,6 +354,7 @@ var App = React.createClass({
         <VariableWidth />
         <AdaptiveHeight />
         <LazyLoad />
+        <Fade />
       </div>
     );
   }

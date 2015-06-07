@@ -47,12 +47,46 @@ var helpers = {
     // console.log('slideHandler', index);
     var targetSlide, currentSlide;
     var targetLeft, currentLeft;
+    var callback;
 
-    if (this.state.animating === true) {
+    if (this.state.animating === true && this.state.currentSlide === index) {
       return;
     }
 
-    if (this.props.fade === true || this.state.currentSlide === index) {
+    if (this.props.fade) {
+      currentSlide = this.state.currentSlide;
+
+      if (this.props.beforeChange) {
+        this.props.beforeChange(currentSlide);
+      }
+
+      //  Shifting targetSlide back into the range
+      if (index < 0) {
+        targetSlide = index + this.state.slideCount;
+      } else if (index >= this.state.slideCount) {
+        targetSlide = index - this.state.slideCount;
+      } else {
+        targetSlide = index;
+      }
+
+      callback = () => {
+        this.setState({
+          animating: false
+        });
+        if (this.props.afterChange) {
+          this.props.afterChange(currentSlide);
+        }
+        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+      };
+
+      this.setState({
+        animating: true,
+        currentSlide: targetSlide
+      }, function () {
+        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+      });
+
+      this.autoPlay();
       return;
     }
 
@@ -113,7 +147,7 @@ var helpers = {
       swipeLeft: null
     };
 
-    var callback = () => {
+    callback = () => {
       this.setState(nextStateChanges);
       if (this.props.afterChange) {
         this.props.afterChange(currentSlide);

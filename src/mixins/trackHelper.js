@@ -54,6 +54,10 @@ export var getTrackLeft = function (spec) {
   var targetLeft;
   var targetSlide;
 
+  if (spec.fade) {
+    return 0;
+  }
+
   if (spec.infinite) {
     if (spec.slideCount > spec.slidesToShow) {
      slideOffset = (spec.slideWidth * spec.slidesToShow) * -1;
