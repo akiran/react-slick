@@ -1,31 +1,29 @@
 'use strict';
+import {getTrackCSS, getTrackLeft} from './trackHelper';
+import assign from 'object-assign';
 
 var EventHandlers = {
   // Event handler for previous and next
-  changeSlide: function (options, e) {
-    // console.log('changeSlide');
-    var indexOffset, slideOffset, unevenOffset;
+  changeSlide: function (options) {
+    var indexOffset, slideOffset, unevenOffset, targetSlide;
     unevenOffset = (this.state.slideCount % this.props.slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
 
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-      if (this.state.slideCount > this.props.slidesToShow) {
-        this.slideHandler(this.state.currentSlide - slideOffset, false);
-      }
+      targetSlide = this.state.currentSlide - slideOffset;
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : indexOffset;
-      if (this.state.slideCount > this.props.slidesToShow) {
-        this.slideHandler(this.state.currentSlide + slideOffset, false);
-      }
-    } else if (options.message === 'index') {
+      targetSlide = this.state.currentSlide + slideOffset;
+    } else if (options.message === 'dots') {
       // Click on dots
-      var targetSlide = options.index*this.props.slidesToScroll;
-      if (targetSlide !== this.state.currentSlide) {
-        this.slideHandler(targetSlide);
+      targetSlide = options.index * options.slidesToScroll;
+      if (targetSlide === options.currentSlide) {
+        return;
       }
     }
 
+    this.slideHandler(targetSlide);
   },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
@@ -67,7 +65,10 @@ var EventHandlers = {
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
 
-    curLeft = this.getLeft(this.state.currentSlide);
+    curLeft = getTrackLeft(assign({
+      slideIndex: this.state.currentSlide,
+      trackRef: this.refs.track
+    }, this.props, this.state));
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
@@ -77,7 +78,7 @@ var EventHandlers = {
     this.setState({
       touchObject: touchObject,
       swipeLeft: swipeLeft,
-      trackStyle: this.getCSS(swipeLeft)
+      trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
     });
     e.preventDefault();
   },
@@ -104,12 +105,12 @@ var EventHandlers = {
       } else if (swipeDirection === 'right') {
         this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
       } else {
-        this.slideHandler(this.state.currentSlide, null, true);
+        this.slideHandler(this.state.currentSlide);
       }
     } else {
-      this.slideHandler(this.state.currentSlide, null, true);
+      this.slideHandler(this.state.currentSlide);
     }
   }
 };
 
-module.exports = EventHandlers;
+export default EventHandlers;

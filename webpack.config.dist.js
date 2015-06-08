@@ -7,26 +7,26 @@ module.exports = {
   output: {
     library: 'Slider',
     libraryTarget: 'umd',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist')
   },
 
   module: {
     loaders: [
-      {test: /\.jsx$/, loaders: ['babel']},
-    ],
+      {test: /\.jsx$/, loaders: ['babel']}
+    ]
   },
 
-  resolve : {
+  resolve: {
     extensions: ['', '.js', '.jsx']
   },
 
   externals: [
     {
-      "react": {
-        root: "React",
-        commonjs2: "react",
-        commonjs: "react",
-        amd: "react"
+      'react': {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
       }
     }
   ],

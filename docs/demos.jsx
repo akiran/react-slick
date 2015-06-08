@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var Slider = require('../lib/slider');
+import React from 'react';
+import Slider from '../src/slider';
 
 var SingleItem = React.createClass({
   render: function () {
@@ -139,8 +139,11 @@ var CenterMode = React.createClass({
       centerPadding: '60px',
       slidesToShow: 7,
       speed: 500,
+      beforeChange: function (index) {
+        console.log('Slider will change from:' + index);
+      },
       afterChange: function (currentSlide) {
-        alert('Slider Changed to :' + (currentSlide + 1));
+        console.log('Slider Changed to :' + (currentSlide + 1));
       }
     };
     return (
@@ -174,7 +177,7 @@ var CenterModeWithInitial = React.createClass({
       initialSlide: 3,
       speed: 500,
       afterChange: function (index) {
-        console.log(`%c Slider Changed to: + ${index}, background: #222; color: #bada55`);
+        console.log(`Slider Changed to: ${index + 1}, background: #222; color: #bada55`);
       }
     };
     return (
@@ -286,6 +289,56 @@ var AdaptiveHeight = React.createClass({
   }
 });
 
+var LazyLoad = React.createClass({
+
+  render: function () {
+    var settings = {
+      dots: true,
+      lazyLoad: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div>
+        <h2> Lazy Load</h2>
+        <Slider {...settings}>
+          <div><img src="img/abstract01.jpg" /></div>
+          <div><img src="img/abstract02.jpg" /></div>
+          <div><img src="img/abstract03.jpg" /></div>
+          <div><img src="img/abstract04.jpg" /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
+var Fade = React.createClass({
+
+  render: function () {
+    var settings = {
+      dots: true,
+      fade: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div>
+        <h2>Fade</h2>
+        <Slider {...settings}>
+          <div><img src="img/abstract01.jpg" /></div>
+          <div><img src="img/abstract02.jpg" /></div>
+          <div><img src="img/abstract03.jpg" /></div>
+          <div><img src="img/abstract04.jpg" /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 var App = React.createClass({
   render: function () {
     //need to add variable width and center mode demo
@@ -300,6 +353,8 @@ var App = React.createClass({
         <AutoPlay />
         <VariableWidth />
         <AdaptiveHeight />
+        <LazyLoad />
+        <Fade />
       </div>
     );
   }

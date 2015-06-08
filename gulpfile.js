@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var del = require('del');
 var sass = require('gulp-sass');
@@ -6,6 +8,8 @@ var WebpackDevServer = require('webpack-dev-server');
 var runSequence = require('run-sequence');
 var assign = require('object-assign');
 
+gulp.task('default', ['watch', 'server']);
+
 gulp.task('clean', function () {
   return del(['./build/*']);
 });
@@ -13,49 +17,45 @@ gulp.task('clean', function () {
 gulp.task('copy', function () {
   gulp.src('./docs/index.html')
     .pipe(gulp.dest('./build'));
+  gulp.src('./docs/img/*')
+      .pipe(gulp.dest('./build/img'));
   gulp.src('./node_modules/slick-carousel/slick/fonts/*')
       .pipe(gulp.dest('./build/fonts'));
   return gulp.src('./node_modules/slick-carousel/slick/ajax-loader.gif')
       .pipe(gulp.dest('./build'));
 });
 
-// gulp.task('sass', function () {
-//   return  gulp.src(['./docs/**/*.scss'])
-//               .pipe(sass({ loadPath : ['bower_components', 'node_modules'],}))
-//                .on('error', function (err) { console.log(err.message); })
-//               .pipe(gulp.dest('./build'));
-// });
-
 gulp.task('sass', function () {
-  return  gulp.src(['./docs/**/*.{scss,sass}'])
-              .pipe(sass({ includePaths : ['bower_components', 'node_modules'], errLogToConsole: true}))
+  return gulp.src(['./docs/**/*.{scss,sass}'])
+              .pipe(sass({ includePaths: ['bower_components', 'node_modules'], errLogToConsole: true}))
               .pipe(gulp.dest('./build'));
 });
 
 gulp.task('watch', ['copy', 'sass'], function () {
   gulp.watch(['./docs/**/*.{scss,sass}'], ['sass']);
   gulp.watch(['./docs/index.html'], ['copy']);
-}); 
+});
 
 gulp.task('server', ['copy', 'sass'], function (callback) {
-  var myConfig = require('./webpack.config.js');
+  var myConfig = require('./webpack.config');
   myConfig.plugins = myConfig.plugins.concat(
     new webpack.DefinePlugin({
-      "process.env": {
-        "NODE_ENV": JSON.stringify("dev_docs")
+      'process.env': {
+        'NODE_ENV': JSON.stringify('dev_docs')
       }
     })
   );
-  
-  var webpackCompiler = webpack(myConfig, function(err, stats) {
-  });
 
-  new WebpackDevServer(webpackCompiler, {
+  new WebpackDevServer(webpack(myConfig), {
     contentBase: './build',
     hot: true,
     debug: true
   }).listen(8000, process.env.HOST_IP || 'localhost', function (err, result) {
+    if (err) {
+      console.log(err);
+    }
   });
+  callback();
 });
 
 
@@ -69,7 +69,7 @@ gulp.task('dist-unmin', function (cb) {
   var unminConfig = assign({}, distConfig);
   unminConfig.output.filename = 'react-slick.js';
   return webpack(unminConfig, function (err, stat) {
-    console.log(err);
+    console.error(err);
     cb();
   });
 });
@@ -86,11 +86,11 @@ gulp.task('dist-min', function (cb) {
     })
   );
   return webpack(minConfig, function (err, stat) {
-    console.log(err);
+    console.error(err);
     cb();
   });
 });
 
 gulp.task('dist', function (cb) {
-  runSequence('dist-clean', 'dist-unmin', 'dist-min', cb)
+  runSequence('dist-clean', 'dist-unmin', 'dist-min', cb);
 });

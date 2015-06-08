@@ -21,6 +21,8 @@ var initialState = {
       curY: 0
     },
 
+    lazyLoadedList: [],
+
     // added for react
     initialized: false,
     trackStyle: {},

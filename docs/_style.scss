@@ -32,15 +32,15 @@ h3 {
 .slick-slide .image {
   padding: 10px;
 }
-.slick-slide img{
+.slick-slide img {
   border: 5px solid #FFF;
   display: block;
-  width: 100%;
+  margin: auto;
 }
 .slick-slide img.slick-loading {
   border: 0
 }
-.slick-slider{
+.slick-slider {
   margin: 30px auto 50px;
 }
 @media (max-width: 768px) {
