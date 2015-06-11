@@ -98,13 +98,17 @@ var helpers = {
 
     targetSlide = index;
     if (targetSlide < 0) {
-      if (this.state.slideCount % this.props.slidesToScroll !== 0) {
+      if(this.props.infinite === false) {
+        currentSlide = 0;
+      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = this.state.slideCount - (this.state.slideCount % this.props.slidesToScroll);
       } else {
         currentSlide = this.state.slideCount + targetSlide;
       }
     } else if (targetSlide >= this.state.slideCount) {
-      if (this.state.slideCount % this.props.slidesToScroll !== 0) {
+      if(this.props.infinite === false) {
+        currentSlide = this.state.slideCount - this.props.slidesToShow;
+      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = 0;
       } else {
         currentSlide = targetSlide - this.state.slideCount;
