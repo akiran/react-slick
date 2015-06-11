@@ -43,15 +43,22 @@ var Slider = React.createClass({
     var newProps;
     if (this.state.breakpoint) {
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
-      settings = assign({}, this.props, newProps[0].settings);
+      settings = newProps[0].settings === 'unslick' ? 'unslick' : _assign({}, this.props, newProps[0].settings);
     } else {
       settings = this.props;
     }
-    return (
-      <InnerSlider {...settings}>
-        {this.props.children}
-      </InnerSlider>
-    );
+    if (settings === 'unslick') {
+      // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
+      return (
+        <div>{this.props.children}</div>
+      );
+    } else {
+      return (
+        <InnerSlider {...settings}>
+          {this.props.children}
+        </InnerSlider>
+      );
+    }
   }
 });
 
