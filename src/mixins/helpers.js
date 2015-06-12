@@ -49,7 +49,7 @@ var helpers = {
     var targetLeft, currentLeft;
     var callback;
 
-    if (this.state.animating === true && this.state.currentSlide === index) {
+    if (this.state.animating === true || this.state.currentSlide === index) {
       return;
     }
 
