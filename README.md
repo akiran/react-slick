@@ -84,6 +84,7 @@ var SimpleSlider = React.createClass({
 | touchMove | bool |||
 | touchThreshold | int |||
 | variableWidth | bool |||
+| useCSS | bool | Enable/Disable CSS Transitions | Yes |
 | vertical | bool |||
 | afterChange | function | callback function called when the current index changes | Yes (since pull req #17) |
 

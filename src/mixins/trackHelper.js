@@ -39,6 +39,7 @@ export var getTrackAnimateCSS = function (spec) {
   ]);
 
   var style = getTrackCSS(spec);
+  // useCSS is true by default so it can be undefined
   style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase;
   style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase;
   return style;
