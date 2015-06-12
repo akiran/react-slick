@@ -16,7 +16,7 @@ var defaultProps = {
     focusOnSelect: false,
     infinite: true,
     initialSlide: 0,
-    // lazyLoad: 'ondemand',
+    lazyLoad: false,
     responsive: null,
     rtl: false,
     slide: 'div',

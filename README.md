@@ -2,7 +2,7 @@
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
 # Road to 1.0
-react-slick is under active development now. 
+react-slick is under active development now.
 Soon this project will have all the features of slick carousel.
 We encourage your feedback and support.
 
@@ -23,7 +23,7 @@ or add cdn link in your html
 
 
 ### Starter Kit
-Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly 
+Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly
 get started with react-slick.
 
 ### Example
@@ -56,22 +56,23 @@ var SimpleSlider = React.createClass({
 
 |    Property    | Type |          Description          | Working |
 | -------------  | ---- |          -----------          | ------- |
-| className      | String |Additional class name for the inner slider div | Yes | 
-| adaptiveHeight | | | | 
+| className      | String |Additional class name for the inner slider div | Yes |
+| adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
-| cssEase        | | | | 
+| cssEase        | | | |
 | dots           |bool | Should we show the dots at the bottom of the gallery | Yes |
-| dotsClass      | string | Class applied to the dots if they are enabled | Yes | 
+| dotsClass      | string | Class applied to the dots if they are enabled | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
 | easing         | string | | |
-| fade           | bool | | | 
-| focusOnSelect  | bool | | | 
+| fade           | bool | Slides use fade for transition  | Yes |
+| focusOnSelect  | bool | | |
 | infinite       | should the gallery wrap around it's contents | Yes |
-| initialSlide   | int | which item should be the first to be displayed | Yes (since pull req #17) | 
+| initialSlide   | int | which item should be the first to be displayed | Yes (since pull req #17) |
+| lazyLoad       | bool | Loads images or renders components on demands | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } } ]`| Yes |
 | rtl            | bool | | |
 | slide         | string |||
@@ -94,5 +95,3 @@ npm install
 npm start
 open http://localhost:8000
 ```
-
-
