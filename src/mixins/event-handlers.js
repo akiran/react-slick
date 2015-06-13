@@ -1,5 +1,5 @@
 'use strict';
-import {getTrackCSS, getTrackLeft} from './trackHelper';
+import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 
 var EventHandlers = {
@@ -120,7 +120,15 @@ var EventHandlers = {
         this.slideHandler(this.state.currentSlide);
       }
     } else {
-      this.slideHandler(this.state.currentSlide);
+      // Adjust the track back to it's original position.
+      var currentLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.refs.track
+      }, this.props, this.state));
+
+      this.setState({
+        trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
+      });
     }
   }
 };
