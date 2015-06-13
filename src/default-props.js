@@ -28,11 +28,14 @@ var defaultProps = {
     swipeToSlide: false,
     touchMove: true,
     touchThreshold: 5,
-    // useCSS: true,
+    useCSS: true,
     variableWidth: false,
     vertical: false,
     // waitForAnimate: true,
     afterChange: null,
+    beforeChange: null,
+    edgeEvent: null,
+    // nextArrow, prevArrow are react componets
     nextArrow: null,
     prevArrow: null
 };
