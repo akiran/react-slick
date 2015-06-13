@@ -12,12 +12,14 @@ var helpers = {
     var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
     var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
 
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
       listWidth: listWidth,
       trackWidth: trackWidth,
-      currentSlide: props.initialSlide
+      currentSlide: currentSlide
 
     }, function () {
 

@@ -7,17 +7,24 @@ import classnames from 'classnames';
 
 var getSlideClasses = (spec) => {
   var slickActive, slickCenter, slickCloned;
-  var centerOffset;
+  var centerOffset, index;
 
-  slickCloned = (spec.index < 0) || (spec.index >= spec.slideCount);
+  if (spec.rtl) {
+    index = spec.slideCount - 1 - spec.index;
+    console.log();
+  } else {
+    index = spec.index;
+  }
+
+  slickCloned = (index < 0) || (index >= spec.slideCount);
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
-    slickCenter = (spec.currentSlide === spec.index);
-    if ((spec.index > spec.currentSlide - centerOffset - 1) && (spec.index <= spec.currentSlide + centerOffset)) {
+    slickCenter = (spec.currentSlide === index);
+    if ((index > spec.currentSlide - centerOffset - 1) && (index <= spec.currentSlide + centerOffset)) {
       slickActive = true;
     }
   } else {
-    slickActive = (spec.currentSlide === spec.index);
+    slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
   return classnames({
     'slick-slide': true,
@@ -94,7 +101,13 @@ var renderSlides = (spec) => {
     }
   });
 
-  return preCloneSlides.concat(slides, postCloneSlides);
+  if (spec.rtl) {
+    return preCloneSlides.concat(slides, postCloneSlides).reverse();
+  } else {
+    return preCloneSlides.concat(slides, postCloneSlides);
+  }
+
+
 };
 
 export var Track = React.createClass({
