@@ -35,9 +35,11 @@ var getSlideClasses = (spec) => {
 };
 
 var getSlideStyle = function (spec) {
-  var style = {
-    width: spec.slideWidth
-  };
+  var style = {};
+
+  if (spec.variableWidth === undefined || spec.variableWidth === false) {
+    style.width = spec.slideWidth;
+  }
 
   if (spec.fade) {
     style.position = 'relative';
@@ -56,22 +58,22 @@ var renderSlides = (spec) => {
   var preCloneSlides = [];
   var postCloneSlides = [];
   var count = React.Children.count(spec.children);
-  var child, childStyle;
+  var child;
 
   React.Children.forEach(spec.children, (elem, index) => {
     if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
       child = elem;
     } else {
-      childStyle = (<div></div>);
+      child = (<div></div>);
     }
 
     var infiniteCount;
-    var childCSS = getSlideStyle(assign({}, spec, {index: index}));
+    var childStyle = getSlideStyle(assign({}, spec, {index: index}));
     slides.push(cloneWithProps(child, {
       key: index,
       'data-index': index,
       className: getSlideClasses(assign({index: index}, spec)),
-      style: assign({}, childCSS, childStyle)
+      style: childStyle
     }));
 
     // variableWidth doesn't clone children properly. centerMode clones too many
@@ -85,7 +87,7 @@ var renderSlides = (spec) => {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),
-          style: assign({}, {width: spec.slideWidth}, childStyle)
+          style: childStyle
         }));
       }
 
@@ -95,7 +97,7 @@ var renderSlides = (spec) => {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),
-          style: assign({}, {width: spec.slideWidth}, childStyle)
+          style: childStyle
         }));
       }
     }
