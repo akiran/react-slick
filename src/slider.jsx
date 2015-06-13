@@ -5,6 +5,7 @@ import {InnerSlider} from './inner-slider';
 import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
+import defaultProps from './default-props';
 
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
@@ -45,7 +46,7 @@ var Slider = React.createClass({
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
       settings = assign({}, this.props, newProps[0].settings);
     } else {
-      settings = this.props;
+      settings = assign({}, defaultProps, this.props);
     }
     return (
       <InnerSlider {...settings}>

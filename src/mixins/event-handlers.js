@@ -74,7 +74,19 @@ var EventHandlers = {
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
-    swipeLeft = curLeft + touchObject.swipeLength * positionOffset;
+
+    var currentSlide = this.state.currentSlide;
+    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
+    var swipeDirection = this.swipeDirection(this.state.touchObject);
+    var touchSwipeLength = touchObject.swipeLength;
+
+    if (this.props.infinite === false) {
+      if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
+        touchSwipeLength = touchObject.swipeLength * this.props.edgeFriction;
+      }
+    }
+
+    swipeLeft = curLeft + touchSwipeLength * positionOffset;
     this.setState({
       touchObject: touchObject,
       swipeLeft: swipeLeft,
