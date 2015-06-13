@@ -67,7 +67,6 @@ var renderSlides = (spec) => {
       child = (<div></div>);
     }
 
-    var infiniteCount;
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
     slides.push(cloneWithProps(child, {
       key: index,
@@ -76,10 +75,9 @@ var renderSlides = (spec) => {
       style: childStyle
     }));
 
-    // variableWidth doesn't clone children properly. centerMode clones too many
-    // children than necessary.
+    // variableWidth doesn't wrap properly.
     if (spec.infinite && spec.fade === false) {
-      infiniteCount = spec.slidesToShow;
+      var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);

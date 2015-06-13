@@ -95,9 +95,9 @@ export var getTrackLeft = function (spec) {
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (spec.centerMode === true) {
           if(spec.infinite === false) {
-              targetSlide = spec.trackRef.getDOMNode().childNodes[spec.slideIndex];
+              targetSlide = spec.trackRef.getDOMNode().children[spec.slideIndex];
           } else {
-              targetSlide = spec.trackRef.getDOMNode().childNodes[(spec.slideIndex + spec.slidesToShow + 1)];
+              targetSlide = spec.trackRef.getDOMNode().children[(spec.slideIndex + spec.slidesToShow + 1)];
           }
 
           targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
