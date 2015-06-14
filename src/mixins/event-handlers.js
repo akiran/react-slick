@@ -84,15 +84,15 @@ var EventHandlers = {
       if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
         touchSwipeLength = touchObject.swipeLength * this.props.edgeFriction;
 
-        if (this.state.edgeDragged === false && this.props.edge) {
-          this.props.edge(swipeDirection);
+        if (this.state.edgeDragged === false && this.props.edgeEvent) {
+          this.props.edgeEvent(swipeDirection);
           this.setState({ edgeDragged: true });
         }
       }
     }
 
     if (this.state.swiped === false) {
-      this.props.swipe(swipeDirection);
+      this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });
     }
 
