@@ -25,6 +25,7 @@ var initialState = {
 
     // added for react
     initialized: false,
+    edgeDragged: false,
     trackStyle: {},
     trackWidth: 0
 
