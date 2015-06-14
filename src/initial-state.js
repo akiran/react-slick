@@ -26,6 +26,7 @@ var initialState = {
     // added for react
     initialized: false,
     edgeDragged: false,
+    swiped: false, // used by swipeEvent. differentites between touch and swipe.
     trackStyle: {},
     trackWidth: 0
 

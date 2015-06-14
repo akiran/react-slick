@@ -91,6 +91,11 @@ var EventHandlers = {
       }
     }
 
+    if (this.state.swiped === false) {
+      this.props.swipeEvent(e, swipeDirection);
+      this.setState({ swiped: true });
+    }
+
     swipeLeft = curLeft + touchSwipeLength * positionOffset;
     this.setState({
       touchObject: touchObject,
@@ -108,9 +113,11 @@ var EventHandlers = {
     var minSwipe = this.state.listWidth/this.props.touchThreshold;
     var swipeDirection = this.swipeDirection(touchObject);
 
+    // reset the state of touch related state variables.
     this.setState({
       dragging: false,
       edgeDragged: false,
+      swiped: false,
       swipeLeft: null,
       touchObject: {}
     });
