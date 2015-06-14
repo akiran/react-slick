@@ -20,6 +20,9 @@ export var InnerSlider = React.createClass({
     return defaultProps;
   },
   componentWillMount: function () {
+    if (this.props.initEvent) {
+      this.props.initEvent();
+    }
     this.setState({
       mounted: true
     });

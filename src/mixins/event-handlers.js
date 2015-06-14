@@ -85,14 +85,14 @@ var EventHandlers = {
         touchSwipeLength = touchObject.swipeLength * this.props.edgeFriction;
 
         if (this.state.edgeDragged === false && this.props.edgeEvent) {
-          this.props.edgeEvent(e, swipeDirection);
+          this.props.edgeEvent(swipeDirection);
           this.setState({ edgeDragged: true });
         }
       }
     }
 
     if (this.state.swiped === false) {
-      this.props.swipeEvent(e, swipeDirection);
+      this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });
     }
 
