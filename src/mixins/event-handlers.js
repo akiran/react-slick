@@ -91,7 +91,7 @@ var EventHandlers = {
       }
     }
 
-    if (this.state.swiped === false) {
+    if (this.state.swiped === false && this.props.swipeEvent) {
       this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });
     }
