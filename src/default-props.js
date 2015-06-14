@@ -34,9 +34,9 @@ var defaultProps = {
     // waitForAnimate: true,
     afterChange: null,
     beforeChange: null,
-    edgeEvent: null,
-    initEvent: null,
-    swipeEvent: null,
+    edge: null,
+    init: null,
+    swipe: null,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
     prevArrow: null
