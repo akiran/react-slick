@@ -12,12 +12,14 @@ var helpers = {
     var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
     var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
 
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
       listWidth: listWidth,
       trackWidth: trackWidth,
-      currentSlide: props.initialSlide
+      currentSlide: currentSlide
 
     }, function () {
 
@@ -49,7 +51,7 @@ var helpers = {
     var targetLeft, currentLeft;
     var callback;
 
-    if (this.state.animating === true && this.state.currentSlide === index) {
+    if (this.state.animating === true || this.state.currentSlide === index) {
       return;
     }
 
@@ -151,28 +153,48 @@ var helpers = {
       }
     }
 
-    var nextStateChanges = {
-      animating: false,
-      trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
-      swipeLeft: null
-    };
+    // Slide Transition happens here.
+    // animated transition happens to target Slide and
+    // non - animated transition happens to current Slide
+    // If CSS transitions are false, directly go the current slide.
 
-    callback = () => {
-      this.setState(nextStateChanges);
-      if (this.props.afterChange) {
-        this.props.afterChange(currentSlide);
-      }
-      ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
-    };
+    if (this.props.useCSS === false) {
 
-    this.setState({
-      animating: true,
-      currentSlide: currentSlide,
-      currentLeft: currentLeft,
-      trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
-    }, function () {
-      ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
-    });
+      this.setState({
+        currentSlide: currentSlide,
+        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
+      }, function () {
+        if (this.props.afterChange) {
+          this.props.afterChange(currentSlide);
+        }
+      });
+
+    } else {
+
+      var nextStateChanges = {
+        animating: false,
+        currentSlide: currentSlide,
+        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
+        swipeLeft: null
+      };
+
+      callback = () => {
+        this.setState(nextStateChanges);
+        if (this.props.afterChange) {
+          this.props.afterChange(currentSlide);
+        }
+        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
+      };
+
+      this.setState({
+        animating: true,
+        currentSlide: targetSlide,
+        trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
+      }, function () {
+        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
+      });
+
+    }
 
     this.autoPlay();
   },

@@ -1,5 +1,5 @@
 'use strict';
-import {getTrackCSS, getTrackLeft} from './trackHelper';
+import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 
 var EventHandlers = {
@@ -74,7 +74,29 @@ var EventHandlers = {
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
-    swipeLeft = curLeft + touchObject.swipeLength * positionOffset;
+
+    var currentSlide = this.state.currentSlide;
+    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
+    var swipeDirection = this.swipeDirection(this.state.touchObject);
+    var touchSwipeLength = touchObject.swipeLength;
+
+    if (this.props.infinite === false) {
+      if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
+        touchSwipeLength = touchObject.swipeLength * this.props.edgeFriction;
+
+        if (this.state.edgeDragged === false && this.props.edgeEvent) {
+          this.props.edgeEvent(swipeDirection);
+          this.setState({ edgeDragged: true });
+        }
+      }
+    }
+
+    if (this.state.swiped === false && this.props.swipeEvent) {
+      this.props.swipeEvent(swipeDirection);
+      this.setState({ swiped: true });
+    }
+
+    swipeLeft = curLeft + touchSwipeLength * positionOffset;
     this.setState({
       touchObject: touchObject,
       swipeLeft: swipeLeft,
@@ -90,8 +112,12 @@ var EventHandlers = {
     var touchObject = this.state.touchObject;
     var minSwipe = this.state.listWidth/this.props.touchThreshold;
     var swipeDirection = this.swipeDirection(touchObject);
+
+    // reset the state of touch related state variables.
     this.setState({
       dragging: false,
+      edgeDragged: false,
+      swiped: false,
       swipeLeft: null,
       touchObject: {}
     });
@@ -108,7 +134,15 @@ var EventHandlers = {
         this.slideHandler(this.state.currentSlide);
       }
     } else {
-      this.slideHandler(this.state.currentSlide);
+      // Adjust the track back to it's original position.
+      var currentLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.refs.track
+      }, this.props, this.state));
+
+      this.setState({
+        trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
+      });
     }
   }
 };

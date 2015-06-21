@@ -20,6 +20,9 @@ export var InnerSlider = React.createClass({
     return defaultProps;
   },
   componentWillMount: function () {
+    if (this.props.init) {
+      this.props.init();
+    }
     this.setState({
       mounted: true
     });
@@ -59,8 +62,10 @@ export var InnerSlider = React.createClass({
       currentSlide: this.state.currentSlide,
       lazyLoad: this.props.lazyLoad,
       lazyLoadedList: this.state.lazyLoadedList,
+      rtl: this.props.rtl,
       slideWidth: this.state.slideWidth,
       slidesToShow: this.props.slidesToShow,
+      slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
       variableWidth: this.props.variableWidth
     };

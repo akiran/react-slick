@@ -7,17 +7,24 @@ import classnames from 'classnames';
 
 var getSlideClasses = (spec) => {
   var slickActive, slickCenter, slickCloned;
-  var centerOffset;
+  var centerOffset, index;
 
-  slickCloned = (spec.index < 0) || (spec.index >= spec.slideCount);
+  if (spec.rtl) {
+    index = spec.slideCount - 1 - spec.index;
+    console.log();
+  } else {
+    index = spec.index;
+  }
+
+  slickCloned = (index < 0) || (index >= spec.slideCount);
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
-    slickCenter = (spec.currentSlide === spec.index);
-    if ((spec.index > spec.currentSlide - centerOffset - 1) && (spec.index <= spec.currentSlide + centerOffset)) {
+    slickCenter = (spec.currentSlide === index);
+    if ((index > spec.currentSlide - centerOffset - 1) && (index <= spec.currentSlide + centerOffset)) {
       slickActive = true;
     }
   } else {
-    slickActive = (spec.currentSlide === spec.index);
+    slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
   return classnames({
     'slick-slide': true,
@@ -28,9 +35,11 @@ var getSlideClasses = (spec) => {
 };
 
 var getSlideStyle = function (spec) {
-  var style = {
-    width: spec.slideWidth
-  };
+  var style = {};
+
+  if (spec.variableWidth === undefined || spec.variableWidth === false) {
+    style.width = spec.slideWidth;
+  }
 
   if (spec.fade) {
     style.position = 'relative';
@@ -49,28 +58,26 @@ var renderSlides = (spec) => {
   var preCloneSlides = [];
   var postCloneSlides = [];
   var count = React.Children.count(spec.children);
-  var child, childStyle;
+  var child;
 
   React.Children.forEach(spec.children, (elem, index) => {
     if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
       child = elem;
     } else {
-      childStyle = (<div></div>);
+      child = (<div></div>);
     }
 
-    var infiniteCount;
-    var childCSS = getSlideStyle(assign({}, spec, {index: index}));
+    var childStyle = getSlideStyle(assign({}, spec, {index: index}));
     slides.push(cloneWithProps(child, {
       key: index,
       'data-index': index,
       className: getSlideClasses(assign({index: index}, spec)),
-      style: assign({}, childCSS, childStyle)
+      style: childStyle
     }));
 
-    // variableWidth doesn't clone children properly. centerMode clones too many
-    // children than necessary.
+    // variableWidth doesn't wrap properly.
     if (spec.infinite && spec.fade === false) {
-      infiniteCount = spec.slidesToShow;
+      var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
@@ -78,7 +85,7 @@ var renderSlides = (spec) => {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),
-          style: assign({}, {width: spec.slideWidth}, childStyle)
+          style: childStyle
         }));
       }
 
@@ -88,13 +95,19 @@ var renderSlides = (spec) => {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),
-          style: assign({}, {width: spec.slideWidth}, childStyle)
+          style: childStyle
         }));
       }
     }
   });
 
-  return preCloneSlides.concat(slides, postCloneSlides);
+  if (spec.rtl) {
+    return preCloneSlides.concat(slides, postCloneSlides).reverse();
+  } else {
+    return preCloneSlides.concat(slides, postCloneSlides);
+  }
+
+
 };
 
 export var Track = React.createClass({
