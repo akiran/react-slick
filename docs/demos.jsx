@@ -4,6 +4,12 @@ import React from 'react';
 import Slider from '../src/slider';
 
 var SingleItem = React.createClass({
+  getInitialState: function () {
+    return {count: 10};
+  },
+  click: function () {
+    this.setState({count: this.state.count + 1});
+  },
   render: function () {
     var settings = {
       dots: true,
@@ -16,7 +22,7 @@ var SingleItem = React.createClass({
       <div>
         <h2> Single Item</h2>
         <Slider {...settings}>
-          <div><h3>1</h3></div>
+          <div onClick={this.click}><h3>{this.state.count}</h3></div>
           <div><h3>2</h3></div>
           <div><h3>3</h3></div>
           <div><h3>4</h3></div>

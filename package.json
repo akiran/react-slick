@@ -5,7 +5,8 @@
   "main": "./lib",
   "scripts": {
     "start": "./node_modules/.bin/gulp server",
-    "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib && ./node_modules/.bin/gulp dist"
+    "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib && ./node_modules/.bin/gulp dist",
+    "test": "karma start"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
