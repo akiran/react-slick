@@ -43,12 +43,19 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
+    window.addEventListener('resize', this.onWindowResized);
+  },
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this.onWindowResized);
   },
   componentDidUpdate: function () {
     this.adaptHeight();
   },
   componentWillReceiveProps: function(nextProps) {
     this.initialize(nextProps);
+  },
+  onWindowResized: function () {
+    this.initialize(this.props);
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
