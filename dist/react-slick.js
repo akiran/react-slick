@@ -313,12 +313,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
+	    window.addEventListener('resize', this.onWindowResized);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener('resize', this.onWindowResized);
 	  },
 	  componentDidUpdate: function componentDidUpdate() {
 	    this.adaptHeight();
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    this.initialize(nextProps);
+	  },
+	  onWindowResized: function onWindowResized() {
+	    this.initialize(this.props);
 	  },
 	  render: function render() {
 	    var className = (0, _classnames2['default'])('slick-initialized', 'slick-slider', this.props.className);

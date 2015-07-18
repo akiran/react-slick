@@ -1,4 +1,5 @@
 // Karma configuration
+'use strict';
 
 module.exports = function(config) {
   config.set({
@@ -14,10 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "testlib/sinon.js",
-      "bower_components/react/react-with-addons.js",
-      "bower_components/jquery/dist/jquery.js",
-      "bower_components/should/should.js",
+      'node_modules/es5-shim/es5-shim.js',
+      'testlib/sinon.js',
+      'node_modules/react/dist/react-with-addons.js',
+      //'bower_components/jquery/dist/jquery.js',
+      'node_modules/should/should.js',
       'test/**/*.js',
       'test/**/*.jsx',
     ],
@@ -39,22 +41,22 @@ module.exports = function(config) {
       // cache: true,
       module: {
         loaders: [
-            { loader: "babel" },
+            { loader: 'babel' },
         ]
       },
       resolve : {
           extensions: ['', '.js', '.jsx']
       },
       externals: {
-        react: "React",
-        "react/addons": "React",
-        "sinon": "sinon",
-        jquery: "$",
+        react: 'React',
+        'react/addons': 'React',
+        'sinon': 'sinon',
+        jquery: '$',
         should: 'should'
       },
       // postLoaders: [{
-      //   test: "", // every file
-      //   loader: "coverjs-loader"
+      //   test: ', // every file
+      //   loader: 'coverjs-loader'
       // }]
     },
     webpackServer: {
@@ -94,14 +96,14 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
     // plugins: [
-    //   require("karma-webpack")
+    //   require('karma-webpack')
     // ]
   });
 };
