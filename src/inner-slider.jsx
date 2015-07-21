@@ -51,9 +51,6 @@ export var InnerSlider = React.createClass({
   componentDidUpdate: function () {
     this.adaptHeight();
   },
-  componentWillReceiveProps: function(nextProps) {
-    this.initialize(nextProps);
-  },
   onWindowResized: function () {
     this.initialize(this.props);
   },
