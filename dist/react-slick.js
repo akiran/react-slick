@@ -321,9 +321,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  componentDidUpdate: function componentDidUpdate() {
 	    this.adaptHeight();
 	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    this.initialize(nextProps);
-	  },
 	  onWindowResized: function onWindowResized() {
 	    this.initialize(this.props);
 	  },
