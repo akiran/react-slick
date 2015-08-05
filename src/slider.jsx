@@ -11,7 +11,8 @@ var Slider = React.createClass({
   mixins: [ResponsiveMixin],
   getInitialState: function () {
     return {
-      breakpoint: null
+      breakpoint: null,
+      isReady: !this.props.responsive,
     };
   },
   componentDidMount: function () {
@@ -27,7 +28,7 @@ var Slider = React.createClass({
           bQuery = json2mq({minWidth: breakpoints[index-1], maxWidth: breakpoint});
         }
         this.media(bQuery, () => {
-          this.setState({breakpoint: breakpoint});
+          this.setState({breakpoint: breakpoint, isReady: true});
         });
       });
 
@@ -35,11 +36,14 @@ var Slider = React.createClass({
       var query = json2mq({minWidth: breakpoints.slice(-1)[0]});
 
       this.media(query, () => {
-        this.setState({breakpoint: null});
+        this.setState({breakpoint: null, isReady: true});
       });
     }
   },
   render: function () {
+    if (!this.state.isReady) {
+      return null;
+    }
     var settings;
     var newProps;
     if (this.state.breakpoint) {
