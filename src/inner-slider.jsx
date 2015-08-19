@@ -6,6 +6,7 @@ import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import classnames from 'classnames';
+import addEventListener from './addEventListener';
 
 import {Track} from './track';
 import {Dots} from './dots';
@@ -43,10 +44,12 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-    window.addEventListener('resize', this.onWindowResized);
+    this._resizeEvent = addEventListener(window, 'resize', this.onWindowResized);
   },
   componentWillUnmount: function () {
-    window.removeEventListener('resize', this.onWindowResized);
+    if (this._resizeEvent) {
+      this._resizeEvent.remove();
+    }
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
     }

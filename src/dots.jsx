@@ -25,8 +25,9 @@ export var Dots = React.createClass({
       slidesToScroll: this.props.slidesToScroll
     });
 
-    var dots = Array.apply(null, {length: dotCount}).map((x, i) => {
+    var dots = [];
 
+    for (var i=0; i<dotCount; i++) {
       var className = classnames({
         'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll)
       });
@@ -38,12 +39,12 @@ export var Dots = React.createClass({
         currentSlide: this.props.currentSlide
       };
 
-      return (
+      dots.push(
         <li key={i} className={className}>
           <button onClick={this.clickHandler.bind(this, dotOptions)}>{i}</button>
         </li>
       );
-    });
+    }
 
     return (
       <ul className={this.props.dotsClass} style={{display: 'block'}}>

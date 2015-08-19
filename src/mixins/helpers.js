@@ -7,10 +7,15 @@ import assign from 'object-assign';
 
 var helpers = {
   initialize: function (props) {
+
+    function _getWidth(elem) {
+      return elem.getBoundingClientRect().width || elem.offsetWidth;
+    }
+
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
-    var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
-    var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
+    var listWidth = _getWidth(this.refs.list.getDOMNode());
+    var trackWidth = _getWidth(this.refs.track.getDOMNode());
+    var slideWidth = _getWidth(this.getDOMNode())/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
