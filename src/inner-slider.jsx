@@ -47,6 +47,9 @@ export var InnerSlider = React.createClass({
   },
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.onWindowResized);
+    if (this.state.autoPlayTimer) {
+      window.clearTimeout(this.state.autoPlayTimer);
+    }
   },
   componentDidUpdate: function () {
     this.adaptHeight();
