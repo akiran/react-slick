@@ -1,5 +1,5 @@
 {
-  "name": "react-slick",
+  "name": "cn-react-slick",
   "version": "0.6.6",
   "description": " React port of slick carousel",
   "main": "./lib",
@@ -8,11 +8,11 @@
     "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib && ./node_modules/.bin/gulp dist",
     "test": "./node_modules/.bin/karma start --single-run"
   },
-  "author": "Kiran Abburi",
+  "author": "CondeNast",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/CondeNast/react-slick"
   },
   "keywords": [
     "slick",
@@ -78,7 +78,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/akiran/react-slick/issues"
+    "url": "https://github.com/CondeNast/react-slick/issues"
   },
-  "homepage": "https://github.com/akiran/react-slick"
+  "homepage": "https://github.com/CondeNast/react-slick"
 }
