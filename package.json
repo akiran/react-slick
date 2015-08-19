@@ -68,7 +68,7 @@
   "peerDependencies": {
     "react": ">=0.12.*"
   },
-  "npmName": "react-slick",
+  "npmName": "cn-react-slick",
   "npmFileMap": [
     {
       "basePath": "/dist/",
