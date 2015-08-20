@@ -51,6 +51,9 @@ export var InnerSlider = React.createClass({
       window.clearTimeout(this.state.autoPlayTimer);
     }
   },
+  componentWillReceiveProps: function(nextProps) {
+    this.update(nextProps);
+  },
   componentDidUpdate: function () {
     this.adaptHeight();
   },

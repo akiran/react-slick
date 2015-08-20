@@ -35,6 +35,31 @@ var helpers = {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
+  update: function (props) {
+    // This method has mostly same code as initialize method.
+    // Refactor it 
+    var slideCount = React.Children.count(props.children);
+    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
+    var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
+    var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
+
+    this.setState({
+      slideCount: slideCount,
+      slideWidth: slideWidth,
+      listWidth: listWidth,
+      trackWidth: trackWidth
+    }, function () {
+
+      var targetLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.refs.track
+      }, props, this.state));
+      // getCSS function needs previously set state
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+
+      this.setState({trackStyle: trackStyle});
+    });
+  },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
