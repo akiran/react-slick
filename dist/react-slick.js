@@ -318,6 +318,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    window.removeEventListener('resize', this.onWindowResized);
+	    if (this.state.autoPlayTimer) {
+	      window.clearTimeout(this.state.autoPlayTimer);
+	    }
 	  },
 	  componentDidUpdate: function componentDidUpdate() {
 	    this.adaptHeight();
