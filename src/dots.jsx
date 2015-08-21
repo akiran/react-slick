@@ -25,7 +25,7 @@ export var Dots = React.createClass({
       slidesToScroll: this.props.slidesToScroll
     });
 
-    var dots = Array.apply(null, {length: dotCount}).map((x, i) => {
+    var dots = Array.apply(null, Array(dotCount)).map((x, i) => {
 
       var className = classnames({
         'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll)

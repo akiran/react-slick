@@ -31,6 +31,10 @@ export var getTrackCSS = function(spec) {
     msTransform: 'translateX(' + spec.left + 'px)'
   };
 
+  if (!-[1,]) {
+    style.marginLeft = spec.left + 'px';
+  }
+
   return style;
 };
 
