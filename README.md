@@ -97,3 +97,8 @@ npm install
 npm start
 open http://localhost:8000
 ```
+
+### Browser Support and Polyfills
+Polyfills Needed to Support Older Browsers
+
+`addEventListener` & `removeEventListener` support from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Compatibility)
