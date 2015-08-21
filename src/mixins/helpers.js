@@ -4,6 +4,7 @@ import React from 'react';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
+import _ from 'lodash';
 
 var helpers = {
   initialize: function (props) {
@@ -138,17 +139,10 @@ var helpers = {
     }
 
     if (this.props.lazyLoad) {
-      var loaded = true;
-      var slidesToLoad = [];
-      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
-        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
-        if (!loaded) {
-          slidesToLoad.push(i);
-        }
-      }
-      if (!loaded) {
+      var newLazyLoadedList = _.uniq(this.state.lazyLoadedList.concat(this._getLazyLoadList(currentSlide)));
+      if (newLazyLoadedList !== this.state.lazyLoadedList) {
         this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+          lazyLoadedList: newLazyLoadedList
         });
       }
     }
@@ -230,7 +224,16 @@ var helpers = {
         autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
       });
     }
+  },
+  _getLazyLoadList: function(currentSlideIndex) {
+    var lazyLoadedList = [];
+    var loopIndex = currentSlideIndex + this.props.children.length;
+    for (var h = loopIndex - this.props.lazyLoadOffset; h <= loopIndex + this.props.lazyLoadOffset; h++) {
+      lazyLoadedList.push(h % this.props.children.length);
+    }
+    return lazyLoadedList;
   }
 };
 
 export default helpers;
+  
