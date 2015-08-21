@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import EventListener from 'react/lib/EventListener';
 import EventHandlersMixin from './mixins/event-handlers';
 import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
@@ -43,10 +44,13 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-    window.addEventListener('resize', this.onWindowResized);
+    this.resizeListener = EventListener.listen(window, 'resize', this.onWindowResized);
   },
   componentWillUnmount: function () {
-    window.removeEventListener('resize', this.onWindowResized);
+    if (this.resizeListener) {
+      this.resizeListener.remove();
+    }
+
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
     }

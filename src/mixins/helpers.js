@@ -8,9 +8,9 @@ import assign from 'object-assign';
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
-    var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
-    var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
+    var listWidth = this.getWidth(this.refs.list.getDOMNode());
+    var trackWidth = this.getWidth(this.refs.track.getDOMNode());
+    var slideWidth = this.getWidth(this.getDOMNode())/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -39,9 +39,9 @@ var helpers = {
     // This method has mostly same code as initialize method.
     // Refactor it 
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
-    var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
-    var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
+    var listWidth = this.getWidth(this.refs.list.getDOMNode());
+    var trackWidth = this.getWidth(this.refs.track.getDOMNode());
+    var slideWidth = this.getWidth(this.getDOMNode())/props.slidesToShow;
 
     this.setState({
       slideCount: slideCount,
@@ -59,6 +59,9 @@ var helpers = {
 
       this.setState({trackStyle: trackStyle});
     });
+  },
+  getWidth: function getWidth(elem) {
+    return elem.getBoundingClientRect().width || elem.offsetWidth;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
