@@ -31,6 +31,15 @@ export var getTrackCSS = function(spec) {
     msTransform: 'translateX(' + spec.left + 'px)'
   };
 
+  // To detect IE8
+  //
+  // Do not use !window.addEventListener for browser testing here
+  // since the polyfill prototype will fix everything.
+  // Also this can avoid the detection being affected by any polyfill
+  // introduced out of the box.
+  // So here we use a native JS operation detection.
+  //
+  // Credit: http://stackoverflow.com/a/30617541/1849458
   if (!-[1,]) {
     style.marginLeft = spec.left + 'px';
   }
