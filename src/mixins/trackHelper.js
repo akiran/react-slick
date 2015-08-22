@@ -31,6 +31,11 @@ export var getTrackCSS = function(spec) {
     msTransform: 'translateX(' + spec.left + 'px)'
   };
 
+  // Fallback for IE8
+  if (!window.addEventListener && window.attachEvent) {
+    style.marginLeft = spec.left + 'px';
+  }
+
   return style;
 };
 
