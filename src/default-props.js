@@ -35,6 +35,7 @@ var defaultProps = {
     // waitForAnimate: true,
     afterChange: null,
     beforeChange: null,
+    afterInit: null,
     edgeEvent: null,
     init: null,
     swipeEvent: null,
