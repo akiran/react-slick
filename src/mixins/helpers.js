@@ -37,7 +37,7 @@ var helpers = {
   },
   update: function (props) {
     // This method has mostly same code as initialize method.
-    // Refactor it 
+    // Refactor it
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(this.refs.list.getDOMNode());
     var trackWidth = this.getWidth(this.refs.track.getDOMNode());
@@ -110,7 +110,7 @@ var helpers = {
           animating: false
         });
         if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+          this.props.afterChange(targetSlide);
         }
         ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
       };
