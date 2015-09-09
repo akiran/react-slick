@@ -53,7 +53,7 @@ export var NextArrow = React.createClass({
         nextClasses['slick-disabled'] = true;
         nextHandler = null;
       } else {
-        if (this.props.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
+        if (this.props.currentSlide >= (this.props.slideCount - this.props.slidesToScroll)) {
           nextClasses['slick-disabled'] = true;
           nextHandler = null;
         }

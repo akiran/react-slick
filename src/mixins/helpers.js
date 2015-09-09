@@ -38,6 +38,7 @@ var helpers = {
   update: function (props) {
     // This method has mostly same code as initialize method.
     // Refactor it
+    if (!this.refs.list || !this.refs.track) return;
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(this.refs.list.getDOMNode());
     var trackWidth = this.getWidth(this.refs.track.getDOMNode());
