@@ -1,16 +1,15 @@
 'use strict';
 
 import React from 'react';
-import EventListener from 'react/lib/EventListener';
 import EventHandlersMixin from './mixins/event-handlers';
 import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import classnames from 'classnames';
 
-import {Track} from './track';
-import {Dots} from './dots';
-import {PrevArrow, NextArrow} from './arrows';
+import { Track } from './track';
+import { Dots } from './dots';
+import { PrevArrow, NextArrow } from './arrows';
 
 export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
@@ -44,12 +43,10 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-    this.resizeListener = EventListener.listen(window, 'resize', this.onWindowResized);
+    window.addEventListener('resize', this.onWindowResized);
   },
   componentWillUnmount: function () {
-    if (this.resizeListener) {
-      this.resizeListener.remove();
-    }
+    window.removeEventListener('resize', this.onWindowResized);
 
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
