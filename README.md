@@ -83,11 +83,12 @@ var SimpleSlider = React.createClass({
 | swipeToSlide | bool |||
 | touchMove | bool |||
 | touchThreshold | int |||
-| variableWidth | bool |||
 | useCSS | bool | Enable/Disable CSS Transitions | Yes |
 | vertical | bool |||
 | afterChange | function | callback function called after the current index changes | Yes |
 | beforeChange | function | callback function called before the current index changes | Yes |
+
+Note: `variableWidth` doesn't work
 
 ### Development
 Want to run demos locally
@@ -98,5 +99,6 @@ npm start
 open http://localhost:8000
 ```
 
-### Polyfills for old IE support
+### IE8 support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
+`addEventListener` and `removeEventListener` polyfills
