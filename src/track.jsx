@@ -5,8 +5,8 @@ import cloneWithProps from 'react/lib/cloneWithProps';
 import assign from 'object-assign';
 import classnames from 'classnames';
 
-var getSlideClasses = (spec) => {
-  var slickActive, slickCenter, slickCloned;
+var getSlideClasses = function getSlideClasses(spec) {
+  var slickActive, slickCenter, slickCloned, slickActiveFirst, slickActiveLast;
   var centerOffset, index;
 
   if (spec.rtl) {
@@ -16,19 +16,23 @@ var getSlideClasses = (spec) => {
     index = spec.index;
   }
 
-  slickCloned = (index < 0) || (index >= spec.slideCount);
+  slickCloned = index < 0 || index >= spec.slideCount;
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
-    slickCenter = (spec.currentSlide === index);
-    if ((index > spec.currentSlide - centerOffset - 1) && (index <= spec.currentSlide + centerOffset)) {
+    slickCenter = spec.currentSlide === index;
+    if (index == spec.currentSlide - centerOffset) slickActiveFirst = true;
+    if (index == spec.currentSlide - centerOffset + (spec.slidesToShow-1)) slickActiveLast = true;
+    if (index > spec.currentSlide - centerOffset - 1 && index <= spec.currentSlide + centerOffset) {
       slickActive = true;
     }
   } else {
-    slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
+    slickActive = spec.currentSlide <= index && index < spec.currentSlide + spec.slidesToShow;
   }
-  return classnames({
+  return (0, _classnames2['default'])({
     'slick-slide': true,
     'slick-active': slickActive,
+    'slick-active-first': slickActiveFirst,
+    'slick-active-last': slickActiveLast,
     'slick-center': slickCenter,
     'slick-cloned': slickCloned
   });
