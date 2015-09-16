@@ -104,20 +104,21 @@ var helpers = {
         });
       }
 
-      callback = () => {
+      this.animationEndCallback = () => {
         this.setState({
           animating: false
         });
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
+        delete this.animationEndCallback;
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        setTimeout(callback, this.props.speed);
+        setTimeout(this.animationEndCallback, this.props.speed);
       });
 
       this.autoPlay();
@@ -204,11 +205,12 @@ var helpers = {
         swipeLeft: null
       };
 
-      callback = () => {
+      this.animationEndCallback = () => {
         this.setState(nextStateChanges);
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
+        delete this.animationEndCallback;
       };
 
       this.setState({
@@ -216,7 +218,7 @@ var helpers = {
         currentSlide: targetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
-        setTimeout(callback, this.props.speed);
+        setTimeout(this.animationEndCallback, this.props.speed);
       });
 
     }

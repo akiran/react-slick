@@ -50,6 +50,9 @@ export var InnerSlider = React.createClass({
     if (this.resizeListener) {
       this.resizeListener.remove();
     }
+    if (this.animationEndCallback) {
+      clearTimeout(this.animationEndCallback);
+    }
 
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
