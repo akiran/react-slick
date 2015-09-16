@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 
@@ -37,7 +36,7 @@ var helpers = {
   },
   update: function (props) {
     // This method has mostly same code as initialize method.
-    // Refactor it 
+    // Refactor it
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(this.refs.list.getDOMNode());
     var trackWidth = this.getWidth(this.refs.track.getDOMNode());
@@ -112,14 +111,13 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        setTimeout(callback, this.props.speed);
       });
 
       this.autoPlay();
@@ -211,7 +209,6 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
       };
 
       this.setState({
@@ -219,7 +216,7 @@ var helpers = {
         currentSlide: targetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
+        setTimeout(callback, this.props.speed);
       });
 
     }
