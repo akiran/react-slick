@@ -38,7 +38,7 @@
     "foundation-apps": "^1.1.0",
     "gulp": "^3.8.11",
     "gulp-sass": "^2.0.1",
-    "karma": "^0.12.31",
+    "karma": "^0.13",
     "karma-chrome-launcher": "^0.1.12",
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.0",
