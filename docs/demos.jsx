@@ -318,7 +318,7 @@ var LazyLoad = React.createClass({
           <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
           <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
           <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
-          <div><img src={baseUrl + 'img/abstract04.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
         </Slider>
       </div>
     );
