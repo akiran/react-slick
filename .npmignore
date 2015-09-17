@@ -6,6 +6,7 @@ demos1
 TODO.md
 test
 testlib
+src
 bower.json
 gulpfile.js
 karma.conf.js
