@@ -86,10 +86,6 @@ var helpers = {
     if (this.props.fade) {
       currentSlide = this.state.currentSlide;
 
-      if (this.props.beforeChange) {
-        this.props.beforeChange(currentSlide);
-      }
-
       //  Shifting targetSlide back into the range
       if (index < 0) {
         targetSlide = index + this.state.slideCount;
@@ -162,7 +158,7 @@ var helpers = {
     }
 
     if (this.props.beforeChange) {
-      this.props.beforeChange(currentSlide);
+      this.props.beforeChange(this.state.currentSlide, currentSlide);
     }
 
     if (this.props.lazyLoad) {
