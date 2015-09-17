@@ -3,6 +3,11 @@
 import React from 'react';
 import Slider from '../src/slider';
 
+var baseUrl = '';
+if (process.env.NODE_ENV === 'production') {
+  baseUrl = 'http://static.webrafter.com';
+}
+
 var SingleItem = React.createClass({
   getInitialState: function () {
     return {count: 10};
@@ -310,10 +315,10 @@ var LazyLoad = React.createClass({
       <div>
         <h2> Lazy Load</h2>
         <Slider {...settings}>
-          <div><img src="img/abstract01.jpg" /></div>
-          <div><img src="img/abstract02.jpg" /></div>
-          <div><img src="img/abstract03.jpg" /></div>
-          <div><img src="img/abstract04.jpg" /></div>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + 'img/abstract04.jpg'} /></div>
         </Slider>
       </div>
     );
@@ -335,10 +340,10 @@ var Fade = React.createClass({
       <div>
         <h2>Fade</h2>
         <Slider {...settings}>
-          <div><img src="img/abstract01.jpg" /></div>
-          <div><img src="img/abstract02.jpg" /></div>
-          <div><img src="img/abstract03.jpg" /></div>
-          <div><img src="img/abstract04.jpg" /></div>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
         </Slider>
       </div>
     );
