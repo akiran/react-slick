@@ -1,6 +1,5 @@
 'use strict';
-import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
-import assign from 'object-assign';
+import { getTrackCSS, getTrackLeft, getTrackAnimateCSS } from './trackHelper';
 
 var EventHandlers = {
   // Event handler for previous and next
@@ -64,10 +63,12 @@ var EventHandlers = {
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
 
-    curLeft = getTrackLeft(assign({
+    curLeft = getTrackLeft({
       slideIndex: this.state.currentSlide,
-      trackRef: this.refs.track
-    }, this.props, this.state));
+      trackRef: this.refs.track,
+      ...this.props,
+      ...this.state
+    });
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
@@ -99,7 +100,11 @@ var EventHandlers = {
     this.setState({
       touchObject: touchObject,
       swipeLeft: swipeLeft,
-      trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
+      trackStyle: getTrackCSS({
+        left: swipeLeft,
+        ...this.props,
+        ...this.state
+      })
     });
 
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
@@ -139,13 +144,19 @@ var EventHandlers = {
       }
     } else {
       // Adjust the track back to it's original position.
-      var currentLeft = getTrackLeft(assign({
+      var currentLeft = getTrackLeft({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
-      }, this.props, this.state));
+        trackRef: this.refs.track,
+        ...this.props,
+        ...this.state
+      });
 
       this.setState({
-        trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
+        trackStyle: getTrackAnimateCSS({
+          left: currentLeft,
+          ...this.props,
+          ...this.state
+        })
       });
     }
   }

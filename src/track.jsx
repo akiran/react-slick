@@ -1,8 +1,6 @@
 'use strict';
 
-import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
-import assign from 'object-assign';
+import React, { cloneElement } from 'react';
 import classnames from 'classnames';
 
 var getSlideClasses = (spec) => {
@@ -67,11 +65,11 @@ var renderSlides = (spec) => {
       child = (<div></div>);
     }
 
-    var childStyle = getSlideStyle(assign({}, spec, {index: index}));
-    slides.push(cloneWithProps(child, {
+    var childStyle = getSlideStyle({ ...spec, index });
+    slides.push(cloneElement(child, {
       key: index,
       'data-index': index,
-      className: getSlideClasses(assign({index: index}, spec)),
+      className: getSlideClasses({ index, ...spec }),
       style: childStyle
     }));
 
@@ -81,20 +79,20 @@ var renderSlides = (spec) => {
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
-        preCloneSlides.push(cloneWithProps(child, {
+        preCloneSlides.push(cloneElement(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: getSlideClasses({ index: key, ...spec }),
           style: childStyle
         }));
       }
 
       if (index < infiniteCount) {
         key = count + index;
-        postCloneSlides.push(cloneWithProps(child, {
+        postCloneSlides.push(cloneElement(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: getSlideClasses({ index: key, ...spec }),
           style: childStyle
         }));
       }

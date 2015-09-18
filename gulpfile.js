@@ -50,11 +50,7 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, '0.0.0.0', function (err, result) {
-    if (err) {
-      console.log(err);
-    }
-  });
+  }).listen(8000, '0.0.0.0');
   callback();
 });
 

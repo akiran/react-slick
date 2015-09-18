@@ -1,8 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {InnerSlider} from './inner-slider';
-import assign from 'object-assign';
+import { InnerSlider } from './inner-slider';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
 import defaultProps from './default-props';
@@ -44,9 +43,9 @@ var Slider = React.createClass({
     var newProps;
     if (this.state.breakpoint) {
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
-      settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, this.props, newProps[0].settings);
+      settings = newProps[0].settings === 'unslick' ? 'unslick' : {...this.props, ...newProps[0].settings};
     } else {
-      settings = assign({}, defaultProps, this.props);
+      settings = {...defaultProps, ...this.props};
     }
     if (settings === 'unslick') {
       // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML

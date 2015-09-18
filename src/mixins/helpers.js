@@ -1,16 +1,15 @@
 'use strict';
 
-import React from 'react';
+import React, { findDOMNode } from 'react';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
-import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
-import assign from 'object-assign';
+import { getTrackCSS, getTrackLeft, getTrackAnimateCSS } from './trackHelper';
 
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(this.refs.list.getDOMNode());
-    var trackWidth = this.getWidth(this.refs.track.getDOMNode());
-    var slideWidth = this.getWidth(this.getDOMNode())/props.slidesToShow;
+    var listWidth = this.getWidth(findDOMNode(this.refs.list));
+    var trackWidth = this.getWidth(findDOMNode(this.refs.track));
+    var slideWidth = this.getWidth(findDOMNode(this))/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -23,12 +22,14 @@ var helpers = {
 
     }, function () {
 
-      var targetLeft = getTrackLeft(assign({
+      var targetLeft = getTrackLeft({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
-      }, props, this.state));
+        trackRef: this.refs.track,
+        ...props,
+        ...this.state
+      });
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS({ left: targetLeft, ...props, ...this.state});
 
       this.setState({trackStyle: trackStyle});
 
@@ -37,11 +38,11 @@ var helpers = {
   },
   update: function (props) {
     // This method has mostly same code as initialize method.
-    // Refactor it 
+    // Refactor it
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(this.refs.list.getDOMNode());
-    var trackWidth = this.getWidth(this.refs.track.getDOMNode());
-    var slideWidth = this.getWidth(this.getDOMNode())/props.slidesToShow;
+    var listWidth = this.getWidth(findDOMNode(this.refs.list));
+    var trackWidth = this.getWidth(findDOMNode(this.refs.track));
+    var slideWidth = this.getWidth(findDOMNode(this))/props.slidesToShow;
 
     this.setState({
       slideCount: slideCount,
@@ -50,12 +51,14 @@ var helpers = {
       trackWidth: trackWidth
     }, function () {
 
-      var targetLeft = getTrackLeft(assign({
+      var targetLeft = getTrackLeft({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
-      }, props, this.state));
+        trackRef: this.refs.track,
+        ...props,
+        ...this.state
+      });
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS({ left: targetLeft, ...props, ...this.state});
 
       this.setState({trackStyle: trackStyle});
     });
@@ -67,7 +70,7 @@ var helpers = {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.refs.list) {
-        var slickList = this.refs.list.getDOMNode();
+        var slickList = findDOMNode(this.refs.list);
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
@@ -108,14 +111,14 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        ReactTransitionEvents.removeEndEventListener(findDOMNode(this.refs.track).children[currentSlide], callback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        ReactTransitionEvents.addEndEventListener(findDOMNode(this.refs.track).children[currentSlide], callback);
       });
 
       if (this.props.beforeChange) {
@@ -147,15 +150,19 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    targetLeft = getTrackLeft(assign({
+    targetLeft = getTrackLeft({
       slideIndex: targetSlide,
-      trackRef: this.refs.track
-    }, this.props, this.state));
+      trackRef: this.refs.track,
+      ...this.props,
+      ...this.state
+    });
 
-    currentLeft = getTrackLeft(assign({
+    currentLeft = getTrackLeft({
       slideIndex: currentSlide,
-      trackRef: this.refs.track
-    }, this.props, this.state));
+      trackRef: this.refs.track,
+      ...this.props,
+      ...this.state
+    });
 
     if (this.props.infinite === false) {
       targetLeft = currentLeft;
@@ -190,7 +197,7 @@ var helpers = {
 
       this.setState({
         currentSlide: currentSlide,
-        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
+        trackStyle: getTrackCSS({ left: currentLeft, ...this.props, ...this.state})
       }, function () {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
@@ -202,7 +209,7 @@ var helpers = {
       var nextStateChanges = {
         animating: false,
         currentSlide: currentSlide,
-        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
+        trackStyle: getTrackCSS({ left: currentLeft, ...this.props, ...this.state }),
         swipeLeft: null
       };
 
@@ -211,15 +218,15 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
+        ReactTransitionEvents.removeEndEventListener(findDOMNode(this.refs.track), callback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide,
-        trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
+        trackStyle: getTrackAnimateCSS({ left: targetLeft, ...this.props, ...this.state})
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
+        ReactTransitionEvents.addEndEventListener(findDOMNode(this.refs.track), callback);
       });
 
     }
