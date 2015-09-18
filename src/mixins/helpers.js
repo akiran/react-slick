@@ -118,6 +118,10 @@ var helpers = {
         ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
       });
 
+      if (this.props.beforeChange) {
+        this.props.beforeChange(this.state.currentSlide, currentSlide);
+      }
+
       this.autoPlay();
       return;
     }

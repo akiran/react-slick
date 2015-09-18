@@ -43,6 +43,9 @@ h3 {
 .slick-slider {
   margin: 30px auto 50px;
 }
+.slick-dots {
+  margin-left: 0;
+}
 @media (max-width: 768px) {
   h3 {
     font-size:24px;
