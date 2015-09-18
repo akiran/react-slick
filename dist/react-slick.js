@@ -1062,6 +1062,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _reactLibReactTransitionEvents2['default'].addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
 	      });
 
+	      if (this.props.beforeChange) {
+	        this.props.beforeChange(this.state.currentSlide, currentSlide);
+	      }
+
 	      this.autoPlay();
 	      return;
 	    }
