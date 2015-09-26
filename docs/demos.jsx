@@ -356,6 +356,54 @@ var Fade = React.createClass({
   }
 });
 
+var ExternalControl = React.createClass({
+  getInitialState: function() {
+    return {
+      initialSlide: 1 
+    }
+  },
+
+  handleClick: function(event) {
+    event.preventDefault();
+
+    this.setState({
+      initialSlide: 2
+    });
+  },
+
+  render: function () {
+    var settings = {
+      dots: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      initialSlide: this.state.initialSlide,
+      beforeChange: function (currentSlide, nextSlide) {
+        console.log('before change', currentSlide, nextSlide);
+      },
+      afterChange: function (currentSlide) {
+        console.log('after change', currentSlide);
+      }
+    };
+    return (
+      <div>
+        <h2>External Control</h2>
+        Control your slider externally by applying a parent state variables as props to a slider instance.
+        <br />
+        <br />
+        <button onClick={this.handleClick}>Click to go to slide 3</button> 
+        <Slider {...settings}>
+          <div><h3>1</h3></div>
+          <div><h3>2</h3></div>
+          <div><h3>3</h3></div>
+          <div><h3>4</h3></div>
+          <div><h3>5</h3></div>
+          <div><h3>6</h3></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 var App = React.createClass({
   render: function () {
     //need to add variable width and center mode demo
@@ -372,6 +420,7 @@ var App = React.createClass({
         <AdaptiveHeight />
         <LazyLoad />
         <Fade />
+        <ExternalControl />
       </div>
     );
   }

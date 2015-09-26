@@ -58,6 +58,9 @@ var helpers = {
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
       this.setState({trackStyle: trackStyle});
+
+      // Animate slider to initial slide passed as props 
+      this.slideHandler(props.initialSlide);
     });
   },
   getWidth: function getWidth(elem) {
