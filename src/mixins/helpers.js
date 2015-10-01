@@ -251,15 +251,15 @@ var helpers = {
     return 'vertical';
   },
   autoPlay: function () {
-    var play = () => {
-      this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-    };
     if (this.props.autoplay) {
       window.clearTimeout(this.state.autoPlayTimer);
       this.setState({
-        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+        autoPlayTimer: window.setTimeout(this.playNext, this.props.autoplaySpeed)
       });
     }
+  },
+  playNext: function () {
+    this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
   }
 };
 
