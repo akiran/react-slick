@@ -79,6 +79,10 @@ var helpers = {
     var targetLeft, currentLeft;
     var callback;
 
+    if (!this.state.mounted) {
+      return;
+    }
+
     if (this.state.animating === true || this.state.currentSlide === index) {
       return;
     }
@@ -247,17 +251,15 @@ var helpers = {
     return 'vertical';
   },
   autoPlay: function () {
-    var play = () => {
-      if (this.state.mounted) {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-      }
-    };
     if (this.props.autoplay) {
       window.clearTimeout(this.state.autoPlayTimer);
       this.setState({
-        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+        autoPlayTimer: window.setTimeout(this.playNext, this.props.autoplaySpeed)
       });
     }
+  },
+  playNext: function () {
+    this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
   }
 };
 
