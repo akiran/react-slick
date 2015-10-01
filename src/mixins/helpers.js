@@ -79,6 +79,10 @@ var helpers = {
     var targetLeft, currentLeft;
     var callback;
 
+    if (!this.state.mounted) {
+      return;
+    }
+
     if (this.state.animating === true || this.state.currentSlide === index) {
       return;
     }
@@ -248,9 +252,7 @@ var helpers = {
   },
   autoPlay: function () {
     var play = () => {
-      if (this.state.mounted) {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-      }
+      this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
     };
     if (this.props.autoplay) {
       window.clearTimeout(this.state.autoPlayTimer);
