@@ -255,7 +255,11 @@ var helpers = {
   autoPlay: function () {
     var play = () => {
       if (this.state.mounted) {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+        if (this.props.rtl) {
+          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+        } else {
+          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+        }
       }
     };
     if (this.props.autoplay) {
