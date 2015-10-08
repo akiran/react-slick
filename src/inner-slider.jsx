@@ -114,7 +114,7 @@ export var InnerSlider = React.createClass({
     }
 
     return (
-      <div className={className}>
+      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         <div
           ref='list'
           className="slick-list"

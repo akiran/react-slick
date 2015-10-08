@@ -37,7 +37,7 @@ var helpers = {
   },
   update: function (props) {
     // This method has mostly same code as initialize method.
-    // Refactor it 
+    // Refactor it
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(this.refs.list.getDOMNode());
     var trackWidth = this.getWidth(this.refs.track.getDOMNode());
@@ -257,6 +257,11 @@ var helpers = {
       this.setState({
         autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
       });
+    }
+  },
+  pause: function () {
+    if (this.state.autoPlayTimer) {
+      window.clearTimeout(this.state.autoPlayTimer);
     }
   }
 };
