@@ -144,7 +144,7 @@ export var InnerSlider = React.createClass({
     var handleTouchCancel = (this.props.touchMove === false) ? null : (this.state.dragging ? this.swipeEnd: null);
 
     return (
-      <div className={className}>
+      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         <div
           ref='list'
           className="slick-list"

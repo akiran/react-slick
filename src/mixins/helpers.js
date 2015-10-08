@@ -264,6 +264,11 @@ var helpers = {
         autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
       });
     }
+  },
+  pause: function () {
+    if (this.state.autoPlayTimer) {
+      window.clearTimeout(this.state.autoPlayTimer);
+    }
   }
 };
 
