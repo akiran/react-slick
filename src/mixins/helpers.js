@@ -104,21 +104,21 @@ var helpers = {
         });
       }
 
-      this.animationEndCallback = () => {
+      callback = () => {
         this.setState({
           animating: false
         });
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        delete this.animationEndCallback;
+        clearTimeout(this.animationEndCallback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
-      }, function () {
-        setTimeout(this.animationEndCallback, this.props.speed);
+      }, () => {
+        this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
       this.autoPlay();
@@ -205,20 +205,20 @@ var helpers = {
         swipeLeft: null
       };
 
-      this.animationEndCallback = () => {
+      callback = () => {
         this.setState(nextStateChanges);
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        delete this.animationEndCallback;
+        clearTimeout(this.animationEndCallback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
-      }, function () {
-        setTimeout(this.animationEndCallback, this.props.speed);
+      }, () => {
+        this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
     }
