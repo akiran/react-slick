@@ -107,7 +107,7 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        clearTimeout(this.animationEndCallback);
+        delete this.animationEndCallback;
       };
 
       this.setState({
@@ -210,7 +210,7 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        clearTimeout(this.animationEndCallback);
+        delete this.animationEndCallback;
       };
 
       this.setState({
