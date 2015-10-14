@@ -1,5 +1,7 @@
 'use strict';
 
+import ReactDom from 'react-dom';
+
 var checkSpecKeys = function (spec, keysArray) {
   return keysArray.reduce((value, key) => {
     return value && spec.hasOwnProperty(key);
@@ -93,17 +95,17 @@ export var getTrackLeft = function (spec) {
   if (spec.variableWidth === true) {
       var targetSlideIndex;
       if(spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
-          targetSlide = spec.trackRef.getDOMNode().childNodes[spec.slideIndex];
+          targetSlide = ReactDom.findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
       } else {
           targetSlideIndex = (spec.slideIndex + spec.slidesToShow);
-          targetSlide = spec.trackRef.getDOMNode().childNodes[targetSlideIndex];
+          targetSlide = ReactDom.findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
       }
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (spec.centerMode === true) {
           if(spec.infinite === false) {
-              targetSlide = spec.trackRef.getDOMNode().children[spec.slideIndex];
+              targetSlide = ReactDom.findDOMNode(spec.trackRef).children[spec.slideIndex];
           } else {
-              targetSlide = spec.trackRef.getDOMNode().children[(spec.slideIndex + spec.slidesToShow + 1)];
+              targetSlide = ReactDom.findDOMNode(spec.trackRef).children[(spec.slideIndex + spec.slidesToShow + 1)];
           }
 
           targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
