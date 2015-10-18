@@ -25,7 +25,7 @@ var EventHandlers = {
       if (this.props.lazyLoad) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
       }
-    } else if (options.message === 'dots') {
+    } else if (options.message === 'dots' || options.message === 'children') {
       // Click on dots
       targetSlide = options.index * options.slidesToScroll;
       if (targetSlide === options.currentSlide) {
@@ -45,8 +45,8 @@ var EventHandlers = {
 
   },
   // Focus on selecting a slide (click handler on track)
-  selectHandler: function (e) {
-
+  selectHandler: function (options) {
+    this.changeSlide(options)
   },
   swipeStart: function (e) {
     var touches, posX, posY;

@@ -87,7 +87,7 @@ var SimpleSlider = React.createClass({
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
 | easing         | string | | |
 | fade           | bool | Slides use fade for transition  | Yes |
-| focusOnSelect  | bool | | |
+| focusOnSelect  | bool | Go to slide on click | Yes |
 | infinite       | bool | should the gallery wrap around it's contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |

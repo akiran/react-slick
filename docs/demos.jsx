@@ -9,6 +9,7 @@ import MultipleItems from '../examples/MultipleItems'
 import Responsive from '../examples/Responsive'
 import UnevenSets from '../examples/UnevenSets'
 import CenterMode from '../examples/CenterMode'
+import CenterModeWithFocusOnSelect from '../examples/CenterModeWithFocusOnSelect'
 import AutoPlay from '../examples/AutoPlay'
 import PauseOnHover from '../examples/PauseOnHover'
 import Rtl from '../examples/Rtl'
@@ -28,6 +29,7 @@ export default class App extends React.Component {
         <Responsive />
         <UnevenSets />
         <CenterMode />
+        <CenterModeWithFocusOnSelect />
         <AutoPlay />
         <PauseOnHover />
         <Rtl />
