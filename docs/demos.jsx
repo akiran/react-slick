@@ -213,6 +213,34 @@ var CenterModeWithInitial = React.createClass({
   }
 });
 
+var CenterModeWithFocusOnSelect = React.createClass({
+  render: function () {
+    var settings = {
+      className: 'center',
+      focusOnSelect: true,
+      centerMode: true,
+      dots: true,
+      infinite: false,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      speed: 500
+    };
+    return (
+      <div>
+        <h2>Center Mode with FocusOnSelect</h2>
+        <Slider {...settings}>
+          <div><h3>1</h3></div>
+          <div><h3>2</h3></div>
+          <div><h3>3</h3></div>
+          <div><h3>4</h3></div>
+          <div><h3>5</h3></div>
+          <div><h3>6</h3></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 
 var AutoPlay = React.createClass({
   render: function () {
@@ -367,6 +395,7 @@ var App = React.createClass({
         <UnevenSets />
         <CenterMode />
         <CenterModeWithInitial />
+        <CenterModeWithFocusOnSelect />
         <AutoPlay />
         <VariableWidth />
         <AdaptiveHeight />
