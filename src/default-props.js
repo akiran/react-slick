@@ -21,6 +21,7 @@ var defaultProps = {
     responsive: null,
     rtl: false,
     slide: 'div',
+    slidesClass: null,
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 500,
