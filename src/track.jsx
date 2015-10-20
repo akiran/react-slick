@@ -26,12 +26,15 @@ var getSlideClasses = (spec) => {
   } else {
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
-  return classnames({
+  var { slidesClass } = spec;
+  var classNames = classnames({
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
     'slick-cloned': slickCloned
   });
+
+  return slidesClass ? `${classNames} ${slidesClass}` : classNames;
 };
 
 var getSlideStyle = function (spec) {
