@@ -19508,11 +19508,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else {
 	    slickActive = spec.currentSlide <= index && index < spec.currentSlide + spec.slidesToShow;
 	  }
+	  var slickCurrent = false;
+	  if (spec.currentSlide == index) {
+	    slickCurrent = true;
+	  }
 	  return (0, _classnames2['default'])({
+	    'slide': true,
 	    'slick-slide': true,
 	    'slick-active': slickActive,
 	    'slick-center': slickCenter,
-	    'slick-cloned': slickCloned
+	    'slick-cloned': slickCloned,
+	    'slick-current': slickCurrent
 	  });
 	};
 
