@@ -25,11 +25,17 @@ var getSlideClasses = (spec) => {
   } else {
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
+  var slickCurrent = false;
+  if (spec.currentSlide == index) {
+    slickCurrent = true;
+  }
   return classnames({
+    'slide': true,
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
-    'slick-cloned': slickCloned
+    'slick-cloned': slickCloned,
+    'slick-current': slickCurrent
   });
 };
 

@@ -18991,7 +18991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  adaptHeight: function adaptHeight() {
 	    if (this.props.adaptiveHeight) {
-	      var selector = 'div>div';
+	      var selector = 'div.slick-track>div.slide';
 	      //var selector = '[data-index="' + this.state.currentSlide +'"]';
 	      if (this.refs.list) {
 	        var slickList = this.refs.list;
