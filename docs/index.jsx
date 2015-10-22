@@ -5,5 +5,5 @@ var ReactDOM = require('react-dom');
 var Docs = require('./docs');
 
 React.initializeTouchEvents && React.initializeTouchEvents(true);
-React.render(<Docs />, document.getElementById('rapp'));
+ReactDOM.render(<Docs />, document.getElementById('rapp'));
 
