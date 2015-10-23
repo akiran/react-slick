@@ -356,6 +356,50 @@ var Fade = React.createClass({
   }
 });
 
+var SetCurrentSlide = React.createClass({
+  getInitialState: function () {
+    return {currentSlide: 0};
+  },
+  onButtonClick(to, e) {
+    this.setState({currentSlide: to});
+  },
+  render: function () {
+    var settings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      currentSlide: this.state.currentSlide
+    };
+    return (
+        <div className="set-current-slide">
+          <h2>Set current slide</h2>
+          <ul>
+            <li>
+              <button onClick={this.onButtonClick.bind(this, 0)}>Change to 0</button>
+            </li>
+            <li>
+              <button onClick={this.onButtonClick.bind(this, 1)}>Change to 1</button>
+            </li>
+            <li>
+              <button onClick={this.onButtonClick.bind(this, 2)}>Change to 3</button>
+            </li>
+            <li>
+              <button onClick={this.onButtonClick.bind(this, 3)}>Change to 4</button>
+            </li>
+          </ul>
+          <Slider {...settings}>
+            <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+            <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+            <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+            <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
+          </Slider>
+        </div>
+    );
+  }
+});
+
 var App = React.createClass({
   render: function () {
     //need to add variable width and center mode demo
@@ -372,6 +416,7 @@ var App = React.createClass({
         <AdaptiveHeight />
         <LazyLoad />
         <Fade />
+        <SetCurrentSlide />
       </div>
     );
   }

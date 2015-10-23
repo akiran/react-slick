@@ -21,6 +21,8 @@ var EventHandlers = {
       if (targetSlide === options.currentSlide) {
         return;
       }
+    } else {
+      targetSlide = options.index;
     }
 
     this.slideHandler(targetSlide);

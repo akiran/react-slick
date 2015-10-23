@@ -1215,12 +1215,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
+		function classNames () {
 			var classes = '';
 
 			for (var i = 0; i < arguments.length; i++) {
@@ -1229,15 +1231,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
+				if (argType === 'string' || argType === 'number') {
 					classes += ' ' + arg;
-
 				} else if (Array.isArray(arg)) {
 					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
+						if (hasOwn.call(arg, key) && arg[key]) {
 							classes += ' ' + key;
 						}
 					}
@@ -1249,15 +1249,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
 			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
 			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1445,10 +1444,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @deprecated
 	 */
 	function cloneWithProps(child, props) {
-	  if ((undefined) !== 'production') {
-	    (undefined) !== 'production' ? warning(didDeprecatedWarn, 'cloneWithProps(...) is deprecated. ' + 'Please use React.cloneElement instead.') : undefined;
+	  if (true) {
+	     true ? warning(didDeprecatedWarn, 'cloneWithProps(...) is deprecated. ' + 'Please use React.cloneElement instead.') : undefined;
 	    didDeprecatedWarn = true;
-	    (undefined) !== 'production' ? warning(!child.ref, 'You are calling cloneWithProps() on a child with a ref. This is ' + 'dangerous because you\'re creating a new child which will not be ' + 'added as a ref to its parent.') : undefined;
+	     true ? warning(!child.ref, 'You are calling cloneWithProps() on a child with a ref. This is ' + 'dangerous because you\'re creating a new child which will not be ' + 'added as a ref to its parent.') : undefined;
 	  }
 
 	  var newProps = ReactPropTransferer.mergeProps(props, child.props);
@@ -1498,7 +1497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var canDefineProperty = false;
-	if ((undefined) !== 'production') {
+	if (true) {
 	  try {
 	    Object.defineProperty({}, 'x', {});
 	    canDefineProperty = true;
@@ -1540,7 +1539,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _owner: owner
 	  };
 
-	  if ((undefined) !== 'production') {
+	  if (true) {
 	    // The validation flag is currently mutative. We put it on
 	    // an external backing store so that we can freeze the whole object.
 	    // This can be replaced with a WeakMap once they are implemented in
@@ -1655,7 +1654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	ReactElement.cloneAndReplaceProps = function (oldElement, newProps) {
 	  var newElement = ReactElement(oldElement.type, oldElement.key, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, newProps);
 
-	  if ((undefined) !== 'production') {
+	  if (true) {
 	    // If the key on the original is valid, then the clone is valid
 	    newElement._store.validated = oldElement._store.validated;
 	  }
@@ -2081,7 +2080,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var warning = emptyFunction;
 
-	if ((undefined) !== 'production') {
+	if (true) {
 	  warning = function (condition, format) {
 	    for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
 	      args[_key - 2] = arguments[_key];
