@@ -66,6 +66,7 @@ var SimpleSlider = React.createClass({
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
 | cssEase        | | | |
+| currentSlide   | int | Sets the current slide | Yes |
 | dots           |bool | Should we show the dots at the bottom of the gallery | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |

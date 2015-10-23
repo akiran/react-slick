@@ -52,6 +52,11 @@ export var InnerSlider = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
+    // Only do this if prop is properly set, otherwise keep things normal
+    if (Number.isInteger(nextProps.currentSlide)) {
+      setTimeout(() => this.changeSlide({index: nextProps.currentSlide}));
+    }
+
     this.update(nextProps);
   },
   componentDidUpdate: function () {

@@ -66,3 +66,20 @@ h3 {
     transition: all 300ms ease;
   }
 }
+.set-current-slide {
+  &>ul {
+    list-style: none;
+    text-align: center;
+    margin: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
