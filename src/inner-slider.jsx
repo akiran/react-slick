@@ -46,6 +46,9 @@ export var InnerSlider = React.createClass({
     window.addEventListener('resize', this.onWindowResized);
   },
   componentWillUnmount: function () {
+    if (this.animationEndCallback) {
+      clearTimeout(this.animationEndCallback);
+    }
     window.removeEventListener('resize', this.onWindowResized);
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
