@@ -253,8 +253,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (this.props.initialSlide != nextProps.initialSlide) {
-	      this.setState({ currentSlide: nextProps.initialSlide });
+	    if (this.props.slickGoTo != nextProps.slickGoTo) {
+	      this.setState({ currentSlide: nextProps.slickGoTo });
 	    }
 	    this.update(nextProps);
 	  },
