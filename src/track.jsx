@@ -68,10 +68,20 @@ var renderSlides = (spec) => {
     }
 
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
-    slides.push(cloneWithProps(child, {
+    var slickClasses = getSlideClasses(assign({index: index}, spec));
+    var cssClasses;
+
+    if (child.props.className) {
+        cssClasses = classnames(slickClasses, child.props.className);
+    }
+    else {
+        cssClasses = slickClasses;
+    }
+
+    slides.push(React.cloneElement(child, {
       key: index,
       'data-index': index,
-      className: getSlideClasses(assign({index: index}, spec)),
+      className: cssClasses,
       style: childStyle
     }));
 
