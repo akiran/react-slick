@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
@@ -8,9 +9,9 @@ import assign from 'object-assign';
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(this.refs.list.getDOMNode());
-    var trackWidth = this.getWidth(this.refs.track.getDOMNode());
-    var slideWidth = this.getWidth(this.getDOMNode())/props.slidesToShow;
+    var listWidth = this.getWidth(this.refs.list);
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
+    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -37,11 +38,11 @@ var helpers = {
   },
   update: function (props) {
     // This method has mostly same code as initialize method.
-    // Refactor it 
+    // Refactor it
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(this.refs.list.getDOMNode());
-    var trackWidth = this.getWidth(this.refs.track.getDOMNode());
-    var slideWidth = this.getWidth(this.getDOMNode())/props.slidesToShow;
+    var listWidth = this.getWidth(this.refs.list);
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
+    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     this.setState({
       slideCount: slideCount,
@@ -67,7 +68,7 @@ var helpers = {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.refs.list) {
-        var slickList = this.refs.list.getDOMNode();
+        var slickList = this.refs.list;
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
@@ -108,14 +109,14 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       });
 
       if (this.props.beforeChange) {
@@ -211,7 +212,7 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
+        ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       };
 
       this.setState({
@@ -219,7 +220,7 @@ var helpers = {
         currentSlide: targetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
+        ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       });
 
     }
