@@ -1,7 +1,7 @@
 {
   "name": "react-slick",
   "main": "dist/react-slick.min.js",
-  "version": "0.6.6",
+  "version": "0.9.0",
   "homepage": "https://github.com/akiran/react-slick",
   "authors": [
     "Kiran Abburi"
