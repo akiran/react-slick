@@ -16,6 +16,16 @@ export var InnerSlider = React.createClass({
   getInitialState: function () {
     return initialState;
   },
+  ignoreClick: function(e) {
+    var lastSwipeEvent = this.state.lastSwipeEvent;
+    var result = false;
+    if (lastSwipeEvent && e) {
+      var lastDispatchMarker = lastSwipeEvent.dispatchMarker;
+      var currentDispatchMarker = e.dispatchMarker;
+      result = lastDispatchMarker === currentDispatchMarker;
+    }
+    return result;
+  },
   getDefaultProps: function () {
     return defaultProps;
   },
