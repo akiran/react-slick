@@ -97,6 +97,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      breakpoint: null
 	    };
 	  },
+	  ignoreClick: function ignoreClick(e) {
+	    return this.refs.innerSlider.ignoreClick(e);
+	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 
@@ -149,6 +152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.children
 	      );
 	    } else {
+	      settings.ref = "innerSlider";
 	      return _react2['default'].createElement(
 	        _innerSlider.InnerSlider,
 	        settings,
@@ -216,6 +220,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  mixins: [_mixinsHelpers2['default'], _mixinsEventHandlers2['default']],
 	  getInitialState: function getInitialState() {
 	    return _initialState2['default'];
+	  },
+	  ignoreClick: function ignoreClick(e) {
+	    var lastSwipeEvent = this.state.lastSwipeEvent;
+	    var result = false;
+	    if (lastSwipeEvent && e) {
+	      var lastDispatchMarker = lastSwipeEvent.dispatchMarker;
+	      var currentDispatchMarker = e.dispatchMarker;
+	      result = lastDispatchMarker === currentDispatchMarker;
+	    }
+	    return result;
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return _defaultProps2['default'];
@@ -473,6 +487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    if (touchObject.swipeLength > 4) {
 	      e.preventDefault();
+	      this.setState({ lastSwipeEvent: e });
 	    }
 	  },
 	  swipeEnd: function swipeEnd(e) {
