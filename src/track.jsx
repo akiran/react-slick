@@ -80,7 +80,7 @@ var renderSlides = (spec) => {
       key: index,
       'data-index': index,
       className: cssClasses,
-      style: Object.assign({}, child.props.style || {}, childStyle)
+      style: assign({}, child.props.style || {}, childStyle)
     }));
 
     // variableWidth doesn't wrap properly.
@@ -93,7 +93,7 @@ var renderSlides = (spec) => {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),
-          style: Object.assign({}, child.props.style || {}, childStyle)
+          style: assign({}, child.props.style || {}, childStyle)
         }));
       }
 
@@ -103,7 +103,7 @@ var renderSlides = (spec) => {
           key: key,
           'data-index': key,
           className: getSlideClasses(assign({index: key}, spec)),
-          style: Object.assign({}, child.props.style || {}, childStyle)
+          style: assign({}, child.props.style || {}, childStyle)
         }));
       }
     }
