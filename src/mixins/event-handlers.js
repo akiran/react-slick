@@ -106,6 +106,7 @@ var EventHandlers = {
       { return; }
     if (touchObject.swipeLength > 4) {
       e.preventDefault();
+      e.persist();
       this.setState({ lastSwipeEvent: e });
     }
   },
