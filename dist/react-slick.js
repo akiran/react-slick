@@ -222,6 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _initialState2['default'];
 	  },
 	  ignoreClick: function ignoreClick(e) {
+	    e.persist();
 	    var lastSwipeEvent = this.state.lastSwipeEvent;
 	    var result = false;
 	    if (lastSwipeEvent && e) {
@@ -487,6 +488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    if (touchObject.swipeLength > 4) {
 	      e.preventDefault();
+	      e.persist();
 	      this.setState({ lastSwipeEvent: e });
 	    }
 	  },

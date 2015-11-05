@@ -17,6 +17,7 @@ export var InnerSlider = React.createClass({
     return initialState;
   },
   ignoreClick: function(e) {
+    e.persist();
     var lastSwipeEvent = this.state.lastSwipeEvent;
     var result = false;
     if (lastSwipeEvent && e) {
