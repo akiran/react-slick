@@ -14,6 +14,9 @@ var Slider = React.createClass({
       breakpoint: null
     };
   },
+  ignoreClick: function (e) {
+    return this.refs.innerSlider.ignoreClick(e);
+  },
   componentDidMount: function () {
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
@@ -54,6 +57,7 @@ var Slider = React.createClass({
         <div>{this.props.children}</div>
       );
     } else {
+      settings.ref = "innerSlider";
       return (
         <InnerSlider {...settings}>
           {this.props.children}
