@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
+var ReactDOM = require('../src/mixins/ReactDOM');
 var Docs = require('./docs');
 
 React.initializeTouchEvents && React.initializeTouchEvents(true);

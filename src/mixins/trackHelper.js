@@ -1,5 +1,5 @@
 'use strict';
-import ReactDOM from 'react-dom';
+import ReactDOM from './ReactDOM';
 
 var checkSpecKeys = function (spec, keysArray) {
   return keysArray.reduce((value, key) => {

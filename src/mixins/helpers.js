@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from './ReactDOM';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
@@ -9,7 +9,7 @@ import assign from 'object-assign';
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(this.refs.list);
+    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
@@ -21,7 +21,6 @@ var helpers = {
       listWidth: listWidth,
       trackWidth: trackWidth,
       currentSlide: currentSlide
-
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -40,7 +39,7 @@ var helpers = {
     // This method has mostly same code as initialize method.
     // Refactor it
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(this.refs.list);
+    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
@@ -68,7 +67,7 @@ var helpers = {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.refs.list) {
-        var slickList = this.refs.list;
+        var slickList = ReactDOM.findDOMNode(this.refs.list);
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
