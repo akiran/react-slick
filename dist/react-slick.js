@@ -244,6 +244,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
+
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResized);
 	    } else {
@@ -253,9 +254,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  componentWillUnmount: function componentWillUnmount() {
 	    if (window.addEventListener) {
 	      window.removeEventListener('resize', this.onWindowResized);
+	      window.removeEventListener('blur', this.onWindowInactive);
+	      window.removeEventListener('focus', this.onWindowActive);
 	    } else {
 	      window.detachEvent('onresize', this.onWindowResized);
+	      window.detachEvent('blur', this.onWindowInactive);
+	      window.detachEvent('focus', this.onWindowActive);
 	    }
+
 	    if (this.state.autoPlayTimer) {
 	      window.clearTimeout(this.state.autoPlayTimer);
 	    }
