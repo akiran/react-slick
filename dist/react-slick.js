@@ -801,12 +801,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return elem.getBoundingClientRect().width || elem.offsetWidth;
 	  },
 	  adaptHeight: function adaptHeight() {
+	    var self = this;
 	    if (this.props.adaptiveHeight) {
-	      var selector = '[data-index="' + this.state.currentSlide + '"]';
-	      if (this.refs.list) {
-	        var slickList = _ReactDOM2['default'].findDOMNode(this.refs.list);
-	        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
-	      }
+	      setTimeout(function () {
+	        var selector = '[data-index="' + self.state.currentSlide + '"]';
+	        if (self.refs.list) {
+	          var slickList = _ReactDOM2['default'].findDOMNode(self.refs.list);
+	          slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+	        }
+	      }, 0);
 	    }
 	  },
 	  slideHandler: function slideHandler(index) {
