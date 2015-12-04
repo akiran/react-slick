@@ -40,6 +40,8 @@ var EventHandlers = {
       return;
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
+    } else if (this.props.touchMove === false && e.type.indexOf('touch') !== -1) {
+      return;      
     }
     posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
     posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;

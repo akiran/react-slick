@@ -135,6 +135,11 @@ export var InnerSlider = React.createClass({
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
     }
+    
+    var handleTouchStart = (this.props.touchMove === false) ? null : this.swipeStart;
+    var handleTouchMove = (this.props.touchMove === false) ? null : (this.state.dragging ? this.swipeMove : null);
+    var handleTouchEnd = (this.props.touchMove === false) ? null : this.swipeEnd;
+    var handleTouchCancel = (this.props.touchMove === false) ? null : (this.state.dragging ? this.swipeEnd: null);
 
     return (
       <div className={className}>
@@ -145,10 +150,10 @@ export var InnerSlider = React.createClass({
           onMouseMove={this.state.dragging ? this.swipeMove: null}
           onMouseUp={this.swipeEnd}
           onMouseLeave={this.state.dragging ? this.swipeEnd: null}
-          onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove: null}
-          onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}>
           <Track ref='track' {...trackProps}>
             {this.props.children}
           </Track>
