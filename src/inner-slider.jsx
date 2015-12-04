@@ -28,7 +28,9 @@ export var InnerSlider = React.createClass({
     });
     var lazyLoadedList = [];
     for (var i = 0; i < this.props.children.length; i++) {
-      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
+      if ((i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) || 
+          (this.props.initialSlide && i >= this.props.initialSlide && i < this.props.initialSlide + this.props.slidesToShow)
+      ) {
         lazyLoadedList.push(i);
       }
     }
