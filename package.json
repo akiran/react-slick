@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": " React port of slick carousel",
   "main": "./lib",
   "scripts": {
@@ -59,7 +59,6 @@
     "classnames": "^2.1.1",
     "json2mq": "^0.2.0",
     "object-assign": "^2.0.0",
-    "react-dom": "^0.14.0",
     "react-responsive-mixin": "^0.3.5",
     "slick-carousel": "^1.5.5"
   },
