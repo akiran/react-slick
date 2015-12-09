@@ -10,8 +10,10 @@ export var PrevArrow = React.createClass({
     this.props.clickHandler(options, e);
   },
   render: function () {
-    var prevClasses = {'slick-prev': true};
+    var prevClasses = {};
     var prevHandler = this.clickHandler.bind(this, {message: 'previous'});
+
+    prevClasses[this.props.prevArrowClass] = true;
 
     if (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
       prevClasses['slick-disabled'] = true;
@@ -45,8 +47,10 @@ export var NextArrow = React.createClass({
     this.props.clickHandler(options, e);
   },
   render: function () {
-    var nextClasses = {'slick-next': true};
+    var nextClasses = {};
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
+
+    nextClasses[this.props.nextArrowClass] = true;
 
     if (!this.props.infinite) {
       if (this.props.centerMode && this.props.currentSlide >= (this.props.slideCount - 1)) {

@@ -24,7 +24,9 @@ var defaultProps = {
     lazyLoad: false,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
+    nextArrowClass: 'slick-next',
     prevArrow: null,
+    prevArrowClass: 'slick-prev',
     responsive: null,
     rtl: false,
     slide: 'div',
