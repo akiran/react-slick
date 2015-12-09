@@ -6,7 +6,8 @@
   "scripts": {
     "start": "./node_modules/.bin/gulp server",
     "prepublish": "./node_modules/.bin/babel ./src --out-dir ./lib && ./node_modules/.bin/gulp dist",
-    "test": "./node_modules/.bin/karma start --single-run"
+    "test": "./node_modules/.bin/karma start --single-run",
+    "install": "node node_modules/babel/bin/babel.js src --out-dir lib && node node_modules/gulp/bin/gulp.js dist"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
