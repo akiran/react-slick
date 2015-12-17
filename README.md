@@ -67,6 +67,7 @@ var SimpleSlider = React.createClass({
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
+| autoplayPause  | bool | Should the scroller pause auto scroll? | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
 | cssEase        | | | |
