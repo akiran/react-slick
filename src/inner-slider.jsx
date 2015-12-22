@@ -100,6 +100,7 @@ export var InnerSlider = React.createClass({
         slidesToShow: this.props.slidesToShow,
         currentSlide: this.state.currentSlide,
         slidesToScroll: this.props.slidesToScroll,
+        disableDots: this.props.disableDots,
         clickHandler: this.changeSlide
       };
 
@@ -116,7 +117,9 @@ export var InnerSlider = React.createClass({
       slidesToShow: this.props.slidesToShow,
       prevArrow: this.props.prevArrow,
       nextArrow: this.props.nextArrow,
-      clickHandler: this.changeSlide
+      clickHandler: this.changeSlide,
+      disableNextArrow: this.props.disableNextArrow,
+      disablePreviousArrow: this.props.disablePreviousArrow,
     };
 
     if (this.props.arrows) {

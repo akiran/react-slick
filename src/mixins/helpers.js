@@ -64,12 +64,15 @@ var helpers = {
     return elem.getBoundingClientRect().width || elem.offsetWidth;
   },
   adaptHeight: function () {
+    var self = this;
     if (this.props.adaptiveHeight) {
-      var selector = '[data-index="' + this.state.currentSlide +'"]';
-      if (this.refs.list) {
-        var slickList = ReactDOM.findDOMNode(this.refs.list);
-        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
-      }
+      setTimeout(function () {
+        var selector = '[data-index="' + self.state.currentSlide +'"]';
+        if (self.refs.list) {
+          var slickList = ReactDOM.findDOMNode(self.refs.list);
+          slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+        }
+      }, 0);
     }
   },
   slideHandler: function (index) {
