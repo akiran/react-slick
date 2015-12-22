@@ -13,7 +13,7 @@ export var PrevArrow = React.createClass({
     var prevClasses = {'slick-prev': true};
     var prevHandler = this.clickHandler.bind(this, {message: 'previous'});
 
-    if (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
+    if (this.props.disablePreviousArrow || (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow))) {
       prevClasses['slick-disabled'] = true;
       prevHandler = null;
     }
@@ -47,24 +47,28 @@ export var NextArrow = React.createClass({
   render: function () {
     var nextClasses = {'slick-next': true};
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
-
+    var disabled = false;
+    if (this.props.disableNextArrow) {
+      disabled = true;
+    }
     if (!this.props.infinite) {
       if (this.props.centerMode && this.props.currentSlide >= (this.props.slideCount - 1)) {
-        nextClasses['slick-disabled'] = true;
-        nextHandler = null;
+        disabled = true;
       } else {
         if (this.props.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
-          nextClasses['slick-disabled'] = true;
-          nextHandler = null;
+          disabled = true;
         }
       }
 
       if (this.props.slideCount <= this.props.slidesToShow) {
-        nextClasses['slick-disabled'] = true;
-        nextHandler = null;
+        disabled = true;
       }
     }
 
+    if (disabled === true) {
+      nextClasses['slick-disabled'] = true;
+      nextHandler = null;
+    }
 
     var nextArrowProps = {
       key: '1',

@@ -18,6 +18,7 @@ var defaultProps = {
     infinite: true,
     initialSlide: 0,
     lazyLoad: false,
+    pauseOnHover: false,
     responsive: null,
     rtl: false,
     slide: 'div',
@@ -39,7 +40,10 @@ var defaultProps = {
     swipeEvent: null,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
-    prevArrow: null
+    prevArrow: null,
+    disableNextArrow: null,
+    disablePreviousArrow: null,
+    disableDots: null,
 };
 
 module.exports = defaultProps;

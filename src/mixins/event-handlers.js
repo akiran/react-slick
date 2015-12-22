@@ -1,5 +1,6 @@
 'use strict';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import helpers from './helpers';
 import assign from 'object-assign';
 
 var EventHandlers = {
@@ -40,6 +41,8 @@ var EventHandlers = {
       return;
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
+    } else if (this.props.touchMove === false && e.type.indexOf('touch') !== -1) {
+      return;      
     }
     posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
     posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;
@@ -70,7 +73,7 @@ var EventHandlers = {
     }, this.props, this.state));
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
-    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
+    touchObject.swipeLength = Math.round(Math.abs(touchObject.curX - touchObject.startX));
 
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
 
@@ -113,7 +116,7 @@ var EventHandlers = {
       return;
     }
     var touchObject = this.state.touchObject;
-    var minSwipe = this.state.listWidth/this.props.touchThreshold;
+    var minSwipe = this.state.listWidth / this.props.touchThreshold;
     var swipeDirection = this.swipeDirection(touchObject);
 
     // reset the state of touch related state variables.
@@ -147,6 +150,16 @@ var EventHandlers = {
       this.setState({
         trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
       });
+    }
+  },
+  onInnerSliderEnter: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause();
+    }
+  },
+  onInnerSliderLeave: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.autoPlay();
     }
   }
 };
