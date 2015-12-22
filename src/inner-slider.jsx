@@ -115,7 +115,9 @@ export var InnerSlider = React.createClass({
       slideCount: this.state.slideCount,
       slidesToShow: this.props.slidesToShow,
       prevArrow: this.props.prevArrow,
+      prevArrowClass: this.props.prevArrowClass,
       nextArrow: this.props.nextArrow,
+      nextArrowClass: this.props.nextArrowClass,
       clickHandler: this.changeSlide
     };
 
