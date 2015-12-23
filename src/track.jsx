@@ -10,7 +10,6 @@ var getSlideClasses = (spec) => {
 
   if (spec.rtl) {
     index = spec.slideCount - 1 - spec.index;
-    console.log();
   } else {
     index = spec.index;
   }
@@ -92,7 +91,7 @@ var renderSlides = (spec) => {
         preCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: classnames(getSlideClasses(assign({index: key}, spec)), child.props.className),
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
@@ -102,7 +101,7 @@ var renderSlides = (spec) => {
         postCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: classnames(getSlideClasses(assign({index: key}, spec)), child.props.className),
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }

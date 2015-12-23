@@ -70,7 +70,7 @@ var EventHandlers = {
     }, this.props, this.state));
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
-    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
+    touchObject.swipeLength = Math.round(Math.abs(touchObject.curX - touchObject.startX));
 
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
 
@@ -113,7 +113,7 @@ var EventHandlers = {
       return;
     }
     var touchObject = this.state.touchObject;
-    var minSwipe = this.state.listWidth/this.props.touchThreshold;
+    var minSwipe = this.state.listWidth / this.props.touchThreshold;
     var swipeDirection = this.swipeDirection(touchObject);
 
     // reset the state of touch related state variables.
