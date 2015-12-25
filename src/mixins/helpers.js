@@ -133,15 +133,13 @@ var helpers = {
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = this.state.slideCount - (this.state.slideCount % this.props.slidesToScroll);
       } else {
-        currentSlide = this.state.slideCount + targetSlide;
+        currentSlide = this.state.slideCount - this.props.slidesToScroll;
       }
     } else if (targetSlide >= this.state.slideCount) {
       if(this.props.infinite === false) {
         currentSlide = this.state.slideCount - this.props.slidesToShow;
-      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
-        currentSlide = 0;
       } else {
-        currentSlide = targetSlide - this.state.slideCount;
+        currentSlide = 0;
       }
     } else {
       currentSlide = targetSlide;
