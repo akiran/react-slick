@@ -301,6 +301,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        slidesToShow: this.props.slidesToShow,
 	        currentSlide: this.state.currentSlide,
 	        slidesToScroll: this.props.slidesToScroll,
+	        disableDots: this.props.disableDots,
 	        clickHandler: this.changeSlide
 	      };
 
@@ -317,7 +318,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slidesToShow: this.props.slidesToShow,
 	      prevArrow: this.props.prevArrow,
 	      nextArrow: this.props.nextArrow,
-	      clickHandler: this.changeSlide
+	      clickHandler: this.changeSlide,
+	      disableNextArrow: this.props.disableNextArrow,
+	      disablePreviousArrow: this.props.disablePreviousArrow
 	    };
 
 	    if (this.props.arrows) {
@@ -798,12 +801,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return elem.getBoundingClientRect().width || elem.offsetWidth;
 	  },
 	  adaptHeight: function adaptHeight() {
+	    var self = this;
 	    if (this.props.adaptiveHeight) {
-	      var selector = '[data-index="' + this.state.currentSlide + '"]';
-	      if (this.refs.list) {
-	        var slickList = _ReactDOM2['default'].findDOMNode(this.refs.list);
-	        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
-	      }
+	      setTimeout(function () {
+	        var selector = '[data-index="' + self.state.currentSlide + '"]';
+	        if (self.refs.list) {
+	          var slickList = _ReactDOM2['default'].findDOMNode(self.refs.list);
+	          slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+	        }
+	      }, 0);
 	    }
 	  },
 	  slideHandler: function slideHandler(index) {
@@ -1252,7 +1258,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    swipeEvent: null,
 	    // nextArrow, prevArrow are react componets
 	    nextArrow: null,
-	    prevArrow: null
+	    prevArrow: null,
+	    disableNextArrow: null,
+	    disablePreviousArrow: null,
+	    disableDots: null
 	};
 
 	module.exports = defaultProps;
@@ -1261,17 +1270,19 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	  Copyright (c) 2015 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
+		function classNames () {
 			var classes = '';
 
 			for (var i = 0; i < arguments.length; i++) {
@@ -1280,15 +1291,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
+				if (argType === 'string' || argType === 'number') {
 					classes += ' ' + arg;
-
 				} else if (Array.isArray(arg)) {
 					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
+						if (hasOwn.call(arg, key) && arg[key]) {
 							classes += ' ' + key;
 						}
 					}
@@ -1300,15 +1309,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1494,7 +1502,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // In Autoplay the focus stays on clicked button even after transition
 	    // to next slide. That only goes away by click somewhere outside
 	    e.preventDefault();
-	    this.props.clickHandler(options);
+	    if (!this.props.disableDots) {
+	      this.props.clickHandler(options);
+	    }
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -1573,7 +1583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var prevClasses = { 'slick-prev': true };
 	    var prevHandler = this.clickHandler.bind(this, { message: 'previous' });
 
-	    if (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
+	    if (this.props.disablePreviousArrow || !this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
 	      prevClasses['slick-disabled'] = true;
 	      prevHandler = null;
 	    }
@@ -1613,22 +1623,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	  render: function render() {
 	    var nextClasses = { 'slick-next': true };
 	    var nextHandler = this.clickHandler.bind(this, { message: 'next' });
-
+	    var disabled = false;
+	    if (this.props.disableNextArrow) {
+	      disabled = true;
+	    }
 	    if (!this.props.infinite) {
 	      if (this.props.centerMode && this.props.currentSlide >= this.props.slideCount - 1) {
-	        nextClasses['slick-disabled'] = true;
-	        nextHandler = null;
+	        disabled = true;
 	      } else {
 	        if (this.props.currentSlide >= this.props.slideCount - this.props.slidesToShow) {
-	          nextClasses['slick-disabled'] = true;
-	          nextHandler = null;
+	          disabled = true;
 	        }
 	      }
 
 	      if (this.props.slideCount <= this.props.slidesToShow) {
-	        nextClasses['slick-disabled'] = true;
-	        nextHandler = null;
+	        disabled = true;
 	      }
+	    }
+
+	    if (disabled === true) {
+	      nextClasses['slick-disabled'] = true;
+	      nextHandler = null;
 	    }
 
 	    var nextArrowProps = {
