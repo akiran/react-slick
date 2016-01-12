@@ -135,7 +135,7 @@ var helpers = {
       } else {
         currentSlide = this.state.slideCount + targetSlide;
       }
-    } else if (targetSlide >= (this.state.slideCount - this.props.slidesToShow)) {
+    } else if (targetSlide >= this.state.slideCount) {
       if(this.props.infinite === false) {
         currentSlide = this.state.slideCount - this.props.slidesToShow;
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
@@ -143,6 +143,8 @@ var helpers = {
       } else {
         currentSlide = targetSlide - this.state.slideCount;
       }
+    } else if (targetSlide >= (this.state.slideCount - this.props.slidesToShow) && this.props.infinite === false) {
+      currentSlide = this.state.slideCount - this.props.slidesToShow;
     } else {
       currentSlide = targetSlide;
     }
