@@ -18,6 +18,25 @@ export var Dots = React.createClass({
     e.preventDefault();
     this.props.clickHandler(options);
   },
+
+  isDisplayed: function (i, dotCount) {
+    var currentSlide   = this.props.currentSlide,
+        //slideCount     = this.props.slideCount,
+        slidesToScroll = this.props.slidesToScroll,
+        slidesToShow   = this.props.slidesToShow;
+
+    var displayAllDotSlides = slidesToShow % slidesToScroll === 0;
+
+    if (this.props.centerMode || this.props.infinite || dotCount == slidesToShow || !displayAllDotSlides) {
+      return (currentSlide === i * slidesToScroll);
+    }
+
+    var dotSlidesDisplayeds = ((i >= currentSlide) && (i < (currentSlide + slidesToShow))),
+        dotSlidesBetweenDisplayeds = ((i >= (dotCount - slidesToShow)) && (currentSlide >= (dotCount - slidesToShow)));
+
+    return dotSlidesDisplayeds || dotSlidesBetweenDisplayeds;
+  },
+
   render: function () {
 
     var dotCount = getDotCount({
@@ -31,7 +50,8 @@ export var Dots = React.createClass({
     var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map((x, i) => {
 
       var className = classnames({
-        'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll)
+        'slick-active': (this.props.currentSlide === i * this.props.slidesToScroll),
+        'slick-displayed': this.isDisplayed(i, dotCount)
       });
 
       var dotOptions = {
