@@ -28,7 +28,9 @@ export var InnerSlider = React.createClass({
     });
     var lazyLoadedList = [];
     for (var i = 0; i < this.props.children.length; i++) {
-      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
+      if ((i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) || 
+          (this.props.initialSlide && i >= this.props.initialSlide && i < this.props.initialSlide + this.props.slidesToShow)
+      ) {
         lazyLoadedList.push(i);
       }
     }
@@ -43,6 +45,7 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
+
     if (window.addEventListener) {
       window.addEventListener('resize', this.onWindowResized);
     } else {
@@ -52,9 +55,14 @@ export var InnerSlider = React.createClass({
   componentWillUnmount: function componentWillUnmount() {
     if (window.addEventListener) {
       window.removeEventListener('resize', this.onWindowResized);
+      window.removeEventListener('blur', this.onWindowInactive);
+      window.removeEventListener('focus', this.onWindowActive);
     } else {
       window.detachEvent('onresize', this.onWindowResized);
+      window.detachEvent('blur', this.onWindowInactive);
+      window.detachEvent('focus', this.onWindowActive);
     }
+
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
     }
@@ -75,6 +83,9 @@ export var InnerSlider = React.createClass({
   },
   onWindowResized: function () {
     this.update(this.props);
+    this.state.animating = false;
+    /* Reset autoplay timer so that autoplaying does not occur during resize */
+    this.autoPlay();
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
@@ -105,6 +116,7 @@ export var InnerSlider = React.createClass({
         slidesToShow: this.props.slidesToShow,
         currentSlide: this.state.currentSlide,
         slidesToScroll: this.props.slidesToScroll,
+        disableDots: this.props.disableDots,
         clickHandler: this.changeSlide
       };
 
@@ -121,13 +133,20 @@ export var InnerSlider = React.createClass({
       slidesToShow: this.props.slidesToShow,
       prevArrow: this.props.prevArrow,
       nextArrow: this.props.nextArrow,
-      clickHandler: this.changeSlide
+      clickHandler: this.changeSlide,
+      disableNextArrow: this.props.disableNextArrow,
+      disablePreviousArrow: this.props.disablePreviousArrow,
     };
 
     if (this.props.arrows) {
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
     }
+    
+    var handleTouchStart = (this.props.touchMove === false) ? null : this.swipeStart;
+    var handleTouchMove = (this.props.touchMove === false) ? null : (this.state.dragging ? this.swipeMove : null);
+    var handleTouchEnd = (this.props.touchMove === false) ? null : this.swipeEnd;
+    var handleTouchCancel = (this.props.touchMove === false) ? null : (this.state.dragging ? this.swipeEnd: null);
 
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
@@ -138,10 +157,10 @@ export var InnerSlider = React.createClass({
           onMouseMove={this.state.dragging ? this.swipeMove: null}
           onMouseUp={this.swipeEnd}
           onMouseLeave={this.state.dragging ? this.swipeEnd: null}
-          onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove: null}
-          onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}>
           <Track ref='track' {...trackProps}>
             {this.props.children}
           </Track>

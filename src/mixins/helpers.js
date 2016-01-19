@@ -64,12 +64,15 @@ var helpers = {
     return elem.getBoundingClientRect().width || elem.offsetWidth;
   },
   adaptHeight: function () {
+    var self = this;
     if (this.props.adaptiveHeight) {
-      var selector = '[data-index="' + this.state.currentSlide +'"]';
-      if (this.refs.list) {
-        var slickList = ReactDOM.findDOMNode(this.refs.list);
-        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
-      }
+      setTimeout(function () {
+        var selector = '[data-index="' + self.state.currentSlide +'"]';
+        if (self.refs.list) {
+          var slickList = ReactDOM.findDOMNode(self.refs.list);
+          slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+        }
+      }, 0);
     }
   },
   slideHandler: function (index) {
@@ -113,6 +116,8 @@ var helpers = {
           this.props.afterChange(currentSlide);
         }
         ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
+
+        this.autoPlay();
       };
 
       this.setState({
@@ -126,7 +131,6 @@ var helpers = {
         this.props.beforeChange(this.state.currentSlide, currentSlide);
       }
 
-      this.autoPlay();
       return;
     }
 
@@ -145,7 +149,7 @@ var helpers = {
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = 0;
       } else {
-        currentSlide = targetSlide - this.state.slideCount;
+        currentSlide = targetSlide % this.state.slideCount;
       }
     } else {
       currentSlide = targetSlide;
@@ -195,10 +199,12 @@ var helpers = {
       this.setState({
         currentSlide: currentSlide,
         trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
-      }, function () {
+      }, () => {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
+
+        this.autoPlay();
       });
 
     } else {
@@ -216,19 +222,19 @@ var helpers = {
           this.props.afterChange(currentSlide);
         }
         ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
+
+        this.autoPlay();
       };
 
       this.setState({
         animating: true,
-        currentSlide: targetSlide,
+        currentSlide: currentSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
         ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       });
 
     }
-
-    this.autoPlay();
   },
   swipeDirection: function (touchObject) {
     var xDist, yDist, r, swipeAngle;
