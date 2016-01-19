@@ -253,7 +253,7 @@ var helpers = {
           this.state.currentSlide - this.props.slidesToScroll:
           this.state.currentSlide + this.props.slidesToScroll;
 
-        this.slideHandler(nextIndex%this.state.slideCount);
+        this.slideHandler(nextIndex);
       }
     };
     if (this.props.autoplay) {
