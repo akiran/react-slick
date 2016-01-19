@@ -22,6 +22,11 @@ var EventHandlers = {
       if (targetSlide === options.currentSlide) {
         return;
       }
+    } else if (options.message === 'index') {
+      targetSlide = options.index;
+      if (targetSlide === options.currentSlide) {
+        return;
+      }
     }
 
     this.slideHandler(targetSlide);
