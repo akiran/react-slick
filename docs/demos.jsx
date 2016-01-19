@@ -411,6 +411,39 @@ var Fade = React.createClass({
   }
 });
 
+var SlickGoTo = React.createClass({
+  getInitialState: function () {
+    return {
+      slickGoTo: 0
+    };
+  },
+  changeHandler: function(e) {
+    this.setState({slickGoTo: e.target.value});
+  },
+  render: function () {
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      slickGoTo: this.state.slickGoTo || 0
+    };
+    return (
+      <div>
+        <h2>Slick Go To</h2>
+        <input onChange={this.changeHandler} value={this.state.slickGoTo} type='range' min={0} max={3} />
+        <Slider {...settings}>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 var App = React.createClass({
   render: function () {
     //need to add variable width and center mode demo
@@ -429,6 +462,7 @@ var App = React.createClass({
         <AdaptiveHeight />
         <LazyLoad />
         <Fade />
+        <SlickGoTo />
       </div>
     );
   }
