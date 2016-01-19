@@ -1,5 +1,6 @@
 'use strict';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import helpers from './helpers';
 import assign from 'object-assign';
 
 var EventHandlers = {
@@ -147,6 +148,16 @@ var EventHandlers = {
       this.setState({
         trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
       });
+    }
+  },
+  onInnerSliderEnter: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause();
+    }
+  },
+  onInnerSliderLeave: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.autoPlay();
     }
   }
 };
