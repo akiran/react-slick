@@ -22,6 +22,7 @@ var SingleItem = React.createClass({
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      waitForAnimate: false,
       beforeChange: function (currentSlide, nextSlide) {
         console.log('before change', currentSlide, nextSlide);
       },

@@ -32,7 +32,7 @@ var defaultProps = {
     useCSS: true,
     variableWidth: false,
     vertical: false,
-    // waitForAnimate: true,
+    waitForAnimate: true,
     afterChange: null,
     beforeChange: null,
     edgeEvent: null,
