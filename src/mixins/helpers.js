@@ -79,6 +79,10 @@ var helpers = {
     var targetLeft, currentLeft;
     var callback;
 
+    if (this.props.waitForAnimate && this.state.animating) {
+	return;
+    }
+
     if (this.state.currentSlide === index) {
       return;
     }
@@ -253,10 +257,10 @@ var helpers = {
     var play = () => {
       if (this.state.mounted) {
         var nextIndex = this.props.rtl ?
-          this.state.currentSlide - this.props.slidesToScroll:
-          this.state.currentSlide + this.props.slidesToScroll;
+        this.state.currentSlide - this.props.slidesToScroll:
+        this.state.currentSlide + this.props.slidesToScroll;
 
-        this.slideHandler(nextIndex%this.state.slideCount);
+        this.slideHandler(nextIndex);
       }
     };
     if (this.props.autoplay) {
@@ -264,6 +268,11 @@ var helpers = {
       this.setState({
         autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
       });
+    }
+  },
+  pause: function () {
+    if (this.state.autoPlayTimer) {
+      window.clearTimeout(this.state.autoPlayTimer);
     }
   }
 };

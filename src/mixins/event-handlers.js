@@ -1,5 +1,6 @@
 'use strict';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import helpers from './helpers';
 import assign from 'object-assign';
 
 var EventHandlers = {
@@ -18,6 +19,11 @@ var EventHandlers = {
     } else if (options.message === 'dots') {
       // Click on dots
       targetSlide = options.index * options.slidesToScroll;
+      if (targetSlide === options.currentSlide) {
+        return;
+      }
+    } else if (options.message === 'index') {
+      targetSlide = options.index;
       if (targetSlide === options.currentSlide) {
         return;
       }
@@ -147,6 +153,16 @@ var EventHandlers = {
       this.setState({
         trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
       });
+    }
+  },
+  onInnerSliderEnter: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause();
+    }
+  },
+  onInnerSliderLeave: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.autoPlay();
     }
   }
 };
