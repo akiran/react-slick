@@ -4,7 +4,7 @@ import React from 'react';
 import assign from 'object-assign';
 import classnames from 'classnames';
 
-var getSlideClasses = (spec) => {
+var getSlideClasses = (spec, childClassName) => {
   var slickActive, slickCenter, slickCloned;
   var centerOffset, index;
 
@@ -30,7 +30,7 @@ var getSlideClasses = (spec) => {
     'slick-active': slickActive,
     'slick-center': slickCenter,
     'slick-cloned': slickCloned
-  });
+  }, childClassName);
 };
 
 var getSlideStyle = function (spec) {
@@ -66,20 +66,13 @@ var renderSlides = (spec) => {
       child = (<div></div>);
     }
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
-    var slickClasses = getSlideClasses(assign({index: index}, spec));
-    var cssClasses;
-
-    if (child.props.className) {
-        cssClasses = classnames(slickClasses, child.props.className);
-    }
-    else {
-        cssClasses = slickClasses;
-    }
+    var childClassName = child.props.className || '';
+    var slickClasses = getSlideClasses(assign({index: index}, spec), childClassName);
 
     slides.push(React.cloneElement(child, {
       key: index,
       'data-index': index,
-      className: cssClasses,
+      className: slickClasses,
       style: assign({}, child.props.style || {}, childStyle)
     }));
 
@@ -92,7 +85,7 @@ var renderSlides = (spec) => {
         preCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: getSlideClasses(assign({index: key}, spec), childClassName),
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
@@ -102,7 +95,7 @@ var renderSlides = (spec) => {
         postCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: getSlideClasses(assign({index: key}, spec), childClassName),
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
