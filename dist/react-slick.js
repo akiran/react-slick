@@ -244,17 +244,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
-	    if (window.addEventListener) {
-	      window.addEventListener('resize', this.onWindowResized);
+
+	    if (this.props.debounceResizing) {
+	      this.onWindowResizedFunc = this.debounce(this.onWindowResized, 300);
 	    } else {
-	      window.attachEvent('onresize', this.onWindowResized);
+	      this.onWindowResizedFunc = this.onWindowResized;
+	    }
+
+	    if (window.addEventListener) {
+	      window.addEventListener('resize', this.onWindowResizedDebounced);
+	    } else {
+	      window.attachEvent('onresize', this.onWindowResizedDebounced);
 	    }
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    if (window.addEventListener) {
-	      window.removeEventListener('resize', this.onWindowResized);
+	      window.removeEventListener('resize', this.onWindowResizedDebounced);
 	    } else {
-	      window.detachEvent('onresize', this.onWindowResized);
+	      window.detachEvent('onresize', this.onWindowResizedDebounced);
 	    }
 	    if (this.state.autoPlayTimer) {
 	      window.clearTimeout(this.state.autoPlayTimer);
@@ -997,6 +1004,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.state.autoPlayTimer) {
 	      window.clearTimeout(this.state.autoPlayTimer);
 	    }
+	  },
+	  debounce: function debounce(func, wait, immediate) {
+	    var timeout;
+	    return function () {
+	      var context = this;
+	      var args = arguments;
+
+	      var later = function later() {
+	        timeout = null;
+	        if (!immediate) {
+	          func.apply(context, args);
+	        }
+	      };
+
+	      var callNow = immediate && !timeout;
+
+	      clearTimeout(timeout);
+
+	      timeout = setTimeout(later, wait || 200);
+
+	      if (callNow) {
+	        func.apply(context, args);
+	      }
+	    };
 	  }
 	};
 
@@ -1256,6 +1287,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    centerMode: false,
 	    centerPadding: '50px',
 	    cssEase: 'ease',
+	    debounceResizing: false,
 	    dots: false,
 	    dotsClass: 'slick-dots',
 	    draggable: true,
@@ -1297,18 +1329,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1316,35 +1350,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
