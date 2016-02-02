@@ -43,24 +43,17 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-    
-    if (this.props.debounceResizing) {
-      this.onWindowResizedFunc = this.debounce(this.onWindowResized, 300);
-    } else {
-      this.onWindowResizedFunc = this.onWindowResized;
-    }
-
     if (window.addEventListener) {
-      window.addEventListener('resize', this.onWindowResizedDebounced);
+      window.addEventListener('resize', this.onWindowResized);
     } else {
-      window.attachEvent('onresize', this.onWindowResizedDebounced);
+      window.attachEvent('onresize', this.onWindowResized);
     }
   },
   componentWillUnmount: function componentWillUnmount() {
     if (window.addEventListener) {
-      window.removeEventListener('resize', this.onWindowResizedDebounced);
+      window.removeEventListener('resize', this.onWindowResized);
     } else {
-      window.detachEvent('onresize', this.onWindowResizedDebounced);
+      window.detachEvent('onresize', this.onWindowResized);
     }
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
