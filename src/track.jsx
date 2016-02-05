@@ -10,7 +10,6 @@ var getSlideClasses = (spec) => {
 
   if (spec.rtl) {
     index = spec.slideCount - 1 - spec.index;
-    console.log();
   } else {
     index = spec.index;
   }
