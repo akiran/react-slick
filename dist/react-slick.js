@@ -384,14 +384,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	var EventHandlers = {
 	  // Event handler for previous and next
 	  changeSlide: function changeSlide(options) {
-	    var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
+	    var indexOffset, slideOffset, unevenOffset, targetSlide;
 	    unevenOffset = this.state.slideCount % this.props.slidesToScroll !== 0;
 	    indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
 
 	    if (options.message === 'previous') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-	      previousInt = this.state.currentSlide - slideOffset;
-	      targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
+	      targetSlide = this.state.currentSlide - slideOffset;
 	    } else if (options.message === 'next') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : indexOffset;
 	      targetSlide = this.state.currentSlide + slideOffset;
@@ -1298,20 +1297,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
-	/* global define */
 
 	(function () {
 		'use strict';
 
-		var hasOwn = {}.hasOwnProperty;
-
 		function classNames () {
-			var classes = [];
+
+			var classes = '';
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1319,32 +1316,35 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
+				if ('string' === argType || 'number' === argType) {
+					classes += ' ' + arg;
+
 				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
+					classes += ' ' + classNames.apply(null, arg);
+
+				} else if ('object' === argType) {
 					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
+						if (arg.hasOwnProperty(key) && arg[key]) {
+							classes += ' ' + key;
 						}
 					}
 				}
 			}
 
-			return classes.join(' ');
+			return classes.substr(1);
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true){
+			// AMD. Register as an anonymous module.
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
+
 	}());
 
 
@@ -1378,6 +1378,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (spec.rtl) {
 	    index = spec.slideCount - 1 - spec.index;
+	    console.log();
 	  } else {
 	    index = spec.index;
 	  }
