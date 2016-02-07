@@ -384,13 +384,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var EventHandlers = {
 	  // Event handler for previous and next
 	  changeSlide: function changeSlide(options) {
-	    var indexOffset, slideOffset, unevenOffset, targetSlide;
+	    var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
 	    unevenOffset = this.state.slideCount % this.props.slidesToScroll !== 0;
 	    indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
 
 	    if (options.message === 'previous') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-	      targetSlide = this.state.currentSlide - slideOffset;
+	      previousInt = this.state.currentSlide - slideOffset;
+	      targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
 	    } else if (options.message === 'next') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : indexOffset;
 	      targetSlide = this.state.currentSlide + slideOffset;
@@ -1378,7 +1379,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (spec.rtl) {
 	    index = spec.slideCount - 1 - spec.index;
-	    console.log();
 	  } else {
 	    index = spec.index;
 	  }
