@@ -370,11 +370,37 @@ var LazyLoad = React.createClass({
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
     };
     return (
       <div>
-        <h2> Lazy Load</h2>
+        <h2>Lazy Load</h2>
+        <Slider {...settings}>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
+var LazyLoadInitialSlide = React.createClass({
+
+  render: function () {
+    var settings = {
+      dots: true,
+      lazyLoad: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      initialSlide: 2,
+    };
+    return (
+      <div>
+        <h2>Lazy Load With initialSlide:2</h2>
         <Slider {...settings}>
           <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
           <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
@@ -461,6 +487,7 @@ var App = React.createClass({
         <VariableWidth />
         <AdaptiveHeight />
         <LazyLoad />
+        <LazyLoadInitialSlide />
         <Fade />
         <SlickGoTo />
       </div>
