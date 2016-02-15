@@ -220,7 +220,7 @@ var helpers = {
 
       this.setState({
         animating: true,
-        currentSlide: targetSlide,
+        currentSlide: currentSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
         ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
