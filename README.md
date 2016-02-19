@@ -72,6 +72,7 @@ var SimpleSlider = React.createClass({
 | cssEase        | | | |
 | dots           |bool | Should we show the dots at the bottom of the gallery | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |
+| dotsHumanReadable | bool  | Should the numbers in the dots start at 1? | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
 | easing         | string | | |
 | fade           | bool | Slides use fade for transition  | Yes |
