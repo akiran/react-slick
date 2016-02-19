@@ -40,10 +40,12 @@ export var Dots = React.createClass({
         slidesToScroll: this.props.slidesToScroll,
         currentSlide: this.props.currentSlide
       };
+      
+      var dotContents = this.props.dotsHumanReadable ? i + 1 : i;
 
       return (
         <li key={i} className={className}>
-          <button onClick={this.clickHandler.bind(this, dotOptions)}>{i}</button>
+          <button onClick={this.clickHandler.bind(this, dotOptions)}>{dotContents}</button>
         </li>
       );
     });
