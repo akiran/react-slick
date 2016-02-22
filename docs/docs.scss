@@ -1,10 +1,10 @@
 
-@import "foundation-apps/scss/foundation";
+@import "foundation-apps/scss/foundation.scss";
 $primary-color: #00558B;
 
 $slick-font-path: "/fonts/";
 $slick-arrow-color: $primary-color;
 
-@import "slick-carousel/slick/slick";
-@import "slick-carousel/slick/slick-theme";
-@import "./style";
+@import "slick-carousel/slick/slick.scss";
+@import "slick-carousel/slick/slick-theme.scss";
+@import "./style.scss";
