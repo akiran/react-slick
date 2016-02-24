@@ -70,13 +70,13 @@ var SimpleSlider = React.createClass({
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
 | cssEase        | | | |
-| dots           |bool | Should we show the dots at the bottom of the gallery | Yes |
+| dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
 | easing         | string | | |
 | fade           | bool | Slides use fade for transition  | Yes |
 | focusOnSelect  | bool | | |
-| infinite       | should the gallery wrap around it's contents | Yes |
+| infinite       | bool | should the gallery wrap around it's contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
