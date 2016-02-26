@@ -5,8 +5,6 @@
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-For React 0.12 or below version support, please stick with react-slick@0.7.2
-
 # Road to 1.0
 react-slick is under active development now.
 Soon this project will have all the features of slick carousel.
