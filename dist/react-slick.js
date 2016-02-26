@@ -228,7 +228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      mounted: true
 	    });
 	    var lazyLoadedList = [];
-	    for (var i = 0; i < this.props.children.length; i++) {
+	    for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
 	      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
 	        lazyLoadedList.push(i);
 	      }
@@ -257,7 +257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.detachEvent('onresize', this.onWindowResized);
 	    }
 	    if (this.state.autoPlayTimer) {
-	      window.clearTimeout(this.state.autoPlayTimer);
+	      window.clearInterval(this.state.autoPlayTimer);
 	    }
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -390,8 +390,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (options.message === 'previous') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-	      previousInt = this.state.currentSlide - slideOffset;
-	      targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
+	      targetSlide = this.state.currentSlide - slideOffset;
+	      if (this.props.lazyLoad) {
+	        previousInt = this.state.currentSlide - slideOffset;
+	        targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
+	      }
 	    } else if (options.message === 'next') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : indexOffset;
 	      targetSlide = this.state.currentSlide + slideOffset;
@@ -955,7 +958,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 
-	    this.autoPlay();
+	    if (!this.state.autoPlayTimer) {
+	      this.autoPlay();
+	    }
 	  },
 	  swipeDirection: function swipeDirection(touchObject) {
 	    var xDist, yDist, r, swipeAngle;
@@ -983,20 +988,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var play = function play() {
 	      if (_this2.state.mounted) {
 	        var nextIndex = _this2.props.rtl ? _this2.state.currentSlide - _this2.props.slidesToScroll : _this2.state.currentSlide + _this2.props.slidesToScroll;
-
 	        _this2.slideHandler(nextIndex);
 	      }
 	    };
 	    if (this.props.autoplay) {
-	      window.clearTimeout(this.state.autoPlayTimer);
 	      this.setState({
-	        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+	        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
 	      });
 	    }
 	  },
 	  pause: function pause() {
 	    if (this.state.autoPlayTimer) {
-	      window.clearTimeout(this.state.autoPlayTimer);
+	      window.clearInterval(this.state.autoPlayTimer);
 	    }
 	  }
 	};
@@ -1562,7 +1565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2['default'].createElement(
 	          'button',
 	          { onClick: _this.clickHandler.bind(_this, dotOptions) },
-	          i
+	          i + 1
 	        )
 	      );
 	    });
