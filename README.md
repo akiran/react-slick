@@ -63,6 +63,8 @@ var SimpleSlider = React.createClass({
 | className      | String |Additional class name for the inner slider div | Yes |
 | adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
+| nextArrow      | React Component | Use this component for the next arrow button | Yes |
+| prevArrow      | React Component | Use this component for the prev arrow button | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
@@ -93,6 +95,26 @@ var SimpleSlider = React.createClass({
 | afterChange | function | callback function called after the current index changes | Yes |
 | beforeChange | function | callback function called before the current index changes | Yes |
 | slickGoTo | int | go to the specified slide number
+
+### Custom next/prev arrows
+
+To customize the next/prev arrow elements, simply create new React components and set them
+as the values of nextArrow and prevArrow.
+
+````
+class LeftNavButton extends React.Component {
+  render() {
+    return <button {...this.props}>Next</button>  
+  }
+}
+
+````
+
+Important: be sure that you pass your component's props to your clickable element
+like the example above. If you don't, your custom component won't trigger the click handler.
+
+You can also set onClick={this.props.onClick} if you only want to set the click handler. 
+
 
 ### Development
 Want to run demos locally
