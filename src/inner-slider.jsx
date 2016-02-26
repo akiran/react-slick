@@ -75,6 +75,9 @@ export var InnerSlider = React.createClass({
   },
   onWindowResized: function () {
     this.update(this.props);
+    this.state.animating = false;
+    /* Reset autoplay timer so that autoplaying does not occur during resize */
+    this.autoPlay();
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
