@@ -107,3 +107,6 @@ open http://localhost:8000
 
 ### Polyfills for old IE support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
+
+For premium support, contact me on codementor
+[![Contact me on Codementor](https://cdn.codementor.io/badges/contact_me_github.svg)](https://www.codementor.io/akiran?utm_source=github&utm_medium=button&utm_term=akiran&utm_campaign=github)
