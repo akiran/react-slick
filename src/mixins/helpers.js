@@ -80,10 +80,6 @@ var helpers = {
     var callback;
 
     if (this.props.waitForAnimate && this.state.animating) {
-	return;
-    }
-
-    if (this.state.currentSlide === index) {
       return;
     }
 
