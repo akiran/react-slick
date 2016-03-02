@@ -24,7 +24,7 @@ var getSlideClasses = (spec) => {
   } else {
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
-  return classnames(this.props.className, {
+  return classnames({
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
@@ -70,8 +70,7 @@ var renderSlides = (spec) => {
 
     if (child.props.className) {
         cssClasses = classnames(slickClasses, child.props.className);
-    }
-    else {
+    } else {
         cssClasses = slickClasses;
     }
 
@@ -91,7 +90,7 @@ var renderSlides = (spec) => {
         preCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: classnames(getSlideClasses(assign({index: key}, spec)), child.props.className),
+          className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
@@ -101,7 +100,7 @@ var renderSlides = (spec) => {
         postCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: classnames(getSlideClasses(assign({index: key}, spec)), child.props.className),
+          className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
