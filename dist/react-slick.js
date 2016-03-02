@@ -951,7 +951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.setState({
 	        animating: true,
-	        currentSlide: targetSlide,
+	        currentSlide: currentSlide,
 	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2['default'])({ left: targetLeft }, this.props, this.state))
 	      }, function () {
 	        _reactLibReactTransitionEvents2['default'].addEndEventListener(_ReactDOM2['default'].findDOMNode(this.refs.track), callback);
