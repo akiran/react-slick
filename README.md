@@ -5,8 +5,6 @@
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-For React 0.12 or below version support, please stick with react-slick@0.7.2
-
 # Road to 1.0
 react-slick is under active development now.
 Soon this project will have all the features of slick carousel.
@@ -26,6 +24,12 @@ or add cdn link in your html
 ```
 
 ### [Demos](http://webrafter.com/opensource/react-slick)
+
+### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
+Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
+
+### Filling issues
+Please replicate your issue with [jsfiddile template](https://jsfiddle.net/kirana/20bumb4g/) and post it along with issue to make it easy for me to debug.
 
 
 ### Starter Kit
@@ -65,6 +69,8 @@ var SimpleSlider = React.createClass({
 | className      | String |Additional class name for the inner slider div | Yes |
 | adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
+| nextArrow      | React Component | Use this component for the next arrow button | Yes |
+| prevArrow      | React Component | Use this component for the prev arrow button | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
@@ -96,6 +102,26 @@ var SimpleSlider = React.createClass({
 | beforeChange | function | callback function called before the current index changes | Yes |
 | slickGoTo | int | go to the specified slide number
 
+### Custom next/prev arrows
+
+To customize the next/prev arrow elements, simply create new React components and set them
+as the values of nextArrow and prevArrow.
+
+````
+class LeftNavButton extends React.Component {
+  render() {
+    return <button {...this.props}>Next</button>  
+  }
+}
+
+````
+
+Important: be sure that you pass your component's props to your clickable element
+like the example above. If you don't, your custom component won't trigger the click handler.
+
+You can also set onClick={this.props.onClick} if you only want to set the click handler. 
+
+
 ### Development
 Want to run demos locally
 ```
@@ -107,3 +133,6 @@ open http://localhost:8000
 
 ### Polyfills for old IE support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
+
+For premium support, contact me on codementor
+[![Contact me on Codementor](https://cdn.codementor.io/badges/contact_me_github.svg)](https://www.codementor.io/akiran?utm_source=github&utm_medium=button&utm_term=akiran&utm_campaign=github)
