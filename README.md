@@ -25,6 +25,12 @@ or add cdn link in your html
 
 ### [Demos](http://webrafter.com/opensource/react-slick)
 
+### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
+Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
+
+### Filling issues
+Please replicate your issue with [jsfiddile template](https://jsfiddle.net/kirana/20bumb4g/) and post it along with issue to make it easy for me to debug.
+
 
 ### Starter Kit
 Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly
