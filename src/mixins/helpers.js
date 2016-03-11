@@ -259,7 +259,7 @@ var helpers = {
       }
     };
     if (this.props.autoplay) {
-      window.clearInterval(this.props.autoplaySpeed);
+      window.clearInterval(this.props.autoPlayTimer);
       this.setState({
         autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
       });
