@@ -36,7 +36,7 @@
     "eslint-plugin-react": "^2.4.0",
     "express": "^5.0.0-alpha.1",
     "foundation-apps": "^1.1.0",
-    "gulp": "^3.9.11",
+    "gulp": "^3.9.1",
     "gulp-sass": "^2.0.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13",
