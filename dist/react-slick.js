@@ -245,11 +245,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.initialize(this.props);
 	    this.adaptHeight();
 
-	    if (this.props.debounceResizing) {
-	      this.onWindowResizedFunc = this.debounce(this.onWindowResized, 300);
-	    } else {
-	      this.onWindowResizedFunc = this.onWindowResized;
-	    }
+	    this.onWindowResizedFunc = this.debounce(this.onWindowResized, 50);
 
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResizedDebounced);
