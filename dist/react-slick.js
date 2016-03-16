@@ -1283,7 +1283,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    centerMode: false,
 	    centerPadding: '50px',
 	    cssEase: 'ease',
-	    debounceResizing: false,
 	    dots: false,
 	    dotsClass: 'slick-dots',
 	    draggable: true,
