@@ -92,7 +92,7 @@ var SimpleSlider = React.createClass({
 | slidesToScroll | int | Number of slides to scroll for each navigation item
 | speed | int |||
 | swipe | bool |||
-| swipeToSlide | bool |||
+| swipeToSlide | bool |Allow users to drag or swipe directly to a slide irrespective of slidesToScroll||
 | touchMove | bool |||
 | touchThreshold | int |||
 | variableWidth | bool |||

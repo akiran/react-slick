@@ -62,9 +62,9 @@ export var InnerSlider = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     if (this.props.slickGoTo != nextProps.slickGoTo) {
       this.changeSlide({
-          message: 'index',
-          index: nextProps.slickGoTo,
-          currentSlide: this.state.currentSlide
+        message: 'index',
+        index: nextProps.slickGoTo,
+        currentSlide: this.state.currentSlide
       });
     } else {
       this.update(nextProps);
@@ -91,6 +91,7 @@ export var InnerSlider = React.createClass({
       rtl: this.props.rtl,
       slideWidth: this.state.slideWidth,
       slidesToShow: this.props.slidesToShow,
+      swipeToSlide: this.props.swipeToSlide,
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
       variableWidth: this.props.variableWidth
@@ -130,26 +131,26 @@ export var InnerSlider = React.createClass({
     }
 
     return (
-      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
-        <div
-          ref='list'
-          className="slick-list"
-          onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove: null}
-          onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd: null}
-          onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove: null}
-          onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
-          <Track ref='track' {...trackProps}>
-            {this.props.children}
-          </Track>
+        <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+          <div
+              ref='list'
+              className="slick-list"
+              onMouseDown={this.swipeStart}
+              onMouseMove={this.state.dragging ? this.swipeMove: null}
+              onMouseUp={this.swipeEnd}
+              onMouseLeave={this.state.dragging ? this.swipeEnd: null}
+              onTouchStart={this.swipeStart}
+              onTouchMove={this.state.dragging ? this.swipeMove: null}
+              onTouchEnd={this.swipeEnd}
+              onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
+            <Track ref='track' {...trackProps}>
+              {this.props.children}
+            </Track>
+          </div>
+          {prevArrow}
+          {nextArrow}
+          {dots}
         </div>
-        {prevArrow}
-        {nextArrow}
-        {dots}
-      </div>
     );
   }
 });

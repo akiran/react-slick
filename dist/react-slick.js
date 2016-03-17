@@ -292,6 +292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      rtl: this.props.rtl,
 	      slideWidth: this.state.slideWidth,
 	      slidesToShow: this.props.slidesToShow,
+	      swipeToSlide: this.props.swipeToSlide,
 	      slideCount: this.state.slideCount,
 	      trackStyle: this.state.trackStyle,
 	      variableWidth: this.props.variableWidth
@@ -513,12 +514,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!touchObject.swipeLength) {
 	      return;
 	    }
-	    if (touchObject.swipeLength > minSwipe) {
+	    if (touchObject.swipeLength > minSwipe || this.props.swipeToSlide) {
 	      e.preventDefault();
+	      var slidesToScroll = this.props.slidesToScroll;
+
+	      if (this.props.swipeToSlide) {
+	        slidesToScroll = Math.round(touchObject.swipeLength / this.state.slideWidth);
+	      }
 	      if (swipeDirection === 'left') {
-	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	        this.slideHandler(this.state.currentSlide + slidesToScroll);
 	      } else if (swipeDirection === 'right') {
-	        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+	        this.slideHandler(this.state.currentSlide - slidesToScroll);
 	      } else {
 	        this.slideHandler(this.state.currentSlide);
 	      }
@@ -772,12 +778,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var listWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.list));
 	    var trackWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.track));
 	    var slideWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this)) / props.slidesToShow;
+	    var currentSlide = this.state.currentSlide;
+
+	    if (currentSlide > slideCount - props.slidesToShow) {
+	      currentSlide = slideCount - props.slidesToShow;
+	    }
 
 	    this.setState({
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
 	      listWidth: listWidth,
-	      trackWidth: trackWidth
+	      trackWidth: trackWidth,
+	      currentSlide: currentSlide
 	    }, function () {
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
@@ -812,10 +824,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var callback;
 
 	    if (this.props.waitForAnimate && this.state.animating) {
-	      return;
-	    }
-
-	    if (this.state.currentSlide === index) {
 	      return;
 	    }
 
@@ -871,9 +879,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else {
 	        currentSlide = this.state.slideCount + targetSlide;
 	      }
-	    } else if (targetSlide >= this.state.slideCount) {
+	    } else if (targetSlide >= this.state.slideCount - this.props.slidesToShow + (this.props.centerMode ? Math.floor(this.props.slidesToShow / 2) : 0)) {
+
 	      if (this.props.infinite === false) {
-	        currentSlide = this.state.slideCount - this.props.slidesToShow;
+	        currentSlide = this.state.slideCount - this.props.slidesToShow + (this.props.centerMode ? Math.floor(this.props.slidesToShow / 2) : 0);
 	      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
 	        currentSlide = 0;
 	      } else {
@@ -1301,18 +1310,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1320,35 +1331,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1462,7 +1470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
 	          key: key,
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1472,7 +1480,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
 	          key: key,
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1619,7 +1627,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var prevArrowProps = {
 	      key: '0',
-	      ref: 'previous',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(prevClasses),
 	      style: { display: 'block' },
@@ -1672,7 +1679,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var nextArrowProps = {
 	      key: '1',
-	      ref: 'next',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(nextClasses),
 	      style: { display: 'block' },

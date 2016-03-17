@@ -42,12 +42,18 @@ var helpers = {
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    var currentSlide = this.state.currentSlide;
+
+    if (currentSlide > slideCount - props.slidesToShow) {
+      currentSlide = slideCount - props.slidesToShow;
+    }
 
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
       listWidth: listWidth,
-      trackWidth: trackWidth
+      trackWidth: trackWidth,
+      currentSlide: currentSlide
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -135,9 +141,12 @@ var helpers = {
       } else {
         currentSlide = this.state.slideCount + targetSlide;
       }
-    } else if (targetSlide >= this.state.slideCount) {
+    } else if (targetSlide >= (this.state.slideCount - this.props.slidesToShow +
+        (this.props.centerMode ? Math.floor(this.props.slidesToShow / 2) : 0 ))) {
+
       if(this.props.infinite === false) {
-        currentSlide = this.state.slideCount - this.props.slidesToShow;
+        currentSlide = this.state.slideCount - this.props.slidesToShow
+            + (this.props.centerMode ? Math.floor(this.props.slidesToShow / 2) : 0 );
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = 0;
       } else {
@@ -238,13 +247,13 @@ var helpers = {
 
     swipeAngle = Math.round(r * 180 / Math.PI);
     if (swipeAngle < 0) {
-        swipeAngle = 360 - Math.abs(swipeAngle);
+      swipeAngle = 360 - Math.abs(swipeAngle);
     }
     if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
-        return (this.props.rtl === false ? 'left' : 'right');
+      return (this.props.rtl === false ? 'left' : 'right');
     }
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
-        return (this.props.rtl === false ? 'right' : 'left');
+      return (this.props.rtl === false ? 'right' : 'left');
     }
 
     return 'vertical';
