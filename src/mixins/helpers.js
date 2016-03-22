@@ -13,11 +13,25 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
-    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+    var slidesWidth = 0, maxSlide;
+    // for variable width of slides calc full width
+    if (props.variableWidth) {
+      for (var i = ReactDOM.findDOMNode(this.refs.track).children.length - 1; i >= 0; i--) {
+        slidesWidth += this.getWidth(ReactDOM.findDOMNode(this.refs.track).children[i]);
+        // calc last available step
+        if (!maxSlide && listWidth < slidesWidth) {
+          maxSlide = i + 1;
+        }
+      }
+    }
+
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide: props.initialSlide;
 
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
+      slidesWidth: slidesWidth,
+      maxSlide: maxSlide,
       listWidth: listWidth,
       trackWidth: trackWidth,
       currentSlide: currentSlide
@@ -44,13 +58,27 @@ var helpers = {
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
     var currentSlide = this.state.currentSlide;
 
+    var slidesWidth = 0, maxSlide;
+    // for variable width of slides calc full width
+    if (props.variableWidth) {
+      for (var i = ReactDOM.findDOMNode(this.refs.track).children.length - 1; i >= 0; i--) {
+        slidesWidth += this.getWidth(ReactDOM.findDOMNode(this.refs.track).children[i]);
+        // calc last available step
+        if (!maxSlide && listWidth < slidesWidth) {
+          maxSlide = i + 1;
+        }
+      }
+    }
+
     if (currentSlide > slideCount - props.slidesToShow) {
-      currentSlide = slideCount - props.slidesToShow;
+      currentSlide = slideCount - props.slidesToShow + slidesWidth;
     }
 
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
+      slidesWidth: slidesWidth,
+      maxSlide: maxSlide,
       listWidth: listWidth,
       trackWidth: trackWidth,
       currentSlide: currentSlide
@@ -153,7 +181,11 @@ var helpers = {
         currentSlide = targetSlide - this.state.slideCount;
       }
     } else {
-      currentSlide = targetSlide;
+      if(this.state.maxSlide && targetSlide >= this.state.maxSlide) {
+        currentSlide = this.state.maxSlide;
+      } else {
+        currentSlide = targetSlide;
+      }
     }
 
     targetLeft = getTrackLeft(assign({
