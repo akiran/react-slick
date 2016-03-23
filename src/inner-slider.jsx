@@ -60,6 +60,12 @@ export var InnerSlider = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
+    if (this.state.currentSlide >= nextProps.children.length) {
+      this.setState({
+        currentSlide: nextProps.children.length - nextProps.slidesToShow
+      });
+    }
+
     if (this.props.slickGoTo != nextProps.slickGoTo) {
       this.changeSlide({
           message: 'index',
