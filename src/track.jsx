@@ -37,6 +37,7 @@ var getSlideStyle = function (spec) {
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
     style.width = spec.slideWidth;
+    style.display = (!spec.slideWidth && (spec.currentSlide !== spec.index || spec.key < 0 || spec.children.length <= spec.key)) ? 'none' : null;
   }
 
   if (spec.fade) {
@@ -64,7 +65,7 @@ var renderSlides = (spec) => {
     } else {
       child = (<div></div>);
     }
-    var childStyle = getSlideStyle(assign({}, spec, {index: index}));
+    var childStyle = getSlideStyle(assign({}, spec, {index: index, key: index}));
     var slickClasses = getSlideClasses(assign({index: index}, spec));
     var cssClasses;
 
@@ -87,6 +88,7 @@ var renderSlides = (spec) => {
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
+        childStyle = getSlideStyle(assign({}, spec, {index: index, key: key}));
         preCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
@@ -97,6 +99,7 @@ var renderSlides = (spec) => {
 
       if (index < infiniteCount) {
         key = count + index;
+        childStyle = getSlideStyle(assign({}, spec, {index: index, key: key}));
         postCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
