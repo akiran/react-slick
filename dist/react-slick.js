@@ -815,10 +815,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return;
 	    }
 
-	    if (this.state.currentSlide === index) {
-	      return;
-	    }
-
 	    if (this.props.fade) {
 	      currentSlide = this.state.currentSlide;
 
@@ -1462,7 +1458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
 	          key: key,
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1472,7 +1468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
 	          key: key,
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
