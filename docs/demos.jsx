@@ -214,6 +214,42 @@ var CenterModeWithInitial = React.createClass({
   }
 });
 
+var SwipeToSlideMode = React.createClass({
+    render: function () {
+        var settings = {
+            className: 'center',
+            infinite: false,
+            centerPadding: '60px',
+            slidesToShow: 7,
+            swipe: true,
+            swipeToSlide: true,
+            speed: 500,
+            beforeChange: function (index) {
+                console.log('Slider will change from:' + index);
+            },
+            afterChange: function (currentSlide) {
+                console.log('Slider Changed to :' + (currentSlide + 1));
+            }
+        };
+        return (
+            <div>
+                <h2>Swipe To Slide</h2>
+                <Slider {...settings}>
+                    <div><h3>1</h3></div>
+                    <div><h3>2</h3></div>
+                    <div><h3>3</h3></div>
+                    <div><h3>4</h3></div>
+                    <div><h3>5</h3></div>
+                    <div><h3>6</h3></div>
+                    <div><h3>7</h3></div>
+                    <div><h3>8</h3></div>
+                    <div><h3>9</h3></div>
+                </Slider>
+            </div>
+        );
+    }
+});
+
 
 var AutoPlay = React.createClass({
   render: function () {
@@ -455,6 +491,7 @@ var App = React.createClass({
         <UnevenSets />
         <CenterMode />
         <CenterModeWithInitial />
+        <SwipeToSlideMode />
         <AutoPlay />
         <PauseOnHover />
         <Rtl />

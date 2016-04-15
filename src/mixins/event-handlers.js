@@ -113,7 +113,7 @@ var EventHandlers = {
     });
 
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
-      { return; }
+    { return; }
     if (touchObject.swipeLength > 4) {
       e.preventDefault();
     }
@@ -138,12 +138,17 @@ var EventHandlers = {
     if (!touchObject.swipeLength) {
       return;
     }
-    if (touchObject.swipeLength > minSwipe) {
+    if (touchObject.swipeLength > minSwipe || this.props.swipeToSlide) {
       e.preventDefault();
+      var slidesToScroll = this.props.slidesToScroll;
+
+      if (this.props.swipeToSlide) {
+        slidesToScroll = Math.round(touchObject.swipeLength / this.state.slideWidth);
+      }
       if (swipeDirection === 'left') {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+        this.slideHandler(this.state.currentSlide + slidesToScroll);
       } else if (swipeDirection === 'right') {
-        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+        this.slideHandler(this.state.currentSlide - slidesToScroll);
       } else {
         this.slideHandler(this.state.currentSlide);
       }

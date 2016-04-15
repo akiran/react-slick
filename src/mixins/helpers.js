@@ -13,11 +13,25 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
-    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+    var slidesWidth = 0, maxSlide;
+    // for variable width of slides calc full width
+    if (props.variableWidth) {
+      for (var i = ReactDOM.findDOMNode(this.refs.track).children.length - 1; i >= 0; i--) {
+        slidesWidth += this.getWidth(ReactDOM.findDOMNode(this.refs.track).children[i]);
+        // calc last available step
+        if (!maxSlide && listWidth < slidesWidth) {
+          maxSlide = i + 1;
+        }
+      }
+    }
+
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide: props.initialSlide;
 
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
+      slidesWidth: slidesWidth,
+      maxSlide: maxSlide,
       listWidth: listWidth,
       trackWidth: trackWidth,
       currentSlide: currentSlide
@@ -42,12 +56,32 @@ var helpers = {
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    var currentSlide = this.state.currentSlide;
+
+    var slidesWidth = 0, maxSlide;
+    // for variable width of slides calc full width
+    if (props.variableWidth) {
+      for (var i = ReactDOM.findDOMNode(this.refs.track).children.length - 1; i >= 0; i--) {
+        slidesWidth += this.getWidth(ReactDOM.findDOMNode(this.refs.track).children[i]);
+        // calc last available step
+        if (!maxSlide && listWidth < slidesWidth) {
+          maxSlide = i + 1;
+        }
+      }
+    }
+
+    if (currentSlide > slideCount - props.slidesToShow) {
+      currentSlide = slideCount - props.slidesToShow + slidesWidth;
+    }
 
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
+      slidesWidth: slidesWidth,
+      maxSlide: maxSlide,
       listWidth: listWidth,
-      trackWidth: trackWidth
+      trackWidth: trackWidth,
+      currentSlide: currentSlide
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -135,16 +169,23 @@ var helpers = {
       } else {
         currentSlide = this.state.slideCount + targetSlide;
       }
-    } else if (targetSlide >= this.state.slideCount) {
+    } else if (targetSlide >= (this.state.slideCount - this.props.slidesToShow +
+        (this.props.centerMode ? Math.floor(this.props.slidesToShow / 2) : 0 ))) {
+
       if(this.props.infinite === false) {
-        currentSlide = this.state.slideCount - this.props.slidesToShow;
+        currentSlide = this.state.slideCount - this.props.slidesToShow
+            + (this.props.centerMode ? Math.floor(this.props.slidesToShow / 2) : 0 );
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = 0;
       } else {
         currentSlide = targetSlide - this.state.slideCount;
       }
     } else {
-      currentSlide = targetSlide;
+      if(this.state.maxSlide && targetSlide >= this.state.maxSlide) {
+        currentSlide = this.state.maxSlide;
+      } else {
+        currentSlide = targetSlide;
+      }
     }
 
     targetLeft = getTrackLeft(assign({
@@ -238,13 +279,13 @@ var helpers = {
 
     swipeAngle = Math.round(r * 180 / Math.PI);
     if (swipeAngle < 0) {
-        swipeAngle = 360 - Math.abs(swipeAngle);
+      swipeAngle = 360 - Math.abs(swipeAngle);
     }
     if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
-        return (this.props.rtl === false ? 'left' : 'right');
+      return (this.props.rtl === false ? 'left' : 'right');
     }
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
-        return (this.props.rtl === false ? 'right' : 'left');
+      return (this.props.rtl === false ? 'right' : 'left');
     }
 
     return 'vertical';
