@@ -49,7 +49,7 @@
     "phantomjs": "^1.9.17",
     "postcss-loader": "^0.4.4",
     "react": "^15.0.1",
-    "react-dom": "^15.0.1,
+    "react-dom": "^15.0.1",
     "run-sequence": "^1.1.0",
     "sass-loader": "^1.0.2",
     "should": "^7.0.2",
