@@ -6,6 +6,7 @@ import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
 import defaultProps from './default-props';
+import keydown from 'keydown'
 
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
