@@ -7,6 +7,7 @@ import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
 import defaultProps from './default-props';
 
+
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
   getInitialState: function () {
@@ -14,7 +15,12 @@ var Slider = React.createClass({
       breakpoint: null
     };
   },
+
+
+ 
+  
   componentDidMount: function () {
+    this.registerHotkeys();
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       breakpoints.sort((x, y) => x - y);
@@ -37,8 +43,18 @@ var Slider = React.createClass({
       this.media(query, () => {
         this.setState({breakpoint: null});
       });
+      
+
     }
+    this.props.onSliderMount(this);
   },
+  componentWillUnmount: function () {
+    this.hotkeys.map(evt => {
+      evt.removeAllListeners('pressed');
+    });
+    this.props.onSliderUnmount();
+  },
+  
   render: function () {
     var settings;
     var newProps;
@@ -55,7 +71,7 @@ var Slider = React.createClass({
       );
     } else {
       return (
-        <InnerSlider {...settings}>
+        <InnerSlider ref="inner-slider" {...settings}>
           {this.props.children}
         </InnerSlider>
       );

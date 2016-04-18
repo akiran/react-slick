@@ -64,6 +64,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
@@ -88,6 +90,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
+	var _keydown = __webpack_require__(23);
+
+	var _keydown2 = _interopRequireDefault(_keydown);
+
 	var Slider = _react2['default'].createClass({
 	  displayName: 'Slider',
 
@@ -97,8 +103,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	      breakpoint: null
 	    };
 	  },
-	  componentDidMount: function componentDidMount() {
+
+	  registerHotkeys: function registerHotkeys() {
 	    var _this = this;
+
+	    this.hotkeys = [];
+
+	    // escape
+	    var kdClose = (0, _keydown2['default'])('<escape>');
+	    this.hotkeys.push(kdClose);
+	    kdClose.on('pressed', function () {
+	      _this.closeSlider();
+	    });
+
+	    // left
+	    var kdLeft = (0, _keydown2['default'])('<left>');
+	    this.hotkeys.push(kdLeft);
+
+	    kdLeft.on('pressed', function () {
+	      if (!_this.props.infinite && (_this.props.currentSlide === 0 || _this.props.slideCount <= _this.props.slidesToShow)) _this.refs['inner-slider'].changeSlide({ message: 'previous' });
+	    });
+
+	    // right
+	    var kdRight = (0, _keydown2['default'])('<right>');
+	    this.hotkeys.push(kdRight);
+
+	    kdRight.on('pressed', function () {
+	      if (!_this.props.infinite) {
+	        if (_this.props.centerMode && _this.props.currentSlide >= _this.props.slideCount - 1) {
+	          _this.slider.refs['inner-slider'].changeSlide({ message: 'next' });
+	        } else {
+	          if (_this.props.currentSlide >= _this.props.slideCount - _this.props.slidesToShow) {
+	            _this.slider.refs['inner-slider'].changeSlide({ message: 'next' });
+	          }
+	        }
+
+	        if (_this.props.slideCount <= _this.props.slidesToShow) {
+	          _this.slider.refs['inner-slider'].changeSlide({ message: 'next' });
+	        }
+	      }
+	    });
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    var _this2 = this;
 
 	    if (this.props.responsive) {
 	      var breakpoints = this.props.responsive.map(function (breakpt) {
@@ -115,8 +163,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } else {
 	          bQuery = (0, _json2mq2['default'])({ minWidth: breakpoints[index - 1], maxWidth: breakpoint });
 	        }
-	        _this.media(bQuery, function () {
-	          _this.setState({ breakpoint: breakpoint });
+	        _this2.media(bQuery, function () {
+	          _this2.setState({ breakpoint: breakpoint });
 	        });
 	      });
 
@@ -124,18 +172,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var query = (0, _json2mq2['default'])({ minWidth: breakpoints.slice(-1)[0] });
 
 	      this.media(query, function () {
-	        _this.setState({ breakpoint: null });
+	        _this2.setState({ breakpoint: null });
 	      });
 	    }
+	    this.props.onSliderMount(this);
 	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.hotkeys.map(function (evt) {
+	      evt.removeAllListeners('pressed');
+	    });
+	    this.props.onSliderUnmount();
+	  },
+
 	  render: function render() {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    var settings;
 	    var newProps;
 	    if (this.state.breakpoint) {
 	      newProps = this.props.responsive.filter(function (resp) {
-	        return resp.breakpoint === _this2.state.breakpoint;
+	        return resp.breakpoint === _this3.state.breakpoint;
 	      });
 	      settings = newProps[0].settings === 'unslick' ? 'unslick' : (0, _objectAssign2['default'])({}, this.props, newProps[0].settings);
 	    } else {
@@ -151,7 +207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      return _react2['default'].createElement(
 	        _innerSlider.InnerSlider,
-	        settings,
+	        _extends({ ref: 'inner-slider' }, settings),
 	        this.props.children
 	      );
 	    }
@@ -215,7 +271,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  mixins: [_mixinsHelpers2['default'], _mixinsEventHandlers2['default']],
 	  getInitialState: function getInitialState() {
-	    return _initialState2['default'];
+	    var state = _initialState2['default'];
+	    state.currentSlide = this.props.initialSlide;
+
+	    return state;
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return _defaultProps2['default'];
@@ -244,6 +303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
+
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResized);
 	    } else {
@@ -277,6 +337,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onWindowResized: function onWindowResized() {
 	    this.update(this.props);
 	  },
+
+	  nextSlide: function nextSlide() {
+	    this.changeSlide({
+	      message: 'index',
+	      index: this.state.currentSlide + 1,
+	      currentSlide: this.state.currentSlide
+	    });
+	  },
+	  previousSlide: function previousSlide() {
+	    this.changeSlide({
+	      message: 'index',
+	      index: this.state.currentSlide - 1,
+	      currentSlide: this.state.currentSlide
+	    });
+	  },
+
 	  render: function render() {
 	    var className = (0, _classnames2['default'])('slick-initialized', 'slick-slider', this.props.className);
 
@@ -815,10 +891,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return;
 	    }
 
-	    if (this.state.currentSlide === index) {
-	      return;
-	    }
-
 	    if (this.props.fade) {
 	      currentSlide = this.state.currentSlide;
 
@@ -1292,7 +1364,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    swipeEvent: null,
 	    // nextArrow, prevArrow are react componets
 	    nextArrow: null,
-	    prevArrow: null
+	    prevArrow: null,
+
+	    onSliderMount: function onSliderMount() {},
+	    onSliderUnmount: function onSliderUnmount() {}
 	};
 
 	module.exports = defaultProps;
@@ -1301,18 +1376,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1320,35 +1397,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1422,6 +1496,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return style;
 	};
 
+	var getKey = function getKey(child, fallbackKey) {
+	  // key could be a zero
+	  return child.key === null || child.key === undefined ? fallbackKey : child.key;
+	};
+
 	var renderSlides = function renderSlides(spec) {
 	  var key;
 	  var slides = [];
@@ -1447,7 +1526,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    slides.push(_react2['default'].cloneElement(child, {
-	      key: index,
+	      key: getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
 	      style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1460,9 +1539,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index >= count - infiniteCount) {
 	        key = -(count - index);
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1470,9 +1549,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index < infiniteCount) {
 	        key = count + index;
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1619,7 +1698,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var prevArrowProps = {
 	      key: '0',
-	      ref: 'previous',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(prevClasses),
 	      style: { display: 'block' },
@@ -1672,7 +1750,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var nextArrowProps = {
 	      key: '1',
-	      ref: 'next',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(nextClasses),
 	      style: { display: 'block' },
@@ -2110,6 +2187,496 @@ return /******/ (function(modules) { // webpackBootstrap
 		return new MediaQueryDispatch();
 
 	}));
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Emitter = __webpack_require__(24).EventEmitter
+	var vkey = __webpack_require__(25)
+
+	module.exports = function(keys, el) {
+	  if (typeof keys === 'string') keys = [keys]
+	  if (!el) el = window
+
+	  var emitter = new Emitter()
+	  emitter.pressed = {}
+	  
+	  el.addEventListener('blur', clearPressed)
+	  el.addEventListener('focus', clearPressed)
+	  
+	  el.addEventListener('keydown', function(ev) {
+	    var key = vkey[ev.keyCode]
+	    emitter.pressed[key] = true
+	    var allPressed = true
+	    keys.forEach(function(k) {
+	      if (!emitter.pressed[k]) allPressed = false
+	    })
+	    if (allPressed) {
+	      emitter.emit('pressed', emitter.pressed)
+
+	      // this seems to be necessary as keyup doesn't always fire during combos :/
+	      clearPressed()
+	    }
+	  })
+
+	  el.addEventListener('keyup', function(ev) {
+	    delete emitter.pressed[vkey[ev.keyCode]]
+	  })
+	  
+	  function clearPressed() {
+	    emitter.pressed = {}
+	  }
+	  
+	  return emitter
+	}
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	function EventEmitter() {
+	  this._events = this._events || {};
+	  this._maxListeners = this._maxListeners || undefined;
+	}
+	module.exports = EventEmitter;
+
+	// Backwards-compat with node 0.10.x
+	EventEmitter.EventEmitter = EventEmitter;
+
+	EventEmitter.prototype._events = undefined;
+	EventEmitter.prototype._maxListeners = undefined;
+
+	// By default EventEmitters will print a warning if more than 10 listeners are
+	// added to it. This is a useful default which helps finding memory leaks.
+	EventEmitter.defaultMaxListeners = 10;
+
+	// Obviously not all Emitters should be limited to 10. This function allows
+	// that to be increased. Set to zero for unlimited.
+	EventEmitter.prototype.setMaxListeners = function(n) {
+	  if (!isNumber(n) || n < 0 || isNaN(n))
+	    throw TypeError('n must be a positive number');
+	  this._maxListeners = n;
+	  return this;
+	};
+
+	EventEmitter.prototype.emit = function(type) {
+	  var er, handler, len, args, i, listeners;
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // If there is no 'error' event listener then throw.
+	  if (type === 'error') {
+	    if (!this._events.error ||
+	        (isObject(this._events.error) && !this._events.error.length)) {
+	      er = arguments[1];
+	      if (er instanceof Error) {
+	        throw er; // Unhandled 'error' event
+	      }
+	      throw TypeError('Uncaught, unspecified "error" event.');
+	    }
+	  }
+
+	  handler = this._events[type];
+
+	  if (isUndefined(handler))
+	    return false;
+
+	  if (isFunction(handler)) {
+	    switch (arguments.length) {
+	      // fast cases
+	      case 1:
+	        handler.call(this);
+	        break;
+	      case 2:
+	        handler.call(this, arguments[1]);
+	        break;
+	      case 3:
+	        handler.call(this, arguments[1], arguments[2]);
+	        break;
+	      // slower
+	      default:
+	        args = Array.prototype.slice.call(arguments, 1);
+	        handler.apply(this, args);
+	    }
+	  } else if (isObject(handler)) {
+	    args = Array.prototype.slice.call(arguments, 1);
+	    listeners = handler.slice();
+	    len = listeners.length;
+	    for (i = 0; i < len; i++)
+	      listeners[i].apply(this, args);
+	  }
+
+	  return true;
+	};
+
+	EventEmitter.prototype.addListener = function(type, listener) {
+	  var m;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events)
+	    this._events = {};
+
+	  // To avoid recursion in the case that type === "newListener"! Before
+	  // adding it to the listeners, first emit "newListener".
+	  if (this._events.newListener)
+	    this.emit('newListener', type,
+	              isFunction(listener.listener) ?
+	              listener.listener : listener);
+
+	  if (!this._events[type])
+	    // Optimize the case of one listener. Don't need the extra array object.
+	    this._events[type] = listener;
+	  else if (isObject(this._events[type]))
+	    // If we've already got an array, just append.
+	    this._events[type].push(listener);
+	  else
+	    // Adding the second element, need to change to array.
+	    this._events[type] = [this._events[type], listener];
+
+	  // Check for listener leak
+	  if (isObject(this._events[type]) && !this._events[type].warned) {
+	    if (!isUndefined(this._maxListeners)) {
+	      m = this._maxListeners;
+	    } else {
+	      m = EventEmitter.defaultMaxListeners;
+	    }
+
+	    if (m && m > 0 && this._events[type].length > m) {
+	      this._events[type].warned = true;
+	      console.error('(node) warning: possible EventEmitter memory ' +
+	                    'leak detected. %d listeners added. ' +
+	                    'Use emitter.setMaxListeners() to increase limit.',
+	                    this._events[type].length);
+	      if (typeof console.trace === 'function') {
+	        // not supported in IE 10
+	        console.trace();
+	      }
+	    }
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+	EventEmitter.prototype.once = function(type, listener) {
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  var fired = false;
+
+	  function g() {
+	    this.removeListener(type, g);
+
+	    if (!fired) {
+	      fired = true;
+	      listener.apply(this, arguments);
+	    }
+	  }
+
+	  g.listener = listener;
+	  this.on(type, g);
+
+	  return this;
+	};
+
+	// emits a 'removeListener' event iff the listener was removed
+	EventEmitter.prototype.removeListener = function(type, listener) {
+	  var list, position, length, i;
+
+	  if (!isFunction(listener))
+	    throw TypeError('listener must be a function');
+
+	  if (!this._events || !this._events[type])
+	    return this;
+
+	  list = this._events[type];
+	  length = list.length;
+	  position = -1;
+
+	  if (list === listener ||
+	      (isFunction(list.listener) && list.listener === listener)) {
+	    delete this._events[type];
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+
+	  } else if (isObject(list)) {
+	    for (i = length; i-- > 0;) {
+	      if (list[i] === listener ||
+	          (list[i].listener && list[i].listener === listener)) {
+	        position = i;
+	        break;
+	      }
+	    }
+
+	    if (position < 0)
+	      return this;
+
+	    if (list.length === 1) {
+	      list.length = 0;
+	      delete this._events[type];
+	    } else {
+	      list.splice(position, 1);
+	    }
+
+	    if (this._events.removeListener)
+	      this.emit('removeListener', type, listener);
+	  }
+
+	  return this;
+	};
+
+	EventEmitter.prototype.removeAllListeners = function(type) {
+	  var key, listeners;
+
+	  if (!this._events)
+	    return this;
+
+	  // not listening for removeListener, no need to emit
+	  if (!this._events.removeListener) {
+	    if (arguments.length === 0)
+	      this._events = {};
+	    else if (this._events[type])
+	      delete this._events[type];
+	    return this;
+	  }
+
+	  // emit removeListener for all listeners on all events
+	  if (arguments.length === 0) {
+	    for (key in this._events) {
+	      if (key === 'removeListener') continue;
+	      this.removeAllListeners(key);
+	    }
+	    this.removeAllListeners('removeListener');
+	    this._events = {};
+	    return this;
+	  }
+
+	  listeners = this._events[type];
+
+	  if (isFunction(listeners)) {
+	    this.removeListener(type, listeners);
+	  } else if (listeners) {
+	    // LIFO order
+	    while (listeners.length)
+	      this.removeListener(type, listeners[listeners.length - 1]);
+	  }
+	  delete this._events[type];
+
+	  return this;
+	};
+
+	EventEmitter.prototype.listeners = function(type) {
+	  var ret;
+	  if (!this._events || !this._events[type])
+	    ret = [];
+	  else if (isFunction(this._events[type]))
+	    ret = [this._events[type]];
+	  else
+	    ret = this._events[type].slice();
+	  return ret;
+	};
+
+	EventEmitter.prototype.listenerCount = function(type) {
+	  if (this._events) {
+	    var evlistener = this._events[type];
+
+	    if (isFunction(evlistener))
+	      return 1;
+	    else if (evlistener)
+	      return evlistener.length;
+	  }
+	  return 0;
+	};
+
+	EventEmitter.listenerCount = function(emitter, type) {
+	  return emitter.listenerCount(type);
+	};
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	var ua = typeof window !== 'undefined' ? window.navigator.userAgent : ''
+	  , isOSX = /OS X/.test(ua)
+	  , isOpera = /Opera/.test(ua)
+	  , maybeFirefox = !/like Gecko/.test(ua) && !isOpera
+
+	var i, output = module.exports = {
+	  0:  isOSX ? '<menu>' : '<UNK>'
+	, 1:  '<mouse 1>'
+	, 2:  '<mouse 2>'
+	, 3:  '<break>'
+	, 4:  '<mouse 3>'
+	, 5:  '<mouse 4>'
+	, 6:  '<mouse 5>'
+	, 8:  '<backspace>'
+	, 9:  '<tab>'
+	, 12: '<clear>'
+	, 13: '<enter>'
+	, 16: '<shift>'
+	, 17: '<control>'
+	, 18: '<alt>'
+	, 19: '<pause>'
+	, 20: '<caps-lock>'
+	, 21: '<ime-hangul>'
+	, 23: '<ime-junja>'
+	, 24: '<ime-final>'
+	, 25: '<ime-kanji>'
+	, 27: '<escape>'
+	, 28: '<ime-convert>'
+	, 29: '<ime-nonconvert>'
+	, 30: '<ime-accept>'
+	, 31: '<ime-mode-change>'
+	, 27: '<escape>'
+	, 32: '<space>'
+	, 33: '<page-up>'
+	, 34: '<page-down>'
+	, 35: '<end>'
+	, 36: '<home>'
+	, 37: '<left>'
+	, 38: '<up>'
+	, 39: '<right>'
+	, 40: '<down>'
+	, 41: '<select>'
+	, 42: '<print>'
+	, 43: '<execute>'
+	, 44: '<snapshot>'
+	, 45: '<insert>'
+	, 46: '<delete>'
+	, 47: '<help>'
+	, 91: '<meta>'  // meta-left -- no one handles left and right properly, so we coerce into one.
+	, 92: '<meta>'  // meta-right
+	, 93: isOSX ? '<meta>' : '<menu>'      // chrome,opera,safari all report this for meta-right (osx mbp).
+	, 95: '<sleep>'
+	, 106: '<num-*>'
+	, 107: '<num-+>'
+	, 108: '<num-enter>'
+	, 109: '<num-->'
+	, 110: '<num-.>'
+	, 111: '<num-/>'
+	, 144: '<num-lock>'
+	, 145: '<scroll-lock>'
+	, 160: '<shift-left>'
+	, 161: '<shift-right>'
+	, 162: '<control-left>'
+	, 163: '<control-right>'
+	, 164: '<alt-left>'
+	, 165: '<alt-right>'
+	, 166: '<browser-back>'
+	, 167: '<browser-forward>'
+	, 168: '<browser-refresh>'
+	, 169: '<browser-stop>'
+	, 170: '<browser-search>'
+	, 171: '<browser-favorites>'
+	, 172: '<browser-home>'
+
+	  // ff/osx reports '<volume-mute>' for '-'
+	, 173: isOSX && maybeFirefox ? '-' : '<volume-mute>'
+	, 174: '<volume-down>'
+	, 175: '<volume-up>'
+	, 176: '<next-track>'
+	, 177: '<prev-track>'
+	, 178: '<stop>'
+	, 179: '<play-pause>'
+	, 180: '<launch-mail>'
+	, 181: '<launch-media-select>'
+	, 182: '<launch-app 1>'
+	, 183: '<launch-app 2>'
+	, 186: ';'
+	, 187: '='
+	, 188: ','
+	, 189: '-'
+	, 190: '.'
+	, 191: '/'
+	, 192: '`'
+	, 219: '['
+	, 220: '\\'
+	, 221: ']'
+	, 222: "'"
+	, 223: '<meta>'
+	, 224: '<meta>'       // firefox reports meta here.
+	, 226: '<alt-gr>'
+	, 229: '<ime-process>'
+	, 231: isOpera ? '`' : '<unicode>'
+	, 246: '<attention>'
+	, 247: '<crsel>'
+	, 248: '<exsel>'
+	, 249: '<erase-eof>'
+	, 250: '<play>'
+	, 251: '<zoom>'
+	, 252: '<no-name>'
+	, 253: '<pa-1>'
+	, 254: '<clear>'
+	}
+
+	for(i = 58; i < 65; ++i) {
+	  output[i] = String.fromCharCode(i)
+	}
+
+	// 0-9
+	for(i = 48; i < 58; ++i) {
+	  output[i] = (i - 48)+''
+	}
+
+	// A-Z
+	for(i = 65; i < 91; ++i) {
+	  output[i] = String.fromCharCode(i)
+	}
+
+	// num0-9
+	for(i = 96; i < 106; ++i) {
+	  output[i] = '<num-'+(i - 96)+'>'
+	}
+
+	// F1-F24
+	for(i = 112; i < 136; ++i) {
+	  output[i] = 'F'+(i-111)
+	}
+
 
 /***/ }
 /******/ ])
