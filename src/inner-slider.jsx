@@ -46,6 +46,11 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
+
+
+
+
+
     if (window.addEventListener) {
       window.addEventListener('resize', this.onWindowResized);
     } else {
@@ -79,6 +84,24 @@ export var InnerSlider = React.createClass({
   onWindowResized: function () {
     this.update(this.props);
   },
+
+
+  nextSlide: function () {
+    this.changeSlide({
+      message: 'index',
+      index: this.state.currentSlide + 1,
+      currentSlide: this.state.currentSlide
+    });
+  },
+  previousSlide: function () {
+    this.changeSlide({
+      message: 'index',
+      index: this.state.currentSlide - 1,
+      currentSlide: this.state.currentSlide
+    });
+  },
+
+
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
 

@@ -64,6 +64,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
@@ -128,7 +130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.setState({ breakpoint: null });
 	      });
 	    }
-	    this.props.onSliderMount();
+	    this.props.onSliderMount(this);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.props.onSliderUnmount();
@@ -157,7 +159,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      return _react2['default'].createElement(
 	        _innerSlider.InnerSlider,
-	        settings,
+	        _extends({ ref: 'inner-slider' }, settings),
 	        this.props.children
 	      );
 	    }
@@ -253,6 +255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
+
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResized);
 	    } else {
@@ -286,6 +289,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onWindowResized: function onWindowResized() {
 	    this.update(this.props);
 	  },
+
+	  nextSlide: function nextSlide() {
+	    this.changeSlide({
+	      message: 'index',
+	      index: this.state.currentSlide + 1,
+	      currentSlide: this.state.currentSlide
+	    });
+	  },
+	  previousSlide: function previousSlide() {
+	    this.changeSlide({
+	      message: 'index',
+	      index: this.state.currentSlide - 1,
+	      currentSlide: this.state.currentSlide
+	    });
+	  },
+
 	  render: function render() {
 	    var className = (0, _classnames2['default'])('slick-initialized', 'slick-slider', this.props.className);
 

@@ -41,7 +41,7 @@ var Slider = React.createClass({
       
 
     }
-    this.props.onSliderMount();
+    this.props.onSliderMount(this);
   },
   componentWillUnmount: function () {
     this.props.onSliderUnmount();
@@ -63,7 +63,7 @@ var Slider = React.createClass({
       );
     } else {
       return (
-        <InnerSlider {...settings}>
+        <InnerSlider ref="inner-slider" {...settings}>
           {this.props.children}
         </InnerSlider>
       );
