@@ -6,7 +6,7 @@ import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
 import defaultProps from './default-props';
-import keydown from 'keydown'
+
 
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
@@ -17,54 +17,10 @@ var Slider = React.createClass({
   },
 
 
-  registerHotkeys: function () {
-    this.hotkeys = [];
-
-
-    // escape
-    let kdClose = keydown('<escape>');
-    this.hotkeys.push(kdClose);
-    kdClose.on('pressed', () => {
-      this.closeSlider();
-    })
-
-    // left
-    let kdLeft = keydown('<left>');
-    this.hotkeys.push(kdLeft);
-
-    kdLeft.on('pressed', () => {
-      if(!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow))
-        this.refs['inner-slider'].changeSlide({message:'previous'});
-
-    })
-
-    // right
-    let kdRight = keydown('<right>');
-    this.hotkeys.push(kdRight);
-
-    kdRight.on('pressed', () => {
-      if (!this.props.infinite) {
-        if (this.props.centerMode && this.props.currentSlide >= (this.props.slideCount - 1)) {
-          this.slider.refs['inner-slider'].changeSlide({message:'next'})
-        } else {
-          if (this.props.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
-            this.slider.refs['inner-slider'].changeSlide({message:'next'})
-          }
-        }
-
-        if (this.props.slideCount <= this.props.slidesToShow) {
-          this.slider.refs['inner-slider'].changeSlide({message:'next'})
-        }
-      }
-
-
-
-    })
-
-
-  },
+ 
   
   componentDidMount: function () {
+    this.registerHotkeys();
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       breakpoints.sort((x, y) => x - y);

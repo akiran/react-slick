@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import {Track} from './track';
 import {Dots} from './dots';
 import {PrevArrow, NextArrow} from './arrows';
-
+import keydown from 'keydown'
 export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   getInitialState: function () {
@@ -46,7 +46,7 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-
+    this.registerHotkeys();
 
 
 
@@ -101,6 +101,53 @@ export var InnerSlider = React.createClass({
     });
   },
 
+  registerHotkeys: function () {
+    this.hotkeys = [];
+
+
+
+    // escape
+    let kdClose = keydown('<escape>');
+    this.hotkeys.push(kdClose);
+    kdClose.on('pressed', () => {
+      this.closeSlider();
+    })
+
+    // left
+    let kdLeft = keydown('<left>');
+    this.hotkeys.push(kdLeft);
+
+    kdLeft.on('pressed', () => {
+      if(!this.props.infinite && (this.state.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow))
+        this.refs['inner-slider'].changeSlide({message:'previous'});
+
+    })
+
+    // right
+    let kdRight = keydown('<right>');
+    this.hotkeys.push(kdRight);
+
+    kdRight.on('pressed', () => {
+      if (!this.props.infinite) {
+        if (this.props.centerMode && this.state.currentSlide >= (this.props.slideCount - 1)) {
+          this.slider.refs['inner-slider'].changeSlide({message:'next'})
+        } else {
+          if (this.state.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
+            this.slider.refs['inner-slider'].changeSlide({message:'next'})
+          }
+        }
+
+        if (this.props.slideCount <= this.props.slidesToShow) {
+          this.slider.refs['inner-slider'].changeSlide({message:'next'})
+        }
+      }
+
+
+
+    })
+
+
+  },
 
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
