@@ -39,8 +39,9 @@ var Slider = React.createClass({
         this.setState({breakpoint: null});
       });
       
-      this.props.onSliderMount();
+
     }
+    this.props.onSliderMount();
   },
   componentWillUnmount: function () {
     this.props.onSliderUnmount();

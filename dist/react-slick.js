@@ -127,9 +127,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.media(query, function () {
 	        _this.setState({ breakpoint: null });
 	      });
-
-	      this.props.onSliderMount();
 	    }
+	    this.props.onSliderMount();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.props.onSliderUnmount();
