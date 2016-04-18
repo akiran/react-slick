@@ -14,6 +14,7 @@ var Slider = React.createClass({
       breakpoint: null
     };
   },
+  
   componentDidMount: function () {
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
@@ -37,8 +38,14 @@ var Slider = React.createClass({
       this.media(query, () => {
         this.setState({breakpoint: null});
       });
+      
+      this.props.onSliderMount();
     }
   },
+  componentWillUnmount: function () {
+    this.props.onSliderUnmount();
+  },
+  
   render: function () {
     var settings;
     var newProps;

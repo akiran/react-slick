@@ -40,7 +40,10 @@ var defaultProps = {
     swipeEvent: null,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
-    prevArrow: null
+    prevArrow: null,
+
+    onSliderMount: function () {},
+    onSliderUnmount: function () {}
 };
 
 module.exports = defaultProps;

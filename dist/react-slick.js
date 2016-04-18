@@ -215,7 +215,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  mixins: [_mixinsHelpers2['default'], _mixinsEventHandlers2['default']],
 	  getInitialState: function getInitialState() {
-	    return _initialState2['default'];
+	    var state = _initialState2['default'];
+	    state.currentSlide = this.props.initialSlide;
+
+	    return state;
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return _defaultProps2['default'];
@@ -815,10 +818,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return;
 	    }
 
-	    if (this.state.currentSlide === index) {
-	      return;
-	    }
-
 	    if (this.props.fade) {
 	      currentSlide = this.state.currentSlide;
 
@@ -1301,18 +1300,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1320,35 +1321,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1422,6 +1420,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return style;
 	};
 
+	var getKey = function getKey(child, fallbackKey) {
+	  // key could be a zero
+	  return child.key === null || child.key === undefined ? fallbackKey : child.key;
+	};
+
 	var renderSlides = function renderSlides(spec) {
 	  var key;
 	  var slides = [];
@@ -1447,7 +1450,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    slides.push(_react2['default'].cloneElement(child, {
-	      key: index,
+	      key: getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
 	      style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1460,9 +1463,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index >= count - infiniteCount) {
 	        key = -(count - index);
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1470,9 +1473,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index < infiniteCount) {
 	        key = count + index;
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1619,7 +1622,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var prevArrowProps = {
 	      key: '0',
-	      ref: 'previous',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(prevClasses),
 	      style: { display: 'block' },
@@ -1672,7 +1674,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var nextArrowProps = {
 	      key: '1',
-	      ref: 'next',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(nextClasses),
 	      style: { display: 'block' },
