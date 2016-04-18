@@ -100,8 +100,49 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  },
 
-	  componentDidMount: function componentDidMount() {
+	  registerHotkeys: function registerHotkeys() {
 	    var _this = this;
+
+	    this.hotkeys = [];
+
+	    // escape
+	    var kdClose = keydown('<escape>');
+	    this.hotkeys.push(kdClose);
+	    kdClose.on('pressed', function () {
+	      _this.closeSlider();
+	    });
+
+	    // left
+	    var kdLeft = keydown('<left>');
+	    this.hotkeys.push(kdLeft);
+
+	    kdLeft.on('pressed', function () {
+	      if (!_this.props.infinite && (_this.props.currentSlide === 0 || _this.props.slideCount <= _this.props.slidesToShow)) _this.refs['inner-slider'].changeSlide({ message: 'previous' });
+	    });
+
+	    // right
+	    var kdRight = keydown('<right>');
+	    this.hotkeys.push(kdRight);
+
+	    kdRight.on('pressed', function () {
+	      if (!_this.props.infinite) {
+	        if (_this.props.centerMode && _this.props.currentSlide >= _this.props.slideCount - 1) {
+	          _this.slider.refs['inner-slider'].changeSlide({ message: 'next' });
+	        } else {
+	          if (_this.props.currentSlide >= _this.props.slideCount - _this.props.slidesToShow) {
+	            _this.slider.refs['inner-slider'].changeSlide({ message: 'next' });
+	          }
+	        }
+
+	        if (_this.props.slideCount <= _this.props.slidesToShow) {
+	          _this.slider.refs['inner-slider'].changeSlide({ message: 'next' });
+	        }
+	      }
+	    });
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    var _this2 = this;
 
 	    if (this.props.responsive) {
 	      var breakpoints = this.props.responsive.map(function (breakpt) {
@@ -118,8 +159,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } else {
 	          bQuery = (0, _json2mq2['default'])({ minWidth: breakpoints[index - 1], maxWidth: breakpoint });
 	        }
-	        _this.media(bQuery, function () {
-	          _this.setState({ breakpoint: breakpoint });
+	        _this2.media(bQuery, function () {
+	          _this2.setState({ breakpoint: breakpoint });
 	        });
 	      });
 
@@ -127,23 +168,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var query = (0, _json2mq2['default'])({ minWidth: breakpoints.slice(-1)[0] });
 
 	      this.media(query, function () {
-	        _this.setState({ breakpoint: null });
+	        _this2.setState({ breakpoint: null });
 	      });
 	    }
 	    this.props.onSliderMount(this);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
+	    this.hotkeys.map(function (evt) {
+	      evt.removeAllListeners('pressed');
+	    });
 	    this.props.onSliderUnmount();
 	  },
 
 	  render: function render() {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    var settings;
 	    var newProps;
 	    if (this.state.breakpoint) {
 	      newProps = this.props.responsive.filter(function (resp) {
-	        return resp.breakpoint === _this2.state.breakpoint;
+	        return resp.breakpoint === _this3.state.breakpoint;
 	      });
 	      settings = newProps[0].settings === 'unslick' ? 'unslick' : (0, _objectAssign2['default'])({}, this.props, newProps[0].settings);
 	    } else {
