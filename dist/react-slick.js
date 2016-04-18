@@ -97,6 +97,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      breakpoint: null
 	    };
 	  },
+
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 
@@ -126,8 +127,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.media(query, function () {
 	        _this.setState({ breakpoint: null });
 	      });
+
+	      this.props.onSliderMount();
 	    }
 	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.props.onSliderUnmount();
+	  },
+
 	  render: function render() {
 	    var _this2 = this;
 
@@ -1291,7 +1298,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    swipeEvent: null,
 	    // nextArrow, prevArrow are react componets
 	    nextArrow: null,
-	    prevArrow: null
+	    prevArrow: null,
+
+	    onSliderMount: function onSliderMount() {},
+	    onSliderUnmount: function onSliderUnmount() {}
 	};
 
 	module.exports = defaultProps;
