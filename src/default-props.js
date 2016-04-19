@@ -42,7 +42,7 @@ var defaultProps = {
     nextArrow: null,
     prevArrow: null,
 
-    onSliderMount: function () {},
+    onSliderMount: function     () {},
     onSliderUnmount: function () {}
 };
 

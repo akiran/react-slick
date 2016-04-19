@@ -20,7 +20,7 @@ var Slider = React.createClass({
  
   
   componentDidMount: function () {
-    this.registerHotkeys();
+
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       breakpoints.sort((x, y) => x - y);
@@ -49,10 +49,7 @@ var Slider = React.createClass({
     this.props.onSliderMount(this);
   },
   componentWillUnmount: function () {
-    this.hotkeys.map(evt => {
-      evt.removeAllListeners('pressed');
-    });
-    this.props.onSliderUnmount();
+    typeof this.props.sliderUnmount === 'function' && this.props.onSliderUnmount();
   },
   
   render: function () {

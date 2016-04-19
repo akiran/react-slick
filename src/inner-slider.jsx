@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom'
 import EventHandlersMixin from './mixins/event-handlers';
 import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
@@ -58,6 +59,9 @@ export var InnerSlider = React.createClass({
     }
   },
   componentWillUnmount: function componentWillUnmount() {
+    this.hotkeys.map(evt => {
+      evt.removeAllListeners('pressed');
+    });
     if (window.addEventListener) {
       window.removeEventListener('resize', this.onWindowResized);
     } else {
@@ -88,17 +92,23 @@ export var InnerSlider = React.createClass({
 
   nextSlide: function () {
     this.changeSlide({
-      message: 'index',
-      index: this.state.currentSlide + 1,
-      currentSlide: this.state.currentSlide
+      message: 'next'
     });
+    // this.changeSlide({
+    //   message: 'index',
+    //   index: this.state.currentSlide + 1,
+    //   currentSlide: this.state.currentSlide
+    // });
   },
   previousSlide: function () {
     this.changeSlide({
-      message: 'index',
-      index: this.state.currentSlide - 1,
-      currentSlide: this.state.currentSlide
+      message: 'previous'
     });
+    // this.changeSlide({
+    //   message: 'index',
+    //   index: this.state.currentSlide - 1,
+    //   currentSlide: this.state.currentSlide
+    // });
   },
 
   registerHotkeys: function () {
@@ -106,20 +116,16 @@ export var InnerSlider = React.createClass({
 
 
 
-    // escape
-    let kdClose = keydown('<escape>');
-    this.hotkeys.push(kdClose);
-    kdClose.on('pressed', () => {
-      this.closeSlider();
-    })
 
     // left
     let kdLeft = keydown('<left>');
     this.hotkeys.push(kdLeft);
 
     kdLeft.on('pressed', () => {
-      if(!this.props.infinite && (this.state.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow))
-        this.refs['inner-slider'].changeSlide({message:'previous'});
+
+      
+      if(!this.props.infinite && !(this.state.currentSlide === 0 || this.state.slideCount <= this.props.slidesToShow))
+        this.previousSlide()
 
     })
 
@@ -128,17 +134,19 @@ export var InnerSlider = React.createClass({
     this.hotkeys.push(kdRight);
 
     kdRight.on('pressed', () => {
+    
+      
       if (!this.props.infinite) {
-        if (this.props.centerMode && this.state.currentSlide >= (this.props.slideCount - 1)) {
-          this.slider.refs['inner-slider'].changeSlide({message:'next'})
+        if (!(this.props.centerMode && this.state.currentSlide >= (this.state.slideCount - 1))) {
+          this.nextSlide()
         } else {
-          if (this.state.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
-            this.slider.refs['inner-slider'].changeSlide({message:'next'})
+          if (!(this.state.currentSlide >= (this.state.slideCount - this.props.slidesToShow))) {
+            this.nextSlide()
           }
         }
 
-        if (this.props.slideCount <= this.props.slidesToShow) {
-          this.slider.refs['inner-slider'].changeSlide({message:'next'})
+        if (!(this.state.slideCount <= this.props.slidesToShow)) {
+          this.nextSlide()
         }
       }
 
