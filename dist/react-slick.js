@@ -333,6 +333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.hotkeys.push(kdLeft);
 
 	    kdLeft.on('pressed', function () {
+	      console.log("kd left pressed", _this.state.slideCount, _this.props.slidesToShow);
 
 	      if (!_this.props.infinite && !(_this.state.currentSlide === 0 || _this.state.slideCount <= _this.props.slidesToShow)) _this.previousSlide();
 	    });
@@ -342,6 +343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.hotkeys.push(kdRight);
 
 	    kdRight.on('pressed', function () {
+	      console.log("kd right pressed", _this.state.slideCount, _this.props.slidesToShow);
 
 	      if (!_this.props.infinite) {
 	        if (!(_this.props.centerMode && _this.state.currentSlide >= _this.state.slideCount - 1)) {

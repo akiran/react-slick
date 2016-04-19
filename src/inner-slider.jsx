@@ -122,8 +122,9 @@ export var InnerSlider = React.createClass({
     this.hotkeys.push(kdLeft);
 
     kdLeft.on('pressed', () => {
+      console.log("kd left pressed",this.state.slideCount,this.props.slidesToShow );
 
-      
+      //todo fix this if
       if(!this.props.infinite && !(this.state.currentSlide === 0 || this.state.slideCount <= this.props.slidesToShow))
         this.previousSlide()
 
@@ -134,8 +135,9 @@ export var InnerSlider = React.createClass({
     this.hotkeys.push(kdRight);
 
     kdRight.on('pressed', () => {
-    
-      
+      console.log("kd right pressed",this.state.slideCount,this.props.slidesToShow );
+      //todo fix these ifs
+
       if (!this.props.infinite) {
         if (!(this.props.centerMode && this.state.currentSlide >= (this.state.slideCount - 1))) {
           this.nextSlide()
