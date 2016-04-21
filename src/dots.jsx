@@ -43,7 +43,7 @@ export var Dots = React.createClass({
 
       return (
         <li key={i} className={className}>
-          <button onClick={this.clickHandler.bind(this, dotOptions)}>{i}</button>
+          <button onClick={this.clickHandler.bind(this, dotOptions)}>{i + 1}</button>
         </li>
       );
     });

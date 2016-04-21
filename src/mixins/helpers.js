@@ -80,10 +80,6 @@ var helpers = {
     var callback;
 
     if (this.props.waitForAnimate && this.state.animating) {
-	return;
-    }
-
-    if (this.state.currentSlide === index) {
       return;
     }
 
@@ -220,7 +216,7 @@ var helpers = {
 
       this.setState({
         animating: true,
-        currentSlide: targetSlide,
+        currentSlide: currentSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
         ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
@@ -228,7 +224,10 @@ var helpers = {
 
     }
 
-    this.autoPlay();
+    if (!this.state.autoPlayTimer) {
+      this.autoPlay();
+    }
+
   },
   swipeDirection: function (touchObject) {
     var xDist, yDist, r, swipeAngle;
@@ -256,20 +255,18 @@ var helpers = {
         var nextIndex = this.props.rtl ?
         this.state.currentSlide - this.props.slidesToScroll:
         this.state.currentSlide + this.props.slidesToScroll;
-
         this.slideHandler(nextIndex);
       }
     };
     if (this.props.autoplay) {
-      window.clearTimeout(this.state.autoPlayTimer);
       this.setState({
-        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
       });
     }
   },
   pause: function () {
     if (this.state.autoPlayTimer) {
-      window.clearTimeout(this.state.autoPlayTimer);
+      window.clearInterval(this.state.autoPlayTimer);
     }
   }
 };
