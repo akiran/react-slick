@@ -20,7 +20,6 @@ export var PrevArrow = React.createClass({
 
     var prevArrowProps = {
       key: '0',
-      ref: 'previous',
       'data-role': 'none',
       className: classnames(prevClasses),
       style: {display: 'block'},
@@ -29,7 +28,7 @@ export var PrevArrow = React.createClass({
     var prevArrow;
 
     if (this.props.prevArrow) {
-      prevArrow = <this.props.prevArrow {...prevArrowProps} />;
+      prevArrow = React.cloneElement(this.props.prevArrow, prevArrowProps);
     } else {
       prevArrow = <button key='0' type='button' {...prevArrowProps}> Previous</button>;
     }
@@ -68,7 +67,6 @@ export var NextArrow = React.createClass({
 
     var nextArrowProps = {
       key: '1',
-      ref: 'next',
       'data-role': 'none',
       className: classnames(nextClasses),
       style: {display: 'block'},
@@ -78,7 +76,7 @@ export var NextArrow = React.createClass({
     var nextArrow;
 
     if (this.props.nextArrow) {
-      nextArrow = <this.props.nextArrow {...nextArrowProps} />;
+      nextArrow = React.cloneElement(this.props.nextArrow, nextArrowProps);
     } else {
       nextArrow = <button key='1' type='button' {...nextArrowProps}> Next</button>;
     }
