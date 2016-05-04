@@ -958,9 +958,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 
-	    if (!this.state.autoPlayTimer) {
-	      this.autoPlay();
-	    }
+	    this.autoPlay();
 	  },
 	  swipeDirection: function swipeDirection(touchObject) {
 	    var xDist, yDist, r, swipeAngle;
@@ -985,6 +983,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  autoPlay: function autoPlay() {
 	    var _this2 = this;
 
+	    if (this.state.autoPlayTimer) {
+	      return;
+	    }
 	    var play = function play() {
 	      if (_this2.state.mounted) {
 	        var nextIndex = _this2.props.rtl ? _this2.state.currentSlide - _this2.props.slidesToScroll : _this2.state.currentSlide + _this2.props.slidesToScroll;
@@ -1301,18 +1302,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1320,16 +1323,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
@@ -1340,15 +1341,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1422,6 +1422,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return style;
 	};
 
+	var getKey = function getKey(child, fallbackKey) {
+	  // key could be a zero
+	  return child.key === null || child.key === undefined ? fallbackKey : child.key;
+	};
+
 	var renderSlides = function renderSlides(spec) {
 	  var key;
 	  var slides = [];
@@ -1447,7 +1452,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    slides.push(_react2['default'].cloneElement(child, {
-	      key: index,
+	      key: getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
 	      style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1460,7 +1465,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index >= count - infiniteCount) {
 	        key = -(count - index);
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1470,7 +1475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index < infiniteCount) {
 	        key = count + index;
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1568,8 +1573,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Credit: http://stackoverflow.com/a/13735425/1849458
 	    var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map(function (x, i) {
 
-	      console.log('i', i, _this.props);
-
 	      var className = (0, _classnames2['default'])({
 	        'slick-active': _this.props.currentSlide === i * _this.props.slidesToScroll,
 	        'slick-displayed': _this.isDisplayed(i, dotCount)
@@ -1642,7 +1645,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var prevArrowProps = {
 	      key: '0',
-	      ref: 'previous',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(prevClasses),
 	      style: { display: 'block' },
@@ -1651,7 +1653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var prevArrow;
 
 	    if (this.props.prevArrow) {
-	      prevArrow = _react2['default'].createElement(this.props.prevArrow, prevArrowProps);
+	      prevArrow = _react2['default'].cloneElement(this.props.prevArrow, prevArrowProps);
 	    } else {
 	      prevArrow = _react2['default'].createElement(
 	        'button',
@@ -1695,7 +1697,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var nextArrowProps = {
 	      key: '1',
-	      ref: 'next',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(nextClasses),
 	      style: { display: 'block' },
@@ -1705,7 +1706,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var nextArrow;
 
 	    if (this.props.nextArrow) {
-	      nextArrow = _react2['default'].createElement(this.props.nextArrow, nextArrowProps);
+	      nextArrow = _react2['default'].cloneElement(this.props.nextArrow, nextArrowProps);
 	    } else {
 	      nextArrow = _react2['default'].createElement(
 	        'button',
@@ -1807,7 +1808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    enquire.register(query, handler);
 
-	    // Queue the handlers to unregister them at unmount
+	    // Queue the handlers to unregister them at unmount  
 	    if (! this._responsiveMediaHandlers) {
 	      this._responsiveMediaHandlers = [];
 	    }
@@ -2013,7 +2014,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        /**
 	         * removes the given handler from the collection, and calls it's destroy methods
-	         *
+	         * 
 	         * @param {object || function} handler the handler to remove
 	         */
 	        removeHandler : function(handler) {
@@ -2028,7 +2029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        /**
 	         * Determine whether the media query should be considered a match
-	         *
+	         * 
 	         * @return {Boolean} true if media query can be considered a match, false otherwise
 	         */
 	        matches : function() {
