@@ -267,6 +267,9 @@ var helpers = {
   pause: function () {
     if (this.state.autoPlayTimer) {
       window.clearInterval(this.state.autoPlayTimer);
+      this.setState({
+        autoPlayTimer: null
+      });
     }
   }
 };
