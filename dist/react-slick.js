@@ -1001,6 +1001,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  pause: function pause() {
 	    if (this.state.autoPlayTimer) {
 	      window.clearInterval(this.state.autoPlayTimer);
+	      this.setState({
+	        autoPlayTimer: null
+	      });
 	    }
 	  }
 	};
