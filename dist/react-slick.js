@@ -1374,18 +1374,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1393,16 +1395,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
@@ -1413,15 +1413,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1645,8 +1644,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    //
 	    // Credit: http://stackoverflow.com/a/13735425/1849458
 	    var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map(function (x, i) {
-
-	      console.log('i', i, _this.props);
 
 	      var className = (0, _classnames2['default'])({
 	        'slick-active': _this.props.currentSlide === i * _this.props.slidesToScroll,
@@ -1883,7 +1880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    enquire.register(query, handler);
 
-	    // Queue the handlers to unregister them at unmount
+	    // Queue the handlers to unregister them at unmount  
 	    if (! this._responsiveMediaHandlers) {
 	      this._responsiveMediaHandlers = [];
 	    }
@@ -2089,7 +2086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        /**
 	         * removes the given handler from the collection, and calls it's destroy methods
-	         *
+	         * 
 	         * @param {object || function} handler the handler to remove
 	         */
 	        removeHandler : function(handler) {
@@ -2104,7 +2101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        /**
 	         * Determine whether the media query should be considered a match
-	         *
+	         * 
 	         * @return {Boolean} true if media query can be considered a match, false otherwise
 	         */
 	        matches : function() {
