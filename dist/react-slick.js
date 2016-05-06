@@ -301,6 +301,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
 	      var dotProps = {
+	        infinite: this.props.infinite,
+	        centerMode: this.props.centerMode,
 	        dotsClass: this.props.dotsClass,
 	        slideCount: this.state.slideCount,
 	        slidesToShow: this.props.slidesToShow,
@@ -875,6 +877,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else {
 	        currentSlide = targetSlide - this.state.slideCount;
 	      }
+	    } else if (targetSlide >= this.state.slideCount - this.props.slidesToShow && this.props.infinite === false) {
+	      currentSlide = this.state.slideCount - this.props.slidesToShow;
 	    } else {
 	      currentSlide = targetSlide;
 	    }
@@ -1370,18 +1374,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1389,35 +1395,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
@@ -1609,6 +1612,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    e.preventDefault();
 	    this.props.clickHandler(options);
 	  },
+
+	  isDisplayed: function isDisplayed(i, dotCount) {
+	    var currentSlide = this.props.currentSlide,
+
+	    //slideCount     = this.props.slideCount,
+	    slidesToScroll = this.props.slidesToScroll,
+	        slidesToShow = this.props.slidesToShow;
+
+	    var displayAllDotSlides = slidesToShow % slidesToScroll === 0;
+
+	    if (this.props.centerMode || this.props.infinite || dotCount == slidesToShow || !displayAllDotSlides) {
+	      return currentSlide === i * slidesToScroll;
+	    }
+
+	    var dotSlidesDisplayeds = i >= currentSlide && i < currentSlide + slidesToShow,
+	        dotSlidesBetweenDisplayeds = i >= dotCount - slidesToShow && currentSlide >= dotCount - slidesToShow;
+
+	    return dotSlidesDisplayeds || dotSlidesBetweenDisplayeds;
+	  },
+
 	  render: function render() {
 	    var _this = this;
 
@@ -1623,7 +1646,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map(function (x, i) {
 
 	      var className = (0, _classnames2['default'])({
-	        'slick-active': _this.props.currentSlide === i * _this.props.slidesToScroll
+	        'slick-active': _this.props.currentSlide === i * _this.props.slidesToScroll,
+	        'slick-displayed': _this.isDisplayed(i, dotCount)
 	      });
 
 	      var dotOptions = {
