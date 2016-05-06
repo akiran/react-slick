@@ -72,19 +72,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _innerSlider = __webpack_require__(3);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(12);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(18);
+	var _json2mq = __webpack_require__(19);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(20);
+	var _reactResponsiveMixin = __webpack_require__(21);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(13);
+	var _defaultProps = __webpack_require__(14);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -192,23 +192,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
 
-	var _initialState = __webpack_require__(12);
+	var _initialState = __webpack_require__(13);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(13);
+	var _defaultProps = __webpack_require__(14);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(15);
+	var _track = __webpack_require__(16);
 
-	var _dots = __webpack_require__(16);
+	var _dots = __webpack_require__(17);
 
-	var _arrows = __webpack_require__(17);
+	var _arrows = __webpack_require__(18);
 
 	var InnerSlider = _react2['default'].createClass({
 	  displayName: 'InnerSlider',
@@ -228,7 +228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      mounted: true
 	    });
 	    var lazyLoadedList = [];
-	    for (var i = 0; i < this.props.children.length; i++) {
+	    for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
 	      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
 	        lazyLoadedList.push(i);
 	      }
@@ -257,7 +257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.detachEvent('onresize', this.onWindowResized);
 	    }
 	    if (this.state.autoPlayTimer) {
-	      window.clearTimeout(this.state.autoPlayTimer);
+	      window.clearInterval(this.state.autoPlayTimer);
 	    }
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -379,7 +379,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(12);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -392,8 +392,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (options.message === 'previous') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-	      previousInt = this.state.currentSlide - slideOffset;
-	      targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
+	      targetSlide = this.state.currentSlide - slideOffset;
+	      if (this.props.lazyLoad) {
+	        previousInt = this.state.currentSlide - slideOffset;
+	        targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
+	      }
 	    } else if (options.message === 'next') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : indexOffset;
 	      targetSlide = this.state.currentSlide + slideOffset;
@@ -731,7 +734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(12);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -811,10 +814,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var callback;
 
 	    if (this.props.waitForAnimate && this.state.animating) {
-	      return;
-	    }
-
-	    if (this.state.currentSlide === index) {
 	      return;
 	    }
 
@@ -952,7 +951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.setState({
 	        animating: true,
-	        currentSlide: targetSlide,
+	        currentSlide: currentSlide,
 	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2['default'])({ left: targetLeft }, this.props, this.state))
 	      }, function () {
 	        _reactLibReactTransitionEvents2['default'].addEndEventListener(_ReactDOM2['default'].findDOMNode(this.refs.track), callback);
@@ -984,23 +983,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	  autoPlay: function autoPlay() {
 	    var _this2 = this;
 
+	    if (this.state.autoPlayTimer) {
+	      return;
+	    }
 	    var play = function play() {
 	      if (_this2.state.mounted) {
 	        var nextIndex = _this2.props.rtl ? _this2.state.currentSlide - _this2.props.slidesToScroll : _this2.state.currentSlide + _this2.props.slidesToScroll;
-
 	        _this2.slideHandler(nextIndex);
 	      }
 	    };
 	    if (this.props.autoplay) {
-	      window.clearTimeout(this.state.autoPlayTimer);
 	      this.setState({
-	        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+	        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
 	      });
 	    }
 	  },
 	  pause: function pause() {
 	    if (this.state.autoPlayTimer) {
-	      window.clearTimeout(this.state.autoPlayTimer);
+	      window.clearInterval(this.state.autoPlayTimer);
+	      this.setState({
+	        autoPlayTimer: null
+	      });
 	    }
 	  }
 	};
@@ -1013,7 +1016,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-2015, Facebook, Inc.
+	 * Copyright 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
 	 * This source code is licensed under the BSD-style license found in the
@@ -1027,56 +1030,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ExecutionEnvironment = __webpack_require__(10);
 
-	/**
-	 * EVENT_NAME_MAP is used to determine which event fired when a
-	 * transition/animation ends, based on the style property used to
-	 * define that event.
-	 */
-	var EVENT_NAME_MAP = {
-	  transitionend: {
-	    'transition': 'transitionend',
-	    'WebkitTransition': 'webkitTransitionEnd',
-	    'MozTransition': 'mozTransitionEnd',
-	    'OTransition': 'oTransitionEnd',
-	    'msTransition': 'MSTransitionEnd'
-	  },
-
-	  animationend: {
-	    'animation': 'animationend',
-	    'WebkitAnimation': 'webkitAnimationEnd',
-	    'MozAnimation': 'mozAnimationEnd',
-	    'OAnimation': 'oAnimationEnd',
-	    'msAnimation': 'MSAnimationEnd'
-	  }
-	};
+	var getVendorPrefixedEventName = __webpack_require__(11);
 
 	var endEvents = [];
 
 	function detectEvents() {
-	  var testEl = document.createElement('div');
-	  var style = testEl.style;
+	  var animEnd = getVendorPrefixedEventName('animationend');
+	  var transEnd = getVendorPrefixedEventName('transitionend');
 
-	  // On some platforms, in particular some releases of Android 4.x,
-	  // the un-prefixed "animation" and "transition" properties are defined on the
-	  // style object but the events that fire will still be prefixed, so we need
-	  // to check if the un-prefixed events are useable, and if not remove them
-	  // from the map
-	  if (!('AnimationEvent' in window)) {
-	    delete EVENT_NAME_MAP.animationend.animation;
+	  if (animEnd) {
+	    endEvents.push(animEnd);
 	  }
 
-	  if (!('TransitionEvent' in window)) {
-	    delete EVENT_NAME_MAP.transitionend.transition;
-	  }
-
-	  for (var baseEventName in EVENT_NAME_MAP) {
-	    var baseEvents = EVENT_NAME_MAP[baseEventName];
-	    for (var styleName in baseEvents) {
-	      if (styleName in style) {
-	        endEvents.push(baseEvents[styleName]);
-	        break;
-	      }
-	    }
+	  if (transEnd) {
+	    endEvents.push(transEnd);
 	  }
 	}
 
@@ -1127,14 +1094,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	/**
-	 * Copyright 2013-2015, Facebook, Inc.
+	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
 	 *
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule ExecutionEnvironment
 	 */
 
 	'use strict';
@@ -1165,6 +1131,112 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule getVendorPrefixedEventName
+	 */
+
+	'use strict';
+
+	var ExecutionEnvironment = __webpack_require__(10);
+
+	/**
+	 * Generate a mapping of standard vendor prefixes using the defined style property and event name.
+	 *
+	 * @param {string} styleProp
+	 * @param {string} eventName
+	 * @returns {object}
+	 */
+	function makePrefixMap(styleProp, eventName) {
+	  var prefixes = {};
+
+	  prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
+	  prefixes['Webkit' + styleProp] = 'webkit' + eventName;
+	  prefixes['Moz' + styleProp] = 'moz' + eventName;
+	  prefixes['ms' + styleProp] = 'MS' + eventName;
+	  prefixes['O' + styleProp] = 'o' + eventName.toLowerCase();
+
+	  return prefixes;
+	}
+
+	/**
+	 * A list of event names to a configurable list of vendor prefixes.
+	 */
+	var vendorPrefixes = {
+	  animationend: makePrefixMap('Animation', 'AnimationEnd'),
+	  animationiteration: makePrefixMap('Animation', 'AnimationIteration'),
+	  animationstart: makePrefixMap('Animation', 'AnimationStart'),
+	  transitionend: makePrefixMap('Transition', 'TransitionEnd')
+	};
+
+	/**
+	 * Event names that have already been detected and prefixed (if applicable).
+	 */
+	var prefixedEventNames = {};
+
+	/**
+	 * Element to check for prefixes on.
+	 */
+	var style = {};
+
+	/**
+	 * Bootstrap if a DOM exists.
+	 */
+	if (ExecutionEnvironment.canUseDOM) {
+	  style = document.createElement('div').style;
+
+	  // On some platforms, in particular some releases of Android 4.x,
+	  // the un-prefixed "animation" and "transition" properties are defined on the
+	  // style object but the events that fire will still be prefixed, so we need
+	  // to check if the un-prefixed events are usable, and if not remove them from the map.
+	  if (!('AnimationEvent' in window)) {
+	    delete vendorPrefixes.animationend.animation;
+	    delete vendorPrefixes.animationiteration.animation;
+	    delete vendorPrefixes.animationstart.animation;
+	  }
+
+	  // Same as above
+	  if (!('TransitionEvent' in window)) {
+	    delete vendorPrefixes.transitionend.transition;
+	  }
+	}
+
+	/**
+	 * Attempts to determine the correct vendor prefixed event name.
+	 *
+	 * @param {string} eventName
+	 * @returns {string}
+	 */
+	function getVendorPrefixedEventName(eventName) {
+	  if (prefixedEventNames[eventName]) {
+	    return prefixedEventNames[eventName];
+	  } else if (!vendorPrefixes[eventName]) {
+	    return eventName;
+	  }
+
+	  var prefixMap = vendorPrefixes[eventName];
+
+	  for (var styleProp in prefixMap) {
+	    if (prefixMap.hasOwnProperty(styleProp) && styleProp in style) {
+	      return prefixedEventNames[eventName] = prefixMap[styleProp];
+	    }
+	  }
+
+	  return '';
+	}
+
+	module.exports = getVendorPrefixedEventName;
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1196,7 +1268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1246,7 +1318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = initialState;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1299,7 +1371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = defaultProps;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1354,7 +1426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1369,11 +1441,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(12);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1423,6 +1495,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return style;
 	};
 
+	var getKey = function getKey(child, fallbackKey) {
+	  // key could be a zero
+	  return child.key === null || child.key === undefined ? fallbackKey : child.key;
+	};
+
 	var renderSlides = function renderSlides(spec) {
 	  var key;
 	  var slides = [];
@@ -1448,7 +1525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    slides.push(_react2['default'].cloneElement(child, {
-	      key: index,
+	      key: getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
 	      style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1461,9 +1538,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index >= count - infiniteCount) {
 	        key = -(count - index);
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1471,9 +1548,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index < infiniteCount) {
 	        key = count + index;
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: key,
+	          key: getKey(child, key),
 	          'data-index': key,
-	          className: getSlideClasses((0, _objectAssign2['default'])({ index: key }, spec)),
+	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
 	        }));
 	      }
@@ -1502,7 +1579,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Track = Track;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1517,7 +1594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1589,7 +1666,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2['default'].createElement(
 	          'button',
 	          { onClick: _this.clickHandler.bind(_this, dotOptions) },
-	          i
+	          i + 1
 	        )
 	      );
 	    });
@@ -1604,7 +1681,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Dots = Dots;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1621,7 +1698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(15);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1643,7 +1720,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var prevArrowProps = {
 	      key: '0',
-	      ref: 'previous',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(prevClasses),
 	      style: { display: 'block' },
@@ -1652,7 +1728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var prevArrow;
 
 	    if (this.props.prevArrow) {
-	      prevArrow = _react2['default'].createElement(this.props.prevArrow, prevArrowProps);
+	      prevArrow = _react2['default'].cloneElement(this.props.prevArrow, prevArrowProps);
 	    } else {
 	      prevArrow = _react2['default'].createElement(
 	        'button',
@@ -1696,7 +1772,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var nextArrowProps = {
 	      key: '1',
-	      ref: 'next',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(nextClasses),
 	      style: { display: 'block' },
@@ -1706,7 +1781,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var nextArrow;
 
 	    if (this.props.nextArrow) {
-	      nextArrow = _react2['default'].createElement(this.props.nextArrow, nextArrowProps);
+	      nextArrow = _react2['default'].cloneElement(this.props.nextArrow, nextArrowProps);
 	    } else {
 	      nextArrow = _react2['default'].createElement(
 	        'button',
@@ -1721,10 +1796,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(19);
+	var camel2hyphen = __webpack_require__(20);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -1777,7 +1852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = json2mq;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -1791,12 +1866,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(21);
-	var enquire = canUseDOM && __webpack_require__(22);
-	var json2mq = __webpack_require__(18);
+	var canUseDOM = __webpack_require__(22);
+	var enquire = canUseDOM && __webpack_require__(23);
+	var json2mq = __webpack_require__(19);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -1826,7 +1901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -1838,7 +1913,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
