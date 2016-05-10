@@ -80,7 +80,7 @@ var renderSlides = (spec) => {
     }
 
     slides.push(React.cloneElement(child, {
-      key: getKey(child, index),
+      key: 'original' + getKey(child, index),
       'data-index': index,
       className: cssClasses,
       style: assign({}, child.props.style || {}, childStyle)
@@ -93,7 +93,7 @@ var renderSlides = (spec) => {
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
         preCloneSlides.push(React.cloneElement(child, {
-          key: getKey(child, key),
+          key: 'cloned' + getKey(child, key),
           'data-index': key,
           className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
@@ -103,7 +103,7 @@ var renderSlides = (spec) => {
       if (index < infiniteCount) {
         key = count + index;
         postCloneSlides.push(React.cloneElement(child, {
-          key: getKey(child, key),
+          key: 'cloned' + getKey(child, key),
           'data-index': key,
           className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)

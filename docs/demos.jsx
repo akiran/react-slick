@@ -34,12 +34,12 @@ var SingleItem = React.createClass({
       <div>
         <h2> Single Item</h2>
         <Slider {...settings}>
-          <div onClick={this.click}><h3>{this.state.count}</h3></div>
-          <div><h3>2</h3></div>
-          <div><h3>3</h3></div>
-          <div><h3>4</h3></div>
-          <div><h3>5</h3></div>
-          <div><h3>6</h3></div>
+          <div key={1} onClick={this.click}><h3>{this.state.count}</h3></div>
+          <div key={2}><h3>2</h3></div>
+          <div key={3}><h3>3</h3></div>
+          <div key={4}><h3>4</h3></div>
+          <div key={5}><h3>5</h3></div>
+          <div key={6}><h3>6</h3></div>
         </Slider>
       </div>
     );
