@@ -45,12 +45,11 @@ module.exports = function(config) {
           extensions: ['', '.js', '.jsx']
       },
       externals: {
-        react: 'React',
-        'react/addons': 'React',
-        'sinon': 'sinon',
-        jquery: '$',
-        should: 'should'
-      },
+        'cheerio': 'window',
+        'react/addons': true,
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true
+      }
       // postLoaders: [{
       //   test: ', // every file
       //   loader: 'coverjs-loader'
