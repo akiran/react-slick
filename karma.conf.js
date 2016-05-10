@@ -21,7 +21,6 @@ module.exports = function(config) {
       //'bower_components/jquery/dist/jquery.js',
       'node_modules/should/should.js',
       'test/**/*.js',
-      'test/**/*.jsx',
     ],
 
 
@@ -34,11 +33,9 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       './test/**/*.js': ['webpack'],
-      './test/**/*.jsx': ['webpack'],
     },
 
     webpack: {
-      // cache: true,
       module: {
         loaders: [
             { loader: 'babel' },
@@ -63,7 +60,6 @@ module.exports = function(config) {
       // hot: true,
       quiet: true,
       noInfo: true,
-      watchDelay: 300,
     },
     // webpackPort: 8080, // Defaults to config.port + 1
 
