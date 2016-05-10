@@ -40,6 +40,8 @@ export var InnerSlider = React.createClass({
     }
   },
   componentDidMount: function componentDidMount() {
+    this._slickSlider.classList.add('slick-initialized');
+
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
@@ -77,7 +79,7 @@ export var InnerSlider = React.createClass({
     this.update(this.props);
   },
   render: function () {
-    var className = classnames('slick-initialized', 'slick-slider', this.props.className);
+    var className = classnames('slick-slider', this.props.className);
 
     var trackProps = {
       fade: this.props.fade,
@@ -130,7 +132,7 @@ export var InnerSlider = React.createClass({
     }
 
     return (
-      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave} ref={c => (this._slickSlider = c)}>
         <div
           ref='list'
           className="slick-list"
