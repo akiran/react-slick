@@ -6,7 +6,8 @@
   "scripts": {
     "start": "gulp server",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
-    "test": "karma start --single-run"
+    "test": "karma start --single-run",
+    "dev-test": "karma start"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
