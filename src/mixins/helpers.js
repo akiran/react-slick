@@ -167,12 +167,28 @@ var helpers = {
     if (this.props.lazyLoad) {
       var loaded = true;
       var slidesToLoad = [];
-      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
-        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
-        if (!loaded) {
+      const length = React.Children.count(this.props.children);
+      const max = targetSlide + this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
+      const min = targetSlide - this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
+
+      for (var i = 0; i < React.Children.count(this.props.children); i++) {
+        if (this.state.lazyLoadedList.indexOf(i) >= 0) {
+          continue;
+        }
+
+        if (i < max && i > min) {
+          loaded = false;
           slidesToLoad.push(i);
+          continue;
+        }
+
+        if (i >= max && min < 0 && this.props.infinite && min < i - length) {
+          loaded = false;
+          slidesToLoad.push(i);
+          continue;
         }
       }
+
       if (!loaded) {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)

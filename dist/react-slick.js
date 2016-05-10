@@ -227,14 +227,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.setState({
 	      mounted: true
 	    });
-	    var lazyLoadedList = [];
-	    for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
-	      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
-	        lazyLoadedList.push(i);
-	      }
-	    }
 
 	    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
+	      var lazyLoadedList = [];
+	      var _length = _react2['default'].Children.count(this.props.children);
+	      var max = this.state.currentSlide + this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
+	      var min = this.state.currentSlide - this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
+	      for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
+	        if (i < max && i > min) {
+	          lazyLoadedList.push(i);
+	          continue;
+	        }
+
+	        if (i >= max && min < 0 && this.props.infinite && min < i - _length) {
+	          lazyLoadedList.push(i);
+	        }
+	      }
+
 	      this.setState({
 	        lazyLoadedList: lazyLoadedList
 	      });
@@ -901,12 +910,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.lazyLoad) {
 	      var loaded = true;
 	      var slidesToLoad = [];
-	      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++) {
-	        loaded = loaded && this.state.lazyLoadedList.indexOf(i) >= 0;
-	        if (!loaded) {
+	      var _length = _react2['default'].Children.count(this.props.children);
+	      var max = targetSlide + this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
+	      var min = targetSlide - this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
+
+	      for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
+	        if (this.state.lazyLoadedList.indexOf(i) >= 0) {
+	          continue;
+	        }
+
+	        if (i < max && i > min) {
+	          loaded = false;
 	          slidesToLoad.push(i);
+	          continue;
+	        }
+
+	        if (i >= max && min < 0 && this.props.infinite && min < i - _length) {
+	          loaded = false;
+	          slidesToLoad.push(i);
+	          continue;
 	        }
 	      }
+
 	      if (!loaded) {
 	        this.setState({
 	          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
@@ -1122,6 +1147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    slide: 'div',
 	    slidesToShow: 1,
 	    slidesToScroll: 1,
+	    preloadSlides: true,
 	    speed: 500,
 	    swipe: true,
 	    swipeToSlide: false,
