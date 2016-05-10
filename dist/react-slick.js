@@ -7,7 +7,7 @@
 		exports["Slider"] = factory(require("react"), require("react-dom"));
 	else
 		root["Slider"] = factory(root["React"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_7__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -72,19 +72,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _innerSlider = __webpack_require__(3);
 
-	var _objectAssign = __webpack_require__(12);
+	var _objectAssign = __webpack_require__(11);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(19);
+	var _json2mq = __webpack_require__(18);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(21);
+	var _reactResponsiveMixin = __webpack_require__(20);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(14);
+	var _defaultProps = __webpack_require__(13);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -188,27 +188,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _mixinsEventHandlers2 = _interopRequireDefault(_mixinsEventHandlers);
 
-	var _mixinsHelpers = __webpack_require__(8);
+	var _mixinsHelpers = __webpack_require__(7);
 
 	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
 
-	var _initialState = __webpack_require__(13);
+	var _initialState = __webpack_require__(12);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(14);
+	var _defaultProps = __webpack_require__(13);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(15);
+	var _classnames = __webpack_require__(14);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(16);
+	var _track = __webpack_require__(15);
 
-	var _dots = __webpack_require__(17);
+	var _dots = __webpack_require__(16);
 
-	var _arrows = __webpack_require__(18);
+	var _arrows = __webpack_require__(17);
 
 	var InnerSlider = _react2['default'].createClass({
 	  displayName: 'InnerSlider',
@@ -373,11 +373,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _helpers = __webpack_require__(8);
+	var _helpers = __webpack_require__(7);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(12);
+	var _objectAssign = __webpack_require__(11);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -560,9 +560,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _ReactDOM = __webpack_require__(6);
+	var _reactDom = __webpack_require__(6);
 
-	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var checkSpecKeys = function checkSpecKeys(spec, keysArray) {
 	  return keysArray.reduce(function (value, key) {
@@ -653,17 +653,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (spec.variableWidth === true) {
 	    var targetSlideIndex;
 	    if (spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
-	      targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
+	      targetSlide = _reactDom2['default'].findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
 	    } else {
 	      targetSlideIndex = spec.slideIndex + spec.slidesToShow;
-	      targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
+	      targetSlide = _reactDom2['default'].findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
 	    }
 	    targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
 	    if (spec.centerMode === true) {
 	      if (spec.infinite === false) {
-	        targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).children[spec.slideIndex];
+	        targetSlide = _reactDom2['default'].findDOMNode(spec.trackRef).children[spec.slideIndex];
 	      } else {
-	        targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).children[spec.slideIndex + spec.slidesToShow + 1];
+	        targetSlide = _reactDom2['default'].findDOMNode(spec.trackRef).children[spec.slideIndex + spec.slidesToShow + 1];
 	      }
 
 	      targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
@@ -677,37 +677,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(7);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var ReactDOM = _react2['default'].version >= '0.14.0' ? _reactDom2['default'] : _react2['default'];
-
-	exports['default'] = ReactDOM;
-	module.exports = exports['default'];
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
-
-/***/ },
-/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -722,26 +697,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactDOM = __webpack_require__(6);
+	var _reactDom = __webpack_require__(6);
 
-	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactLibReactTransitionEvents = __webpack_require__(9);
+	var _reactLibReactTransitionEvents = __webpack_require__(8);
 
 	var _reactLibReactTransitionEvents2 = _interopRequireDefault(_reactLibReactTransitionEvents);
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _objectAssign = __webpack_require__(12);
+	var _objectAssign = __webpack_require__(11);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 	var helpers = {
 	  initialize: function initialize(props) {
 	    var slideCount = _react2['default'].Children.count(props.children);
-	    var listWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.list));
-	    var trackWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this)) / props.slidesToShow;
+	    var listWidth = this.getWidth(_reactDom2['default'].findDOMNode(this.refs.list));
+	    var trackWidth = this.getWidth(_reactDom2['default'].findDOMNode(this.refs.track));
+	    var slideWidth = this.getWidth(_reactDom2['default'].findDOMNode(this)) / props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -769,9 +744,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // This method has mostly same code as initialize method.
 	    // Refactor it
 	    var slideCount = _react2['default'].Children.count(props.children);
-	    var listWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.list));
-	    var trackWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this)) / props.slidesToShow;
+	    var listWidth = this.getWidth(_reactDom2['default'].findDOMNode(this.refs.list));
+	    var trackWidth = this.getWidth(_reactDom2['default'].findDOMNode(this.refs.track));
+	    var slideWidth = this.getWidth(_reactDom2['default'].findDOMNode(this)) / props.slidesToShow;
 
 	    this.setState({
 	      slideCount: slideCount,
@@ -797,7 +772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.adaptiveHeight) {
 	      var selector = '[data-index="' + this.state.currentSlide + '"]';
 	      if (this.refs.list) {
-	        var slickList = _ReactDOM2['default'].findDOMNode(this.refs.list);
+	        var slickList = _reactDom2['default'].findDOMNode(this.refs.list);
 	        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
 	      }
 	    }
@@ -840,14 +815,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (_this.props.afterChange) {
 	          _this.props.afterChange(currentSlide);
 	        }
-	        _reactLibReactTransitionEvents2['default'].removeEndEventListener(_ReactDOM2['default'].findDOMNode(_this.refs.track).children[currentSlide], callback);
+	        _reactLibReactTransitionEvents2['default'].removeEndEventListener(_reactDom2['default'].findDOMNode(_this.refs.track).children[currentSlide], callback);
 	      };
 
 	      this.setState({
 	        animating: true,
 	        currentSlide: targetSlide
 	      }, function () {
-	        _reactLibReactTransitionEvents2['default'].addEndEventListener(_ReactDOM2['default'].findDOMNode(this.refs.track).children[currentSlide], callback);
+	        _reactLibReactTransitionEvents2['default'].addEndEventListener(_reactDom2['default'].findDOMNode(this.refs.track).children[currentSlide], callback);
 	      });
 
 	      if (this.props.beforeChange) {
@@ -942,7 +917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (_this.props.afterChange) {
 	          _this.props.afterChange(currentSlide);
 	        }
-	        _reactLibReactTransitionEvents2['default'].removeEndEventListener(_ReactDOM2['default'].findDOMNode(_this.refs.track), callback);
+	        _reactLibReactTransitionEvents2['default'].removeEndEventListener(_reactDom2['default'].findDOMNode(_this.refs.track), callback);
 	      };
 
 	      this.setState({
@@ -950,7 +925,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        currentSlide: currentSlide,
 	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2['default'])({ left: targetLeft }, this.props, this.state))
 	      }, function () {
-	        _reactLibReactTransitionEvents2['default'].addEndEventListener(_ReactDOM2['default'].findDOMNode(this.refs.track), callback);
+	        _reactLibReactTransitionEvents2['default'].addEndEventListener(_reactDom2['default'].findDOMNode(this.refs.track), callback);
 	      });
 	    }
 
@@ -1008,7 +983,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1024,9 +999,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(10);
+	var ExecutionEnvironment = __webpack_require__(9);
 
-	var getVendorPrefixedEventName = __webpack_require__(11);
+	var getVendorPrefixedEventName = __webpack_require__(10);
 
 	var endEvents = [];
 
@@ -1086,7 +1061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 	/**
@@ -1126,7 +1101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ExecutionEnvironment;
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1142,7 +1117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(10);
+	var ExecutionEnvironment = __webpack_require__(9);
 
 	/**
 	 * Generate a mapping of standard vendor prefixes using the defined style property and event name.
@@ -1232,7 +1207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getVendorPrefixedEventName;
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1264,7 +1239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1314,7 +1289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = initialState;
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1367,21 +1342,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = defaultProps;
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
+	/* global define */
 
 	(function () {
 		'use strict';
 
-		function classNames () {
+		var hasOwn = {}.hasOwnProperty;
 
-			var classes = '';
+		function classNames () {
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1389,40 +1366,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				var argType = typeof arg;
 
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
 					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
-		} else if (true){
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
-
 	}());
 
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1437,11 +1411,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(12);
+	var _objectAssign = __webpack_require__(11);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(15);
+	var _classnames = __webpack_require__(14);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1575,7 +1549,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Track = Track;
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1590,7 +1564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(15);
+	var _classnames = __webpack_require__(14);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1654,7 +1628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Dots = Dots;
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1671,7 +1645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(15);
+	var _classnames = __webpack_require__(14);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1769,10 +1743,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(20);
+	var camel2hyphen = __webpack_require__(19);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -1825,7 +1799,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = json2mq;
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -1839,12 +1813,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(22);
-	var enquire = canUseDOM && __webpack_require__(23);
-	var json2mq = __webpack_require__(19);
+	var canUseDOM = __webpack_require__(21);
+	var enquire = canUseDOM && __webpack_require__(22);
+	var json2mq = __webpack_require__(18);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -1874,7 +1848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -1886,7 +1860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!

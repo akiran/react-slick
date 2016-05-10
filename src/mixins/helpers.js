@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from './ReactDOM';
+import ReactDOM from 'react-dom';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
