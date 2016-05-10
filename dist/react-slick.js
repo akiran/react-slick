@@ -1308,9 +1308,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
 
 	      if (index >= count - infiniteCount) {
-	        key = -(count - index);
+	        key = count - index;
 	        preCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: getKey(child, key),
+	          key: '-' + getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
@@ -1320,7 +1320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (index < infiniteCount) {
 	        key = count + index;
 	        postCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: getKey(child, key),
+	          key: '+' + getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)

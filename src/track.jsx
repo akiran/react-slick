@@ -91,9 +91,9 @@ var renderSlides = (spec) => {
       var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
 
       if (index >= (count - infiniteCount)) {
-        key = -(count - index);
+        key = count - index;
         preCloneSlides.push(React.cloneElement(child, {
-          key: getKey(child, key),
+          key: '-' + getKey(child, key),
           'data-index': key,
           className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
@@ -103,7 +103,7 @@ var renderSlides = (spec) => {
       if (index < infiniteCount) {
         key = count + index;
         postCloneSlides.push(React.cloneElement(child, {
-          key: getKey(child, key),
+          key: '+' + getKey(child, key),
           'data-index': key,
           className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
