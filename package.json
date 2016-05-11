@@ -5,6 +5,7 @@
   "main": "./lib",
   "scripts": {
     "start": "gulp server",
+    "postinstall": "babel ./src --out-dir ./lib",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "karma start --single-run",
     "dev-test": "karma start"
