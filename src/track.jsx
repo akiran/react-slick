@@ -50,6 +50,11 @@ var getSlideStyle = function (spec) {
   return style;
 };
 
+var getKey = (child, fallbackKey) => {
+    // key could be a zero
+    return (child.key === null || child.key === undefined) ? fallbackKey : child.key;
+};
+
 var renderSlides = (spec) => {
   var key;
   var slides = [];
@@ -70,13 +75,12 @@ var renderSlides = (spec) => {
 
     if (child.props.className) {
         cssClasses = classnames(slickClasses, child.props.className);
-    }
-    else {
+    } else {
         cssClasses = slickClasses;
     }
 
     slides.push(React.cloneElement(child, {
-      key: index,
+      key: 'original' + getKey(child, index),
       'data-index': index,
       className: cssClasses,
       style: assign({}, child.props.style || {}, childStyle)
@@ -89,9 +93,9 @@ var renderSlides = (spec) => {
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
         preCloneSlides.push(React.cloneElement(child, {
-          key: key,
+          key: 'cloned' + getKey(child, key),
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
@@ -99,9 +103,9 @@ var renderSlides = (spec) => {
       if (index < infiniteCount) {
         key = count + index;
         postCloneSlides.push(React.cloneElement(child, {
-          key: key,
+          key: 'cloned' + getKey(child, key),
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
+          className: cssClasses,
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }

@@ -14,9 +14,12 @@ var EventHandlers = {
     indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
 
     if (options.message === 'previous') {
-      slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
-      previousInt = currentSlide - slideOffset;
-      targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
+      slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
+      targetSlide = this.state.currentSlide - slideOffset;
+      if (this.props.lazyLoad) {
+        previousInt = this.state.currentSlide - slideOffset;
+        targetSlide = previousInt === -1 ? this.state.slideCount -1 : previousInt;
+      }
     } else if (options.message === 'next') {
       targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     } else if (options.message === 'dots') {
