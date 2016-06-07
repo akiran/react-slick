@@ -214,7 +214,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  mixins: [_helpers2.default, _eventHandlers2.default],
 	  getInitialState: function getInitialState() {
-	    return _initialState2.default;
+	    return Object.assign({}, _initialState2.default, {
+	      currentSlide: this.props.initialSlide
+	    });
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return _defaultProps2.default;
@@ -381,9 +383,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	var EventHandlers = {
 	  // Event handler for previous and next
 	  changeSlide: function changeSlide(options) {
+	    var _props = this.props;
+	    var slidesToScroll = _props.slidesToScroll;
+	    var slidesToShow = _props.slidesToShow;
+	    var _state = this.state;
+	    var currentSlide = _state.currentSlide;
+	    var slideCount = _state.slideCount;
+
 	    var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
-	    unevenOffset = this.state.slideCount % this.props.slidesToScroll !== 0;
-	    indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
+
+	    unevenOffset = slideCount % slidesToScroll !== 0;
+	    indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
 
 	    if (options.message === 'previous') {
 	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
@@ -393,8 +403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        targetSlide = previousInt === -1 ? this.state.slideCount - 1 : previousInt;
 	      }
 	    } else if (options.message === 'next') {
-	      slideOffset = indexOffset === 0 ? this.props.slidesToScroll : indexOffset;
-	      targetSlide = this.state.currentSlide + slideOffset;
+	      targetSlide = (currentSlide + slidesToScroll) % slideCount + indexOffset;
 	    } else if (options.message === 'dots') {
 	      // Click on dots
 	      targetSlide = options.index * options.slidesToScroll;
