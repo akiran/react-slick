@@ -458,6 +458,34 @@ var SamplePrevArrow = React.createClass({
   }
 });
 
+var CustomPadding = React.createClass({
+  render: function () {
+    var settings = {
+      customPaging: function(onClick, i, element) {
+        var image = element.props.children;
+        return <a onClick={onClick}><img src={baseUrl + image.props.src}/></a>;
+      },
+      dots: true,
+      dotsClass: 'slick-dots slick-thumb',
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div>
+        <h2>Custom Paging</h2>
+        <Slider {...settings}>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 var CustomArrows = React.createClass({
   render: function () {
     var settings = {
@@ -484,7 +512,6 @@ var CustomArrows = React.createClass({
   }
 });
 
-
 var App = React.createClass({
   render: function () {
     //need to add variable width and center mode demo
@@ -504,6 +531,7 @@ var App = React.createClass({
         <LazyLoad />
         <Fade />
         <SlickGoTo />
+        <CustomPadding />
         <CustomArrows />
       </div>
     );
