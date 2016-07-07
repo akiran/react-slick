@@ -7,7 +7,7 @@
 		exports["Slider"] = factory(require("react"), require("react-dom"));
 	else
 		root["Slider"] = factory(root["React"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_7__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -64,34 +64,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _innerSlider = __webpack_require__(3);
 
-	var _objectAssign = __webpack_require__(9);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(16);
+	var _json2mq = __webpack_require__(15);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(18);
+	var _reactResponsiveMixin = __webpack_require__(17);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(11);
+	var _defaultProps = __webpack_require__(10);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var Slider = _react2['default'].createClass({
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Slider = _react2.default.createClass({
 	  displayName: 'Slider',
 
-	  mixins: [_reactResponsiveMixin2['default']],
+	  mixins: [_reactResponsiveMixin2.default],
 	  getInitialState: function getInitialState() {
 	    return {
 	      breakpoint: null
@@ -111,9 +111,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      breakpoints.forEach(function (breakpoint, index) {
 	        var bQuery;
 	        if (index === 0) {
-	          bQuery = (0, _json2mq2['default'])({ minWidth: 0, maxWidth: breakpoint });
+	          bQuery = (0, _json2mq2.default)({ minWidth: 0, maxWidth: breakpoint });
 	        } else {
-	          bQuery = (0, _json2mq2['default'])({ minWidth: breakpoints[index - 1], maxWidth: breakpoint });
+	          bQuery = (0, _json2mq2.default)({ minWidth: breakpoints[index - 1], maxWidth: breakpoint });
 	        }
 	        _this.media(bQuery, function () {
 	          _this.setState({ breakpoint: breakpoint });
@@ -121,7 +121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 
 	      // Register media query for full screen. Need to support resize from small to large
-	      var query = (0, _json2mq2['default'])({ minWidth: breakpoints.slice(-1)[0] });
+	      var query = (0, _json2mq2.default)({ minWidth: breakpoints.slice(-1)[0] });
 
 	      this.media(query, function () {
 	        _this.setState({ breakpoint: null });
@@ -137,19 +137,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	      newProps = this.props.responsive.filter(function (resp) {
 	        return resp.breakpoint === _this2.state.breakpoint;
 	      });
-	      settings = newProps[0].settings === 'unslick' ? 'unslick' : (0, _objectAssign2['default'])({}, this.props, newProps[0].settings);
+	      settings = newProps[0].settings === 'unslick' ? 'unslick' : (0, _objectAssign2.default)({}, this.props, newProps[0].settings);
 	    } else {
-	      settings = (0, _objectAssign2['default'])({}, _defaultProps2['default'], this.props);
+	      settings = (0, _objectAssign2.default)({}, _defaultProps2.default, this.props);
 	    }
 	    if (settings === 'unslick') {
 	      // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
-	      return _react2['default'].createElement(
+	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        this.props.children
 	      );
 	    } else {
-	      return _react2['default'].createElement(
+	      return _react2.default.createElement(
 	        _innerSlider.InnerSlider,
 	        settings,
 	        this.props.children
@@ -172,53 +172,52 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
+	exports.__esModule = true;
+	exports.InnerSlider = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _mixinsEventHandlers = __webpack_require__(4);
+	var _eventHandlers = __webpack_require__(4);
 
-	var _mixinsEventHandlers2 = _interopRequireDefault(_mixinsEventHandlers);
+	var _eventHandlers2 = _interopRequireDefault(_eventHandlers);
 
-	var _mixinsHelpers = __webpack_require__(8);
+	var _helpers = __webpack_require__(7);
 
-	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
+	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _initialState = __webpack_require__(10);
+	var _initialState = __webpack_require__(9);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(11);
+	var _defaultProps = __webpack_require__(10);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(12);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(13);
+	var _track = __webpack_require__(12);
 
-	var _dots = __webpack_require__(14);
+	var _dots = __webpack_require__(13);
 
-	var _arrows = __webpack_require__(15);
+	var _arrows = __webpack_require__(14);
 
-	var InnerSlider = _react2['default'].createClass({
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InnerSlider = exports.InnerSlider = _react2.default.createClass({
 	  displayName: 'InnerSlider',
 
-	  mixins: [_mixinsHelpers2['default'], _mixinsEventHandlers2['default']],
+	  mixins: [_helpers2.default, _eventHandlers2.default],
 	  getInitialState: function getInitialState() {
-	    return _initialState2['default'];
+	    return _initialState2.default;
 	  },
 	  getDefaultProps: function getDefaultProps() {
-	    return _defaultProps2['default'];
+	    return _defaultProps2.default;
 	  },
 	  componentWillMount: function componentWillMount() {
 	    if (this.props.init) {
@@ -230,16 +229,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
 	      var lazyLoadedList = [];
-	      var _length = _react2['default'].Children.count(this.props.children);
+	      var length = _react2.default.Children.count(this.props.children);
 	      var max = this.state.currentSlide + this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
 	      var min = this.state.currentSlide - this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
-	      for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
+	      for (var i = 0; i < _react2.default.Children.count(this.props.children); i++) {
 	        if (i < max && i > min) {
 	          lazyLoadedList.push(i);
 	          continue;
 	        }
 
-	        if (i >= max && min < 0 && this.props.infinite && min < i - _length) {
+	        if (i >= max && min < 0 && this.props.infinite && min < i - length) {
 	          lazyLoadedList.push(i);
 	        }
 	      }
@@ -292,7 +291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.update(this.props);
 	  },
 	  render: function render() {
-	    var className = (0, _classnames2['default'])('slick-initialized', 'slick-slider', this.props.className);
+	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className);
 
 	    var trackProps = {
 	      fade: this.props.fade,
@@ -323,7 +322,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        clickHandler: this.changeSlide
 	      };
 
-	      dots = _react2['default'].createElement(_dots.Dots, dotProps);
+	      dots = _react2.default.createElement(_dots.Dots, dotProps);
 	    }
 
 	    var prevArrow, nextArrow;
@@ -340,14 +339,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    if (this.props.arrows) {
-	      prevArrow = _react2['default'].createElement(_arrows.PrevArrow, arrowProps);
-	      nextArrow = _react2['default'].createElement(_arrows.NextArrow, arrowProps);
+	      prevArrow = _react2.default.createElement(_arrows.PrevArrow, arrowProps);
+	      nextArrow = _react2.default.createElement(_arrows.NextArrow, arrowProps);
 	    }
 
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        {
 	          ref: 'list',
@@ -360,7 +359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onTouchMove: this.state.dragging ? this.swipeMove : null,
 	          onTouchEnd: this.swipeEnd,
 	          onTouchCancel: this.state.dragging ? this.swipeEnd : null },
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          _track.Track,
 	          _extends({ ref: 'track' }, trackProps),
 	          this.props.children
@@ -372,28 +371,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    );
 	  }
 	});
-	exports.InnerSlider = InnerSlider;
 
 /***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	exports.__esModule = true;
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _helpers = __webpack_require__(8);
+	var _helpers = __webpack_require__(7);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(9);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var EventHandlers = {
 	  // Event handler for previous and next
@@ -462,7 +459,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var curLeft, positionOffset;
 	    var touchObject = this.state.touchObject;
 
-	    curLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
+	    curLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	      slideIndex: this.state.currentSlide,
 	      trackRef: this.refs.track
 	    }, this.props, this.state));
@@ -497,7 +494,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.setState({
 	      touchObject: touchObject,
 	      swipeLeft: swipeLeft,
-	      trackStyle: (0, _trackHelper.getTrackCSS)((0, _objectAssign2['default'])({ left: swipeLeft }, this.props, this.state))
+	      trackStyle: (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: swipeLeft }, this.props, this.state))
 	    });
 
 	    if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8) {
@@ -538,13 +535,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    } else {
 	      // Adjust the track back to it's original position.
-	      var currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
+	      var currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
 	        trackRef: this.refs.track
 	      }, this.props, this.state));
 
 	      this.setState({
-	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2['default'])({ left: currentLeft }, this.props, this.state))
+	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2.default)({ left: currentLeft }, this.props, this.state))
 	      });
 	    }
 	  },
@@ -560,23 +557,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
-	exports['default'] = EventHandlers;
-	module.exports = exports['default'];
+	exports.default = EventHandlers;
 
 /***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	exports.__esModule = true;
+	exports.getTrackLeft = exports.getTrackAnimateCSS = exports.getTrackCSS = undefined;
 
-	var _ReactDOM = __webpack_require__(6);
+	var _reactDom = __webpack_require__(6);
 
-	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var checkSpecKeys = function checkSpecKeys(spec, keysArray) {
 	  return keysArray.reduce(function (value, key) {
@@ -584,7 +580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, true) ? null : console.error('Keys Missing', spec);
 	};
 
-	var getTrackCSS = function getTrackCSS(spec) {
+	var getTrackCSS = exports.getTrackCSS = function getTrackCSS(spec) {
 	  checkSpecKeys(spec, ['left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth']);
 
 	  var trackWidth;
@@ -615,8 +611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return style;
 	};
 
-	exports.getTrackCSS = getTrackCSS;
-	var getTrackAnimateCSS = function getTrackAnimateCSS(spec) {
+	var getTrackAnimateCSS = exports.getTrackAnimateCSS = function getTrackAnimateCSS(spec) {
 	  checkSpecKeys(spec, ['left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'speed', 'cssEase']);
 
 	  var style = getTrackCSS(spec);
@@ -626,8 +621,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return style;
 	};
 
-	exports.getTrackAnimateCSS = getTrackAnimateCSS;
-	var getTrackLeft = function getTrackLeft(spec) {
+	var getTrackLeft = exports.getTrackLeft = function getTrackLeft(spec) {
 
 	  checkSpecKeys(spec, ['slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow', 'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth']);
 
@@ -667,17 +661,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (spec.variableWidth === true) {
 	    var targetSlideIndex;
 	    if (spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
-	      targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
+	      targetSlide = _reactDom2.default.findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
 	    } else {
 	      targetSlideIndex = spec.slideIndex + spec.slidesToShow;
-	      targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
+	      targetSlide = _reactDom2.default.findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
 	    }
 	    targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
 	    if (spec.centerMode === true) {
 	      if (spec.infinite === false) {
-	        targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).children[spec.slideIndex];
+	        targetSlide = _reactDom2.default.findDOMNode(spec.trackRef).children[spec.slideIndex];
 	      } else {
-	        targetSlide = _ReactDOM2['default'].findDOMNode(spec.trackRef).children[spec.slideIndex + spec.slidesToShow + 1];
+	        targetSlide = _reactDom2.default.findDOMNode(spec.trackRef).children[spec.slideIndex + spec.slidesToShow + 1];
 	      }
 
 	      targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
@@ -687,71 +681,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return targetLeft;
 	};
-	exports.getTrackLeft = getTrackLeft;
 
 /***/ },
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(7);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var ReactDOM = _react2['default'].version >= '0.14.0' ? _reactDom2['default'] : _react2['default'];
-
-	exports['default'] = ReactDOM;
-	module.exports = exports['default'];
+	module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
-
-/***/ },
-/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	exports.__esModule = true;
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactDOM = __webpack_require__(6);
+	var _reactDom = __webpack_require__(6);
 
-	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _objectAssign = __webpack_require__(9);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var helpers = {
 	  initialize: function initialize(props) {
-	    var slideCount = _react2['default'].Children.count(props.children);
-	    var listWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.list));
-	    var trackWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this)) / props.slidesToShow;
+	    var slideCount = _react2.default.Children.count(props.children);
+	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
+	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
+	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -763,12 +729,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      currentSlide: currentSlide
 	    }, function () {
 
-	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
+	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
 	        trackRef: this.refs.track
 	      }, props, this.state));
 	      // getCSS function needs previously set state
-	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2['default'])({ left: targetLeft }, props, this.state));
+	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: targetLeft }, props, this.state));
 
 	      this.setState({ trackStyle: trackStyle });
 
@@ -778,10 +744,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  update: function update(props) {
 	    // This method has mostly same code as initialize method.
 	    // Refactor it
-	    var slideCount = _react2['default'].Children.count(props.children);
-	    var listWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.list));
-	    var trackWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_ReactDOM2['default'].findDOMNode(this)) / props.slidesToShow;
+	    var slideCount = _react2.default.Children.count(props.children);
+	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
+	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
+	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
 
 	    this.setState({
 	      slideCount: slideCount,
@@ -790,12 +756,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      trackWidth: trackWidth
 	    }, function () {
 
-	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
+	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
 	        trackRef: this.refs.track
 	      }, props, this.state));
 	      // getCSS function needs previously set state
-	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2['default'])({ left: targetLeft }, props, this.state));
+	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: targetLeft }, props, this.state));
 
 	      this.setState({ trackStyle: trackStyle });
 	    });
@@ -807,7 +773,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.adaptiveHeight) {
 	      var selector = '[data-index="' + this.state.currentSlide + '"]';
 	      if (this.refs.list) {
-	        var slickList = _ReactDOM2['default'].findDOMNode(this.refs.list);
+	        var slickList = _reactDom2.default.findDOMNode(this.refs.list);
 	        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
 	      }
 	    }
@@ -843,7 +809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	      }
 
-	      callback = function () {
+	      callback = function callback() {
 	        _this.setState({
 	          animating: false
 	        });
@@ -889,12 +855,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      currentSlide = targetSlide;
 	    }
 
-	    targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
+	    targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	      slideIndex: targetSlide,
 	      trackRef: this.refs.track
 	    }, this.props, this.state));
 
-	    currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2['default'])({
+	    currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	      slideIndex: currentSlide,
 	      trackRef: this.refs.track
 	    }, this.props, this.state));
@@ -910,11 +876,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.lazyLoad) {
 	      var loaded = true;
 	      var slidesToLoad = [];
-	      var _length = _react2['default'].Children.count(this.props.children);
+	      var length = _react2.default.Children.count(this.props.children);
 	      var max = targetSlide + this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
 	      var min = targetSlide - this.props.slidesToShow * (this.props.preloadSlides ? 3 : 1);
 
-	      for (var i = 0; i < _react2['default'].Children.count(this.props.children); i++) {
+	      for (var i = 0; i < _react2.default.Children.count(this.props.children); i++) {
 	        if (this.state.lazyLoadedList.indexOf(i) >= 0) {
 	          continue;
 	        }
@@ -925,7 +891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          continue;
 	        }
 
-	        if (i >= max && min < 0 && this.props.infinite && min < i - _length) {
+	        if (i >= max && min < 0 && this.props.infinite && min < i - length) {
 	          loaded = false;
 	          slidesToLoad.push(i);
 	          continue;
@@ -948,7 +914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.setState({
 	        currentSlide: currentSlide,
-	        trackStyle: (0, _trackHelper.getTrackCSS)((0, _objectAssign2['default'])({ left: currentLeft }, this.props, this.state))
+	        trackStyle: (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: currentLeft }, this.props, this.state))
 	      }, function () {
 	        if (this.props.afterChange) {
 	          this.props.afterChange(currentSlide);
@@ -959,11 +925,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var nextStateChanges = {
 	        animating: false,
 	        currentSlide: currentSlide,
-	        trackStyle: (0, _trackHelper.getTrackCSS)((0, _objectAssign2['default'])({ left: currentLeft }, this.props, this.state)),
+	        trackStyle: (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: currentLeft }, this.props, this.state)),
 	        swipeLeft: null
 	      };
 
-	      callback = function () {
+	      callback = function callback() {
 	        _this.setState(nextStateChanges);
 	        if (_this.props.afterChange) {
 	          _this.props.afterChange(currentSlide);
@@ -974,7 +940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({
 	        animating: true,
 	        currentSlide: currentSlide,
-	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2['default'])({ left: targetLeft }, this.props, this.state))
+	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2.default)({ left: targetLeft }, this.props, this.state))
 	      }, function () {
 	        _this.animationEndCallback = setTimeout(callback, _this.props.speed);
 	      });
@@ -1030,34 +996,90 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
-	exports['default'] = helpers;
-	module.exports = exports['default'];
+	exports.default = helpers;
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
+	/* eslint-disable no-unused-vars */
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-	function ToObject(val) {
-		if (val == null) {
+	function toObject(val) {
+		if (val === null || val === undefined) {
 			throw new TypeError('Object.assign cannot be called with null or undefined');
 		}
 
 		return Object(val);
 	}
 
-	module.exports = Object.assign || function (target, source) {
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (e) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 		var from;
-		var keys;
-		var to = ToObject(target);
+		var to = toObject(target);
+		var symbols;
 
 		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = Object.keys(Object(from));
+			from = Object(arguments[s]);
 
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
 			}
 		}
 
@@ -1066,7 +1088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1116,7 +1138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = initialState;
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1170,7 +1192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = defaultProps;
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1224,28 +1246,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	exports.__esModule = true;
+	exports.Track = undefined;
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(9);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(12);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var getSlideClasses = function getSlideClasses(spec) {
 	  var slickActive, slickCenter, slickCloned;
@@ -1267,7 +1288,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else {
 	    slickActive = spec.currentSlide <= index && index < spec.currentSlide + spec.slidesToShow;
 	  }
-	  return (0, _classnames2['default'])({
+	  return (0, _classnames2.default)({
 	    'slick-slide': true,
 	    'slick-active': slickActive,
 	    'slick-center': slickCenter,
@@ -1303,30 +1324,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var slides = [];
 	  var preCloneSlides = [];
 	  var postCloneSlides = [];
-	  var count = _react2['default'].Children.count(spec.children);
+	  var count = _react2.default.Children.count(spec.children);
 	  var child;
 
-	  _react2['default'].Children.forEach(spec.children, function (elem, index) {
+	  _react2.default.Children.forEach(spec.children, function (elem, index) {
 	    if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
 	      child = elem;
 	    } else {
-	      child = _react2['default'].createElement('div', null);
+	      child = _react2.default.createElement('div', null);
 	    }
-	    var childStyle = getSlideStyle((0, _objectAssign2['default'])({}, spec, { index: index }));
-	    var slickClasses = getSlideClasses((0, _objectAssign2['default'])({ index: index }, spec));
+	    var childStyle = getSlideStyle((0, _objectAssign2.default)({}, spec, { index: index }));
+	    var slickClasses = getSlideClasses((0, _objectAssign2.default)({ index: index }, spec));
 	    var cssClasses;
 
 	    if (child.props.className) {
-	      cssClasses = (0, _classnames2['default'])(slickClasses, child.props.className);
+	      cssClasses = (0, _classnames2.default)(slickClasses, child.props.className);
 	    } else {
 	      cssClasses = slickClasses;
 	    }
 
-	    slides.push(_react2['default'].cloneElement(child, {
-	      key: getKey(child, index),
+	    slides.push(_react2.default.cloneElement(child, {
+	      key: 'original' + getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
-	      style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
+	      style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle)
 	    }));
 
 	    // variableWidth doesn't wrap properly.
@@ -1334,22 +1355,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
 
 	      if (index >= count - infiniteCount) {
-	        key = count - index;
-	        preCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: '-' + getKey(child, key),
+	        key = -(count - index);
+	        preCloneSlides.push(_react2.default.cloneElement(child, {
+	          key: 'cloned' + getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
-	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
+	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle)
 	        }));
 	      }
 
 	      if (index < infiniteCount) {
 	        key = count + index;
-	        postCloneSlides.push(_react2['default'].cloneElement(child, {
-	          key: '+' + getKey(child, key),
+	        postCloneSlides.push(_react2.default.cloneElement(child, {
+	          key: 'cloned' + getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
-	          style: (0, _objectAssign2['default'])({}, child.props.style || {}, childStyle)
+	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle)
 	        }));
 	      }
 	    }
@@ -1362,39 +1383,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	};
 
-	var Track = _react2['default'].createClass({
+	var Track = exports.Track = _react2.default.createClass({
 	  displayName: 'Track',
 
 	  render: function render() {
 	    var slides = renderSlides(this.props);
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'slick-track', style: this.props.trackStyle },
 	      slides
 	    );
 	  }
 	});
-	exports.Track = Track;
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	exports.__esModule = true;
+	exports.Dots = undefined;
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(12);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var getDotCount = function getDotCount(spec) {
 	  var dots;
@@ -1402,8 +1421,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return dots;
 	};
 
-	var Dots = _react2['default'].createClass({
+	var Dots = exports.Dots = _react2.default.createClass({
 	  displayName: 'Dots',
+
 
 	  clickHandler: function clickHandler(options, e) {
 	    // In Autoplay the focus stays on clicked button even after transition
@@ -1424,7 +1444,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Credit: http://stackoverflow.com/a/13735425/1849458
 	    var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map(function (x, i) {
 
-	      var className = (0, _classnames2['default'])({
+	      var className = (0, _classnames2.default)({
 	        'slick-active': _this.props.currentSlide === i * _this.props.slidesToScroll
 	      });
 
@@ -1435,10 +1455,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        currentSlide: _this.props.currentSlide
 	      };
 
-	      return _react2['default'].createElement(
+	      return _react2.default.createElement(
 	        'li',
 	        { key: i, className: className },
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'button',
 	          { onClick: _this.clickHandler.bind(_this, dotOptions) },
 	          i + 1
@@ -1446,46 +1466,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	      );
 	    });
 
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'ul',
 	      { className: this.props.dotsClass, style: { display: 'block' } },
 	      dots
 	    );
 	  }
 	});
-	exports.Dots = Dots;
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
+	exports.__esModule = true;
+	exports.NextArrow = exports.PrevArrow = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(12);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var PrevArrow = _react2['default'].createClass({
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PrevArrow = exports.PrevArrow = _react2.default.createClass({
 	  displayName: 'PrevArrow',
+
 
 	  clickHandler: function clickHandler(options, e) {
 	    e.preventDefault();
 	    this.props.clickHandler(options, e);
 	  },
 	  render: function render() {
-	    var prevClasses = { 'slick-prev': true };
+	    var prevClasses = { 'slick-arrow': true, 'slick-prev': true };
 	    var prevHandler = this.clickHandler.bind(this, { message: 'previous' });
 
 	    if (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
@@ -1496,16 +1515,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var prevArrowProps = {
 	      key: '0',
 	      'data-role': 'none',
-	      className: (0, _classnames2['default'])(prevClasses),
+	      className: (0, _classnames2.default)(prevClasses),
 	      style: { display: 'block' },
 	      onClick: prevHandler
 	    };
 	    var prevArrow;
 
 	    if (this.props.prevArrow) {
-	      prevArrow = _react2['default'].cloneElement(this.props.prevArrow, prevArrowProps);
+	      prevArrow = _react2.default.cloneElement(this.props.prevArrow, prevArrowProps);
 	    } else {
-	      prevArrow = _react2['default'].createElement(
+	      prevArrow = _react2.default.createElement(
 	        'button',
 	        _extends({ key: '0', type: 'button' }, prevArrowProps),
 	        ' Previous'
@@ -1516,8 +1535,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
-	exports.PrevArrow = PrevArrow;
-	var NextArrow = _react2['default'].createClass({
+	var NextArrow = exports.NextArrow = _react2.default.createClass({
 	  displayName: 'NextArrow',
 
 	  clickHandler: function clickHandler(options, e) {
@@ -1525,7 +1543,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.props.clickHandler(options, e);
 	  },
 	  render: function render() {
-	    var nextClasses = { 'slick-next': true };
+	    var nextClasses = { 'slick-arrow': true, 'slick-next': true };
 	    var nextHandler = this.clickHandler.bind(this, { message: 'next' });
 
 	    if (!this.props.infinite) {
@@ -1548,7 +1566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var nextArrowProps = {
 	      key: '1',
 	      'data-role': 'none',
-	      className: (0, _classnames2['default'])(nextClasses),
+	      className: (0, _classnames2.default)(nextClasses),
 	      style: { display: 'block' },
 	      onClick: nextHandler
 	    };
@@ -1556,9 +1574,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var nextArrow;
 
 	    if (this.props.nextArrow) {
-	      nextArrow = _react2['default'].cloneElement(this.props.nextArrow, nextArrowProps);
+	      nextArrow = _react2.default.cloneElement(this.props.nextArrow, nextArrowProps);
 	    } else {
-	      nextArrow = _react2['default'].createElement(
+	      nextArrow = _react2.default.createElement(
 	        'button',
 	        _extends({ key: '1', type: 'button' }, nextArrowProps),
 	        ' Next'
@@ -1568,13 +1586,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return nextArrow;
 	  }
 	});
-	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(17);
+	var camel2hyphen = __webpack_require__(16);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -1627,7 +1644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = json2mq;
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -1641,12 +1658,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(19);
-	var enquire = canUseDOM && __webpack_require__(20);
-	var json2mq = __webpack_require__(16);
+	var canUseDOM = __webpack_require__(18);
+	var enquire = canUseDOM && __webpack_require__(19);
+	var json2mq = __webpack_require__(15);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -1676,7 +1693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -1688,7 +1705,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
