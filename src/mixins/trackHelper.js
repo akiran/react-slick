@@ -108,7 +108,7 @@ export var getTrackLeft = function (spec) {
           }
 
           targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-          targetLeft += (spec.listWidth - targetSlide.offsetWidth) / 2;
+          targetLeft += targetSlide ? (spec.listWidth - targetSlide.offsetWidth) / 2 : targetLeft;
       }
   }
 
