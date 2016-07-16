@@ -56,9 +56,7 @@ var Slider = React.createClass({
     } else {
       return (
         <InnerSlider {...settings}>
-            <div>
-                {this.props.children}
-            </div>
+            {this.props.children}
         </InnerSlider>
       );
     }

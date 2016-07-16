@@ -152,11 +152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2.default.createElement(
 	        _innerSlider.InnerSlider,
 	        settings,
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          this.props.children
-	        )
+	        this.props.children
 	      );
 	    }
 	  }
@@ -1517,7 +1513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var getKey = function getKey(child, fallbackKey) {
 	  // key could be a zero
-	  return child.key === null || child.key === undefined ? fallbackKey : child.key;
+	  return child.key === null || child.key === undefined ? fallbackKey : child.key + fallbackKey;
 	};
 
 	var renderSlides = function renderSlides(spec) {
