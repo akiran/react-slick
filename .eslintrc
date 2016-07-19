@@ -2,11 +2,11 @@
   "rules": {
     "no-extra-parens": 0,
     "react/jsx-uses-vars": 1,
-    "global-strict": true,
+    "strict": 0,
     "quotes": [2, "single"],
-    "no-underscore-dangle": false,
-    "space-infix-ops": false,
-    "no-alert": false
+    "no-underscore-dangle": 0,
+    "space-infix-ops": 0,
+    "no-alert": 0
   },
   "ecmaFeatures": {
     "jsx": true,
