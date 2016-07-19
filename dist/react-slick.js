@@ -1513,7 +1513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var getKey = function getKey(child, fallbackKey) {
 	  // key could be a zero
-	  return child.key === null || child.key === undefined ? fallbackKey : child.key;
+	  return child.key === null || child.key === undefined ? fallbackKey : child.key + fallbackKey;
 	};
 
 	var renderSlides = function renderSlides(spec) {

@@ -52,7 +52,7 @@ var getSlideStyle = function (spec) {
 
 var getKey = (child, fallbackKey) => {
     // key could be a zero
-    return (child.key === null || child.key === undefined) ? fallbackKey : child.key;
+    return (child.key === null || child.key === undefined) ? fallbackKey : child.key + fallbackKey;
 };
 
 var renderSlides = (spec) => {
