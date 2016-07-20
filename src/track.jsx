@@ -71,6 +71,7 @@ var renderSlides = (spec) => {
     }
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
     var slickClasses = getSlideClasses(assign({index: index}, spec));
+    var slickActive = slickClasses.indexOf('slick-active') > -1;
     var cssClasses;
 
     if (child.props.className) {
@@ -83,6 +84,7 @@ var renderSlides = (spec) => {
       key: 'original' + getKey(child, index),
       'data-index': index,
       className: cssClasses,
+      slickActive: slickActive,
       style: assign({}, child.props.style || {}, childStyle)
     }));
 
