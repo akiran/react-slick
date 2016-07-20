@@ -40,6 +40,7 @@ var SingleItem = React.createClass({
           <div key={4}><h3>4</h3></div>
           <div key={5}><h3>5</h3></div>
           <div key={6}><h3>6</h3></div>
+          {false? <div key={6}><h3>6</h3></div>: null}
         </Slider>
       </div>
     );
