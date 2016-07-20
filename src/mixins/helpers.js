@@ -106,7 +106,7 @@ var helpers = {
           animating: false
         });
         if (this.props.afterChange) {
-          this.props.afterChange(targetSlide);
+          this.props.afterChange({slide: targetSlide});
         }
         ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       };
@@ -193,7 +193,7 @@ var helpers = {
         trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
       }, function () {
         if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+          this.props.afterChange({slide: currentSlide});
         }
       });
 
@@ -209,7 +209,7 @@ var helpers = {
       callback = () => {
         this.setState(nextStateChanges);
         if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+          this.props.afterChange({slide: currentSlide});
         }
         ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       };
