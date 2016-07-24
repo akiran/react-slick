@@ -70,19 +70,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _innerSlider = __webpack_require__(3);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(18);
+	var _json2mq = __webpack_require__(15);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(20);
+	var _reactResponsiveMixin = __webpack_require__(17);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(13);
+	var _defaultProps = __webpack_require__(10);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -200,23 +200,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _initialState = __webpack_require__(12);
+	var _initialState = __webpack_require__(9);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(13);
+	var _defaultProps = __webpack_require__(10);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(15);
+	var _track = __webpack_require__(12);
 
-	var _dots = __webpack_require__(16);
+	var _dots = __webpack_require__(13);
 
-	var _arrows = __webpack_require__(17);
+	var _arrows = __webpack_require__(14);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -288,7 +288,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.update(this.props);
 	  },
 	  render: function render() {
-	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className);
+	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className, {
+	      'slick-vertical': this.props.vertical
+	    });
 
 	    var trackProps = {
 	      fade: this.props.fade,
@@ -340,6 +342,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      nextArrow = _react2.default.createElement(_arrows.NextArrow, arrowProps);
 	    }
 
+	    var listStyle = {
+	      height: this.state.listHeight
+	    };
+
 	    return _react2.default.createElement(
 	      'div',
 	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
@@ -355,7 +361,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onTouchStart: this.swipeStart,
 	          onTouchMove: this.state.dragging ? this.swipeMove : null,
 	          onTouchEnd: this.swipeEnd,
-	          onTouchCancel: this.state.dragging ? this.swipeEnd : null },
+	          onTouchCancel: this.state.dragging ? this.swipeEnd : null,
+	          style: listStyle },
 	        _react2.default.createElement(
 	          _track.Track,
 	          _extends({ ref: 'track' }, trackProps),
@@ -383,7 +390,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -457,6 +464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var touchObject = this.state.touchObject;
 
 	    curLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
+	      listRef: this.refs.list,
 	      slideIndex: this.state.currentSlide,
 	      trackRef: this.refs.track
 	    }, this.props, this.state));
@@ -464,12 +472,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    touchObject.curY = e.touches ? e.touches[0].pageY : e.clientY;
 	    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
+	    if (this.props.verticalSwiping === true) {
+	      touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+	    }
+
 	    positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+
+	    if (this.props.verticalSwiping === true) {
+	      positionOffset = touchObject.curY > touchObject.startY ? 1 : -1;
+	    }
 
 	    var currentSlide = this.state.currentSlide;
 	    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
 	    var swipeDirection = this.swipeDirection(this.state.touchObject);
 	    var touchSwipeLength = touchObject.swipeLength;
+
+	    if (event.originalEvent !== undefined && touchSwipeLength > 4) {
+	      event.preventDefault();
+	    }
 
 	    if (this.props.infinite === false) {
 	      if (currentSlide === 0 && swipeDirection === 'right' || currentSlide + 1 >= dotCount && swipeDirection === 'left') {
@@ -487,7 +507,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ swiped: true });
 	    }
 
-	    swipeLeft = curLeft + touchSwipeLength * positionOffset;
+	    if (this.props.vertical === false) {
+	      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+	    } else {
+	      swipeLeft = curLeft + touchSwipeLength * (this.state.listHeight / this.state.listWidth) * positionOffset;
+	    }
+
+	    if (this.props.verticalSwiping === true) {
+	      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+	    }
+
 	    this.setState({
 	      touchObject: touchObject,
 	      swipeLeft: swipeLeft,
@@ -509,6 +538,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var minSwipe = this.state.listWidth / this.props.touchThreshold;
 	    var swipeDirection = this.swipeDirection(touchObject);
 
+	    if (this.props.verticalSwiping === true) {
+	      minSwipe = this.state.listHeight / this.props.touchThreshold;
+	    }
+
 	    // reset the state of touch related state variables.
 	    this.setState({
 	      dragging: false,
@@ -517,17 +550,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	      swipeLeft: null,
 	      touchObject: {}
 	    });
+
 	    // Fix for #13
 	    if (!touchObject.swipeLength) {
 	      return;
 	    }
+
 	    if (touchObject.swipeLength > minSwipe) {
 	      e.preventDefault();
+
 	      if (swipeDirection === 'left') {
+
+	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	      } else if (swipeDirection === 'down') {
+
 	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
 	      } else if (swipeDirection === 'right') {
+
+	        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+	      } else if (swipeDirection === 'up') {
+
 	        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
 	      } else {
+
 	        this.slideHandler(this.state.currentSlide);
 	      }
 	    } else {
@@ -569,6 +614,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _helpers = __webpack_require__(7);
+
+	var _helpers2 = _interopRequireDefault(_helpers);
+
+	var _objectAssign = __webpack_require__(8);
+
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var checkSpecKeys = function checkSpecKeys(spec, keysArray) {
@@ -580,29 +633,62 @@ return /******/ (function(modules) { // webpackBootstrap
 	var getTrackCSS = exports.getTrackCSS = function getTrackCSS(spec) {
 	  checkSpecKeys(spec, ['left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth']);
 
-	  var trackWidth;
+	  var trackWidth, trackHeight;
 
-	  if (spec.variableWidth) {
-	    trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
+	  var trackChildren = spec.slideCount + 2 * spec.slidesToShow;
+
+	  /*if (spec.variableWidth) {
+	    trackWidth = trackChildren * spec.slideWidth;
 	  } else if (spec.centerMode) {
-	    trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
+	    trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
 	  } else {
-	    trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
+	    trackWidth = trackChildren * spec.slideWidth;
+	  }*/
+
+	  if (spec.vertical === false && spec.variableWidth === false) {
+	    trackWidth = trackChildren * spec.slideWidth;
+	  } else if (spec.variableWidth === true) {
+	    trackWidth = 5000 * spec.slideCount;
+	  } else {
+	    trackHeight = trackChildren * spec.slideHeight;
 	  }
+
+	  var transform = void 0,
+	      WebkitTransform = void 0,
+	      msTransform = void 0;
+
+	  transform = WebkitTransform = spec.vertical === false ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)';
+
+	  msTransform = spec.vertical === false ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)';
 
 	  var style = {
 	    opacity: 1,
-	    width: trackWidth,
-	    WebkitTransform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
-	    transform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
+	    WebkitTransform: WebkitTransform,
+	    transform: transform,
 	    transition: '',
 	    WebkitTransition: '',
-	    msTransform: 'translateX(' + spec.left + 'px)'
+	    msTransform: msTransform
 	  };
+
+	  if (trackWidth) {
+	    (0, _objectAssign2.default)(style, {
+	      width: trackWidth
+	    });
+	  }
+
+	  if (trackHeight) {
+	    (0, _objectAssign2.default)(style, {
+	      height: trackHeight
+	    });
+	  }
 
 	  // Fallback for IE8
 	  if (!window.addEventListener && window.attachEvent) {
-	    style.marginLeft = spec.left + 'px';
+	    if (spec.vertical === false) {
+	      style.marginLeft = spec.left + 'px';
+	    } else {
+	      style.marginTop = spec.left + 'px';
+	    }
 	  }
 
 	  return style;
@@ -620,9 +706,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var getTrackLeft = exports.getTrackLeft = function getTrackLeft(spec) {
 
-	  checkSpecKeys(spec, ['slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow', 'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth']);
+	  checkSpecKeys(spec, ['slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow', 'slidesToScroll', 'slideWidth', 'slideHeight', 'listWidth', 'variableWidth']);
 
 	  var slideOffset = 0;
+	  var verticalOffset = 0;
 	  var targetLeft;
 	  var targetSlide;
 
@@ -633,13 +720,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (spec.infinite) {
 	    if (spec.slideCount > spec.slidesToShow) {
 	      slideOffset = spec.slideWidth * spec.slidesToShow * -1;
+	      verticalOffset = spec.slideHeight * spec.slidesToShow * -1;
 	    }
 	    if (spec.slideCount % spec.slidesToScroll !== 0) {
 	      if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
 	        if (spec.slideIndex > spec.slideCount) {
 	          slideOffset = (spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideWidth * -1;
+	          verticalOffset = (spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideHeight * -1;
 	        } else {
 	          slideOffset = spec.slideCount % spec.slidesToScroll * spec.slideWidth * -1;
+	          verticalOffset = spec.slideCount % spec.slidesToScroll * spec.slideHeight * -1;
 	        }
 	      }
 	    }
@@ -653,7 +743,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
-	  targetLeft = spec.slideIndex * spec.slideWidth * -1 + slideOffset;
+	  if (spec.vertical === false) {
+	    targetLeft = spec.slideIndex * spec.slideWidth * -1 + slideOffset;
+	  } else {
+	    targetLeft = spec.slideIndex * spec.slideHeight * -1 + verticalOffset;
+	  }
 
 	  if (spec.variableWidth === true) {
 	    var targetSlideIndex;
@@ -701,13 +795,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _ReactTransitionEvents = __webpack_require__(8);
+	var _ReactTransitionEvents = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react/lib/ReactTransitionEvents\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _ReactTransitionEvents2 = _interopRequireDefault(_ReactTransitionEvents);
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -718,19 +812,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    var slideWidth = void 0;
+
+	    if (props.vertical === false) {
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    } else {
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
+	    }
+
+	    var slickList = _reactDom2.default.findDOMNode(this.refs.list);
+	    var slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+	    var listHeight = slideHeight * props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
 	    this.setState({
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
+	      slideHeight: slideHeight,
+	      listHeight: listHeight,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
 	      currentSlide: currentSlide
 	    }, function () {
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
+	        listRef: this.refs.list,
 	        slideIndex: this.state.currentSlide,
 	        trackRef: this.refs.track
 	      }, props, this.state));
@@ -748,16 +855,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    var slideWidth = void 0;
+
+	    if (options.vertical === false) {
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    } else {
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
+	    }
+
+	    var slideHeight = this.getHeight(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    var listHeight = slideHeight * props.slidesToShow;
 
 	    this.setState({
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
+	      slideHeight: slideHeight,
 	      listWidth: listWidth,
+	      listHeight: listHeight,
 	      trackWidth: trackWidth
 	    }, function () {
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
+	        listRef: this.refs.list,
 	        slideIndex: this.state.currentSlide,
 	        trackRef: this.refs.track
 	      }, props, this.state));
@@ -769,6 +888,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  getWidth: function getWidth(elem) {
 	    return elem.getBoundingClientRect().width || elem.offsetWidth;
+	  },
+	  getHeight: function getHeight(elem) {
+	    return elem.getBoundingClientRect().height || elem.offsetHeight;
 	  },
 	  adaptHeight: function adaptHeight() {
 	    if (this.props.adaptiveHeight) {
@@ -857,11 +979,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
+	      listRef: this.refs.list,
 	      slideIndex: targetSlide,
 	      trackRef: this.refs.track
 	    }, this.props, this.state));
 
 	    currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
+	      listRef: this.refs.list,
 	      slideIndex: currentSlide,
 	      trackRef: this.refs.track
 	    }, this.props, this.state));
@@ -944,11 +1068,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (swipeAngle < 0) {
 	      swipeAngle = 360 - Math.abs(swipeAngle);
 	    }
+
 	    if (swipeAngle <= 45 && swipeAngle >= 0 || swipeAngle <= 360 && swipeAngle >= 315) {
 	      return this.props.rtl === false ? 'left' : 'right';
 	    }
+
 	    if (swipeAngle >= 135 && swipeAngle <= 225) {
 	      return this.props.rtl === false ? 'right' : 'left';
+	    }
+
+	    if (this.props.verticalSwiping === true) {
+	      if (swipeAngle >= 35 && swipeAngle <= 135) {
+	        return 'down';
+	      } else {
+	        return 'up';
+	      }
 	    }
 
 	    return 'vertical';
@@ -985,230 +1119,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactTransitionEvents
-	 */
-
-	'use strict';
-
-	var ExecutionEnvironment = __webpack_require__(9);
-
-	var getVendorPrefixedEventName = __webpack_require__(10);
-
-	var endEvents = [];
-
-	function detectEvents() {
-	  var animEnd = getVendorPrefixedEventName('animationend');
-	  var transEnd = getVendorPrefixedEventName('transitionend');
-
-	  if (animEnd) {
-	    endEvents.push(animEnd);
-	  }
-
-	  if (transEnd) {
-	    endEvents.push(transEnd);
-	  }
-	}
-
-	if (ExecutionEnvironment.canUseDOM) {
-	  detectEvents();
-	}
-
-	// We use the raw {add|remove}EventListener() call because EventListener
-	// does not know how to remove event listeners and we really should
-	// clean up. Also, these events are not triggered in older browsers
-	// so we should be A-OK here.
-
-	function addEventListener(node, eventName, eventListener) {
-	  node.addEventListener(eventName, eventListener, false);
-	}
-
-	function removeEventListener(node, eventName, eventListener) {
-	  node.removeEventListener(eventName, eventListener, false);
-	}
-
-	var ReactTransitionEvents = {
-	  addEndEventListener: function (node, eventListener) {
-	    if (endEvents.length === 0) {
-	      // If CSS transitions are not supported, trigger an "end animation"
-	      // event immediately.
-	      window.setTimeout(eventListener, 0);
-	      return;
-	    }
-	    endEvents.forEach(function (endEvent) {
-	      addEventListener(node, endEvent, eventListener);
-	    });
-	  },
-
-	  removeEndEventListener: function (node, eventListener) {
-	    if (endEvents.length === 0) {
-	      return;
-	    }
-	    endEvents.forEach(function (endEvent) {
-	      removeEventListener(node, endEvent, eventListener);
-	    });
-	  }
-	};
-
-	module.exports = ReactTransitionEvents;
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-
-	'use strict';
-
-	var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-	/**
-	 * Simple, lightweight module assisting with the detection and context of
-	 * Worker. Helps avoid circular dependencies and allows code to reason about
-	 * whether or not they are in a Worker, even if they never include the main
-	 * `ReactWorker` dependency.
-	 */
-	var ExecutionEnvironment = {
-
-	  canUseDOM: canUseDOM,
-
-	  canUseWorkers: typeof Worker !== 'undefined',
-
-	  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
-
-	  canUseViewport: canUseDOM && !!window.screen,
-
-	  isInWorker: !canUseDOM // For now, this is true - might change in the future.
-
-	};
-
-	module.exports = ExecutionEnvironment;
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule getVendorPrefixedEventName
-	 */
-
-	'use strict';
-
-	var ExecutionEnvironment = __webpack_require__(9);
-
-	/**
-	 * Generate a mapping of standard vendor prefixes using the defined style property and event name.
-	 *
-	 * @param {string} styleProp
-	 * @param {string} eventName
-	 * @returns {object}
-	 */
-	function makePrefixMap(styleProp, eventName) {
-	  var prefixes = {};
-
-	  prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
-	  prefixes['Webkit' + styleProp] = 'webkit' + eventName;
-	  prefixes['Moz' + styleProp] = 'moz' + eventName;
-	  prefixes['ms' + styleProp] = 'MS' + eventName;
-	  prefixes['O' + styleProp] = 'o' + eventName.toLowerCase();
-
-	  return prefixes;
-	}
-
-	/**
-	 * A list of event names to a configurable list of vendor prefixes.
-	 */
-	var vendorPrefixes = {
-	  animationend: makePrefixMap('Animation', 'AnimationEnd'),
-	  animationiteration: makePrefixMap('Animation', 'AnimationIteration'),
-	  animationstart: makePrefixMap('Animation', 'AnimationStart'),
-	  transitionend: makePrefixMap('Transition', 'TransitionEnd')
-	};
-
-	/**
-	 * Event names that have already been detected and prefixed (if applicable).
-	 */
-	var prefixedEventNames = {};
-
-	/**
-	 * Element to check for prefixes on.
-	 */
-	var style = {};
-
-	/**
-	 * Bootstrap if a DOM exists.
-	 */
-	if (ExecutionEnvironment.canUseDOM) {
-	  style = document.createElement('div').style;
-
-	  // On some platforms, in particular some releases of Android 4.x,
-	  // the un-prefixed "animation" and "transition" properties are defined on the
-	  // style object but the events that fire will still be prefixed, so we need
-	  // to check if the un-prefixed events are usable, and if not remove them from the map.
-	  if (!('AnimationEvent' in window)) {
-	    delete vendorPrefixes.animationend.animation;
-	    delete vendorPrefixes.animationiteration.animation;
-	    delete vendorPrefixes.animationstart.animation;
-	  }
-
-	  // Same as above
-	  if (!('TransitionEvent' in window)) {
-	    delete vendorPrefixes.transitionend.transition;
-	  }
-	}
-
-	/**
-	 * Attempts to determine the correct vendor prefixed event name.
-	 *
-	 * @param {string} eventName
-	 * @returns {string}
-	 */
-	function getVendorPrefixedEventName(eventName) {
-	  if (prefixedEventNames[eventName]) {
-	    return prefixedEventNames[eventName];
-	  } else if (!vendorPrefixes[eventName]) {
-	    return eventName;
-	  }
-
-	  var prefixMap = vendorPrefixes[eventName];
-
-	  for (var styleProp in prefixMap) {
-	    if (prefixMap.hasOwnProperty(styleProp) && styleProp in style) {
-	      return prefixedEventNames[eventName] = prefixMap[styleProp];
-	    }
-	  }
-
-	  return '';
-	}
-
-	module.exports = getVendorPrefixedEventName;
-
-/***/ },
-/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1297,7 +1207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1310,11 +1220,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    currentLeft: null,
 	    currentSlide: 0,
 	    direction: 1,
-	    // listWidth: null,
-	    // listHeight: null,
+	    listWidth: null,
+	    listHeight: null,
 	    // loadIndex: 0,
 	    slideCount: null,
 	    slideWidth: null,
+	    slideHeight: null,
 	    // sliding: false,
 	    // slideOffset: 0,
 	    swipeLeft: null,
@@ -1347,7 +1258,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = initialState;
 
 /***/ },
-/* 13 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1400,7 +1311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = defaultProps;
 
 /***/ },
-/* 14 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1454,7 +1365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1466,11 +1377,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(11);
+	var _objectAssign = __webpack_require__(8);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1605,7 +1516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 16 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1617,7 +1528,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1683,7 +1594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 17 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1697,7 +1608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(14);
+	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -1796,10 +1707,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
-/* 18 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(19);
+	var camel2hyphen = __webpack_require__(16);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -1852,7 +1763,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = json2mq;
 
 /***/ },
-/* 19 */
+/* 16 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -1866,12 +1777,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 20 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(21);
-	var enquire = canUseDOM && __webpack_require__(22);
-	var json2mq = __webpack_require__(18);
+	var canUseDOM = __webpack_require__(18);
+	var enquire = canUseDOM && __webpack_require__(19);
+	var json2mq = __webpack_require__(15);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -1901,7 +1812,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 21 */
+/* 18 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -1913,7 +1824,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ },
-/* 22 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!

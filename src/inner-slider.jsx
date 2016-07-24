@@ -77,7 +77,9 @@ export var InnerSlider = React.createClass({
     this.update(this.props);
   },
   render: function () {
-    var className = classnames('slick-initialized', 'slick-slider', this.props.className);
+    var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
+      'slick-vertical': this.props.vertical
+    });
 
     var trackProps = {
       fade: this.props.fade,
@@ -128,6 +130,10 @@ export var InnerSlider = React.createClass({
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
     }
+    
+    const listStyle = {
+      height: this.state.listHeight
+    };
 
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
@@ -141,7 +147,8 @@ export var InnerSlider = React.createClass({
           onTouchStart={this.swipeStart}
           onTouchMove={this.state.dragging ? this.swipeMove: null}
           onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
+          onTouchCancel={this.state.dragging ? this.swipeEnd: null}
+          style={listStyle}>
           <Track ref='track' {...trackProps}>
             {this.props.children}
           </Track>

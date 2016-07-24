@@ -1,5 +1,7 @@
 'use strict';
 import ReactDOM from 'react-dom';
+import helpers from './helpers';
+import assign from 'object-assign';
 
 var checkSpecKeys = function (spec, keysArray) {
   return keysArray.reduce((value, key) => {
@@ -12,29 +14,62 @@ export var getTrackCSS = function(spec) {
     'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth'
   ]);
 
-  var trackWidth;
+  var trackWidth, trackHeight;
 
-  if (spec.variableWidth) {
-    trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+  const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
+
+  /*if (spec.variableWidth) {
+    trackWidth = trackChildren * spec.slideWidth;
   } else if (spec.centerMode) {
     trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
   } else {
-    trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+    trackWidth = trackChildren * spec.slideWidth;
+  }*/
+
+  if (spec.vertical === false && spec.variableWidth === false) {
+    trackWidth = trackChildren * spec.slideWidth;
+  } else if (spec.variableWidth === true) {
+    trackWidth = 5000 * spec.slideCount;
+  } else {
+    trackHeight = trackChildren * spec.slideHeight;
   }
+  
+  let transform, WebkitTransform, msTransform;
+  
+  transform = WebkitTransform = spec.vertical === false ? 
+    `translate3d(${spec.left}px, 0px, 0px)` : `translate3d(0px, ${spec.left}px, 0px)`;
+  
+  msTransform = spec.vertical === false ? 
+    `translateX(${spec.left}px)` : `translateY(${spec.left}px)`;
 
   var style = {
     opacity: 1,
-    width: trackWidth,
-    WebkitTransform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
-    transform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
+    WebkitTransform,
+    transform,
     transition: '',
     WebkitTransition: '',
-    msTransform: 'translateX(' + spec.left + 'px)'
+    msTransform
   };
+
+  if (trackWidth) {
+    assign(style, {
+      width: trackWidth
+    });
+  }
+
+  if (trackHeight) {
+    assign(style, {
+      height: trackHeight
+    });
+  }
 
   // Fallback for IE8
   if (!window.addEventListener && window.attachEvent) {
-    style.marginLeft = spec.left + 'px';
+    if (spec.vertical === false) {
+      style.marginLeft = spec.left + 'px';
+    } else {
+      style.marginTop = spec.left + 'px';
+    }
   }
 
   return style;
@@ -47,8 +82,8 @@ export var getTrackAnimateCSS = function (spec) {
 
   var style = getTrackCSS(spec);
   // useCSS is true by default so it can be undefined
-  style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase;
-  style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase;
+  style.WebkitTransition = `-webkit-transform ${spec.speed}ms ${spec.cssEase}`;
+  style.transition = `transform ${spec.speed}ms ${spec.cssEase}`;
   return style;
 };
 
@@ -56,9 +91,10 @@ export var getTrackLeft = function (spec) {
 
   checkSpecKeys(spec, [
    'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
-   'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth']);
+   'slidesToScroll', 'slideWidth', 'slideHeight', 'listWidth', 'variableWidth']);
 
-  var slideOffset = 0;
+  let slideOffset = 0;
+  let verticalOffset = 0;
   var targetLeft;
   var targetSlide;
 
@@ -69,13 +105,16 @@ export var getTrackLeft = function (spec) {
   if (spec.infinite) {
     if (spec.slideCount > spec.slidesToShow) {
      slideOffset = (spec.slideWidth * spec.slidesToShow) * -1;
+     verticalOffset = (spec.slideHeight * spec.slidesToShow) * -1;
     }
     if (spec.slideCount % spec.slidesToScroll !== 0) {
       if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
           if(spec.slideIndex > spec.slideCount) {
             slideOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideWidth) * -1;
+            verticalOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideHeight) * -1;
           } else {
             slideOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideWidth) * -1;
+            verticalOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideHeight) * -1;
           }
       }
     }
@@ -89,7 +128,11 @@ export var getTrackLeft = function (spec) {
     }
   }
 
-  targetLeft = ((spec.slideIndex * spec.slideWidth) * -1) + slideOffset;
+  if (spec.vertical === false) {
+    targetLeft = ((spec.slideIndex * spec.slideWidth) * -1) + slideOffset;
+  } else {
+    targetLeft = ((spec.slideIndex * spec.slideHeight) * -1) + verticalOffset;
+  }
 
   if (spec.variableWidth === true) {
       var targetSlideIndex;

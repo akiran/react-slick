@@ -75,6 +75,7 @@ var EventHandlers = {
     var touchObject = this.state.touchObject;
 
     curLeft = getTrackLeft(assign({
+      listRef: this.refs.list,
       slideIndex: this.state.currentSlide,
       trackRef: this.refs.track
     }, this.props, this.state));
@@ -82,12 +83,24 @@ var EventHandlers = {
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
+    if (this.props.verticalSwiping === true) {
+      touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+    }
+
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+
+    if (this.props.verticalSwiping === true) {
+      positionOffset = touchObject.curY > touchObject.startY ? 1 : -1;
+    }
 
     var currentSlide = this.state.currentSlide;
     var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
     var swipeDirection = this.swipeDirection(this.state.touchObject);
     var touchSwipeLength = touchObject.swipeLength;
+
+    if (event.originalEvent !== undefined && touchSwipeLength > 4) {
+      event.preventDefault();
+    }
 
     if (this.props.infinite === false) {
       if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
@@ -105,10 +118,19 @@ var EventHandlers = {
       this.setState({ swiped: true });
     }
 
-    swipeLeft = curLeft + touchSwipeLength * positionOffset;
+    if (this.props.vertical === false) {
+      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+    } else {
+      swipeLeft = curLeft + (touchSwipeLength * (this.state.listHeight / this.state.listWidth)) * positionOffset;
+    }
+
+    if (this.props.verticalSwiping === true) {
+      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+    }
+
     this.setState({
-      touchObject: touchObject,
-      swipeLeft: swipeLeft,
+      touchObject,
+      swipeLeft,
       trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
     });
 
@@ -123,8 +145,12 @@ var EventHandlers = {
       return;
     }
     var touchObject = this.state.touchObject;
-    var minSwipe = this.state.listWidth/this.props.touchThreshold;
+    var minSwipe = this.state.listWidth / this.props.touchThreshold;
     var swipeDirection = this.swipeDirection(touchObject);
+    
+    if (this.props.verticalSwiping === true) {
+      minSwipe = this.state.listHeight / this.props.touchThreshold;
+    }
 
     // reset the state of touch related state variables.
     this.setState({
@@ -134,18 +160,35 @@ var EventHandlers = {
       swipeLeft: null,
       touchObject: {}
     });
+
     // Fix for #13
     if (!touchObject.swipeLength) {
       return;
     }
+
     if (touchObject.swipeLength > minSwipe) {
       e.preventDefault();
+
       if (swipeDirection === 'left') {
+
         this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+
+      } else if (swipeDirection === 'down') {
+
+        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+
       } else if (swipeDirection === 'right') {
+
         this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+
+      } else if (swipeDirection === 'up') {
+
+        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+
       } else {
+
         this.slideHandler(this.state.currentSlide);
+
       }
     } else {
       // Adjust the track back to it's original position.
