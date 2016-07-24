@@ -18,18 +18,14 @@ export var getTrackCSS = function(spec) {
 
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
 
-  /*if (spec.variableWidth) {
-    trackWidth = trackChildren * spec.slideWidth;
-  } else if (spec.centerMode) {
-    trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
-  } else {
-    trackWidth = trackChildren * spec.slideWidth;
-  }*/
-
-  if (spec.vertical === false && spec.variableWidth === false) {
-    trackWidth = trackChildren * spec.slideWidth;
-  } else if (spec.variableWidth === true) {
-    trackWidth = 5000 * spec.slideCount;
+  if (spec.vertical === false) {
+    if (spec.variableWidth) {
+      trackWidth = trackChildren * spec.slideWidth;
+    } else if (spec.centerMode) {
+      trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+    } else {
+      trackWidth = trackChildren * spec.slideWidth;
+    }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }

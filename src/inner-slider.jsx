@@ -114,6 +114,7 @@ export var InnerSlider = React.createClass({
     }
 
     var prevArrow, nextArrow;
+    let listStyle;
 
     var arrowProps = {
       infinite: this.props.infinite,
@@ -131,9 +132,11 @@ export var InnerSlider = React.createClass({
       nextArrow = (<NextArrow {...arrowProps} />);
     }
     
-    const listStyle = {
-      height: this.state.listHeight
-    };
+    if (this.props.vertical) {
+      listStyle = {
+        height: this.state.listHeight
+      };
+    }
 
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>

@@ -325,6 +325,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var prevArrow, nextArrow;
+	    var listStyle = void 0;
 
 	    var arrowProps = {
 	      infinite: this.props.infinite,
@@ -342,9 +343,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      nextArrow = _react2.default.createElement(_arrows.NextArrow, arrowProps);
 	    }
 
-	    var listStyle = {
-	      height: this.state.listHeight
-	    };
+	    if (this.props.vertical) {
+	      listStyle = {
+	        height: this.state.listHeight
+	      };
+	    }
 
 	    return _react2.default.createElement(
 	      'div',
@@ -486,10 +489,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
 	    var swipeDirection = this.swipeDirection(this.state.touchObject);
 	    var touchSwipeLength = touchObject.swipeLength;
-
-	    if (event.originalEvent !== undefined && touchSwipeLength > 4) {
-	      event.preventDefault();
-	    }
 
 	    if (this.props.infinite === false) {
 	      if (currentSlide === 0 && swipeDirection === 'right' || currentSlide + 1 >= dotCount && swipeDirection === 'left') {
@@ -637,18 +636,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var trackChildren = spec.slideCount + 2 * spec.slidesToShow;
 
-	  /*if (spec.variableWidth) {
-	    trackWidth = trackChildren * spec.slideWidth;
-	  } else if (spec.centerMode) {
-	    trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
-	  } else {
-	    trackWidth = trackChildren * spec.slideWidth;
-	  }*/
-
-	  if (spec.vertical === false && spec.variableWidth === false) {
-	    trackWidth = trackChildren * spec.slideWidth;
-	  } else if (spec.variableWidth === true) {
-	    trackWidth = 5000 * spec.slideCount;
+	  if (spec.vertical === false) {
+	    if (spec.variableWidth) {
+	      trackWidth = trackChildren * spec.slideWidth;
+	    } else if (spec.centerMode) {
+	      trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
+	    } else {
+	      trackWidth = trackChildren * spec.slideWidth;
+	    }
 	  } else {
 	    trackHeight = trackChildren * spec.slideHeight;
 	  }
