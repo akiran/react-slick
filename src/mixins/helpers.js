@@ -56,7 +56,7 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     let slideWidth;
 
-    if (options.vertical === false) {
+    if (props.vertical === false) {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
