@@ -128,8 +128,8 @@ var EventHandlers = {
     if (this.props.infinite === false) {
       max = this.state.slideCount;
     } else {
-      breakPoint = this.props.slidesToScroll * -1;
-      counter = this.props.slidesToScroll * -1;
+      breakPoint = this.props.slidesToShow * -1;
+      counter = this.props.slidesToShow * -1;
       max = this.state.slideCount * 2;
     }
 
