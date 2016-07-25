@@ -62,7 +62,8 @@ var helpers = {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    const slickList = ReactDOM.findDOMNode(this.refs.list);
+    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
     this.setState({
