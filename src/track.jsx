@@ -83,6 +83,7 @@ var renderSlides = (spec) => {
       key: 'original' + getKey(child, index),
       'data-index': index,
       className: cssClasses,
+      tabIndex: '-1',
       style: assign({}, child.props.style || {}, childStyle)
     }));
 

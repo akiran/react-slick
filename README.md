@@ -66,6 +66,7 @@ var SimpleSlider = React.createClass({
 
 |    Property    | Type |          Description          | Working |
 | -------------  | ---- |          -----------          | ------- |
+| accessibility  | bool | Enables tabbing and arrow key navigation | Yes |
 | className      | String |Additional class name for the inner slider div | Yes |
 | adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
