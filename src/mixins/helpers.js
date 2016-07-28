@@ -44,6 +44,7 @@ var helpers = {
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     this.setState({
+      animating: false, // reset animating state to false when resize
       slideCount: slideCount,
       slideWidth: slideWidth,
       listWidth: listWidth,
