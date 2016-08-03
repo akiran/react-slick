@@ -1,3 +1,23 @@
+# Condé Nast react-slick fork
+
+### Purpose:
+This project was forked to allow for added features developed by Condé Nast engineering.
+
+### Goal:
+Remove the need for this fork and have said featured adapted into react-slick core.
+
+### Added Features:
+
+
+| Property       | Type     | Description                                                                                                                            | Working | Proposed to Core | Accepted into Core |
+|----------------|----------|----------------------------------------------------------------------------------------------------------------------------------------|---------|------------------|--------------------|
+| afterInit      | function | callback function called after inner-slider mounts                                                                                     | Yes     | Yes              | No                 |
+| lazyLoadOffset | int      | Lazy loads offset amount of images, forwards and backwards, in the queue. ```lazyLoad``` must be set to ```true``` to use this feature | Yes     | Yes              | No                 |
+
+
+---
+
+
 # react-slick
 
 [![Join the chat at https://gitter.im/akiran/react-slick](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/akiran/react-slick?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
