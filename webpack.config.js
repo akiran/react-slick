@@ -7,8 +7,8 @@ module.exports = {
   entry: {
     'docs.js': [
       './docs/index.jsx',
-      'webpack/hot/only-dev-server',
-      'webpack-dev-server/client?http://localhost:8000'
+      // 'webpack/hot/only-dev-server',
+      // 'webpack-dev-server/client?http://localhost:8000'
     ]
   },
   output: {
@@ -17,7 +17,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.jsx$/, loaders: ['react-hot', 'babel']},
+      {test: /\.jsx$/, loaders: ['babel']},
       {test: /\.js$/, loaders: ['babel'], exclude: /node_modules/},
       {
         test: /\.scss$/,
@@ -32,7 +32,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.IgnorePlugin(/vertx/)
   ]

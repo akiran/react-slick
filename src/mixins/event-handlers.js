@@ -1,23 +1,33 @@
 'use strict';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import helpers from './helpers';
 import assign from 'object-assign';
 
 var EventHandlers = {
   // Event handler for previous and next
   changeSlide: function (options) {
-    var indexOffset, slideOffset, unevenOffset, targetSlide;
+    var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
     unevenOffset = (this.state.slideCount % this.props.slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
 
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
       targetSlide = this.state.currentSlide - slideOffset;
+      if (this.props.lazyLoad) {
+        previousInt = this.state.currentSlide - slideOffset;
+        targetSlide = previousInt === -1 ? this.state.slideCount -1 : previousInt;
+      }
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : indexOffset;
       targetSlide = this.state.currentSlide + slideOffset;
     } else if (options.message === 'dots') {
       // Click on dots
       targetSlide = options.index * options.slidesToScroll;
+      if (targetSlide === options.currentSlide) {
+        return;
+      }
+    } else if (options.message === 'index') {
+      targetSlide = options.index;
       if (targetSlide === options.currentSlide) {
         return;
       }
@@ -147,6 +157,16 @@ var EventHandlers = {
       this.setState({
         trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
       });
+    }
+  },
+  onInnerSliderEnter: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause();
+    }
+  },
+  onInnerSliderLeave: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.autoPlay();
     }
   }
 };

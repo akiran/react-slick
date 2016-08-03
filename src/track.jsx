@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import cloneWithProps from 'react/lib/cloneWithProps';
 import assign from 'object-assign';
 import classnames from 'classnames';
 
@@ -11,7 +10,6 @@ var getSlideClasses = (spec) => {
 
   if (spec.rtl) {
     index = spec.slideCount - 1 - spec.index;
-    console.log();
   } else {
     index = spec.index;
   }
@@ -19,7 +17,7 @@ var getSlideClasses = (spec) => {
   slickCloned = (index < 0) || (index >= spec.slideCount);
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
-    slickCenter = (spec.currentSlide === index);
+    slickCenter = (index - spec.currentSlide) % spec.slideCount === 0;
     if ((index > spec.currentSlide - centerOffset - 1) && (index <= spec.currentSlide + centerOffset)) {
       slickActive = true;
     }
@@ -52,6 +50,11 @@ var getSlideStyle = function (spec) {
   return style;
 };
 
+var getKey = (child, fallbackKey) => {
+    // key could be a zero
+    return (child.key === null || child.key === undefined) ? fallbackKey : child.key;
+};
+
 var renderSlides = (spec) => {
   var key;
   var slides = [];
@@ -66,13 +69,21 @@ var renderSlides = (spec) => {
     } else {
       child = (<div></div>);
     }
-
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
-    slides.push(cloneWithProps(child, {
-      key: index,
+    var slickClasses = getSlideClasses(assign({index: index}, spec));
+    var cssClasses;
+
+    if (child.props.className) {
+        cssClasses = classnames(slickClasses, child.props.className);
+    } else {
+        cssClasses = slickClasses;
+    }
+
+    slides.push(React.cloneElement(child, {
+      key: 'original' + getKey(child, index),
       'data-index': index,
-      className: getSlideClasses(assign({index: index}, spec)),
-      style: childStyle
+      className: cssClasses,
+      style: assign({}, child.props.style || {}, childStyle)
     }));
 
     // variableWidth doesn't wrap properly.
@@ -81,21 +92,21 @@ var renderSlides = (spec) => {
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
-        preCloneSlides.push(cloneWithProps(child, {
-          key: key,
+        preCloneSlides.push(React.cloneElement(child, {
+          key: 'cloned' + getKey(child, key),
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
-          style: childStyle
+          className: cssClasses,
+          style: assign({}, child.props.style || {}, childStyle)
         }));
       }
 
       if (index < infiniteCount) {
         key = count + index;
-        postCloneSlides.push(cloneWithProps(child, {
-          key: key,
+        postCloneSlides.push(React.cloneElement(child, {
+          key: 'cloned' + getKey(child, key),
           'data-index': key,
-          className: getSlideClasses(assign({index: key}, spec)),
-          style: childStyle
+          className: cssClasses,
+          style: assign({}, child.props.style || {}, childStyle)
         }));
       }
     }

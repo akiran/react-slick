@@ -3,6 +3,11 @@
 import React from 'react';
 import Slider from '../src/slider';
 
+var baseUrl = '';
+if (process.env.NODE_ENV === 'production') {
+  baseUrl = 'http://static.webrafter.com';
+}
+
 var SingleItem = React.createClass({
   getInitialState: function () {
     return {count: 10};
@@ -16,18 +21,26 @@ var SingleItem = React.createClass({
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      waitForAnimate: false,
+      beforeChange: function (currentSlide, nextSlide) {
+        console.log('before change', currentSlide, nextSlide);
+      },
+      afterChange: function (currentSlide) {
+        console.log('after change', currentSlide);
+      },
     };
     return (
       <div>
         <h2> Single Item</h2>
         <Slider {...settings}>
-          <div onClick={this.click}><h3>{this.state.count}</h3></div>
-          <div><h3>2</h3></div>
-          <div><h3>3</h3></div>
-          <div><h3>4</h3></div>
-          <div><h3>5</h3></div>
-          <div><h3>6</h3></div>
+          <div key={1} onClick={this.click}><h3>{this.state.count}</h3></div>
+          <div key={2}><h3>2</h3></div>
+          <div key={3}><h3>3</h3></div>
+          <div key={4}><h3>4</h3></div>
+          <div key={5}><h3>5</h3></div>
+          <div key={6}><h3>6</h3></div>
+          {false? <div key={6}><h3>6</h3></div>: null}
         </Slider>
       </div>
     );
@@ -229,6 +242,60 @@ var AutoPlay = React.createClass({
   }
 });
 
+var PauseOnHover = React.createClass({
+  render: function () {
+    var settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      pauseOnHover: true
+    };
+    return (
+      <div>
+        <h2>Pause On Hover</h2>
+        <Slider {...settings}>
+          <div><h3>1</h3></div>
+          <div><h3>2</h3></div>
+          <div><h3>3</h3></div>
+          <div><h3>4</h3></div>
+          <div><h3>5</h3></div>
+          <div><h3>6</h3></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
+var Rtl = React.createClass({
+  render: function () {
+    var settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      rtl: true
+    };
+    return (
+      <div>
+        <h2>Right to Left</h2>
+        <Slider {...settings}>
+          <div><h3>1</h3></div>
+          <div><h3>2</h3></div>
+          <div><h3>3</h3></div>
+          <div><h3>4</h3></div>
+          <div><h3>5</h3></div>
+          <div><h3>6</h3></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 var VariableWidth = React.createClass({
   render: function () {
     var settings = {
@@ -310,10 +377,10 @@ var LazyLoad = React.createClass({
       <div>
         <h2> Lazy Load</h2>
         <Slider {...settings}>
-          <div><img src="img/abstract01.jpg" /></div>
-          <div><img src="img/abstract02.jpg" /></div>
-          <div><img src="img/abstract03.jpg" /></div>
-          <div><img src="img/abstract04.jpg" /></div>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
         </Slider>
       </div>
     );
@@ -335,15 +402,89 @@ var Fade = React.createClass({
       <div>
         <h2>Fade</h2>
         <Slider {...settings}>
-          <div><img src="img/abstract01.jpg" /></div>
-          <div><img src="img/abstract02.jpg" /></div>
-          <div><img src="img/abstract03.jpg" /></div>
-          <div><img src="img/abstract04.jpg" /></div>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
         </Slider>
       </div>
     );
   }
 });
+
+var SlickGoTo = React.createClass({
+  getInitialState: function () {
+    return {
+      slickGoTo: 0
+    };
+  },
+  changeHandler: function(e) {
+    this.setState({slickGoTo: e.target.value});
+  },
+  render: function () {
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      slickGoTo: this.state.slickGoTo || 0
+    };
+    return (
+      <div>
+        <h2>Slick Go To</h2>
+        <input onChange={this.changeHandler} value={this.state.slickGoTo} type='range' min={0} max={3} />
+        <Slider {...settings}>
+          <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
+var SampleNextArrow = React.createClass({
+  render: function() {
+    return <div {...this.props} style={{display: 'block', background: 'red'}}></div>;
+  }
+});
+
+var SamplePrevArrow = React.createClass({
+  render: function() {
+    return (
+      <div {...this.props} style={{display: 'block', background: 'red'}}></div>
+    );
+  }
+});
+
+var CustomArrows = React.createClass({
+  render: function () {
+    var settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
+    };
+    return (
+      <div>
+        <h2>Custom Arrows</h2>
+        <Slider {...settings}>
+          <div><h3>1</h3></div>
+          <div><h3>2</h3></div>
+          <div><h3>3</h3></div>
+          <div><h3>4</h3></div>
+          <div><h3>5</h3></div>
+          <div><h3>6</h3></div>
+        </Slider>
+      </div>
+    );
+  }
+});
+
 
 var App = React.createClass({
   render: function () {
@@ -357,10 +498,14 @@ var App = React.createClass({
         <CenterMode />
         <CenterModeWithInitial />
         <AutoPlay />
+        <PauseOnHover />
+        <Rtl />
         <VariableWidth />
         <AdaptiveHeight />
         <LazyLoad />
         <Fade />
+        <SlickGoTo />
+        <CustomArrows />
       </div>
     );
   }

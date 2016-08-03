@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
@@ -9,9 +10,9 @@ import _ from 'lodash';
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.refs.list.getDOMNode().getBoundingClientRect().width;
-    var trackWidth = this.refs.track.getDOMNode().getBoundingClientRect().width;
-    var slideWidth = this.getDOMNode().getBoundingClientRect().width/props.slidesToShow;
+    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
+    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -21,7 +22,6 @@ var helpers = {
       listWidth: listWidth,
       trackWidth: trackWidth,
       currentSlide: currentSlide
-
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -36,15 +36,46 @@ var helpers = {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
+
+  update: function (props) {
+    // This method has mostly same code as initialize method.
+    // Refactor it
+    var slideCount = React.Children.count(props.children);
+    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
+    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+
+    this.setState({
+      slideCount: slideCount,
+      slideWidth: slideWidth,
+      listWidth: listWidth,
+      trackWidth: trackWidth
+    }, function () {
+
+      var targetLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.refs.track
+      }, props, this.state));
+      // getCSS function needs previously set state
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+
+      this.setState({trackStyle: trackStyle});
+    });
+  },
+  getWidth: function getWidth(elem) {
+    return elem.getBoundingClientRect().width || elem.offsetWidth;
+  },
+
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.refs.list) {
-        var slickList = this.refs.list.getDOMNode();
+        var slickList = ReactDOM.findDOMNode(this.refs.list);
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
   },
+
   slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
@@ -52,16 +83,12 @@ var helpers = {
     var targetLeft, currentLeft;
     var callback;
 
-    if (this.state.animating === true || this.state.currentSlide === index) {
+    if (this.props.waitForAnimate && this.state.animating) {
       return;
     }
 
     if (this.props.fade) {
       currentSlide = this.state.currentSlide;
-
-      if (this.props.beforeChange) {
-        this.props.beforeChange(currentSlide);
-      }
 
       //  Shifting targetSlide back into the range
       if (index < 0) {
@@ -83,17 +110,21 @@ var helpers = {
           animating: false
         });
         if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+          this.props.afterChange(targetSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       };
 
       this.setState({
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode().children[currentSlide], callback);
+        ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
       });
+
+      if (this.props.beforeChange) {
+        this.props.beforeChange(this.state.currentSlide, targetSlide);
+      }
 
       this.autoPlay();
       return;
@@ -135,7 +166,7 @@ var helpers = {
     }
 
     if (this.props.beforeChange) {
-      this.props.beforeChange(currentSlide);
+      this.props.beforeChange(this.state.currentSlide, currentSlide);
     }
 
     if (this.props.lazyLoad) {
@@ -177,21 +208,22 @@ var helpers = {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
         }
-        ReactTransitionEvents.removeEndEventListener(this.refs.track.getDOMNode(), callback);
+        ReactTransitionEvents.removeEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       };
 
       this.setState({
         animating: true,
-        currentSlide: targetSlide,
+        currentSlide: currentSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
-        ReactTransitionEvents.addEndEventListener(this.refs.track.getDOMNode(), callback);
+        ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
       });
 
     }
 
     this.autoPlay();
   },
+
   swipeDirection: function (touchObject) {
     var xDist, yDist, r, swipeAngle;
 
@@ -212,19 +244,35 @@ var helpers = {
 
     return 'vertical';
   },
+
   autoPlay: function () {
+    if (this.state.autoPlayTimer) {
+      return;
+    }
     var play = () => {
       if (this.state.mounted) {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+        var nextIndex = this.props.rtl ?
+        this.state.currentSlide - this.props.slidesToScroll:
+        this.state.currentSlide + this.props.slidesToScroll;
+        this.slideHandler(nextIndex);
       }
     };
     if (this.props.autoplay) {
-      window.clearTimeout(this.state.autoPlayTimer);
       this.setState({
-        autoPlayTimer: window.setTimeout(play, this.props.autoplaySpeed)
+        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
       });
     }
   },
+
+  pause: function () {
+    if (this.state.autoPlayTimer) {
+      window.clearInterval(this.state.autoPlayTimer);
+      this.setState({
+        autoPlayTimer: null
+      });
+    }
+  },
+
   _getLazyLoadList: function(currentSlideIndex) {
     var lazyLoadedList = [];
     var loopIndex = currentSlideIndex + this.props.children.length;
@@ -236,4 +284,3 @@ var helpers = {
 };
 
 export default helpers;
-  

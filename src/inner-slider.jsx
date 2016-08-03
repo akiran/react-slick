@@ -23,35 +23,56 @@ export var InnerSlider = React.createClass({
     if (this.props.init) {
       this.props.init();
     }
+
     this.setState({
       mounted: true
     });
+
     if (this.props.lazyLoad) {
       this.setState({
         lazyLoadedList: this._getLazyLoadList(this.props.initialSlide)
       });
     }
   },
-  componentDidMount: function () {
+  componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-    window.addEventListener('resize', this.onWindowResized);
+    if (window.addEventListener) {
+      window.addEventListener('resize', this.onWindowResized);
+    } else {
+      window.attachEvent('onresize', this.onWindowResized);
+    }
     if (this.props.afterInit) {
       this.props.afterInit();
     }
   },
-  componentWillUnmount: function () {
-    window.removeEventListener('resize', this.onWindowResized);
+  componentWillUnmount: function componentWillUnmount() {
+    if (window.addEventListener) {
+      window.removeEventListener('resize', this.onWindowResized);
+    } else {
+      window.detachEvent('onresize', this.onWindowResized);
+    }
     if (this.state.autoPlayTimer) {
-      window.clearTimeout(this.state.autoPlayTimer);
+      window.clearInterval(this.state.autoPlayTimer);
+    }
+  },
+  componentWillReceiveProps: function(nextProps) {
+    if (this.props.slickGoTo !== nextProps.slickGoTo) {
+      this.changeSlide({
+          message: 'index',
+          index: nextProps.slickGoTo,
+          currentSlide: this.state.currentSlide
+      });
+    } else {
+      this.update(nextProps);
     }
   },
   componentDidUpdate: function () {
     this.adaptHeight();
   },
   onWindowResized: function () {
-    this.initialize(this.props);
+    this.update(this.props);
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
@@ -75,7 +96,7 @@ export var InnerSlider = React.createClass({
 
     var dots;
 
-    if (this.props.dots === true && this.state.slideCount > this.props.slidesToShow) {
+    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
       var dotProps = {
         dotsClass: this.props.dotsClass,
         slideCount: this.state.slideCount,
@@ -107,7 +128,7 @@ export var InnerSlider = React.createClass({
     }
 
     return (
-      <div className={className}>
+      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         <div
           ref='list'
           className="slick-list"
