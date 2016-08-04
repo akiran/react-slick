@@ -4,7 +4,7 @@
 This project was forked to allow for added features developed by Condé Nast engineering.
 
 ### Goal:
-Remove the need for this fork and have said featured adapted into react-slick core.
+Remove the need for this fork and have said features adapted into react-slick core.
 
 ### Added Features:
 
