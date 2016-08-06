@@ -71,7 +71,6 @@
     "classnames": "^2.2.5",
     "json2mq": "^0.2.0",
     "object-assign": "^4.1.0",
-    "phantomjs-prebuilt": "^2.1.7",
     "react-responsive-mixin": "^0.3.5",
     "slick-carousel": "^1.6.0"
   },
