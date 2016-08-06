@@ -5,7 +5,7 @@ import Slider from '../src/slider';
 
 var baseUrl = '/img/react-slick';
 if (process.env.NODE_ENV === 'production') {
-  baseUrl = 'http://static.webrafter.com/img/react-slick';
+  baseUrl = 'https://s3.amazonaws.com/static.neostack.com/img/react-slick';
 }
 
 var SingleItem = React.createClass({
