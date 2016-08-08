@@ -751,6 +751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
 
 	    this.setState({
+	      animating: false, // reset animating state to false when resize
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
 	      listWidth: listWidth,
