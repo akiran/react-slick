@@ -85,7 +85,6 @@ export var InnerSlider = React.createClass({
       speed: this.props.speed,
       infinite: this.props.infinite,
       centerMode: this.props.centerMode,
-      centerPadding: this.props.centerPadding,
       currentSlide: this.state.currentSlide,
       lazyLoad: this.props.lazyLoad,
       lazyLoadedList: this.state.lazyLoadedList,
