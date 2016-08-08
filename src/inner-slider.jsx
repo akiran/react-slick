@@ -100,6 +100,7 @@ export var InnerSlider = React.createClass({
 
     if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
       var dotProps = {
+        dotsClickable: this.props.dotsClickable,
         dotsClass: this.props.dotsClass,
         slideCount: this.state.slideCount,
         slidesToShow: this.props.slidesToShow,

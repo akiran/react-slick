@@ -77,6 +77,7 @@ var SimpleSlider = React.createClass({
 | centerPadding  | | | |
 | cssEase        | | | |
 | dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
+| dotsClickable  | bool | Should we show the dots but not be able to click them | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
 | easing         | string | | |

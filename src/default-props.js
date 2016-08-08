@@ -9,6 +9,7 @@ var defaultProps = {
     centerPadding: '50px',
     cssEase: 'ease',
     dots: false,
+    dotsClickable: true,
     dotsClass: 'slick-dots',
     draggable: true,
     easing: 'linear',
