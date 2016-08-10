@@ -340,6 +340,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      nextArrow = _react2.default.createElement(_arrows.NextArrow, arrowProps);
 	    }
 
+	    var centerPaddingStyle = null;
+
+	    if (this.props.vertical === false) {
+	      if (this.props.centerMode === true) {
+	        centerPaddingStyle = {
+	          padding: '0px ' + this.props.centerPadding
+	        };
+	      }
+	    } else {
+	      if (this.props.centerMode === true) {
+	        centerPaddingStyle = {
+	          padding: this.props.centerPadding + ' 0px'
+	        };
+	      }
+	    }
+
 	    return _react2.default.createElement(
 	      'div',
 	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
@@ -348,6 +364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        {
 	          ref: 'list',
 	          className: 'slick-list',
+	          style: centerPaddingStyle,
 	          onMouseDown: this.swipeStart,
 	          onMouseMove: this.state.dragging ? this.swipeMove : null,
 	          onMouseUp: this.swipeEnd,
@@ -718,7 +735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
-	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    var slideWidth = trackWidth / props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
