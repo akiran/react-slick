@@ -43,6 +43,10 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
+    // pause slider if autoplay is set to false
+    if(!props.autoplay)
+      this.pause();
+
     this.setState({
       slideCount: slideCount,
       slideWidth: slideWidth,
