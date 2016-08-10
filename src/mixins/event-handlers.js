@@ -65,6 +65,7 @@ var EventHandlers = {
   },
   swipeMove: function (e) {
     if (!this.state.dragging) {
+      e.preventDefault();
       return;
     }
     if (this.state.animating) {
@@ -120,6 +121,7 @@ var EventHandlers = {
   },
   swipeEnd: function (e) {
     if (!this.state.dragging) {
+      e.preventDefault();
       return;
     }
     var touchObject = this.state.touchObject;
