@@ -75,6 +75,10 @@ export var InnerSlider = React.createClass({
   },
   onWindowResized: function () {
     this.update(this.props);
+    // animating state should be cleared while resizing, otherwise autoplay stops working
+    this.setState({
+      animating: false 
+    })
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
