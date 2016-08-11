@@ -851,7 +851,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        animating: true,
 	        currentSlide: targetSlide
 	      }, function () {
+	        var _this2 = this;
+
 	        _ReactTransitionEvents2.default.addEndEventListener(_reactDom2.default.findDOMNode(this.refs.track).children[currentSlide], _callback2);
+
+	        window.setTimeout(function () {
+	          if (_this2.state.animating) {
+	            // something went wrong, force end of slide
+	            _callback2();
+	          }
+	        }, this.props.speed * 2);
 	      });
 
 	      if (this.props.beforeChange) {
@@ -954,7 +963,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        currentSlide: currentSlide,
 	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2.default)({ left: targetLeft }, this.props, this.state))
 	      }, function () {
+	        var _this3 = this;
+
 	        _ReactTransitionEvents2.default.addEndEventListener(_reactDom2.default.findDOMNode(this.refs.track), _callback2);
+
+	        window.setTimeout(function () {
+	          if (_this3.state.animating) {
+	            // something went wrong, force end of slide
+	            _callback2();
+	          }
+	        }, this.props.speed * 2);
 	      });
 	    }
 
@@ -981,15 +999,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return 'vertical';
 	  },
 	  autoPlay: function autoPlay() {
-	    var _this2 = this;
+	    var _this4 = this;
 
 	    if (this.state.autoPlayTimer) {
 	      return;
 	    }
 	    var play = function play() {
-	      if (_this2.state.mounted) {
-	        var nextIndex = _this2.props.rtl ? _this2.state.currentSlide - _this2.props.slidesToScroll : _this2.state.currentSlide + _this2.props.slidesToScroll;
-	        _this2.slideHandler(nextIndex);
+	      if (_this4.state.mounted) {
+	        var nextIndex = _this4.props.rtl ? _this4.state.currentSlide - _this4.props.slidesToScroll : _this4.state.currentSlide + _this4.props.slidesToScroll;
+	        _this4.slideHandler(nextIndex);
 	      }
 	    };
 	    if (this.props.autoplay) {
