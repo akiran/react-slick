@@ -126,7 +126,7 @@ var helpers = {
              // something went wrong, force end of slide
             callback();
           }
-        }, this.props.speed * 2);
+        }.bind(this), this.props.speed * 2);
       });
 
       if (this.props.beforeChange) {
@@ -237,7 +237,7 @@ var helpers = {
              // something went wrong, force end of slide
             callback();
           }
-        }, this.props.speed * 2);
+        }.bind(this), this.props.speed * 2);
       });
 
     }
