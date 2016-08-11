@@ -120,6 +120,13 @@ var helpers = {
         currentSlide: targetSlide
       }, function () {
         ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track).children[currentSlide], callback);
+
+        window.setTimeout(function () {
+          if (this.state.animating) {
+             // something went wrong, force end of slide
+            callback();
+          }
+        }, this.props.speed * 2);
       });
 
       if (this.props.beforeChange) {
@@ -224,6 +231,13 @@ var helpers = {
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
       }, function () {
         ReactTransitionEvents.addEndEventListener(ReactDOM.findDOMNode(this.refs.track), callback);
+
+        window.setTimeout(function () {
+          if (this.state.animating) {
+             // something went wrong, force end of slide
+            callback();
+          }
+        }, this.props.speed * 2);
       });
 
     }
