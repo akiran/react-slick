@@ -851,16 +851,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        animating: true,
 	        currentSlide: targetSlide
 	      }, function () {
-	        var _this2 = this;
-
 	        _ReactTransitionEvents2.default.addEndEventListener(_reactDom2.default.findDOMNode(this.refs.track).children[currentSlide], _callback2);
-
-	        window.setTimeout(function () {
-	          if (_this2.state.animating) {
-	            // something went wrong, force end of slide
-	            _callback2();
-	          }
-	        }, this.props.speed * 2);
 	      });
 
 	      if (this.props.beforeChange) {
@@ -963,16 +954,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        currentSlide: currentSlide,
 	        trackStyle: (0, _trackHelper.getTrackAnimateCSS)((0, _objectAssign2.default)({ left: targetLeft }, this.props, this.state))
 	      }, function () {
-	        var _this3 = this;
-
 	        _ReactTransitionEvents2.default.addEndEventListener(_reactDom2.default.findDOMNode(this.refs.track), _callback2);
-
-	        window.setTimeout(function () {
-	          if (_this3.state.animating) {
-	            // something went wrong, force end of slide
-	            _callback2();
-	          }
-	        }, this.props.speed * 2);
 	      });
 	    }
 
@@ -999,15 +981,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return 'vertical';
 	  },
 	  autoPlay: function autoPlay() {
-	    var _this4 = this;
+	    var _this2 = this;
 
 	    if (this.state.autoPlayTimer) {
 	      return;
 	    }
 	    var play = function play() {
-	      if (_this4.state.mounted) {
-	        var nextIndex = _this4.props.rtl ? _this4.state.currentSlide - _this4.props.slidesToScroll : _this4.state.currentSlide + _this4.props.slidesToScroll;
-	        _this4.slideHandler(nextIndex);
+	      if (_this2.state.mounted) {
+	        var nextIndex = _this2.props.rtl ? _this2.state.currentSlide - _this2.props.slidesToScroll : _this2.state.currentSlide + _this2.props.slidesToScroll;
+	        _this2.slideHandler(nextIndex);
 	      }
 	    };
 	    if (this.props.autoplay) {
@@ -1928,7 +1910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    enquire.register(query, handler);
 
-	    // Queue the handlers to unregister them at unmount  
+	    // Queue the handlers to unregister them at unmount
 	    if (! this._responsiveMediaHandlers) {
 	      this._responsiveMediaHandlers = [];
 	    }
@@ -2134,7 +2116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        /**
 	         * removes the given handler from the collection, and calls it's destroy methods
-	         * 
+	         *
 	         * @param {object || function} handler the handler to remove
 	         */
 	        removeHandler : function(handler) {
@@ -2149,7 +2131,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        /**
 	         * Determine whether the media query should be considered a match
-	         * 
+	         *
 	         * @return {Boolean} true if media query can be considered a match, false otherwise
 	         */
 	        matches : function() {
