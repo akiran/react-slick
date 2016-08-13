@@ -3,6 +3,52 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import helpers from './helpers';
 import assign from 'object-assign';
 
+/**
+ *
+ * Calculate if horizontal track swiping should occur.
+
+ * A typical "vertical" thumb swipe to navigate the page can have a degree offset
+ * of up to 45deg from the horizontal line, so it makes sense to start moving *the slide* at
+ * a lower degree offset -- e.g. 20deg -- so that no accidental slide swiping occurs while
+ * the user just wanted to swipe down the page.
+ *
+ *              ^                       45deg
+ *              |                     .'
+ *              |                   .'
+ *              |                 .'
+ *              |               .'
+ *              |             .'
+ *              |          .-'
+ *              |        .'
+ *              |      .'            __ 20deg (degree offset from horizontal line)
+ *              |    .'        _..-::::|
+ *              |  .'   __..-::::::::::|
+ *      Swipe   |.i_.-:::::::::::::::::|
+ *      start-> +'-:::::::Move slide---+----------------- (horizontal line)
+ *              |`:`-.:::::::::::::::::|
+ *              |  `.    `--.::::::::::|
+ *              |    `.        `--:::::|
+ *              |      `.            ``|20deg (degree offset from horizontal line)
+ *              |        `.
+ *              |          `-.
+ *              |             `.
+ *              |               `.
+ *              |                 `.
+ *              |                   `.
+ *              |                     `45deg
+ *              |
+ *              v
+ *
+ * deltaX: The absolute horizontal pixel length of the current swipe
+ * deltaY: The absolute vertical pixel length of the current swipe
+ *
+ */
+function shouldTriggerSlideMovement(deltaX, deltaY) {
+  var minimumDegreeOffsetFromHorizontalLine = 20; // degree
+  var xFactor = (minimumDegreeOffsetFromHorizontalLine / 45);
+  return deltaX * xFactor > deltaY;
+}
+
 var EventHandlers = {
   // Event handler for previous and next
   changeSlide: function (options) {
@@ -66,12 +112,11 @@ var EventHandlers = {
     });
   },
   swipeMove: function (e) {
-    if (!this.state.dragging) {
-      return;
-    }
+    // Fix #5
     if (this.state.animating) {
       return;
     }
+
     var swipeLeft;
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
@@ -107,6 +152,26 @@ var EventHandlers = {
       this.setState({ swiped: true });
     }
 
+    var deltaX = Math.abs(touchObject.curX - touchObject.startX);
+    var deltaY = Math.abs(touchObject.curY - touchObject.startY);
+    if (!shouldTriggerSlideMovement(deltaX, deltaY)) {
+      this.setState({
+        touchObject: {
+          // Set startX to current X so that *when* the deltaX/Y combination
+          // will later trigger a slide movement, the start x movement of the
+          // slide will be smooth and not jerky
+          // (Example: during a ~70 deg slide motion an x offset of 10px and an y offset
+          // of 40px has been accumulated. Now the slide motion is corrected to be
+          // more horizontal. When the deltaX/Y ratio will be sufficient, we don't want to
+          // the slide to jump 10px at once.
+          startX: touchObject.curX,
+          startY: touchObject.startY,
+        },
+      });
+      // Don't perform the slide movement below if shouldTriggerSlideMovement returned false
+      return;
+    }
+
     swipeLeft = curLeft + touchSwipeLength * positionOffset;
     this.setState({
       touchObject: touchObject,
@@ -114,8 +179,7 @@ var EventHandlers = {
       trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
     });
 
-    if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
-      { return; }
+    // Fix #38
     if (touchObject.swipeLength > 4) {
       e.preventDefault();
     }
