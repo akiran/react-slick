@@ -21,7 +21,6 @@ export default class PreviousNextMethods extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
     };
-    return null
     return (
       <div>
         <h2> Single Item</h2>

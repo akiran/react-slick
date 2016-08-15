@@ -37,6 +37,12 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
+  previous: function () {
+    this.changeSlide({message: 'previous'});
+  },
+  next: function () {
+    this.changeSlide({message: 'next'});
+  },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
 
