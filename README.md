@@ -33,7 +33,7 @@ or add cdn link in your html
 ### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
 Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
 
-### Filling issues
+### Filing issues
 Please replicate your issue with [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) and post it along with issue to make it easy for me to debug.
 
 

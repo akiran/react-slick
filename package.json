@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.12.3",
+  "version": "0.12.5",
   "description": " React port of slick carousel",
   "main": "./lib",
   "scripts": {
@@ -29,6 +29,7 @@
     "babel-core": "^6.9.0",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-assign": "^6.3.13",
     "babel-preset-airbnb": "^2.0.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-es2015-loose": "^7.0.0",

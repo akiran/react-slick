@@ -22,6 +22,9 @@ var EventHandlers = {
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
       targetSlide = currentSlide + slideOffset;
+      if (this.props.lazyLoad) {
+        targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
+      }
     } else if (options.message === 'dots') {
       // Click on dots
       targetSlide = options.index * options.slidesToScroll;
