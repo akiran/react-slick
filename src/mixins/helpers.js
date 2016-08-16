@@ -43,6 +43,8 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+
     // pause slider if autoplay is set to false
     if(!props.autoplay)
       this.pause();
@@ -51,7 +53,8 @@ var helpers = {
       slideCount: slideCount,
       slideWidth: slideWidth,
       listWidth: listWidth,
-      trackWidth: trackWidth
+      trackWidth: trackWidth,
+      currentSlide: currentSlide
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
