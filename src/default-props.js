@@ -1,6 +1,6 @@
 var defaultProps = {
     className: '',
-    // accessibility: true,
+    accessibility: true,
     adaptiveHeight: false,
     arrows: true,
     autoplay: false,

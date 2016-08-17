@@ -158,6 +158,7 @@ export var InnerSlider = React.createClass({
 
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+        {prevArrow}
         <div
           ref='list'
           className="slick-list"
@@ -169,12 +170,12 @@ export var InnerSlider = React.createClass({
           onTouchStart={this.swipeStart}
           onTouchMove={this.state.dragging ? this.swipeMove: null}
           onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
+          onTouchCancel={this.state.dragging ? this.swipeEnd: null}
+          onKeyDown={this.props.accessibility ? this.keyHandler : null}>
           <Track ref='track' {...trackProps}>
             {this.props.children}
           </Track>
         </div>
-        {prevArrow}
         {nextArrow}
         {dots}
       </div>
