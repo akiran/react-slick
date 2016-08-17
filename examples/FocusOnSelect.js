@@ -4,18 +4,16 @@ import Slider from '../src/slider'
 export default class CenterModeWithFocusOnSelect extends Component {
   render() {
     const settings = {
-      className: 'center',
       focusOnSelect: true,
-      centerMode: true,
-      dots: true,
-      infinite: false,
-      slidesToShow: 5,
+      infinite: true,
+      slidesToShow: 3,
       slidesToScroll: 1,
       speed: 500
     };
     return (
       <div>
-        <h2>Center Mode with FocusOnSelect</h2>
+        <h2>FocusOnSelect</h2>
+        <div>Click on any slide to select and make it current slide</div>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
