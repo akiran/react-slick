@@ -17,7 +17,7 @@ gulp.task('clean', function () {
 gulp.task('copy', function () {
   gulp.src('./docs/index.html')
     .pipe(gulp.dest('./build'));
-  gulp.src('./docs/img/*')
+  gulp.src('./docs/img/**/*')
       .pipe(gulp.dest('./build/img'));
   gulp.src('./node_modules/slick-carousel/slick/fonts/*')
       .pipe(gulp.dest('./build/fonts'));
@@ -50,7 +50,7 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, '0.0.0.0', function (err, result) {
+  }).listen(8080, '0.0.0.0', function (err, result) {
     if (err) {
       console.log(err);
     }
