@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
 
-export default class CenterModeWithFocusOnSelect extends Component {
+export default class FocusOnSelect extends Component {
   render() {
     const settings = {
       focusOnSelect: true,
