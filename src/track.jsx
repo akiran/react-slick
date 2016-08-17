@@ -91,7 +91,7 @@ var renderSlides = function (spec) {
       'data-index': index,
       className: cssClasses,
       tabIndex: '-1',
-      style: assign({}, child.props.style || {}, childStyle),
+      style: assign({outline: 'none'}, child.props.style || {}, childStyle),
       onClick: spec.focusOnSelect.bind(null, childOnClickOptions)
     }));
 
