@@ -305,12 +305,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      speed: this.props.speed,
 	      infinite: this.props.infinite,
 	      centerMode: this.props.centerMode,
+	      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : new Function(),
 	      currentSlide: this.state.currentSlide,
 	      lazyLoad: this.props.lazyLoad,
 	      lazyLoadedList: this.state.lazyLoadedList,
 	      rtl: this.props.rtl,
 	      slideWidth: this.state.slideWidth,
 	      slidesToShow: this.props.slidesToShow,
+	      slidesToScroll: this.props.slidesToScroll,
 	      slideCount: this.state.slideCount,
 	      trackStyle: this.state.trackStyle,
 	      variableWidth: this.props.variableWidth
@@ -368,6 +370,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2.default.createElement(
 	      'div',
 	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
+	      prevArrow,
 	      _react2.default.createElement(
 	        'div',
 	        {
@@ -381,14 +384,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onTouchStart: this.swipeStart,
 	          onTouchMove: this.state.dragging ? this.swipeMove : null,
 	          onTouchEnd: this.swipeEnd,
-	          onTouchCancel: this.state.dragging ? this.swipeEnd : null },
+	          onTouchCancel: this.state.dragging ? this.swipeEnd : null,
+	          onKeyDown: this.props.accessibility ? this.keyHandler : null },
 	        _react2.default.createElement(
 	          _track.Track,
 	          _extends({ ref: 'track' }, trackProps),
 	          this.props.children
 	        )
 	      ),
-	      prevArrow,
 	      nextArrow,
 	      dots
 	    );
@@ -442,7 +445,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (this.props.lazyLoad) {
 	        targetSlide = (currentSlide + slidesToScroll) % slideCount + indexOffset;
 	      }
-	    } else if (options.message === 'dots') {
+	    } else if (options.message === 'dots' || options.message === 'children') {
 	      // Click on dots
 	      targetSlide = options.index * options.slidesToScroll;
 	      if (targetSlide === options.currentSlide) {
@@ -458,9 +461,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.slideHandler(targetSlide);
 	  },
 	  // Accessiblity handler for previous and next
-	  keyHandler: function keyHandler(e) {},
+	  keyHandler: function keyHandler(e) {
+	    //Dont slide if the cursor is inside the form fields and arrow keys are pressed
+	    if (!e.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
+	      if (e.keyCode === 37 && this.props.accessibility === true) {
+	        this.changeSlide({
+	          message: this.props.rtl === true ? 'next' : 'previous'
+	        });
+	      } else if (e.keyCode === 39 && this.props.accessibility === true) {
+	        this.changeSlide({
+	          message: this.props.rtl === true ? 'previous' : 'next'
+	        });
+	      }
+	    }
+	  },
 	  // Focus on selecting a slide (click handler on track)
-	  selectHandler: function selectHandler(e) {},
+	  selectHandler: function selectHandler(options) {
+	    this.changeSlide(options);
+	  },
 	  swipeStart: function swipeStart(e) {
 	    var touches, posX, posY;
 
@@ -832,6 +850,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.fade) {
 	      currentSlide = this.state.currentSlide;
 
+	      // Don't change slide if it's not infite and current slide is the first or last slide.
+	      if (this.props.infinite === false && (index < 0 || index >= this.state.slideCount)) {
+	        return;
+	      }
+
 	      //  Shifting targetSlide back into the range
 	      if (index < 0) {
 	        targetSlide = index + this.state.slideCount;
@@ -891,6 +914,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    } else {
 	      currentSlide = targetSlide;
+	    }
+
+	    // Don't change slide if it's not infite and current slide is the first or last slide page.
+	    if (currentSlide === this.state.currentSlide && this.props.infinite === false) {
+	      return;
 	    }
 
 	    targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
@@ -1167,7 +1195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var defaultProps = {
 	    className: '',
-	    // accessibility: true,
+	    accessibility: true,
 	    adaptiveHeight: false,
 	    arrows: true,
 	    autoplay: false,
@@ -1341,6 +1369,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var renderSlides = function renderSlides(spec) {
+	  var _this = this;
+
 	  var key;
 	  var slides = [];
 	  var preCloneSlides = [];
@@ -1349,6 +1379,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var child;
 
 	  _react2.default.Children.forEach(spec.children, function (elem, index) {
+	    var childOnClickOptions = {
+	      message: 'children',
+	      index: index,
+	      slidesToScroll: spec.slidesToScroll,
+	      currentSlide: spec.currentSlide
+	    };
+
 	    if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
 	      child = elem;
 	    } else {
@@ -1368,7 +1405,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      key: 'original' + getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
-	      style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle)
+	      tabIndex: '-1',
+	      style: (0, _objectAssign2.default)({ outline: 'none' }, child.props.style || {}, childStyle),
+	      onClick: spec.focusOnSelect.bind(null, childOnClickOptions)
 	    }));
 
 	    // variableWidth doesn't wrap properly.
@@ -1381,7 +1420,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          key: 'precloned' + getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
-	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle)
+	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle),
+	          onClick: _this.props.focusOnSelect.bind(null, childOnClickOptions)
 	        }));
 	      }
 
@@ -1391,7 +1431,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          key: 'postcloned' + getKey(child, key),
 	          'data-index': key,
 	          className: cssClasses,
-	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle)
+	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle),
+	          onClick: _this.props.focusOnSelect.bind(null, childOnClickOptions)
 	        }));
 	      }
 	    }
@@ -1408,7 +1449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'Track',
 
 	  render: function render() {
-	    var slides = renderSlides(this.props);
+	    var slides = renderSlides.call(this, this.props);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'slick-track', style: this.props.trackStyle },
