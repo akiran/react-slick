@@ -19,6 +19,7 @@ import LazyLoad from '../examples/LazyLoad'
 import Fade from '../examples/Fade'
 import SlickGoTo from '../examples/SlickGoTo'
 import CustomArrows from '../examples/CustomArrows'
+import DynamicSlides  from '../examples/DynamicSlides'
 
 export default class App extends React.Component {
   render() {
@@ -40,6 +41,7 @@ export default class App extends React.Component {
         <SlideChangeHooks />
         <SlickGoTo />
         <CustomArrows />
+        <DynamicSlides />
       </div>
     );
   }
