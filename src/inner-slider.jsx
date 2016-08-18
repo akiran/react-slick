@@ -71,6 +71,13 @@ export var InnerSlider = React.createClass({
           index: nextProps.slickGoTo,
           currentSlide: this.state.currentSlide
       });
+    } else if (this.state.currentSlide >= nextProps.children.length) {
+      this.update(nextProps);
+      this.changeSlide({
+          message: 'index',
+          index: nextProps.children.length - nextProps.slidesToShow,
+          currentSlide: this.state.currentSlide
+      });
     } else {
       this.update(nextProps);
     }
