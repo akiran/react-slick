@@ -11,15 +11,20 @@ Soon this project will have all the features of slick carousel.
 We encourage your feedback and support.
 
 ### Installation
+
 ```bash
-  npm install react-slick
+npm install react-slick
 ```
+
 Also install slick-carousel for css and font
+
 ```bash
-  bower install slick-carousel
+bower install slick-carousel
 ```
+
 or add cdn link in your html
-```
+
+```html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.css" />
 ```
 
@@ -28,7 +33,7 @@ or add cdn link in your html
 ### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
 Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
 
-### Filling issues
+### Filing issues
 Please replicate your issue with [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) and post it along with issue to make it easy for me to debug.
 
 
@@ -37,6 +42,7 @@ Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to 
 get started with react-slick.
 
 ### Example
+
 ```js
 var React = require('react');
 var Slider = require('react-slick');
@@ -108,14 +114,13 @@ var SimpleSlider = React.createClass({
 To customize the next/prev arrow elements, simply create new React components and set them
 as the values of nextArrow and prevArrow.
 
-````
+```js
 class LeftNavButton extends React.Component {
   render() {
     return <button {...this.props}>Next</button>  
   }
 }
-
-````
+```
 
 Important: be sure that you pass your component's props to your clickable element
 like the example above. If you don't, your custom component won't trigger the click handler.
@@ -125,7 +130,8 @@ You can also set onClick={this.props.onClick} if you only want to set the click 
 
 ### Development
 Want to run demos locally
-```
+
+```shell
 git clone https://github.com/akiran/react-slick
 npm install
 npm start
