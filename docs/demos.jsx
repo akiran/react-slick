@@ -20,6 +20,7 @@ import Fade from '../examples/Fade'
 import SlickGoTo from '../examples/SlickGoTo'
 import CustomArrows from '../examples/CustomArrows'
 import DynamicSlides  from '../examples/DynamicSlides'
+import VerticalMode  from '../examples/VerticalMode'
 
 export default class App extends React.Component {
   render() {
@@ -42,6 +43,7 @@ export default class App extends React.Component {
         <SlickGoTo />
         <CustomArrows />
         <DynamicSlides />
+        <VerticalMode />
       </div>
     );
   }
