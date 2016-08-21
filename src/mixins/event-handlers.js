@@ -8,20 +8,25 @@ var EventHandlers = {
   // Event handler for previous and next
   changeSlide: function (options) {
     var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
-    unevenOffset = (this.state.slideCount % this.props.slidesToScroll !== 0);
-    indexOffset = unevenOffset ? 0 : (this.state.slideCount - this.state.currentSlide) % this.props.slidesToScroll;
+    const {slidesToScroll, slidesToShow} = this.props
+    const {slideCount, currentSlide} = this.state
+    unevenOffset = (slideCount % slidesToScroll !== 0);
+    indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
 
     if (options.message === 'previous') {
-      slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : this.props.slidesToShow - indexOffset;
-      targetSlide = this.state.currentSlide - slideOffset;
+      slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
+      targetSlide = currentSlide - slideOffset;
       if (this.props.lazyLoad) {
-        previousInt = this.state.currentSlide - slideOffset;
-        targetSlide = previousInt === -1 ? this.state.slideCount -1 : previousInt;
+        previousInt = currentSlide - slideOffset;
+        targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
       }
     } else if (options.message === 'next') {
-      slideOffset = (indexOffset === 0) ? this.props.slidesToScroll : indexOffset;
-      targetSlide = this.state.currentSlide + slideOffset;
-    } else if (options.message === 'dots') {
+      slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
+      targetSlide = currentSlide + slideOffset;
+      if (this.props.lazyLoad) {
+        targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
+      }
+    } else if (options.message === 'dots' || options.message === 'children') {
       // Click on dots
       targetSlide = options.index * options.slidesToScroll;
       if (targetSlide === options.currentSlide) {
@@ -38,11 +43,22 @@ var EventHandlers = {
   },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
-
+    //Dont slide if the cursor is inside the form fields and arrow keys are pressed
+    if(!e.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
+        if (e.keyCode === 37 && this.props.accessibility === true) {
+            this.changeSlide({
+              message: this.props.rtl === true ? 'next' :  'previous'
+            });
+        } else if (e.keyCode === 39 && this.props.accessibility === true) {
+            this.changeSlide({
+              message: this.props.rtl === true ? 'previous' : 'next'
+            });
+        }
+    }
   },
   // Focus on selecting a slide (click handler on track)
-  selectHandler: function (e) {
-
+  selectHandler: function (options) {
+    this.changeSlide(options)
   },
   swipeStart: function (e) {
     var touches, posX, posY;
@@ -66,6 +82,7 @@ var EventHandlers = {
   },
   swipeMove: function (e) {
     if (!this.state.dragging) {
+      e.preventDefault();
       return;
     }
     if (this.state.animating) {
@@ -196,6 +213,7 @@ var EventHandlers = {
   },
   swipeEnd: function (e) {
     if (!this.state.dragging) {
+      e.preventDefault();
       return;
     }
     var touchObject = this.state.touchObject;
