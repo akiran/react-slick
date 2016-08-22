@@ -67,7 +67,7 @@ export var getTrackLeft = function (spec) {
   }
 
   if (spec.infinite) {
-    if (spec.slideCount > spec.slidesToShow) {
+    if (spec.slideCount >= spec.slidesToShow) {
      slideOffset = (spec.slideWidth * spec.slidesToShow) * -1;
     }
     if (spec.slideCount % spec.slidesToScroll !== 0) {
