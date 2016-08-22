@@ -40,6 +40,12 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
+  previous: function () {
+    this.changeSlide({message: 'previous'});
+  },
+  next: function () {
+    this.changeSlide({message: 'next'});
+  },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
     //Dont slide if the cursor is inside the form fields and arrow keys are pressed
