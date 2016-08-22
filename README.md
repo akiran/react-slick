@@ -108,8 +108,13 @@ var SimpleSlider = React.createClass({
 | afterChange | function | callback function called after the current index changes | Yes |
 | beforeChange | function | callback function called before the current index changes | Yes |
 | slickGoTo | int | go to the specified slide number | |
-| next           | function | function called to change current slide on next slide | Yes |
-| previous       | function | function called to change current slide on previous slide  | Yes |
+
+
+### Methods
+* next       - function called to change current slide on next slide
+* previous   - function called to change current slide on previous slide
+
+Check this [example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js) for these methods usage
 
 ### Custom next/prev arrows
 
