@@ -23,7 +23,7 @@ export default class PreviousNextMethods extends Component {
     };
     return (
       <div>
-        <h2> Single Item</h2>
+        <h2>Previous and Next methods</h2>
         <Slider ref='slider' {...settings}>
           <div key={1}><h3>1</h3></div>
           <div key={2}><h3>2</h3></div>
@@ -32,8 +32,10 @@ export default class PreviousNextMethods extends Component {
           <div key={5}><h3>5</h3></div>
           <div key={6}><h3>6</h3></div>
         </Slider>
-        <button onClick={this.previous}>Previous</button>
-        <button onClick={this.next}>>Next</button>
+        <div style={{textAlign: 'center'}}>
+          <button className='button' onClick={this.previous}>Previous</button>
+          <button className='button' onClick={this.next}>Next</button>
+        </div>
       </div>
     );
   }
