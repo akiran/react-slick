@@ -40,12 +40,12 @@ var Slider = React.createClass({
     }
   },
 
-  previous: function () {
-    this.refs.innerSlider.previous();
+  slickPrev: function () {
+    this.refs.innerSlider.slickPrev();
   },
 
-  next: function () {
-    this.refs.innerSlider.next();
+  slickNext: function () {
+    this.refs.innerSlider.slickNext();
   },
 
   render: function () {

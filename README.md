@@ -112,8 +112,8 @@ var SimpleSlider = React.createClass({
 
 
 ### Methods
-* next       - function called to change current slide on next slide
-* previous   - function called to change current slide on previous slide
+* slickNext   - function called to change current slide on next slide
+* slickPrev   - function called to change current slide on previous slide
 
 Check this [example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js) for these methods usage
 

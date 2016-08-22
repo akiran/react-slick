@@ -8,10 +8,10 @@ export default class PreviousNextMethods extends Component {
     this.previous = this.previous.bind(this)
   }
   next() {
-    this.refs.slider.next()
+    this.refs.slider.slickNext()
   }
   previous() {
-    this.refs.slider.previous()
+    this.refs.slider.slickPrev()
   }
   render() {
     const settings = {
