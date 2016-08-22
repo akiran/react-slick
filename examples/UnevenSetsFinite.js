@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
 
-export default class UnevenSets extends Component {
+export default class UnevenSetsFinite extends Component {
   render() {
     var settings = {
       dots: true,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToScroll: 4,
       slidesToShow: 4
     };
     return (
       <div>
-        <h2>Uneven sets</h2>
+        <h2>Uneven sets (finite)</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
