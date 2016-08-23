@@ -48,6 +48,10 @@ var Slider = React.createClass({
     this.refs.innerSlider.slickNext();
   },
 
+  slickGoTo: function (slide) {
+    this.refs.innerSlider.slickGoTo(slide)
+  },
+
   render: function () {
     var settings;
     var newProps;

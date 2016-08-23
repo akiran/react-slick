@@ -32,7 +32,7 @@ var EventHandlers = {
         return;
       }
     } else if (options.message === 'index') {
-      targetSlide = options.index;
+      targetSlide = parseInt(options.index);
       if (targetSlide === options.currentSlide) {
         return;
       }

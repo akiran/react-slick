@@ -98,6 +98,13 @@ export var InnerSlider = React.createClass({
   slickNext: function () {
     this.changeSlide({message: 'next'});
   },
+  slickGoTo: function (slide) {
+    slide && this.changeSlide({
+      message: 'index',
+      index: slide,
+      currentSlide: this.state.currentSlide
+    });
+  },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
 
