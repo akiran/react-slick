@@ -5,10 +5,8 @@
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-# Road to 1.0
-react-slick is under active development now.
-Soon this project will have all the features of slick carousel.
-We encourage your feedback and support.
+### Important
+ * slickGoTo prop is deprecated in favor of slickGoTo method. Check this [slickGoTo usage example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js). slickGoTo prop will be removed in react-slick@0.14
 
 ### Installation
 
