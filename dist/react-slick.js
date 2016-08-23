@@ -64,6 +64,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -128,6 +130,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 	  },
+
+	  slickPrev: function slickPrev() {
+	    this.refs.innerSlider.slickPrev();
+	  },
+
+	  slickNext: function slickNext() {
+	    this.refs.innerSlider.slickNext();
+	  },
+
 	  render: function render() {
 	    var _this2 = this;
 
@@ -162,7 +173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      return _react2.default.createElement(
 	        _innerSlider.InnerSlider,
-	        settings,
+	        _extends({ ref: 'innerSlider' }, settings),
 	        children
 	      );
 	    }
@@ -282,6 +293,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        index: nextProps.slickGoTo,
 	        currentSlide: this.state.currentSlide
 	      });
+	    } else if (this.state.currentSlide >= nextProps.children.length) {
+	      this.update(nextProps);
+	      this.changeSlide({
+	        message: 'index',
+	        index: nextProps.children.length - nextProps.slidesToShow,
+	        currentSlide: this.state.currentSlide
+	      });
 	    } else {
 	      this.update(nextProps);
 	    }
@@ -295,6 +313,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.setState({
 	      animating: false
 	    });
+	  },
+	  slickPrev: function slickPrev() {
+	    this.changeSlide({ message: 'previous' });
+	  },
+	  slickNext: function slickNext() {
+	    this.changeSlide({ message: 'next' });
 	  },
 	  render: function render() {
 	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className);
@@ -460,6 +484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.slideHandler(targetSlide);
 	  },
+
 	  // Accessiblity handler for previous and next
 	  keyHandler: function keyHandler(e) {
 	    //Dont slide if the cursor is inside the form fields and arrow keys are pressed
@@ -687,7 +712,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  if (spec.infinite) {
-	    if (spec.slideCount > spec.slidesToShow) {
+	    if (spec.slideCount >= spec.slidesToShow) {
 	      slideOffset = spec.slideWidth * spec.slidesToShow * -1;
 	    }
 	    if (spec.slideCount % spec.slidesToScroll !== 0) {
@@ -697,6 +722,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } else {
 	          slideOffset = spec.slideCount % spec.slidesToScroll * spec.slideWidth * -1;
 	        }
+	      }
+	    }
+	  } else {
+
+	    if (spec.slideCount % spec.slidesToScroll !== 0) {
+	      if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
+	        var slidesToOffset = spec.slidesToShow - spec.slideCount % spec.slidesToScroll;
+	        slideOffset = slidesToOffset * spec.slideWidth;
 	      }
 	    }
 	  }
