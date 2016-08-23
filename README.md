@@ -19,7 +19,7 @@ npm install react-slick
 Also install slick-carousel for css and font
 
 ```bash
-bower install slick-carousel
+npm install slick-carousel
 ```
 
 or add cdn link in your html
