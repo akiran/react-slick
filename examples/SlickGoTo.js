@@ -5,13 +5,9 @@ import {baseUrl} from './config'
 export default class SlickGoTo extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      slickGoTo: 0
-    }
     this.changeHandler = this.changeHandler.bind(this)
   }
   changeHandler(e) {
-    // this.setState({slickGoTo: e.target.value});
     this.refs.slider.slickGoTo(e.target.value)
   }
   render() {
@@ -21,7 +17,6 @@ export default class SlickGoTo extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      // slickGoTo: this.state.slickGoTo || 0
     };
     return (
       <div>
