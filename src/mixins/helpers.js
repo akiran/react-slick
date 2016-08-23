@@ -5,14 +5,13 @@ import ReactDOM from 'react-dom';
 import ReactTransitionEvents from 'react/lib/ReactTransitionEvents';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
-import _ from 'lodash';
 
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
-    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    var slideWidth = trackWidth/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -36,7 +35,6 @@ var helpers = {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
-
   update: function (props) {
     // This method has mostly same code as initialize method.
     // Refactor it
@@ -44,6 +42,10 @@ var helpers = {
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+
+    // pause slider if autoplay is set to false
+    if(!props.autoplay)
+      this.pause();
 
     this.setState({
       slideCount: slideCount,
@@ -65,7 +67,6 @@ var helpers = {
   getWidth: function getWidth(elem) {
     return elem.getBoundingClientRect().width || elem.offsetWidth;
   },
-
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
@@ -75,7 +76,6 @@ var helpers = {
       }
     }
   },
-
   slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
@@ -170,7 +170,12 @@ var helpers = {
     }
 
     if (this.props.lazyLoad) {
-      var newLazyLoadedList = _.uniq(this.state.lazyLoadedList.concat(this._getLazyLoadList(currentSlide)));
+      var newLazyLoadedList = this.state.lazyLoadedList
+        .concat(this._getLazyLoadList(currentSlide))
+        .filter(function (elem, index, array) {
+          return array.indexOf(elem) == index;
+        });
+
       if (newLazyLoadedList !== this.state.lazyLoadedList) {
         this.setState({
           lazyLoadedList: newLazyLoadedList
@@ -223,7 +228,6 @@ var helpers = {
 
     this.autoPlay();
   },
-
   swipeDirection: function (touchObject) {
     var xDist, yDist, r, swipeAngle;
 
@@ -263,7 +267,6 @@ var helpers = {
       });
     }
   },
-
   pause: function () {
     if (this.state.autoPlayTimer) {
       window.clearInterval(this.state.autoPlayTimer);
