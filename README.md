@@ -5,10 +5,8 @@
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-# Road to 1.0
-react-slick is under active development now.
-Soon this project will have all the features of slick carousel.
-We encourage your feedback and support.
+### Important
+ * slickGoTo prop is deprecated in favor of slickGoTo method. Check this [slickGoTo usage example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js). slickGoTo prop will be removed in react-slick@0.14
 
 ### Installation
 
@@ -82,7 +80,7 @@ var SimpleSlider = React.createClass({
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
-| centerPadding  | | | |
+| centerPadding  | string | Slide padding when in center mode (px or %) | Yes |
 | cssEase        | | | |
 | dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |

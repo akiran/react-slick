@@ -66,6 +66,9 @@ export var InnerSlider = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     if (this.props.slickGoTo != nextProps.slickGoTo) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
+      }
       this.changeSlide({
           message: 'index',
           index: nextProps.slickGoTo,
@@ -97,6 +100,13 @@ export var InnerSlider = React.createClass({
   },
   slickNext: function () {
     this.changeSlide({message: 'next'});
+  },
+  slickGoTo: function (slide) {
+    slide && this.changeSlide({
+      message: 'index',
+      index: slide,
+      currentSlide: this.state.currentSlide
+    });
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);

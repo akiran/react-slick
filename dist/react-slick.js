@@ -139,6 +139,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.refs.innerSlider.slickNext();
 	  },
 
+	  slickGoTo: function slickGoTo(slide) {
+	    this.refs.innerSlider.slickGoTo(slide);
+	  },
+
 	  render: function render() {
 	    var _this2 = this;
 
@@ -288,6 +292,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    if (this.props.slickGoTo != nextProps.slickGoTo) {
+	      if ((undefined) !== 'production') {
+	        console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead');
+	      }
 	      this.changeSlide({
 	        message: 'index',
 	        index: nextProps.slickGoTo,
@@ -319,6 +326,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  slickNext: function slickNext() {
 	    this.changeSlide({ message: 'next' });
+	  },
+	  slickGoTo: function slickGoTo(slide) {
+	    slide && this.changeSlide({
+	      message: 'index',
+	      index: slide,
+	      currentSlide: this.state.currentSlide
+	    });
 	  },
 	  render: function render() {
 	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className);
@@ -476,7 +490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return;
 	      }
 	    } else if (options.message === 'index') {
-	      targetSlide = options.index;
+	      targetSlide = parseInt(options.index);
 	      if (targetSlide === options.currentSlide) {
 	        return;
 	      }
