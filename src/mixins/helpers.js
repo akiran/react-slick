@@ -10,7 +10,8 @@ var helpers = {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
-    var slideWidth = trackWidth/props.slidesToShow;
+    var centerModeAdjustment = props.centerMode ? parseInt(props.centerPadding) * 2 : 0;
+    var slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerModeAdjustment)/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -40,7 +41,8 @@ var helpers = {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
-    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    var centerModeAdjustment = props.centerMode ? parseInt(props.centerPadding) * 2 : 0;
+    var slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerModeAdjustment)/props.slidesToShow;
 
     // pause slider if autoplay is set to false
     if(!props.autoplay)
