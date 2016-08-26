@@ -14,7 +14,7 @@ var Slider = React.createClass({
       breakpoint: null
     };
   },
-  componentDidMount: function () {
+  componentWillMount: function () {
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       breakpoints.sort((x, y) => x - y);
