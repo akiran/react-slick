@@ -99,7 +99,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      breakpoint: null
 	    };
 	  },
-	  componentDidMount: function componentDidMount() {
+	  componentWillMount: function componentWillMount() {
 	    var _this = this;
 
 	    if (this.props.responsive) {
@@ -1416,16 +1416,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var renderSlides = function renderSlides(spec) {
-	  var _this = this;
-
 	  var key;
 	  var slides = [];
 	  var preCloneSlides = [];
 	  var postCloneSlides = [];
 	  var count = _react2.default.Children.count(spec.children);
-	  var child;
 
 	  _react2.default.Children.forEach(spec.children, function (elem, index) {
+	    var child = void 0;
 	    var childOnClickOptions = {
 	      message: 'children',
 	      index: index,
@@ -1448,13 +1446,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      cssClasses = slickClasses;
 	    }
 
+	    var onClick = function onClick(e) {
+	      child.props && child.props.onClick && child.props.onClick(e);
+	      spec.focusOnSelect(childOnClickOptions);
+	    };
+
 	    slides.push(_react2.default.cloneElement(child, {
 	      key: 'original' + getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
 	      tabIndex: '-1',
 	      style: (0, _objectAssign2.default)({ outline: 'none' }, child.props.style || {}, childStyle),
-	      onClick: spec.focusOnSelect.bind(null, childOnClickOptions)
+	      onClick: onClick
 	    }));
 
 	    // variableWidth doesn't wrap properly.
@@ -1468,7 +1471,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle),
-	          onClick: _this.props.focusOnSelect.bind(null, childOnClickOptions)
+	          onClick: onClick
 	        }));
 	      }
 
@@ -1479,7 +1482,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle),
-	          onClick: _this.props.focusOnSelect.bind(null, childOnClickOptions)
+	          onClick: onClick
 	        }));
 	      }
 	    }
