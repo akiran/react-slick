@@ -88,7 +88,7 @@ var renderSlides = function (spec) {
     }
 
     const onClick = function(e) {
-      child.props.onClick && child.props.onClick(e)
+      child.props && child.props.onClick && child.props.onClick(e)
       spec.focusOnSelect(childOnClickOptions)
     }
 

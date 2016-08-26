@@ -14,7 +14,7 @@ export default class SimpleSlider extends Component {
       <div>
         <h2> Single Item</h2>
         <Slider {...settings}>
-          <div name='123' onClick={() => console.log('clicked')}><h3>1</h3></div>
+          <div><h3>1</h3></div>
           <div><h3>2</h3></div>
           <div><h3>3</h3></div>
           <div><h3>4</h3></div>
