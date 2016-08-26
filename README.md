@@ -115,8 +115,6 @@ var SimpleSlider = React.createClass({
 * slickPrev()   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * slickGoTo(slideNumber) - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
 
-Check this [example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js) for these methods usage
-
 ### Custom next/prev arrows
 
 To customize the next/prev arrow elements, simply create new React components and set them
