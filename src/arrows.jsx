@@ -48,19 +48,19 @@ export var NextArrow = React.createClass({
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
 
     if (!this.props.infinite) {
-      if (this.props.centerMode && this.props.currentSlide >= (this.props.slideCount - 1)) {
-        nextClasses['slick-disabled'] = true;
-        nextHandler = null;
-      } else {
-        if (this.props.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
+      if (this.props.centerMode) {
+        // check if current slide is last slide
+        if (this.props.currentSlide >= (this.props.slideCount - 1)) {
           nextClasses['slick-disabled'] = true;
           nextHandler = null;
         }
-      }
-
-      if (this.props.slideCount <= this.props.slidesToShow) {
-        nextClasses['slick-disabled'] = true;
-        nextHandler = null;
+      } else {
+        // check if all slides are shown in slider
+        if (this.props.slideCount <= this.props.slidesToShow ||
+          this.props.currentSlide >= (this.props.slideCount - this.props.slidesToShow)) {
+          nextClasses['slick-disabled'] = true;
+          nextHandler = null;
+        }
       }
     }
 
