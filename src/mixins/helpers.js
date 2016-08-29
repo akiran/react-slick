@@ -156,11 +156,6 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    // Don't change slide if it's not infite and current slide is the first or last slide page.
-    if(currentSlide === this.state.currentSlide && this.props.infinite === false) {
-      return;
-    }
-
     targetLeft = getTrackLeft(assign({
       slideIndex: targetSlide,
       trackRef: this.refs.track
