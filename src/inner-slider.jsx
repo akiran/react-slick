@@ -6,6 +6,7 @@ import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import classnames from 'classnames';
+import assign from 'object-assign';
 
 import {Track} from './track';
 import {Dots} from './dots';
@@ -14,7 +15,7 @@ import {PrevArrow, NextArrow} from './arrows';
 export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   getInitialState: function () {
-    return Object.assign({}, initialState, {
+    return assign({}, initialState, {
       currentSlide: this.props.initialSlide
     });
   },
@@ -92,7 +93,7 @@ export var InnerSlider = React.createClass({
     this.update(this.props);
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
-      animating: false 
+      animating: false
     })
   },
   slickPrev: function () {
