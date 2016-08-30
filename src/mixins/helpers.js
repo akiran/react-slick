@@ -10,19 +10,32 @@ var helpers = {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
-    var slideWidth = trackWidth/props.slidesToShow;
+    let slideWidth;
+
+    if (props.vertical === false) {
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    } else {
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+    }
+
+    const slickList = ReactDOM.findDOMNode(this.refs.list);
+    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const listHeight = slideHeight * props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
     this.setState({
-      slideCount: slideCount,
-      slideWidth: slideWidth,
-      listWidth: listWidth,
-      trackWidth: trackWidth,
-      currentSlide: currentSlide
+      slideCount,
+      slideWidth,
+      slideHeight,
+      listHeight,
+      listWidth,
+      trackWidth,
+      currentSlide
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
+        listRef: this.refs.list,
         slideIndex: this.state.currentSlide,
         trackRef: this.refs.track
       }, props, this.state));
@@ -40,20 +53,33 @@ var helpers = {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
-    var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    let slideWidth;
+
+    if (props.vertical === false) {
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+    } else {
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+    }
+
+    const slickList = ReactDOM.findDOMNode(this.refs.list);
+    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
     if(!props.autoplay)
       this.pause();
 
     this.setState({
-      slideCount: slideCount,
-      slideWidth: slideWidth,
-      listWidth: listWidth,
-      trackWidth: trackWidth
+      slideCount,
+      slideWidth,
+      slideHeight,
+      listWidth,
+      listHeight,
+      trackWidth
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
+        listRef: this.refs.list,
         slideIndex: this.state.currentSlide,
         trackRef: this.refs.track
       }, props, this.state));
@@ -65,6 +91,9 @@ var helpers = {
   },
   getWidth: function getWidth(elem) {
     return elem.getBoundingClientRect().width || elem.offsetWidth;
+  },
+  getHeight: function getHeight(elem) {
+    return elem.getBoundingClientRect().height || elem.offsetHeight;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
@@ -89,11 +118,11 @@ var helpers = {
     if (this.props.fade) {
       currentSlide = this.state.currentSlide;
 
-      // Don't change slide if it's not infite and current slide is the first or last slide.
+      // Don't change slide if it's not infinite and current slide is the first or last slide.
       if(this.props.infinite === false &&
         (index < 0 || index >= this.state.slideCount)) {
         return;
-      } 
+      }
 
       //  Shifting targetSlide back into the range
       if (index < 0) {
@@ -156,17 +185,19 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    // Don't change slide if it's not infite and current slide is the first or last slide page.
+    // Don't change slide if it's not infinite and current slide is the first or last slide page.
     if(currentSlide === this.state.currentSlide && this.props.infinite === false) {
       return;
     }
 
     targetLeft = getTrackLeft(assign({
+      listRef: this.refs.list,
       slideIndex: targetSlide,
       trackRef: this.refs.track
     }, this.props, this.state));
 
     currentLeft = getTrackLeft(assign({
+      listRef: this.refs.list,
       slideIndex: currentSlide,
       trackRef: this.refs.track
     }, this.props, this.state));
@@ -251,11 +282,21 @@ var helpers = {
     if (swipeAngle < 0) {
         swipeAngle = 360 - Math.abs(swipeAngle);
     }
+
     if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
         return (this.props.rtl === false ? 'left' : 'right');
     }
+
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
         return (this.props.rtl === false ? 'right' : 'left');
+    }
+
+    if (this.props.verticalSwiping === true) {
+      if ((swipeAngle >= 35) && (swipeAngle <= 135)) {
+        return 'down';
+      } else {
+        return 'up';
+      }
     }
 
     return 'vertical';

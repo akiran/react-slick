@@ -92,7 +92,7 @@ export var InnerSlider = React.createClass({
     this.update(this.props);
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
-      animating: false 
+      animating: false
     })
   },
   slickPrev: function () {
@@ -109,7 +109,9 @@ export var InnerSlider = React.createClass({
     });
   },
   render: function () {
-    var className = classnames('slick-initialized', 'slick-slider', this.props.className);
+    var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
+      'slick-vertical': this.props.vertical
+    });
 
     var trackProps = {
       fade: this.props.fade,
@@ -146,6 +148,7 @@ export var InnerSlider = React.createClass({
     }
 
     var prevArrow, nextArrow;
+    let listStyle;
 
     var arrowProps = {
       infinite: this.props.infinite,
@@ -161,6 +164,12 @@ export var InnerSlider = React.createClass({
     if (this.props.arrows) {
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
+    }
+
+    if (this.props.vertical) {
+      listStyle = {
+        height: this.state.listHeight
+      };
     }
 
     var centerPaddingStyle = null;
@@ -179,13 +188,14 @@ export var InnerSlider = React.createClass({
       }
     }
 
+    listStyle = Object.assign(listStyle, centerPaddingStyle);
+
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         {prevArrow}
         <div
           ref='list'
           className="slick-list"
-          style={centerPaddingStyle}
           onMouseDown={this.swipeStart}
           onMouseMove={this.state.dragging ? this.swipeMove: null}
           onMouseUp={this.swipeEnd}
@@ -194,6 +204,7 @@ export var InnerSlider = React.createClass({
           onTouchMove={this.state.dragging ? this.swipeMove: null}
           onTouchEnd={this.swipeEnd}
           onTouchCancel={this.state.dragging ? this.swipeEnd: null}
+          style={listStyle}>
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
           <Track ref='track' {...trackProps}>
             {this.props.children}
