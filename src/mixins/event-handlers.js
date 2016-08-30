@@ -2,6 +2,7 @@
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import helpers from './helpers';
 import assign from 'object-assign';
+import ReactDOM from 'react-dom';
 
 var EventHandlers = {
   // Event handler for previous and next
@@ -136,6 +137,81 @@ var EventHandlers = {
       e.preventDefault();
     }
   },
+  getNavigableIndexes: function () {
+    let max;
+    let breakPoint = 0;
+    let counter = 0;
+    let indexes = [];
+
+    if (this.props.infinite === false) {
+      max = this.state.slideCount;
+    } else {
+      breakPoint = this.props.slidesToShow * -1;
+      counter = this.props.slidesToShow * -1;
+      max = this.state.slideCount * 2;
+    }
+
+    while (breakPoint < max) {
+      indexes.push(breakPoint);
+      breakPoint = counter + this.props.slidesToScroll;
+
+      counter += this.props.slidesToScroll <= this.props.slidesToShow ?
+        this.props.slidesToScroll : this.props.slidesToShow;
+    }
+
+    return indexes;
+  },
+  checkNavigable: function (index) {
+    const navigables = this.getNavigableIndexes();
+    let prevNavigable = 0;
+
+    if (index > navigables[navigables.length - 1]) {
+      index = navigables[navigables.length - 1];
+    } else {
+
+      for (var n in navigables) {
+        if (index < navigables[n]) {
+          index = prevNavigable;
+          break;
+        }
+
+        prevNavigable = navigables[n];
+      }
+
+    }
+
+    return index;
+  },
+  getSlideCount: function () {
+
+    const centerOffset = this.props.centerMode === true ?
+      this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) : 0;
+
+    if (this.props.swipeToSlide === true) {
+      let swipedSlide;
+
+      const slickList = ReactDOM.findDOMNode(this.refs.list);
+
+      const slides = slickList.querySelectorAll('.slick-slide');
+
+      Array.from(slides).every((slide, index) => {
+        if (slide.offsetLeft - centerOffset + (helpers.getWidth(slide) / 2) > this.state.swipeLeft * -1) {
+          swipedSlide = slide;
+          return false;
+        }
+
+        return true;
+      });
+
+      const slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+
+      return slidesTraversed;
+
+    } else {
+      return this.props.slidesToScroll;
+    }
+
+  },
   swipeEnd: function (e) {
     if (!this.state.dragging) {
       e.preventDefault();
@@ -159,13 +235,32 @@ var EventHandlers = {
     }
     if (touchObject.swipeLength > minSwipe) {
       e.preventDefault();
-      if (swipeDirection === 'left') {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-      } else if (swipeDirection === 'right') {
-        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
-      } else {
-        this.slideHandler(this.state.currentSlide);
+
+      let slideCount, newSlide;
+
+      switch (swipeDirection) {
+
+        case 'left':
+        case 'down':
+          newSlide = this.state.currentSlide + this.getSlideCount();
+          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+          this.state.currentDirection = 0;
+          break;
+
+        case 'right':
+        case 'up':
+          newSlide = this.state.currentSlide - this.getSlideCount();
+          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+          this.state.currentDirection = 1;
+          break;
+
+        default:
+          slideCount = this.state.currentSlide;
+
       }
+
+      this.slideHandler(slideCount);
+
     } else {
       // Adjust the track back to it's original position.
       var currentLeft = getTrackLeft(assign({

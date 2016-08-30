@@ -94,26 +94,20 @@ var SimpleSlider = React.createClass({
 | pauseOnHover   | bool | prevents autoplay while hovering | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
 | rtl            | bool | Reverses the slide order | Yes |
-| slide         | string |||
-| slidesToShow | int | Number of slides to be visible at a time | Yes |
+| slide          | string |||
+| slidesToShow   | int | Number of slides to be visible at a time | Yes |
 | slidesToScroll | int | Number of slides to scroll for each navigation item
-| speed | int |||
-| swipe | bool |||
-| swipeToSlide | bool |||
-| touchMove | bool |||
+| speed          | int |||
+| swipe          | bool |||
+| swipeToSlide   | bool | Allow users to drag or swipe directly to a slide irrespective of slidesToScroll | Yes |
+| touchMove      | bool |||
 | touchThreshold | int |||
-| variableWidth | bool |||
-| useCSS | bool | Enable/Disable CSS Transitions | Yes |
-| vertical | bool |||
-| afterChange | function | callback function called after the current index changes | Yes |
-| beforeChange | function | callback function called before the current index changes | Yes |
-| slickGoTo | int | go to the specified slide number | |
-
-
-### Methods
-* slickNext()   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
-* slickPrev()   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
-* slickGoTo(slideNumber) - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
+| variableWidth  | bool |||
+| useCSS         | bool | Enable/Disable CSS Transitions | Yes |
+| vertical       | bool |||
+| afterChange    | function | callback function called after the current index changes | Yes |
+| beforeChange   | function | callback function called before the current index changes | Yes |
+| slickGoTo      | int | go to the specified slide number
 
 ### Custom next/prev arrows
 
