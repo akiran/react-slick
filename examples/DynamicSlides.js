@@ -26,7 +26,7 @@ export default class DynamicSlides extends Component {
     return (
       <div>
         <h2>Dynamic slides</h2>
-        <button onClick={this.click}>Click to change slide count</button>
+        <button className='button' onClick={this.click}>Click to change slide count</button>
         <Slider {...settings}>
           {this.state.slides.map(function (slide) {
             return <div key={slide}><h3>{slide}</h3></div>

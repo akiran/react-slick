@@ -64,6 +64,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -97,7 +99,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      breakpoint: null
 	    };
 	  },
-	  componentDidMount: function componentDidMount() {
+	  componentWillMount: function componentWillMount() {
 	    var _this = this;
 
 	    if (this.props.responsive) {
@@ -128,6 +130,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 	  },
+
+	  slickPrev: function slickPrev() {
+	    this.refs.innerSlider.slickPrev();
+	  },
+
+	  slickNext: function slickNext() {
+	    this.refs.innerSlider.slickNext();
+	  },
+
+	  slickGoTo: function slickGoTo(slide) {
+	    this.refs.innerSlider.slickGoTo(slide);
+	  },
+
 	  render: function render() {
 	    var _this2 = this;
 
@@ -162,7 +177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      return _react2.default.createElement(
 	        _innerSlider.InnerSlider,
-	        settings,
+	        _extends({ ref: 'innerSlider' }, settings),
 	        children
 	      );
 	    }
@@ -277,9 +292,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    if (this.props.slickGoTo != nextProps.slickGoTo) {
+	      if ((undefined) !== 'production') {
+	        console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead');
+	      }
 	      this.changeSlide({
 	        message: 'index',
 	        index: nextProps.slickGoTo,
+	        currentSlide: this.state.currentSlide
+	      });
+	    } else if (this.state.currentSlide >= nextProps.children.length) {
+	      this.update(nextProps);
+	      this.changeSlide({
+	        message: 'index',
+	        index: nextProps.children.length - nextProps.slidesToShow,
 	        currentSlide: this.state.currentSlide
 	      });
 	    } else {
@@ -294,6 +319,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // animating state should be cleared while resizing, otherwise autoplay stops working
 	    this.setState({
 	      animating: false
+	    });
+	  },
+	  slickPrev: function slickPrev() {
+	    this.changeSlide({ message: 'previous' });
+	  },
+	  slickNext: function slickNext() {
+	    this.changeSlide({ message: 'next' });
+	  },
+	  slickGoTo: function slickGoTo(slide) {
+	    slide && this.changeSlide({
+	      message: 'index',
+	      index: slide,
+	      currentSlide: this.state.currentSlide
 	    });
 	  },
 	  render: function render() {
@@ -452,7 +490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return;
 	      }
 	    } else if (options.message === 'index') {
-	      targetSlide = options.index;
+	      targetSlide = parseInt(options.index);
 	      if (targetSlide === options.currentSlide) {
 	        return;
 	      }
@@ -460,6 +498,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.slideHandler(targetSlide);
 	  },
+
 	  // Accessiblity handler for previous and next
 	  keyHandler: function keyHandler(e) {
 	    //Dont slide if the cursor is inside the form fields and arrow keys are pressed
@@ -697,6 +736,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } else {
 	          slideOffset = spec.slideCount % spec.slidesToScroll * spec.slideWidth * -1;
 	        }
+	      }
+	    }
+	  } else {
+
+	    if (spec.slideCount % spec.slidesToScroll !== 0) {
+	      if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
+	        var slidesToOffset = spec.slidesToShow - spec.slideCount % spec.slidesToScroll;
+	        slideOffset = slidesToOffset * spec.slideWidth;
 	      }
 	    }
 	  }
@@ -1369,16 +1416,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var renderSlides = function renderSlides(spec) {
-	  var _this = this;
-
 	  var key;
 	  var slides = [];
 	  var preCloneSlides = [];
 	  var postCloneSlides = [];
 	  var count = _react2.default.Children.count(spec.children);
-	  var child;
 
 	  _react2.default.Children.forEach(spec.children, function (elem, index) {
+	    var child = void 0;
 	    var childOnClickOptions = {
 	      message: 'children',
 	      index: index,
@@ -1401,13 +1446,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      cssClasses = slickClasses;
 	    }
 
+	    var onClick = function onClick(e) {
+	      child.props && child.props.onClick && child.props.onClick(e);
+	      spec.focusOnSelect(childOnClickOptions);
+	    };
+
 	    slides.push(_react2.default.cloneElement(child, {
 	      key: 'original' + getKey(child, index),
 	      'data-index': index,
 	      className: cssClasses,
 	      tabIndex: '-1',
 	      style: (0, _objectAssign2.default)({ outline: 'none' }, child.props.style || {}, childStyle),
-	      onClick: spec.focusOnSelect.bind(null, childOnClickOptions)
+	      onClick: onClick
 	    }));
 
 	    // variableWidth doesn't wrap properly.
@@ -1421,7 +1471,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle),
-	          onClick: _this.props.focusOnSelect.bind(null, childOnClickOptions)
+	          onClick: onClick
 	        }));
 	      }
 
@@ -1432,7 +1482,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'data-index': key,
 	          className: cssClasses,
 	          style: (0, _objectAssign2.default)({}, child.props.style || {}, childStyle),
-	          onClick: _this.props.focusOnSelect.bind(null, childOnClickOptions)
+	          onClick: onClick
 	        }));
 	      }
 	    }

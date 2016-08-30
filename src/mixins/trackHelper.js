@@ -79,7 +79,17 @@ export var getTrackLeft = function (spec) {
           }
       }
     }
+  } else {
+
+    if (spec.slideCount % spec.slidesToScroll !== 0) {
+      if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
+          var slidesToOffset = spec.slidesToShow - (spec.slideCount % spec.slidesToScroll);
+          slideOffset = slidesToOffset * spec.slideWidth;
+      }
+    }
   }
+
+
 
   if (spec.centerMode) {
     if(spec.infinite) {
