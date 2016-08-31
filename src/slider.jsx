@@ -10,8 +10,8 @@ import defaultProps from './default-props';
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
   innerSlider: null,
-  refHandlers: {
-    innerSlider: (ref) => this.innerSlider = ref,
+  innerSliderRefHandler: function (ref) {
+    this.innerSlider = ref;
   },
   getInitialState: function () {
     return {
@@ -83,7 +83,7 @@ var Slider = React.createClass({
       );
     } else {
       return (
-        <InnerSlider ref={this.refHandlers.innerSlider} {...settings}>
+        <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
           {children}
         </InnerSlider>
       );

@@ -15,9 +15,11 @@ export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   list: null,
   track: null,
-  refHandlers: {
-    list: (ref) => this.list = ref,
-    track: (ref) => this.track = ref,
+  listRefHandler: function (ref) {
+    this.list = ref;
+  },
+  trackRefHandler: function (ref) {
+    this.track = ref;
   },
   getInitialState: function () {
     return Object.assign({}, initialState, {
@@ -189,7 +191,7 @@ export var InnerSlider = React.createClass({
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         {prevArrow}
         <div
-          ref={this.refHandlers.list}
+          ref={this.listRefHandler}
           className="slick-list"
           style={centerPaddingStyle}
           onMouseDown={this.swipeStart}
@@ -201,7 +203,7 @@ export var InnerSlider = React.createClass({
           onTouchEnd={this.swipeEnd}
           onTouchCancel={this.state.dragging ? this.swipeEnd: null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
-          <Track ref={this.refHandlers.track} {...trackProps}>
+          <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
           </Track>
         </div>
