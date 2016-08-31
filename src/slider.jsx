@@ -45,15 +45,15 @@ var Slider = React.createClass({
   },
 
   slickPrev: function () {
-    this.refs.innerSlider.slickPrev();
+    this.innerSlider.slickPrev();
   },
 
   slickNext: function () {
-    this.refs.innerSlider.slickNext();
+    this.innerSlider.slickNext();
   },
 
   slickGoTo: function (slide) {
-    this.refs.innerSlider.slickGoTo(slide)
+    this.innerSlider.slickGoTo(slide)
   },
 
   render: function () {
