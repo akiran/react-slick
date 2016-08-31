@@ -21,7 +21,7 @@ export default class SlickGoTo extends Component {
     return (
       <div>
         <h2>Slick Go To</h2>
-        <input onChange={this.changeHandler} initialValue={0} type='range' min={0} max={3} />
+        <input onChange={this.changeHandler} defaultValue={0} type='range' min={0} max={3} />
         <Slider ref='slider' {...settings}>
           <div><img src={baseUrl + '/abstract01.jpg'} /></div>
           <div><img src={baseUrl + '/abstract02.jpg'} /></div>
