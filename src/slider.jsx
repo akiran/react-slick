@@ -9,6 +9,10 @@ import defaultProps from './default-props';
 
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
+  innerSlider: null,
+  refHandlers: {
+    innerSlider: (ref) => this.innerSlider = ref,
+  },
   getInitialState: function () {
     return {
       breakpoint: null
@@ -71,7 +75,7 @@ var Slider = React.createClass({
     children = children.filter(function(child){
       return !!child
     })
-    
+
     if (settings === 'unslick') {
       // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
       return (
@@ -79,7 +83,7 @@ var Slider = React.createClass({
       );
     } else {
       return (
-        <InnerSlider ref='innerSlider' {...settings}>
+        <InnerSlider ref={this.refHandlers.innerSlider} {...settings}>
           {children}
         </InnerSlider>
       );
