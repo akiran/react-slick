@@ -6,6 +6,7 @@ import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import classnames from 'classnames';
+import assign from 'object-assign';
 
 import {Track} from './track';
 import {Dots} from './dots';
