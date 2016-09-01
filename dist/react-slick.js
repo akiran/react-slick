@@ -1798,7 +1798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        match: handler
 	      };
 	    }
-	    enquire.register(query, handler);
+	    canUseDOM && enquire.register(query, handler);
 
 	    // Queue the handlers to unregister them at unmount  
 	    if (! this._responsiveMediaHandlers) {
@@ -1809,13 +1809,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  componentWillUnmount: function () {
 	    if (this._responsiveMediaHandlers) {
 	      this._responsiveMediaHandlers.forEach(function(obj) {
-	        enquire.unregister(obj.query, obj.handler);
+	        canUseDOM && enquire.unregister(obj.query, obj.handler);
 	      });
 	    }
 	  }
 	};
 
 	module.exports = ResponsiveMixin;
+
 
 /***/ },
 /* 18 */
