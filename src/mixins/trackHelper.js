@@ -15,6 +15,8 @@ export var getTrackCSS = function(spec) {
 
   var trackWidth, trackHeight;
 
+  const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
+
   if (!spec.vertical) {
     if (spec.variableWidth) {
       trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
