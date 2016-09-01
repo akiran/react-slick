@@ -92,7 +92,7 @@ export var InnerSlider = React.createClass({
     this.update(this.props);
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
-      animating: false 
+      animating: false
     })
   },
   slickPrev: function () {
@@ -102,7 +102,7 @@ export var InnerSlider = React.createClass({
     this.changeSlide({message: 'next'});
   },
   slickGoTo: function (slide) {
-    slide && this.changeSlide({
+    typeof slide === 'number' && this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
