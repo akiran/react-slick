@@ -8,8 +8,8 @@ import assign from 'object-assign';
 var helpers = {
   initialize: function (props) {
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
+    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.list));
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth = trackWidth/props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -24,7 +24,7 @@ var helpers = {
 
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
+        trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
@@ -38,8 +38,8 @@ var helpers = {
     // This method has mostly same code as initialize method.
     // Refactor it
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.list));
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.refs.track));
+    var listWidth = this.getWidth(ReactDOM.findDOMNode(this.list));
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
 
     // pause slider if autoplay is set to false
@@ -55,7 +55,7 @@ var helpers = {
 
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
+        trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
@@ -69,8 +69,8 @@ var helpers = {
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
-      if (this.refs.list) {
-        var slickList = ReactDOM.findDOMNode(this.refs.list);
+      if (this.list) {
+        var slickList = ReactDOM.findDOMNode(this.list);
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
@@ -163,12 +163,12 @@ var helpers = {
 
     targetLeft = getTrackLeft(assign({
       slideIndex: targetSlide,
-      trackRef: this.refs.track
+      trackRef: this.track
     }, this.props, this.state));
 
     currentLeft = getTrackLeft(assign({
       slideIndex: currentSlide,
-      trackRef: this.refs.track
+      trackRef: this.track
     }, this.props, this.state));
 
     if (this.props.infinite === false) {
