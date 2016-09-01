@@ -94,6 +94,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'Slider',
 
 	  mixins: [_reactResponsiveMixin2.default],
+	  innerSlider: null,
+	  innerSliderRefHandler: function innerSliderRefHandler(ref) {
+	    this.innerSlider = ref;
+	  },
 	  getInitialState: function getInitialState() {
 	    return {
 	      breakpoint: null
@@ -132,15 +136,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  slickPrev: function slickPrev() {
-	    this.refs.innerSlider.slickPrev();
+	    this.innerSlider.slickPrev();
 	  },
 
 	  slickNext: function slickNext() {
-	    this.refs.innerSlider.slickNext();
+	    this.innerSlider.slickNext();
 	  },
 
 	  slickGoTo: function slickGoTo(slide) {
-	    this.refs.innerSlider.slickGoTo(slide);
+	    this.innerSlider.slickGoTo(slide);
 	  },
 
 	  render: function render() {
@@ -177,7 +181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      return _react2.default.createElement(
 	        _innerSlider.InnerSlider,
-	        _extends({ ref: 'innerSlider' }, settings),
+	        _extends({ ref: this.innerSliderRefHandler }, settings),
 	        children
 	      );
 	    }
@@ -239,6 +243,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: 'InnerSlider',
 
 	  mixins: [_helpers2.default, _eventHandlers2.default],
+	  list: null,
+	  track: null,
+	  listRefHandler: function listRefHandler(ref) {
+	    this.list = ref;
+	  },
+	  trackRefHandler: function trackRefHandler(ref) {
+	    this.track = ref;
+	  },
 	  getInitialState: function getInitialState() {
 	    return _extends({}, _initialState2.default, {
 	      currentSlide: this.props.initialSlide
@@ -328,7 +340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.changeSlide({ message: 'next' });
 	  },
 	  slickGoTo: function slickGoTo(slide) {
-	    slide && this.changeSlide({
+	    typeof slide === 'number' && this.changeSlide({
 	      message: 'index',
 	      index: slide,
 	      currentSlide: this.state.currentSlide
@@ -412,7 +424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _react2.default.createElement(
 	        'div',
 	        {
-	          ref: 'list',
+	          ref: this.listRefHandler,
 	          className: 'slick-list',
 	          style: centerPaddingStyle,
 	          onMouseDown: this.swipeStart,
@@ -426,7 +438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onKeyDown: this.props.accessibility ? this.keyHandler : null },
 	        _react2.default.createElement(
 	          _track.Track,
-	          _extends({ ref: 'track' }, trackProps),
+	          _extends({ ref: this.trackRefHandler }, trackProps),
 	          this.props.children
 	        )
 	      ),
@@ -552,7 +564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    curLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	      slideIndex: this.state.currentSlide,
-	      trackRef: this.refs.track
+	      trackRef: this.track
 	    }, this.props, this.state));
 	    touchObject.curX = e.touches ? e.touches[0].pageX : e.clientX;
 	    touchObject.curY = e.touches ? e.touches[0].pageY : e.clientY;
@@ -629,7 +641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Adjust the track back to it's original position.
 	      var currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
-	        trackRef: this.refs.track
+	        trackRef: this.track
 	      }, this.props, this.state));
 
 	      this.setState({
@@ -815,8 +827,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var helpers = {
 	  initialize: function initialize(props) {
 	    var slideCount = _react2.default.Children.count(props.children);
-	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
-	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
+	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.list));
+	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.track));
 	    var slideWidth = trackWidth / props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -831,7 +843,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
-	        trackRef: this.refs.track
+	        trackRef: this.track
 	      }, props, this.state));
 	      // getCSS function needs previously set state
 	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: targetLeft }, props, this.state));
@@ -845,8 +857,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // This method has mostly same code as initialize method.
 	    // Refactor it
 	    var slideCount = _react2.default.Children.count(props.children);
-	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
-	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
+	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.list));
+	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.track));
 	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
 
 	    // pause slider if autoplay is set to false
@@ -861,7 +873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
-	        trackRef: this.refs.track
+	        trackRef: this.track
 	      }, props, this.state));
 	      // getCSS function needs previously set state
 	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: targetLeft }, props, this.state));
@@ -875,8 +887,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  adaptHeight: function adaptHeight() {
 	    if (this.props.adaptiveHeight) {
 	      var selector = '[data-index="' + this.state.currentSlide + '"]';
-	      if (this.refs.list) {
-	        var slickList = _reactDom2.default.findDOMNode(this.refs.list);
+	      if (this.list) {
+	        var slickList = _reactDom2.default.findDOMNode(this.list);
 	        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
 	      }
 	    }
@@ -963,19 +975,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      currentSlide = targetSlide;
 	    }
 
-	    // Don't change slide if it's not infite and current slide is the first or last slide page.
-	    if (currentSlide === this.state.currentSlide && this.props.infinite === false) {
-	      return;
-	    }
-
 	    targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	      slideIndex: targetSlide,
-	      trackRef: this.refs.track
+	      trackRef: this.track
 	    }, this.props, this.state));
 
 	    currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	      slideIndex: currentSlide,
-	      trackRef: this.refs.track
+	      trackRef: this.track
 	    }, this.props, this.state));
 
 	    if (this.props.infinite === false) {
@@ -1260,7 +1267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    infinite: true,
 	    initialSlide: 0,
 	    lazyLoad: false,
-	    pauseOnHover: false,
+	    pauseOnHover: true,
 	    responsive: null,
 	    rtl: false,
 	    slide: 'div',
