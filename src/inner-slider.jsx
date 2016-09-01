@@ -178,6 +178,14 @@ export var InnerSlider = React.createClass({
       nextArrow = (<NextArrow {...arrowProps} />);
     }
 
+    var verticalHeightStyle = null;
+
+    if (this.props.vertical) {
+      verticalHeightStyle = {
+        height: this.state.listHeight,
+      };
+    }
+
     var centerPaddingStyle = null;
 
     if (this.props.vertical === false) {
@@ -194,13 +202,15 @@ export var InnerSlider = React.createClass({
       }
     }
 
+    const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
+
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         {prevArrow}
         <div
           ref={this.listRefHandler}
           className="slick-list"
-          style={centerPaddingStyle}
+          style={listStyle}
           onMouseDown={this.swipeStart}
           onMouseMove={this.state.dragging ? this.swipeMove: null}
           onMouseUp={this.swipeEnd}
