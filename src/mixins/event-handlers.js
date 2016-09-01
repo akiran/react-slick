@@ -180,12 +180,19 @@ var EventHandlers = {
     }
     if (touchObject.swipeLength > minSwipe) {
       e.preventDefault();
-      if (swipeDirection === 'left') {
-        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-      } else if (swipeDirection === 'right') {
-        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
-      } else {
-        this.slideHandler(this.state.currentSlide);
+
+      switch (swipeDirection) {
+        case 'left':
+        case 'down':
+          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+          break;
+
+        case 'right':
+        case 'up':
+          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+          break;
+
+        default:
       }
     } else {
       // Adjust the track back to it's original position.
