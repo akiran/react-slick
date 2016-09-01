@@ -269,13 +269,13 @@ var helpers = {
     };
     if (this.props.autoplay) {
       this.setState({
-        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
+        autoPlayTimer: setInterval(play, this.props.autoplaySpeed)
       });
     }
   },
   pause: function () {
     if (this.state.autoPlayTimer) {
-      window.clearInterval(this.state.autoPlayTimer);
+      clearInterval(this.state.autoPlayTimer);
       this.setState({
         autoPlayTimer: null
       });

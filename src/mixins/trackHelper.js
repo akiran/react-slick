@@ -33,7 +33,7 @@ export var getTrackCSS = function(spec) {
   };
 
   // Fallback for IE8
-  if (!window.addEventListener && window.attachEvent) {
+  if (window && !window.addEventListener && window.attachEvent) {
     style.marginLeft = spec.left + 'px';
   }
 

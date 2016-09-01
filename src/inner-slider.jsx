@@ -53,6 +53,11 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
+
+    // To support server-side rendering
+    if (!window) {
+      return
+    }
     if (window.addEventListener) {
       window.addEventListener('resize', this.onWindowResized);
     } else {
@@ -69,7 +74,7 @@ export var InnerSlider = React.createClass({
       window.detachEvent('onresize', this.onWindowResized);
     }
     if (this.state.autoPlayTimer) {
-      window.clearInterval(this.state.autoPlayTimer);
+      clearInterval(this.state.autoPlayTimer);
     }
   },
   componentWillReceiveProps: function(nextProps) {
