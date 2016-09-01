@@ -1,5 +1,6 @@
 'use strict';
 import ReactDOM from 'react-dom';
+import assign from 'object-assign';
 
 var checkSpecKeys = function (spec, keysArray) {
   return keysArray.reduce((value, key) => {
@@ -12,29 +13,44 @@ export var getTrackCSS = function(spec) {
     'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth'
   ]);
 
-  var trackWidth;
+  var trackWidth, trackHeight;
 
-  if (spec.variableWidth) {
-    trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
-  } else if (spec.centerMode) {
-    trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+  if (!spec.vertical) {
+    if (spec.variableWidth) {
+      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+    } else if (spec.centerMode) {
+      trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+    } else {
+      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+    }
   } else {
-    trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+    trackHeight = trackChildren * spec.slideHeight;
   }
 
   var style = {
     opacity: 1,
-    width: trackWidth,
-    WebkitTransform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
-    transform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
+    WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+    transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
     transition: '',
     WebkitTransition: '',
-    msTransform: 'translateX(' + spec.left + 'px)'
+    msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
   };
+
+  if (trackWidth) {
+    assign(style, { width: trackWidth });
+  }
+
+  if (trackHeight) {
+    assign(style, { height: trackHeight });
+  }
 
   // Fallback for IE8
   if (window && !window.addEventListener && window.attachEvent) {
-    style.marginLeft = spec.left + 'px';
+    if (!spec.vertical) {
+      style.marginLeft = spec.left + 'px';
+    } else {
+      style.marginTop = spec.left + 'px';
+    }
   }
 
   return style;
