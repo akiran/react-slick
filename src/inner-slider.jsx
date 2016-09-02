@@ -6,6 +6,7 @@ import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import classnames from 'classnames';
+import assign from 'object-assign';
 
 import {Track} from './track';
 import {Dots} from './dots';
@@ -22,7 +23,7 @@ export var InnerSlider = React.createClass({
     this.track = ref;
   },
   getInitialState: function () {
-    return Object.assign({}, initialState, {
+    return assign({}, initialState, {
       currentSlide: this.props.initialSlide
     });
   },
