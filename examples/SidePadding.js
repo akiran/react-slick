@@ -4,7 +4,6 @@ import Slider from '../src/slider'
 export default class SidePadding extends Component {
   render() {
     const settings = {
-      className: 'center',
       centerMode: false,
       infinite: false,
       sidePadding: '60px',
