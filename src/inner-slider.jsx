@@ -130,7 +130,7 @@ export var InnerSlider = React.createClass({
       speed: this.props.speed,
       infinite: this.props.infinite,
       centerMode: this.props.centerMode,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : new Function(),
+      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null,
       currentSlide: this.state.currentSlide,
       lazyLoad: this.props.lazyLoad,
       lazyLoadedList: this.state.lazyLoadedList,
