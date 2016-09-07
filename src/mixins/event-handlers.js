@@ -208,9 +208,16 @@ var EventHandlers = {
       const slides = slickList.querySelectorAll('.slick-slide');
 
       Array.from(slides).every((slide) => {
-        if (slide.offsetLeft - centerOffset + (this.getWidth(slide) / 2) > this.state.swipeLeft * -1) {
-          swipedSlide = slide;
-          return false;
+        if (!this.props.vertical) {
+          if (slide.offsetLeft - centerOffset + (this.getWidth(slide) / 2) > this.state.swipeLeft * -1) {
+            swipedSlide = slide;
+            return false;
+          }
+        } else {
+          if (slide.offsetTop + (this.getHeight(slide) / 2) > this.state.swipeLeft * -1) {
+            swipedSlide = slide;
+            return false;
+          }
         }
 
         return true;
