@@ -89,7 +89,9 @@ var renderSlides = function (spec) {
 
     const onClick = function(e) {
       child.props && child.props.onClick && child.props.onClick(e)
-      spec.focusOnSelect(childOnClickOptions)
+      if (spec.focusOnSelect) {
+        spec.focusOnSelect(childOnClickOptions)
+      }
     }
 
     slides.push(React.cloneElement(child, {
