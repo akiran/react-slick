@@ -251,19 +251,30 @@ var EventHandlers = {
     if (touchObject.swipeLength > minSwipe) {
       e.preventDefault();
 
+      let slideCount, newSlide;
+
       switch (swipeDirection) {
+
         case 'left':
         case 'down':
-          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+          newSlide = this.state.currentSlide + this.getSlideCount();
+          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+          this.state.currentDirection = 0;
           break;
 
         case 'right':
         case 'up':
-          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+          newSlide = this.state.currentSlide - this.getSlideCount();
+          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+          this.state.currentDirection = 1;
           break;
 
         default:
+          slideCount = this.state.currentSlide;
+
       }
+
+      this.slideHandler(slideCount);
     } else {
       // Adjust the track back to it's original position.
       var currentLeft = getTrackLeft(assign({
