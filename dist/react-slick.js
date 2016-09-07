@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _innerSlider = __webpack_require__(3);
 
-	var _objectAssign = __webpack_require__(8);
+	var _objectAssign = __webpack_require__(7);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -215,7 +215,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _eventHandlers2 = _interopRequireDefault(_eventHandlers);
 
-	var _helpers = __webpack_require__(7);
+	var _helpers = __webpack_require__(8);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
@@ -230,6 +230,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _classnames = __webpack_require__(11);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _objectAssign = __webpack_require__(7);
+
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 	var _track = __webpack_require__(12);
 
@@ -283,6 +287,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
+
+	    // To support server-side rendering
+	    if (!window) {
+	      return;
+	    }
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResized);
 	    } else {
@@ -299,7 +308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.detachEvent('onresize', this.onWindowResized);
 	    }
 	    if (this.state.autoPlayTimer) {
-	      window.clearInterval(this.state.autoPlayTimer);
+	      clearInterval(this.state.autoPlayTimer);
 	    }
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -347,7 +356,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	  },
 	  render: function render() {
-	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className);
+	    var className = (0, _classnames2.default)('slick-initialized', 'slick-slider', this.props.className, {
+	      'slick-vertical': this.props.vertical
+	    });
 
 	    var trackProps = {
 	      fade: this.props.fade,
@@ -355,7 +366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      speed: this.props.speed,
 	      infinite: this.props.infinite,
 	      centerMode: this.props.centerMode,
-	      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : new Function(),
+	      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null,
 	      currentSlide: this.state.currentSlide,
 	      lazyLoad: this.props.lazyLoad,
 	      lazyLoadedList: this.state.lazyLoadedList,
@@ -401,6 +412,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      nextArrow = _react2.default.createElement(_arrows.NextArrow, arrowProps);
 	    }
 
+	    var verticalHeightStyle = null;
+
+	    if (this.props.vertical) {
+	      verticalHeightStyle = {
+	        height: this.state.listHeight
+	      };
+	    }
+
 	    var centerPaddingStyle = null;
 
 	    if (this.props.vertical === false) {
@@ -417,6 +436,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 
+	    var listStyle = (0, _objectAssign2.default)({}, verticalHeightStyle, centerPaddingStyle);
+
 	    return _react2.default.createElement(
 	      'div',
 	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
@@ -426,7 +447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        {
 	          ref: this.listRefHandler,
 	          className: 'slick-list',
-	          style: centerPaddingStyle,
+	          style: listStyle,
 	          onMouseDown: this.swipeStart,
 	          onMouseMove: this.state.dragging ? this.swipeMove : null,
 	          onMouseUp: this.swipeEnd,
@@ -458,11 +479,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _helpers = __webpack_require__(7);
+	var _helpers = __webpack_require__(8);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
 
-	var _objectAssign = __webpack_require__(8);
+	var _objectAssign = __webpack_require__(7);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -570,7 +591,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    touchObject.curY = e.touches ? e.touches[0].pageY : e.clientY;
 	    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
+	    if (this.props.verticalSwiping) {
+	      touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+	    }
+
 	    positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+
+	    if (this.props.verticalSwiping) {
+	      positionOffset = touchObject.curY > touchObject.startY ? 1 : -1;
+	    }
 
 	    var currentSlide = this.state.currentSlide;
 	    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
@@ -593,7 +622,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ swiped: true });
 	    }
 
-	    swipeLeft = curLeft + touchSwipeLength * positionOffset;
+	    if (!this.props.vertical) {
+	      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+	    } else {
+	      swipeLeft = curLeft + touchSwipeLength * (this.state.listHeight / this.state.listWidth) * positionOffset;
+	    }
+
+	    if (this.props.verticalSwiping) {
+	      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+	    }
+
 	    this.setState({
 	      touchObject: touchObject,
 	      swipeLeft: swipeLeft,
@@ -616,6 +654,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var minSwipe = this.state.listWidth / this.props.touchThreshold;
 	    var swipeDirection = this.swipeDirection(touchObject);
 
+	    if (this.props.verticalSwiping) {
+	      minSwipe = this.state.listHeight / this.props.touchThreshold;
+	    }
+
 	    // reset the state of touch related state variables.
 	    this.setState({
 	      dragging: false,
@@ -630,12 +672,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    if (touchObject.swipeLength > minSwipe) {
 	      e.preventDefault();
-	      if (swipeDirection === 'left') {
-	        this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
-	      } else if (swipeDirection === 'right') {
-	        this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
-	      } else {
-	        this.slideHandler(this.state.currentSlide);
+
+	      switch (swipeDirection) {
+	        case 'left':
+	        case 'down':
+	          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	          break;
+
+	        case 'right':
+	        case 'up':
+	          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+	          break;
+
+	        default:
 	      }
 	    } else {
 	      // Adjust the track back to it's original position.
@@ -676,6 +725,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _objectAssign = __webpack_require__(7);
+
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var checkSpecKeys = function checkSpecKeys(spec, keysArray) {
@@ -687,29 +740,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	var getTrackCSS = exports.getTrackCSS = function getTrackCSS(spec) {
 	  checkSpecKeys(spec, ['left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth']);
 
-	  var trackWidth;
+	  var trackWidth, trackHeight;
 
-	  if (spec.variableWidth) {
-	    trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
-	  } else if (spec.centerMode) {
-	    trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
+	  var trackChildren = spec.slideCount + 2 * spec.slidesToShow;
+
+	  if (!spec.vertical) {
+	    if (spec.variableWidth) {
+	      trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
+	    } else if (spec.centerMode) {
+	      trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
+	    } else {
+	      trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
+	    }
 	  } else {
-	    trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
+	    trackHeight = trackChildren * spec.slideHeight;
 	  }
 
 	  var style = {
 	    opacity: 1,
-	    width: trackWidth,
-	    WebkitTransform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
-	    transform: 'translate3d(' + spec.left + 'px, 0px, 0px)',
+	    WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+	    transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
 	    transition: '',
 	    WebkitTransition: '',
-	    msTransform: 'translateX(' + spec.left + 'px)'
+	    msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)'
 	  };
 
+	  if (trackWidth) {
+	    (0, _objectAssign2.default)(style, { width: trackWidth });
+	  }
+
+	  if (trackHeight) {
+	    (0, _objectAssign2.default)(style, { height: trackHeight });
+	  }
+
 	  // Fallback for IE8
-	  if (!window.addEventListener && window.attachEvent) {
-	    style.marginLeft = spec.left + 'px';
+	  if (window && !window.addEventListener && window.attachEvent) {
+	    if (!spec.vertical) {
+	      style.marginLeft = spec.left + 'px';
+	    } else {
+	      style.marginTop = spec.left + 'px';
+	    }
 	  }
 
 	  return style;
@@ -727,26 +797,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var getTrackLeft = exports.getTrackLeft = function getTrackLeft(spec) {
 
-	  checkSpecKeys(spec, ['slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow', 'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth']);
+	  checkSpecKeys(spec, ['slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow', 'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
 
 	  var slideOffset = 0;
 	  var targetLeft;
 	  var targetSlide;
+	  var verticalOffset = 0;
 
 	  if (spec.fade) {
 	    return 0;
 	  }
 
 	  if (spec.infinite) {
-	    if (spec.slideCount > spec.slidesToShow) {
+	    if (spec.slideCount >= spec.slidesToShow) {
 	      slideOffset = spec.slideWidth * spec.slidesToShow * -1;
+	      verticalOffset = spec.slideHeight * spec.slidesToShow * -1;
 	    }
 	    if (spec.slideCount % spec.slidesToScroll !== 0) {
 	      if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
 	        if (spec.slideIndex > spec.slideCount) {
 	          slideOffset = (spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideWidth * -1;
+	          verticalOffset = (spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideHeight * -1;
 	        } else {
 	          slideOffset = spec.slideCount % spec.slidesToScroll * spec.slideWidth * -1;
+	          verticalOffset = spec.slideCount % spec.slidesToScroll * spec.slideHeight * -1;
 	        }
 	      }
 	    }
@@ -768,7 +842,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
-	  targetLeft = spec.slideIndex * spec.slideWidth * -1 + slideOffset;
+	  if (!spec.vertical) {
+	    targetLeft = spec.slideIndex * spec.slideWidth * -1 + slideOffset;
+	  } else {
+	    targetLeft = spec.slideIndex * spec.slideHeight * -1 + verticalOffset;
+	  }
 
 	  if (spec.variableWidth === true) {
 	    var targetSlideIndex;
@@ -802,6 +880,95 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+	/* eslint-disable no-unused-vars */
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (e) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -818,7 +985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _trackHelper = __webpack_require__(5);
 
-	var _objectAssign = __webpack_require__(8);
+	var _objectAssign = __webpack_require__(7);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -826,10 +993,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var helpers = {
 	  initialize: function initialize(props) {
+	    var slickList = _reactDom2.default.findDOMNode(this.list);
+
 	    var slideCount = _react2.default.Children.count(props.children);
-	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.list));
+	    var listWidth = this.getWidth(slickList);
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.track));
-	    var slideWidth = trackWidth / props.slidesToShow;
+	    var slideWidth;
+
+	    if (!props.vertical) {
+	      slideWidth = trackWidth / props.slidesToShow;
+	    } else {
+	      slideWidth = trackWidth;
+	    }
+
+	    var slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+	    var listHeight = slideHeight * props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -838,7 +1016,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideWidth: slideWidth,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
-	      currentSlide: currentSlide
+	      currentSlide: currentSlide,
+	      slideHeight: slideHeight,
+	      listHeight: listHeight
 	    }, function () {
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
@@ -854,12 +1034,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	  },
 	  update: function update(props) {
+	    var slickList = _reactDom2.default.findDOMNode(this.list);
 	    // This method has mostly same code as initialize method.
 	    // Refactor it
 	    var slideCount = _react2.default.Children.count(props.children);
-	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.list));
+	    var listWidth = this.getWidth(slickList);
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.track));
-	    var slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	    var slideWidth;
+
+	    if (!props.vertical) {
+	      slideWidth = trackWidth / props.slidesToShow;
+	    } else {
+	      slideWidth = trackWidth;
+	    }
+
+	    var slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+	    var listHeight = slideHeight * props.slidesToShow;
 
 	    // pause slider if autoplay is set to false
 	    if (!props.autoplay) this.pause();
@@ -868,7 +1058,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
 	      listWidth: listWidth,
-	      trackWidth: trackWidth
+	      trackWidth: trackWidth,
+	      slideHeight: slideHeight,
+	      listHeight: listHeight
 	    }, function () {
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
@@ -884,6 +1076,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getWidth: function getWidth(elem) {
 	    return elem.getBoundingClientRect().width || elem.offsetWidth;
 	  },
+	  getHeight: function getHeight(elem) {
+	    return elem.getBoundingClientRect().height || elem.offsetHeight;
+	  },
+
 	  adaptHeight: function adaptHeight() {
 	    if (this.props.adaptiveHeight) {
 	      var selector = '[data-index="' + this.state.currentSlide + '"]';
@@ -1069,6 +1265,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (swipeAngle >= 135 && swipeAngle <= 225) {
 	      return this.props.rtl === false ? 'right' : 'left';
 	    }
+	    if (this.props.verticalSwiping === true) {
+	      if (swipeAngle >= 35 && swipeAngle <= 135) {
+	        return 'down';
+	      } else {
+	        return 'up';
+	      }
+	    }
 
 	    return 'vertical';
 	  },
@@ -1086,13 +1289,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    if (this.props.autoplay) {
 	      this.setState({
-	        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
+	        autoPlayTimer: setInterval(play, this.props.autoplaySpeed)
 	      });
 	    }
 	  },
 	  pause: function pause() {
 	    if (this.state.autoPlayTimer) {
-	      window.clearInterval(this.state.autoPlayTimer);
+	      clearInterval(this.state.autoPlayTimer);
 	      this.setState({
 	        autoPlayTimer: null
 	      });
@@ -1101,95 +1304,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = helpers;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	'use strict';
-	/* eslint-disable no-unused-vars */
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	function shouldUseNative() {
-		try {
-			if (!Object.assign) {
-				return false;
-			}
-
-			// Detect buggy property enumeration order in older V8 versions.
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc');  // eslint-disable-line
-			test1[5] = 'de';
-			if (Object.getOwnPropertyNames(test1)[0] === '5') {
-				return false;
-			}
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test2 = {};
-			for (var i = 0; i < 10; i++) {
-				test2['_' + String.fromCharCode(i)] = i;
-			}
-			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-				return test2[n];
-			});
-			if (order2.join('') !== '0123456789') {
-				return false;
-			}
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test3 = {};
-			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-				test3[letter] = letter;
-			});
-			if (Object.keys(Object.assign({}, test3)).join('') !==
-					'abcdefghijklmnopqrst') {
-				return false;
-			}
-
-			return true;
-		} catch (e) {
-			// We don't expect any of the above to throw, but better to be safe.
-			return false;
-		}
-	}
-
-	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-
-		return to;
-	};
-
 
 /***/ },
 /* 9 */
@@ -1205,11 +1319,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    currentLeft: null,
 	    currentSlide: 0,
 	    direction: 1,
-	    // listWidth: null,
-	    // listHeight: null,
+	    listWidth: null,
+	    listHeight: null,
 	    // loadIndex: 0,
 	    slideCount: null,
 	    slideWidth: null,
+	    slideHeight: null,
 	    // sliding: false,
 	    // slideOffset: 0,
 	    swipeLeft: null,
@@ -1361,7 +1476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(8);
+	var _objectAssign = __webpack_require__(7);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -1455,7 +1570,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var onClick = function onClick(e) {
 	      child.props && child.props.onClick && child.props.onClick(e);
-	      spec.focusOnSelect(childOnClickOptions);
+	      if (spec.focusOnSelect) {
+	        spec.focusOnSelect(childOnClickOptions);
+	      }
 	    };
 
 	    slides.push(_react2.default.cloneElement(child, {
