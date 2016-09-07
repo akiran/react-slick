@@ -104,12 +104,12 @@ var SimpleSlider = React.createClass({
 | slidesToScroll | int | Number of slides to scroll for each navigation item
 | speed | int |||
 | swipe | bool |||
-| swipeToSlide | bool |||
+| swipeToSlide | bool | Allow users to drag or swipe directly to a slide irrespective of slidesToScroll | Yes |
 | touchMove | bool |||
 | touchThreshold | int |||
 | variableWidth | bool |||
 | useCSS | bool | Enable/Disable CSS Transitions | Yes |
-| vertical | bool |||
+| vertical | bool | Vertical slide mode | Yes |
 | afterChange | function | callback function called after the current index changes | Yes |
 | beforeChange | function | callback function called before the current index changes | Yes |
 | slickGoTo | int | go to the specified slide number | |
