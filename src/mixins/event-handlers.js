@@ -177,6 +177,25 @@ var EventHandlers = {
 
     return indexes;
   },
+  checkNavigable(index) {
+    const navigables = this.getNavigableIndexes();
+    let prevNavigable = 0;
+
+    if (index > navigables[navigables.length - 1]) {
+      index = navigables[navigables.length - 1];
+    } else {
+      for (var n in navigables) {
+        if (index < navigables[n]) {
+          index = prevNavigable;
+          break;
+        }
+
+        prevNavigable = navigables[n];
+      }
+    }
+
+    return index;
+  },
   swipeEnd: function (e) {
     if (!this.state.dragging) {
       e.preventDefault();
