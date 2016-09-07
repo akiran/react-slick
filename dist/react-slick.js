@@ -389,18 +389,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      nextArrow = _react2.default.createElement(_arrows.NextArrow, arrowProps);
 	    }
 
-	    var centerPaddingStyle = null;
+	    var paddingStyle = null;
 
 	    if (this.props.vertical === false) {
 	      if (this.props.centerMode === true) {
-	        centerPaddingStyle = {
+	        paddingStyle = {
 	          padding: '0px ' + this.props.centerPadding
 	        };
 	      }
 	    } else {
 	      if (this.props.centerMode === true) {
-	        centerPaddingStyle = {
+	        paddingStyle = {
 	          padding: this.props.centerPadding + ' 0px'
+	        };
+	      } else if (this.props.sidePadding) {
+	        paddingStyle = {
+	          paddingRight: this.props.sidePadding
 	        };
 	      }
 	    }
@@ -414,7 +418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        {
 	          ref: 'list',
 	          className: 'slick-list',
-	          style: centerPaddingStyle,
+	          style: paddingStyle,
 	          onMouseDown: this.swipeStart,
 	          onMouseMove: this.state.dragging ? this.swipeMove : null,
 	          onMouseUp: this.swipeEnd,
@@ -817,7 +821,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
-	    var centerModeAdjustment = props.centerMode ? parseInt(props.centerPadding) * 2 : 0;
+	    var centerModeAdjustment = 0;
+	    if (props.sidePadding) centerModeAdjustment = parseInt(props.sidePadding);
+	    if (props.centerMode) centerModeAdjustment = parseInt(props.centerPadding) * 2;
 	    var slideWidth = (this.getWidth(_reactDom2.default.findDOMNode(this)) - centerModeAdjustment) / props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -848,7 +854,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.list));
 	    var trackWidth = this.getWidth(_reactDom2.default.findDOMNode(this.refs.track));
-	    var centerModeAdjustment = props.centerMode ? parseInt(props.centerPadding) * 2 : 0;
+	    var centerModeAdjustment = 0;
+	    if (props.sidePadding) centerModeAdjustment = parseInt(props.sidePadding);
+	    if (props.centerMode) centerModeAdjustment = parseInt(props.centerPadding) * 2;
 	    var slideWidth = (this.getWidth(_reactDom2.default.findDOMNode(this)) - centerModeAdjustment) / props.slidesToShow;
 
 	    // pause slider if autoplay is set to false
@@ -1251,6 +1259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    autoplaySpeed: 3000,
 	    centerMode: false,
 	    centerPadding: '50px',
+	    sidePadding: '50px',
 	    cssEase: 'ease',
 	    dots: false,
 	    dotsClass: 'slick-dots',

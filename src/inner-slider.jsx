@@ -163,18 +163,22 @@ export var InnerSlider = React.createClass({
       nextArrow = (<NextArrow {...arrowProps} />);
     }
 
-    var centerPaddingStyle = null;
+    var paddingStyle = null;
 
     if (this.props.vertical === false) {
       if (this.props.centerMode === true) {
-        centerPaddingStyle = {
-          padding: ('0px ' + this.props.centerPadding)
+        paddingStyle = {
+          padding: '0px ' + this.props.centerPadding
         };
       }
     } else {
       if (this.props.centerMode === true) {
-        centerPaddingStyle = {
-          padding: (this.props.centerPadding + ' 0px')
+        paddingStyle = {
+          padding: this.props.centerPadding + ' 0px'
+        };
+      } else if (this.props.sidePadding) {
+        paddingStyle = {
+          paddingRight: this.props.sidePadding
         };
       }
     }
@@ -185,7 +189,7 @@ export var InnerSlider = React.createClass({
         <div
           ref='list'
           className="slick-list"
-          style={centerPaddingStyle}
+          style={paddingStyle}
           onMouseDown={this.swipeStart}
           onMouseMove={this.state.dragging ? this.swipeMove: null}
           onMouseUp={this.swipeEnd}
