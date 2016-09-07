@@ -85,7 +85,7 @@ var SimpleSlider = React.createClass({
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
-| centerPadding  | | | |
+| centerPadding  | string | Slide padding when in center mode (px or %) | Yes |
 | cssEase        | | | |
 | dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |
