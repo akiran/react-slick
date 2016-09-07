@@ -7,7 +7,6 @@ var defaultProps = {
     autoplaySpeed: 3000,
     centerMode: false,
     centerPadding: '50px',
-    sidePadding: '50px',
     cssEase: 'ease',
     dots: false,
     dotsClass: 'slick-dots',
