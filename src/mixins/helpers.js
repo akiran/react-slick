@@ -15,6 +15,7 @@ var helpers = {
     if (props.centerMode) centerModeAdjustment = parseInt(props.centerPadding) * 2;
     var slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerModeAdjustment)/props.slidesToShow;
 
+
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
     this.setState({
@@ -27,7 +28,7 @@ var helpers = {
 
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
+        trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
@@ -61,7 +62,7 @@ var helpers = {
 
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
+        trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
@@ -75,8 +76,8 @@ var helpers = {
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
-      if (this.refs.list) {
-        var slickList = ReactDOM.findDOMNode(this.refs.list);
+      if (this.list) {
+        var slickList = ReactDOM.findDOMNode(this.list);
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
@@ -162,19 +163,14 @@ var helpers = {
       currentSlide = targetSlide;
     }
 
-    // Don't change slide if it's not infite and current slide is the first or last slide page.
-    if(currentSlide === this.state.currentSlide && this.props.infinite === false) {
-      return;
-    }
-
     targetLeft = getTrackLeft(assign({
       slideIndex: targetSlide,
-      trackRef: this.refs.track
+      trackRef: this.track
     }, this.props, this.state));
 
     currentLeft = getTrackLeft(assign({
       slideIndex: currentSlide,
-      trackRef: this.refs.track
+      trackRef: this.track
     }, this.props, this.state));
 
     if (this.props.infinite === false) {
@@ -280,13 +276,13 @@ var helpers = {
     };
     if (this.props.autoplay) {
       this.setState({
-        autoPlayTimer: window.setInterval(play, this.props.autoplaySpeed)
+        autoPlayTimer: setInterval(play, this.props.autoplaySpeed)
       });
     }
   },
   pause: function () {
     if (this.state.autoPlayTimer) {
-      window.clearInterval(this.state.autoPlayTimer);
+      clearInterval(this.state.autoPlayTimer);
       this.setState({
         autoPlayTimer: null
       });

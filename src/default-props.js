@@ -18,7 +18,7 @@ var defaultProps = {
     infinite: true,
     initialSlide: 0,
     lazyLoad: false,
-    pauseOnHover: false,
+    pauseOnHover: true,
     responsive: null,
     rtl: false,
     slide: 'div',

@@ -9,12 +9,16 @@ import defaultProps from './default-props';
 
 var Slider = React.createClass({
   mixins: [ResponsiveMixin],
+  innerSlider: null,
+  innerSliderRefHandler: function (ref) {
+    this.innerSlider = ref;
+  },
   getInitialState: function () {
     return {
       breakpoint: null
     };
   },
-  componentDidMount: function () {
+  componentWillMount: function () {
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       breakpoints.sort((x, y) => x - y);
@@ -41,15 +45,15 @@ var Slider = React.createClass({
   },
 
   slickPrev: function () {
-    this.refs.innerSlider.slickPrev();
+    this.innerSlider.slickPrev();
   },
 
   slickNext: function () {
-    this.refs.innerSlider.slickNext();
+    this.innerSlider.slickNext();
   },
 
   slickGoTo: function (slide) {
-    this.refs.innerSlider.slickGoTo(slide)
+    this.innerSlider.slickGoTo(slide)
   },
 
   render: function () {
@@ -71,7 +75,7 @@ var Slider = React.createClass({
     children = children.filter(function(child){
       return !!child
     })
-    
+
     if (settings === 'unslick') {
       // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
       return (
@@ -79,7 +83,7 @@ var Slider = React.createClass({
       );
     } else {
       return (
-        <InnerSlider ref='innerSlider' {...settings}>
+        <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
           {children}
         </InnerSlider>
       );

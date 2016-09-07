@@ -94,7 +94,7 @@ var EventHandlers = {
 
     curLeft = getTrackLeft(assign({
       slideIndex: this.state.currentSlide,
-      trackRef: this.refs.track
+      trackRef: this.track
     }, this.props, this.state));
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
@@ -170,7 +170,7 @@ var EventHandlers = {
       // Adjust the track back to it's original position.
       var currentLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
-        trackRef: this.refs.track
+        trackRef: this.track
       }, this.props, this.state));
 
       this.setState({

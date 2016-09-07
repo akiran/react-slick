@@ -13,6 +13,14 @@ import {PrevArrow, NextArrow} from './arrows';
 
 export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
+  list: null,
+  track: null,
+  listRefHandler: function (ref) {
+    this.list = ref;
+  },
+  trackRefHandler: function (ref) {
+    this.track = ref;
+  },
   getInitialState: function () {
     return Object.assign({}, initialState, {
       currentSlide: this.props.initialSlide
@@ -45,6 +53,11 @@ export var InnerSlider = React.createClass({
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
+
+    // To support server-side rendering
+    if (!window) {
+      return
+    }
     if (window.addEventListener) {
       window.addEventListener('resize', this.onWindowResized);
     } else {
@@ -61,7 +74,7 @@ export var InnerSlider = React.createClass({
       window.detachEvent('onresize', this.onWindowResized);
     }
     if (this.state.autoPlayTimer) {
-      window.clearInterval(this.state.autoPlayTimer);
+      clearInterval(this.state.autoPlayTimer);
     }
   },
   componentWillReceiveProps: function(nextProps) {
@@ -92,7 +105,7 @@ export var InnerSlider = React.createClass({
     this.update(this.props);
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
-      animating: false 
+      animating: false
     })
   },
   slickPrev: function () {
@@ -102,7 +115,7 @@ export var InnerSlider = React.createClass({
     this.changeSlide({message: 'next'});
   },
   slickGoTo: function (slide) {
-    slide && this.changeSlide({
+    typeof slide === 'number' && this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
@@ -117,7 +130,7 @@ export var InnerSlider = React.createClass({
       speed: this.props.speed,
       infinite: this.props.infinite,
       centerMode: this.props.centerMode,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : new Function(),
+      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null,
       currentSlide: this.state.currentSlide,
       lazyLoad: this.props.lazyLoad,
       lazyLoadedList: this.state.lazyLoadedList,
@@ -187,7 +200,7 @@ export var InnerSlider = React.createClass({
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
         {prevArrow}
         <div
-          ref='list'
+          ref={this.listRefHandler}
           className="slick-list"
           style={paddingStyle}
           onMouseDown={this.swipeStart}
@@ -199,7 +212,7 @@ export var InnerSlider = React.createClass({
           onTouchEnd={this.swipeEnd}
           onTouchCancel={this.state.dragging ? this.swipeEnd: null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
-          <Track ref='track' {...trackProps}>
+          <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
           </Track>
         </div>
