@@ -24,6 +24,7 @@ import PreviousNextMethods from '../examples/PreviousNextMethods'
 import DynamicSlides  from '../examples/DynamicSlides'
 import VerticalMode  from '../examples/VerticalMode'
 import SwipeToSlide from '../examples/SwipeToSlide'
+import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
 
 export default class App extends React.Component {
   render() {
@@ -50,6 +51,7 @@ export default class App extends React.Component {
         <DynamicSlides />
         <VerticalMode />
         <SwipeToSlide />
+        <VerticalSwipeToSlide />
       </div>
     );
   }
