@@ -2,6 +2,7 @@
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import helpers from './helpers';
 import assign from 'object-assign';
+import ReactDOM from 'react-dom';
 
 var EventHandlers = {
   // Event handler for previous and next
@@ -195,6 +196,32 @@ var EventHandlers = {
     }
 
     return index;
+  },
+  getSlideCount() {
+    const centerOffset = this.props.centerMode ? this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) : 0;
+
+    if (this.props.swipeToSlide) {
+      let swipedSlide;
+
+      const slickList = ReactDOM.findDOMNode(this.list);
+
+      const slides = slickList.querySelectorAll('.slick-slide');
+
+      Array.from(slides).every((slide) => {
+        if (slide.offsetLeft - centerOffset + (this.getWidth(slide) / 2) > this.state.swipeLeft * -1) {
+          swipedSlide = slide;
+          return false;
+        }
+
+        return true;
+      });
+
+      const slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+
+      return slidesTraversed;
+    } else {
+      return this.props.slidesToScroll;
+    }
   },
   swipeEnd: function (e) {
     if (!this.state.dragging) {
