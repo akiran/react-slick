@@ -487,6 +487,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+	var _reactDom = __webpack_require__(6);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var EventHandlers = {
@@ -645,6 +649,84 @@ return /******/ (function(modules) { // webpackBootstrap
 	      e.preventDefault();
 	    }
 	  },
+	  getNavigableIndexes: function getNavigableIndexes() {
+	    var max = void 0;
+	    var breakPoint = 0;
+	    var counter = 0;
+	    var indexes = [];
+
+	    if (!this.props.infinite) {
+	      max = this.state.slideCount;
+	    } else {
+	      breakPoint = this.props.slidesToShow * -1;
+	      counter = this.props.slidesToShow * -1;
+	      max = this.state.slideCount * 2;
+	    }
+
+	    while (breakPoint < max) {
+	      indexes.push(breakPoint);
+	      breakPoint = counter + this.props.slidesToScroll;
+
+	      counter += this.props.slidesToScroll <= this.props.slidesToShow ? this.props.slidesToScroll : this.props.slidesToShow;
+	    }
+
+	    return indexes;
+	  },
+	  checkNavigable: function checkNavigable(index) {
+	    var navigables = this.getNavigableIndexes();
+	    var prevNavigable = 0;
+
+	    if (index > navigables[navigables.length - 1]) {
+	      index = navigables[navigables.length - 1];
+	    } else {
+	      for (var n in navigables) {
+	        if (index < navigables[n]) {
+	          index = prevNavigable;
+	          break;
+	        }
+
+	        prevNavigable = navigables[n];
+	      }
+	    }
+
+	    return index;
+	  },
+	  getSlideCount: function getSlideCount() {
+	    var _this = this;
+
+	    var centerOffset = this.props.centerMode ? this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) : 0;
+
+	    if (this.props.swipeToSlide) {
+	      var swipedSlide = void 0;
+
+	      var slickList = _reactDom2.default.findDOMNode(this.list);
+
+	      var slides = slickList.querySelectorAll('.slick-slide');
+
+	      Array.from(slides).every(function (slide) {
+	        if (!_this.props.vertical) {
+	          if (slide.offsetLeft - centerOffset + _this.getWidth(slide) / 2 > _this.state.swipeLeft * -1) {
+	            swipedSlide = slide;
+	            return false;
+	          }
+	        } else {
+	          if (slide.offsetTop + _this.getHeight(slide) / 2 > _this.state.swipeLeft * -1) {
+	            swipedSlide = slide;
+	            return false;
+	          }
+	        }
+
+	        return true;
+	      });
+
+	      var slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+
+	      return slidesTraversed;
+	    } else {
+	      return this.props.slidesToScroll;
+	    }
+	  },
+
 	  swipeEnd: function swipeEnd(e) {
 	    if (!this.state.dragging) {
 	      e.preventDefault();
@@ -673,19 +755,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (touchObject.swipeLength > minSwipe) {
 	      e.preventDefault();
 
+	      var slideCount = void 0,
+	          newSlide = void 0;
+
 	      switch (swipeDirection) {
+
 	        case 'left':
 	        case 'down':
-	          this.slideHandler(this.state.currentSlide + this.props.slidesToScroll);
+	          newSlide = this.state.currentSlide + this.getSlideCount();
+	          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+	          this.state.currentDirection = 0;
 	          break;
 
 	        case 'right':
 	        case 'up':
-	          this.slideHandler(this.state.currentSlide - this.props.slidesToScroll);
+	          newSlide = this.state.currentSlide - this.getSlideCount();
+	          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+	          this.state.currentDirection = 1;
 	          break;
 
 	        default:
+	          slideCount = this.state.currentSlide;
+
 	      }
+
+	      this.slideHandler(slideCount);
 	    } else {
 	      // Adjust the track back to it's original position.
 	      var currentLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
@@ -1789,19 +1883,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var nextHandler = this.clickHandler.bind(this, { message: 'next' });
 
 	    if (!this.props.infinite) {
-	      if (this.props.centerMode && this.props.currentSlide >= this.props.slideCount - 1) {
-	        nextClasses['slick-disabled'] = true;
-	        nextHandler = null;
-	      } else {
-	        if (this.props.currentSlide >= this.props.slideCount - this.props.slidesToShow) {
+	      if (this.props.centerMode) {
+	        // check if current slide is last slide
+	        if (this.props.currentSlide >= this.props.slideCount - 1) {
 	          nextClasses['slick-disabled'] = true;
 	          nextHandler = null;
 	        }
-	      }
-
-	      if (this.props.slideCount <= this.props.slidesToShow) {
-	        nextClasses['slick-disabled'] = true;
-	        nextHandler = null;
+	      } else {
+	        // check if all slides are shown in slider
+	        if (this.props.slideCount <= this.props.slidesToShow || this.props.currentSlide >= this.props.slideCount - this.props.slidesToShow) {
+	          nextClasses['slick-disabled'] = true;
+	          nextHandler = null;
+	        }
 	      }
 	    }
 
