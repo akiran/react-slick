@@ -138,6 +138,14 @@ like the example above. If you don't, your custom component won't trigger the cl
 
 You can also set onClick={this.props.onClick} if you only want to set the click handler. 
 
+### Flexbox support 
+If you have flex property on container div of slider, add below css
+```
+* {
+  min-height: 0;
+  min-width: 0;
+}
+```
 
 ### Development
 Want to run demos locally
