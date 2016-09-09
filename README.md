@@ -6,7 +6,7 @@
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
 ### Important
-### Breaking changes in react-slick@0.14
+### Breaking changes in react-slick@0.15
  * slickGoTo prop is deprecated in favor of slickGoTo method. Check this [slickGoTo usage example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js).
  * dist folder will be removed from the repo to simply PR review process.  If you are using bower or relying on the dist files in githib repo, use dist files from unpkg.com
 ```
