@@ -1095,9 +1095,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      slideWidth = trackWidth / props.slidesToShow;
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
 	    } else {
-	      slideWidth = trackWidth;
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
 	    }
 
 	    var slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -1137,9 +1137,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      slideWidth = trackWidth / props.slidesToShow;
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
 	    } else {
-	      slideWidth = trackWidth;
+	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
 	    }
 
 	    var slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
