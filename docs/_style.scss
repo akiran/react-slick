@@ -47,6 +47,21 @@ h3 {
 .slick-dots {
   margin-left: 0;
 }
+.slick-thumb {
+  bottom: -45px;
+  li {
+    width: 60px;
+    height: 45px;
+    img {
+      filter: grayscale(100%);
+    }
+    &.slick-active {
+      img {
+        filter: grayscale(0%);        
+      }
+    }
+  }
+}
 @media (max-width: 768px) {
   h3 {
     font-size:24px;

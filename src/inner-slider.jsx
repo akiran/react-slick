@@ -155,7 +155,9 @@ export var InnerSlider = React.createClass({
         slidesToShow: this.props.slidesToShow,
         currentSlide: this.state.currentSlide,
         slidesToScroll: this.props.slidesToScroll,
-        clickHandler: this.changeSlide
+        clickHandler: this.changeSlide,
+        children: this.props.children,
+        customPaging: this.props.customPaging
       };
 
       dots = (<Dots {...dotProps} />);

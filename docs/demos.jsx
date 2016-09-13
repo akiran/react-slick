@@ -25,6 +25,7 @@ import DynamicSlides  from '../examples/DynamicSlides'
 import VerticalMode  from '../examples/VerticalMode'
 import SwipeToSlide from '../examples/SwipeToSlide'
 import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
+import CustomPaging from '../examples/CustomPaging'
 
 export default class App extends React.Component {
   render() {
@@ -46,6 +47,7 @@ export default class App extends React.Component {
         <Fade />
         <SlideChangeHooks />
         <SlickGoTo />
+        <CustomPaging />
         <CustomArrows />
         <PreviousNextMethods />
         <DynamicSlides />
