@@ -388,7 +388,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        slidesToShow: this.props.slidesToShow,
 	        currentSlide: this.state.currentSlide,
 	        slidesToScroll: this.props.slidesToScroll,
-	        clickHandler: this.changeSlide
+	        clickHandler: this.changeSlide,
+	        children: this.props.children,
+	        customPaging: this.props.customPaging
 	      };
 
 	      dots = _react2.default.createElement(_dots.Dots, dotProps);
@@ -1452,9 +1454,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 10 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var defaultProps = {
 	    className: '',
@@ -1466,6 +1474,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    centerMode: false,
 	    centerPadding: '50px',
 	    cssEase: 'ease',
+	    customPaging: function customPaging(onClick, i, element) {
+	        return _react2.default.createElement(
+	            'button',
+	            { onClick: onClick },
+	            i + 1
+	        );
+	    },
 	    dots: false,
 	    dotsClass: 'slick-dots',
 	    draggable: true,
@@ -1787,14 +1802,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        currentSlide: _this.props.currentSlide
 	      };
 
+	      var onClick = _this.clickHandler.bind(_this, dotOptions);
+
 	      return _react2.default.createElement(
 	        'li',
 	        { key: i, className: className },
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: _this.clickHandler.bind(_this, dotOptions) },
-	          i + 1
-	        )
+	        _react2.default.cloneElement(_this.props.customPaging(i), { onClick: onClick })
 	      );
 	    });
 
