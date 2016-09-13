@@ -5,9 +5,8 @@ import {baseUrl} from './config'
 export default class CenterMode extends Component {
   render() {
     const settings = {
-      customPaging: function(onClick, i, element) {
-        var image = element.props.children;
-        return <a onClick={onClick}><img src={image.props.src}/></a>;
+      customPaging: function(i) {
+        return <a><img src={`${baseUrl}/abstract0${i+1}.jpg`}/></a>
       },
       dots: true,
       dotsClass: 'slick-dots slick-thumb',

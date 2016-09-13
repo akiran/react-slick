@@ -45,11 +45,9 @@ export var Dots = React.createClass({
 
       var onClick = this.clickHandler.bind(this, dotOptions);
 
-      var element = this.props.children[i];
-
       return (
         <li key={i} className={className}>
-          {this.props.customPaging(onClick, i, element)}
+          {React.cloneElement(this.props.customPaging(i), {onClick})}
         </li>
       );
     });
