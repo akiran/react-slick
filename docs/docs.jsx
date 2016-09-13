@@ -1,23 +1,21 @@
 'use strict';
 
-var React = require('react');
-var Demos = require('./demos');
+import React from 'react'
+import Demos from './demos'
 
-var Docs = React.createClass({
-  render: function () {
+export default class Docs extends React.Component {
+  render() {
     return (
       <div className=''>
-          <div className='title-bar primary'>
-              <span className='title'>React Slick</span>
-          </div>
+        <div className='title-bar primary'>
+            <span className='title'>React Slick</span>
+        </div>
+        <div className=''>
           <div className=''>
-            <div className=''>
-              <Demos />
-            </div>
+            <Demos />
           </div>
         </div>
+      </div>
     );
   }
-});
-
-module.exports = Docs;
+}
