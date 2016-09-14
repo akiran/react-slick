@@ -225,6 +225,10 @@ var helpers = {
 
     if (this.props.useCSS === false) {
 
+      if(this.props.customCurrentSlideLeft) {
+        currentLeft = this.props.customCurrentSlideLeft(currentLeft, currentSlide, targetSlide);
+      }
+
       this.setState({
         currentSlide: currentSlide,
         trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
@@ -235,6 +239,10 @@ var helpers = {
       });
 
     } else {
+
+      if(this.props.customCurrentSlideLeft) {
+        currentLeft = this.props.customCurrentSlideLeft(currentLeft, currentSlide, targetSlide);
+      }
 
       var nextStateChanges = {
         animating: false,
@@ -250,6 +258,10 @@ var helpers = {
         }
         delete this.animationEndCallback;
       };
+
+      if(this.props.customTargetSlideLeft) {
+        targetLeft = this.props.customTargetSlideLeft(targetLeft, currentSlide, targetSlide);
+      }
 
       this.setState({
         animating: true,
