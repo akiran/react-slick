@@ -5,6 +5,22 @@
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
+Extend from https://github.com/akiran/react-slick
+### Additionals:
+* Prop: customTargetSlideLeft for control target slide left offset
+```
+  handleCustomTagetSlideLeft(targetLeft, currentSlide, targetSlide) {
+    return (targetLeft + 100);
+  }
+```
+* customCurrentSlideLeft: same as target
+* onInitTargetLeft for control target slide left on init
+```
+  onInitTargetLeft(targetLeft, slideCount, slideWidth, trackWidth) {
+    return (targetLeft + 100);
+  }
+```
+
 ### Important
 ### Breaking changes in react-slick@0.15
  * slickGoTo prop is deprecated in favor of slickGoTo method. Check this [slickGoTo usage example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js).
