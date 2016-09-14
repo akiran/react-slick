@@ -290,7 +290,7 @@ var helpers = {
 
     return 'vertical';
   },
-  autoPlay: function () {
+  autoPlay: function (isInitManually) {
     if (this.state.autoPlayTimer) {
       return;
     }
@@ -302,7 +302,7 @@ var helpers = {
         this.slideHandler(nextIndex);
       }
     };
-    if (this.props.autoplay) {
+    if (isInitManually == true || this.props.autoplay) {
       this.setState({
         autoPlayTimer: setInterval(play, this.props.autoplaySpeed)
       });
@@ -315,7 +315,14 @@ var helpers = {
         autoPlayTimer: null
       });
     }
-  }
+  },
+  componentWillReceiveProps: function(nextProps) {
+    if(nextProps.autoplay == true) {
+      this.autoPlay(true);
+    } else {
+      this.pause();
+    }
+  },
 };
 
 export default helpers;
