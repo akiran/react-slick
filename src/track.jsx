@@ -42,7 +42,13 @@ var getSlideStyle = function (spec) {
   if (spec.fade) {
     style.position = 'relative';
     style.left = -spec.index * spec.slideWidth;
-    style.opacity = (spec.currentSlide === spec.index) ? 1 : 0;
+    if (spec.currentSlide === spec.index) {
+      style.opacity = 1;
+      style.zIndex = 999;
+    } else {
+      style.opacity = 0;
+      style.zIndex = 998;
+    }
     style.transition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;
     style.WebkitTransition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;
   }
