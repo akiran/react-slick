@@ -42,6 +42,7 @@ var defaultProps = {
     beforeChange: null,
     customTargetSlideLeft: null,
     customCurrentSlideLeft: null,
+    onInitTargetLeft: null,
     edgeEvent: null,
     init: null,
     swipeEvent: null,

@@ -14,6 +14,12 @@ Extend from https://github.com/akiran/react-slick
   }
 ```
 * customCurrentSlideLeft: same as target
+* onInitTargetLeft for control target slide left on init
+```
+  onInitTargetLeft(targetLeft, slideCount, slideWidth, trackWidth) {
+    return (targetLeft + 100);
+  }
+```
 
 ### Important
 ### Breaking changes in react-slick@0.15

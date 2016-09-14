@@ -10,6 +10,7 @@ import Responsive from '../examples/Responsive'
 import UnevenSetsInfinite from '../examples/UnevenSetsInfinite'
 import UnevenSetsFinite from '../examples/UnevenSetsFinite'
 import CenterMode from '../examples/CenterMode'
+import CenterModeWithFiniteCustomLeft from  '../examples/CenterModeWithFiniteCustomLeft'
 import FocusOnSelect from '../examples/FocusOnSelect'
 import AutoPlay from '../examples/AutoPlay'
 import PauseOnHover from '../examples/PauseOnHover'
@@ -37,6 +38,7 @@ export default class App extends React.Component {
         <UnevenSetsInfinite />
         <UnevenSetsFinite />
         <CenterMode />
+        <CenterModeWithFiniteCustomLeft />
         <FocusOnSelect />
         <AutoPlay />
         <PauseOnHover />

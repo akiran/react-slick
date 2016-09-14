@@ -40,6 +40,10 @@ var helpers = {
         trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
+
+      if (this.props.onInitTargetLeft) {
+        targetLeft = this.props.onInitTargetLeft(targetLeft, slideCount, slideWidth, trackWidth);
+      }
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
       this.setState({trackStyle: trackStyle});

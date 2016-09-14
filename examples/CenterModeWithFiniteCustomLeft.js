@@ -10,6 +10,10 @@ export default class CenterModeWithFiniteCustomLeft extends Component {
     return (currentLeft + 100);
   }
 
+  onInitTargetLeft(targetLeft, slideCount, slideWidth, trackWidth) {
+    return 0;
+  }
+
   render() {
     const settings = {
       className: 'center',
@@ -17,6 +21,7 @@ export default class CenterModeWithFiniteCustomLeft extends Component {
       infinite: false,
       centerPadding: 0,
       variableWidth: true,
+      onInitTargetLeft: this.onInitTargetLeft,
       customTargetSlideLeft: this.handleCustomTagetSlideLeft,
       customCurrentSlideLeft: this.handleCustomCurrentSlideLeft,
       speed: 500
