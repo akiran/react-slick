@@ -89,6 +89,9 @@ var EventHandlers = {
     if (this.state.animating) {
       return;
     }
+    if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
+      e.preventDefault();
+    }
     var swipeLeft;
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
