@@ -11,7 +11,7 @@ var defaultProps = {
     centerPadding: '50px',
     cssEase: 'ease',
     customPaging: function(i) {
-        return <button onClick={onClick}>{i + 1}</button>;
+        return <button>{i + 1}</button>;
     },
     dots: false,
     dotsClass: 'slick-dots',
