@@ -1474,10 +1474,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    centerMode: false,
 	    centerPadding: '50px',
 	    cssEase: 'ease',
-	    customPaging: function customPaging(onClick, i, element) {
+	    customPaging: function customPaging(i) {
 	        return _react2.default.createElement(
 	            'button',
-	            { onClick: onClick },
+	            null,
 	            i + 1
 	        );
 	    },
