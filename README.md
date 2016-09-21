@@ -155,7 +155,7 @@ Want to run demos locally
 git clone https://github.com/akiran/react-slick
 npm install
 npm start
-open http://localhost:8000
+open http://localhost:8080
 ```
 
 ### Polyfills for old IE support
