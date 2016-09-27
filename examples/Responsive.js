@@ -32,10 +32,13 @@ export default class Responsive extends Component {
         }
       }, {
         breakpoint: 600,
+        responsiveUnslick: function({children,newProps,props,state}){
+          return children.length < newProps.settings.slidesToShow;
+        },
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToScroll: 1,
+          initialSlide: 2,
         }
       }, {
         breakpoint: 480,
