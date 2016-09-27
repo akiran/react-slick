@@ -1,7 +1,7 @@
 {
   "presets":[
     "react",
-    "es2015-loose"
+    ["es2015", {"loose": true}]
   ],
   "plugins": ["transform-object-assign"]
 }
