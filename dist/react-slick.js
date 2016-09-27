@@ -274,7 +274,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var i = 0; i < _react2.default.Children.count(this.props.children); i++) {
 	      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
 	        lazyLoadedList.push(i);
+
+	        // peek mode - next slide
+	        if (this.props.peek) {
+	          lazyLoadedList.push(i + 1);
+	        }
 	      }
+	    }
+
+	    // peek mode - previous slide
+	    if (this.props.peek) {
+	      var previous = this.props.initialSlide === 0 ? this.props.children.length - 1 : this.props.initialSlide - 1;
+	      lazyLoadedList.push(previous);
 	    }
 
 	    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
@@ -965,6 +976,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
+	  if (spec.peek) {
+	    targetLeft += 15;
+	  }
+
 	  return targetLeft;
 	};
 
@@ -1109,7 +1124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.setState({
 	      slideCount: slideCount,
-	      slideWidth: slideWidth,
+	      slideWidth: props.peek ? slideWidth - 30 : slideWidth,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
 	      currentSlide: currentSlide,
@@ -1152,7 +1167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.setState({
 	      slideCount: slideCount,
-	      slideWidth: slideWidth,
+	      slideWidth: props.peek ? slideWidth - 30 : slideWidth,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
 	      slideHeight: slideHeight,
@@ -1290,15 +1305,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var slidesToLoad = [];
 	      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++) {
 	        loaded = loaded && this.state.lazyLoadedList.indexOf(i) >= 0;
-	        if (!loaded) {
-	          slidesToLoad.push(i);
+	        // if (!loaded) {
+	        slidesToLoad.push(i);
+	        if (this.props.peek) {
+	          if (targetSlide === this.state.slideCount - 1) {
+	            // backwards from start
+	            slidesToLoad.push(this.state.slideCount - 2);
+	          } else {
+	            // any other swipe
+	            slidesToLoad.push(targetSlide > this.state.currentSlide ? i + 1 : i - 1);
+	          }
 	        }
+	        // }
 	      }
-	      if (!loaded) {
-	        this.setState({
-	          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
-	        });
-	      }
+	      // if (!loaded) {
+	      this.setState({
+	        lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+	      });
+	      // }
 	    }
 
 	    // Slide Transition happens here.

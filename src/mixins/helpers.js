@@ -27,7 +27,7 @@ var helpers = {
 
     this.setState({
       slideCount,
-      slideWidth,
+      slideWidth: props.peek ? slideWidth - 30 : slideWidth,
       listWidth,
       trackWidth,
       currentSlide,
@@ -71,7 +71,7 @@ var helpers = {
 
     this.setState({
       slideCount,
-      slideWidth,
+      slideWidth: props.peek ? slideWidth - 30 : slideWidth,
       listWidth,
       trackWidth,
       slideHeight,
@@ -121,7 +121,7 @@ var helpers = {
       if(this.props.infinite === false &&
         (index < 0 || index >= this.state.slideCount)) {
         return;
-      } 
+      }
 
       //  Shifting targetSlide back into the range
       if (index < 0) {
@@ -207,15 +207,22 @@ var helpers = {
       var slidesToLoad = [];
       for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
         loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
-        if (!loaded) {
-          slidesToLoad.push(i);
+        // if (!loaded) {
+        slidesToLoad.push(i);
+        if(this.props.peek) {
+          if(targetSlide === (this.state.slideCount - 1)) { // backwards from start
+            slidesToLoad.push(this.state.slideCount - 2);
+          } else { // any other swipe
+            slidesToLoad.push(targetSlide > this.state.currentSlide ? i + 1 : i - 1);
+          }
         }
+        // }
       }
-      if (!loaded) {
+      // if (!loaded) {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
         });
-      }
+      // }
     }
 
     // Slide Transition happens here.

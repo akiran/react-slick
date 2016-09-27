@@ -41,7 +41,18 @@ export var InnerSlider = React.createClass({
     for (var i = 0; i < React.Children.count(this.props.children); i++) {
       if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
         lazyLoadedList.push(i);
+
+        // peek mode - next slide
+        if(this.props.peek) {
+          lazyLoadedList.push(i + 1);
+        }
       }
+    }
+
+    // peek mode - previous slide
+    if(this.props.peek) {
+        var previous = this.props.initialSlide === 0 ? this.props.children.length - 1 : this.props.initialSlide - 1;
+        lazyLoadedList.push(previous);
     }
 
     if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {

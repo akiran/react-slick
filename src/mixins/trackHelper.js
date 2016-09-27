@@ -148,5 +148,9 @@ export var getTrackLeft = function (spec) {
       }
   }
 
+  if(spec.peek) {
+    targetLeft += 15;
+  }
+
   return targetLeft;
 };
