@@ -59,6 +59,7 @@ var Slider = React.createClass({
   render: function () {
     var settings;
     var newProps;
+    var unslickBool = false;
     var UnSlickComponent = typeof this.props.unslick === 'function' && this.props.unslick;
     var children = this.props.children;
 
@@ -74,12 +75,12 @@ var Slider = React.createClass({
     if (this.state.breakpoint) {
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint)[0];
       // allow for custom unslick function instead of strictly static settings
-      unslick = newProps.settings === 'unslick' || (
+      unslickBool = newProps.settings === 'unslick' || (
         typeof newProps.responsiveUnslick === 'function' &&
           newProps.responsiveUnslick({children,newProps,state: this.state, props: this.props})
       )
 
-      settings = unslick ? 'unslick' : assign({}, this.props, newProps.settings);
+      settings = unslickBool ? 'unslick' : assign({}, this.props, newProps.settings);
     } else {
       settings = assign({}, defaultProps, this.props);
     }
