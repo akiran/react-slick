@@ -103,40 +103,46 @@ var helpers = {
       }
     }
   },
-  addSlides: function(newLazyLoadedList, from, to) {
-    for (; from <= to; from++) {
-      if (newLazyLoadedList.indexOf(from) === -1) {
-        newLazyLoadedList.push(from);
-      }
+  setItemLazyList: function(list, item) {
+    if (list.indexOf(item) == -1) {
+      list.push(item);
     }
   },
-  getLazyLoadedList: function(targetSlide, lazyLoadedList) {
-    const { slidesToScroll, slidesToShow, children } = this.props;
-    const listLength = React.Children.count(children);
+  getLazyLoadedList: function(targetSlide, lazyLoadedList, props) {
+    var { preLoad, slidesToShow, children } = props || this.props;
+    var listLength = React.Children.count(children) - 1;
 
     if (!lazyLoadedList) {
       lazyLoadedList = this.state.lazyLoadedList;
     }
 
-    let newLazyLoadedList = [...lazyLoadedList];
+    var minDistance = targetSlide - preLoad;
+    var maxDistance = targetSlide + slidesToShow + preLoad;
+    var item;
+    var currentDistance;
 
-    targetSlide = targetSlide - 1;
+    do {
+      currentDistance = minDistance;
 
-    // Right
-    if (targetSlide + slidesToShow == listLength) {
-      this.addSlides(newLazyLoadedList, 0, slidesToScroll);
-    } else {
-      this.addSlides(newLazyLoadedList, targetSlide + slidesToShow, targetSlide + slidesToShow + slidesToScroll);
-    }
+      minDistance++;
 
-    // Left
-    if (targetSlide - slidesToShow <= 0) {
-      this.addSlides(newLazyLoadedList, listLength - slidesToScroll, listLength);
-    } else {
-      this.addSlides(newLazyLoadedList, targetSlide - slidesToScroll, targetSlide);
-    }
+      if (currentDistance < 0) {
+        this.setItemLazyList(lazyLoadedList, listLength + (currentDistance + 1))
 
-    return newLazyLoadedList;
+        continue;
+      }
+
+      if (currentDistance > listLength) {
+        this.setItemLazyList(lazyLoadedList, 0 + (currentDistance + 1))
+        
+        continue;
+      }
+
+      this.setItemLazyList(lazyLoadedList, currentDistance)
+    } while (minDistance < maxDistance);
+
+
+    return lazyLoadedList;
   },
   slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
