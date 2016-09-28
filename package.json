@@ -8,7 +8,7 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "karma start --single-run",
     "dev-test": "karma start",
-    "install": "babel ./src --out-dir ./lib && gulp dist"
+    "postinstall": "babel ./src --out-dir ./lib && gulp dist"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
