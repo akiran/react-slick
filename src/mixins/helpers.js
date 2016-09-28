@@ -103,6 +103,36 @@ var helpers = {
       }
     }
   },
+  addSlides: function(newLazyLoadedList, from, to) {
+    for (; from <= to; from++) {
+      if (newLazyLoadedList.indexOf(from) === -1) {
+        newLazyLoadedList.push(from);
+      }
+    }
+  },
+  getLazyLoadedList: function(targetSlide) {
+    const { slidesToScroll, slidesToShow, children } = this.props;
+    const { lazyLoadedList } = this.state;
+    const listLength = React.Children.count(children);
+    let newLazyLoadedList = [...lazyLoadedList];
+    targetSlide = targetSlide - 1;
+
+    // Right
+    if (targetSlide + slidesToShow == listLength) {
+      this.addSlides(newLazyLoadedList, 0, slidesToScroll);
+    } else {
+      this.addSlides(newLazyLoadedList, targetSlide + slidesToShow, targetSlide + slidesToShow + slidesToScroll);
+    }
+
+    // Left
+    if (targetSlide - slidesToShow <= 0) {
+      this.addSlides(newLazyLoadedList, listLength - slidesToScroll, listLength);
+    } else {
+      this.addSlides(newLazyLoadedList, targetSlide - slidesToScroll, targetSlide);
+    }
+
+    return newLazyLoadedList;
+  },
   slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
@@ -203,17 +233,11 @@ var helpers = {
     }
 
     if (this.props.lazyLoad) {
-      var loaded = true;
-      var slidesToLoad = [];
-      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
-        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
-        if (!loaded) {
-          slidesToLoad.push(i);
-        }
-      }
-      if (!loaded) {
+      const listCount = React.Children.count(this.props.children);
+
+      if (listCount != this.state.lazyLoadedList.length) {
         this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+          lazyLoadedList: this.getLazyLoadedList(targetSlide)
         });
       }
     }
