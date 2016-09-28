@@ -37,16 +37,10 @@ export var InnerSlider = React.createClass({
     this.setState({
       mounted: true
     });
-    var lazyLoadedList = [];
-    for (var i = 0; i < React.Children.count(this.props.children); i++) {
-      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
-        lazyLoadedList.push(i);
-      }
-    }
 
-    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
+    if (this.props.lazyLoad) {
       this.setState({
-        lazyLoadedList: lazyLoadedList
+        lazyLoadedList: this.getLazyLoadedList(this.props.initialSlide)
       });
     }
   },
