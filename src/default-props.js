@@ -23,6 +23,7 @@ var defaultProps = {
     infinite: true,
     initialSlide: 0,
     lazyLoad: false,
+    preLoad: 0,
     pauseOnHover: true,
     responsive: null,
     rtl: false,
