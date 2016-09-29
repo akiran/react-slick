@@ -133,14 +133,13 @@ var helpers = {
       }
 
       if (currentDistance > listLength) {
-        this.setItemLazyList(lazyLoadedList, 0 + (currentDistance + 1))
+        this.setItemLazyList(lazyLoadedList, 0 + (currentDistance - listLength - 1))
         
         continue;
       }
 
       this.setItemLazyList(lazyLoadedList, currentDistance)
     } while (minDistance < maxDistance);
-
 
     return lazyLoadedList;
   },
