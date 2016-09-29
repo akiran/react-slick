@@ -110,11 +110,16 @@ var helpers = {
       }
     }
   },
-  getLazyLoadedList: function(targetSlide) {
+  getLazyLoadedList: function(targetSlide, lazyLoadedList) {
     const { slidesToScroll, slidesToShow, children } = this.props;
-    const { lazyLoadedList } = this.state;
     const listLength = React.Children.count(children);
+
+    if (!lazyLoadedList) {
+      lazyLoadedList = this.state.lazyLoadedList;
+    }
+
     let newLazyLoadedList = [...lazyLoadedList];
+
     targetSlide = targetSlide - 1;
 
     // Right
