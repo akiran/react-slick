@@ -103,6 +103,46 @@ var helpers = {
       }
     }
   },
+  setItemLazyList: function(list, item) {
+    if (list.indexOf(item) == -1) {
+      list.push(item);
+    }
+  },
+  getLazyLoadedList: function(targetSlide, lazyLoadedList, props) {
+    var { preLoad, slidesToShow, children } = props || this.props;
+    var listLength = React.Children.count(children) - 1;
+
+    if (!lazyLoadedList) {
+      lazyLoadedList = this.state.lazyLoadedList;
+    }
+
+    var minDistance = targetSlide - preLoad;
+    var maxDistance = targetSlide + slidesToShow + preLoad;
+    var item;
+    var currentDistance;
+
+    do {
+      currentDistance = minDistance;
+
+      minDistance++;
+
+      if (currentDistance < 0) {
+        this.setItemLazyList(lazyLoadedList, listLength + (currentDistance + 1))
+
+        continue;
+      }
+
+      if (currentDistance > listLength) {
+        this.setItemLazyList(lazyLoadedList, 0 + (currentDistance - listLength - 1))
+        
+        continue;
+      }
+
+      this.setItemLazyList(lazyLoadedList, currentDistance)
+    } while (minDistance < maxDistance);
+
+    return lazyLoadedList;
+  },
   slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
@@ -203,17 +243,11 @@ var helpers = {
     }
 
     if (this.props.lazyLoad) {
-      var loaded = true;
-      var slidesToLoad = [];
-      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
-        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
-        if (!loaded) {
-          slidesToLoad.push(i);
-        }
-      }
-      if (!loaded) {
+      const listCount = React.Children.count(this.props.children);
+
+      if (listCount != this.state.lazyLoadedList.length) {
         this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+          lazyLoadedList: this.getLazyLoadedList(targetSlide)
         });
       }
     }
