@@ -341,6 +341,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.setState({
 	      animating: false
 	    });
+	    clearTimeout(this.animationEndCallback);
+	    delete this.animationEndCallback;
 	  },
 	  slickPrev: function slickPrev() {
 	    this.changeSlide({ message: 'previous' });
