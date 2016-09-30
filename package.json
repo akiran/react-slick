@@ -1,5 +1,5 @@
 {
-  "name": "react-slick",
+  "name": "react-slick-noesloose",
   "version": "0.14.4",
   "description": " React port of slick carousel",
   "main": "./lib",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/gemscng/react-slick"
   },
   "keywords": [
     "slick",
