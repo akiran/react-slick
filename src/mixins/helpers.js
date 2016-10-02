@@ -15,7 +15,11 @@ var helpers = {
     var slideWidth;
 
     if (!props.vertical) {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+      var sidePaddingAdj = props.sidePadding && parseInt(props.sidePadding);
+      var paddingAdj = sidePaddingAdj || centerPaddingAdj;
+
+      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - paddingAdj)/props.slidesToShow;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -57,7 +61,11 @@ var helpers = {
     var slideWidth;
 
     if (!props.vertical) {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this))/props.slidesToShow;
+      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+      var sidePaddingAdj = props.sidePadding && parseInt(props.sidePadding);
+      var paddingAdj = sidePaddingAdj || centerPaddingAdj;
+
+      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - paddingAdj)/props.slidesToShow;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
