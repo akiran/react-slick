@@ -192,12 +192,23 @@ export var InnerSlider = React.createClass({
     }
 
     var centerPaddingStyle = null;
+    var sidePaddingStyle = null;
 
     if (this.props.vertical === false) {
       if (this.props.centerMode === true) {
         centerPaddingStyle = {
           padding: ('0px ' + this.props.centerPadding)
         };
+      } else if (this.props.sidePadding) {
+        if (this.props.sidePaddingSide === 'right') {
+          sidePaddingStyle = {
+            paddingRight: parseInt(this.props.sidePadding)
+          };
+        } else if (this.props.sidePaddingSide === 'left') {
+          sidePaddingStyle = {
+            paddingLeft: parseInt(this.props.sidePadding)
+          };
+        }
       }
     } else {
       if (this.props.centerMode === true) {
@@ -207,7 +218,7 @@ export var InnerSlider = React.createClass({
       }
     }
 
-    const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
+    const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle, sidePaddingStyle);
 
     return (
       <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
