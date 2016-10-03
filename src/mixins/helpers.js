@@ -103,6 +103,24 @@ var helpers = {
       }
     }
   },
+  canGoNext: function (opts){
+    var canGo = true;
+    if (!opts.infinite) {
+      if (opts.centerMode) {
+        // check if current slide is last slide
+        if (opts.currentSlide >= (opts.slideCount - 1)) {
+          canGo = false;
+        }
+      } else {
+        // check if all slides are shown in slider
+        if (opts.slideCount <= opts.slidesToShow ||
+          opts.currentSlide >= (opts.slideCount - opts.slidesToShow)) {
+          canGo = false;
+        }
+      }
+    }
+    return canGo;
+  },
   slideHandler: function (index) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
@@ -121,7 +139,7 @@ var helpers = {
       if(this.props.infinite === false &&
         (index < 0 || index >= this.state.slideCount)) {
         return;
-      } 
+      }
 
       //  Shifting targetSlide back into the range
       if (index < 0) {
@@ -290,21 +308,32 @@ var helpers = {
 
     return 'vertical';
   },
+  play: function(){
+    var nextIndex;
+
+    if (!this.state.mounted) {
+      return false
+    }
+
+    if (this.props.rtl) {
+      nextIndex = this.state.currentSlide - this.props.slidesToScroll;
+    } else {
+      if (this.canGoNext(Object.assign({}, this.props,this.state))) {
+        nextIndex = this.state.currentSlide + this.props.slidesToScroll;
+      } else {
+        return false;
+      }
+    }
+
+    this.slideHandler(nextIndex);
+  },
   autoPlay: function () {
     if (this.state.autoPlayTimer) {
       return;
     }
-    var play = () => {
-      if (this.state.mounted) {
-        var nextIndex = this.props.rtl ?
-        this.state.currentSlide - this.props.slidesToScroll:
-        this.state.currentSlide + this.props.slidesToScroll;
-        this.slideHandler(nextIndex);
-      }
-    };
     if (this.props.autoplay) {
       this.setState({
-        autoPlayTimer: setInterval(play, this.props.autoplaySpeed)
+        autoPlayTimer: setInterval(this.play, this.props.autoplaySpeed)
       });
     }
   },
