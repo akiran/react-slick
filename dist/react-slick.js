@@ -425,16 +425,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var centerPaddingStyle = null;
-	    var sidePaddingStyle = null;
 
 	    if (this.props.vertical === false) {
 	      if (this.props.centerMode === true) {
 	        centerPaddingStyle = {
 	          padding: '0px ' + this.props.centerPadding
-	        };
-	      } else if (this.props.sidePadding) {
-	        sidePaddingStyle = {
-	          paddingRight: parseInt(this.props.sidePadding)
 	        };
 	      }
 	    } else {
@@ -445,7 +440,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 
-	    var listStyle = (0, _objectAssign2.default)({}, verticalHeightStyle, centerPaddingStyle, sidePaddingStyle);
+	    var listStyle = (0, _objectAssign2.default)({}, verticalHeightStyle, centerPaddingStyle);
 
 	    return _react2.default.createElement(
 	      'div',
@@ -1107,7 +1102,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+	      slideWidth = (this.getWidth(_reactDom2.default.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow;
 	    } else {
 	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
 	    }
@@ -1149,7 +1145,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+	      slideWidth = (this.getWidth(_reactDom2.default.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow;
 	    } else {
 	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
 	    }
