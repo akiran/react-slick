@@ -587,6 +587,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.state.animating) {
 	      return;
 	    }
+	    if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
+	      e.preventDefault();
+	    }
 	    var swipeLeft;
 	    var curLeft, positionOffset;
 	    var touchObject = this.state.touchObject;
@@ -1099,7 +1102,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+	      slideWidth = (this.getWidth(_reactDom2.default.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow;
 	    } else {
 	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
 	    }
@@ -1141,7 +1145,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this)) / props.slidesToShow;
+	      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+	      slideWidth = (this.getWidth(_reactDom2.default.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow;
 	    } else {
 	      slideWidth = this.getWidth(_reactDom2.default.findDOMNode(this));
 	    }
