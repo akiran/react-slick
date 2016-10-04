@@ -26,7 +26,6 @@ var defaultProps = {
     pauseOnHover: true,
     responsive: null,
     rtl: false,
-    sidePaddingSide: 'right',
     slide: 'div',
     slidesToShow: 1,
     slidesToScroll: 1,
