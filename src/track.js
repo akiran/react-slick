@@ -34,9 +34,11 @@ var getSlideClasses = (spec) => {
 
 var getSlideStyle = function (spec) {
   var style = {};
+  var legacyFunctions = (spec.variableWidth || spec.centerMode);
+  var sizeUnit = legacyFunctions ? 'px' : '%';
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
-    style.width = spec.slideWidth;
+    style.width = spec.slideWidth + sizeUnit;
   }
 
   if (spec.fade) {

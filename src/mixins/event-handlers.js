@@ -41,7 +41,6 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
- 
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
     //Dont slide if the cursor is inside the form fields and arrow keys are pressed
@@ -118,6 +117,7 @@ var EventHandlers = {
     var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
     var swipeDirection = this.swipeDirection(this.state.touchObject);
     var touchSwipeLength = touchObject.swipeLength;
+    var legacyFunctions = (this.props.variableWidth || this.props.vertical);
 
     if (this.props.infinite === false) {
       if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
@@ -133,6 +133,10 @@ var EventHandlers = {
     if (this.state.swiped === false && this.props.swipeEvent) {
       this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });
+    }
+
+    if(!legacyFunctions) {
+      positionOffset = (positionOffset / 20);
     }
 
     if (!this.props.vertical) {

@@ -9,3 +9,5 @@ npm-debug.log
 lib
 *.sublime-*
 .idea
+dist/*
+example/*

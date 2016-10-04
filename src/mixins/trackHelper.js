@@ -14,6 +14,7 @@ export var getTrackCSS = function(spec) {
   ]);
 
   var trackWidth, trackHeight;
+  var legacyFunctions = (spec.variableWidth || spec.vertical || spec.centerMode);
 
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
 
@@ -23,35 +24,43 @@ export var getTrackCSS = function(spec) {
     } else if (spec.centerMode) {
       trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
     } else {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+      if (spec.slidesToShow == 1){
+        trackWidth = 100 * (spec.slideCount + 2*spec.slidesToShow);
+      } else {
+        trackWidth = 100 + (((spec.slideCount + 2*spec.slidesToShow) - spec.slidesToShow) * (100 / spec.slidesToShow));
+      }
     }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
 
+  var sizeUnit = legacyFunctions ? 'px' : '%';
+
   var style = {
     opacity: 1,
-    WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
-    transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+    WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + sizeUnit +', 0px, 0px)' : 'translate3d(0px, ' + spec.left + sizeUnit +', 0px)',
+    transform: !spec.vertical ? 'translate3d(' + spec.left + sizeUnit +', 0px, 0px)' : 'translate3d(0px, ' + spec.left + sizeUnit +', 0px)',
     transition: '',
     WebkitTransition: '',
-    msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
+    msTransform: !spec.vertical ? 'translateX(' + spec.left + sizeUnit +')' : 'translateY(' + spec.left + sizeUnit +')',
   };
 
   if (trackWidth) {
-    assign(style, { width: trackWidth });
+    assign(style, { width: trackWidth + sizeUnit });
   }
 
   if (trackHeight) {
     assign(style, { height: trackHeight });
   }
 
-  // Fallback for IE8
-  if (window && !window.addEventListener && window.attachEvent) {
-    if (!spec.vertical) {
-      style.marginLeft = spec.left + 'px';
-    } else {
-      style.marginTop = spec.left + 'px';
+  if(legacyFunctions){
+    // Fallback for IE8
+    if (window && !window.addEventListener && window.attachEvent) {
+      if (!spec.vertical) {
+        style.marginLeft = spec.left + sizeUnit;
+      } else {
+        style.marginTop = spec.left + sizeUnit;
+      }
     }
   }
 
@@ -73,7 +82,7 @@ export var getTrackAnimateCSS = function (spec) {
 export var getTrackLeft = function (spec) {
 
   checkSpecKeys(spec, [
-   'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
+   'slideIndex', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
    'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
 
   var slideOffset = 0;
@@ -110,8 +119,6 @@ export var getTrackLeft = function (spec) {
       }
     }
   }
-
-
 
   if (spec.centerMode) {
     if(spec.infinite) {

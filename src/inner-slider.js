@@ -16,6 +16,9 @@ export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   list: null,
   track: null,
+  legacyFunctions: function(props){
+    return (props.variableWidth || props.vertical || props.centerMode);
+  },
   listRefHandler: function (ref) {
     this.list = ref;
   },
@@ -49,10 +52,17 @@ export var InnerSlider = React.createClass({
         lazyLoadedList: lazyLoadedList
       });
     }
+
+
+    if (!this.legacyFunctions(this.props)){
+      this.initialize(this.props);
+    }
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
-    this.initialize(this.props);
+    if (this.legacyFunctions(this.props)){
+      this.initialize(this.props);
+    }
     this.adaptHeight();
 
     // To support server-side rendering
