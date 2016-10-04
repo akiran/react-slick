@@ -1076,6 +1076,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -1191,6 +1193,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
 	      }
 	    }
+	  },
+	  canGoNext: function canGoNext(opts) {
+	    var canGo = true;
+	    if (!opts.infinite) {
+	      if (opts.centerMode) {
+	        // check if current slide is last slide
+	        if (opts.currentSlide >= opts.slideCount - 1) {
+	          canGo = false;
+	        }
+	      } else {
+	        // check if all slides are shown in slider
+	        if (opts.slideCount <= opts.slidesToShow || opts.currentSlide >= opts.slideCount - opts.slidesToShow) {
+	          canGo = false;
+	        }
+	      }
+	    }
+	    return canGo;
 	  },
 	  slideHandler: function slideHandler(index) {
 	    var _this = this;
@@ -1378,21 +1397,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return 'vertical';
 	  },
-	  autoPlay: function autoPlay() {
-	    var _this2 = this;
+	  play: function play() {
+	    var nextIndex;
 
+	    if (!this.state.mounted) {
+	      return false;
+	    }
+
+	    if (this.props.rtl) {
+	      nextIndex = this.state.currentSlide - this.props.slidesToScroll;
+	    } else {
+	      if (this.canGoNext(_extends({}, this.props, this.state))) {
+	        nextIndex = this.state.currentSlide + this.props.slidesToScroll;
+	      } else {
+	        return false;
+	      }
+	    }
+
+	    this.slideHandler(nextIndex);
+	  },
+	  autoPlay: function autoPlay() {
 	    if (this.state.autoPlayTimer) {
 	      return;
 	    }
-	    var play = function play() {
-	      if (_this2.state.mounted) {
-	        var nextIndex = _this2.props.rtl ? _this2.state.currentSlide - _this2.props.slidesToScroll : _this2.state.currentSlide + _this2.props.slidesToScroll;
-	        _this2.slideHandler(nextIndex);
-	      }
-	    };
 	    if (this.props.autoplay) {
 	      this.setState({
-	        autoPlayTimer: setInterval(play, this.props.autoplaySpeed)
+	        autoPlayTimer: setInterval(this.play, this.props.autoplaySpeed)
 	      });
 	    }
 	  },
@@ -1845,6 +1875,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
+	var _helpers = __webpack_require__(8);
+
+	var _helpers2 = _interopRequireDefault(_helpers);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var PrevArrow = exports.PrevArrow = _react2.default.createClass({
@@ -1902,20 +1936,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var nextClasses = { 'slick-arrow': true, 'slick-next': true };
 	    var nextHandler = this.clickHandler.bind(this, { message: 'next' });
 
-	    if (!this.props.infinite) {
-	      if (this.props.centerMode) {
-	        // check if current slide is last slide
-	        if (this.props.currentSlide >= this.props.slideCount - 1) {
-	          nextClasses['slick-disabled'] = true;
-	          nextHandler = null;
-	        }
-	      } else {
-	        // check if all slides are shown in slider
-	        if (this.props.slideCount <= this.props.slidesToShow || this.props.currentSlide >= this.props.slideCount - this.props.slidesToShow) {
-	          nextClasses['slick-disabled'] = true;
-	          nextHandler = null;
-	        }
-	      }
+	    if (!_helpers2.default.canGoNext(this.props)) {
+	      nextClasses['slick-disabled'] = true;
+	      nextHandler = null;
 	    }
 
 	    var nextArrowProps = {
