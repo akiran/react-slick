@@ -10,4 +10,3 @@ lib
 *.sublime-*
 .idea
 dist/*
-example/*
