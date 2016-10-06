@@ -34,8 +34,8 @@ var getSlideClasses = (spec) => {
 
 var getSlideStyle = function (spec) {
   var style = {};
-  var legacyFunctions = (spec.variableWidth || spec.centerMode);
-  var sizeUnit = legacyFunctions ? 'px' : '%';
+  var firstRender = spec.firstRender;
+  var sizeUnit = firstRender ? '%' : 'px';
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
     style.width = spec.slideWidth + sizeUnit;
@@ -145,6 +145,7 @@ var renderSlides = function (spec) {
 export var Track = React.createClass({
   render: function () {
     var slides = renderSlides.call(this, this.props);
+    console.log(this.props);
     return (
       <div className='slick-track' style={this.props.trackStyle}>
         { slides }

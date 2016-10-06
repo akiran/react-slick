@@ -117,7 +117,6 @@ var EventHandlers = {
     var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
     var swipeDirection = this.swipeDirection(this.state.touchObject);
     var touchSwipeLength = touchObject.swipeLength;
-    var legacyFunctions = (this.props.variableWidth || this.props.vertical);
 
     if (this.props.infinite === false) {
       if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
@@ -134,14 +133,6 @@ var EventHandlers = {
       this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });
     }
-
-    if(!legacyFunctions) {
-      const totalSlides = this.state.slideCount + (2 * this.props.slidesToShow);
-      positionOffset = (positionOffset / totalSlides) * 0.8;
-      touchSwipeLength = (touchSwipeLength / totalSlides) * 0.8;
-    }
-
-    // console.log(this.props.slidesToShow);
 
     if (!this.props.vertical) {
       swipeLeft = curLeft + touchSwipeLength * positionOffset;

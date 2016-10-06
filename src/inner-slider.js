@@ -16,8 +16,9 @@ export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   list: null,
   track: null,
-  legacyFunctions: function(props){
-    return (props.variableWidth || props.vertical || props.centerMode);
+  firstRender: true,
+  legacyFunctions: function(){
+    return (this.props.variableWidth || this.props.vertical || this.props.centerMode);
   },
   listRefHandler: function (ref) {
     this.list = ref;
@@ -53,16 +54,14 @@ export var InnerSlider = React.createClass({
       });
     }
 
-
-    if (!this.legacyFunctions(this.props)){
-      this.initialize(this.props);
+    if (!this.legacyFunctions()){
+      this.serverInitialize(this.props);
     }
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
-    if (this.legacyFunctions(this.props)){
-      this.initialize(this.props);
-    }
+    this.firstRender = false;
+    this.initialize(this.props);
     this.adaptHeight();
 
     // To support server-side rendering
@@ -155,7 +154,8 @@ export var InnerSlider = React.createClass({
       slidesToScroll: this.props.slidesToScroll,
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
-      variableWidth: this.props.variableWidth
+      variableWidth: this.props.variableWidth,
+      firstRender: this.state.firstRender
     };
 
     var dots;

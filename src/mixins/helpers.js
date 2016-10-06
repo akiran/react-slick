@@ -9,20 +9,52 @@ var helpers = {
   initialize: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
 
-    var legacyFunctions = (props.variableWidth || props.vertical || props.centerMode);
     var slideCount = React.Children.count(props.children);
-    var listWidth = legacyFunctions ? this.getWidth(slickList) : 100;
-    var trackWidth = legacyFunctions ? this.getWidth(ReactDOM.findDOMNode(this.track)) : 100;
+    var listWidth = this.getWidth(slickList);
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth = this.getSlideWidth(props);
+
+    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const listHeight = slideHeight * props.slidesToShow;
+
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+
+    var firstRender = this.firstRender;
+
+    this.setState({
+      slideCount,
+      slideWidth,
+      listWidth,
+      trackWidth,
+      currentSlide,
+      slideHeight,
+      listHeight,
+      firstRender,
+    }, function () {
+
+      var targetLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.track
+      }, props, this.state));
+      // getCSS function needs previously set state
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+
+      this.setState({trackStyle: trackStyle});
+
+      this.autoPlay(); // once we're set up, trigger the initial autoplay.
+    });
+  },
+  serverInitialize: function(props) {
+    var slideCount = React.Children.count(props.children);
+    var listWidth = 100;
+    var trackWidth = 100;
+    var slideWidth = this.getSlidePercentWidth(props);
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
     var slideHeight = null;
     var listHeight = null;
 
-    if (legacyFunctions) {
-      slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
-      listHeight = slideHeight * props.slidesToShow;
-    }
+    var firstRender = this.firstRender;
 
     var stateValues = {
       slideCount,
@@ -31,7 +63,8 @@ var helpers = {
       trackWidth,
       currentSlide,
       slideHeight,
-      listHeight
+      listHeight,
+      firstRender
     }
 
     var targetLeft = getTrackLeft(assign({
@@ -50,48 +83,27 @@ var helpers = {
       slideHeight,
       listHeight,
       trackStyle,
+      firstRender,
     }, function () {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
+
   },
   update: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
     // This method has mostly same code as initialize method.
     // Refactor it
-    var legacyFunctions = (props.variableWidth || props.vertical || props.centerMode);
     var slideCount = React.Children.count(props.children);
-    var listWidth = legacyFunctions ? this.getWidth(slickList) : 100;
-    var trackWidth = legacyFunctions ? this.getWidth(ReactDOM.findDOMNode(this.track)) : 100;
+    var listWidth = this.getWidth(slickList);
+    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth = this.getSlideWidth(props);
 
-    var slideHeight = null;
-    var listHeight = null;
-
-    if (legacyFunctions) {
-      slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
-      listHeight = slideHeight * props.slidesToShow;
-    }
+    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
-    if(!props.autoplay) {
+    if(!props.autoplay)
       this.pause();
-    }
-
-    var stateValues = {
-      slideCount,
-      slideWidth,
-      listWidth,
-      trackWidth,
-      slideHeight,
-      listHeight
-    }
-
-    var targetLeft = getTrackLeft(assign({
-      trackRef: this.track,
-      slideIndex: this.state.currentSlide
-    }, props, this.state, stateValues));
-    // getCSS function needs previously set state
-    var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state, stateValues));
 
     this.setState({
       slideCount,
@@ -100,29 +112,35 @@ var helpers = {
       trackWidth,
       slideHeight,
       listHeight,
-      trackStyle,
+    }, function () {
+
+      var targetLeft = getTrackLeft(assign({
+        slideIndex: this.state.currentSlide,
+        trackRef: this.track
+      }, props, this.state));
+      // getCSS function needs previously set state
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+
+      this.setState({trackStyle: trackStyle});
     });
   },
-  getWidth: function getWidth(elem) {
+  getWidth: function (elem) {
     return elem.getBoundingClientRect().width || elem.offsetWidth;
-  },
-  getWidthInPercent: function getWidth(elem) {
-    return 100;
   },
   getSlideWidth: function(props){
     var slideWidth;
-    //put center mode on legacy
-    var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
 
     if (!props.vertical) {
-      if (props.variableWidth || props.centerMode){
-        slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
-      } else {
-        slideWidth = 100/(props.children.length + 2*props.slidesToShow);
-      }
+      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
+      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
     } else {
-      slideWidth = 100;
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
+
+    return slideWidth;
+  },
+  getSlidePercentWidth: function(props) {
+    var slideWidth = 100/(props.children.length + 2*props.slidesToShow);
 
     return slideWidth;
   },

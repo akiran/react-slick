@@ -15,26 +15,29 @@ export var getTrackCSS = function(spec) {
 
   var trackWidth, trackHeight;
   var legacyFunctions = (spec.variableWidth || spec.vertical || spec.centerMode);
+  var firstRender = spec.firstRender;
 
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
 
   if (!spec.vertical) {
-    if (spec.variableWidth) {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
-    } else if (spec.centerMode) {
-      trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+    if (spec.centerMode) {
+      trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
     } else {
-      if (spec.slidesToShow == 1){
-        trackWidth = 100 * (spec.slideCount + 2*spec.slidesToShow);
-      } else {
-        trackWidth = 100 + (((spec.slideCount + 2*spec.slidesToShow) - spec.slidesToShow) * (100 / spec.slidesToShow));
+      trackWidth = trackChildren * spec.slideWidth;
+
+      if (firstRender) {
+        if (spec.slidesToShow == 1){
+          trackWidth = 100 * trackChildren;
+        } else {
+          trackWidth = 100 + ((trackChildren - spec.slidesToShow) * (100 / spec.slidesToShow));
+        }
       }
     }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
 
-  var sizeUnit = legacyFunctions ? 'px' : '%';
+  var sizeUnit = firstRender ? '%' : 'px';
 
   var style = {
     opacity: 1,
