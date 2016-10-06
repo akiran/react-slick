@@ -134,11 +134,14 @@ var EventHandlers = {
       this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });
     }
-    
+
     if(!legacyFunctions) {
-      positionOffset = (positionOffset / (this.state.slideCount / 2));
-      touchSwipeLength = (touchSwipeLength / (this.state.slideCount / 2));
+      const totalSlides = this.state.slideCount + (2 * this.props.slidesToShow);
+      positionOffset = (positionOffset / totalSlides) * 0.8;
+      touchSwipeLength = (touchSwipeLength / totalSlides) * 0.8;
     }
+
+    // console.log(this.props.slidesToShow);
 
     if (!this.props.vertical) {
       swipeLeft = curLeft + touchSwipeLength * positionOffset;
