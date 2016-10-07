@@ -16,7 +16,9 @@ export var InnerSlider = React.createClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   list: null,
   track: null,
-  firstRender: true,
+  serverRender: function(){
+    return !!window;
+  },
   legacyFunctions: function(){
     return (this.props.variableWidth || this.props.vertical || this.props.centerMode);
   },
@@ -54,13 +56,13 @@ export var InnerSlider = React.createClass({
       });
     }
 
-    if (!this.legacyFunctions()){
+    if (this.serverRender){
       this.serverInitialize(this.props);
     }
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
-    this.firstRender = false;
+    // this.firstRender = false;
     this.initialize(this.props);
     this.adaptHeight();
 
@@ -155,7 +157,7 @@ export var InnerSlider = React.createClass({
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
       variableWidth: this.props.variableWidth,
-      firstRender: this.state.firstRender
+      percentUnit: this.state.percentUnit
     };
 
     var dots;

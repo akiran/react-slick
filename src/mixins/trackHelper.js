@@ -15,7 +15,7 @@ export var getTrackCSS = function(spec) {
 
   var trackWidth, trackHeight;
   var legacyFunctions = (spec.variableWidth || spec.vertical || spec.centerMode);
-  var firstRender = spec.firstRender;
+  var percentUnit = spec.percentUnit;
 
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
 
@@ -23,21 +23,21 @@ export var getTrackCSS = function(spec) {
     if (spec.centerMode) {
       trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
     } else {
-      trackWidth = trackChildren * spec.slideWidth;
-
-      if (firstRender) {
+      if (percentUnit) {
         if (spec.slidesToShow == 1){
           trackWidth = 100 * trackChildren;
         } else {
           trackWidth = 100 + ((trackChildren - spec.slidesToShow) * (100 / spec.slidesToShow));
         }
+      } else {
+        trackWidth = trackChildren * spec.slideWidth;
       }
     }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
 
-  var sizeUnit = firstRender ? '%' : 'px';
+  var sizeUnit = percentUnit ? '%' : 'px';
 
   var style = {
     opacity: 1,
