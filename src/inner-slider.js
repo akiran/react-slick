@@ -17,7 +17,7 @@ export var InnerSlider = React.createClass({
   list: null,
   track: null,
   serverRender: function(){
-    return !!window;
+    return (typeof window == 'undefined');
   },
   legacyFunctions: function(){
     return (this.props.variableWidth || this.props.vertical || this.props.centerMode);
@@ -56,14 +56,16 @@ export var InnerSlider = React.createClass({
       });
     }
 
-    if (this.serverRender){
+    if (this.serverRender() && !this.legacyFunctions()){
       this.serverInitialize(this.props);
     }
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
     // this.firstRender = false;
-    this.initialize(this.props);
+    if (!this.serverRender()){
+      this.initialize(this.props);
+    }
     this.adaptHeight();
 
     // To support server-side rendering
