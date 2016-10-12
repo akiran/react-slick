@@ -39,7 +39,7 @@ var EventHandlers = {
       }
     }
 
-    this.restartAutoPlay()
+    this.restartAutoPlay();
 
     this.slideHandler(targetSlide);
   },
