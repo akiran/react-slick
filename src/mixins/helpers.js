@@ -346,6 +346,14 @@ var helpers = {
         autoPlayTimer: null
       });
     }
+  },
+  restartAutoPlay: function () {
+    if (this.props.autoplay && this.state.autoPlayTimer) {
+      clearInterval(this.state.autoPlayTimer);
+      this.setState({
+        autoPlayTimer: setInterval(this.play, this.props.autoplaySpeed)
+      });
+    }
   }
 };
 
