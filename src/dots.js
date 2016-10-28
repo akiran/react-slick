@@ -43,9 +43,11 @@ export var Dots = React.createClass({
         currentSlide: this.props.currentSlide
       };
 
+      var onClick = this.clickHandler.bind(this, dotOptions);
+
       return (
         <li key={i} className={className}>
-          <button onClick={this.clickHandler.bind(this, dotOptions)}>{i + 1}</button>
+          {React.cloneElement(this.props.customPaging(i), {onClick})}
         </li>
       );
     });
