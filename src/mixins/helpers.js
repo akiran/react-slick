@@ -179,7 +179,7 @@ var helpers = {
         this.props.beforeChange(this.state.currentSlide, targetSlide);
       }
 
-      this.autoPlay();
+      this.autoPlay(this.props.children[targetSlide].props.autoplaySpeed || this.props.autoplaySpeed);
       return;
     }
 
@@ -329,19 +329,19 @@ var helpers = {
 
     this.slideHandler(nextIndex);
   },
-  autoPlay: function () {
+  autoPlay: function (autoplaySpeed) {
     if (this.state.autoPlayTimer) {
-      return;
+      clearTimeout(this.state.autoPlayTimer);
     }
     if (this.props.autoplay) {
       this.setState({
-        autoPlayTimer: setInterval(this.play, this.props.autoplaySpeed)
+        autoPlayTimer: setTimeout(this.play, autoplaySpeed || this.props.autoplaySpeed)
       });
     }
   },
   pause: function () {
     if (this.state.autoPlayTimer) {
-      clearInterval(this.state.autoPlayTimer);
+      clearTimeout(this.state.autoPlayTimer);
       this.setState({
         autoPlayTimer: null
       });
