@@ -331,17 +331,17 @@ var helpers = {
   },
   autoPlay: function () {
     if (this.state.autoPlayTimer) {
-      return;
+      clearTimeout(this.state.autoPlayTimer);
     }
     if (this.props.autoplay) {
       this.setState({
-        autoPlayTimer: setInterval(this.play, this.props.autoplaySpeed)
+        autoPlayTimer: setTimeout(this.play, this.props.autoplaySpeed)
       });
     }
   },
   pause: function () {
     if (this.state.autoPlayTimer) {
-      clearInterval(this.state.autoPlayTimer);
+      clearTimeout(this.state.autoPlayTimer);
       this.setState({
         autoPlayTimer: null
       });
