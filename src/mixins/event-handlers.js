@@ -235,7 +235,9 @@ var EventHandlers = {
   },
   swipeEnd: function (e) {
     if (!this.state.dragging) {
-      e.preventDefault();
+      if (this.props.swipe) {
+        e.preventDefault();
+      }
       return;
     }
     var touchObject = this.state.touchObject;
