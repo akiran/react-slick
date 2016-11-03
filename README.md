@@ -32,7 +32,7 @@ or add cdn link in your html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
-### [Demos](http://webrafter.com/opensource/react-slick)
+### [Demos](http://neostack.com/opensource/react-slick)
 
 ### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
 Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
