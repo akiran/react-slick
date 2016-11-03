@@ -41,7 +41,6 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
- 
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
     //Dont slide if the cursor is inside the form fields and arrow keys are pressed

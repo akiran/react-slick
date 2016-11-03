@@ -1,6 +1,6 @@
 {
-  "name": "react-slick",
-  "version": "0.14.5",
+  "name": "b2w-react-slick",
+  "version": "0.14.5-beta.14",
   "description": " React port of slick carousel",
   "main": "./lib",
   "scripts": {
@@ -10,6 +10,12 @@
     "dev-test": "jest --watch"
   },
   "author": "Kiran Abburi",
+  "contrinutors": [
+    {
+      "name": "Josh Rezende",
+      "url": "http://github.com/joshrezende/"
+    }
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

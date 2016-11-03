@@ -50,7 +50,8 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8080, '0.0.0.0', function (err, result) {
+  }).listen(8000, '0.0.0.0', function (err, result) {
+    console.log('open on your browser http://localhost:8000/')
     if (err) {
       console.log(err);
     }

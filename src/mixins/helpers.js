@@ -12,19 +12,13 @@ var helpers = {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(slickList);
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
-    var slideWidth;
-
-    if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
-    } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
-    }
+    var slideWidth = this.getSlideWidth(props);
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+    var percentUnit = false;
 
     this.setState({
       slideCount,
@@ -34,6 +28,7 @@ var helpers = {
       currentSlide,
       slideHeight,
       listHeight,
+      percentUnit,
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -48,6 +43,49 @@ var helpers = {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
+  serverInitialize: function(props) {
+    var slideCount = React.Children.count(props.children);
+    var listWidth = 100;
+    var trackWidth = 100;
+    var slideWidth = this.getSlidePercentWidth(props);
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+
+    var slideHeight = null;
+    var listHeight = null;
+
+    var percentUnit = true;
+
+    var stateValues = {
+      slideCount,
+      slideWidth,
+      listWidth,
+      trackWidth,
+      currentSlide,
+      slideHeight,
+      listHeight,
+      percentUnit,
+    }
+
+    var targetLeft = getTrackLeft(assign({
+      trackRef: this.track,
+      slideIndex: currentSlide
+    }, props, this.state, stateValues));
+    // getCSS function needs previously set state
+    var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state, stateValues));
+
+    this.setState({
+      slideCount,
+      slideWidth,
+      listWidth,
+      trackWidth,
+      currentSlide,
+      slideHeight,
+      listHeight,
+      trackStyle,
+      percentUnit
+    });
+
+  },
   update: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
     // This method has mostly same code as initialize method.
@@ -55,17 +93,12 @@ var helpers = {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(slickList);
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
-    var slideWidth;
-
-    if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
-    } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
-    }
+    var slideWidth = this.getSlideWidth(props);
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
+
+    var percentUnit = false;
 
     // pause slider if autoplay is set to false
     if(props.autoplay) {
@@ -81,6 +114,7 @@ var helpers = {
       trackWidth,
       slideHeight,
       listHeight,
+      percentUnit,
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -95,6 +129,23 @@ var helpers = {
   },
   getWidth: function getWidth(elem) {
     return elem.getBoundingClientRect().width || elem.offsetWidth;
+  },
+  getSlideWidth: function(props){
+    var slideWidth;
+
+    if (!props.vertical) {
+      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
+      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+    } else {
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+    }
+
+    return slideWidth;
+  },
+  getSlidePercentWidth: function(props) {
+    var slideWidth = 100/(props.children.length + 2*props.slidesToShow);
+
+    return slideWidth;
   },
   getHeight(elem) {
     return elem.getBoundingClientRect().height || elem.offsetHeight;
