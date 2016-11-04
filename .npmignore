@@ -12,3 +12,4 @@ karma.conf.js
 LICENSE
 webpack.config.dist.js
 webpack.config.js
+ISSUE_TEMPLATE.md
