@@ -1,3 +1,3 @@
-### Guidlines for new issue
+### Guidlines for posting new issue
 
-* Please replicate you issue with this [jsfiddle](https://jsfiddle.net/kirana/20bumb4g/) and provide a link to it along with the issue description
+* Please replicate your issue with this [jsfiddle](https://jsfiddle.net/kirana/20bumb4g/) and provide a link to it along with the issue description
