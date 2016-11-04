@@ -129,7 +129,7 @@ as the values of nextArrow and prevArrow.
 ```js
 class LeftNavButton extends React.Component {
   render() {
-    return <button {...this.props}>Next</button>  
+    return <button {...this.props}>Next</button>
   }
 }
 ```
@@ -137,9 +137,9 @@ class LeftNavButton extends React.Component {
 Important: be sure that you pass your component's props to your clickable element
 like the example above. If you don't, your custom component won't trigger the click handler.
 
-You can also set onClick={this.props.onClick} if you only want to set the click handler. 
+You can also set onClick={this.props.onClick} if you only want to set the click handler.
 
-### Flexbox support 
+### Flexbox support
 If you have flex property on container div of slider, add below css
 ```
 * {
@@ -147,6 +147,31 @@ If you have flex property on container div of slider, add below css
   min-width: 0;
 }
 ```
+
+### Test Setup
+If you try to run tests with jest in a project that uses react-slick, you my run into this error
+```
+matchMedia not present, legacy browsers require a polyfill
+```
+
+To fix this issue add below snippet in test-setup.js
+```
+window.matchMedia = window.matchMedia || function() {
+    return {
+        matches : false,
+        addListener : function() {},
+        removeListener: function() {}
+    };
+};
+
+```
+and add below jest config in package.json
+```
+"jest": {
+    "setupFiles": ["test-setup.js"]
+}
+```
+
 
 ### Development
 Want to run demos locally
