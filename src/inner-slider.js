@@ -86,8 +86,9 @@ export var InnerSlider = React.createClass({
           currentSlide: this.state.currentSlide
       });
     } else {
-      // check for lazy load change only if the children count is different
-      if (nextProps.children.length != this.props.children.length) {
+      // check for lazy load change only if the children count is different or if the 
+      // slide to show property has changed - the screen must be updated
+      if (nextProps.children.length != this.props.children.length || this.props.slideToShow != nextProps.slidesToShow) {
         this.updateLazyLoadListIfNeeded(nextProps)
       }
       this.update(nextProps);
