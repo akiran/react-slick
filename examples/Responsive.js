@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
 
+// return a custom unslicked carousel
+class UnSlick extends Component {
+  render(){
+    return (
+      <div className="my-unslick">
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
 export default class Responsive extends Component {
   render() {
     var settings = {
@@ -10,6 +21,7 @@ export default class Responsive extends Component {
       slidesToShow: 4,
       slidesToScroll: 4,
       initialSlide: 0,
+      unslick: UnSlick,
       responsive: [{
         breakpoint: 1024,
         settings: {
@@ -20,10 +32,13 @@ export default class Responsive extends Component {
         }
       }, {
         breakpoint: 600,
+        responsiveUnslick: function({children,newProps,props,state}){
+          return children.length < newProps.settings.slidesToShow;
+        },
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
+          slidesToScroll: 1,
+          initialSlide: 2,
         }
       }, {
         breakpoint: 480,

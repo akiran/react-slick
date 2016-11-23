@@ -59,14 +59,10 @@ var Slider = React.createClass({
   render: function () {
     var settings;
     var newProps;
-    if (this.state.breakpoint) {
-      newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
-      settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, this.props, newProps[0].settings);
-    } else {
-      settings = assign({}, defaultProps, this.props);
-    }
-
+    var unslickBool = false;
+    var UnSlickComponent = typeof this.props.unslick === 'function' && this.props.unslick;
     var children = this.props.children;
+
     if(!Array.isArray(children)) {
       children = [children]
     }
@@ -76,11 +72,30 @@ var Slider = React.createClass({
       return !!child
     })
 
+    if (this.state.breakpoint) {
+      newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint)[0];
+      // allow for custom unslick function instead of strictly static settings
+      unslickBool = newProps.settings === 'unslick' || (
+        typeof newProps.responsiveUnslick === 'function' &&
+          newProps.responsiveUnslick({children,newProps,state: this.state, props: this.props})
+      )
+
+      settings = unslickBool ? 'unslick' : assign({}, this.props, newProps.settings);
+    } else {
+      settings = assign({}, defaultProps, this.props);
+    }
+
+    // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
     if (settings === 'unslick') {
-      // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
-      return (
-        <div>{children}</div>
-      );
+      if (UnSlickComponent) {
+        return (
+          <UnSlickComponent>{children}</UnSlickComponent>
+        );
+      } else {
+        return (
+          <div>{children}</div>
+        );
+      }
     } else {
       return (
         <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
