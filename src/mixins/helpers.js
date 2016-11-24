@@ -6,6 +6,16 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 
 var helpers = {
+  serverInitialize: function (props) {
+    var slideCount = React.Children.count(props.children);
+    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+
+    this.setState({
+      slideCount,
+      currentSlide
+    });
+  },
+
   initialize: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
 
