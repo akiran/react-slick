@@ -53,6 +53,8 @@ export var InnerSlider = createReactClass({
 
     if (typeof window === 'undefined') {
       this.serverInitialize(this.props);
+    } else {
+      this.setState({ initialized: true });
     }
   },
   componentDidMount: function componentDidMount() {
@@ -131,8 +133,9 @@ export var InnerSlider = createReactClass({
     });
   },
   render: function () {
-    var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
+    var className = classnames('slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
+      'slick-initialized': this.state.initialized
     });
 
     var trackProps = {
