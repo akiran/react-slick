@@ -62,7 +62,6 @@ var renderSlides = function (spec) {
   var postCloneSlides = [];
   var count = React.Children.count(spec.children);
 
-
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
     var childOnClickOptions = {
@@ -105,7 +104,13 @@ var renderSlides = function (spec) {
 
     // variableWidth doesn't wrap properly.
     if (spec.infinite && spec.fade === false) {
-      var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
+      var infiniteCount;
+
+      if (spec.centerMode || spec.variableWidth) {
+        infiniteCount = spec.slidesToShow + 1;
+      } else {
+        infiniteCount = spec.slidesToShow;
+      }
 
       if (index >= (count - infiniteCount)) {
         key = -(count - index);
