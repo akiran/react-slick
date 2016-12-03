@@ -41,7 +41,7 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
- 
+
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
     //Dont slide if the cursor is inside the form fields and arrow keys are pressed
@@ -234,12 +234,7 @@ var EventHandlers = {
     }
   },
   swipeEnd: function (e) {
-    if (!this.state.dragging) {
-      if (this.props.swipe) {
-        e.preventDefault();
-      }
-      return;
-    }
+    if (!this.state.dragging) return;
     var touchObject = this.state.touchObject;
     var minSwipe = this.state.listWidth/this.props.touchThreshold;
     var swipeDirection = this.swipeDirection(touchObject);
