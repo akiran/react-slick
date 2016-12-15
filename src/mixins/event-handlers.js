@@ -39,7 +39,7 @@ var EventHandlers = {
       }
     }
 
-    this.slideHandler(targetSlide);
+    this.slideHandler(targetSlide, options.dontAnimate);
   },
 
   // Accessiblity handler for previous and next

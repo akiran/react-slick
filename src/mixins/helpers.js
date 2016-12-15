@@ -126,7 +126,7 @@ var helpers = {
     }
     return canGo;
   },
-  slideHandler: function (index) {
+  slideHandler: function (index, dontAnimate) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
     var targetSlide, currentSlide;
@@ -244,11 +244,20 @@ var helpers = {
     // Slide Transition happens here.
     // animated transition happens to target Slide and
     // non - animated transition happens to current Slide
-    // If CSS transitions are false, directly go the current slide.
+    // If CSS transitions are false, or method was called with
+    // dontAnimate flag, directly go the current slide.
 
-    if (this.props.useCSS === false) {
+    if (this.props.useCSS === false || dontAnimate) {
+
+      // Cancel any unfinished animation, because it could potentially
+      // finish after this non-animated transition.
+      if(this.animationEndCallback) {
+        clearTimeout(this.animationEndCallback);
+        delete this.animationEndCallback;
+      }
 
       this.setState({
+        animating: false,
         currentSlide: currentSlide,
         trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
       }, function () {
