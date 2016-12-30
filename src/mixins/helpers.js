@@ -15,8 +15,7 @@ var helpers = {
     var slideWidth;
 
     if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = Math.ceil(listWidth / props.slidesToShow);
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -58,8 +57,7 @@ var helpers = {
     var slideWidth;
 
     if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = Math.ceil(listWidth / props.slidesToShow);
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -94,10 +92,16 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
-    return elem.getBoundingClientRect().width || elem.offsetWidth;
+    var styles = window.getComputedStyle(elem);
+    var padding = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
+
+    return elem.clientWidth - padding;
   },
-  getHeight(elem) {
-    return elem.getBoundingClientRect().height || elem.offsetHeight;
+  getHeight: function getHeight(elem) {
+    var styles = window.getComputedStyle(elem);
+    var padding = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
+
+    return elem.clientHeight - padding;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
