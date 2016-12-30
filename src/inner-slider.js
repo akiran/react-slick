@@ -210,7 +210,12 @@ export var InnerSlider = React.createClass({
     const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
 
     return (
-      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+      <div
+        className={className}
+        onMouseEnter={this.onInnerSliderEnter}
+        onMouseLeave={this.onInnerSliderLeave}
+        onMouseOver={this.onInnerSliderOver}
+      >
         {prevArrow}
         <div
           ref={this.listRefHandler}
