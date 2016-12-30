@@ -80,8 +80,8 @@ var SimpleSlider = React.createClass({
 | className      | String |Additional class name for the inner slider div | Yes |
 | adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
-| nextArrow      | React Component | Use this component for the next arrow button | Yes |
-| prevArrow      | React Component | Use this component for the prev arrow button | Yes |
+| nextArrow      | React Element | Use this element for the next arrow button | Yes |
+| prevArrow      | React Element | Use this element for the prev arrow button | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
