@@ -8,10 +8,10 @@ export default class PreviousNextMethods extends Component {
     this.previous = this.previous.bind(this)
   }
   next() {
-    this.refs.slider.slickNext()
+    this.slider.slickNext()
   }
   previous() {
-    this.refs.slider.slickPrev()
+    this.slider.slickPrev()
   }
   render() {
     const settings = {
@@ -24,7 +24,7 @@ export default class PreviousNextMethods extends Component {
     return (
       <div>
         <h2>Previous and Next methods</h2>
-        <Slider ref='slider' {...settings}>
+        <Slider ref={c => this.slider = c } {...settings}>
           <div key={1}><h3>1</h3></div>
           <div key={2}><h3>2</h3></div>
           <div key={3}><h3>3</h3></div>
