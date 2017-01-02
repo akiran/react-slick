@@ -97,7 +97,9 @@ var SimpleSlider = React.createClass({
 | infinite       | bool | should the gallery wrap around it's contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |
+| pauseOnChange  | bool | Stops autoplay when changing slides (i.e. clicking on dots or using one of the methods below) (default: false) | Yes |
 | pauseOnHover   | bool | prevents autoplay while hovering | Yes |
+| pauseOnSwipe   | bool | Stops autoplay on swipeStart (default: false) | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
 | rtl            | bool | Reverses the slide order | Yes |
 | slide         | string |||
@@ -120,6 +122,8 @@ var SimpleSlider = React.createClass({
 * `slickNext()`   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * `slickPrev()`   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * `slickGoTo(slideNumber)` - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
+* `slickPause()`   - function called to pause a slider that is autoplaying
+* `slickPlay()`   - function called to resume a paused slider (requires autoplay: true)
 
 ### Custom next/prev arrows
 
