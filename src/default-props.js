@@ -2,6 +2,7 @@ import React from 'react';
 
 var defaultProps = {
     className: '',
+    innerClassName: '',
     accessibility: true,
     adaptiveHeight: false,
     arrows: true,

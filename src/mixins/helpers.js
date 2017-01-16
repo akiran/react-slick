@@ -16,9 +16,9 @@ var helpers = {
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (this.getWidth(slickList) - centerPaddingAdj)/props.slidesToShow;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = this.getWidth(slickList);
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -59,9 +59,9 @@ var helpers = {
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (this.getWidth(slickList) - centerPaddingAdj)/props.slidesToShow;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = this.getWidth(slickList);
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -94,10 +94,14 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
-    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
+    var width = elem.getBoundingClientRect().width || 0,
+      offsetWidth = elem.offsetWidth || 0;
+    return offsetWidth > width ? offsetWidth : width; 
   },
   getHeight(elem) {
-    return elem.getBoundingClientRect().height || elem.offsetHeight || 0;
+    var height = elem.getBoundingClientRect().height || 0,
+      offsetHeight = elem.offsetHeight || 0;
+    return offsetHeight > height ? offsetHeight : height; 
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
