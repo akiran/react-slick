@@ -39,10 +39,6 @@ var EventHandlers = {
       }
     }
 
-    if (this.props.pauseOnChange) {
-      this.pause();
-    }
-
     this.slideHandler(targetSlide);
   },
  
@@ -72,10 +68,6 @@ var EventHandlers = {
       return;
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
-    }
-
-    if (this.props.pauseOnSwipe) {
-      this.pause();
     }
 
     posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
