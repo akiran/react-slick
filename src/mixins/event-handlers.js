@@ -41,7 +41,7 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
- 
+
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
     //Dont slide if the cursor is inside the form fields and arrow keys are pressed
@@ -69,7 +69,6 @@ var EventHandlers = {
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
     }
-
     posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
     posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;
     this.setState({
@@ -301,6 +300,11 @@ var EventHandlers = {
     }
   },
   onInnerSliderEnter: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause();
+    }
+  },
+  onInnerSliderOver: function (e) {
     if (this.props.autoplay && this.props.pauseOnHover) {
       this.pause();
     }
