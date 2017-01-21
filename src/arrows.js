@@ -23,6 +23,8 @@ export var PrevArrow = React.createClass({
       key: '0',
       'data-role': 'none',
       className: classnames(prevClasses),
+      currentSlide: this.props.currentSlide,
+      slideCount: this.props.slideCount,
       style: {display: 'block'},
       onClick: prevHandler
     };
@@ -57,6 +59,8 @@ export var NextArrow = React.createClass({
       key: '1',
       'data-role': 'none',
       className: classnames(nextClasses),
+      currentSlide: this.props.currentSlide,
+      slideCount: this.props.slideCount,
       style: {display: 'block'},
       onClick: nextHandler
     };
