@@ -138,7 +138,12 @@ export var getTrackLeft = function (spec) {
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (spec.centerMode === true) {
           if(spec.infinite === false) {
-              targetSlide = ReactDOM.findDOMNode(spec.trackRef).children[spec.slideIndex];
+              if (spec.slideIndex === spec.slideCount || spec.slideIndex < 0) {
+                // Dont throw exception on edge cases
+                targetSlide = _reactDom2.default.findDOMNode(spec.trackRef).children[spec.slideIndex-1] || _reactDom2.default.findDOMNode(spec.trackRef).children[0];
+              } else {
+                targetSlide = _reactDom2.default.findDOMNode(spec.trackRef).children[spec.slideIndex];
+              }
           } else {
               targetSlide = ReactDOM.findDOMNode(spec.trackRef).children[(spec.slideIndex + spec.slidesToShow + 1)];
           }
