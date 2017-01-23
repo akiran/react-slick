@@ -8,7 +8,7 @@ export var PrevArrow = React.createClass({
 
   clickHandler: function (options, e) {
     if (e) { e.preventDefault(); }
-    this.props.clickHandler(options, e);
+    this.props.clickHandler(options);
   },
   render: function () {
     var prevClasses = {'slick-arrow': true, 'slick-prev': true};
@@ -44,7 +44,7 @@ export var PrevArrow = React.createClass({
 export var NextArrow = React.createClass({
   clickHandler: function (options, e) {
     if (e) { e.preventDefault(); }
-    this.props.clickHandler(options, e);
+    this.props.clickHandler(options);
   },
   render: function () {
     var nextClasses = {'slick-arrow': true, 'slick-next': true};

@@ -126,22 +126,22 @@ var helpers = {
     }
     return canGo;
   },
-  slideHandler: function (index) {
+  slideHandler: function (index, props = this.props) {
     // Functionality of animateSlide and postSlide is merged into this function
     // console.log('slideHandler', index);
     var targetSlide, currentSlide;
     var targetLeft, currentLeft;
     var callback;
 
-    if (this.props.waitForAnimate && this.state.animating) {
+    if (props.waitForAnimate && this.state.animating) {
       return;
     }
 
-    if (this.props.fade) {
+    if (props.fade) {
       currentSlide = this.state.currentSlide;
 
       // Don't change slide if it's not infite and current slide is the first or last slide.
-      if(this.props.infinite === false &&
+      if(props.infinite === false &&
         (index < 0 || index >= this.state.slideCount)) {
         return;
       }
@@ -155,7 +155,7 @@ var helpers = {
         targetSlide = index;
       }
 
-      if (this.props.lazyLoad && this.state.lazyLoadedList.indexOf(targetSlide) < 0) {
+      if (props.lazyLoad && this.state.lazyLoadedList.indexOf(targetSlide) < 0) {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(targetSlide)
         });
@@ -165,8 +165,8 @@ var helpers = {
         this.setState({
           animating: false
         });
-        if (this.props.afterChange) {
-          this.props.afterChange(targetSlide);
+        if (props.afterChange) {
+          props.afterChange(targetSlide);
         }
         delete this.animationEndCallback;
       };
@@ -175,11 +175,11 @@ var helpers = {
         animating: true,
         currentSlide: targetSlide
       }, function () {
-        this.animationEndCallback = setTimeout(callback, this.props.speed);
+        this.animationEndCallback = setTimeout(callback, props.speed);
       });
 
-      if (this.props.beforeChange) {
-        this.props.beforeChange(this.state.currentSlide, targetSlide);
+      if (props.beforeChange) {
+        props.beforeChange(this.state.currentSlide, targetSlide);
       }
 
       this.autoPlay();
@@ -188,17 +188,17 @@ var helpers = {
 
     targetSlide = index;
     if (targetSlide < 0) {
-      if(this.props.infinite === false) {
+      if(props.infinite === false) {
         currentSlide = 0;
-      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
-        currentSlide = this.state.slideCount - (this.state.slideCount % this.props.slidesToScroll);
+      } else if (this.state.slideCount % props.slidesToScroll !== 0) {
+        currentSlide = this.state.slideCount - (this.state.slideCount % props.slidesToScroll);
       } else {
         currentSlide = this.state.slideCount + targetSlide;
       }
     } else if (targetSlide >= this.state.slideCount) {
-      if(this.props.infinite === false) {
-        currentSlide = this.state.slideCount - this.props.slidesToShow;
-      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
+      if(props.infinite === false) {
+        currentSlide = this.state.slideCount - props.slidesToShow;
+      } else if (this.state.slideCount % props.slidesToScroll !== 0) {
         currentSlide = 0;
       } else {
         currentSlide = targetSlide - this.state.slideCount;
@@ -210,25 +210,25 @@ var helpers = {
     targetLeft = getTrackLeft(assign({
       slideIndex: targetSlide,
       trackRef: this.track
-    }, this.props, this.state));
+    }, props, this.state));
 
     currentLeft = getTrackLeft(assign({
       slideIndex: currentSlide,
       trackRef: this.track
-    }, this.props, this.state));
+    }, props, this.state));
 
-    if (this.props.infinite === false) {
+    if (props.infinite === false) {
       targetLeft = currentLeft;
     }
 
-    if (this.props.beforeChange) {
-      this.props.beforeChange(this.state.currentSlide, currentSlide);
+    if (props.beforeChange) {
+      props.beforeChange(this.state.currentSlide, currentSlide);
     }
 
-    if (this.props.lazyLoad) {
+    if (props.lazyLoad) {
       var loaded = true;
       var slidesToLoad = [];
-      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
+      for (var i = targetSlide; i < targetSlide + props.slidesToShow; i++ ) {
         loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
         if (!loaded) {
           slidesToLoad.push(i);
@@ -246,14 +246,14 @@ var helpers = {
     // non - animated transition happens to current Slide
     // If CSS transitions are false, directly go the current slide.
 
-    if (this.props.useCSS === false) {
+    if (props.useCSS === false) {
 
       this.setState({
         currentSlide: currentSlide,
-        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
+        trackStyle: getTrackCSS(assign({left: currentLeft}, props, this.state))
       }, function () {
-        if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+        if (props.afterChange) {
+          props.afterChange(currentSlide);
         }
       });
 
@@ -262,14 +262,15 @@ var helpers = {
       var nextStateChanges = {
         animating: false,
         currentSlide: currentSlide,
-        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
+        trackStyle: getTrackCSS(assign({left: currentLeft}, props, this.state)),
         swipeLeft: null
       };
+      console.log('nextStateChanges', nextStateChanges);
 
       callback = () => {
         this.setState(nextStateChanges);
-        if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+        if (props.afterChange) {
+          props.afterChange(currentSlide);
         }
         delete this.animationEndCallback;
       };
@@ -277,9 +278,9 @@ var helpers = {
       this.setState({
         animating: true,
         currentSlide: currentSlide,
-        trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
+        trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, props, this.state))
       }, function () {
-        this.animationEndCallback = setTimeout(callback, this.props.speed);
+        this.animationEndCallback = setTimeout(callback, props.speed);
       });
 
     }

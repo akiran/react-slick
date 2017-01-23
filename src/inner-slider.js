@@ -83,18 +83,19 @@ export var InnerSlider = React.createClass({
       if (process.env.NODE_ENV !== 'production') {
         console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
       }
+      console.log('nextProps', nextProps);
       this.changeSlide({
           message: 'index',
           index: nextProps.slickGoTo,
           currentSlide: this.state.currentSlide
-      });
+      }, nextProps);
     } else if (this.state.currentSlide >= nextProps.children.length) {
       this.update(nextProps);
       this.changeSlide({
           message: 'index',
           index: nextProps.children.length - nextProps.slidesToShow,
           currentSlide: this.state.currentSlide
-      });
+      }, nextProps);
     } else {
       this.update(nextProps);
     }
