@@ -44,8 +44,12 @@ var helpers = {
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
       this.setState({trackStyle: trackStyle});
-
-      this.autoPlay(); // once we're set up, trigger the initial autoplay.
+      if(props.pauseOnStart){
+        this.autoPlay(); // once we're set up, trigger the initial autoplay.
+        this.pause();
+      }else{
+        this.autoPlay(); // once we're set up, trigger the initial autoplay.
+      }
     });
   },
   update: function (props) {
