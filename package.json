@@ -5,7 +5,7 @@
   "main": "./lib",
   "scripts": {
     "start": "gulp server",
-    "prepublish": "babel ./src --out-dir ./lib && gulp dist",
+    "prepublish": "babel ./src --out-dir ./lib",
     "test": "jest",
     "dev-test": "jest --watch",
     "lint": "eslint src"
@@ -67,10 +67,6 @@
     "object-assign": "^4.1.0",
     "react-responsive-mixin": "^0.4.0",
     "slick-carousel": "^1.6.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.1",
-    "react-dom": "^0.14.0 || ^15.0.1"
   },
   "jest": {
     "setupFiles": ["test-setup.js"]
