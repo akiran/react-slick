@@ -8,17 +8,21 @@ import assign from 'object-assign';
 var helpers = {
   initialize: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
+    const slickTrack = ReactDOM.findDOMNode(this.track) ||
+      ReactDOM.findDOMNode(slickList.childNodes[0]);
+    const slickThis = ReactDOM.findDOMNode(this) ||
+      ReactDOM.findDOMNode(slickList.parentNode);
 
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(slickList);
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
+    var trackWidth = this.getWidth(slickTrack);
     var slideWidth;
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (this.getWidth(slickThis) - centerPaddingAdj) / props.slidesToShow;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = this.getWidth(slickThis);
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -50,18 +54,23 @@ var helpers = {
   },
   update: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
+    const slickTrack = ReactDOM.findDOMNode(this.track) ||
+      ReactDOM.findDOMNode(slickList.childNodes[0]);
+    const slickThis = ReactDOM.findDOMNode(this) ||
+      ReactDOM.findDOMNode(slickList.parentNode);
+
     // This method has mostly same code as initialize method.
     // Refactor it
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(slickList);
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
+    var trackWidth = this.getWidth(slickTrack);
     var slideWidth;
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (this.getWidth(slickThis) - centerPaddingAdj) / props.slidesToShow;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = this.getWidth(slickThis);
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
