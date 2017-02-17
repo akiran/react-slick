@@ -83,6 +83,10 @@ var helpers = {
       return;
     }
 
+    if (this.state.currentSlide === index) {
+        return;
+    }
+
     if (this.props.fade) {
       currentSlide = this.state.currentSlide;
 

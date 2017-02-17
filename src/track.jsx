@@ -90,7 +90,7 @@ var renderSlides = (spec) => {
         preCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: cssClasses,
+          className: getSlideClasses(assign({index: key}, spec)),
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
@@ -100,7 +100,7 @@ var renderSlides = (spec) => {
         postCloneSlides.push(React.cloneElement(child, {
           key: key,
           'data-index': key,
-          className: cssClasses,
+          className: getSlideClasses(assign({index: key}, spec)),
           style: assign({}, child.props.style || {}, childStyle)
         }));
       }
