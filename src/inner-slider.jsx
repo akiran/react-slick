@@ -153,8 +153,8 @@ export var InnerSlider = React.createClass({
           {slickList}
           <div className="slider-navi-wrapper">
             {prevArrow}
-            {nextArrow}
             {dots}
+            {nextArrow}
           </div>
         </div>
         :
