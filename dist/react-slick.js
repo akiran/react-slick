@@ -358,8 +358,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        'div',
 	        { className: 'slider-navi-wrapper' },
 	        prevArrow,
-	        nextArrow,
-	        dots
+	        dots,
+	        nextArrow
 	      )
 	    ) : _react2['default'].createElement(
 	      'div',
