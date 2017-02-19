@@ -124,32 +124,46 @@ export var InnerSlider = React.createClass({
       clickHandler: this.changeSlide
     };
 
-    if (this.props.arrows) {
+    if (this.props.arrows && this.state.slideCount > this.props.slidesToShow) {
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
     }
 
-    return (
-      <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
-        <div
-          ref='list'
-          className="slick-list"
-          onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove: null}
-          onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd: null}
-          onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove: null}
-          onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
-          <Track ref='track' {...trackProps}>
+    var slickList = (
+      <div
+        ref='list'
+        className="slick-list"
+        onMouseDown={this.swipeStart}
+        onMouseMove={this.state.dragging ? this.swipeMove: null}
+        onMouseUp={this.swipeEnd}
+        onMouseLeave={this.state.dragging ? this.swipeEnd: null}
+        onTouchStart={this.swipeStart}
+        onTouchMove={this.state.dragging ? this.swipeMove: null}
+        onTouchEnd={this.swipeEnd}
+        onTouchCancel={this.state.dragging ? this.swipeEnd: null}>
+        <Track ref='track' {...trackProps}>
             {this.props.children}
-          </Track>
-        </div>
-        {prevArrow}
-        {nextArrow}
-        {dots}
+        </Track>
       </div>
+      );
+
+    return (
+      this.props.navigationType === 'dots-with-arrows' ?
+        <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+          {slickList}
+          <div className="slider-navi-wrapper">
+            {prevArrow}
+            {nextArrow}
+            {dots}
+          </div>
+        </div>
+        :
+        <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+          {slickList}
+          {prevArrow}
+          {nextArrow}
+          {dots}
+        </div>
     );
   }
 });
