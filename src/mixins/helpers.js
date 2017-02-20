@@ -174,7 +174,7 @@ var helpers = {
       this.setState({
         animating: true,
         currentSlide: targetSlide
-      }, function () {
+      }, () => {
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
@@ -278,7 +278,7 @@ var helpers = {
         animating: true,
         currentSlide: currentSlide,
         trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
-      }, function () {
+      }, () => {
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
