@@ -68,7 +68,7 @@ var helpers = {
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
-    if(props.autoplay) {
+    if(!props.autoplay) {
       this.pause();
     } else {
       this.autoPlay();
