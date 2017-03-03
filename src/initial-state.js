@@ -28,7 +28,9 @@ var initialState = {
     initialized: false,
     edgeDragged: false,
     swiped: false, // used by swipeEvent. differentites between touch and swipe.
-    trackStyle: {},
+    trackStyle: {
+        width: 30000, // default value for fix calculation offset issue
+    },
     trackWidth: 0
 
     // Removed
