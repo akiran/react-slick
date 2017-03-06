@@ -26,10 +26,14 @@ export var PrevArrow = React.createClass({
       style: {display: 'block'},
       onClick: prevHandler
     };
+    var customProps = {
+      currentSlide: this.props.currentSlide,
+      slideCount: this.props.slideCount
+    };
     var prevArrow;
 
     if (this.props.prevArrow) {
-      prevArrow = React.cloneElement(this.props.prevArrow, prevArrowProps);
+      prevArrow = React.cloneElement(this.props.prevArrow, { ...prevArrowProps, ...customProps });
     } else {
       prevArrow = <button key='0' type='button' {...prevArrowProps}> Previous</button>;
     }
@@ -60,11 +64,14 @@ export var NextArrow = React.createClass({
       style: {display: 'block'},
       onClick: nextHandler
     };
-
+    var customProps = {
+      currentSlide: this.props.currentSlide,
+      slideCount: this.props.slideCount
+    };
     var nextArrow;
 
     if (this.props.nextArrow) {
-      nextArrow = React.cloneElement(this.props.nextArrow, nextArrowProps);
+      nextArrow = React.cloneElement(this.props.nextArrow, { ...nextArrowProps, ...customProps });
     } else {
       nextArrow = <button key='1' type='button' {...nextArrowProps}> Next</button>;
     }
