@@ -48,7 +48,7 @@
     "gulp": "^3.9.1",
     "gulp-sass": "^2.3.2",
     "jasmine-core": "^2.5.2",
-    "jest": "^15.1.1",
+    "jest": "^19.0.2",
     "json-loader": "^0.5.4",
     "node-sass": "^3.10.1",
     "postcss-loader": "^0.13.0",
@@ -74,7 +74,9 @@
     "react-dom": "^0.14.0 || ^15.0.1"
   },
   "jest": {
-    "setupFiles": ["test-setup.js"]
+    "setupFiles": [
+      "./test-setup.js"
+    ]
   },
   "npmName": "react-slick",
   "npmFileMap": [
