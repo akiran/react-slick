@@ -40,6 +40,8 @@ var defaultProps = {
     waitForAnimate: true,
     afterChange: null,
     beforeChange: null,
+    beforeSlick: null,
+    beforeUnslick: null,
     edgeEvent: null,
     init: null,
     swipeEvent: null,
