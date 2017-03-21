@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
 
-var SampleNextArrow = React.createClass({
-  render: function() {
-    return <div {...this.props} style={{display: 'block', background: 'red'}}></div>;
-  }
-});
+class CarouselArrow extends Component {
 
-var SamplePrevArrow = React.createClass({
-  render: function() {
+  render() {
+    let style = {
+      ...this.props.style,
+      display: 'block',
+      background: '#d8e4e8',
+      'paddingLeft': '6px',
+    };
+
     return (
-      <div {...this.props} style={{display: 'block', background: 'red'}}></div>
+      <div className={this.props.className}
+           onClick={this.props.onClick}
+           style={style}>
+      </div>
     );
   }
-});
+}
 
 export default class CustomArrows extends Component {
   render() {
@@ -22,8 +27,8 @@ export default class CustomArrows extends Component {
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
+      nextArrow: <CarouselArrow />,
+      prevArrow: <CarouselArrow />
     };
     return (
       <div>
