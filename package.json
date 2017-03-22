@@ -27,7 +27,7 @@
   ],
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
-    "babel-cli": "^6.16.0",
+    "babel-cli": "^6.24.0",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
     "babel-jest": "^15.0.0",
