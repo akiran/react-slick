@@ -8,7 +8,8 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "jest",
     "dev-test": "jest --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "install": "npm run prepublish"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
