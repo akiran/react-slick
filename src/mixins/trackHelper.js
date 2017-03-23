@@ -30,27 +30,27 @@ export var getTrackCSS = function(spec) {
   }
 
     var style = {
-        opacity: 1,
+      opacity: 1,
     };
 
     var transform = {
-        WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
-        transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
-        transition: '',
-        WebkitTransition: '',
-        msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
+      WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+      transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+      transition: '',
+      WebkitTransition: '',
+      msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
     };
 
     if (trackWidth) {
-        assign(style, { width: trackWidth });
+      assign(style, { width: trackWidth });
     }
 
     if (trackHeight) {
-        assign(style, { height: trackHeight });
+      assign(style, { height: trackHeight });
     }
 
     if (!spec.fade) {
-        assign(style, transform);
+      assign(style, transform);
     }
 
   // Fallback for IE8
