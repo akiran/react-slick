@@ -219,7 +219,7 @@ export var InnerSlider = React.createClass({
         {prevArrow}
         <div
           ref={this.listRefHandler}
-          className="slick-list"
+          className={this.state.dragging ? 'slick-list dragging' : 'slick-list'}
           style={listStyle}
           onMouseDown={this.swipeStart}
           onMouseMove={this.state.dragging ? this.swipeMove: null}
