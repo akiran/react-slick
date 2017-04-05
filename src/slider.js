@@ -43,6 +43,9 @@ var Slider = React.createClass({
       });
     }
   },
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.breakpoint !== nextState.breakpoint
+  },
 
   slickPrev: function () {
     this.innerSlider.slickPrev();
