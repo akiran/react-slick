@@ -43,8 +43,8 @@ var Slider = React.createClass({
       });
     }
   },
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.breakpoint !== nextState.breakpoint
+  shouldComponentUpdate(nextProps, nextState) {  
+    return this.state.breakpoint !== nextState.breakpoint || this.props.slickGoTo !== nextProps.slickGoTo
   },
 
   slickPrev: function () {
