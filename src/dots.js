@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 
 var getDotCount = function (spec) {
@@ -11,15 +10,14 @@ var getDotCount = function (spec) {
 };
 
 
-export var Dots = createReactClass({
-
-  clickHandler: function (options, e) {
+export class Dots extends React.Component {
+  clickHandler(options, e) {
     // In Autoplay the focus stays on clicked button even after transition
     // to next slide. That only goes away by click somewhere outside
     e.preventDefault();
     this.props.clickHandler(options);
-  },
-  render: function () {
+  }
+  render() {
 
     var dotCount = getDotCount({
       slideCount: this.props.slideCount,
@@ -58,6 +56,5 @@ export var Dots = createReactClass({
         {dots}
       </ul>
     );
-
   }
-});
+}
