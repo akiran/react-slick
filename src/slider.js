@@ -57,6 +57,14 @@ var Slider = createReactClass({
     this.innerSlider.slickGoTo(slide)
   },
 
+  slickPause: function () {
+    this.innerSlider.pause()
+  },
+
+  slickPlay: function () {
+    this.innerSlider.autoPlay()
+  },
+
   render: function () {
     var settings;
     var newProps;

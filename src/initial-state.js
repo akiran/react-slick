@@ -1,7 +1,6 @@
 var initialState = {
     animating: false,
     dragging: false,
-    autoPlayTimer: null,
     currentDirection: 0,
     currentLeft: null,
     currentSlide: 0,
@@ -32,6 +31,7 @@ var initialState = {
     trackWidth: 0
 
     // Removed
+    // autoPlayTimer
     // transformsEnabled: false,
     // $nextArrow: null,
     // $prevArrow: null,

@@ -68,10 +68,10 @@ var helpers = {
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
-    if(props.autoplay) {
-      this.pause();
-    } else {
+    if (props.autoplay) {
       this.autoPlay();
+    } else {
+      this.pause();
     }
 
     this.setState({
@@ -182,7 +182,11 @@ var helpers = {
         this.props.beforeChange(this.state.currentSlide, targetSlide);
       }
 
-      this.autoPlay();
+      // if we are autoplaying, then reset the autoplay timer
+      // but if we are paused, don't restart autoplaying
+      if (this.autoPlayTimer) {
+        this.autoPlay();
+      }
       return;
     }
 
@@ -284,7 +288,11 @@ var helpers = {
 
     }
 
-    this.autoPlay();
+    // if we are autoplaying, then reset the autoplay timer
+    // but if we are paused, don't restart autoplaying
+    if (this.autoPlayTimer) {
+      this.autoPlay();
+    }
   },
   swipeDirection: function (touchObject) {
     var xDist, yDist, r, swipeAngle;
@@ -333,21 +341,17 @@ var helpers = {
     this.slideHandler(nextIndex);
   },
   autoPlay: function () {
-    if (this.state.autoPlayTimer) {
-      clearTimeout(this.state.autoPlayTimer);
+    if (this.autoPlayTimer) {
+      clearTimeout(this.autoPlayTimer);
     }
     if (this.props.autoplay) {
-      this.setState({
-        autoPlayTimer: setTimeout(this.play, this.props.autoplaySpeed)
-      });
+      this.autoPlayTimer = setTimeout(this.play, this.props.autoplaySpeed)
     }
   },
   pause: function () {
-    if (this.state.autoPlayTimer) {
-      clearTimeout(this.state.autoPlayTimer);
-      this.setState({
-        autoPlayTimer: null
-      });
+    if (this.autoPlayTimer) {
+      clearTimeout(this.autoPlayTimer);
+      this.autoPlayTimer = null
     }
   }
 };
