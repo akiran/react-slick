@@ -3,6 +3,7 @@
 import React from 'react';
 import assign from 'object-assign';
 import classnames from 'classnames';
+import createReactClass from 'create-react-class';
 
 var getSlideClasses = (spec) => {
   var slickActive, slickCenter, slickCloned;
@@ -140,7 +141,7 @@ var renderSlides = function (spec) {
 
 };
 
-export var Track = React.createClass({
+export var Track = createReactClass({
   render: function () {
     var slides = renderSlides.call(this, this.props);
     return (
