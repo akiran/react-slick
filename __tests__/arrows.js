@@ -6,11 +6,12 @@ sinon.stub(console, 'error');
 
 import {render, shallow} from 'enzyme';
 import React from 'react';
+import createReactClass from 'create-react-class';
 import sinon from 'sinon';
 
 import { NextArrow, PrevArrow } from '../src/arrows';
 
-let CustomArrow = React.createClass({
+let CustomArrow = createReactClass({
   render: function () {
     return <span className="sample" data-currentSlide={this.props.currentSlide} data-slideCount={this.props.slideCount} />;
   }
