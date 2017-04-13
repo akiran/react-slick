@@ -1,32 +1,28 @@
 import React, { Component } from 'react'
-import createReactClass from 'create-react-class'
 import Slider from '../src/slider'
 
-var SampleNextArrow = createReactClass({
-  render: function() {
-    const {className, style, onClick} = this.props
-    return (
-      <div
-        className={className}
-        style={{...style, display: 'block', background: 'red'}}
-        onClick={onClick}
-      ></div>
-    );
-  }
-});
+function SampleNextArrow(props) {
+  const {className, style, onClick} = props
+  return (
+    <div
+      className={className}
+      style={{...style, display: 'block', background: 'red'}}
+      onClick={onClick}
+    ></div>
+  );
+}
 
-var SamplePrevArrow = createReactClass({
-  render: function() {
-    const {className, style, onClick} = this.props
-    return (
-      <div
-        className={className}
-        style={{...style, display: 'block', background: 'green'}}
-        onClick={onClick}
-      ></div>
-    );
-  }
-});
+function SamplePrevArrow(props) {
+  const {className, style, onClick} = props
+  return (
+    <div
+      className={className}
+      style={{...style, display: 'block', background: 'green'}}
+      onClick={onClick}
+    ></div>
+  );
+}
+
 
 export default class CustomArrows extends Component {
   render() {
