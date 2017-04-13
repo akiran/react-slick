@@ -51,10 +51,9 @@ get started with react-slick.
 
 ```js
 var React = require('react');
-var createReactClass = require('create-react-class');
 var Slider = require('react-slick');
 
-var SimpleSlider = createReactClass({
+class SimpleSlider extends React.Component {
   render: function () {
     var settings = {
       dots: true,
@@ -74,7 +73,7 @@ var SimpleSlider = createReactClass({
       </Slider>
     );
   }
-});
+}
 ```
 
 |    Property    | Type |          Description          | Working |
