@@ -19,11 +19,11 @@ export var getTrackCSS = function(spec) {
 
   if (!spec.vertical) {
     if (spec.variableWidth) {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+      trackWidth = (spec.slideCount + 4*spec.slidesToShow) * spec.slideWidth;
     } else if (spec.centerMode) {
-      trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+      trackWidth = (spec.slideCount + 4*(spec.slidesToShow + 1)) * spec.slideWidth;
     } else {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+      trackWidth = (spec.slideCount + 4*spec.slidesToShow) * spec.slideWidth;
     }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
@@ -144,7 +144,7 @@ export var getTrackLeft = function (spec) {
           }
 
           if (targetSlide) {
-            targetLeft = targetSlide.offsetLeft * -1 + (spec.listWidth - targetSlide.offsetWidth) / 2;
+            targetLeft = Math.abs(targetSlide.offsetLeft) * -1 + (spec.slideWidth - targetSlide.offsetWidth) / 2;
           }
       }
   }
