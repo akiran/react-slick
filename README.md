@@ -23,6 +23,8 @@ Also install slick-carousel for css and font
 
 ```bash
 npm install slick-carousel
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 ```
 
 or add cdn link in your html
@@ -186,4 +188,3 @@ open http://localhost:8080
 
 ### Polyfills for old IE support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
-
