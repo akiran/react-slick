@@ -4,14 +4,26 @@ import Slider from '../src/slider'
 
 var SampleNextArrow = createReactClass({
   render: function() {
-    return <div {...this.props} style={{display: 'block', background: 'red'}}></div>;
+    const {className, style, onClick} = this.props
+    return (
+      <div
+        className={className}
+        style={{...style, display: 'block', background: 'red'}}
+        onClick={onClick}
+      ></div>
+    );
   }
 });
 
 var SamplePrevArrow = createReactClass({
   render: function() {
+    const {className, style, onClick} = this.props
     return (
-      <div {...this.props} style={{display: 'block', background: 'red'}}></div>
+      <div
+        className={className}
+        style={{...style, display: 'block', background: 'green'}}
+        onClick={onClick}
+      ></div>
     );
   }
 });
