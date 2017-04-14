@@ -39,6 +39,7 @@
     "css-loader": "^0.25.0",
     "deepmerge": "^1.1.0",
     "del": "^2.2.2",
+    "enquire.js": "^2.1.6",
     "enzyme": "^2.4.1",
     "es5-shim": "^4.5.9",
     "eslint": "^3.6.1",
@@ -65,11 +66,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "create-react-class": "^15.5.2",
-    "enzyme": "^2.8.1",
     "json2mq": "^0.2.0",
     "object-assign": "^4.1.0",
-    "react-responsive-mixin": "^0.4.0",
-    "react-test-renderer": "^15.5.4",
     "slick-carousel": "^1.6.0"
   },
   "peerDependencies": {
