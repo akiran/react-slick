@@ -10,11 +10,14 @@ import sinon from 'sinon';
 
 import { NextArrow, PrevArrow } from '../src/arrows';
 
-let CustomArrow = React.createClass({
-  render: function () {
-    return <span className="sample" data-currentSlide={this.props.currentSlide} data-slideCount={this.props.slideCount} />;
-  }
-})
+function CustomArrow(props) {
+  return (
+    <span
+      className="sample"
+      data-currentSlide={props.currentSlide}
+      data-slideCount={props.slideCount} />
+  );
+}
 
 describe('Previous arrows', () => {
   it('should render arrow', () => {

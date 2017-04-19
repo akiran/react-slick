@@ -4,13 +4,12 @@ import React from 'react';
 import classnames from 'classnames';
 import Helpers from './mixins/helpers';
 
-export var PrevArrow = React.createClass({
-
-  clickHandler: function (options, e) {
+export class PrevArrow extends React.Component {
+  clickHandler(options, e) {
     if (e) { e.preventDefault(); }
     this.props.clickHandler(options, e);
-  },
-  render: function () {
+  }
+  render() {
     var prevClasses = {'slick-arrow': true, 'slick-prev': true};
     var prevHandler = this.clickHandler.bind(this, {message: 'previous'});
 
@@ -40,15 +39,15 @@ export var PrevArrow = React.createClass({
 
     return prevArrow;
   }
-});
+}
 
 
-export var NextArrow = React.createClass({
-  clickHandler: function (options, e) {
+export class NextArrow extends React.Component {
+  clickHandler(options, e) {
     if (e) { e.preventDefault(); }
     this.props.clickHandler(options, e);
-  },
-  render: function () {
+  }
+  render() {
     var nextClasses = {'slick-arrow': true, 'slick-next': true};
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
 
@@ -78,4 +77,4 @@ export var NextArrow = React.createClass({
 
     return nextArrow;
   }
-});
+}
