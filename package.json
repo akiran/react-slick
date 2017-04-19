@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.14.9",
+  "version": "0.14.10",
   "description": " React port of slick carousel",
   "main": "./lib",
   "scripts": {
@@ -39,7 +39,6 @@
     "css-loader": "^0.25.0",
     "deepmerge": "^1.1.0",
     "del": "^2.2.2",
-    "enquire.js": "^2.1.6",
     "enzyme": "^2.4.1",
     "es5-shim": "^4.5.9",
     "eslint": "^3.6.1",
@@ -68,7 +67,8 @@
     "create-react-class": "^15.5.2",
     "json2mq": "^0.2.0",
     "object-assign": "^4.1.0",
-    "slick-carousel": "^1.6.0"
+    "slick-carousel": "^1.6.0",
+    "enquire.js": "^2.1.6"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1",
