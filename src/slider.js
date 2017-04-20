@@ -5,7 +5,8 @@ import {InnerSlider} from './inner-slider';
 import assign from 'object-assign';
 import json2mq from 'json2mq';
 import defaultProps from './default-props';
-import enquire from 'enquire.js';
+import canUseDOM from 'can-use-dom';
+const enquire = canUseDOM && require('enquire.js');
 
 export default class Slider extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ export default class Slider extends React.Component {
       // Register media query for full screen. Need to support resize from small to large
       var query = json2mq({minWidth: breakpoints.slice(-1)[0]});
 
-      this.media(query, () => {
+      canUseDOM && this.media(query, () => {
         this.setState({breakpoint: null});
       });
     }
