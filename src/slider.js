@@ -36,7 +36,7 @@ export default class Slider extends React.Component {
         } else {
           bQuery = json2mq({minWidth: breakpoints[index-1], maxWidth: breakpoint});
         }
-        this.media(bQuery, () => {
+        canUseDOM && this.media(bQuery, () => {
           this.setState({breakpoint: breakpoint});
         })
       });
