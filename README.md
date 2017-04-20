@@ -70,14 +70,6 @@ class SimpleSlider extends React.Component {
 }
 ```
 
-### Important
-### Breaking changes in react-slick@0.15
- * slickGoTo prop is deprecated in favor of slickGoTo method. Check this [slickGoTo usage example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js).
- * dist folder will be removed from the repo to simplify PR review process.  If you are using bower or relying on the dist files in github repo, use dist files from unpkg.com
-```
-  https://unpkg.com/react-slick@0.13.6/dist/react-slick.min.js
-```
-
 |    Property    | Type |          Description          | Working |
 | -------------  | ---- |          -----------          | ------- |
 | accessibility  | bool | Enables tabbing and arrow key navigation | Yes |
