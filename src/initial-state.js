@@ -8,6 +8,7 @@ var initialState = {
     direction: 1,
     listWidth: null,
     listHeight: null,
+    scrolling: false,
     // loadIndex: 0,
     slideCount: null,
     slideWidth: null,
