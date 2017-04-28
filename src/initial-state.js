@@ -13,6 +13,7 @@ var initialState = {
     slideCount: null,
     slideWidth: null,
     slideHeight: null,
+    swiping: false,
     // sliding: false,
     // slideOffset: 0,
     swipeLeft: null,

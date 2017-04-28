@@ -108,7 +108,7 @@ var EventHandlers = {
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
     var verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
 
-    if (!this.props.verticalSwiping && !this.state.swiped && verticalSwipeLength > 4) {
+    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 4) {
       this.setState({
         scrolling: true
       })
@@ -165,6 +165,9 @@ var EventHandlers = {
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
       { return; }
     if (touchObject.swipeLength > 4) {
+      this.setState({
+        swiping: true
+      })
       e.preventDefault();
     }
   },
@@ -265,6 +268,7 @@ var EventHandlers = {
       dragging: false,
       edgeDragged: false,
       scrolling: false,
+      swiping: false,
       swiped: false,
       swipeLeft: null,
       touchObject: {}
