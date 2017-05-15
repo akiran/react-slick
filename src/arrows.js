@@ -2,7 +2,7 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import Helpers from './mixins/helpers';
+import canGoNext from './helpers/canGoNext';
 
 export class PrevArrow extends React.Component {
   clickHandler(options, e) {
@@ -51,7 +51,7 @@ export class NextArrow extends React.Component {
     var nextClasses = {'slick-arrow': true, 'slick-next': true};
     var nextHandler = this.clickHandler.bind(this, {message: 'next'});
 
-    if (!Helpers.canGoNext(this.props)) {
+    if (!canGoNext(this.props)) {
       nextClasses['slick-disabled'] = true;
       nextHandler = null;
     }
