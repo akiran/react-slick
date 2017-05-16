@@ -95,6 +95,7 @@ var EventHandlers = {
     var swipeLeft;
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
+    var verticalSwipeLength;
 
     curLeft = getTrackLeft(assign({
       slideIndex: this.state.currentSlide,
@@ -104,8 +105,17 @@ var EventHandlers = {
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
+    verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+
+    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 4) {
+        this.setState({
+            scrolling: true
+        });
+        return;
+    }
+
     if (this.props.verticalSwiping) {
-      touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+      touchObject.swipeLength = verticalSwipeLength;
     }
 
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
@@ -154,6 +164,9 @@ var EventHandlers = {
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
       { return; }
     if (touchObject.swipeLength > 4) {
+        this.setState({
+            scrolling: true
+        });
       e.preventDefault();
     }
   },
@@ -251,11 +264,17 @@ var EventHandlers = {
     // reset the state of touch related state variables.
     this.setState({
       dragging: false,
+      swiping: false,
       edgeDragged: false,
       swiped: false,
       swipeLeft: null,
       touchObject: {}
     });
+    if (this.state.scrolling) {
+      this.setState({
+          scrolling: false
+      });
+    }
     // Fix for #13
     if (!touchObject.swipeLength) {
       return;
