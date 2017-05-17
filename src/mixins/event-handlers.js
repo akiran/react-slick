@@ -16,14 +16,14 @@ var EventHandlers = {
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
       targetSlide = currentSlide - slideOffset;
-      if (this.props.lazyLoad) {
+      if (this.props.lazyLoad && !this.props.infinite) {
         previousInt = currentSlide - slideOffset;
         targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
       }
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
       targetSlide = currentSlide + slideOffset;
-      if (this.props.lazyLoad) {
+      if (this.props.lazyLoad && !this.props.infinite) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
       }
     } else if (options.message === 'dots' || options.message === 'children') {
