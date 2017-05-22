@@ -39,6 +39,8 @@ var EventHandlers = {
       }
     }
 
+    this.restartAutoPlay();
+
     this.slideHandler(targetSlide);
   },
 
