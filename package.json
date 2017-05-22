@@ -8,7 +8,8 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "jest",
     "dev-test": "jest --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "install": "npm run prepublish"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
@@ -26,7 +27,7 @@
   ],
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
-    "babel-cli": "^6.16.0",
+    "babel-cli": "^6.24.0",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
     "babel-jest": "^19.0.0",
