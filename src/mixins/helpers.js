@@ -166,7 +166,7 @@ var helpers = {
           animating: false
         });
         if (this.props.afterChange) {
-          this.props.afterChange(targetSlide);
+          this.props.afterChange({slide: targetSlide});
         }
         delete this.animationEndCallback;
       };
@@ -253,7 +253,7 @@ var helpers = {
         trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
       }, function () {
         if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+          this.props.afterChange({slide: currentSlide});
         }
       });
 
@@ -269,7 +269,7 @@ var helpers = {
       callback = () => {
         this.setState(nextStateChanges);
         if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
+          this.props.afterChange({slide: currentSlide});
         }
         delete this.animationEndCallback;
       };
