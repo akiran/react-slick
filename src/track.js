@@ -22,7 +22,7 @@ var getSlideClasses = (spec) => {
       slickActive = true;
     }
   } else {
-    slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
+    slickActive = (index >= spec.currentSlide && index < spec.currentSlide + spec.slidesToShow) || index < spec.currentSlide + spec.slidesToShow - spec.slideCount;
   }
   return classnames({
     'slick-slide': true,
