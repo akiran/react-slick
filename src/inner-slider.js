@@ -80,25 +80,30 @@ export var InnerSlider = createReactClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
-    if (this.props.slickGoTo != nextProps.slickGoTo) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
-      }
-      this.changeSlide({
-          message: 'index',
-          index: nextProps.slickGoTo,
-          currentSlide: this.state.currentSlide
-      });
-    } else if (this.state.currentSlide >= nextProps.children.length) {
-      this.update(nextProps);
-      this.changeSlide({
-          message: 'index',
-          index: nextProps.children.length - nextProps.slidesToShow,
-          currentSlide: this.state.currentSlide
-      });
-    } else {
-      this.update(nextProps);
-    }
+    // probably unneccessary code - commented resolves problem with setState
+    // if (this.props.slickGoTo != nextProps.slickGoTo) {
+    //   if (process.env.NODE_ENV !== 'production') {
+    //     console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
+    //   }
+    //
+    //   this.changeSlide({
+    //       message: 'index',
+    //       index: nextProps.slickGoTo,
+    //       currentSlide: this.state.currentSlide
+    //   });
+    //
+    // } else
+    // if (this.state.currentSlide >= nextProps.children.length) {
+    //   this.update(nextProps);
+    //   this.changeSlide({
+    //       message: 'index',
+    //       index: nextProps.children.length - nextProps.slidesToShow,
+    //       currentSlide: this.state.currentSlide
+    //   });
+    //
+    // } else {
+    //   this.update(nextProps);
+    // }
   },
   componentDidUpdate: function () {
     this.adaptHeight();
