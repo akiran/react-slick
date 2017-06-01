@@ -94,11 +94,13 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
+    if (!elem) { return null; }
     var width = elem.getBoundingClientRect().width || 0,
       offsetWidth = elem.offsetWidth || 0;
     return offsetWidth > width ? offsetWidth : width; 
   },
   getHeight(elem) {
+    if (!elem) { return null; }
     var height = elem.getBoundingClientRect().height || 0,
       offsetHeight = elem.offsetHeight || 0;
     return offsetHeight > height ? offsetHeight : height; 
