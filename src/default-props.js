@@ -7,6 +7,7 @@ var defaultProps = {
     arrows: true,
     autoplay: false,
     autoplaySpeed: 3000,
+    autoplayPause: false,
     centerMode: false,
     centerPadding: '50px',
     cssEase: 'ease',

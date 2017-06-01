@@ -80,6 +80,7 @@ class SimpleSlider extends React.Component {
 | prevArrow      | React Element | Use this element for the prev arrow button | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
+| autoplayPause  | bool | Should the scroller pause auto scroll? | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
 | cssEase        | | | |

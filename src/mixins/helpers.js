@@ -137,6 +137,12 @@ var helpers = {
       return;
     }
 
+    // If autoplayPause is true, it would stop slide animation but keep autoPlay timer
+    if (this.props.autoplayPause) {
+      this.autoPlay();
+      return;
+    }
+
     if (this.props.fade) {
       currentSlide = this.state.currentSlide;
 
