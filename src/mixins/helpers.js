@@ -195,7 +195,7 @@ var helpers = {
       } else {
         currentSlide = this.state.slideCount + targetSlide;
       }
-    } else if (targetSlide >= this.state.slideCount) {
+    } else if (targetSlide >= (this.state.slideCount - this.props.slidesToShow)) {
       if(this.props.infinite === false) {
         currentSlide = this.state.slideCount - this.props.slidesToShow;
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
@@ -224,6 +224,7 @@ var helpers = {
     if (this.props.beforeChange) {
       this.props.beforeChange(this.state.currentSlide, currentSlide);
     }
+
 
     if (this.props.lazyLoad) {
       var loaded = true;
