@@ -5,9 +5,10 @@ import {InnerSlider} from './inner-slider';
 import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
+import createReactClass from 'create-react-class';
 import defaultProps from './default-props';
 
-var Slider = React.createClass({
+var Slider = createReactClass({
   mixins: [ResponsiveMixin],
   innerSlider: null,
   innerSliderRefHandler: function (ref) {

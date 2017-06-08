@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import createReactClass from 'create-react-class'
 import Slider from '../src/slider'
 
-var SampleNextArrow = React.createClass({
+var SampleNextArrow = createReactClass({
   render: function() {
     return <div {...this.props} style={{display: 'block', background: 'red'}}></div>;
   }
 });
 
-var SamplePrevArrow = React.createClass({
+var SamplePrevArrow = createReactClass({
   render: function() {
     return (
       <div {...this.props} style={{display: 'block', background: 'red'}}></div>
