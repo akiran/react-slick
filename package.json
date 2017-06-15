@@ -1,7 +1,7 @@
 {
-  "name": "react-slick",
-  "version": "0.14.7",
-  "description": " React port of slick carousel",
+  "name": "react-slick-complex",
+  "version": "0.01.0",
+  "description": "React port of slick carousel",
   "main": "./lib",
   "scripts": {
     "start": "gulp server",
@@ -10,11 +10,11 @@
     "dev-test": "jest --watch",
     "lint": "eslint src"
   },
-  "author": "Kiran Abburi",
+  "author": "Wilbert Abreu",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/wilbert-abreu/react-slick"
   },
   "keywords": [
     "slick",
@@ -90,8 +90,5 @@
       ]
     }
   ],
-  "bugs": {
-    "url": "https://github.com/akiran/react-slick/issues"
-  },
-  "homepage": "https://github.com/akiran/react-slick"
+  "homepage": "https://github.com/wilbert-abreu/react-slick"
 }
