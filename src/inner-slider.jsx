@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import createReactClass from 'create-react-class';
 import EventHandlersMixin from './mixins/event-handlers';
 import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
@@ -11,7 +12,7 @@ import {Track} from './track';
 import {Dots} from './dots';
 import {PrevArrow, NextArrow} from './arrows';
 
-export var InnerSlider = React.createClass({
+export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   getInitialState: function () {
     return Object.assign({}, initialState, {

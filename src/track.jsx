@@ -2,6 +2,7 @@
 
 import React from 'react';
 import assign from 'object-assign';
+import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 
 var getSlideClasses = (spec) => {
@@ -121,7 +122,7 @@ var renderSlides = (spec) => {
 
 };
 
-export var Track = React.createClass({
+export var Track = createReactClass({
   render: function () {
     var slides = renderSlides(this.props);
     return (

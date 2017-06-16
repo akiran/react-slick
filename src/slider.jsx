@@ -1,13 +1,14 @@
 'use strict';
 
 import React from 'react';
+import createReactClass from 'create-react-class';
 import {InnerSlider} from './inner-slider';
 import assign from 'object-assign';
 import json2mq from 'json2mq';
 import ResponsiveMixin from 'react-responsive-mixin';
 import defaultProps from './default-props';
 
-var Slider = React.createClass({
+var Slider = createReactClass({
   mixins: [ResponsiveMixin],
   getInitialState: function () {
     return {

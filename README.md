@@ -46,8 +46,9 @@ get started with react-slick.
 ```js
 var React = require('react');
 var Slider = require('react-slick');
+import createReactClass from 'create-react-class';
 
-var SimpleSlider = React.createClass({
+var SimpleSlider = createReactClass({
   render: function () {
     var settings = {
       dots: true,
