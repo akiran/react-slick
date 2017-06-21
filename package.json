@@ -68,7 +68,9 @@
     "slick-carousel": "^1.6.0"
   },
   "jest": {
-    "setupFiles": ["test-setup.js"]
+    "setupFiles": [
+      "test-setup.js"
+    ]
   },
   "npmName": "react-slick",
   "npmFileMap": [
