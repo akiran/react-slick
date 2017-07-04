@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
 
-var SampleNextArrow = React.createClass({
-  render: function() {
-    return <div {...this.props} style={{display: 'block', background: 'red'}}></div>;
-  }
-});
+function SampleNextArrow(props) {
+  const {className, style, onClick} = props
+  return (
+    <div
+      className={className}
+      style={{...style, display: 'block', background: 'red'}}
+      onClick={onClick}
+    ></div>
+  );
+}
 
-var SamplePrevArrow = React.createClass({
-  render: function() {
-    return (
-      <div {...this.props} style={{display: 'block', background: 'red'}}></div>
-    );
-  }
-});
+function SamplePrevArrow(props) {
+  const {className, style, onClick} = props
+  return (
+    <div
+      className={className}
+      style={{...style, display: 'block', background: 'green'}}
+      onClick={onClick}
+    ></div>
+  );
+}
+
 
 export default class CustomArrows extends Component {
   render() {

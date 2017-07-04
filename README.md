@@ -5,13 +5,7 @@
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-### Important
-### Breaking changes in react-slick@0.15
- * slickGoTo prop is deprecated in favor of slickGoTo method. Check this [slickGoTo usage example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js).
- * dist folder will be removed from the repo to simplify PR review process.  If you are using bower or relying on the dist files in githib repo, use dist files from unpkg.com
-```
-  https://unpkg.com/react-slick@0.13.6/dist/react-slick.min.js
-```
+
 
 ### Installation
 
@@ -23,6 +17,8 @@ Also install slick-carousel for css and font
 
 ```bash
 npm install slick-carousel
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 ```
 
 or add cdn link in your html
@@ -51,7 +47,7 @@ get started with react-slick.
 var React = require('react');
 var Slider = require('react-slick');
 
-var SimpleSlider = React.createClass({
+class SimpleSlider extends React.Component {
   render: function () {
     var settings = {
       dots: true,
@@ -71,7 +67,7 @@ var SimpleSlider = React.createClass({
       </Slider>
     );
   }
-});
+}
 ```
 
 |    Property    | Type |          Description          | Working |
@@ -185,4 +181,3 @@ open http://localhost:8080
 
 ### Polyfills for old IE support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
-
