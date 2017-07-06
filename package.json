@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.14.10",
+  "version": "0.14.11",
   "description": " React port of slick carousel",
   "main": "./lib",
   "scripts": {
@@ -64,6 +64,7 @@
     "webpack-dev-server": "^1.16.1"
   },
   "dependencies": {
+    "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
     "create-react-class": "^15.5.2",
     "json2mq": "^0.2.0",
