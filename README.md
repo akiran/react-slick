@@ -93,6 +93,7 @@ class SimpleSlider extends React.Component {
 | infinite       | bool | should the gallery wrap around it's contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |
+| pagesToPreload | int  | Sets the amount of pages to preload when lazyLoad is active. WIll preload pages when the slider is loaded as well as the next button is clicked. | Yes |
 | pauseOnHover   | bool | prevents autoplay while hovering | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
 | rtl            | bool | Reverses the slide order | Yes |
