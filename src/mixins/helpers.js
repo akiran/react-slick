@@ -94,7 +94,10 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
-    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
+    var scaleX = (elem.getBoundingClientRect().width / (elem.offsetWidth || 1)) || 1;
+    return (
+      1 / scaleX * (elem.getBoundingClientRect().width || elem.offsetWidth || 0)
+    );
   },
   getHeight(elem) {
     return elem.getBoundingClientRect().height || elem.offsetHeight || 0;
