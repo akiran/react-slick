@@ -3,29 +3,31 @@
 import React from 'react';
 import Slider from '../src/slider';
 
-import SimpleSlider from '../examples/SimpleSlider'
-import SlideChangeHooks from '../examples/SlideChangeHooks'
+import AdaptiveHeight from '../examples/AdaptiveHeight'
+import AutoPlay from '../examples/AutoPlay'
+import CenterMode from '../examples/CenterMode'
+import CustomArrows from '../examples/CustomArrows'
+import CustomPaging from '../examples/CustomPaging'
+import CustomSlides from '../examples/CustomSlides'
+import DynamicSlides  from '../examples/DynamicSlides'
+import Fade from '../examples/Fade'
+import FocusOnSelect from '../examples/FocusOnSelect'
+import LazyLoad from '../examples/LazyLoad'
 import MultipleItems from '../examples/MultipleItems'
+import Pause from '../examples/Pause';
+import PauseOnHover from '../examples/PauseOnHover'
+import PreviousNextMethods from '../examples/PreviousNextMethods'
 import Responsive from '../examples/Responsive'
+import Rtl from '../examples/Rtl'
+import SimpleSlider from '../examples/SimpleSlider'
+import SlickGoTo from '../examples/SlickGoTo'
+import SlideChangeHooks from '../examples/SlideChangeHooks'
+import SwipeToSlide from '../examples/SwipeToSlide'
 import UnevenSetsInfinite from '../examples/UnevenSetsInfinite'
 import UnevenSetsFinite from '../examples/UnevenSetsFinite'
-import CenterMode from '../examples/CenterMode'
-import FocusOnSelect from '../examples/FocusOnSelect'
-import AutoPlay from '../examples/AutoPlay'
-import PauseOnHover from '../examples/PauseOnHover'
-import Rtl from '../examples/Rtl'
 import VariableWidth from '../examples/VariableWidth'
-import AdaptiveHeight from '../examples/AdaptiveHeight'
-import LazyLoad from '../examples/LazyLoad'
-import Fade from '../examples/Fade'
-import SlickGoTo from '../examples/SlickGoTo'
-import CustomArrows from '../examples/CustomArrows'
-import PreviousNextMethods from '../examples/PreviousNextMethods'
-import DynamicSlides  from '../examples/DynamicSlides'
 import VerticalMode  from '../examples/VerticalMode'
-import SwipeToSlide from '../examples/SwipeToSlide'
 import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
-import CustomPaging from '../examples/CustomPaging'
 
 export default class App extends React.Component {
   render() {
@@ -39,6 +41,7 @@ export default class App extends React.Component {
         <CenterMode />
         <FocusOnSelect />
         <AutoPlay />
+        <Pause />
         <PauseOnHover />
         <Rtl />
         <VariableWidth />
