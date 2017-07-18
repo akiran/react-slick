@@ -97,7 +97,7 @@ var helpers = {
     return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
   },
   getHeight(elem) {
-    return elem.getBoundingClientRect().height || elem.offsetHeight || 0;
+    return elem === null ? 0 : elem.getBoundingClientRect().height || elem.offsetHeight || 0;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {

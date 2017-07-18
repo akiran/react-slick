@@ -3,6 +3,7 @@
 import React from 'react';
 import Slider from '../src/slider';
 
+import NoSlider from '../examples/NoSlider'
 import SimpleSlider from '../examples/SimpleSlider'
 import SlideChangeHooks from '../examples/SlideChangeHooks'
 import MultipleItems from '../examples/MultipleItems'
@@ -56,7 +57,7 @@ export default class App extends React.Component {
         <VerticalMode />
         <SwipeToSlide />
         <VerticalSwipeToSlide />
-
+        <NoSlider />
       </div>
     );
   }
