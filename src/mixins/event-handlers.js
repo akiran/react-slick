@@ -62,6 +62,7 @@ var EventHandlers = {
     this.changeSlide(options)
   },
   swipeStart: function (e) {
+    e.stopPropagation();
     var touches, posX, posY;
 
     if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
@@ -82,6 +83,7 @@ var EventHandlers = {
     });
   },
   swipeMove: function (e) {
+    e.stopPropagation();
     if (!this.state.dragging) {
       e.preventDefault();
       return;
