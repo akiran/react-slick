@@ -350,25 +350,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	      )
 	    );
 
-	    return this.props.navigationType === 'dots-with-arrows' ? _react2['default'].createElement(
-	      'div',
-	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
-	      slickList,
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'slider-navi-wrapper' },
-	        prevArrow,
-	        dots,
-	        nextArrow
-	      )
-	    ) : _react2['default'].createElement(
-	      'div',
-	      { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
-	      slickList,
-	      prevArrow,
-	      nextArrow,
-	      dots
-	    );
+	    switch (this.props.navigationType) {
+	      case 'dots-with-arrows':
+	        return _react2['default'].createElement(
+	          'div',
+	          { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
+	          slickList,
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'slider-navi-wrapper' },
+	            prevArrow,
+	            dots,
+	            nextArrow
+	          )
+	        );
+	      case 'arrows-with-all-link':
+	        return _react2['default'].createElement(
+	          'div',
+	          { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
+	          slickList,
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'slider-navi-wrapper' },
+	            _react2['default'].createElement(
+	              'div',
+	              { className: 'slider-navi-wrapper_i' },
+	              prevArrow,
+	              this.props.allLink,
+	              nextArrow
+	            )
+	          )
+	        );
+
+	      default:
+	        return _react2['default'].createElement(
+	          'div',
+	          { className: className, onMouseEnter: this.onInnerSliderEnter, onMouseLeave: this.onInnerSliderLeave },
+	          slickList,
+	          prevArrow,
+	          nextArrow,
+	          dots
+	        );
+	    }
 	  }
 	});
 	exports.InnerSlider = InnerSlider;

@@ -147,23 +147,41 @@ export var InnerSlider = React.createClass({
       </div>
       );
 
-    return (
-      this.props.navigationType === 'dots-with-arrows' ?
-        <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
-          {slickList}
-          <div className="slider-navi-wrapper">
-            {prevArrow}
-            {dots}
-            {nextArrow}
-          </div>
-        </div>
-        :
-        <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
-          {slickList}
-          {prevArrow}
-          {nextArrow}
-          {dots}
-        </div>
-    );
+      switch (this.props.navigationType) {
+          case 'dots-with-arrows':
+              return (
+                  <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+                      {slickList}
+                    <div className="slider-navi-wrapper">
+                        {prevArrow}
+                        {dots}
+                        {nextArrow}
+                    </div>
+                  </div>
+              );
+          case 'arrows-with-all-link':
+            return (
+                <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+                    {slickList}
+                  <div className="slider-navi-wrapper">
+                    <div className="slider-navi-wrapper_i">
+                        {prevArrow}
+                        {this.props.allLink}
+                        {nextArrow}
+                    </div>
+                  </div>
+                </div>
+            );
+
+          default:
+            return (
+                <div className={className} onMouseEnter={this.onInnerSliderEnter} onMouseLeave={this.onInnerSliderLeave}>
+                    {slickList}
+                    {prevArrow}
+                    {nextArrow}
+                    {dots}
+                </div>
+            );
+      }
   }
 });
