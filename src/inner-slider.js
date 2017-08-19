@@ -96,6 +96,11 @@ export var InnerSlider = createReactClass({
           index: nextProps.children.length - nextProps.slidesToShow,
           currentSlide: this.state.currentSlide
       });
+    } else if (!nextProps.autoplay) {
+      clearTimeout(this.state.autoPlayTimer);
+      this.setState({ autoPlayTimer: null });
+    } else if(nextProps.autoplay) {
+      this.autoPlay(nextProps);
     } else {
       this.update(nextProps);
     }

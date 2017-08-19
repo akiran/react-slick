@@ -332,13 +332,14 @@ var helpers = {
 
     this.slideHandler(nextIndex);
   },
-  autoPlay: function () {
+  autoPlay: function (props) {
+    props = props || this.props;
     if (this.state.autoPlayTimer) {
       clearTimeout(this.state.autoPlayTimer);
     }
-    if (this.props.autoplay) {
+    if (props.autoplay) {
       this.setState({
-        autoPlayTimer: setTimeout(this.play, this.props.autoplaySpeed)
+        autoPlayTimer: setTimeout(this.play, props.autoplaySpeed)
       });
     }
   },
