@@ -21,7 +21,7 @@ var helpers = {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = this.getHeight(slickList.querySelector('.slick-track'));
     const listHeight = slideHeight * props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -64,7 +64,7 @@ var helpers = {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = this.getHeight(slickList.querySelector('.slick-track'));
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
