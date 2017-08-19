@@ -94,10 +94,10 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
-    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
+    return elem && (elem.getBoundingClientRect().width || elem.offsetWidth) || 0;
   },
   getHeight(elem) {
-    return elem === null ? 0 : elem.getBoundingClientRect().height || elem.offsetHeight || 0;
+    return elem && (elem.getBoundingClientRect().height || elem.offsetHeight) || 0;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
