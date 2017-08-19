@@ -25,7 +25,7 @@
     "react-component"
   ],
   "devDependencies": {
-    "autoprefixer-core": "^6.0.1",
+    "autoprefixer": "^7.1.2",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.16.0",
     "babel-eslint": "^7.0.0",
@@ -67,10 +67,10 @@
     "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
     "create-react-class": "^15.5.2",
+    "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",
     "object-assign": "^4.1.0",
-    "slick-carousel": "^1.6.0",
-    "enquire.js": "^2.1.6"
+    "slick-carousel": "^1.6.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1",
