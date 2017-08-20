@@ -32,4 +32,26 @@ describe('Simple Slider', function() {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-next').length).toEqual(1);
   });
+
+  it('should got to second slide when next button is clicked', function () {
+    const wrapper = mount(<SimpleSlider />);
+    wrapper.find('.slick-next').simulate('click')
+    expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('2');
+    expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
+    expect(wrapper.find('.slick-dots').childAt(1).hasClass('slick-active')).toEqual(true)
+  });
+  it('should goto last slide when prev button is clicked', function() {
+    const wrapper = mount(<SimpleSlider />);
+    wrapper.find('.slick-prev').simulate('click')
+    expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('6');
+    expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
+    expect(wrapper.find('.slick-dots').childAt(5).hasClass('slick-active')).toEqual(true)
+  })
+  it('should goto 4th slide when 4th dot is clicked', function() {
+    const wrapper = mount(<SimpleSlider />);
+    wrapper.find('.slick-dots button').at(3).simulate('click')
+    expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('4');
+    expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
+    expect(wrapper.find('.slick-dots').childAt(3).hasClass('slick-active')).toEqual(true)
+  })
 });
