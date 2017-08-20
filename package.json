@@ -7,7 +7,7 @@
     "start": "gulp server",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "jest",
-    "dev-test": "jest --watch",
+    "test:watch": "jest --watch",
     "lint": "eslint src"
   },
   "author": "Kiran Abburi",

@@ -13,7 +13,7 @@ var getSlideClasses = (spec) => {
   } else {
     index = spec.index;
   }
-
+  console.log(index, 'index')
   slickCloned = (index < 0) || (index >= spec.slideCount);
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
@@ -112,7 +112,7 @@ var renderSlides = function (spec) {
         preCloneSlides.push(React.cloneElement(child, {
           key: 'precloned' + getKey(child, key),
           'data-index': key,
-          className: cssClasses,
+          className: classnames(cssClasses, 'slick-cloned'),
           style: assign({}, child.props.style || {}, childStyle),
           onClick
         }));
@@ -123,7 +123,7 @@ var renderSlides = function (spec) {
         postCloneSlides.push(React.cloneElement(child, {
           key: 'postcloned' + getKey(child, key),
           'data-index': key,
-          className: cssClasses,
+          className: classnames(cssClasses, 'slick-cloned'),
           style: assign({}, child.props.style || {}, childStyle),
           onClick
         }));
