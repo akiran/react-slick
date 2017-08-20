@@ -2,6 +2,7 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import SimpleSlider from '../SimpleSlider';
+import {repeatClicks} from '../../test-helpers';
 
 describe('Simple Slider', function() {
   it('should have 8 slides (6 actual and 2 clone slides)', function() {
@@ -53,5 +54,41 @@ describe('Simple Slider', function() {
     expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('4');
     expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
     expect(wrapper.find('.slick-dots').childAt(3).hasClass('slick-active')).toEqual(true)
+  })
+  // it('should come back to 1st slide after 6 clicks on next button', function () {
+  //   // waitForAnimate option is causing problem for this test
+  //   const wrapper = mount(<SimpleSlider />);
+  //   wrapper.find('.slick-next').first().simulate('click').simulate('click')
+  //   // wrapper.find('.slick-prev').first().simulate('click')
+  //   // wrapper.find('.slick-next').first().simulate('click')
+  //   // console.log(nextButton)
+  //   // nextButton.simulate('click').simulate('click')
+  //   // nextButton.simulate('click')
+  //   // repeatClicks(wrapper.find('.slick-next'), 1)
+  //   expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('1');
+  //   expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
+  //   expect(wrapper.find('.slick-dots').childAt(0).hasClass('slick-active')).toEqual(true)
+  // })
+});
+
+describe("Simple Slider Snapshots", function () {
+  it("slider initial state", function () {
+    const wrapper = mount(<SimpleSlider />);
+    expect(wrapper.html()).toMatchSnapshot()
+  });
+  it("click on next button", function () {
+    const wrapper = mount(<SimpleSlider />);
+    wrapper.find('.slick-next').simulate('click')
+    expect(wrapper.html()).toMatchSnapshot()
+  });
+  it("click on prev button", function () {
+    const wrapper = mount(<SimpleSlider />);
+    wrapper.find('.slick-prev').simulate('click')
+    expect(wrapper.html()).toMatchSnapshot()
+  });
+  it("click on 3rd dot", function () {
+    const wrapper = mount(<SimpleSlider />);
+    wrapper.find('.slick-dots button').at(2).simulate('click')
+    expect(wrapper.html()).toMatchSnapshot()
   })
 });
