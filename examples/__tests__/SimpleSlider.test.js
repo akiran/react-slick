@@ -12,5 +12,8 @@ describe('sample enzyme test', function() {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-cloned').length).toEqual(2);
   });
-
+  it('should have 1 active slide', function() {
+    const wrapper = mount(<SimpleSlider />);
+    expect(wrapper.find('.slick-slide.slick-active').length).toEqual(1);
+  });
 });
