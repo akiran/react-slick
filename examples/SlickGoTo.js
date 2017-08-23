@@ -6,15 +6,9 @@ export default class SlickGoTo extends Component {
   constructor(props) {
     super(props)
     this.changeHandler = this.changeHandler.bind(this)
-    // this.state = {
-    //   slickGoTo: 0
-    // }
   }
   changeHandler(e) {
     this.refs.slider.slickGoTo(e.target.value)
-    this.setState({
-      slickGoTo: e.target.value
-    })
   }
   render() {
     const settings = {
