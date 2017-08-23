@@ -1,27 +1,26 @@
-'use strict';
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { mount } from 'enzyme';
 import SimpleSlider from '../SimpleSlider';
-import {repeatClicks} from '../../test-helpers';
+import { repeatClicks } from '../../test-helpers';
 
-describe('Simple Slider', function() {
-  it('should have 8 slides (6 actual and 2 clone slides)', function() {
+describe('Simple Slider', function () {
+  it('should have 8 slides (6 actual and 2 clone slides)', function () {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-slide').length).toEqual(8);
   });
-  it('should have 2 clone slides', function() {
+  it('should have 2 clone slides', function () {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-cloned').length).toEqual(2);
   });
-  it('should have 1 active slide', function() {
+  it('should have 1 active slide', function () {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-slide.slick-active').length).toEqual(1);
   });
-  it('should have 6 dots', function() {
+  it('should have 6 dots', function () {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-dots').children().length).toEqual(6);
   });
-  it('should have 1 active dot', function() {
+  it('should have 1 active dot', function () {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
   });
@@ -41,14 +40,14 @@ describe('Simple Slider', function() {
     expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
     expect(wrapper.find('.slick-dots').childAt(1).hasClass('slick-active')).toEqual(true)
   });
-  it('should goto last slide when prev button is clicked', function() {
+  it('should goto last slide when prev button is clicked', function () {
     const wrapper = mount(<SimpleSlider />);
     wrapper.find('.slick-prev').simulate('click')
     expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('6');
     expect(wrapper.find('.slick-dots .slick-active').length).toEqual(1);
     expect(wrapper.find('.slick-dots').childAt(5).hasClass('slick-active')).toEqual(true)
   })
-  it('should goto 4th slide when 4th dot is clicked', function() {
+  it('should goto 4th slide when 4th dot is clicked', function () {
     const wrapper = mount(<SimpleSlider />);
     wrapper.find('.slick-dots button').at(3).simulate('click')
     expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('4');
