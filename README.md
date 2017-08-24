@@ -13,7 +13,7 @@ Carousel component built with React. It is a react port of [slick carousel](http
 npm install react-slick
 ```
 
-Also install slick-carousel for css and font
+⚠️ Also install slick-carousel for css and font 
 
 ```bash
 npm install slick-carousel
