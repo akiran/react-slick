@@ -120,7 +120,7 @@ export var InnerSlider = createReactClass({
   },
   slickGoTo: function (slide) {
     slide = Number(slide)
-    slide && this.changeSlide({
+    !isNaN(slide) && this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
