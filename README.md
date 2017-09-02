@@ -145,7 +145,7 @@ If you have flex property on container div of slider, add below css
 ```
 
 ### Test Setup
-If you try to run tests with jest in a project that uses react-slick, you my run into this error
+If you try to run tests with jest in a project that uses react-slick, you may run into this error
 ```
 matchMedia not present, legacy browsers require a polyfill
 ```
