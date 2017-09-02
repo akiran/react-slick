@@ -60,20 +60,10 @@ export var InnerSlider = createReactClass({
     if (!window) {
       return
     }
-    if (window.addEventListener) {
-      window.addEventListener('resize', this.onWindowResized);
-    } else {
-      window.attachEvent('onresize', this.onWindowResized);
-    }
   },
   componentWillUnmount: function componentWillUnmount() {
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
-    }
-    if (window.addEventListener) {
-      window.removeEventListener('resize', this.onWindowResized);
-    } else {
-      window.detachEvent('onresize', this.onWindowResized);
     }
     if (this.state.autoPlayTimer) {
       clearInterval(this.state.autoPlayTimer);
@@ -102,15 +92,6 @@ export var InnerSlider = createReactClass({
   },
   componentDidUpdate: function () {
     this.adaptHeight();
-  },
-  onWindowResized: function () {
-    this.update(this.props);
-    // animating state should be cleared while resizing, otherwise autoplay stops working
-    this.setState({
-      animating: false
-    });
-    clearTimeout(this.animationEndCallback);
-    delete this.animationEndCallback;
   },
   slickPrev: function () {
     this.changeSlide({ message: 'previous' });
