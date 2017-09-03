@@ -99,6 +99,11 @@ var EventHandlers = {
     var swipeLeft;
     var curLeft, positionOffset;
     var touchObject = this.state.touchObject;
+    var minSwipe = this.state.listWidth/this.props.touchThreshold;
+
+    if (this.props.verticalSwiping) {
+      minSwipe = this.state.listHeight/this.props.touchThreshold;
+    }
 
     curLeft = getTrackLeft(assign({
       slideIndex: this.state.currentSlide,
@@ -109,7 +114,7 @@ var EventHandlers = {
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
     var verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
 
-    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 4) {
+    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > minSwipe) {
       this.setState({
         scrolling: true
       })
@@ -165,7 +170,7 @@ var EventHandlers = {
 
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
       { return; }
-    if (touchObject.swipeLength > 4) {
+    if (touchObject.swipeLength > minSwipe) {
       this.setState({
         swiping: true
       })
