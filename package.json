@@ -1,10 +1,11 @@
 {
   "name": "react-slick",
-  "version": "0.15.3",
+  "version": "0.15.4",
   "description": " React port of slick carousel",
-  "main": "./dist/react-slick.js",
+  "main": "./lib",
   "files": [
-    "dist"
+    "dist",
+    "lib"
   ],
   "scripts": {
     "start": "gulp server",
