@@ -3,6 +3,9 @@
   "version": "0.15.0",
   "description": " React port of slick carousel",
   "main": "./lib",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "gulp server",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
