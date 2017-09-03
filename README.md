@@ -107,8 +107,8 @@ class SimpleSlider extends React.Component {
 | variableWidth | bool |||
 | useCSS | bool | Enable/Disable CSS Transitions | Yes |
 | vertical | bool | Vertical slide mode | Yes |
-| afterChange | function | callback function called after the current index changes | Yes |
-| beforeChange | function | callback function called before the current index changes | Yes |
+| afterChange | function | callback function called after the current index changes. The new index is accessible in the first parameter of the callback function. | Yes |
+| beforeChange | function | callback function called before the current index changes. The old and the new indexes are accessible in the first and the second parameters of the callback function respectively. | Yes |
 | slickGoTo | int | go to the specified slide number | |
 
 
