@@ -101,6 +101,7 @@ class SimpleSlider extends React.Component {
 | slidesToScroll | int | Number of slides to scroll for each navigation item
 | speed | int |||
 | swipe | bool |||
+| swipeEvent | func | Tells swipe direction | Yes |
 | swipeToSlide | bool | Allow users to drag or swipe directly to a slide irrespective of slidesToScroll | Yes |
 | touchMove | bool |||
 | touchThreshold | int |||
