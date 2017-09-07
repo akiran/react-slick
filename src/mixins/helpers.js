@@ -68,7 +68,7 @@ var helpers = {
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
-    if(props.autoplay) {
+    if(!props.autoplay) {
       this.pause();
     } else {
       this.autoPlay();
@@ -94,10 +94,10 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
-    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
+    return elem && (elem.getBoundingClientRect().width || elem.offsetWidth) || 0;
   },
   getHeight(elem) {
-    return elem.getBoundingClientRect().height || elem.offsetHeight || 0;
+    return elem && (elem.getBoundingClientRect().height || elem.offsetHeight) || 0;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {

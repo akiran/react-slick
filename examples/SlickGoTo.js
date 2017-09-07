@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
-import {baseUrl} from './config'
+import { baseUrl } from './config'
 
 export default class SlickGoTo extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ export default class SlickGoTo extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      ...this.props
     };
     return (
       <div>

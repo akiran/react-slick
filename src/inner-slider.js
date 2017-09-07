@@ -9,9 +9,9 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 
-import {Track} from './track';
-import {Dots} from './dots';
-import {PrevArrow, NextArrow} from './arrows';
+import { Track } from './track';
+import { Dots } from './dots';
+import { PrevArrow, NextArrow } from './arrows';
 
 export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
@@ -79,15 +79,15 @@ export var InnerSlider = createReactClass({
       clearInterval(this.state.autoPlayTimer);
     }
   },
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (this.props.slickGoTo != nextProps.slickGoTo) {
       if (process.env.NODE_ENV !== 'production') {
         console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
       }
       this.changeSlide({
-          message: 'index',
-          index: nextProps.slickGoTo,
-          currentSlide: this.state.currentSlide
+        message: 'index',
+        index: nextProps.slickGoTo,
+        currentSlide: this.state.currentSlide
       });
     } else if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
       this.update(nextProps);
@@ -113,13 +113,14 @@ export var InnerSlider = createReactClass({
     delete this.animationEndCallback;
   },
   slickPrev: function () {
-    this.changeSlide({message: 'previous'});
+    this.changeSlide({ message: 'previous' });
   },
   slickNext: function () {
-    this.changeSlide({message: 'next'});
+    this.changeSlide({ message: 'next' });
   },
   slickGoTo: function (slide) {
-    typeof slide === 'number' && this.changeSlide({
+    slide = Number(slide)
+    !isNaN(slide) && this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
@@ -223,13 +224,13 @@ export var InnerSlider = createReactClass({
           className="slick-list"
           style={listStyle}
           onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove: null}
+          onMouseMove={this.state.dragging ? this.swipeMove : null}
           onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd: null}
+          onMouseLeave={this.state.dragging ? this.swipeEnd : null}
           onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove: null}
+          onTouchMove={this.state.dragging ? this.swipeMove : null}
           onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}
+          onTouchCancel={this.state.dragging ? this.swipeEnd : null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}

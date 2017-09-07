@@ -13,7 +13,7 @@ Carousel component built with React. It is a react port of [slick carousel](http
 npm install react-slick
 ```
 
-Also install slick-carousel for css and font
+⚠️ Also install slick-carousel for css and font 
 
 ```bash
 npm install slick-carousel
@@ -76,8 +76,8 @@ class SimpleSlider extends React.Component {
 | className      | String |Additional class name for the inner slider div | Yes |
 | adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
 | arrows         | bool | Should we show Left and right nav arrows | Yes |
-| nextArrow      | React Element | Use this element for the next arrow button | Yes |
-| prevArrow      | React Element | Use this element for the prev arrow button | Yes |
+| nextArrow      | React Element | Use this element for the next arrow button [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js) | Yes |
+| prevArrow      | React Element | Use this element for the prev arrow button [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js) | Yes |
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
@@ -90,11 +90,11 @@ class SimpleSlider extends React.Component {
 | easing         | string | | |
 | fade           | bool | Slides use fade for transition  | Yes |
 | focusOnSelect  | bool | Go to slide on click | Yes |
-| infinite       | bool | should the gallery wrap around it's contents | Yes |
+| infinite       | bool | should the gallery wrap around its contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |
 | pauseOnHover   | bool | prevents autoplay while hovering | Yes |
-| responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
+| responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
 | rtl            | bool | Reverses the slide order | Yes |
 | slide         | string |||
 | slidesToShow | int | Number of slides to be visible at a time | Yes |
@@ -107,8 +107,8 @@ class SimpleSlider extends React.Component {
 | variableWidth | bool |||
 | useCSS | bool | Enable/Disable CSS Transitions | Yes |
 | vertical | bool | Vertical slide mode | Yes |
-| afterChange | function | callback function called after the current index changes | Yes |
-| beforeChange | function | callback function called before the current index changes | Yes |
+| afterChange | function | callback function called after the current index changes. The new index is accessible in the first parameter of the callback function. | Yes |
+| beforeChange | function | callback function called before the current index changes. The old and the new indexes are accessible in the first and the second parameters of the callback function respectively. | Yes |
 | slickGoTo | int | go to the specified slide number | |
 
 
@@ -145,7 +145,7 @@ If you have flex property on container div of slider, add below css
 ```
 
 ### Test Setup
-If you try to run tests with jest in a project that uses react-slick, you my run into this error
+If you try to run tests with jest in a project that uses react-slick, you may run into this error
 ```
 matchMedia not present, legacy browsers require a polyfill
 ```
