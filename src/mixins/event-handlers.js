@@ -238,7 +238,9 @@ var EventHandlers = {
   swipeEnd: function (e) {
     if (!this.state.dragging) {
       if (this.props.swipe) {
-        e.preventDefault();
+        // bug fix: let the click event bubble up
+        //  to inner slider
+        //e.preventDefault();
       }
       return;
     }
