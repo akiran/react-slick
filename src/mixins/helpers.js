@@ -43,8 +43,8 @@ var helpers = {
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
-      this.setState({trackStyle: trackStyle});
-
+      this.setState({trackStyle: trackStyle}, this.afterRender);
+      
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
@@ -82,16 +82,33 @@ var helpers = {
       slideHeight,
       listHeight,
     }, function () {
-
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
-
-      this.setState({trackStyle: trackStyle});
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));      
+      this.setState({trackStyle: trackStyle}, this.afterRender);
     });
+  },
+  afterRender: function() {
+    if(this.props.afterRender) {
+      if(typeof this.props.afterRender !== "function") {
+        throw Error("Error: afterRender must be a function")
+      } else {
+        // I'd like to make it possible to refer a different "this" in whoever's using it scope
+        // hence passing 'this' as a parameter, rather than binding to it.
+        this.props.afterRender(this);
+      }
+    }
+  },
+  afterRenderInit: function() {
+    // short-circuiting the function after a single invocation to prevent a maximum callstack exception
+    // this shuold be safe since initialization should only be invoked once and only draw information from props, rather than state, 
+    // the fact its not is a bug, IMO.
+    if(!this.state.afterRenderInitInvoked) {
+      this.setState({afterRenderInitInvoked: true}, this.afterRender)
+    }
   },
   getWidth: function getWidth(elem) {
     return elem && (elem.getBoundingClientRect().width || elem.offsetWidth) || 0;
