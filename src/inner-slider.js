@@ -12,6 +12,7 @@ import assign from 'object-assign';
 import { Track } from './track';
 import { Dots } from './dots';
 import { PrevArrow, NextArrow } from './arrows';
+import deepEqual from "deep-equal";
 
 export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
@@ -96,7 +97,7 @@ export var InnerSlider = createReactClass({
         index: nextProps.children.length - nextProps.slidesToShow,
         currentSlide: this.state.currentSlide
       });
-    } else {
+    } else if(!deepEqual(this.props, nextProps)) { //kinda expensive, but worth the extra feature, calling this.update() every time, basically, is extremely dangerous, due the risk of circular calls
       this.update(nextProps);
     }
   },

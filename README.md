@@ -109,6 +109,8 @@ class SimpleSlider extends React.Component {
 | vertical | bool | Vertical slide mode | Yes |
 | afterChange | function | callback function called after the current index changes. The new index is accessible in the first parameter of the callback function. | Yes |
 | beforeChange | function | callback function called before the current index changes. The old and the new indexes are accessible in the first and the second parameters of the callback function respectively. | Yes |
+| afterRender | function | Exposes the entire slider object, including state, props and calculated properties of all elements after each calculation or change | Yes |
+
 | slickGoTo | int | go to the specified slide number | |
 
 

@@ -27,6 +27,7 @@ import SwipeToSlide from '../examples/SwipeToSlide'
 import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
 import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
+import AfterRenderHook from '../examples/AfterRenderHook'
 
 export default class App extends React.Component {
   render() {
@@ -47,6 +48,7 @@ export default class App extends React.Component {
         <LazyLoad />
         <Fade />
         <SlideChangeHooks />
+        <AfterRenderHook />
         <SlickGoTo />
         <CustomPaging />
         <CustomArrows />
