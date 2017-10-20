@@ -41,12 +41,12 @@ export class Dots extends React.Component {
         slidesToScroll: this.props.slidesToScroll,
         currentSlide: this.props.currentSlide
       };
-
+      var isActive = dotOptions.index === dotOptions.currentSlide;
       var onClick = this.clickHandler.bind(this, dotOptions);
 
       return (
         <li key={i} className={className}>
-          {React.cloneElement(this.props.customPaging(i), {onClick})}
+          {React.cloneElement(this.props.customPaging(i, isActive), {onClick})}
         </li>
       );
     });
