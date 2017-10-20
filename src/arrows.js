@@ -32,7 +32,7 @@ export class PrevArrow extends React.Component {
     var prevArrow;
 
     if (this.props.prevArrow) {
-      prevArrow = React.cloneElement(this.props.prevArrow, { ...prevArrowProps, ...customProps });
+      prevArrow = React.createElement(this.props.prevArrow, { ...prevArrowProps, ...customProps });
     } else {
       prevArrow = <button key='0' type='button' {...prevArrowProps}> Previous</button>;
     }
@@ -70,7 +70,7 @@ export class NextArrow extends React.Component {
     var nextArrow;
 
     if (this.props.nextArrow) {
-      nextArrow = React.cloneElement(this.props.nextArrow, { ...nextArrowProps, ...customProps });
+      nextArrow = React.createElement(this.props.nextArrow, { ...nextArrowProps, ...customProps });
     } else {
       nextArrow = <button key='1' type='button' {...nextArrowProps}> Next</button>;
     }

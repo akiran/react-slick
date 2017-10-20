@@ -33,9 +33,8 @@ describe('Previous arrows', () => {
 
   it('should pass slide data to custom arrow', () => {
     let elAttributes;
-    let arr = <CustomArrow />
 
-    const wrapper = render(<PrevArrow currentSlide={3} prevArrow={arr} slideCount={5} />);
+    const wrapper = render(<PrevArrow currentSlide={3} prevArrow={CustomArrow} slideCount={5} />);
 
     elAttributes = wrapper.find('.sample')[0].attribs;
     expect(elAttributes['data-currentslide']).toBe('3');
@@ -57,9 +56,8 @@ describe('Next arrows', () => {
 
   it('should pass slide data to custom arrow', () => {
     let elAttributes;
-    let arr = <CustomArrow />
 
-    const wrapper = render(<NextArrow currentSlide={6} nextArrow={arr} slideCount={9} />);
+    const wrapper = render(<NextArrow currentSlide={6} nextArrow={CustomArrow} slideCount={9} />);
 
     elAttributes = wrapper.find('.sample')[0].attribs;
     expect(elAttributes['data-currentslide']).toBe('6');

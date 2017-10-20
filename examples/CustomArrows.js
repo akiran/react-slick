@@ -31,8 +31,8 @@ export default class CustomArrows extends Component {
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
+      nextArrow: SampleNextArrow,
+      prevArrow: SamplePrevArrow
     };
     return (
       <div>
