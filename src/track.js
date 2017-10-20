@@ -71,7 +71,11 @@ var renderSlides = function (spec) {
       currentSlide: spec.currentSlide
     };
 
-    if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
+    // Fix for #628
+    // if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
+    // When scrolling directly to last slide by swiping towards left -1/clone index is getting added on the list
+    // thus applying additional condition for such case
+    if (!spec.lazyLoad | (spec.lazyLoad && (spec.lazyLoadedList.indexOf(index) >= 0 || (count === index + 1 && spec.lazyLoadedList.indexOf(-1) >= 0) ))) {
       child = elem;
     } else {
       child = (<div></div>);
