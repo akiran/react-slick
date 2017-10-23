@@ -11,7 +11,7 @@ import assign from 'object-assign';
 
 import { Track } from './track';
 import { Dots } from './dots';
-import { PrevArrow, NextArrow } from './arrows';
+import { PrevArrow, NextArrow, FullscreenArrow } from './arrows';
 
 export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
@@ -25,7 +25,8 @@ export var InnerSlider = createReactClass({
   },
   getInitialState: function () {
     return Object.assign({}, initialState, {
-      currentSlide: this.props.initialSlide
+      currentSlide: this.props.initialSlide,
+      fullscreen: this.props.fullscreen
     });
   },
   getDefaultProps: function () {
@@ -90,21 +91,21 @@ export var InnerSlider = createReactClass({
         currentSlide: this.state.currentSlide
       });
     } else if (this.state.currentSlide >= nextProps.children.length) {
-      this.update(nextProps);
+      this.update(this, nextProps);
       this.changeSlide({
         message: 'index',
         index: nextProps.children.length - nextProps.slidesToShow,
         currentSlide: this.state.currentSlide
       });
     } else {
-      this.update(nextProps);
+      this.update(this, nextProps);
     }
   },
   componentDidUpdate: function () {
     this.adaptHeight();
   },
   onWindowResized: function () {
-    this.update(this.props);
+    this.update(this, this.props);
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
       animating: false
@@ -129,6 +130,7 @@ export var InnerSlider = createReactClass({
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
+      'fullscreen': this.state.fullscreen
     });
 
     var trackProps = {
@@ -177,12 +179,18 @@ export var InnerSlider = createReactClass({
       slidesToShow: this.props.slidesToShow,
       prevArrow: this.props.prevArrow,
       nextArrow: this.props.nextArrow,
-      clickHandler: this.changeSlide
+      clickHandler: this.changeSlide,
+      fullscreen: this.props.fullscreen
     };
 
     if (this.props.arrows) {
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
+    }
+
+    var fullscreenArrow;
+    if (this.props.fullscreen) {
+      fullscreenArrow = (<FullscreenArrow {...arrowProps} />);
     }
 
     var verticalHeightStyle = null;
@@ -238,6 +246,7 @@ export var InnerSlider = createReactClass({
         </div>
         {nextArrow}
         {dots}
+        {fullscreenArrow}
       </div>
     );
   }

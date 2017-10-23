@@ -48,33 +48,31 @@ var helpers = {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
-  update: function (props) {
-    const slickList = ReactDOM.findDOMNode(this.list);
+  update: function (that, props) {
+    const slickList = ReactDOM.findDOMNode(that.list);
     // This method has mostly same code as initialize method.
     // Refactor it
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(slickList);
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
+    var listWidth = that.getWidth(slickList);
+    var trackWidth = that.getWidth(ReactDOM.findDOMNode(that.track));
     var slideWidth;
-
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (that.getWidth(ReactDOM.findDOMNode(that)) - centerPaddingAdj)/props.slidesToShow;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = that.getWidth(ReactDOM.findDOMNode(that));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = that.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
     if(!props.autoplay) {
-      this.pause();
+      that.pause();
     } else {
-      this.autoPlay();
+      that.autoPlay();
     }
-
-    this.setState({
+    that.setState({
       slideCount,
       slideWidth,
       listWidth,
@@ -84,13 +82,13 @@ var helpers = {
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
-        slideIndex: this.state.currentSlide,
-        trackRef: this.track
-      }, props, this.state));
+        slideIndex: that.state.currentSlide,
+        trackRef: that.track
+      }, props, that.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, that.state));
 
-      this.setState({trackStyle: trackStyle});
+      that.setState({trackStyle: trackStyle});
     });
   },
   getWidth: function getWidth(elem) {
@@ -283,7 +281,6 @@ var helpers = {
       });
 
     }
-
     this.autoPlay();
   },
   swipeDirection: function (touchObject) {

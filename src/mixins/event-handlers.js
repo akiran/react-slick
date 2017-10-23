@@ -37,6 +37,19 @@ var EventHandlers = {
       if (targetSlide === options.currentSlide) {
         return;
       }
+    } else if (options.message === 'fullscreen') {
+
+      var callback = () => {
+        helpers.update(this, this.props);
+        delete this.fullscreenCallback;
+      };
+
+      this.setState({
+        fullscreen: !this.state.fullscreen,
+      }, function () {
+        this.fullscreenCallback = setTimeout(callback, 5);
+      });
+      return;
     }
 
     this.slideHandler(targetSlide);

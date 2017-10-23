@@ -57,7 +57,7 @@ h3 {
     }
     &.slick-active {
       img {
-        filter: grayscale(0%);        
+        filter: grayscale(0%);
       }
     }
   }
@@ -88,4 +88,89 @@ h3 {
 // explicitly in CSS or otherwise
 .slick-vertical .slick-slide {
   height: 180px;
+}
+
+.fullscreen {
+  position: fixed !important;
+  z-index: 12348 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  margin: 0 !important;
+  background: #222222 !important;
+}
+
+.fullscreen .slick-list, .fullscreen .slick-track {
+    height: 100% !important;
+    padding: 0 !important;
+}
+
+.fullscreen img {
+  height: 100%;
+}
+
+.fullscreen .slick-prev {
+  position: absolute;
+  left: 43px;
+  z-index: 1;
+}
+
+.fullscreen .slick-next {
+  position: absolute;
+  right: 39px;
+  z-index: 1;
+}
+
+.fullscreen .slick-fullscreen {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  line-height: 0px;
+  font-size: 0px;
+  cursor: pointer;
+  background: transparent;
+  color: transparent;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  padding: 0;
+  border: none;
+  outline: none;
+  top: 30px;
+  right: 30px;
+  font-size: 30pt;
+  max-width: 256px;
+  max-height: 256px;
+  /* https://www.flaticon.com/free-icon/delete_32178#term=close&page=1&position=24 */
+  background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDM0OC4zMzMgMzQ4LjMzNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzQ4LjMzMyAzNDguMzM0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTMzNi41NTksNjguNjExTDIzMS4wMTYsMTc0LjE2NWwxMDUuNTQzLDEwNS41NDljMTUuNjk5LDE1LjcwNSwxNS42OTksNDEuMTQ1LDAsNTYuODUgICBjLTcuODQ0LDcuODQ0LTE4LjEyOCwxMS43NjktMjguNDA3LDExLjc2OWMtMTAuMjk2LDAtMjAuNTgxLTMuOTE5LTI4LjQxOS0xMS43NjlMMTc0LjE2NywyMzEuMDAzTDY4LjYwOSwzMzYuNTYzICAgYy03Ljg0Myw3Ljg0NC0xOC4xMjgsMTEuNzY5LTI4LjQxNiwxMS43NjljLTEwLjI4NSwwLTIwLjU2My0zLjkxOS0yOC40MTMtMTEuNzY5Yy0xNS42OTktMTUuNjk4LTE1LjY5OS00MS4xMzksMC01Ni44NSAgIGwxMDUuNTQtMTA1LjU0OUwxMS43NzQsNjguNjExYy0xNS42OTktMTUuNjk5LTE1LjY5OS00MS4xNDUsMC01Ni44NDRjMTUuNjk2LTE1LjY4Nyw0MS4xMjctMTUuNjg3LDU2LjgyOSwwbDEwNS41NjMsMTA1LjU1NCAgIEwyNzkuNzIxLDExLjc2N2MxNS43MDUtMTUuNjg3LDQxLjEzOS0xNS42ODcsNTYuODMyLDBDMzUyLjI1OCwyNy40NjYsMzUyLjI1OCw1Mi45MTIsMzM2LjU1OSw2OC42MTF6IiBmaWxsPSIjRkZGRkZGIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==)
+}
+
+.slick-fullscreen {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  line-height: 0px;
+  font-size: 0px;
+  cursor: pointer;
+  background: transparent;
+  color: transparent;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  padding: 0;
+  border: none;
+  outline: none;
+  top: 30px;
+  right: 30px;
+  font-size: 30pt;
+  max-width: 256px;
+  max-height: 256px;
+  /* https://www.flaticon.com/free-icon/expand_560470#term=fullscreen&page=1&position=22 */
+  background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMjM2LjQ1NCwxNzIuODA4TDEzMi40MjEsNjguNzg5bDQzLjE4NC00My4xODRDMTg1LjAxNCwxNi4xOTcsMTc4LjM2NSwwLDE2NSwwSDE1QzYuNzA5LDAsMCw2LjcwOSwwLDE1djE1MCAgICBjMCwxMy4yNDEsMTYuMDY2LDIwLjExMiwyNS42MDYsMTAuNjA2bDQzLjE5OC00My4xNjlsMTA0LjAwNCwxMDQuMDE4YzUuODU2LDUuODU2LDE1LjM1MSw1Ljg1OSwyMS4yMDksMC4wMDFsNDIuNDM3LTQyLjQzNyAgICBDMjQyLjI4NiwxODguMTg3LDI0Mi4zMzQsMTc4LjY4OCwyMzYuNDU0LDE3Mi44MDh6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNDk3LDBIMzQ3Yy0xMy4zNjEsMC0yMC4wMTgsMTYuMTkzLTEwLjYwNiwyNS42MDVsNDMuMTg0LDQzLjE4NEwyNzUuNTQ0LDE3Mi43OTJjLTUuODQ0LDUuODQ0LTUuODY4LDE1LjM1OCwwLDIxLjIyNiAgICBsNDIuNDM3LDQyLjQzN2M1Ljg2LDUuODYsMTUuMzUyLDUuODU5LDIxLjIxMSwwbDEwNC4wMTktMTA0LjAzNGw0My4xODQsNDMuMTg0QzQ5NS45MywxODUuMTQxLDUxMiwxNzguMjMsNTEyLDE2NVYxNSAgICBDNTEyLDYuNzA5LDUwNS4yOTEsMCw0OTcsMHoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik00ODYuMzk2LDMzNi4zOTNsLTQzLjE4NCw0My4xODRMMzM5LjE5MywyNzUuNTQ0Yy01Ljg1Ni01Ljg1Ni0xNS4zNDktNS44NjItMjEuMjExLDBsLTQyLjQzNyw0Mi40MzcgICAgYy01Ljg2OCw1Ljg2OC01Ljg0NCwxNS4zODIsMCwyMS4yMjZsMTA0LjAzNCwxMDQuMDA0bC00My4xODQsNDMuMTg0QzMyNi45ODYsNDk1LjgwMywzMzMuNjM1LDUxMiwzNDcsNTEyaDE1MCAgICBjOC4yOTEsMCwxNS02LjcwOSwxNS0xNVYzNDdDNTEyLDMzMy42MzksNDk1LjgwNywzMjYuOTgyLDQ4Ni4zOTYsMzM2LjM5M3oiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0yMzYuNDU2LDMxNy45ODNsLTQyLjQzNy00Mi40MzdjLTUuNjI1LTUuNjI1LTE1LjU4Ni01LjYyNS0yMS4yMTEsMEw2OC43ODksMzc5LjU3OWwtNDMuMTg0LTQzLjE4NCAgICBDMTYuMjgzLDMyNy4wNCwwLDMzMy41NjMsMCwzNDd2MTUwYzAsOC4yOTEsNi43MDksMTUsMTUsMTVoMTUwYzEzLjM2MSwwLDIwLjAxOC0xNi4xOTMsMTAuNjA2LTI1LjYwNWwtNDMuMTg0LTQzLjE4NCAgICBsMTA0LjAzNC0xMDQuMDE3QzI0Mi4zMzYsMzMzLjMxNCwyNDIuMjg5LDMyMy44MTYsMjM2LjQ1NiwzMTcuOTgzeiIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=)
 }

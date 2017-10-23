@@ -45,7 +45,8 @@ var defaultProps = {
     swipeEvent: null,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
-    prevArrow: null
+    prevArrow: null,
+    fullscreen: false
 };
 
 module.exports = defaultProps;
