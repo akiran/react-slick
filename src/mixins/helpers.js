@@ -104,7 +104,8 @@ var helpers = {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.list) {
         var slickList = ReactDOM.findDOMNode(this.list);
-        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+        var elem = slickList.querySelector(selector) || {};
+        slickList.style.height = (elem.offsetHeight || 0) + 'px';
       }
     }
   },
