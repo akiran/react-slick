@@ -129,6 +129,8 @@ export var getTrackLeft = function (spec) {
 
   if (spec.variableWidth === true) {
       var targetSlideIndex;
+      var lastSlide = ReactDOM.findDOMNode(spec.trackRef).children[spec.slideCount - 1];
+      var max = -(lastSlide.offsetLeft) + spec.listWidth - lastSlide.offsetWidth;
       if(spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
           targetSlide = ReactDOM.findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
       } else {
@@ -146,6 +148,9 @@ export var getTrackLeft = function (spec) {
           if (targetSlide) {
             targetLeft = targetSlide.offsetLeft * -1 + (spec.listWidth - targetSlide.offsetWidth) / 2;
           }
+      }
+      if (spec.infinite === false && targetLeft < max) {
+        targetLeft = max;
       }
   }
 

@@ -218,6 +218,9 @@ var helpers = {
     }, this.props, this.state));
 
     if (this.props.infinite === false) {
+      if (targetLeft === currentLeft) {
+        targetSlide = currentSlide;
+      }
       targetLeft = currentLeft;
     }
 
