@@ -70,45 +70,45 @@ class SimpleSlider extends React.Component {
 }
 ```
 
-|    Property    | Type |          Description          | Working |
-| -------------  | ---- |          -----------          | ------- |
-| accessibility  | bool | Enables tabbing and arrow key navigation | Yes |
-| className      | String |Additional class name for the inner slider div | Yes |
-| adaptiveHeight | bool | Adjust the slide's height automatically | Yes |
-| arrows         | bool | Should we show Left and right nav arrows | Yes |
-| nextArrow      | React Element | Use this element for the next arrow button [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js) | Yes |
-| prevArrow      | React Element | Use this element for the prev arrow button [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js) | Yes |
-| autoplay       | bool | Should the scroller auto scroll? | Yes |
-| autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
-| centerMode     | bool | Should we centre to a single item? | Yes |
+|    Property    | Type |          Description          | Working | Default |
+| -------------  | ---- |          -----------          | ------- | ------- |
+| accessibility  | bool | Enables tabbing and arrow key navigation | Yes | `true` |
+| className      | String |Additional class name for the inner slider div | Yes | |
+| adaptiveHeight | bool | Adjust the slide's height automatically | Yes | `false` |
+| arrows         | bool | Should we show Left and right nav arrows | Yes | `true` |
+| nextArrow      | React Element | Use this element for the next arrow button [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js) | Yes | `null` |
+| prevArrow      | React Element | Use this element for the prev arrow button [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js) | Yes | `null` |
+| autoplay       | bool | Should the scroller auto scroll? | Yes | `false` |
+| autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes | `3000` |
+| centerMode     | bool | Should we centre to a single item? | Yes | `false` |
 | centerPadding  | | | |
 | cssEase        | | | |
 | customPaging   | func | Custom paging templates. [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomPaging.js)| Yes |
-| dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
-| dotsClass      | string | Class applied to the dots if they are enabled | Yes |
-| draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
-| easing         | string | | |
-| fade           | bool | Slides use fade for transition  | Yes |
-| focusOnSelect  | bool | Go to slide on click | Yes |
-| infinite       | bool | should the gallery wrap around its contents | Yes |
-| initialSlide   | int | which item should be the first to be displayed | Yes |
-| lazyLoad       | bool | Loads images or renders components on demands | Yes |
-| pauseOnHover   | bool | prevents autoplay while hovering | Yes |
-| responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
-| rtl            | bool | Reverses the slide order | Yes |
+| dots           | bool | Should we show the dots at the bottom of the gallery | Yes | `false` |
+| dotsClass      | string | Class applied to the dots if they are enabled | Yes | `'slick-dots'` |
+| draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes | `true` |
+| easing         | string | | |`linear` |
+| fade           | bool | Slides use fade for transition  | Yes | `false` |
+| focusOnSelect  | bool | Go to slide on click | Yes | `false` |
+| infinite       | bool | should the gallery wrap around its contents | Yes | `true` |
+| initialSlide   | int | which item should be the first to be displayed | Yes | `0` |
+| lazyLoad       | bool | Loads images or renders components on demands | Yes | `false` |
+| pauseOnHover   | bool | prevents autoplay while hovering | Yes | `true` |
+| responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes | `null` |
+| rtl            | bool | Reverses the slide order | Yes | `false` |
 | slide         | string |||
-| slidesToShow | int | Number of slides to be visible at a time | Yes |
-| slidesToScroll | int | Number of slides to scroll for each navigation item
-| speed | int |||
-| swipe | bool |||
-| swipeToSlide | bool | Allow users to drag or swipe directly to a slide irrespective of slidesToScroll | Yes |
-| touchMove | bool |||
-| touchThreshold | int |||
-| variableWidth | bool |||
-| useCSS | bool | Enable/Disable CSS Transitions | Yes |
-| vertical | bool | Vertical slide mode | Yes |
-| afterChange | function | callback function called after the current index changes. The new index is accessible in the first parameter of the callback function. | Yes |
-| beforeChange | function | callback function called before the current index changes. The old and the new indexes are accessible in the first and the second parameters of the callback function respectively. | Yes |
+| slidesToShow | int | Number of slides to be visible at a time | Yes | `1` |
+| slidesToScroll | int | Number of slides to scroll for each navigation item | | `1` |
+| speed | int ||| `500` |
+| swipe | bool ||| `true` |
+| swipeToSlide | bool | Allow users to drag or swipe directly to a slide irrespective of slidesToScroll | Yes | `false` |
+| touchMove | bool ||| `true` |
+| touchThreshold | int ||| `5` |
+| variableWidth | bool ||| `false` |
+| useCSS | bool | Enable/Disable CSS Transitions | Yes | `true` |
+| vertical | bool | Vertical slide mode | Yes | `false` |
+| afterChange | function | callback function called after the current index changes. The new index is accessible in the first parameter of the callback function. | Yes | `null` |
+| beforeChange | function | callback function called before the current index changes. The old and the new indexes are accessible in the first and the second parameters of the callback function respectively. | Yes | `null` |
 | slickGoTo | int | go to the specified slide number | |
 
 
