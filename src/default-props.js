@@ -46,7 +46,8 @@ var defaultProps = {
     // nextArrow, prevArrow are react componets
     nextArrow: null,
     prevArrow: null,
-    fullscreen: false
+    fullscreen: false,
+    fullscreenArrow: null
 };
 
 module.exports = defaultProps;

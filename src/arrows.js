@@ -102,7 +102,6 @@ export class FullscreenArrow extends React.Component {
       slideCount: this.props.slideCount
     };
     var fullscreenArrow;
-
     if (this.props.fullscreenArrow) {
       fullscreenArrow = React.cloneElement(this.props.fullscreenArrow, { ...fullscreenArrowProps, ...customProps });
     } else {

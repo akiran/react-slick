@@ -119,6 +119,9 @@ export var InnerSlider = createReactClass({
   slickNext: function () {
     this.changeSlide({ message: 'next' });
   },
+  slickFullScreen: function () {
+    this.changeSlide({ message: 'fullscreen' });
+  },
   slickGoTo: function (slide) {
     slide = Number(slide)
     !isNaN(slide) && this.changeSlide({
@@ -152,6 +155,9 @@ export var InnerSlider = createReactClass({
       variableWidth: this.props.variableWidth
     };
 
+    console.log('this.state.trackStyle');
+    console.log(this.state.trackStyle);
+
     var dots;
 
     if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
@@ -169,7 +175,7 @@ export var InnerSlider = createReactClass({
       dots = (<Dots {...dotProps} />);
     }
 
-    var prevArrow, nextArrow;
+    var prevArrow, nextArrow, fullscreenArrow;
 
     var arrowProps = {
       infinite: this.props.infinite,
@@ -180,16 +186,17 @@ export var InnerSlider = createReactClass({
       prevArrow: this.props.prevArrow,
       nextArrow: this.props.nextArrow,
       clickHandler: this.changeSlide,
-      fullscreen: this.props.fullscreen
+      fullscreen: this.props.fullscreen,
+      fullscreenArrow: this.props.fullscreenArrow
     };
 
     if (this.props.arrows) {
       prevArrow = (<PrevArrow {...arrowProps} />);
       nextArrow = (<NextArrow {...arrowProps} />);
+
     }
 
-    var fullscreenArrow;
-    if (this.props.fullscreen) {
+    if (this.props.fullscreenArrow !== null) {
       fullscreenArrow = (<FullscreenArrow {...arrowProps} />);
     }
 
