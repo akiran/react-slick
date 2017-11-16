@@ -133,7 +133,7 @@ export var InnerSlider = createReactClass({
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
-      'fullscreen': this.state.fullscreen
+      'full': this.state.fullscreen
     });
 
     var trackProps = {
@@ -154,9 +154,6 @@ export var InnerSlider = createReactClass({
       trackStyle: this.state.trackStyle,
       variableWidth: this.props.variableWidth
     };
-
-    console.log('this.state.trackStyle');
-    console.log(this.state.trackStyle);
 
     var dots;
 
