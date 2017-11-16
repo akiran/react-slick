@@ -30,15 +30,19 @@ export var getTrackCSS = function (spec) {
     trackHeight = trackChildren * spec.slideHeight;
   }
 
-  var left = spec.indent && !spec.variableWidth ? (spec.left + spec.indent - spec.slideWidth) : spec.left;
+  const indentLeft = spec.left + spec.indent - spec.slideWidth;
+  let left = spec.infinite && spec.indent && !spec.variableWidth && !spec.vertical ? indentLeft : spec.left;
+  if (spec.vertical && spec.indent) {
+    left = left - spec.slideHeight;
+  }
 
   var style = {
     opacity: 1,
-    WebkitTransform: !spec.vertical ? 'translate3d(' + left + 'px, 0px, 0px)' : 'translate3d(0px, ' + (spec.left - spec.slideHeight) + 'px, 0px)',
-    transform: !spec.vertical ? 'translate3d(' + left + 'px, 0px, 0px)' : 'translate3d(0px, ' + (spec.left - spec.slideHeight) + 'px, 0px)',
+    WebkitTransform: !spec.vertical ? 'translate3d(' + left + 'px, 0px, 0px)' : 'translate3d(0px, ' + left + 'px, 0px)',
+    transform: !spec.vertical ? 'translate3d(' + left + 'px, 0px, 0px)' : 'translate3d(0px, ' + left + 'px, 0px)',
     transition: '',
     WebkitTransition: '',
-    msTransform: !spec.vertical ? 'translateX(' + left + 'px)' : 'translateY(' + (spec.left - spec.slideHeight) + 'px)',
+    msTransform: !spec.vertical ? 'translateX(' + left + 'px)' : 'translateY(' + left + 'px)',
   };
 
   if (trackWidth) {

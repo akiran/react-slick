@@ -14,14 +14,14 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth;
 
-    var indent = props.infinite ? props.indent * 2 : 0;
-    var indentPerSlide = indent / props.slidesToShow;
+    const indent = props.infinite ? props.indent * 2 : 0;
+    const indentPerSlide = indent / props.slidesToShow;
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
       slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow - indentPerSlide;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this)) - indent;
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -60,14 +60,14 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth;
 
-    var indent = props.infinite ? props.indent * 2 : 0;
-    var indentPerSlide = indent / props.slidesToShow;
+    const indent = props.infinite ? props.indent * 2 : 0;
+    const indentPerSlide = indent / props.slidesToShow;
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
       slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow - indentPerSlide;
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this)) - indent;
+      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
