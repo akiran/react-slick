@@ -14,6 +14,7 @@ export class Dots extends React.Component {
   clickHandler(options, e) {
     // In Autoplay the focus stays on clicked button even after transition
     // to next slide. That only goes away by click somewhere outside
+    e.stopPropagation(); // Prevent closing the lightbox
     e.preventDefault();
     this.props.clickHandler(options);
   }

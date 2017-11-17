@@ -41,7 +41,33 @@ var EventHandlers = {
 
     this.slideHandler(targetSlide);
   },
-
+  // Event handler for opening lightbox
+  openLightbox: function () {
+    this.setState({
+      lightboxOpen: true
+    });
+  },
+  // Add open class to lightbox (doing this for animating)
+  showLightbox: function () {
+    if (this.props.lightbox) {
+      if (this.lightbox && this.state.lightboxOpen) {
+        var lightbox = ReactDOM.findDOMNode(this.lightbox);
+        lightbox.classList.add('open');
+        var wrapper = ReactDOM.findDOMNode(this.wrapper);
+        wrapper.style.height = lightbox.clientHeight + 'px';
+        wrapper.style.width = lightbox.clientWidth + 'px';
+      }
+    }
+  },
+  // Remove the lightbox
+  closeLightbox: function () {
+    this.setState({
+      lightboxOpen: false
+    });
+    var wrapper = ReactDOM.findDOMNode(this.wrapper);
+    wrapper.style.height ='100%';
+    wrapper.style.width = '100%';
+  },
   // Accessiblity handler for previous and next
   keyHandler: function (e) {
     //Dont slide if the cursor is inside the form fields and arrow keys are pressed
@@ -60,6 +86,12 @@ var EventHandlers = {
   // Focus on selecting a slide (click handler on track)
   selectHandler: function (options) {
     this.changeSlide(options)
+  },
+  // Open Lightbox on selecting a slide (click handler on track)
+  lightboxHandler: function () {
+    if (!this.state.lightboxOpen) {
+      this.openLightbox();
+    }
   },
   swipeStart: function (e) {
     var touches, posX, posY;
@@ -334,6 +366,11 @@ var EventHandlers = {
   onInnerSliderLeave: function (e) {
     if (this.props.autoplay && this.props.pauseOnHover) {
       this.autoPlay();
+    }
+  },
+  onClickWrapper: function (e) {
+    if (this.state.lightboxOpen) {
+      this.closeLightbox();
     }
   }
 };

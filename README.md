@@ -90,6 +90,7 @@ class SimpleSlider extends React.Component {
 | easing         | string | | |
 | fade           | bool | Slides use fade for transition  | Yes |
 | focusOnSelect  | bool | Go to slide on click | Yes |
+| lightbox       | bool | Open a lightbox on click | Yes |
 | infinite       | bool | should the gallery wrap around its contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |

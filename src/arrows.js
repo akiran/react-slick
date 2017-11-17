@@ -6,7 +6,10 @@ import Helpers from './mixins/helpers';
 
 export class PrevArrow extends React.Component {
   clickHandler(options, e) {
-    if (e) { e.preventDefault(); }
+    if (e) {
+      e.stopPropagation(); // Prevent closing the lightbox
+      e.preventDefault();
+   }
     this.props.clickHandler(options, e);
   }
   render() {
@@ -44,7 +47,10 @@ export class PrevArrow extends React.Component {
 
 export class NextArrow extends React.Component {
   clickHandler(options, e) {
-    if (e) { e.preventDefault(); }
+    if (e) {
+      e.stopPropagation(); // Prevent closing the lightbox
+      e.preventDefault();
+    }
     this.props.clickHandler(options, e);
   }
   render() {
