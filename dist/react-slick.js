@@ -2862,7 +2862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var style = {};
 
 	  if (spec.variableWidth === undefined || spec.variableWidth === false) {
-	    style.width = spec.slideWidth;
+	    style.width = spec.slideWidth + 0.2;
 	  }
 
 	  if (spec.fade) {
