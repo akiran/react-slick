@@ -129,13 +129,12 @@ var helpers = {
     };
   },
   // get thie first child from the First Level Children with special selector，avoiding get error elements if react-slick nested using
-  getFirstLevelChild(dom, selector) {
+  getFirstLevelChild(slickList, selector) {
     const children = [];
-    const allChildren = dom.querySelectorAll(selector);
-    allChildren.forEach((child, idx) => {
+    const allChildren = slickList.querySelectorAll(selector);
+    allChildren.forEach(child => {
       const parentList = closest(child, '.slick-list');
-      const grandpaList = closest(parentList, '.slick-list');
-      if (!grandpaList) {
+      if (parentList === slickList) {
         children.push(child);
       }
     });
