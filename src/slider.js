@@ -65,7 +65,7 @@ export default class Slider extends React.Component {
   }
 
   slickFullscreen() {
-    this.innerSlider.slickFullscreen();
+    this.innerSlider.slickFullScreen();
   }
 
   slickGoTo(slide) {

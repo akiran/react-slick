@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "start": "gulp server",
+    "copy": "cp -R dist/ ../slickton/node_modules/react-slick/dist/ && cp -R lib/ ../slickton/node_modules/react-slick/lib/",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "jest",
     "test:watch": "jest --watch",
