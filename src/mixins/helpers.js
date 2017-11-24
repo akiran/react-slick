@@ -132,12 +132,13 @@ var helpers = {
   getFirstLevelChild(slickList, selector) {
     const children = [];
     const allChildren = slickList.querySelectorAll(selector);
-    allChildren.forEach(child => {
+    for (let i = 0, l = allChildren.length; i < l; i++) {
+      const child = allChildren[i];
       const parentList = closest(child, '.slick-list');
       if (parentList === slickList) {
         children.push(child);
       }
-    });
+    }
     return children[0];
   },
   getWidth: function getWidth(elem) {
