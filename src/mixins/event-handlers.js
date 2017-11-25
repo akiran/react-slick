@@ -148,7 +148,12 @@ var EventHandlers = {
     }
 
     if (!this.props.vertical) {
-      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+      if (!this.props.rtl) {
+        swipeLeft = curLeft + touchSwipeLength * positionOffset;
+      }
+      else {
+        swipeLeft = curLeft - touchSwipeLength * positionOffset;
+      }
     } else {
       swipeLeft = curLeft + (touchSwipeLength * (this.state.listHeight / this.state.listWidth)) * positionOffset;
     }
