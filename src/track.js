@@ -90,7 +90,7 @@ var renderSlides = function (spec) {
       key: 'original' + getKey(child, index),
       'data-index': index,
       className: classnames(getSlideClasses(assign({index: index}, spec)), slideClass),
-      tabIndex: '-1',
+      // tabIndex: '-1',
       style: assign({outline: 'none'}, child.props.style || {}, childStyle),
       onClick
     }));
