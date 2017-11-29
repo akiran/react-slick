@@ -128,17 +128,16 @@ var renderSlides = function (spec) {
   } else {
     return preCloneSlides.concat(slides, postCloneSlides);
   }
-
-
 };
 
 export class Track extends React.Component {
   render() {
     var slides = renderSlides.call(this, this.props);
+    const TrackComponent = this.props.trackComponent || 'div';
     return (
-      <div className='slick-track' style={this.props.trackStyle}>
+      <TrackComponent className='slick-track' style={this.props.trackStyle}>
         { slides }
-      </div>
+      </TrackComponent>
     );
   }
 }
