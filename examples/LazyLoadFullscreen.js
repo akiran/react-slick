@@ -2,6 +2,24 @@ import React, { Component } from 'react'
 import Slider from '../src/slider'
 import {baseUrl} from './config'
 
+class FullScreenArrow extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      props: props
+    }
+  }
+  click(event, onClick) {
+    onClick();
+  }
+  render() {
+    const {className, style, onClick} = this.state.props;
+    return (
+        <a className="fullscreen-button" onClick={(e) => this.click(e, onClick)} ></a>
+    );
+  }
+}
+
 export default class LazyLoad extends Component {
   render() {
     const settings = {
@@ -12,7 +30,7 @@ export default class LazyLoad extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       initialSlide: 2,
-      fullscreen: true
+      fullscreenArrow: <FullScreenArrow />
     };
     return (
       <div>
