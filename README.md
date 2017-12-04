@@ -13,7 +13,7 @@ Carousel component built with React. It is a react port of [slick carousel](http
 npm install react-slick
 ```
 
-⚠️ Also install slick-carousel for css and font 
+⚠️ Also install slick-carousel for css and font
 
 ```bash
 npm install slick-carousel
@@ -110,6 +110,9 @@ class SimpleSlider extends React.Component {
 | afterChange | function | callback function called after the current index changes. The new index is accessible in the first parameter of the callback function. | Yes |
 | beforeChange | function | callback function called before the current index changes. The old and the new indexes are accessible in the first and the second parameters of the callback function respectively. | Yes |
 | slickGoTo | int | go to the specified slide number | |
+| fullscreenArrow      | React Element | Use this element for the fullscreen button
+| slickFullscreen | func | enable/disable fullscreen mode| |
+| getDirection | int | get the swiped direction  | |
 
 
 ### Methods
