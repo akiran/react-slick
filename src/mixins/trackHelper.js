@@ -47,7 +47,7 @@ export var getTrackCSS = function(spec) {
   }
 
   // Fallback for IE8
-  if (window && !window.addEventListener && window.attachEvent) {
+  if (!+"\v1") {
     if (!spec.vertical) {
       style.marginLeft = spec.left + 'px';
     } else {
