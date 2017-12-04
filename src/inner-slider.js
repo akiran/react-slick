@@ -122,6 +122,9 @@ export var InnerSlider = createReactClass({
   slickFullScreen: function () {
     this.changeSlide({ message: 'fullscreen' });
   },
+  getDirection: function () {
+    return this.state.currentDirection;
+  },
   slickGoTo: function (slide) {
     slide = Number(slide)
     !isNaN(slide) && this.changeSlide({

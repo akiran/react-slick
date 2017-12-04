@@ -270,7 +270,7 @@ var EventHandlers = {
     }
     var touchObject = this.state.touchObject;
     var minSwipe = this.state.listWidth/this.props.touchThreshold;
-    var swipeDirection = window.swipeDirection = this.swipeDirection(touchObject);
+    var swipeDirection = this.swipeDirection(touchObject);
 
     if (this.props.verticalSwiping) {
       minSwipe = this.state.listHeight/this.props.touchThreshold;

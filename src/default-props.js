@@ -47,7 +47,8 @@ var defaultProps = {
     nextArrow: null,
     prevArrow: null,
     fullscreen: false,
-    fullscreenArrow: null
+    fullscreenArrow: null,
+    currentDirection: null
 };
 
 module.exports = defaultProps;
