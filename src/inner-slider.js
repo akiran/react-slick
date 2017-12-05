@@ -125,6 +125,9 @@ export var InnerSlider = createReactClass({
   getDirection: function () {
     return this.state.currentDirection;
   },
+  isAnimated: function () {
+    return this.state.animating;
+  },
   slickGoTo: function (slide) {
     slide = Number(slide)
     !isNaN(slide) && this.changeSlide({

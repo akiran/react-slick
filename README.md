@@ -113,6 +113,7 @@ class SimpleSlider extends React.Component {
 | fullscreenArrow      | React Element | Use this element for the fullscreen button
 | slickFullscreen | func | enable/disable fullscreen mode| |
 | getDirection | int | get the swiped direction  | |
+| isAnimated | bool | is slideshow animated  | |
 
 
 ### Methods

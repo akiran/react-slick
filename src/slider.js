@@ -76,6 +76,10 @@ export default class Slider extends React.Component {
     return this.innerSlider.getDirection()
   }
 
+  isAnimated() {
+    return this.innerSlider.isAnimated()
+  }
+
   render() {
     var settings;
     var newProps;
