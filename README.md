@@ -181,7 +181,3 @@ open http://localhost:8080
 
 ### Polyfills for old IE support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/8Wa5rFgnuaoyA8ryN2LAAqgu/akiran/react-slick'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/8Wa5rFgnuaoyA8ryN2LAAqgu/akiran/react-slick.svg' />
-</a>

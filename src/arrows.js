@@ -10,26 +10,26 @@ export class PrevArrow extends React.Component {
     this.props.clickHandler(options, e);
   }
   render() {
-    var prevClasses = {'slick-arrow': true, 'slick-prev': true};
-    var prevHandler = this.clickHandler.bind(this, {message: 'previous'});
+    let prevClasses = {'slick-arrow': true, 'slick-prev': true};
+    let prevHandler = this.clickHandler.bind(this, {message: 'previous'});
 
     if (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
       prevClasses['slick-disabled'] = true;
       prevHandler = null;
     }
 
-    var prevArrowProps = {
+    let prevArrowProps = {
       key: '0',
       'data-role': 'none',
       className: classnames(prevClasses),
       style: {display: 'block'},
       onClick: prevHandler
     };
-    var customProps = {
+    let customProps = {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
-    var prevArrow;
+    let prevArrow;
 
     if (this.props.prevArrow) {
       prevArrow = React.cloneElement(this.props.prevArrow, { ...prevArrowProps, ...customProps });
@@ -48,26 +48,26 @@ export class NextArrow extends React.Component {
     this.props.clickHandler(options, e);
   }
   render() {
-    var nextClasses = {'slick-arrow': true, 'slick-next': true};
-    var nextHandler = this.clickHandler.bind(this, {message: 'next'});
+    let nextClasses = {'slick-arrow': true, 'slick-next': true};
+    let nextHandler = this.clickHandler.bind(this, {message: 'next'});
 
     if (!Helpers.canGoNext(this.props)) {
       nextClasses['slick-disabled'] = true;
       nextHandler = null;
     }
 
-    var nextArrowProps = {
+    let nextArrowProps = {
       key: '1',
       'data-role': 'none',
       className: classnames(nextClasses),
       style: {display: 'block'},
       onClick: nextHandler
     };
-    var customProps = {
+    let customProps = {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
-    var nextArrow;
+    let nextArrow;
 
     if (this.props.nextArrow) {
       nextArrow = React.cloneElement(this.props.nextArrow, { ...nextArrowProps, ...customProps });
