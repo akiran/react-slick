@@ -16,9 +16,17 @@ import { PrevArrow, NextArrow } from './arrows';
 export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   list: null,
+  wrapper: null,
+  lightbox: null,
   track: null,
   listRefHandler: function (ref) {
     this.list = ref;
+  },
+  wrapperRefHandler: function (ref) {
+    this.wrapper = ref;
+  },
+  lightboxRefHandler: function (ref) {
+    this.lightbox = ref;
   },
   trackRefHandler: function (ref) {
     this.track = ref;
@@ -101,6 +109,7 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidUpdate: function () {
+    this.showLightbox();
     this.adaptHeight();
   },
   onWindowResized: function () {
@@ -138,6 +147,7 @@ export var InnerSlider = createReactClass({
       infinite: this.props.infinite,
       centerMode: this.props.centerMode,
       focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null,
+      lightbox: this.props.lightbox ? this.lightboxHandler : null,
       currentSlide: this.state.currentSlide,
       lazyLoad: this.props.lazyLoad,
       lazyLoadedList: this.state.lazyLoadedList,
@@ -211,7 +221,7 @@ export var InnerSlider = createReactClass({
 
     const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
 
-    return (
+    const finalSlider = (
       <div
         className={className}
         onMouseEnter={this.onInnerSliderEnter}
@@ -239,6 +249,22 @@ export var InnerSlider = createReactClass({
         {nextArrow}
         {dots}
       </div>
+    );
+
+    return (
+      this.state.lightboxOpen ? (
+        <div className="slick-wrapper" ref={this.wrapperRefHandler}>
+          <div className="slick-lightbox-overlay" onClick={this.onClickWrapper}>
+            <div ref={this.lightboxRefHandler} className="slick-lightbox">
+              {finalSlider}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="slick-wrapper" ref={this.wrapperRefHandler}>
+          {finalSlider}
+        </div>
+      )
     );
   }
 });

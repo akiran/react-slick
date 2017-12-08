@@ -27,6 +27,7 @@ import SwipeToSlide from '../examples/SwipeToSlide'
 import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
 import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
+import Lightbox from '../examples/Lightbox'
 
 export default class App extends React.Component {
   render() {
@@ -39,6 +40,7 @@ export default class App extends React.Component {
         <UnevenSetsFinite />
         <CenterMode />
         <FocusOnSelect />
+        <Lightbox />
         <AutoPlay />
         <PauseOnHover />
         <Rtl />

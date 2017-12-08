@@ -80,9 +80,13 @@ var renderSlides = function (spec) {
     const slideClass = child.props.className || ''
 
     const onClick = function(e) {
+      if (e) { e.stopPropagation(); } // Prevent closing the lightbox
       child.props && child.props.onClick && child.props.onClick(e)
       if (spec.focusOnSelect) {
         spec.focusOnSelect(childOnClickOptions)
+      }
+      if (spec.lightbox) {
+        spec.lightbox()
       }
     }
 
