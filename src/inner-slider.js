@@ -60,20 +60,36 @@ export var InnerSlider = createReactClass({
     if (!window) {
       return
     }
-    if (window.addEventListener) {
-      window.addEventListener('resize', this.onWindowResized);
+    if (window.parent) {
+      if (window.parent.addEventListener) {
+        window.parent.addEventListener('resize', this.onWindowResized);
+      } else {
+        window.parent.attachEvent('onresize', this.onWindowResized);
+      }
     } else {
-      window.attachEvent('onresize', this.onWindowResized);
+      if (window.addEventListener) {
+        window.addEventListener('resize', this.onWindowResized);
+      } else {
+        window.attachEvent('onresize', this.onWindowResized);
+      }
     }
   },
   componentWillUnmount: function componentWillUnmount() {
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
     }
-    if (window.addEventListener) {
-      window.removeEventListener('resize', this.onWindowResized);
+    if (window.parent) {
+      if (window.parent.addEventListener) {
+        window.parent.addEventListener('resize', this.onWindowResized);
+      } else {
+        window.parent.attachEvent('onresize', this.onWindowResized);
+      }
     } else {
-      window.detachEvent('onresize', this.onWindowResized);
+      if (window.addEventListener) {
+        window.addEventListener('resize', this.onWindowResized);
+      } else {
+        window.attachEvent('onresize', this.onWindowResized);
+      }
     }
     if (this.state.autoPlayTimer) {
       clearInterval(this.state.autoPlayTimer);
