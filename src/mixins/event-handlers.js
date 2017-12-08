@@ -20,12 +20,18 @@ var EventHandlers = {
         previousInt = currentSlide - slideOffset;
         targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
       }
+      this.setState({
+        currentDirection: 1
+      });
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
       targetSlide = currentSlide + slideOffset;
       if (this.props.lazyLoad) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
       }
+      this.setState({
+        currentDirection: 0
+      });
     } else if (options.message === 'dots' || options.message === 'children') {
       // Click on dots
       targetSlide = options.index * options.slidesToScroll;
@@ -37,6 +43,19 @@ var EventHandlers = {
       if (targetSlide === options.currentSlide) {
         return;
       }
+    } else if (options.message === 'fullscreen') {
+
+      var callback = () => {
+        helpers.update(this, this.props);
+        delete this.fullscreenCallback;
+      };
+
+      this.setState({
+        fullscreen: !this.state.fullscreen,
+      }, function () {
+        this.fullscreenCallback = setTimeout(callback, 5);
+      });
+      return;
     }
 
     this.slideHandler(targetSlide);

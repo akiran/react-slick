@@ -27,11 +27,14 @@ import SwipeToSlide from '../examples/SwipeToSlide'
 import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
 import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
+import LazyLoadFullscreen from '../examples/LazyLoadFullscreen'
 
-export default class App extends React.Component {
+
+export default class App1 extends React.Component {
   render() {
     return (
       <div className='content'>
+        <LazyLoadFullscreen />
         <SimpleSlider />
         <MultipleItems />
         <Responsive />
