@@ -71,7 +71,7 @@ var renderSlides = function (spec) {
       currentSlide: spec.currentSlide
     };
 
-    if (!spec.lazyLoad | (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
+    if (!spec.lazyLoad || (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
       child = elem;
     } else {
       child = (<div></div>);
