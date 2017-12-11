@@ -1,6 +1,6 @@
 {
   "name": "react-slick-complex",
-  "version": "0.01.3",
+  "version": "0.01.4",
   "description": "React port of slick carousel",
   "main": "./lib",
   "scripts": {
@@ -37,7 +37,7 @@
     "css-loader": "^0.23.1",
     "deepmerge": "^0.2.10",
     "del": "^2.2.0",
-    "enzyme": "^2.3.0",
+    "enzyme": "^3.2.0",
     "es5-shim": "^4.5.8",
     "eslint": "^2.10.2",
     "eslint-plugin-react": "^5.1.1",
@@ -57,16 +57,17 @@
     "node-sass": "^3.7.0",
     "phantomjs-prebuilt": "^2.1.7",
     "postcss-loader": "^0.9.1",
-    "react": "^15.1.0",
-    "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "run-sequence": "^1.2.1",
     "sass-loader": "^3.2.0",
     "should": "^8.4.0",
     "sinon": "^1.17.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "jquery": "^3.2.1"
+
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -75,10 +76,6 @@
     "object-assign": "^4.1.0",
     "react-responsive-mixin": "^0.3.5",
     "slick-carousel": "^1.6.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.1",
-    "react-dom": "^0.14.0 || ^15.0.1"
   },
   "npmName": "react-slick",
   "npmFileMap": [
