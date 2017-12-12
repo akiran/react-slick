@@ -50,6 +50,10 @@ export var InnerSlider = createReactClass({
         lazyLoadedList: lazyLoadedList
       });
     }
+
+    if (typeof window === 'undefined') {
+      this.serverInitialize(this.props);
+    }
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
