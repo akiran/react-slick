@@ -15,6 +15,18 @@ var EventHandlers = {
 
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
+
+      let slidesToMove = 0;
+      let widthAggregation = 0;
+      for(let i = currentSlide - 1; i >= 0; i--) {
+        widthAggregation += this.props.children[i].props.style.width;
+        if (widthAggregation > this.state.trackWidth) {
+          break;
+        }
+        slidesToMove++;
+      }
+      slideOffset = slidesToMove;
+
       targetSlide = currentSlide - slideOffset;
       if (this.props.lazyLoad) {
         previousInt = currentSlide - slideOffset;
@@ -22,6 +34,18 @@ var EventHandlers = {
       }
     } else if (options.message === 'next') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
+
+      let slidesToMove = 0;
+      let widthAggregation = 0;
+      for(let i = currentSlide; i < this.props.children.length; i++) {
+        widthAggregation += this.props.children[i].props.style.width;
+        if (widthAggregation > this.state.trackWidth) {
+          break;
+        }
+        slidesToMove++;
+      }
+      slideOffset = slidesToMove;
+
       targetSlide = currentSlide + slideOffset;
       if (this.props.lazyLoad) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
