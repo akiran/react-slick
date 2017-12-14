@@ -8,24 +8,26 @@ var EventHandlers = {
   // Event handler for previous and next
   changeSlide: function (options) {
     var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
-    const {slidesToScroll, slidesToShow} = this.props
-    const {slideCount, currentSlide} = this.state
+    const {slidesToScroll, slidesToShow, scrollVisibleSlides} = this.props
+    const {slideCount, currentSlide, trackWidth} = this.state
+    const slides = ReactDOM.findDOMNode(this.list).querySelectorAll('.slick-slide');
     unevenOffset = (slideCount % slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
 
     if (options.message === 'previous') {
-      slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
-
-      let slidesToMove = 0;
-      let widthAggregation = 0;
-      for(let i = currentSlide - 1; i >= 0; i--) {
-        widthAggregation += this.props.children[i].props.style.width;
-        if (widthAggregation > this.state.trackWidth) {
-          break;
+      if (scrollVisibleSlides) {
+        slideOffset = 0;
+        let widthAggregation = 0;
+        for (let i = currentSlide - 1; i >= 0; i--) {
+          widthAggregation += this.getWidth(slides[i]);
+          if (widthAggregation > trackWidth) {
+            break;
+          }
+          slideOffset++;
         }
-        slidesToMove++;
+      } else {
+        slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
       }
-      slideOffset = slidesToMove;
 
       targetSlide = currentSlide - slideOffset;
       if (this.props.lazyLoad) {
@@ -33,19 +35,19 @@ var EventHandlers = {
         targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
       }
     } else if (options.message === 'next') {
-      slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
-
-      let slidesToMove = 0;
-      let widthAggregation = 0;
-      for(let i = currentSlide; i < this.props.children.length; i++) {
-        widthAggregation += this.props.children[i].props.style.width;
-        if (widthAggregation > this.state.trackWidth) {
-          break;
+      if (scrollVisibleSlides) {
+        slideOffset = 0;
+        let widthAggregation = 0;
+        for (let i = currentSlide; i < slides.length; i++) {
+          widthAggregation += this.getWidth(slides[i]);
+          if (widthAggregation > trackWidth) {
+            break;
+          }
+          slideOffset++;
         }
-        slidesToMove++;
+      } else {
+        slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
       }
-      slideOffset = slidesToMove;
-
       targetSlide = currentSlide + slideOffset;
       if (this.props.lazyLoad) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
