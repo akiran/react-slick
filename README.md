@@ -115,6 +115,7 @@ Props            | Type            | Default Value                   | Descripti
 `variableWidth`  | `bool`          | `false`                         |                                                             |
 `useCSS`         | `bool`          | `true`                          | Enable/Disable CSS Transitions                              | Yes
 `vertical`       | `bool`          | `false`                         |                                                             | Yes
+`init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                       | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
 `slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            |
