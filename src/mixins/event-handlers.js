@@ -9,7 +9,7 @@ var EventHandlers = {
   changeSlide: function (options) {
     var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
     const {slidesToScroll, slidesToShow, scrollVisibleSlides} = this.props
-    const {slideCount, currentSlide, trackWidth} = this.state
+    const {slideCount, currentSlide, slideWidth} = this.state
     const slides = ReactDOM.findDOMNode(this.list).querySelectorAll('.slick-slide');
     unevenOffset = (slideCount % slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
@@ -20,7 +20,7 @@ var EventHandlers = {
         let widthAggregation = 0;
         for (let i = currentSlide - 1; i >= 0; i--) {
           widthAggregation += this.getWidth(slides[i]);
-          if (widthAggregation > trackWidth) {
+          if (widthAggregation > slideWidth) {
             break;
           }
           slideOffset++;
@@ -28,7 +28,6 @@ var EventHandlers = {
       } else {
         slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
       }
-
       targetSlide = currentSlide - slideOffset;
       if (this.props.lazyLoad) {
         previousInt = currentSlide - slideOffset;
@@ -40,7 +39,7 @@ var EventHandlers = {
         let widthAggregation = 0;
         for (let i = currentSlide; i < slides.length; i++) {
           widthAggregation += this.getWidth(slides[i]);
-          if (widthAggregation > trackWidth) {
+          if (widthAggregation > slideWidth) {
             break;
           }
           slideOffset++;

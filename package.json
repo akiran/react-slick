@@ -1,6 +1,6 @@
 {
   "name": "@faithlife/react-slick",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
