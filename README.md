@@ -104,6 +104,7 @@ Props            | Type            | Default Value                   | Descripti
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
 `rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes
+`scrollVisibleSlides`| `bool`      | `false`                         | Enable scrolling through all visible slides                 | Yes
 `slide`          | `string`        | `'div'`                         |                                                             |
 `slidesToShow`   | `int`           | `1`                             | Yes                                                         | Yes
 `slidesToScroll` | `int`           | `1`                             |                                                             |
