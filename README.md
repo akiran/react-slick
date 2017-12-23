@@ -108,6 +108,8 @@ Props            | Type            | Default Value                   | Descripti
 `slidesToShow`   | `int`           | `1`                             | Yes                                                         | Yes
 `slidesToScroll` | `int`           | `1`                             |                                                             |
 `speed`          | `int`           | `500`                           |                                                             |
+`ssr`            | `bool`          | `false`                         | True if you SSR and use `responsive` prop (see below)       | Yes
+`ssrBreakpoint`  | `int`           | `null`                          | The breakpoint to use during SSR (see `responsive` below)   | Yes
 `swipe`          | `bool`          | `true`                          |                                                             |
 `swipeToSlide`   | `bool`          | `false`                         | Enable drag/swpie irrespective of `slidesToScroll`          | Yes
 `touchMove`      | `bool`          | `true`                          |                                                             |
@@ -122,6 +124,8 @@ Props            | Type            | Default Value                   | Descripti
 #### `responsive` property
 
 Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
+
+If you are using the responsive property and server side rendering be sure to set the `ssr` property to true. This will make sure when the client renders it uses the same settings as the server and doesn't change to your responsive settings until after mount. If you use server side client detection you can set `ssrBreakpoint` to have the server render with a specific breakpoints settings instead of the default.
 
 [customArrows]: https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js
 [customPaging]: https://github.com/akiran/react-slick/blob/master/examples/CustomPaging.js
