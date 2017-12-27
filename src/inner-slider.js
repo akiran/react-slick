@@ -38,18 +38,8 @@ export var InnerSlider = createReactClass({
     this.setState({
       mounted: true
     });
-    var lazyLoadedList = [];
-    for (var i = 0; i < React.Children.count(this.props.children); i++) {
-      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
-        lazyLoadedList.push(i);
-      }
-    }
-
-    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
-      this.setState({
-        lazyLoadedList: lazyLoadedList
-      });
-    }
+    
+    this.updateLazyLoadListIfNeeded(this.props);
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
@@ -97,11 +87,48 @@ export var InnerSlider = createReactClass({
         currentSlide: this.state.currentSlide
       });
     } else {
+      // check for lazy load change only if the children count is different or if the 
+      // slide to show property has changed - the screen must be updated
+      if (nextProps.children.length != this.props.children.length || this.props.slideToShow != nextProps.slidesToShow) {
+        this.updateLazyLoadListIfNeeded(nextProps)
+      }
       this.update(nextProps);
     }
   },
   componentDidUpdate: function () {
     this.adaptHeight();
+  },
+  /**
+   * Detects if the lazyload list needs to be updated
+   * @param props
+   */
+  updateLazyLoadListIfNeeded: function(props) {
+    if (!props.lazyLoad) {
+      return;
+    }
+
+    var lazyLoadedList = this.buildLazyLoadList(props);
+
+    // update only if needed
+    if (this.state.lazyLoadedList.length !== lazyLoadedList.length) {
+      this.setState({
+        lazyLoadedList: lazyLoadedList
+      });
+    }
+  },
+  /**
+   * Builds the lazy load list for detecting which items can be rendered
+   * @param props
+   * @returns {Array}
+   */
+  buildLazyLoadList: function(props) {
+    var lazyLoadedList = [];
+    for (var i = 0; i < React.Children.count(props.children); i++) {
+      if (i >= this.state.currentSlide && i < this.state.currentSlide + props.slidesToShow) {
+        lazyLoadedList.push(i);
+      }
+    }
+    return lazyLoadedList;
   },
   onWindowResized: function () {
     this.update(this.props);
