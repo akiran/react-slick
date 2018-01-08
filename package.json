@@ -1,6 +1,6 @@
 {
-  "name": "react-slick",
-  "version": "0.16.0",
+  "name": "@betit/react-slick",
+  "version": "0.16.1",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
@@ -65,6 +65,7 @@
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.3",
     "sinon": "^2.1.0",
+    "slick-carousel": "^1.8.1",
     "style-loader": "^0.16.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
@@ -75,13 +76,11 @@
     "create-react-class": "^15.5.2",
     "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",
-    "object-assign": "^4.1.0",
-    "slick-carousel": "^1.8.1"
+    "object-assign": "^4.1.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1 || ^16.0.0",
-    "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0",
-    "slick-carousel": "^1.6.0 || ^1.8.0"
+    "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0"
   },
   "jest": {
     "setupFiles": [
