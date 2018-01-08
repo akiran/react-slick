@@ -39,9 +39,26 @@ export var InnerSlider = createReactClass({
       mounted: true
     });
     var lazyLoadedList = [];
-    for (var i = 0; i < React.Children.count(this.props.children); i++) {
-      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
+    const slidesToShow = this.props.slidesToShow;
+    const childrenLen = React.Children.count(this.props.children);
+    const currentSlide = this.state.currentSlide;
+    for (var i = 0; i < childrenLen; i++) {
+      if (i >= currentSlide && i < currentSlide + slidesToShow) {
         lazyLoadedList.push(i);
+      }
+    }
+    if (this.props.centerMode === true) {
+      let additionalCount = Math.floor(slidesToShow / 2);
+      if (parseInt(this.props.centerPadding) > 0) {
+        additionalCount += 1;
+      }
+      let additionalNum = currentSlide;
+      for (let j = 0; j < additionalCount; j++) {
+        additionalNum = additionalNum - 1;
+        if (additionalNum < 0) {
+          additionalNum = childrenLen - 1;
+        }
+        lazyLoadedList.push(additionalNum);
       }
     }
 
