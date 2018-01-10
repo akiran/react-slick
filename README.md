@@ -131,6 +131,8 @@ Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The bre
 * `slickNext()`   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * `slickPrev()`   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * `slickGoTo(slideNumber)` - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
+* `slickPause()` - function called to pause a slider that is autoplaying
+* `slickPlay()` - function called to resume a paused slider (requires autoplay: true)
 
 ### Custom next/prev arrows
 

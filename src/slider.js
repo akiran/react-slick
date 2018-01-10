@@ -68,6 +68,14 @@ export default class Slider extends React.Component {
     this.innerSlider.slickGoTo(slide)
   }
 
+  slickPause(){
+    this.innerSlider.pause()
+  }
+
+  slickPlay(){
+    this.innerSlider.autoPlay()
+  }
+
   render() {
     var settings;
     var newProps;
