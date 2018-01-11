@@ -15,8 +15,8 @@ import { PrevArrow, NextArrow } from './arrows';
 
 export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
-  list: null,
-  track: null,
+  list: null, // wraps the track
+  track: null, // component that rolls out like a film
   listRefHandler: function (ref) {
     this.list = ref;
   },
@@ -38,27 +38,25 @@ export var InnerSlider = createReactClass({
     this.setState({
       mounted: true
     });
-    var lazyLoadedList = [];
+    let lazyLoadedList = [];
+    // number of slides shown in the active frame
     const slidesToShow = this.props.slidesToShow;
     const childrenLen = React.Children.count(this.props.children);
     const currentSlide = this.state.currentSlide;
-    for (var i = 0; i < childrenLen; i++) {
+    for (let i = 0; i < childrenLen; i++) {
       if (i >= currentSlide && i < currentSlide + slidesToShow) {
         lazyLoadedList.push(i);
       }
     }
     if (this.props.centerMode === true) {
+      // add slides to show on the left in case of centerMode with lazyLoad
       let additionalCount = Math.floor(slidesToShow / 2);
       if (parseInt(this.props.centerPadding) > 0) {
         additionalCount += 1;
       }
       let additionalNum = currentSlide;
-      for (let j = 0; j < additionalCount; j++) {
-        additionalNum = additionalNum - 1;
-        if (additionalNum < 0) {
-          additionalNum = childrenLen - 1;
-        }
-        lazyLoadedList.push(additionalNum);
+      while(additionalCount--){
+        lazyLoadedList.push((--additionalNum + childrenLen) % childrenLen)
       }
     }
 
