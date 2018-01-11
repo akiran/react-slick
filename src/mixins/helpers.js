@@ -197,7 +197,12 @@ var helpers = {
       }
     } else if (targetSlide >= this.state.slideCount) {
       if(this.props.infinite === false) {
-        currentSlide = this.state.slideCount - this.props.slidesToShow;
+        if(this.props.centerMode === true){
+          // If centerMode is true
+          currentSlide = this.state.slideCount - 1;
+        }else{
+          currentSlide = this.state.slideCount - this.props.slidesToShow;
+        }
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = 0;
       } else {

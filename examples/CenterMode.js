@@ -6,14 +6,15 @@ export default class CenterMode extends Component {
     const settings = {
       className: 'center',
       centerMode: true,
-      infinite: true,
+      infinite: false,
       centerPadding: '60px',
       slidesToShow: 3,
+      slidesToScroll: 3,
       speed: 500
     };
     return (
       <div>
-        <h2>Center Mode</h2>
+        <h2>Center Mode Finite</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
@@ -24,6 +25,8 @@ export default class CenterMode extends Component {
           <div><h3>7</h3></div>
           <div><h3>8</h3></div>
           <div><h3>9</h3></div>
+          <div><h3>10</h3></div>
+          <div><h3>11</h3></div>
         </Slider>
       </div>
     );
