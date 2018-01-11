@@ -116,6 +116,23 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidUpdate: function () {
+    if(this.props.lazyLoad && this.props.centerMode) {
+      let childrenLen = React.Children.count(this.props.children)
+      let additionalCount = Math.floor(this.props.slidesToShow / 2)
+      if(parseInt(this.props.centerPadding) > 0) additionalCount++;
+      let leftMostSlide = (this.state.currentSlide - additionalCount + childrenLen) % childrenLen
+      let rightMostSlide = (this.state.currentSlide + additionalCount) % childrenLen
+      if(!this.state.lazyLoadedList.includes(leftMostSlide)){
+        this.setState({
+          lazyLoadedList: this.state.lazyLoadedList + [leftMostSlide]
+        })
+      }
+      if(!this.state.lazyLoadedList.includes(rightMostSlide)){
+        this.setState({
+          lazyLoadedList: this.state.lazyLoadedList + [rightMostSlide]
+        })
+      }
+    }
     this.adaptHeight();
   },
   onWindowResized: function () {
