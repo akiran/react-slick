@@ -246,7 +246,8 @@ var EventHandlers = {
         return true;
       });
 
-      const slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+      const currentIndex = this.props.rtl === true ? this.state.slideCount - this.state.currentSlide : this.state.currentSlide; 
+      const slidesTraversed = Math.abs(swipedSlide.dataset.index - currentIndex) || 1;
 
       return slidesTraversed;
     } else {
