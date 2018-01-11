@@ -14,7 +14,7 @@ export default class CenterMode extends Component {
     };
     return (
       <div>
-        <h2>Center Mode</h2>
+        <h2>Center Mode Finite</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
