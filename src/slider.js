@@ -91,6 +91,11 @@ export default class Slider extends React.Component {
       settings = assign({}, defaultProps, this.props);
     }
 
+    // always scroll by one if centerMode is on
+    if(settings.centerMode){
+      settings.slidesToScroll = 1
+    }
+
     var children = this.props.children;
     if(!Array.isArray(children)) {
       children = [children]
