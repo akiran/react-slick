@@ -28,9 +28,10 @@ export var InnerSlider = createReactClass({
       currentSlide: this.props.initialSlide
     });
   },
-  getDefaultProps: function () {
-    return defaultProps;
-  },
+  // defaultProps are already accessible via this.props because Slider component passed them down
+  // getDefaultProps: function () {
+  //   return defaultProps;
+  // },
   componentWillMount: function () {
     if (this.props.init) {
       this.props.init();
