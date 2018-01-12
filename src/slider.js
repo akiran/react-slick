@@ -85,6 +85,8 @@ export default class Slider extends React.Component {
     var settings;
     var newProps;
     if (this.state.breakpoint) {
+      // never executes in the first render
+      // so defaultProps should be already there in this.props
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
       settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, this.props, newProps[0].settings);
     } else {
@@ -96,13 +98,17 @@ export default class Slider extends React.Component {
       settings.slidesToScroll = 1
     }
 
-    var children = this.props.children;
-    if(!Array.isArray(children)) {
-      children = [children]
-    }
+    // makes sure that children is an array, even when there is only 1 child
+    var children = React.Children.toArray(this.props.children)
 
     // Children may contain false or null, so we should filter them
-    children = children.filter(child => !!child)
+    // children may also contain string filled with spaces (in certain cases where we use jsx strings)
+    children = children.filter(child => {
+      if (typeof child === 'string'){
+        return !!(child.trim())
+      }
+      return !!child
+    })
 
     if (settings === 'unslick') {
       // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
