@@ -1,11 +1,12 @@
-# react-slick
+### react-slick
+
+<a href="https://opencollective.com/react-slick/donate" target="_blank">
+  <img align="right" src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
+</a>
 
 [![Join the chat at https://gitter.im/akiran/react-slick](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/akiran/react-slick?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-
-Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
-
-
+##### Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
 ### Installation
 
@@ -27,7 +28,7 @@ npm install slick-carousel
 @import "~slick-carousel/slick/slick-theme.css";
 ```
 
-But be aware slick-carousel has a peer-dependancy on jQuery which you, or your colleagues may not like to see in your console output, so you can always grab the CSS from there and convert it into any CSS in JS solution that you might be using. 
+But be aware slick-carousel has a peer-dependancy on jQuery which you, or your colleagues may not like to see in your console output, so you can always grab the CSS from there and convert it into any CSS in JS solution that you might be using.
 
 or add cdn link in your html
 
