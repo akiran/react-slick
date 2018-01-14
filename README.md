@@ -27,6 +27,8 @@ npm install slick-carousel
 @import "~slick-carousel/slick/slick-theme.css";
 ```
 
+But be aware slick-carousel has a peer-dependancy on jQuery which you, or your colleagues may not like to see in your console output, so you can always grab the CSS from there and convert it into any CSS in JS solution that you might be using. 
+
 or add cdn link in your html
 
 ```html
@@ -115,6 +117,7 @@ Props            | Type            | Default Value                   | Descripti
 `variableWidth`  | `bool`          | `false`                         |                                                             |
 `useCSS`         | `bool`          | `true`                          | Enable/Disable CSS Transitions                              | Yes
 `vertical`       | `bool`          | `false`                         |                                                             | Yes
+`init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                       | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
 `slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            |
@@ -131,6 +134,8 @@ Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The bre
 * `slickNext()`   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * `slickPrev()`   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
 * `slickGoTo(slideNumber)` - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
+* `slickPause()` - function called to pause a slider that is autoplaying
+* `slickPlay()` - function called to resume a paused slider (requires autoplay: true)
 
 ### Custom next/prev arrows
 
@@ -189,6 +194,7 @@ Want to run demos locally
 
 ```bash
 git clone https://github.com/akiran/react-slick
+cd react-slick
 npm install
 npm start
 open http://localhost:8080

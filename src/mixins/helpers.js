@@ -6,6 +6,7 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 
 var helpers = {
+  // supposed to start autoplay of slides
   initialize: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
 
@@ -35,7 +36,7 @@ var helpers = {
       slideHeight,
       listHeight,
     }, function () {
-
+      // this reference isn't lost due to mixin
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track

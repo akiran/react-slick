@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom';
 import assign from 'object-assign';
 
+// checks if spec is the superset of keys in keysArray, i.e., spec contains all the keys from keysArray
 var checkSpecKeys = function (spec, keysArray) {
   return keysArray.reduce((value, key) => {
     return value && spec.hasOwnProperty(key);
