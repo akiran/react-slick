@@ -1,6 +1,6 @@
 'use strict';
-import ReactDOM from 'react-dom';
 import assign from 'object-assign';
+import ReactDOM from 'react-dom';
 
 // checks if spec is the superset of keys in keysArray, i.e., spec contains all the keys from keysArray
 var checkSpecKeys = function (spec, keysArray) {
@@ -9,34 +9,41 @@ var checkSpecKeys = function (spec, keysArray) {
   }, true) ? null : console.error('Keys Missing', spec);
 };
 
-export var getTrackCSS = function(spec) {
+export var getTrackCSS = function (spec) {
   checkSpecKeys(spec, [
-    'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth'
+    'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth', 'spaceLeft'
   ]);
 
   var trackWidth, trackHeight;
 
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
+  const indent = spec.indent ? spec.slideWidth * 2 : 0;
 
   if (!spec.vertical) {
     if (spec.variableWidth) {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+      trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
     } else if (spec.centerMode) {
-      trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
+      trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
     } else {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
+      trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth + indent;
     }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
 
+  const indentLeft = spec.left + spec.indent - spec.slideWidth;
+  let left = spec.infinite && spec.indent && !spec.variableWidth && !spec.vertical ? indentLeft : spec.left;
+  if (spec.vertical && spec.indent) {
+    left = left - spec.slideHeight;
+  }
+
   var style = {
     opacity: 1,
-    WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
-    transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+    WebkitTransform: !spec.vertical ? 'translate3d(' + left + 'px, 0px, 0px)' : 'translate3d(0px, ' + left + 'px, 0px)',
+    transform: !spec.vertical ? 'translate3d(' + left + 'px, 0px, 0px)' : 'translate3d(0px, ' + left + 'px, 0px)',
     transition: '',
     WebkitTransition: '',
-    msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
+    msTransform: !spec.vertical ? 'translateX(' + left + 'px)' : 'translateY(' + left + 'px)',
   };
 
   if (trackWidth) {
@@ -72,10 +79,10 @@ export var getTrackAnimateCSS = function (spec) {
 };
 
 export var getTrackLeft = function (spec) {
-
   checkSpecKeys(spec, [
-   'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
-   'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
+    'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
+    'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight'
+  ]);
 
   var slideOffset = 0;
   var targetLeft;
@@ -93,29 +100,28 @@ export var getTrackLeft = function (spec) {
     }
     if (spec.slideCount % spec.slidesToScroll !== 0) {
       if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
-          if(spec.slideIndex > spec.slideCount) {
-            slideOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideWidth) * -1;
-            verticalOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideHeight) * -1;
-          } else {
-            slideOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideWidth) * -1;
-            verticalOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideHeight) * -1;
-          }
+        if (spec.slideIndex > spec.slideCount) {
+          slideOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideWidth) * -1;
+          verticalOffset = ((spec.slidesToShow - (spec.slideIndex - spec.slideCount)) * spec.slideHeight) * -1;
+        } else {
+          slideOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideWidth) * -1;
+          verticalOffset = ((spec.slideCount % spec.slidesToScroll) * spec.slideHeight) * -1;
+        }
       }
     }
   } else {
 
     if (spec.slideCount % spec.slidesToScroll !== 0) {
       if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
-          var slidesToOffset = spec.slidesToShow - (spec.slideCount % spec.slidesToScroll);
-          slideOffset = slidesToOffset * spec.slideWidth;
+        var slidesToOffset = spec.slidesToShow - (spec.slideCount % spec.slidesToScroll);
+        slideOffset = slidesToOffset * spec.slideWidth;
       }
     }
   }
 
 
-
   if (spec.centerMode) {
-    if(spec.infinite) {
+    if (spec.infinite) {
       slideOffset += spec.slideWidth * Math.floor(spec.slidesToShow / 2);
     } else {
       slideOffset = spec.slideWidth * Math.floor(spec.slidesToShow / 2);
@@ -129,25 +135,25 @@ export var getTrackLeft = function (spec) {
   }
 
   if (spec.variableWidth === true) {
-      var targetSlideIndex;
-      if(spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
-          targetSlide = ReactDOM.findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
+    var targetSlideIndex;
+    if (spec.slideCount <= spec.slidesToShow || spec.infinite === false) {
+      targetSlide = ReactDOM.findDOMNode(spec.trackRef).childNodes[spec.slideIndex];
+    } else {
+      targetSlideIndex = (spec.slideIndex + spec.slidesToShow);
+      targetSlide = ReactDOM.findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
+    }
+    targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    if (spec.centerMode === true) {
+      if (spec.infinite === false) {
+        targetSlide = ReactDOM.findDOMNode(spec.trackRef).children[spec.slideIndex];
       } else {
-          targetSlideIndex = (spec.slideIndex + spec.slidesToShow);
-          targetSlide = ReactDOM.findDOMNode(spec.trackRef).childNodes[targetSlideIndex];
+        targetSlide = ReactDOM.findDOMNode(spec.trackRef).children[(spec.slideIndex + spec.slidesToShow + 1)];
       }
-      targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-      if (spec.centerMode === true) {
-          if(spec.infinite === false) {
-              targetSlide = ReactDOM.findDOMNode(spec.trackRef).children[spec.slideIndex];
-          } else {
-              targetSlide = ReactDOM.findDOMNode(spec.trackRef).children[(spec.slideIndex + spec.slidesToShow + 1)];
-          }
 
-          if (targetSlide) {
-            targetLeft = targetSlide.offsetLeft * -1 + (spec.listWidth - targetSlide.offsetWidth) / 2;
-          }
+      if (targetSlide) {
+        targetLeft = targetSlide.offsetLeft * -1 + (spec.listWidth - targetSlide.offsetWidth) / 2;
       }
+    }
   }
 
   return targetLeft;

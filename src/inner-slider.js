@@ -180,7 +180,8 @@ export var InnerSlider = createReactClass({
       slidesToScroll: this.props.slidesToScroll,
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
-      variableWidth: this.props.variableWidth
+      variableWidth: this.props.variableWidth,
+      indent: this.props.indent
     };
 
     var dots;

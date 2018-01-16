@@ -1,9 +1,9 @@
 'use strict';
 
+import assign from 'object-assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
-import assign from 'object-assign';
+import { getTrackAnimateCSS, getTrackCSS, getTrackLeft } from './trackHelper';
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -15,9 +15,12 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth;
 
+    const indent = props.infinite ? props.indent * 2 : 0;
+    const indentPerSlide = indent / props.slidesToShow;
+
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow - indentPerSlide;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -42,9 +45,9 @@ var helpers = {
         trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({ left: targetLeft }, props, this.state));
 
-      this.setState({trackStyle: trackStyle});
+      this.setState({ trackStyle: trackStyle });
 
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
@@ -58,9 +61,12 @@ var helpers = {
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth;
 
+    const indent = props.infinite ? props.indent * 2 : 0;
+    const indentPerSlide = indent / props.slidesToShow;
+
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj) / props.slidesToShow - indentPerSlide;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -69,7 +75,7 @@ var helpers = {
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
-    if(!props.autoplay) {
+    if (!props.autoplay) {
       this.pause();
     } else {
       this.autoPlay();
@@ -89,9 +95,9 @@ var helpers = {
         trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({ left: targetLeft }, props, this.state));
 
-      this.setState({trackStyle: trackStyle});
+      this.setState({ trackStyle: trackStyle });
     });
   },
   getWidth: function getWidth(elem) {
@@ -102,14 +108,14 @@ var helpers = {
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
-      var selector = '[data-index="' + this.state.currentSlide +'"]';
+      var selector = '[data-index="' + this.state.currentSlide + '"]';
       if (this.list) {
         var slickList = ReactDOM.findDOMNode(this.list);
         slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
       }
     }
   },
-  canGoNext: function (opts){
+  canGoNext: function (opts) {
     var canGo = true;
     if (!opts.infinite) {
       if (opts.centerMode) {
@@ -142,7 +148,7 @@ var helpers = {
       currentSlide = this.state.currentSlide;
 
       // Don't change slide if it's not infite and current slide is the first or last slide.
-      if(this.props.infinite === false &&
+      if (this.props.infinite === false &&
         (index < 0 || index >= this.state.slideCount)) {
         return;
       }
@@ -189,7 +195,7 @@ var helpers = {
 
     targetSlide = index;
     if (targetSlide < 0) {
-      if(this.props.infinite === false) {
+      if (this.props.infinite === false) {
         currentSlide = 0;
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = this.state.slideCount - (this.state.slideCount % this.props.slidesToScroll);
@@ -197,7 +203,7 @@ var helpers = {
         currentSlide = this.state.slideCount + targetSlide;
       }
     } else if (targetSlide >= this.state.slideCount) {
-      if(this.props.infinite === false) {
+      if (this.props.infinite === false) {
         currentSlide = this.state.slideCount - this.props.slidesToShow;
       } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
         currentSlide = 0;
@@ -229,7 +235,7 @@ var helpers = {
     if (this.props.lazyLoad) {
       var loaded = true;
       var slidesToLoad = [];
-      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
+      for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++) {
         loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
         if (!loaded) {
           slidesToLoad.push(i);
@@ -251,7 +257,7 @@ var helpers = {
 
       this.setState({
         currentSlide: currentSlide,
-        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state))
+        trackStyle: getTrackCSS(assign({ left: currentLeft }, this.props, this.state))
       }, function () {
         if (this.props.afterChange) {
           this.props.afterChange(currentSlide);
@@ -263,7 +269,7 @@ var helpers = {
       var nextStateChanges = {
         animating: false,
         currentSlide: currentSlide,
-        trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
+        trackStyle: getTrackCSS(assign({ left: currentLeft }, this.props, this.state)),
         swipeLeft: null
       };
 
@@ -278,7 +284,7 @@ var helpers = {
       this.setState({
         animating: true,
         currentSlide: currentSlide,
-        trackStyle: getTrackAnimateCSS(assign({left: targetLeft}, this.props, this.state))
+        trackStyle: getTrackAnimateCSS(assign({ left: targetLeft }, this.props, this.state))
       }, function () {
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
@@ -296,13 +302,13 @@ var helpers = {
 
     swipeAngle = Math.round(r * 180 / Math.PI);
     if (swipeAngle < 0) {
-        swipeAngle = 360 - Math.abs(swipeAngle);
+      swipeAngle = 360 - Math.abs(swipeAngle);
     }
     if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
-        return (this.props.rtl === false ? 'left' : 'right');
+      return (this.props.rtl === false ? 'left' : 'right');
     }
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
-        return (this.props.rtl === false ? 'right' : 'left');
+      return (this.props.rtl === false ? 'right' : 'left');
     }
     if (this.props.verticalSwiping === true) {
       if ((swipeAngle >= 35) && (swipeAngle <= 135)) {
@@ -314,7 +320,7 @@ var helpers = {
 
     return 'vertical';
   },
-  play: function(){
+  play: function () {
     var nextIndex;
 
     if (!this.state.mounted) {
@@ -324,7 +330,7 @@ var helpers = {
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
     } else {
-      if (this.canGoNext(Object.assign({}, this.props,this.state))) {
+      if (this.canGoNext(Object.assign({}, this.props, this.state))) {
         nextIndex = this.state.currentSlide + this.props.slidesToScroll;
       } else {
         return false;
