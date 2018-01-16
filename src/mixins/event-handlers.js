@@ -241,7 +241,13 @@ var EventHandlers = {
         return true;
       });
 
-      const slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+      var slidesTraversed;
+
+      try {
+        slidesTraversed = Math.abs(swipedSlide.dataset.index);
+      } catch (e) {
+        slidesTraversed = 1;
+      }
 
       return slidesTraversed;
     } else {
