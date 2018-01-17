@@ -22,7 +22,7 @@ export function createSliderReact({noOfSlides, ...props}){
   }
   return (
     <Slider {...props}>
-      {children.map(i => <div key={i}><h3>{i}</h3></div>)}
+      {children.map(i => <div key={i}><h3>{i+1}</h3></div>)}
     </Slider>
   )
 }
@@ -31,7 +31,7 @@ export function createSliderReact({noOfSlides, ...props}){
 export function createSliderJQuery(noOfSlides){
   let children = []
   for(let i = 0; i < noOfSlides; i++){
-    children.push(`<div><h3>${i}</h3></div>`)
+    children.push(`<div><h3>${i+1}</h3></div>`)
   }
   return children.join('')
 }
@@ -51,6 +51,7 @@ export function testSliderScroll({direction, ...settings}){
     ...settings, 
   })
   // console.log('setings:', settings)
+  
   let expectedSlideIndex = initialSlide || 0
   for(let click = 0; click < 2*noOfSlides + 2; click++){
     let activeSlides = slider.find('.slick-slide.slick-active')

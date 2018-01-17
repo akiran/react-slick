@@ -1,4 +1,5 @@
-import React from 'react'
+// includes tests of
+// SimpleSlider, MultipleItems
 import {mount} from 'enzyme'
 import {
   testSlider
