@@ -74,8 +74,8 @@ function returnDetails(settings){
     detailsObject.afterLeftClicks[`${click}`] = details
     $('.slick-prev').click()
   }
-  console.log('Entire details object is as follows')
-  console.log(util.inspect(detailsObject, {showHidden: false, depth: null}))
+  // console.log('Entire details object is as follows')
+  // console.log(util.inspect(detailsObject, {showHidden: false, depth: null}))
 }
 
 const settings = {
