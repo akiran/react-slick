@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
+import closest from 'closest';
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -22,7 +23,9 @@ var helpers = {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slidesHeight = this.getSlidesHeight();
+
+    const slideHeight = slidesHeight.heights[0];
     const listHeight = slideHeight * props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -40,9 +43,13 @@ var helpers = {
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
-      }, props, this.state));
+      }, props, this.state, {
+          slidesHeights: this.getSlidesHeight().heights
+      }));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state, {
+        totalHeight: slidesHeight.totalHeight
+      }));
 
       this.setState({trackStyle: trackStyle});
 
@@ -65,7 +72,9 @@ var helpers = {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slidesHeight = this.getSlidesHeight()
+
+    const slideHeight = slidesHeight.heights[0];
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
@@ -87,12 +96,51 @@ var helpers = {
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
-      }, props, this.state));
+      }, props, this.state, {
+          slidesHeights: this.getSlidesHeight().heights
+      }));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state, {
+        totalHeight: slidesHeight.totalHeight
+      }));
 
       this.setState({trackStyle: trackStyle});
     });
+  },
+  getSlidesHeight() {
+    const heights = [];
+    let totalHeight = 0;
+    const slickList = ReactDOM.findDOMNode(this.list);
+    const slideCount = React.Children.count(this.props.children);
+
+    const preSlideHeight = this.getHeight(this.getFirstLevelChild(slickList, '[data-index="-1"]'));
+    heights.push(preSlideHeight);
+    totalHeight += preSlideHeight;
+    for (let i = 0; i < slideCount; i ++) {
+      const h = this.getHeight(this.getFirstLevelChild(slickList, '[data-index="' + i + '"]'));
+      heights.push(h);
+      totalHeight += h;
+    }
+    const lastSlideHeight = this.getHeight(this.getFirstLevelChild(slickList, '[data-index="' + slideCount + '"]'));
+    heights.push(lastSlideHeight);
+    totalHeight += lastSlideHeight;
+    return {
+      heights,
+      totalHeight
+    };
+  },
+  // get thie first child from the First Level Children with special selector，avoiding get error elements if react-slick nested using
+  getFirstLevelChild(slickList, selector) {
+    const children = [];
+    const allChildren = slickList.querySelectorAll(selector);
+    for (let i = 0, l = allChildren.length; i < l; i++) {
+      const child = allChildren[i];
+      const parentList = closest(child, '.slick-list');
+      if (parentList === slickList) {
+        children.push(child);
+      }
+    }
+    return children[0];
   },
   getWidth: function getWidth(elem) {
     return elem && (elem.getBoundingClientRect().width || elem.offsetWidth) || 0;
@@ -105,7 +153,7 @@ var helpers = {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.list) {
         var slickList = ReactDOM.findDOMNode(this.list);
-        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+        slickList.style.height = this.getFirstLevelChild(slickList, selector).offsetHeight + 'px';
       }
     }
   },
@@ -211,12 +259,16 @@ var helpers = {
     targetLeft = getTrackLeft(assign({
       slideIndex: targetSlide,
       trackRef: this.track
-    }, this.props, this.state));
+    }, this.props, this.state, {
+        slidesHeights: this.getSlidesHeight().heights
+    }));
 
     currentLeft = getTrackLeft(assign({
       slideIndex: currentSlide,
       trackRef: this.track
-    }, this.props, this.state));
+    }, this.props, this.state, {
+        slidesHeights: this.getSlidesHeight().heights
+    }));
 
     if (this.props.infinite === false) {
       targetLeft = currentLeft;

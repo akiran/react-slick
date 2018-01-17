@@ -73,6 +73,7 @@
   "dependencies": {
     "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
+    "closest": "0.0.1",
     "create-react-class": "^15.5.2",
     "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",

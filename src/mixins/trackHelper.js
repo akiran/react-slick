@@ -27,7 +27,7 @@ export var getTrackCSS = function(spec) {
       trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
     }
   } else {
-    trackHeight = trackChildren * spec.slideHeight;
+    trackHeight = spec.totalHeight ? spec.totalHeight : trackChildren * spec.slideHeight;
   }
 
   var style = {
@@ -89,7 +89,16 @@ export var getTrackLeft = function (spec) {
   if (spec.infinite) {
     if (spec.slideCount >= spec.slidesToShow) {
       slideOffset = (spec.slideWidth * spec.slidesToShow) * -1;
-      verticalOffset = (spec.slideHeight * spec.slidesToShow) * -1;
+      verticalOffset = 0;
+      if (Array.isArray(spec.slidesHeights)) {
+        spec.slidesHeights.forEach((h, k) => {
+            if (k < spec.slideIndex) {
+                verticalOffset += h * -1;
+            }
+        });
+      } else {
+        verticalOffset = (spec.slideHeight * spec.slidesToShow) * -1;
+      }
     }
     if (spec.slideCount % spec.slidesToScroll !== 0) {
       if (spec.slideIndex + spec.slidesToScroll > spec.slideCount && spec.slideCount > spec.slidesToShow) {
@@ -112,8 +121,6 @@ export var getTrackLeft = function (spec) {
     }
   }
 
-
-
   if (spec.centerMode) {
     if(spec.infinite) {
       slideOffset += spec.slideWidth * Math.floor(spec.slidesToShow / 2);
@@ -125,7 +132,11 @@ export var getTrackLeft = function (spec) {
   if (!spec.vertical) {
     targetLeft = ((spec.slideIndex * spec.slideWidth) * -1) + slideOffset;
   } else {
-    targetLeft = ((spec.slideIndex * spec.slideHeight) * -1) + verticalOffset;
+      if (Array.isArray(spec.slidesHeights)) {
+        targetLeft = spec.slidesHeights[spec.slideIndex] * -1 + verticalOffset;
+      } else {
+        targetLeft = ((spec.slideIndex * spec.slideHeight) * -1) + verticalOffset;
+      }
   }
 
   if (spec.variableWidth === true) {
