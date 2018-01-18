@@ -39,7 +39,7 @@ var getSlideStyle = function (spec) {
   }
 
   if (spec.fade) {
-    style.position = 'relative'; console.log(spec);
+    style.position = 'relative';
     if (spec.vertical) {
       style.top = -spec.index * spec.slideHeight;
     } else {
