@@ -88,8 +88,4 @@ const settings = {
   centerMode: true,
 }
 
-returnDetails(settings)
-
-test('fake test to manipulate jest', function(){
-  expect(1).toBe(1)
-})
+// returnDetails(settings)

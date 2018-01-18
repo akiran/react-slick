@@ -93,7 +93,3 @@ export function testSlider(settings){
   testSliderScroll(settings1)
   testSliderScroll(settings2)
 }
-
-test('fake test to manipulate jest', () => {
-  expect(1).toBe(1)
-})
