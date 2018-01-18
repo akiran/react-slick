@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Slider from '../src/slider'
 
-export default class VerticalSwipeToSlide extends Component {
+export default class VerticalAndFade extends Component {
   render() {
     const settings = {
       dots: true,
