@@ -55,7 +55,7 @@ export function createInnerSliderWrapper(settings){
 }
 
 // creates a dom string, containing children of slick children
-export function createSliderJQuery(noOfSlides){
+export function createJQuerySliderChildren(noOfSlides){
   let children = []
   for(let i = 0; i < noOfSlides; i++){
     children.push(`<div><h3>${i+1}</h3></div>`)
@@ -71,7 +71,7 @@ export function testSliderScroll({direction, ...settings}){
   // initialize jquery slider
   document.body.innerHTML = `
   <section class="regular slider">
-    ${createSliderJQuery(noOfSlides)}
+    ${createJQuerySliderChildren(noOfSlides)}
   </section>
   `
   $('.regular.slider').slick({
