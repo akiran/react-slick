@@ -1,7 +1,10 @@
 import React from 'react'
-import Slider from '../src/slider'
-import {mount} from 'enzyme'
 import $ from 'jquery'
+import assign from 'object-assign'
+import {mount} from 'enzyme'
+import Slider from '../src/slider'
+import {InnerSlider} from '../src/inner-slider'
+import defaultProps from '../src/default-props'
 import * as slickCarousel from 'slick-carousel' // defining slick in global environment
 
 // finds active slide number in the last transition in the forward direction
@@ -13,18 +16,42 @@ export function activeSlideInLastTransition(noOfSlides, slidesToShow, slidesToSc
     return currentSlide - slidesToScroll
 }
 
+// create jsx-form children for react slider
+export function createReactSliderChildren(noOfSlides){
+  return Array.from(Array(noOfSlides).keys()).map(i => (
+    <div key={i}><h3>{i+1}</h3></div>
+  ))
+}
+
 // create a react-slider with given noOfSlides and other props
 // variable widths are ignored for now for simplicity
-export function createSliderReact({noOfSlides, ...props}){
-  let children = []
-  for(let i = 0; i < noOfSlides; i++){
-    children.push(i)
-  }
+export function createReactSlider({noOfSlides, ...props}){
   return (
     <Slider {...props}>
-      {children.map(i => <div key={i}><h3>{i+1}</h3></div>)}
+      {createReactSliderChildren(noOfSlides)}
     </Slider>
   )
+}
+
+// create a react inner-slider with given noOfSlides and other props
+// performs most operations like the ones when mounted inside Slider component
+export function createInnerSlider({noOfSlides, ...settings}){
+  if(settings.centerMode){
+    settings.slidesToScroll = 1 // always scroll by one when centerMode is enabled
+  }
+  settings = assign({}, defaultProps, settings)
+  const children = React.Children.toArray(
+    createReactSliderChildren(noOfSlides)
+  )
+  return (
+    <InnerSlider {...settings}>
+      {children}
+    </InnerSlider>
+  )
+}
+
+export function createInnerSliderWrapper(settings){
+  return mount(createInnerSlider(settings))
 }
 
 // creates a dom string, containing children of slick children
@@ -40,7 +67,7 @@ export function createSliderJQuery(noOfSlides){
 export function testSliderScroll({direction, ...settings}){
   const {noOfSlides, slidesToShow, slidesToScroll, initialSlide} = settings
   // initialize react slider
-  const slider = mount(createSliderReact(settings))
+  const slider = mount(createReactSlider(settings))
   // initialize jquery slider
   document.body.innerHTML = `
   <section class="regular slider">
