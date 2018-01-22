@@ -32,10 +32,10 @@ const testsUtil  = (settings, actions, keys) => {
   })
 
   // Following two tests fail
-  test.skip('checking cloned slides jQuery vs react', () => {
+  test('checking cloned slides jQuery vs react', () => {
     expect(reactDetails.clonedSlides.map(slide => slide.index)).toEqual(jqDetails.clonedSlides.map(slide => slide.index))
   })
-  test.skip('checking all slides jQuery vs react', () => {
+  test('checking all slides jQuery vs react', () => {
     expect(reactDetails.allSlides.map(slide => slide.index)).toEqual(jqDetails.allSlides.map(slide => slide.index))
   })
 }

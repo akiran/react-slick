@@ -89,6 +89,6 @@ export function getReactSlickDetails(settings, actions, keys){
 
 // const details = getReactSlickDetails(settings, actions, keys)
 // console.log('details:', details)
-// test('fake test', () => {
-//   expect(1).toBe(1)
-// })
+test('fake test', () => {
+  expect(1).toBe(1)
+})

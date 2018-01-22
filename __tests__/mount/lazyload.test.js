@@ -25,18 +25,18 @@ let keys = {
 const testsUtil  = (settings, actions, keys) => {
   const jqDetails = getJQuerySlickDetails(settings, actions, keys)
   const reactDetails = getReactSlickDetails(settings, actions, keys)
-  test('checking current slide jQuery vs react', () => {
+  test.skip('checking current slide jQuery vs react', () => {
     expect(reactDetails.currentSlide).toEqual(jqDetails.currentSlide)
   })
-  test('checking active slides jQuery vs react', () => {
+  test.skip('checking active slides jQuery vs react', () => {
     expect(reactDetails.activeSlides).toEqual(jqDetails.activeSlides)
   })
 
   // Following two tests fail
-  test.skip('checking cloned slides jQuery vs react', () => {
+  test('checking cloned slides jQuery vs react', () => {
     expect(reactDetails.clonedSlides.map(slide => slide.index)).toEqual(jqDetails.clonedSlides.map(slide => slide.index))
   })
-  test.skip('checking all slides jQuery vs react', () => {
+  test('checking all slides jQuery vs react', () => {
     expect(reactDetails.allSlides.map(slide => slide.index)).toEqual(jqDetails.allSlides.map(slide => slide.index))
   })
 }
@@ -64,25 +64,25 @@ describe(
     testsUtil(settings, actions, keys)
   }
 )
-describe.skip(
+describe(
   'InnerSlider component tests with lazyload: Part 5', () => {
     actions.clickNext = 6
     testsUtil(settings, actions, keys)
   }
 )
-describe.skip(
+describe(
   'InnerSlider component tests with lazyload: Part 6', () => {
     actions.clickPrev = 6
     testsUtil(settings, actions, keys)
   }
 )
-describe.skip(
+describe(
   'InnerSlider component tests with lazyload: Part 7', () => {
     actions.clickSequence = ['n', 'n', 'n', 'n', 'n', 'n', 'p', 'p', 'p']
     testsUtil(settings, actions, keys)
   }
 )
-describe.skip(
+describe(
   'InnerSlider component tests with lazyload: Part 8', () => {
     actions.clickSequence = ['p', 'p', 'p', 'p', 'p', 'p', 'n', 'n', 'n']
     testsUtil(settings, actions, keys)
