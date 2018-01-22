@@ -22,9 +22,9 @@ function simulateActions(actions){
   }
   if(actions.clickSequence){
     for(let click of actions.clickSequence){
-      if(click == 'n'){
+      if(click === 'n'){
         $('.slick-next').click()
-      } else if (click == 'p') {
+      } else if (click === 'p') {
         $('.slick-prev').click()
       } else {
         // that's right, you can't even write n/p properly
@@ -51,7 +51,7 @@ function fetchDetails(keys){
       value: $(slide).find('div').find('div').find('h3').text()
     }
     allSlides.push(slideObj)
-    if($(slide).hasClass('slick-current')){ currentSlide = slideObj }
+    if($(slide).hasClass('slick-current')){ currentSlide = slideObj.index }
     if($(slide).hasClass('slick-active')){ activeSlides.push(slideObj) }
     if($(slide).hasClass('slick-cloned')){ clonedSlides.push(slideObj) }
     if($(slide).attr('aria-hidden') == 'false'){ visibleSlides.push(slideObj) }
@@ -67,7 +67,7 @@ function fetchDetails(keys){
 // creates a jQuery slick with given settings and
 // performs the given actions
 // returns the given keys
-export function getJQuerySlickDetails(settings, actions={}, keys={}){
+export function getJQuerySlickDetails(settings, actions, keys){
   // create new slider
   document.body.innerHTML = `
   <section class="regular slider">

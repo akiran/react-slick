@@ -8,6 +8,7 @@ let settings = {
   noOfSlides: 5,
   slidesToShow: 3,
   slidesToScroll: 1,
+  centerMode: true,
 }
 let actions = {
   clickNext: 0,
