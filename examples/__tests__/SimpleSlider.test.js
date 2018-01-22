@@ -4,13 +4,13 @@ import SimpleSlider from '../SimpleSlider';
 import { repeatClicks } from '../../test-helpers';
 
 describe('Simple Slider', function () {
-  it('should have 8 slides (6 actual and 2 clone slides)', function () {
+  it('should have 13 slides (1(preclone) + 6(actual) + 6(postclone))', function () {
     const wrapper = mount(<SimpleSlider />);
-    expect(wrapper.find('.slick-slide').length).toEqual(8);
+    expect(wrapper.find('.slick-slide').length).toEqual(13);
   });
-  it('should have 2 clone slides', function () {
+  it('should have 7 clone slides', function () {
     const wrapper = mount(<SimpleSlider />);
-    expect(wrapper.find('.slick-cloned').length).toEqual(2);
+    expect(wrapper.find('.slick-cloned').length).toEqual(7);
   });
   it('should have 1 active slide', function () {
     const wrapper = mount(<SimpleSlider />);

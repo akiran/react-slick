@@ -3,10 +3,10 @@ import { mount } from 'enzyme';
 import MultipleItems from '../MultipleItems';
 
 describe('Multiple Items', function () {
-  it('should have 9 actual slides and 6 clone slides', function () {
+  it('should have 9 actual slides and (3(pre) + 9(post)) clone slides', function () {
     const wrapper = mount(<MultipleItems />);
-    expect(wrapper.find('.slick-slide').length).toEqual(15);
-    expect(wrapper.find('.slick-cloned').length).toEqual(6);
+    expect(wrapper.find('.slick-slide').length).toEqual(21);
+    expect(wrapper.find('.slick-cloned').length).toEqual(12);
   });
   it('should have 3 active slides', function () {
     const wrapper = mount(<MultipleItems />);
