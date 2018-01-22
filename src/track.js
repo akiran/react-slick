@@ -102,10 +102,10 @@ var renderSlides = function (spec) {
     if (spec.infinite && spec.fade === false) {
       // In the following: (spec.slidesToShow + 1) seems flawed in case of variable width
       var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
-
-      // still not sure about this
-      if (index >= (childrenCount - infiniteCount)) {
-        key = -(childrenCount - index);
+      let preCloneNo = childrenCount - index
+      if (preCloneNo <= spec.slidesToShow + (spec.centerMode ? 1 : 0)
+        && childrenCount !== spec.slidesToShow){
+        key = -preCloneNo;
         preCloneSlides.push(React.cloneElement(child, {
           key: 'precloned' + getKey(child, key),
           'data-index': key,
@@ -115,7 +115,7 @@ var renderSlides = function (spec) {
         }));
       }
 
-      if (index < infiniteCount) {
+      if (childrenCount !== spec.slidesToShow) {
         key = childrenCount + index;
         postCloneSlides.push(React.cloneElement(child, {
           key: 'postcloned' + getKey(child, key),
