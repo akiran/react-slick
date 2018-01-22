@@ -88,7 +88,7 @@ export default class Slider extends React.Component {
       // never executes in the first render
       // so defaultProps should be already there in this.props
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
-      settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, this.props, newProps[0].settings);
+      settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, defaultProps, this.props, newProps[0].settings);
     } else {
       settings = assign({}, defaultProps, this.props);
     }
