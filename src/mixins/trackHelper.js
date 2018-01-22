@@ -15,17 +15,10 @@ export var getTrackCSS = function(spec) {
   ]);
 
   var trackWidth, trackHeight;
-
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow);
-
+  const cloneCount = spec.slideCount + spec.slidesToShow + (spec.centerMode ? 1: 0)
   if (!spec.vertical) {
-    if (spec.variableWidth) {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
-    } else if (spec.centerMode) {
-      trackWidth = (spec.slideCount + 2*(spec.slidesToShow + 1)) * spec.slideWidth;
-    } else {
-      trackWidth = (spec.slideCount + 2*spec.slidesToShow) * spec.slideWidth;
-    }
+    trackWidth = (spec.slideCount + cloneCount ) * spec.slideWidth;
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }

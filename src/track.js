@@ -100,8 +100,6 @@ var renderSlides = function (spec) {
     // variableWidth doesn't wrap properly.
     // if slide needs to be precloned or postcloned
     if (spec.infinite && spec.fade === false) {
-      // In the following: (spec.slidesToShow + 1) seems flawed in case of variable width
-      var infiniteCount = spec.variableWidth ? spec.slidesToShow + 1 : spec.slidesToShow;
       let preCloneNo = childrenCount - index
       if (preCloneNo <= spec.slidesToShow + (spec.centerMode ? 1 : 0)
         && childrenCount !== spec.slidesToShow){
