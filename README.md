@@ -81,47 +81,48 @@ class SimpleSlider extends React.Component {
 
 ### Props
 
-Props            | Type            | Default Value                   | Description                                                 | Working
----------------- | --------------- | ------------------------------- | -----------                                                 | -------
-`accessibility`  | `bool`          | `true`                          | Enable tabbing and arrow key navigation                     | Yes
-`className`      | `string`        | `''`                            | CSS class for inner slider div                              | Yes
-`adaptiveHeight` | `bool`          | `false`                         | Adjust the slide's height automatically                     | Yes
-`arrows`         | `bool`          | `true`                          |                                                             | Yes
-`nextArrow`      | React Element   | `null`                          | React element for next arrow. [Example](customArrows)       | Yes
-`prevArrow`      | React Element   | `null`                          | React element for prev arrow. [Example](customArrows)       | Yes
-`autoplay`       | `bool`          | `false`                         |                                                             | Yes
-`autoplaySpeed`  | `int`           | `3000`                          | Delay between each auto scroll (in milliseconds)            | Yes
-`centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
-`centerPadding`  |                 | `'50px'`                        |                                                             |
-`cssEase`        |                 | `'ease'`                        |                                                             |
-`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](customPaging)            | Yes
-`dots`           | `bool`          | `Default`                       |                                                             | Yes
-`dotsClass`      | `string`        | `'slick-dots'`                  | CSS class for dots                                          | Yes
-`draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
-`easing`         | `string`        | `'linear'`                      |                                                             |
-`fade`           | `bool`          | `Default`                       |                                                             | Yes
-`focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
-`infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
-`initialSlide`   | `int`           | `0`                             | Index of first slide                                        | Yes
-`lazyLoad`       | `bool`          | `false`                         | Load images or render components on demand                  | Yes
-`pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
-`responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
-`rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes
-`slide`          | `string`        | `'div'`                         |                                                             |
-`slidesToShow`   | `int`           | `1`                             | Yes                                                         | Yes
-`slidesToScroll` | `int`           | `1`                             |                                                             |
-`speed`          | `int`           | `500`                           |                                                             |
-`swipe`          | `bool`          | `true`                          |                                                             |
-`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swpie irrespective of `slidesToScroll`          | Yes
-`touchMove`      | `bool`          | `true`                          |                                                             |
-`touchThreshold` | `int`           | `5`                             |                                                             |
-`variableWidth`  | `bool`          | `false`                         |                                                             |
-`useCSS`         | `bool`          | `true`                          | Enable/Disable CSS Transitions                              | Yes
-`vertical`       | `bool`          | `false`                         |                                                             | Yes
-`init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                       | Yes
-`afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
-`beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
-`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            |
+Props             | Type             | Default Value                    | Description                                                  | Working
+----------------  | ---------------  | -------------------------------  | -----------                                                  | -------
+`accessibility`   | `bool`           | `true`                           | Enable tabbing and arrow key navigation                      | Yes
+`className`       | `string`         | `''`                             | CSS class for inner slider div                               | Yes
+`adaptiveHeight`  | `bool`           | `false`                          | Adjust the slide's height automatically                      | Yes
+`arrows`          | `bool`           | `true`                           |                                                              | Yes
+`nextArrow`       | React Element    | `null`                           | React element for next arrow. [Example](customArrows)        | Yes
+`prevArrow`       | React Element    | `null`                           | React element for prev arrow. [Example](customArrows)        | Yes
+`autoplay`        | `bool`           | `false`                          |                                                              | Yes
+`autoplaySpeed`   | `int`            | `3000`                           | Delay between each auto scroll (in milliseconds)             | Yes
+`centerMode`      | `bool`           | `false`                          | Center current slide                                         | Yes
+`centerPadding`   |                  | `'50px'`                         |                                                              |
+`cssEase`         |                  | `'ease'`                         |                                                              |
+`customPaging`    | `func`           | `i => <button>{i + 1}</button>`  | Custom paging templates. [Example](customPaging)             | Yes
+`dots`            | `bool`           | `Default`                        |                                                              | Yes
+`dotsClass`       | `string`         | `'slick-dots'`                   | CSS class for dots                                           | Yes
+`draggable`       | `bool`           | `true`                           | Enable scrollable via dragging on desktop                    | Yes
+`easing`          | `string`         | `'linear'`                       |                                                              |
+`fade`            | `bool`           | `Default`                        |                                                              | Yes
+`focusOnSelect`   | `bool`           | `false`                          | Go to slide on click                                         | Yes
+`infinite`        | `bool`           | `true`                           | Infinitely wrap around contents                              | Yes
+`initialSlide`    | `int`            | `0`                              | Index of first slide                                         | Yes
+`lazyLoad`        | `bool`           | `false`                          | Load images or render components on demand                   | Yes
+`pauseOnHover`    | `bool`           | `true`                           | Prevents autoplay while hovering                             | Yes
+`responsive`      | `array`          | `null`                           | Customize based on breakpoints (detailed explanation below)  | Yes
+`rtl`             | `bool`           | `false`                          | Reverses the slide order                                     | Yes
+`slide`           | `string`         | `'div'`                          |                                                              |
+`slidesToShow`    | `int`            | `1`                              | Yes                                                          | Yes
+`slickListClasses`| `string`         | `''`                             | CSS classes for SlickListContainer                           | Yes
+`slidesToScroll`  | `int`            | `1`                              |                                                              |
+`speed`           | `int`            | `500`                            |                                                              |
+`swipe`           | `bool`           | `true`                           |                                                              |
+`swipeToSlide`    | `bool`           | `false`                          | Enable drag/swpie irrespective of `slidesToScroll`           | Yes
+`touchMove`       | `bool`           | `true`                           |                                                              |
+`touchThreshold`  | `int`            | `5`                              |                                                              |
+`variableWidth`   | `bool`           | `false`                          |                                                              |
+`useCSS`          | `bool`           | `true`                           | Enable/Disable CSS Transitions                               | Yes
+`vertical`        | `bool`           | `false`                          |                                                              | Yes
+`init`            | `func`           | `null`                           | componentWillMount callback. `() => void`                    | Yes
+`afterChange`     | `func`           | `Default`                        | Index change callback. `index => ...`                        | Yes
+`beforeChange`    | `func`           | `null`                           | Index change callback. `(oldIndex, newIndex) => ...`         | Yes
+`slickGoTo`       | `int`            | `Default`                        | Go to the specified slide number                             |
 
 #### `responsive` property
 
