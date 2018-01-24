@@ -12,7 +12,8 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "postinstall": "opencollective postinstall"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
@@ -76,7 +77,8 @@
     "create-react-class": "^15.5.2",
     "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",
-    "object-assign": "^4.1.0"
+    "object-assign": "^4.1.0",
+    "opencollective": "^1.0.3"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1 || ^16.0.0",
@@ -99,5 +101,10 @@
   "bugs": {
     "url": "https://github.com/akiran/react-slick/issues"
   },
-  "homepage": "https://github.com/akiran/react-slick"
+  "homepage": "https://github.com/akiran/react-slick",
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/react-slick",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
+  }
 }
