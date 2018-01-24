@@ -85,9 +85,11 @@ export var getTrackLeft = function (spec) {
   let slidesToOffset = 0
   if(infinite){
     slidesToOffset = -getPreClones(spec) // bring active slide to the beginning of visual area
+    // if next scroll doesn't have enough children, just reach till the end of original slides instead of shifting slidesToScroll children
     if (slideCount % slidesToScroll !== 0 && (slideIndex + slidesToScroll) > slideCount){
       slidesToOffset = -(slideIndex > slideCount ? (slidesToShow - (slideIndex - slideCount)) : slideCount % slidesToScroll)
     }
+    // shift current slide to center of the frame
     if(centerMode){
       slidesToOffset += parseInt(slidesToShow / 2)
     }
@@ -110,8 +112,10 @@ export var getTrackLeft = function (spec) {
 
   if (variableWidth === true) {
       var targetSlideIndex;
+      var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
+      var max = -(lastSlide.offsetLeft) + listWidth - lastSlide.offsetWidth;
       if(slideCount <= slidesToShow || infinite === false) {
-          targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[slideIndex];
+        targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[slideIndex];
       } else {
           targetSlideIndex = (slideIndex + slidesToShow);
           targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
@@ -127,6 +131,9 @@ export var getTrackLeft = function (spec) {
           if (targetSlide) {
             targetLeft = targetSlide.offsetLeft * -1 + (listWidth - targetSlide.offsetWidth) / 2;
           }
+      }
+      if (spec.infinite === false && targetLeft < max) {
+        targetLeft = max;
       }
   }
 
