@@ -19,7 +19,6 @@ npm install react-slick
 yarn add react-slick
 ```
 
-
 ⚠️ Also install slick-carousel for css and font
 
 ```bash
@@ -33,7 +32,7 @@ But be aware slick-carousel has a peer-dependancy on jQuery which you, or your c
 or add cdn link in your html
 
 ```html
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
