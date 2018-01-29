@@ -31,6 +31,11 @@ export var getTrackCSS = function(spec) {
     WebkitTransition: '',
     msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
   };
+  if (spec.fade) {
+    style = {
+      opacity: 1
+    }
+  }
 
   if (trackWidth) {
     assign(style, { width: trackWidth });
