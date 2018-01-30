@@ -27,7 +27,9 @@ export class Dots extends React.Component {
 
     var dotCount = getDotCount({
       slideCount: this.props.slideCount,
-      slidesToScroll: this.props.slidesToScroll
+      slidesToScroll: this.props.slidesToScroll,
+      slidesToShow: this.props.slidesToShow,
+      infinite: this.props.infinite
     });
 
     // Apply join & split to Array to pre-fill it for IE8
