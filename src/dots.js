@@ -5,7 +5,13 @@ import classnames from 'classnames';
 
 var getDotCount = function (spec) {
   var dots;
-  dots = Math.ceil(spec.slideCount / spec.slidesToScroll);
+
+  if (spec.infinite) {
+    dots = Math.ceil((spec.slideCount) / spec.slidesToScroll);
+  } else {
+    dots = Math.ceil((spec.slideCount - spec.slidesToShow) / spec.slidesToScroll) + 1;
+  }
+  
   return dots;
 };
 
