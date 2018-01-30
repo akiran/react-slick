@@ -161,6 +161,10 @@ var EventHandlers = {
     if (this.props.verticalSwiping) {
       swipeLeft = curLeft + touchSwipeLength * positionOffset;
     }
+    
+    if (!(this.props.verticalSwiping || this.props.vertical) && swipeDirection === 'vertical' && swipeLeft) {
+      swipeLeft = curLeft;
+    }
 
     this.setState({
       touchObject: touchObject,
