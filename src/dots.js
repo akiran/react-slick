@@ -5,7 +5,13 @@ import classnames from 'classnames';
 
 var getDotCount = function (spec) {
   var dots;
-  dots = Math.ceil(spec.slideCount / spec.slidesToScroll);
+
+  if (spec.infinite) {
+    dots = Math.ceil((spec.slideCount) / spec.slidesToScroll);
+  } else {
+    dots = Math.ceil((spec.slideCount - spec.slidesToShow) / spec.slidesToScroll) + 1;
+  }
+  
   return dots;
 };
 
@@ -21,7 +27,9 @@ export class Dots extends React.Component {
 
     var dotCount = getDotCount({
       slideCount: this.props.slideCount,
-      slidesToScroll: this.props.slidesToScroll
+      slidesToScroll: this.props.slidesToScroll,
+      slidesToShow: this.props.slidesToShow,
+      infinite: this.props.infinite
     });
 
     // Apply join & split to Array to pre-fill it for IE8
