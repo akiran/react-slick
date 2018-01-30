@@ -25,6 +25,9 @@ export var getTrackCSS = function(spec) {
 
   var style = {
     opacity: 1,
+  };
+
+  var transform = {
     WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
     transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
     transition: '',
@@ -43,6 +46,10 @@ export var getTrackCSS = function(spec) {
 
   if (trackHeight) {
     assign(style, { height: trackHeight });
+  }
+
+  if (!spec.fade) {
+    assign(style, transform);
   }
 
   // Fallback for IE8
