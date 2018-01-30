@@ -2,15 +2,16 @@ import React from 'react';
 import { mount } from 'enzyme';
 import SimpleSlider from '../SimpleSlider';
 import { repeatClicks } from '../../test-helpers';
+import { html as beautify_html } from 'js-beautify'
 
 describe('Simple Slider', function () {
-  it('should have 8 slides (6 actual and 2 clone slides)', function () {
+  it('should have 13 slides (1(preclone) + 6(actual) + 6(postclone))', function () {
     const wrapper = mount(<SimpleSlider />);
-    expect(wrapper.find('.slick-slide').length).toEqual(8);
+    expect(wrapper.find('.slick-slide').length).toEqual(13);
   });
-  it('should have 2 clone slides', function () {
+  it('should have 7 clone slides', function () {
     const wrapper = mount(<SimpleSlider />);
-    expect(wrapper.find('.slick-cloned').length).toEqual(2);
+    expect(wrapper.find('.slick-cloned').length).toEqual(7);
   });
   it('should have 1 active slide', function () {
     const wrapper = mount(<SimpleSlider />);
@@ -73,21 +74,21 @@ describe('Simple Slider', function () {
 describe("Simple Slider Snapshots", function () {
   it("slider initial state", function () {
     const wrapper = mount(<SimpleSlider />);
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(beautify_html(wrapper.html())).toMatchSnapshot()
   });
   it("click on next button", function () {
     const wrapper = mount(<SimpleSlider />);
     wrapper.find('.slick-next').simulate('click')
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(beautify_html(wrapper.html())).toMatchSnapshot()
   });
   it("click on prev button", function () {
     const wrapper = mount(<SimpleSlider />);
     wrapper.find('.slick-prev').simulate('click')
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(beautify_html(wrapper.html())).toMatchSnapshot()
   });
   it("click on 3rd dot", function () {
     const wrapper = mount(<SimpleSlider />);
     wrapper.find('.slick-dots button').at(2).simulate('click')
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(beautify_html(wrapper.html())).toMatchSnapshot()
   })
 });

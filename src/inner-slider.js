@@ -28,10 +28,6 @@ export var InnerSlider = createReactClass({
       currentSlide: this.props.initialSlide
     });
   },
-  // defaultProps are already accessible via this.props because Slider component passed them down
-  // getDefaultProps: function () {
-  //   return defaultProps;
-  // },
   componentWillMount: function () {
     if (this.props.init) {
       this.props.init();
@@ -45,6 +41,9 @@ export var InnerSlider = createReactClass({
     const childrenLen = React.Children.count(this.props.children);
     const currentSlide = this.state.currentSlide;
     for (let i = 0; i < childrenLen; i++) {
+      // if currentSlide is the lastSlide of current frame and 
+      // rest of the active slides are on the left of currentSlide
+      // then the following might cause a problem
       if (i >= currentSlide && i < currentSlide + slidesToShow) {
         lazyLoadedList.push(i);
       }

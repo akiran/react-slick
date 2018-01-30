@@ -19,7 +19,6 @@ npm install react-slick
 yarn add react-slick
 ```
 
-
 ⚠️ Also install slick-carousel for css and font
 
 ```bash
@@ -33,17 +32,17 @@ But be aware slick-carousel has a peer-dependancy on jQuery which you, or your c
 or add cdn link in your html
 
 ```html
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
 ### [Demos](http://neostack.com/opensource/react-slick)
 
-### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
-Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
+### [PlayGround](https://codesandbox.io/s/zzloxr09mp)
+Use [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) to try react-slick with different settings.
 
 ### Filing issues
-Please replicate your issue with [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) and post it along with issue to make it easy for me to debug.
+Please replicate your issue with [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) and post it along with issue to make it easy for me to debug.
 
 
 ### Starter Kit
