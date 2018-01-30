@@ -88,13 +88,27 @@ export default class Slider extends React.Component {
       // never executes in the first render
       // so defaultProps should be already there in this.props
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
-      settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, this.props, newProps[0].settings);
+      settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, defaultProps, this.props, newProps[0].settings);
     } else {
       settings = assign({}, defaultProps, this.props);
     }
 
-    // always scroll by one if centerMode is on
+    // force scrolling by one if centerMode is on
     if(settings.centerMode){
+      if(settings.slidesToScroll > 1 && process.env.NODE_ENV !== 'production'){
+        console.warn(`slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`)
+      }
+      settings.slidesToScroll = 1
+    }
+    // force showing one slide and scrolling by one if the fade mode is on
+    if(settings.fade){
+      if(settings.slidesToShow > 1 && process.env.NODE_ENV !== 'production'){
+        console.warn(`slidesToShow should be equal to 1 when fade is true, you're using ${settings.slidesToShow}`)
+      }
+      if(settings.slidesToScroll > 1 && process.env.NODE_ENV !== 'production'){
+        console.warn(`slidesToScroll should be equal to 1 when fade is true, you're using ${settings.slidesToScroll}`)
+      }
+      settings.slidesToShow = 1
       settings.slidesToScroll = 1
     }
 
