@@ -5,7 +5,7 @@ import assign from 'object-assign';
 import classnames from 'classnames';
 
 var getSlideClasses = (spec) => {
-  var slickActive, slickCenter, slickCloned;
+  var slickActive, slickCenter, slickCloned, isCurrentIndex;
   var centerOffset, index;
 
   if (spec.rtl) {
@@ -23,11 +23,13 @@ var getSlideClasses = (spec) => {
   } else {
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
+  isCurrentIndex = spec.currentSlide === spec.index;
   return classnames({
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
-    'slick-cloned': slickCloned
+    'slick-cloned': slickCloned,
+    'current-index': isCurrentIndex
   });
 };
 
