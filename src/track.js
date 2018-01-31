@@ -27,11 +27,13 @@ var getSlideClasses = (spec) => {
     // concern: following can be incorrect in case where currentSlide is lastSlide in frame and rest of the slides to show have index smaller than currentSlideIndex
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
+  let slickCurrent = index === spec.currentSlide
   return classnames({
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
-    'slick-cloned': slickCloned
+    'slick-cloned': slickCloned,
+    'slick-current': slickCurrent // dubious in case of RTL
   });
 };
 
