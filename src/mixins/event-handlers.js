@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 
 var EventHandlers = {
   // Event handler for previous and next
+  // gets called if slide is changed via arrows or dots but not swiping/dragging
   changeSlide: function (options) {
     var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
     const {slidesToScroll, slidesToShow} = this.props
@@ -61,6 +62,7 @@ var EventHandlers = {
   selectHandler: function (options) {
     this.changeSlide(options)
   },
+  // invoked when swiping/dragging starts (just once)
   swipeStart: function (e) {
     var touches, posX, posY;
 
@@ -81,6 +83,7 @@ var EventHandlers = {
       }
     });
   },
+  // continuous invokation while swiping/dragging is going on
   swipeMove: function (e) {
     if (!this.state.dragging) {
       e.preventDefault();
@@ -127,7 +130,7 @@ var EventHandlers = {
     }
 
     var currentSlide = this.state.currentSlide;
-    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll);
+    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll); // this might not be correct, using getDotCount may be more accurate
     var swipeDirection = this.swipeDirection(this.state.touchObject);
     var touchSwipeLength = touchObject.swipeLength;
 
@@ -141,7 +144,6 @@ var EventHandlers = {
         }
       }
     }
-
     if (this.state.swiped === false && this.props.swipeEvent) {
       this.props.swipeEvent(swipeDirection);
       this.setState({ swiped: true });

@@ -231,15 +231,17 @@ var helpers = {
     }
 
     if (this.props.lazyLoad) {
-      var loaded = true;
       var slidesToLoad = [];
+      let slideCount = this.state.slideCount
       for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
-        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
-        if (!loaded) {
-          slidesToLoad.push(i);
+        if (this.state.lazyLoadedList.indexOf(i) < 0) {
+          slidesToLoad.push(i)
+        }
+        if (i >= slideCount && this.state.lazyLoadedList.indexOf(i - slideCount) < 0) {
+          slidesToLoad.push(i - slideCount)
         }
       }
-      if (!loaded) {
+      if (slidesToLoad.length > 0) {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
         });

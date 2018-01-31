@@ -69,6 +69,7 @@ export var getTrackAnimateCSS = function (spec) {
   return style;
 };
 
+// gets total length of track that's on the left side of current slide
 export var getTrackLeft = function (spec) {
 
   checkSpecKeys(spec, [
