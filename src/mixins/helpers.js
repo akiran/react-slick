@@ -240,6 +240,9 @@ var helpers = {
         if (i >= slideCount && this.state.lazyLoadedList.indexOf(i - slideCount) < 0) {
           slidesToLoad.push(i - slideCount)
         }
+        if (i < 0 && this.state.lazyLoadedList.indexOf(i + slideCount) < 0) {
+          slidesToLoad.push(i + slideCount)
+        }
       }
       if (slidesToLoad.length > 0) {
         this.setState({
