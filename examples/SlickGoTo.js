@@ -11,9 +11,11 @@ export default class SlickGoTo extends Component {
       slideIndex: 0
     }
   }
+
   changeHandler(e) {
-    this.setState({ slideIndex: e.target.value })
-    this.refs.slider.slickGoTo(e.target.value)
+    this.refs.slider.slickGoTo(e.target.value, () => {
+      this.setState({ slideIndex: e.target.value })
+    })
   }
 
   changeSlider(){
@@ -21,6 +23,7 @@ export default class SlickGoTo extends Component {
       slideIndex: this.refs.slider.innerSlider.state.currentSlide
     })
   }
+  
   render() {
     const settings = {
       dots: false,

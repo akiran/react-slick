@@ -129,8 +129,9 @@ var helpers = {
     return canGo;
   },
   slideHandler: function (index) {
+    // index is target slide index
+
     // Functionality of animateSlide and postSlide is merged into this function
-    // console.log('slideHandler', index);
     var targetSlide, currentSlide;
     var targetLeft, currentLeft;
     var callback;
@@ -142,7 +143,7 @@ var helpers = {
     if (this.props.fade) {
       currentSlide = this.state.currentSlide;
 
-      // Don't change slide if it's not infite and current slide is the first or last slide.
+      // Don't change slide if infinite=false and target slide is out of range
       if(this.props.infinite === false &&
         (index < 0 || index >= this.state.slideCount)) {
         return;
@@ -275,13 +276,13 @@ var helpers = {
         trackStyle: getTrackCSS(assign({left: currentLeft}, this.props, this.state)),
         swipeLeft: null
       };
-
       callback = () => {
-        this.setState(nextStateChanges);
-        if (this.props.afterChange) {
-          this.props.afterChange(currentSlide);
-        }
-        delete this.animationEndCallback;
+        this.setState(nextStateChanges, () => {
+          if (this.props.afterChange) {
+            this.props.afterChange(currentSlide);
+          }
+          delete this.animationEndCallback;
+        });
       };
 
       this.setState({
