@@ -9,6 +9,15 @@ var checkSpecKeys = function (spec, keysArray) {
   }, true) ? null : console.error('Keys Missing', spec);
 };
 
+export var round = function(value) {
+  /*
+   * http://keithclark.co.uk/articles/gpu-text-rendering-in-webkit/
+   * If we want a size divisible by 2:
+   * return (Math.ceil(value) / 2) * 2;
+   */
+  return Math.ceil(value);
+};
+
 export var getTrackCSS = function(spec) {
   checkSpecKeys(spec, [
     'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth'
@@ -38,11 +47,11 @@ export var getTrackCSS = function(spec) {
   }
 
   if (trackWidth) {
-    assign(style, { width: trackWidth });
+    assign(style, { width: round(trackWidth) });
   }
 
   if (trackHeight) {
-    assign(style, { height: trackHeight });
+    assign(style, { height: round(trackHeight) });
   }
 
   // Fallback for IE8
@@ -142,7 +151,7 @@ export var getTrackLeft = function (spec) {
       }
   }
 
-  return targetLeft;
+  return round(targetLeft);
 };
 
 export function getPreClones(spec){

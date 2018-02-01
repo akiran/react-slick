@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
+import {getTrackCSS, getTrackLeft, getTrackAnimateCSS, round} from './trackHelper';
 import assign from 'object-assign';
 
 var helpers = {
@@ -17,9 +17,9 @@ var helpers = {
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = round((this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow);
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = round(this.getWidth(ReactDOM.findDOMNode(this)));
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -60,9 +60,9 @@ var helpers = {
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = round((this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow);
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = round(this.getWidth(ReactDOM.findDOMNode(this)));
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
