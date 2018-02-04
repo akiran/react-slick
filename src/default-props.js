@@ -46,7 +46,8 @@ var defaultProps = {
     swipeEvent: null,
     // nextArrow, prevArrow should react componets
     nextArrow: null,
-    prevArrow: null
+    prevArrow: null,
+    afterDots: null
 };
 
 export default defaultProps
