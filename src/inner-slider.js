@@ -183,6 +183,7 @@ export var InnerSlider = createReactClass({
     };
 
     var dots;
+    var afterDots;
 
     if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
       var dotProps = {
@@ -197,6 +198,10 @@ export var InnerSlider = createReactClass({
       };
 
       dots = (<Dots {...dotProps} />);
+
+      if (this.props.afterDots) {
+        afterDots = this.props.afterDots;
+      }
     }
 
     var prevArrow, nextArrow;
@@ -270,6 +275,7 @@ export var InnerSlider = createReactClass({
         </div>
         {nextArrow}
         {dots}
+        {afterDots}
       </div>
     );
   }
