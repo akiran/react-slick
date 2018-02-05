@@ -17,6 +17,9 @@ var helpers = {
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
+      if (props.centerPadding.slice(-1) === '%') {
+        centerPaddingAdj *= listWidth / 100
+      }
       slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
@@ -60,6 +63,9 @@ var helpers = {
 
     if (!props.vertical) {
       var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
+      if (props.centerPadding.slice(-1) === '%') {
+        centerPaddingAdj *= listWidth / 100
+      }
       slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
