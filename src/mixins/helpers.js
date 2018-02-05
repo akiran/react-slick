@@ -75,6 +75,15 @@ var helpers = {
       this.autoPlay();
     }
 
+    // animating state should be cleared when updating, otherwise tracker width gets old value
+    if (this.animationEndCallback) {
+      this.setState({
+        animating: false
+      });
+      clearTimeout(this.animationEndCallback);
+      delete this.animationEndCallback;
+    }
+
     this.setState({
       slideCount,
       slideWidth,
