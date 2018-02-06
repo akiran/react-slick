@@ -27,11 +27,13 @@ var getSlideClasses = (spec) => {
     // concern: following can be incorrect in case where currentSlide is lastSlide in frame and rest of the slides to show have index smaller than currentSlideIndex
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
+  let slickCurrent = index === spec.currentSlide
   return classnames({
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
-    'slick-cloned': slickCloned
+    'slick-cloned': slickCloned,
+    'slick-current': slickCurrent // dubious in case of RTL
   });
 };
 
@@ -44,10 +46,15 @@ var getSlideStyle = function (spec) {
 
   if (spec.fade) {
     style.position = 'relative';
-    style.left = -spec.index * spec.slideWidth;
+    if (spec.vertical) {
+      style.top = -spec.index * spec.slideHeight;
+    } else {
+      style.left = -spec.index * spec.slideWidth;
+    }
     style.opacity = (spec.currentSlide === spec.index) ? 1 : 0;
-    style.transition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;
-    style.WebkitTransition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;
+    style.visibility = (spec.currentSlide === spec.index) ? 'visible' : 'hidden';
+    style.transition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase + ', ' + 'visibility ' + spec.speed + 'ms ' + spec.cssEase;
+    style.WebkitTransition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase + ', ' + 'visibility ' + spec.speed + 'ms ' + spec.cssEase;
   }
 
   return style;

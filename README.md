@@ -86,14 +86,14 @@ Props            | Type            | Default Value                   | Descripti
 `className`      | `string`        | `''`                            | CSS class for inner slider div                              | Yes
 `adaptiveHeight` | `bool`          | `false`                         | Adjust the slide's height automatically                     | Yes
 `arrows`         | `bool`          | `true`                          |                                                             | Yes
-`nextArrow`      | React Element   | `null`                          | React element for next arrow. [Example](customArrows)       | Yes
-`prevArrow`      | React Element   | `null`                          | React element for prev arrow. [Example](customArrows)       | Yes
+`nextArrow`      | React Element   | `null`                          | React element for next arrow. [Example](examples/CustomArrows.js)       | Yes
+`prevArrow`      | React Element   | `null`                          | React element for prev arrow. [Example](examples/CustomArrows.js)       | Yes
 `autoplay`       | `bool`          | `false`                         |                                                             | Yes
 `autoplaySpeed`  | `int`           | `3000`                          | Delay between each auto scroll (in milliseconds)            | Yes
 `centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
 `centerPadding`  |                 | `'50px'`                        |                                                             |
 `cssEase`        |                 | `'ease'`                        |                                                             |
-`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](customPaging)            | Yes
+`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)            | Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
 `dotsClass`      | `string`        | `'slick-dots'`                  | CSS class for dots                                          | Yes
 `draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
@@ -125,10 +125,6 @@ Props            | Type            | Default Value                   | Descripti
 #### `responsive` property
 
 Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
-
-[customArrows]: https://github.com/akiran/react-slick/blob/master/examples/CustomArrows.js
-[customPaging]: https://github.com/akiran/react-slick/blob/master/examples/CustomPaging.js
-
 
 ### Methods
 * `slickNext()`   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))

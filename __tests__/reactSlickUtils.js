@@ -38,11 +38,11 @@ function fetchDetails(slider, keys){
 
 function fetchDOMDetails(slider, keys){
   let details = {}
-  let currentSlide = null, // no way to find it
+  let currentSlide = null,
     activeSlides = [],
     allSlides = [],
     clonedSlides = [],
-    visibleSlides = [] // no way to find these
+    visibleSlides = [] // currently no way to find these
   slider.find('div.slick-slide').forEach((slide, index) => {
     const slideObj = {
       index: slide.prop('data-index').toString(),
@@ -51,6 +51,7 @@ function fetchDOMDetails(slider, keys){
     allSlides.push(slideObj)
     if(slide.hasClass('slick-active')){ activeSlides.push(slideObj) }
     if(slide.hasClass('slick-cloned')) { clonedSlides.push(slideObj) }
+    if(slide.hasClass('slick-current')) { currentSlide = slideObj }
   })
   if(keys.currentSlide) { details.currentSlide = currentSlide }
   if(keys.activeSlides) { details.activeSlides = activeSlides }
@@ -66,29 +67,12 @@ export function getReactSlickDetails(settings, actions, keys){
   return fetchDetails(slider, keys)
 }
 
-// let settings = {
-//   infinite: true,
-//   speed: 0,
-//   useCSS: false,
-//   lazyLoad: true,
-//   noOfSlides: 5,
-//   slidesToShow: 3,
-//   slidesToScroll: 1,
-// }
-// let actions = {
-//   clickNext: 0,
-//   clickPrev: 0,
-//   clickSequence: []
-// }
-// let keys = {
-//   currentSlide: true,
-//   activeSlides: true,
-//   clonedSlides: true,
-//   allSlides: true,
-// }
+/*
+settings: [...sliderProps, noOfSlides],
+actions: [clickNext, clickPrev, clickSequence],
+keys: [currentSlide, activeSlides, clonedSlides, allSlides, visibleSlides]
+*/
 
-// const details = getReactSlickDetails(settings, actions, keys)
-// console.log('details:', details)
 test('fake test', () => {
   expect(1).toBe(1)
 })

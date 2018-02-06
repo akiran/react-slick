@@ -15,7 +15,7 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>2</h3>
                 </div>
-                <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
+                <div data-index=\\"2\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>3</h3>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
@@ -71,7 +71,7 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>1</h3>
                 </div>
-                <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
+                <div data-index=\\"1\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>2</h3>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
@@ -142,7 +142,7 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>5</h3>
                 </div>
-                <div data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
+                <div data-index=\\"5\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>6</h3>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
@@ -186,7 +186,7 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
                 <div data-index=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
-                <div data-index=\\"0\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
+                <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>1</h3>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">

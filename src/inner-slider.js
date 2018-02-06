@@ -175,6 +175,9 @@ export var InnerSlider = createReactClass({
       lazyLoadedList: this.state.lazyLoadedList,
       rtl: this.props.rtl,
       slideWidth: this.state.slideWidth,
+      slideHeight: this.state.slideHeight,
+      listHeight: this.state.listHeight,
+      vertical: this.props.vertical,
       slidesToShow: this.props.slidesToShow,
       slidesToScroll: this.props.slidesToScroll,
       slideCount: this.state.slideCount,
@@ -193,7 +196,8 @@ export var InnerSlider = createReactClass({
         slidesToScroll: this.props.slidesToScroll,
         clickHandler: this.changeSlide,
         children: this.props.children,
-        customPaging: this.props.customPaging
+        customPaging: this.props.customPaging,
+        infinite: this.props.infinite
       };
 
       dots = (<Dots {...dotProps} />);
