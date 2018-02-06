@@ -84,7 +84,7 @@ export var getTrackLeft = function (spec) {
   var targetSlide;
   var verticalOffset = 0;
 
-  if (fade) {
+  if (fade || spec.slideCount === 1) {
     return 0;
   }
 
@@ -155,5 +155,8 @@ export function getPostClones(spec){
 }
 
 export function getTotalSlides(spec){
+  if (spec.slideCount === 1) {
+    return 1
+  }
   return getPreClones(spec) + spec.slideCount + getPostClones(spec)
 }
