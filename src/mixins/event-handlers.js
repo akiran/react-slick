@@ -33,7 +33,7 @@ var EventHandlers = {
         return;
       }
     } else if (options.message === 'index') {
-      targetSlide = parseInt(options.index);
+      targetSlide = Number(options.index);
       if (targetSlide === options.currentSlide) {
         return;
       }
@@ -86,7 +86,11 @@ var EventHandlers = {
       e.preventDefault();
       return;
     }
+    if (this.state.scrolling) {
+      return;
+    }
     if (this.state.animating) {
+      e.preventDefault();
       return;
     }
     if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
@@ -103,9 +107,17 @@ var EventHandlers = {
     touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
     touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
+    var verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+
+    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 4) {
+      this.setState({
+        scrolling: true
+      })
+      return;
+    }
 
     if (this.props.verticalSwiping) {
-      touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+      touchObject.swipeLength = verticalSwipeLength;
     }
 
     positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
@@ -136,7 +148,12 @@ var EventHandlers = {
     }
 
     if (!this.props.vertical) {
-      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+      if (!this.props.rtl) {
+        swipeLeft = curLeft + touchSwipeLength * positionOffset;
+      }
+      else {
+        swipeLeft = curLeft - touchSwipeLength * positionOffset;
+      }
     } else {
       swipeLeft = curLeft + (touchSwipeLength * (this.state.listHeight / this.state.listWidth)) * positionOffset;
     }
@@ -154,6 +171,9 @@ var EventHandlers = {
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
       { return; }
     if (touchObject.swipeLength > 4) {
+      this.setState({
+        swiping: true
+      })
       e.preventDefault();
     }
   },
@@ -225,7 +245,8 @@ var EventHandlers = {
         return true;
       });
         
-        if(swipedSlide && swipedSlide.dataset) {
+      const currentIndex = this.props.rtl === true ? this.state.slideCount - this.state.currentSlide : this.state.currentSlide; 
+      if(swipedSlide && swipedSlide.dataset) {
             slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
         } else {
             slidesTraversed = 0;
@@ -251,14 +272,21 @@ var EventHandlers = {
       minSwipe = this.state.listHeight/this.props.touchThreshold;
     }
 
+    var wasScrolling = this.state.scrolling;
     // reset the state of touch related state variables.
     this.setState({
       dragging: false,
       edgeDragged: false,
+      scrolling: false,
+      swiping: false,
       swiped: false,
       swipeLeft: null,
       touchObject: {}
     });
+    if (wasScrolling) {
+      return;
+    }
+
     // Fix for #13
     if (!touchObject.swipeLength) {
       return;

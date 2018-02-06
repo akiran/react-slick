@@ -6,6 +6,7 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 
 var helpers = {
+  // supposed to start autoplay of slides
   initialize: function (props) {
     const slickList = ReactDOM.findDOMNode(this.list);
 
@@ -35,7 +36,7 @@ var helpers = {
       slideHeight,
       listHeight,
     }, function () {
-
+      // this reference isn't lost due to mixin
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
@@ -68,7 +69,7 @@ var helpers = {
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
-    if(props.autoplay) {
+    if(!props.autoplay) {
       this.pause();
     } else {
       this.autoPlay();
@@ -94,17 +95,18 @@ var helpers = {
     });
   },
   getWidth: function getWidth(elem) {
-    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
+    return elem && (elem.getBoundingClientRect().width || elem.offsetWidth) || 0;
   },
   getHeight(elem) {
-    return elem.getBoundingClientRect().height || elem.offsetHeight || 0;
+    return elem && (elem.getBoundingClientRect().height || elem.offsetHeight) || 0;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
       var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.list) {
         var slickList = ReactDOM.findDOMNode(this.list);
-        slickList.style.height = slickList.querySelector(selector).offsetHeight + 'px';
+        var elem = slickList.querySelector(selector) || {};
+        slickList.style.height = (elem.offsetHeight || 0) + 'px';
       }
     }
   },
@@ -218,6 +220,9 @@ var helpers = {
     }, this.props, this.state));
 
     if (this.props.infinite === false) {
+      if (targetLeft === currentLeft) {
+        targetSlide = currentSlide;
+      }
       targetLeft = currentLeft;
     }
 
@@ -298,10 +303,10 @@ var helpers = {
         swipeAngle = 360 - Math.abs(swipeAngle);
     }
     if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
-        return (this.props.rtl === false ? 'left' : 'right');
+        return 'left';
     }
     if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
-        return (this.props.rtl === false ? 'right' : 'left');
+        return 'right';
     }
     if (this.props.verticalSwiping === true) {
       if ((swipeAngle >= 35) && (swipeAngle <= 135)) {

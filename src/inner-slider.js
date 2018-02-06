@@ -9,14 +9,14 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 
-import {Track} from './track';
-import {Dots} from './dots';
-import {PrevArrow, NextArrow} from './arrows';
+import { Track } from './track';
+import { Dots } from './dots';
+import { PrevArrow, NextArrow } from './arrows';
 
 export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
-  list: null,
-  track: null,
+  list: null, // wraps the track
+  track: null, // component that rolls out like a film
   listRefHandler: function (ref) {
     this.list = ref;
   },
@@ -28,9 +28,6 @@ export var InnerSlider = createReactClass({
       currentSlide: this.props.initialSlide
     });
   },
-  getDefaultProps: function () {
-    return defaultProps;
-  },
   componentWillMount: function () {
     if (this.props.init) {
       this.props.init();
@@ -38,10 +35,28 @@ export var InnerSlider = createReactClass({
     this.setState({
       mounted: true
     });
-    var lazyLoadedList = [];
-    for (var i = 0; i < React.Children.count(this.props.children); i++) {
-      if (i >= this.state.currentSlide && i < this.state.currentSlide + this.props.slidesToShow) {
+    let lazyLoadedList = [];
+    // number of slides shown in the active frame
+    const slidesToShow = this.props.slidesToShow;
+    const childrenLen = React.Children.count(this.props.children);
+    const currentSlide = this.state.currentSlide;
+    for (let i = 0; i < childrenLen; i++) {
+      // if currentSlide is the lastSlide of current frame and 
+      // rest of the active slides are on the left of currentSlide
+      // then the following might cause a problem
+      if (i >= currentSlide && i < currentSlide + slidesToShow) {
         lazyLoadedList.push(i);
+      }
+    }
+    if (this.props.centerMode === true) {
+      // add slides to show on the left in case of centerMode with lazyLoad
+      let additionalCount = Math.floor(slidesToShow / 2);
+      if (parseInt(this.props.centerPadding) > 0) {
+        additionalCount += 1;
+      }
+      let additionalNum = currentSlide;
+      while(additionalCount--){
+        lazyLoadedList.push((--additionalNum + childrenLen) % childrenLen)
       }
     }
 
@@ -79,28 +94,45 @@ export var InnerSlider = createReactClass({
       clearInterval(this.state.autoPlayTimer);
     }
   },
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (this.props.slickGoTo != nextProps.slickGoTo) {
       if (process.env.NODE_ENV !== 'production') {
         console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
       }
       this.changeSlide({
-          message: 'index',
-          index: nextProps.slickGoTo,
-          currentSlide: this.state.currentSlide
+        message: 'index',
+        index: nextProps.slickGoTo,
+        currentSlide: this.state.currentSlide
       });
     } else if (this.state.currentSlide >= nextProps.children.length) {
       this.update(nextProps);
       this.changeSlide({
-          message: 'index',
-          index: nextProps.children.length - nextProps.slidesToShow,
-          currentSlide: this.state.currentSlide
+        message: 'index',
+        index: nextProps.children.length - nextProps.slidesToShow,
+        currentSlide: this.state.currentSlide
       });
     } else {
       this.update(nextProps);
     }
   },
   componentDidUpdate: function () {
+    if(this.props.lazyLoad && this.props.centerMode) {
+      let childrenLen = React.Children.count(this.props.children)
+      let additionalCount = Math.floor(this.props.slidesToShow / 2)
+      if(parseInt(this.props.centerPadding) > 0) additionalCount++;
+      let leftMostSlide = (this.state.currentSlide - additionalCount + childrenLen) % childrenLen
+      let rightMostSlide = (this.state.currentSlide + additionalCount) % childrenLen
+      if(!this.state.lazyLoadedList.includes(leftMostSlide)){
+        this.setState({
+          lazyLoadedList: this.state.lazyLoadedList + [leftMostSlide]
+        })
+      }
+      if(!this.state.lazyLoadedList.includes(rightMostSlide)){
+        this.setState({
+          lazyLoadedList: this.state.lazyLoadedList + [rightMostSlide]
+        })
+      }
+    }
     this.adaptHeight();
   },
   onWindowResized: function () {
@@ -113,13 +145,14 @@ export var InnerSlider = createReactClass({
     delete this.animationEndCallback;
   },
   slickPrev: function () {
-    this.changeSlide({message: 'previous'});
+    this.changeSlide({ message: 'previous' });
   },
   slickNext: function () {
-    this.changeSlide({message: 'next'});
+    this.changeSlide({ message: 'next' });
   },
   slickGoTo: function (slide) {
-    typeof slide === 'number' && this.changeSlide({
+    slide = Number(slide)
+    !isNaN(slide) && this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
@@ -223,13 +256,13 @@ export var InnerSlider = createReactClass({
           className="slick-list"
           style={listStyle}
           onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove: null}
+          onMouseMove={this.state.dragging ? this.swipeMove : null}
           onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd: null}
+          onMouseLeave={this.state.dragging ? this.swipeEnd : null}
           onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove: null}
+          onTouchMove={this.state.dragging ? this.swipeMove : null}
           onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd: null}
+          onTouchCancel={this.state.dragging ? this.swipeEnd : null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
