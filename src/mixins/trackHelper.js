@@ -17,8 +17,7 @@ export var getTrackCSS = function(spec) {
   var trackWidth, trackHeight;
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow); // this should probably be getTotalSlides
   if (!spec.vertical) {
-    trackWidth = getTotalSlides(spec) * spec.slideWidth;
-    trackWidth += spec.slideWidth/2 // this is a temporary hack so that track div doesn't create new row for slight overflow
+    trackWidth = 'calc(100% * ' + (getTotalSlides(spec) / spec.slidesToShow) + ')';
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
