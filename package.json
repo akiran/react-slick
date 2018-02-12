@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
@@ -12,8 +12,7 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint src",
-    "postinstall": "opencollective postinstall"
+    "lint": "eslint src"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
@@ -79,8 +78,7 @@
     "create-react-class": "^15.5.2",
     "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",
-    "object-assign": "^4.1.0",
-    "opencollective": "^1.0.3"
+    "object-assign": "^4.1.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1 || ^16.0.0",
