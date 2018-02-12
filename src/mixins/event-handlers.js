@@ -33,6 +33,14 @@ var EventHandlers = {
       if (targetSlide === options.currentSlide) {
         return;
       }
+
+      if (this.props.infinite) {
+        if (targetSlide === 0 && options.currentSlide === slideCount - 1) {
+          return this.slideHandler(options.currentSlide + 1);
+        } else if (targetSlide === slideCount - 1 && options.currentSlide === 0) {
+          return this.slideHandler(-1);
+        }
+      }
     } else if (options.message === 'index') {
       targetSlide = Number(options.index);
       if (targetSlide === options.currentSlide) {
