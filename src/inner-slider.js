@@ -71,6 +71,11 @@ export var InnerSlider = createReactClass({
     this.initialize(this.props);
     this.adaptHeight();
 
+    // Add hook after inner-slider calculates all it's sizes
+    if (this.props.afterInit) {
+      this.props.afterInit();
+    }
+
     // To support server-side rendering
     if (!window) {
       return
