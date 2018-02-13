@@ -42,7 +42,9 @@ var defaultProps = {
     beforeChange: null,
     edgeEvent: null,
     // init: function hook that gets called right before InnerSlider mounts
-    init: null, 
+    init: null,
+    // afterIniti: function hook after inner-slider calculates all it's sizes
+    afterInit: null, 
     swipeEvent: null,
     // nextArrow, prevArrow should react componets
     nextArrow: null,
