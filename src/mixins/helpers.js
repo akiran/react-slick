@@ -108,11 +108,16 @@ var helpers = {
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
-      var selector = '[data-index="' + this.state.currentSlide +'"]';
       if (this.list) {
         var slickList = ReactDOM.findDOMNode(this.list);
-        var elem = slickList.querySelector(selector) || {};
-        slickList.style.height = (elem.offsetHeight || 0) + 'px';
+        var maxHeight = 0
+        for (let i = 0; i < this.props.slidesToShow; i++) {
+          var slideIndex = this.state.currentSlide + i
+          var selector = '[data-index="' + slideIndex +'"]';
+          var elem = slickList.querySelector(selector) || {};
+          maxHeight = elem.offsetHeight || 0 > maxHeight ? elem.offsetHeight : maxHeight
+        }
+        slickList.style.height = maxHeight + 'px';
       }
     }
   },
