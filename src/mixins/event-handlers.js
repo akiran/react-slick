@@ -3,13 +3,14 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import helpers from './helpers';
 import assign from 'object-assign';
 import ReactDOM from 'react-dom';
+import { siblingDirection } from '../utils/trackUtils'
 
 var EventHandlers = {
   // Event handler for previous and next
   // gets called if slide is changed via arrows or dots but not swiping/dragging
   changeSlide: function (options) {
     var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
-    const {slidesToScroll, slidesToShow} = this.props
+    const {slidesToScroll, slidesToShow, centerMode, rtl} = this.props
     const {slideCount, currentSlide} = this.state
     unevenOffset = (slideCount % slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
@@ -27,11 +28,25 @@ var EventHandlers = {
       if (this.props.lazyLoad && !this.props.infinite) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
       }
-    } else if (options.message === 'dots' || options.message === 'children') {
+    } else if (options.message === 'dots') {
       // Click on dots
-      targetSlide = options.index * options.slidesToScroll;
+      targetSlide = options.index * options.slidesToScroll
       if (targetSlide === options.currentSlide) {
         return;
+      }
+    } else if (options.message === 'children') {
+      // Click on the slides
+      targetSlide = options.index
+      if (targetSlide === options.currentSlide) {
+        return
+      }
+      if (this.props.infinite) {
+        let direction = siblingDirection({currentSlide, targetSlide, slidesToShow, centerMode, slideCount, rtl})
+        if (targetSlide > options.currentSlide && direction === 'left') {
+          targetSlide = targetSlide - slideCount
+        } else if (targetSlide < options.currentSlide && direction === 'right') {
+          targetSlide = targetSlide + slideCount
+        }
       }
     } else if (options.message === 'index') {
       targetSlide = Number(options.index);
