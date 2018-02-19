@@ -1,6 +1,7 @@
 'use strict';
 import ReactDOM from 'react-dom';
 import assign from 'object-assign';
+import { getPreClones, getPostClones, getTotalSlides } from '../utils/trackUtils'
 
 // checks if spec is the superset of keys in keysArray, i.e., spec contains all the keys from keysArray
 var checkSpecKeys = function (spec, keysArray) {
@@ -145,18 +146,3 @@ export var getTrackLeft = function (spec) {
 
   return targetLeft;
 };
-
-export function getPreClones(spec){
-  return spec.slidesToShow + (spec.centerMode ? 1: 0)
-}
-
-export function getPostClones(spec){
-  return spec.slideCount
-}
-
-export function getTotalSlides(spec){
-  if (spec.slideCount === 1) {
-    return 1
-  }
-  return getPreClones(spec) + spec.slideCount + getPostClones(spec)
-}
