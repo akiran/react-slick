@@ -20,9 +20,9 @@ var helpers = {
       if (props.centerPadding.slice(-1) === '%') {
         centerPaddingAdj *= listWidth / 100
       }
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = Math.ceil((this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow)
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = Math.ceil(this.getWidth(ReactDOM.findDOMNode(this)))
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
@@ -66,9 +66,9 @@ var helpers = {
       if (props.centerPadding.slice(-1) === '%') {
         centerPaddingAdj *= listWidth / 100
       }
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      slideWidth = Math.ceil((this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow)
     } else {
-      slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
+      slideWidth = Math.ceil(this.getWidth(ReactDOM.findDOMNode(this)))
     }
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
