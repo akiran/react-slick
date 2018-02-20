@@ -47,7 +47,7 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul class=\\"slick-dots\\" style=\\"display: block;\\">
+        <ul style=\\"display: block;\\" class=\\"slick-dots\\">
             <li class=\\"\\"><button>1</button></li>
             <li class=\\"\\"><button>2</button></li>
             <li class=\\"slick-active\\"><button>3</button></li>
@@ -106,7 +106,7 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul class=\\"slick-dots\\" style=\\"display: block;\\">
+        <ul style=\\"display: block;\\" class=\\"slick-dots\\">
             <li class=\\"\\"><button>1</button></li>
             <li class=\\"slick-active\\"><button>2</button></li>
             <li class=\\"\\"><button>3</button></li>
@@ -165,7 +165,7 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul class=\\"slick-dots\\" style=\\"display: block;\\">
+        <ul style=\\"display: block;\\" class=\\"slick-dots\\">
             <li class=\\"\\"><button>1</button></li>
             <li class=\\"\\"><button>2</button></li>
             <li class=\\"\\"><button>3</button></li>
@@ -224,7 +224,7 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul class=\\"slick-dots\\" style=\\"display: block;\\">
+        <ul style=\\"display: block;\\" class=\\"slick-dots\\">
             <li class=\\"slick-active\\"><button>1</button></li>
             <li class=\\"\\"><button>2</button></li>
             <li class=\\"\\"><button>3</button></li>
