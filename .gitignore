@@ -12,3 +12,4 @@ lib
 dist
 yarn.lock
 .vscode
+exampleslib
