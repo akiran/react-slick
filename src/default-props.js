@@ -47,7 +47,7 @@ var defaultProps = {
     // nextArrow, prevArrow should react componets
     nextArrow: null,
     prevArrow: null,
-    renderDots: function(dots) {
+    appendDots: function(dots) {
         return <ul style={{display: 'block'}}>{dots}</ul>;
     }
 };

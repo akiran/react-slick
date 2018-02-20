@@ -96,7 +96,7 @@ Props            | Type            | Default Value                   | Descripti
 `customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)            | Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
 `dotsClass`      | `string`        | `'slick-dots'`                  | CSS class for dots                                          | Yes
-`renderDots`     | `func`          | `dots => <ul>{dots}</ul>`       | Custom dots templates. Works same as customPaging           | Yes
+`appendDots`     | `func`          | `dots => <ul>{dots}</ul>`       | Custom dots templates. Works same as customPaging           | Yes
 `draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
 `easing`         | `string`        | `'linear'`                      |                                                             |
 `fade`           | `bool`          | `Default`                       |                                                             | Yes
