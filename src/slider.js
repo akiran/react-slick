@@ -25,6 +25,7 @@ export default class Slider extends React.Component {
     enquire.register(query, handler);
     this._responsiveMediaHandlers.push({query, handler});
   }
+  // handles responsive breakpoints
   componentWillMount() {
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);

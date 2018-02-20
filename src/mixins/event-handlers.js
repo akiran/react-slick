@@ -54,7 +54,6 @@ var EventHandlers = {
         return;
       }
     }
-
     this.slideHandler(targetSlide);
   },
 
@@ -81,7 +80,8 @@ var EventHandlers = {
   swipeStart: function (e) {
     var touches, posX, posY;
 
-    if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
+    // the condition after or looked redundant
+    if ((this.props.swipe === false)) { // || ('ontouchend' in document && this.props.swipe === false)) {
       return;
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
@@ -316,21 +316,22 @@ var EventHandlers = {
         case 'down':
           newSlide = this.state.currentSlide + this.getSlideCount();
           slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
-          this.state.currentDirection = 0;
+          // this.state.currentDirection = 0; // critical: change this line with setState statement
+          this.setState({ currentDirection: 0 }) // unverified fix of above line
           break;
 
         case 'right':
         case 'up':
           newSlide = this.state.currentSlide - this.getSlideCount();
           slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
-          this.state.currentDirection = 1;
+          // this.state.currentDirection = 1; // critical: change this line with setState statement
+          this.setState({ currentDirection: 1 }) // unverified fix of above line
           break;
 
         default:
           slideCount = this.state.currentSlide;
 
       }
-
       this.slideHandler(slideCount);
     } else {
       // Adjust the track back to it's original position.
