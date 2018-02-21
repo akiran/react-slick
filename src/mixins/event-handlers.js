@@ -13,7 +13,9 @@ var EventHandlers = {
     const {slideCount, currentSlide} = this.state
     unevenOffset = (slideCount % slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
-
+    if(this.props.swipe === false) {
+       return;
+    }
     if (options.message === 'previous') {
       slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
       targetSlide = currentSlide - slideOffset;
@@ -66,9 +68,7 @@ var EventHandlers = {
   swipeStart: function (e) {
     var touches, posX, posY;
 
-    if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
-      return;
-    } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
+    if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
     }
     posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
@@ -85,6 +85,9 @@ var EventHandlers = {
   },
   // continuous invokation while swiping/dragging is going on
   swipeMove: function (e) {
+    if (this.props.swipe === false || 'ontouchend' in document && this.props.swipe === false) {
+      return;
+    }
     if (!this.state.dragging) {
       e.preventDefault();
       return;
