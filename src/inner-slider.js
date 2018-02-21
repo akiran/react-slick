@@ -271,12 +271,6 @@ export var InnerSlider = createReactClass({
     if (this.props.unslick) {
       listProps = { className: 'slick-list' }
       innerSliderProps = { className }
-      trackProps.trackStyle = {
-        ...trackProps.trackStyle,
-        transform: '',
-        WebkitTransform: '',
-        msTransform: ''
-      }
     }
     
     return (
