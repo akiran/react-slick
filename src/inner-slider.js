@@ -247,28 +247,30 @@ export var InnerSlider = createReactClass({
     }
 
     const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
+    const listProps = {
+      className: 'slick-list',
+      onMouseDown: this.swipeStart,
+      onMouseMove: this.state.dragging ? this.swipeMove : null,
+      onMouseUp: this.swipeEnd,
+      onMouseLeave: this.state.dragging ? this.swipeEnd : null,
+      onTouchStart: this.swipeStart,
+      onTouchMove: this.state.dragging ? this.swipeMove : null,
+      onTouchEnd: this.swipeEnd,
+      onTouchCancel: this.state.dragging ? this.swipeEnd : null,
+      onKeyDown: this.props.accessibility ? this.keyHandler : null,
+    }
 
+    const innerSliderProps = {
+      className: className,
+      onMouseEnter: this.onInnerSliderEnter,
+      onMouseLeave: this.onInnerSliderLeave,
+      onMouseOver: this.onInnerSliderOver,
+    }
+    
     return (
-      <div
-        className={className}
-        onMouseEnter={this.onInnerSliderEnter}
-        onMouseLeave={this.onInnerSliderLeave}
-        onMouseOver={this.onInnerSliderOver}
-      >
+      <div {...innerSliderProps} >
         {prevArrow}
-        <div
-          ref={this.listRefHandler}
-          className="slick-list"
-          style={listStyle}
-          onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove : null}
-          onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd : null}
-          onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove : null}
-          onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd : null}
-          onKeyDown={this.props.accessibility ? this.keyHandler : null}>
+        <div ref={this.listRefHandler} {...listProps} >
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
           </Track>
