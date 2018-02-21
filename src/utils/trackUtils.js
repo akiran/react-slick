@@ -1,16 +1,18 @@
-export function getPreClones({ slidesToShow, centerMode }){
+export function getPreClones({ slidesToShow, centerMode, unslick }){
+  if (unslick) return 0
   return slidesToShow + (centerMode ? 1: 0)
 }
 
-export function getPostClones({ slideCount }){
+export function getPostClones({ slideCount, unslick }){
+  if (unslick) return 0
   return slideCount
 }
 
-export function getTotalSlides({  slideCount, slidesToShow, centerMode, }){
+export function getTotalSlides({  slideCount, slidesToShow, centerMode, unslick }){
   if (slideCount === 1) {
     return 1
   }
-  return getPreClones({ slidesToShow, centerMode }) + slideCount + getPostClones({ slideCount })
+  return getPreClones({ slidesToShow, centerMode, unslick }) + slideCount + getPostClones({ slideCount, unslick })
 }
 
 export function siblingDirection({ currentSlide, targetSlide, slidesToShow, centerMode, rtl}) {
