@@ -210,6 +210,14 @@ var helpers = {
       } else {
         finalTargetSlide = this.state.slideCount + animationTargetSlide;
       }
+    } else if (this.props.centerMode && animationTargetSlide >= this.state.slideCount) {
+      if(this.props.infinite === false) {
+        animationTargetSlide = this.state.slideCount - 1
+        finalTargetSlide = this.state.slideCount - 1
+      } else {
+        animationTargetSlide = this.state.slideCount
+        finalTargetSlide = 0
+      }
     } else if (animationTargetSlide >= this.state.slideCount) {
       if(this.props.infinite === false) {
         finalTargetSlide = this.state.slideCount - this.props.slidesToShow;
@@ -218,16 +226,16 @@ var helpers = {
       } else {
         finalTargetSlide = animationTargetSlide - this.state.slideCount;
       }
-    // } else if (animationTargetSlide + this.props.slidesToShow >= this.state.slideCount) {
-    //   if (this.props.infinite === false) {
-    //     finalTargetSlide = this.state.slideCount - this.props.slidesToShow
-    //   } else {
-    //     if ((this.state.slideCount - animationTargetSlide) % this.props.slidesToScroll !== 0) {
-    //       finalTargetSlide = this.state.slideCount - this.props.slidesToShow
-    //     } else {
-    //       finalTargetSlide = animationTargetSlide
-    //     }
-    //   }
+    } else if (this.state.currentSlide + this.slidesToShow < this.state.slideCount && animationTargetSlide + this.props.slidesToShow >= this.state.slideCount) {
+      if (this.props.infinite === false) {
+        finalTargetSlide = this.state.slideCount - this.props.slidesToShow
+      } else {
+        if ((this.state.slideCount - animationTargetSlide) % this.props.slidesToScroll !== 0) {
+          finalTargetSlide = this.state.slideCount - this.props.slidesToShow
+        } else {
+          finalTargetSlide = animationTargetSlide
+        }
+      }
     } else {
       finalTargetSlide = animationTargetSlide;
     }
@@ -282,10 +290,8 @@ var helpers = {
     // animated transition happens to target Slide and
     // non - animated transition happens to current Slide
     // If CSS transitions are false, directly go the current slide.
-    animationTargetSlide = finalTargetSlide
-    animationTargetLeft = finalTargetLeft
-    if (this.props.useCSS === false) {
 
+    if (this.props.useCSS === false) {
       this.setState({
         currentSlide: finalTargetSlide,
         trackStyle: getTrackCSS(assign({left: finalTargetLeft}, this.props, this.state))
