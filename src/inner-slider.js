@@ -250,6 +250,7 @@ export var InnerSlider = createReactClass({
     const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
     let listProps = {
       className: 'slick-list',
+      style: listStyle,
       onMouseDown: this.swipeStart,
       onMouseMove: this.state.dragging ? this.swipeMove : null,
       onMouseUp: this.swipeEnd,
