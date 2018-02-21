@@ -24,7 +24,19 @@ var helpers = {
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
+        
+    var images = slickList.querySelector('[data-index="0"]').querySelectorAll('img');
+    var loadedImages = 0;
 
+    for (var i = 0; i < images.length; i++) {
+      images[i].onload = function() {
+        loadedImages++;
+        if(loadedImages == images.length) {
+          this.update(this.props);
+        }
+      }.bind(this);
+    };
+    
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
