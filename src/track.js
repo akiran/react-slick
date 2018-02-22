@@ -3,6 +3,7 @@
 import React from 'react';
 import assign from 'object-assign';
 import classnames from 'classnames';
+import { getTotalSlides } from './mixins/trackHelper.js'
 
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
@@ -41,7 +42,11 @@ var getSlideStyle = function (spec) {
   var style = {};
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
-    style.width = spec.slideWidth;
+    if (spec.vertical) {
+      style.width = '100%';
+    } else {
+      style.width = 'calc(100% / ' + getTotalSlides(spec) + ')';
+    }
   }
 
   if (spec.fade) {
