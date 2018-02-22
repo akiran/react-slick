@@ -120,23 +120,17 @@ export var getTrackLeft = function (spec) {
       var targetSlideIndex;
       var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
       var max = -(lastSlide.offsetLeft) + listWidth - lastSlide.offsetWidth;
-      if(slideCount <= slidesToShow || infinite === false) {
-        targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[slideIndex];
-      } else {
-          targetSlideIndex = (slideIndex + slidesToShow);
-          targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
-      }
+      targetSlideIndex = (slideIndex + getPreClones(spec));
+      targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (centerMode === true) {
-          if(infinite === false) {
-              targetSlide = ReactDOM.findDOMNode(trackRef).children[slideIndex];
-          } else {
-              targetSlide = ReactDOM.findDOMNode(trackRef).children[(slideIndex + slidesToShow + 1)];
+          targetSlideIndex = infinite ? slideIndex + getPreClones(spec) : slideIndex
+          targetSlide = ReactDOM.findDOMNode(trackRef).children[targetSlideIndex]
+          targetLeft = 0
+          for (let slide = 0; slide < targetSlideIndex; slide++) {
+            targetLeft -= ReactDOM.findDOMNode(trackRef).children[slide].offsetWidth
           }
-
-          if (targetSlide) {
-            targetLeft = targetSlide.offsetLeft * -1 + (listWidth - targetSlide.offsetWidth) / 2;
-          }
+          targetLeft += (listWidth - targetSlide.offsetWidth) / 2
       }
       if (spec.infinite === false && targetLeft < max) {
         targetLeft = max;
