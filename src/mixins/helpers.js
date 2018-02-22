@@ -80,6 +80,21 @@ var helpers = {
     } else {
       this.autoPlay(props.autoplay);
     }
+    
+    const lazyLoadedList = this.state.lazyLoadedList
+    let startIndex, endIndex
+    if (props.centerMode) {
+      startIndex = this.state.currentSlide - props.slidesToShow / 2
+      endIndex = this.state.currentSlide + props.slidesToShow / 2
+    } else {
+      startIndex = this.state.currentSlide
+      endIndex = this.state.currentSlide + props.slidesToShow
+    }
+    for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex += 1) {
+      if (lazyLoadedList.indexOf(slideIndex) < 0) {
+        lazyLoadedList.push(slideIndex)
+      }
+    }
 
     this.setState({
       slideCount,
@@ -88,6 +103,7 @@ var helpers = {
       trackWidth,
       slideHeight,
       listHeight,
+      lazyLoadedList
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
