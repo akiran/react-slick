@@ -32,9 +32,9 @@ export var InnerSlider = createReactClass({
     if (this.props.init) {
       this.props.init();
     }
-    this.setState({
-      mounted: true
-    });
+    // this.setState({
+    //   mounted: true
+    // });
     let lazyLoadedList = [];
     // number of slides shown in the active frame
     const slidesToShow = this.props.slidesToShow;

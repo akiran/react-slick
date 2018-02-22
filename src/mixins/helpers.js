@@ -360,9 +360,9 @@ var helpers = {
   play: function(){
     var nextIndex;
 
-    if (!this.state.mounted) {
-      return false
-    }
+    // if (!this.state.mounted) {
+    //   return false
+    // }
 
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
