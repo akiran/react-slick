@@ -30,6 +30,9 @@ export var InnerSlider = createReactClass({
   },
   componentWillMount: function () {
     if (this.props.init) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('init prop is deprecated and will be removed in next release')
+      }
       this.props.init();
     }
     // this.setState({
