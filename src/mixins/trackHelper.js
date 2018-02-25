@@ -1,6 +1,7 @@
 'use strict';
 import ReactDOM from 'react-dom';
 import assign from 'object-assign';
+import { getPreClones, getPostClones, getTotalSlides } from '../utils/trackUtils'
 
 // checks if spec is the superset of keys in keysArray, i.e., spec contains all the keys from keysArray
 var checkSpecKeys = function (spec, keysArray) {
@@ -18,7 +19,6 @@ export var getTrackCSS = function(spec) {
   const trackChildren = (spec.slideCount + 2 * spec.slidesToShow); // this should probably be getTotalSlides
   if (!spec.vertical) {
     trackWidth = getTotalSlides(spec) * spec.slideWidth;
-    trackWidth += spec.slideWidth/2 // this is a temporary hack so that track div doesn't create new row for slight overflow
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
@@ -36,7 +36,7 @@ export var getTrackCSS = function(spec) {
       opacity: 1
     }
   }
-
+  
   if (trackWidth) {
     assign(style, { width: trackWidth });
   }
@@ -120,23 +120,17 @@ export var getTrackLeft = function (spec) {
       var targetSlideIndex;
       var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
       var max = -(lastSlide.offsetLeft) + listWidth - lastSlide.offsetWidth;
-      if(slideCount <= slidesToShow || infinite === false) {
-        targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[slideIndex];
-      } else {
-          targetSlideIndex = (slideIndex + slidesToShow);
-          targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
-      }
+      targetSlideIndex = (slideIndex + getPreClones(spec));
+      targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (centerMode === true) {
-          if(infinite === false) {
-              targetSlide = ReactDOM.findDOMNode(trackRef).children[slideIndex];
-          } else {
-              targetSlide = ReactDOM.findDOMNode(trackRef).children[(slideIndex + slidesToShow + 1)];
+          targetSlideIndex = infinite ? slideIndex + getPreClones(spec) : slideIndex
+          targetSlide = ReactDOM.findDOMNode(trackRef).children[targetSlideIndex]
+          targetLeft = 0
+          for (let slide = 0; slide < targetSlideIndex; slide++) {
+            targetLeft -= ReactDOM.findDOMNode(trackRef).children[slide].offsetWidth
           }
-
-          if (targetSlide) {
-            targetLeft = targetSlide.offsetLeft * -1 + (listWidth - targetSlide.offsetWidth) / 2;
-          }
+          targetLeft += (listWidth - targetSlide.offsetWidth) / 2
       }
       if (spec.infinite === false && targetLeft < max) {
         targetLeft = max;
@@ -145,18 +139,3 @@ export var getTrackLeft = function (spec) {
 
   return targetLeft;
 };
-
-export function getPreClones(spec){
-  return spec.slidesToShow + (spec.centerMode ? 1: 0)
-}
-
-export function getPostClones(spec){
-  return spec.slideCount
-}
-
-export function getTotalSlides(spec){
-  if (spec.slideCount === 1) {
-    return 1
-  }
-  return getPreClones(spec) + spec.slideCount + getPostClones(spec)
-}

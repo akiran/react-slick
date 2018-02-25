@@ -46,7 +46,10 @@ var defaultProps = {
     swipeEvent: null,
     // nextArrow, prevArrow should react componets
     nextArrow: null,
-    prevArrow: null
+    prevArrow: null,
+    appendDots: function(dots) {
+        return <ul style={{display: 'block'}}>{dots}</ul>;
+    }
 };
 
 export default defaultProps

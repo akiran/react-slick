@@ -59,10 +59,6 @@ export class Dots extends React.Component {
       );
     });
 
-    return (
-      <ul className={this.props.dotsClass} style={{display: 'block'}}>
-        {dots}
-      </ul>
-    );
+    return React.cloneElement(this.props.appendDots(dots), {className: this.props.dotsClass});
   }
 }

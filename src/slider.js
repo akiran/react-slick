@@ -25,6 +25,7 @@ export default class Slider extends React.Component {
     enquire.register(query, handler);
     this._responsiveMediaHandlers.push({query, handler});
   }
+  // handles responsive breakpoints
   componentWillMount() {
     if (this.props.responsive) {
       var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
@@ -125,18 +126,15 @@ export default class Slider extends React.Component {
     })
 
     if (settings === 'unslick') {
-      // if 'unslick' responsive breakpoint setting used, just return the <Slider> tag nested HTML
-      return (
-        <div className={`${this.props.className} unslicked`}>
-          {children}
-        </div>
-      );
-    } else {
-      return (
-        <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
-          {children}
-        </InnerSlider>
-      );
+      settings = assign({ unslick: true }, defaultProps, this.props)
+      settings.slidesToShow = children.length
+    } else if (children.length <= settings.slidesToShow) {
+      settings.unslick = true
     }
+    return (
+      <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
+        {children}
+      </InnerSlider>
+    )
   }
 }

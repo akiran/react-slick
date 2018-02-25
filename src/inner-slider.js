@@ -30,11 +30,14 @@ export var InnerSlider = createReactClass({
   },
   componentWillMount: function () {
     if (this.props.init) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('init prop is deprecated and will be removed in next release')
+      }
       this.props.init();
     }
-    this.setState({
-      mounted: true
-    });
+    // this.setState({
+    //   mounted: true
+    // });
     let lazyLoadedList = [];
     // number of slides shown in the active frame
     const slidesToShow = this.props.slidesToShow;
@@ -182,7 +185,8 @@ export var InnerSlider = createReactClass({
       slidesToScroll: this.props.slidesToScroll,
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
-      variableWidth: this.props.variableWidth
+      variableWidth: this.props.variableWidth,
+      unslick: this.props.unslick
     };
 
     var dots;
@@ -197,7 +201,8 @@ export var InnerSlider = createReactClass({
         clickHandler: this.changeSlide,
         children: this.props.children,
         customPaging: this.props.customPaging,
-        infinite: this.props.infinite
+        infinite: this.props.infinite,
+        appendDots: this.props.appendDots
       };
 
       dots = (<Dots {...dotProps} />);
@@ -246,34 +251,42 @@ export var InnerSlider = createReactClass({
     }
 
     const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
+    let listProps = {
+      className: 'slick-list',
+      style: listStyle,
+      onMouseDown: this.swipeStart,
+      onMouseMove: this.state.dragging ? this.swipeMove : null,
+      onMouseUp: this.swipeEnd,
+      onMouseLeave: this.state.dragging ? this.swipeEnd : null,
+      onTouchStart: this.swipeStart,
+      onTouchMove: this.state.dragging ? this.swipeMove : null,
+      onTouchEnd: this.swipeEnd,
+      onTouchCancel: this.state.dragging ? this.swipeEnd : null,
+      onKeyDown: this.props.accessibility ? this.keyHandler : null,
+    }
 
+    let innerSliderProps = {
+      className: className,
+      onMouseEnter: this.onInnerSliderEnter,
+      onMouseLeave: this.onInnerSliderLeave,
+      onMouseOver: this.onInnerSliderOver,
+    }
+
+    if (this.props.unslick) {
+      listProps = { className: 'slick-list' }
+      innerSliderProps = { className }
+    }
+    
     return (
-      <div
-        className={className}
-        onMouseEnter={this.onInnerSliderEnter}
-        onMouseLeave={this.onInnerSliderLeave}
-        onMouseOver={this.onInnerSliderOver}
-      >
-        {prevArrow}
-        <div
-          ref={this.listRefHandler}
-          className="slick-list"
-          style={listStyle}
-          onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove : null}
-          onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd : null}
-          onTouchStart={this.swipeStart}
-          onTouchMove={this.state.dragging ? this.swipeMove : null}
-          onTouchEnd={this.swipeEnd}
-          onTouchCancel={this.state.dragging ? this.swipeEnd : null}
-          onKeyDown={this.props.accessibility ? this.keyHandler : null}>
+      <div {...innerSliderProps} >
+        { !this.props.unslick ? prevArrow : '' }
+        <div ref={this.listRefHandler} {...listProps} >
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
           </Track>
         </div>
-        {nextArrow}
-        {dots}
+        { !this.props.unslick ? nextArrow: '' }
+        { !this.props.unslick ? dots : '' }
       </div>
     );
   }

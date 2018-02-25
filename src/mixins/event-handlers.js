@@ -3,13 +3,14 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import helpers from './helpers';
 import assign from 'object-assign';
 import ReactDOM from 'react-dom';
+import { siblingDirection } from '../utils/trackUtils'
 
 var EventHandlers = {
   // Event handler for previous and next
   // gets called if slide is changed via arrows or dots but not swiping/dragging
   changeSlide: function (options) {
     var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
-    const {slidesToScroll, slidesToShow} = this.props
+    const {slidesToScroll, slidesToShow, centerMode, rtl} = this.props
     const {slideCount, currentSlide} = this.state
     unevenOffset = (slideCount % slidesToScroll !== 0);
     indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
@@ -27,11 +28,25 @@ var EventHandlers = {
       if (this.props.lazyLoad && !this.props.infinite) {
         targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
       }
-    } else if (options.message === 'dots' || options.message === 'children') {
+    } else if (options.message === 'dots') {
       // Click on dots
-      targetSlide = options.index * options.slidesToScroll;
+      targetSlide = options.index * options.slidesToScroll
       if (targetSlide === options.currentSlide) {
         return;
+      }
+    } else if (options.message === 'children') {
+      // Click on the slides
+      targetSlide = options.index
+      if (targetSlide === options.currentSlide) {
+        return
+      }
+      if (this.props.infinite) {
+        let direction = siblingDirection({currentSlide, targetSlide, slidesToShow, centerMode, slideCount, rtl})
+        if (targetSlide > options.currentSlide && direction === 'left') {
+          targetSlide = targetSlide - slideCount
+        } else if (targetSlide < options.currentSlide && direction === 'right') {
+          targetSlide = targetSlide + slideCount
+        }
       }
     } else if (options.message === 'index') {
       targetSlide = Number(options.index);
@@ -39,7 +54,6 @@ var EventHandlers = {
         return;
       }
     }
-
     this.slideHandler(targetSlide);
   },
 
@@ -66,7 +80,8 @@ var EventHandlers = {
   swipeStart: function (e) {
     var touches, posX, posY;
 
-    if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
+    // the condition after or looked redundant
+    if ((this.props.swipe === false)) { // || ('ontouchend' in document && this.props.swipe === false)) {
       return;
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
       return;
@@ -112,7 +127,7 @@ var EventHandlers = {
     touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
     var verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
 
-    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 4) {
+    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 10) {
       this.setState({
         scrolling: true
       })
@@ -172,7 +187,7 @@ var EventHandlers = {
 
     if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
       { return; }
-    if (touchObject.swipeLength > 4) {
+    if (touchObject.swipeLength > 10) {
       this.setState({
         swiping: true
       })
@@ -301,21 +316,22 @@ var EventHandlers = {
         case 'down':
           newSlide = this.state.currentSlide + this.getSlideCount();
           slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
-          this.state.currentDirection = 0;
+          // this.state.currentDirection = 0; // critical: change this line with setState statement
+          this.setState({ currentDirection: 0 }) // unverified fix of above line
           break;
 
         case 'right':
         case 'up':
           newSlide = this.state.currentSlide - this.getSlideCount();
           slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
-          this.state.currentDirection = 1;
+          // this.state.currentDirection = 1; // critical: change this line with setState statement
+          this.setState({ currentDirection: 1 }) // unverified fix of above line
           break;
 
         default:
           slideCount = this.state.currentSlide;
 
       }
-
       this.slideHandler(slideCount);
     } else {
       // Adjust the track back to it's original position.
