@@ -152,9 +152,6 @@ var helpers = {
   },
   slideHandler: function (index) {
     // index is target slide index
-    if (this.props.asNavFor) {
-      this.props.asNavFor.innerSlider.slideHandler(index)
-    }
     // Functionality of animateSlide and postSlide is merged into this function
     var animationTargetSlide, finalTargetSlide;
     var animationTargetLeft, finalTargetLeft;
@@ -206,6 +203,9 @@ var helpers = {
         animating: true,
         currentSlide: animationTargetSlide
       }, function () {
+        if (this.props.asNavFor && this.props.asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide) {
+          this.props.asNavFor.innerSlider.slideHandler(index)
+        }
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
@@ -345,6 +345,9 @@ var helpers = {
         currentSlide: finalTargetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: animationTargetLeft}, this.props, this.state))
       }, function () {
+        if (this.props.asNavFor && this.props.asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide) {
+          this.props.asNavFor.innerSlider.slideHandler(index)
+        }
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
