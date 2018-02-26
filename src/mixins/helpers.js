@@ -397,21 +397,17 @@ var helpers = {
     this.slideHandler(nextIndex);
   },
   autoPlay: function (autoplay=false) {
-    if (this.state.autoPlayTimer) {
-      clearTimeout(this.state.autoPlayTimer);
+    if (this.autoplayTimer) {
+      clearTimeout(this.autoplayTimer)
     }
     if (autoplay || this.props.autoplay) {
-      this.setState({
-        autoPlayTimer: setTimeout(this.play, this.props.autoplaySpeed)
-      });
+      this.autoplayTimer = setTimeout(this.play, this.props.autoplaySpeed)
     }
   },
   pause: function () {
-    if (this.state.autoPlayTimer) {
-      clearTimeout(this.state.autoPlayTimer);
-      this.setState({
-        autoPlayTimer: null
-      });
+    if (this.autoplayTimer) {
+      clearTimeout(this.autoplayTimer)
+      this.autoplayTimer = null
     }
   }
 };
