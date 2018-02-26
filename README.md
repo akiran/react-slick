@@ -83,6 +83,7 @@ class SimpleSlider extends React.Component {
 Props            | Type            | Default Value                   | Description                                                 | Working
 ---------------- | --------------- | ------------------------------- | -----------                                                 | -------
 `accessibility`  | `bool`          | `true`                          | Enable tabbing and arrow key navigation                     | Yes
+`asNavFor`       | `ref`           | `undefined`                     | provide ref to another slider and sync it with current slider| Yes
 `className`      | `string`        | `''`                            | CSS class for inner slider div                              | Yes
 `adaptiveHeight` | `bool`          | `false`                         | Adjust the slide's height automatically                     | Yes
 `arrows`         | `bool`          | `true`                          |                                                             | Yes
