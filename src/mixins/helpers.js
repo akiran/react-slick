@@ -152,7 +152,9 @@ var helpers = {
   },
   slideHandler: function (index) {
     // index is target slide index
-
+    if (this.props.asNavFor) {
+      this.props.asNavFor.innerSlider.slideHandler(index)
+    }
     // Functionality of animateSlide and postSlide is merged into this function
     var animationTargetSlide, finalTargetSlide;
     var animationTargetLeft, finalTargetLeft;
