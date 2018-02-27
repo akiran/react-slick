@@ -263,7 +263,7 @@ var EventHandlers = {
         return true;
       });
 
-      const currentIndex = this.props.rtl === true ? this.state.slideCount - this.state.currentSlide : this.state.currentSlide; 
+      const currentIndex = this.props.rtl === true ? this.state.slideCount - this.state.currentSlide : this.state.currentSlide;
       const slidesTraversed = Math.abs(swipedSlide.dataset.index - currentIndex) || 1;
 
       return slidesTraversed;
