@@ -92,14 +92,14 @@ Props            | Type            | Default Value                   | Descripti
 `autoplay`       | `bool`          | `false`                         |                                                             | Yes
 `autoplaySpeed`  | `int`           | `3000`                          | Delay between each auto scroll (in milliseconds)            | Yes
 `centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
-`centerPadding`  |                 | `'50px'`                        |                                                             |
-`cssEase`        |                 | `'ease'`                        |                                                             |
+`centerPadding`  |                 | `'50px'`                        |                                                             | Yes
+`cssEase`        |                 | `'ease'`                        |                                                             | Yes
 `customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)| Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
 `dotsClass`      | `string`        | `'slick-dots'`                  | CSS class for dots                                          | Yes
 `appendDots`     | `func`          | `dots => <ul>{dots}</ul>`       | Custom dots templates. Works same as customPaging           | Yes
 `draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
-`easing`         | `string`        | `'linear'`                      |                                                             |
+`easing`         | `string`        | `'linear'`                      |                                                             | Yes
 `fade`           | `bool`          | `Default`                       |                                                             | Yes
 `focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
@@ -109,22 +109,23 @@ Props            | Type            | Default Value                   | Descripti
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
 `rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes
-`slide`          | `string`        | `'div'`                         |                                                             |
-`slidesToShow`   | `int`           | `1`                             | Yes                                                         | Yes
-`slidesToScroll` | `int`           | `1`                             |                                                             |
-`speed`          | `int`           | `500`                           |                                                             |
-`swipe`          | `bool`          | `true`                          |                                                             |
+`slide`          | `string`        | `'div'`                         | Slide container type                                        | Yes
+`slidesToShow`   | `int`           | `1`                             | How many slides to show in one frame                        | Yes
+`slidesToScroll` | `int`           | `1`                             | How many slides to scroll at once                           | Yes
+`speed`          | `int`           | `500`                           | Animation speed in milliseconds                             | Yes
+`swipe`          | `bool`          | `true`                          | Enable/disable swiping to change slides                     | Yes
+`onSwipe`        | `func`          | `null`                          | Callback after slide changes by swiping                     | Yes
 `swipeToSlide`   | `bool`          | `false`                         | Enable drag/swpie irrespective of `slidesToScroll`          | Yes
-`touchMove`      | `bool`          | `true`                          |                                                             |
-`touchThreshold` | `int`           | `5`                             |                                                             |
-`variableWidth`  | `bool`          | `false`                         |                                                             |
+`touchMove`      | `bool`          | `true`                          |                                                             | Yes
+`touchThreshold` | `int`           | `5`                             |                                                             | Yes
+`variableWidth`  | `bool`          | `false`                         |                                                             | Yes
 `useCSS`         | `bool`          | `true`                          | Enable/Disable CSS Transitions                              | Yes
 `vertical`       | `bool`          | `false`                         |                                                             | Yes
 `init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                   | Yes
 `reInit`         | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
-`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            |
+`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            | Yes
 
 
 ### Methods
@@ -148,6 +149,7 @@ Name              |type             | Reason
 `slickUnfilter`   | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
 `slickAdd`        | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
 `slickRemove`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
+`slickCurrentSlide`| method         | same functionality can be achieved with `slickGetOption('currentSlide')`
 
 #### `responsive` property
 

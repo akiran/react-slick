@@ -308,6 +308,10 @@ var EventHandlers = {
     if (touchObject.swipeLength > minSwipe) {
       e.preventDefault();
 
+      if(this.props.onSwipe) {
+        this.props.onSwipe(swipeDirection)
+      }
+
       let slideCount, newSlide;
 
       switch (swipeDirection) {
