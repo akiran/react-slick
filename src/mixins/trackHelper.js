@@ -92,7 +92,7 @@ export var getTrackLeft = function (spec) {
   if(infinite){
     slidesToOffset = -getPreClones(spec) // bring active slide to the beginning of visual area
     // if next scroll doesn't have enough children, just reach till the end of original slides instead of shifting slidesToScroll children
-    if ((slideIndex != 0 && !centerMode) && slideCount % slidesToScroll !== 0 && (slideIndex + slidesToScroll) > slideCount){
+    if (slideIndex != 0 && slideCount % slidesToScroll !== 0 && (slideIndex + slidesToScroll) > slideCount){
       slidesToOffset = -(slideIndex > slideCount ? (slidesToShow - (slideIndex - slideCount)) : slideCount % slidesToScroll)
     }
     // shift current slide to center of the frame
@@ -100,7 +100,7 @@ export var getTrackLeft = function (spec) {
       slidesToOffset += parseInt(slidesToShow / 2)
     }
   } else {
-    if((slideIndex != 0 && !centerMode) && slideCount % slidesToScroll !== 0 && slideIndex + slidesToScroll > slideCount){
+    if(slideIndex != 0 && slideCount % slidesToScroll !== 0 && slideIndex + slidesToScroll > slideCount){
       slidesToOffset = slidesToShow - (slideCount % slidesToScroll)
     }
     if(centerMode){
