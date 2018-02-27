@@ -9,32 +9,33 @@ import canUseDOM from 'can-use-dom';
 const enquire = canUseDOM && require('enquire.js');
 
 export default class Slider extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = {
       breakpoint: null
     };
     this._responsiveMediaHandlers = [];
-    this.innerSliderRefHandler = this.innerSliderRefHandler.bind(this)
   }
-  innerSliderRefHandler(ref) {
-    this.innerSlider = ref;
-  }
+
+  innerSliderRefHandler = ref => this.innerSlider = ref
+
   media(query, handler) {
     // javascript handler for  css media query
     enquire.register(query, handler);
     this._responsiveMediaHandlers.push({query, handler});
   }
+  
   // handles responsive breakpoints
   componentWillMount() {
     if (this.props.responsive) {
-      var breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
+      let breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       // sort them in increasing order of their numerical value
       breakpoints.sort((x, y) => x - y);
 
       breakpoints.forEach((breakpoint, index) => {
         // media query for each breakpoint
-        var bQuery;
+        let bQuery;
         if (index === 0) {
           bQuery = json2mq({minWidth: 0, maxWidth: breakpoint});
         } else {
@@ -48,7 +49,7 @@ export default class Slider extends React.Component {
 
       // Register media query for full screen. Need to support resize from small to large
       // convert javascript object to media query string
-      var query = json2mq({minWidth: breakpoints.slice(-1)[0]});
+      let query = json2mq({minWidth: breakpoints.slice(-1)[0]});
 
       canUseDOM && this.media(query, () => {
         this.setState({breakpoint: null});
@@ -62,25 +63,15 @@ export default class Slider extends React.Component {
     });
   }
 
-  slickPrev() {
-    this.innerSlider.slickPrev();
-  }
+  slickPrev = () => this.innerSlider.slickPrev()
 
-  slickNext() {
-    this.innerSlider.slickNext();
-  }
+  slickNext = () => this.innerSlider.slickNext()
 
-  slickGoTo(slide) {
-    this.innerSlider.slickGoTo(slide)
-  }
+  slickGoTo = slide => this.innerSlider.slickGoTo(slide)
 
-  slickPause(){
-    this.innerSlider.pause()
-  }
+  slickPause = () => this.innerSlider.pause()
 
-  slickPlay(){
-    this.innerSlider.autoPlay()
-  }
+  slickPlay = () => this.innerSlider.autoPlay()
 
   render() {
     var settings;
@@ -114,7 +105,7 @@ export default class Slider extends React.Component {
     }
 
     // makes sure that children is an array, even when there is only 1 child
-    var children = React.Children.toArray(this.props.children)
+    let children = React.Children.toArray(this.props.children)
 
     // Children may contain false or null, so we should filter them
     // children may also contain string filled with spaces (in certain cases where we use jsx strings)
