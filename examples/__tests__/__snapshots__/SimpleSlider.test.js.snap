@@ -6,7 +6,7 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
     <div class=\\"slick-initialized slick-slider\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <div data-index=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
@@ -27,22 +27,22 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>6</h3>
                 </div>
-                <div data-index=\\"6\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>1</h3>
                 </div>
-                <div data-index=\\"7\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>2</h3>
                 </div>
-                <div data-index=\\"8\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>3</h3>
                 </div>
-                <div data-index=\\"9\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>4</h3>
                 </div>
-                <div data-index=\\"10\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>5</h3>
                 </div>
-                <div data-index=\\"11\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
             </div>
@@ -65,7 +65,7 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
     <div class=\\"slick-initialized slick-slider\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <div data-index=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
@@ -86,22 +86,22 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>6</h3>
                 </div>
-                <div data-index=\\"6\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>1</h3>
                 </div>
-                <div data-index=\\"7\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>2</h3>
                 </div>
-                <div data-index=\\"8\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>3</h3>
                 </div>
-                <div data-index=\\"9\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>4</h3>
                 </div>
-                <div data-index=\\"10\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>5</h3>
                 </div>
-                <div data-index=\\"11\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
             </div>
@@ -124,7 +124,7 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
     <div class=\\"slick-initialized slick-slider\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <div data-index=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
@@ -145,22 +145,22 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
                 <div data-index=\\"5\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>6</h3>
                 </div>
-                <div data-index=\\"6\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>1</h3>
                 </div>
-                <div data-index=\\"7\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>2</h3>
                 </div>
-                <div data-index=\\"8\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>3</h3>
                 </div>
-                <div data-index=\\"9\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>4</h3>
                 </div>
-                <div data-index=\\"10\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>5</h3>
                 </div>
-                <div data-index=\\"11\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
             </div>
@@ -183,7 +183,7 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
     <div class=\\"slick-initialized slick-slider\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <div data-index=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
@@ -204,22 +204,22 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
                     <h3>6</h3>
                 </div>
-                <div data-index=\\"6\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>1</h3>
                 </div>
-                <div data-index=\\"7\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>2</h3>
                 </div>
-                <div data-index=\\"8\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>3</h3>
                 </div>
-                <div data-index=\\"9\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>4</h3>
                 </div>
-                <div data-index=\\"10\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>5</h3>
                 </div>
-                <div data-index=\\"11\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
                     <h3>6</h3>
                 </div>
             </div>
