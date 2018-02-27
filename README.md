@@ -124,6 +124,26 @@ Props            | Type            | Default Value                   | Descripti
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
 `slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            |
 
+
+### Methods
+Name              | Arguments       | Description
+------------------|-----------------|-------------------------
+`getSlick`        | None            | get an instance of the slider
+`slickPrev`       | None            | go to previous slide
+`slickNext`       | None            | go to next slide
+`slickGoTo`       | index:number    | go to the given slide index
+`slickPause`      | None            | pause the autoplay
+`slickPlay`       | None            | start the autoplay
+`slickGetOption`  | key:string      | get the value for given option from (props or states)
+
+
+#### Followings are not going to be implemented
+Name              |type             | Reason
+------------------|-----------------|-------------------
+`unslick`         |method           | same functionality can be achieved with `unslick` prop
+`slickSetOption`  |method           | same functionality can be achieved via props and managing state for them in wrapper
+
+
 #### `responsive` property
 
 Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
