@@ -161,6 +161,10 @@ export var InnerSlider = createReactClass({
       currentSlide: this.state.currentSlide
     });
   },
+  slickGetOption: function(option) {
+    const options = assign({}, this.props, this.state)
+    return options[option]
+  },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
