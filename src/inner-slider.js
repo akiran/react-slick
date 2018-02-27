@@ -67,6 +67,9 @@ export var InnerSlider = createReactClass({
       this.setState({
         lazyLoadedList: lazyLoadedList
       });
+      if (this.props.lazyLoaded && lazyLoadedList.length > 0) {
+        this.props.lazyLoaded(lazyLoadedList)
+      }
     }
   },
   componentDidMount: function componentDidMount() {
@@ -129,11 +132,17 @@ export var InnerSlider = createReactClass({
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList + [leftMostSlide]
         })
+        if (this.props.lazyLoaded) {
+          this.props.lazyLoaded([leftMostSlide])
+        }
       }
       if(!this.state.lazyLoadedList.includes(rightMostSlide)){
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList + [rightMostSlide]
         })
+        if (this.props.lazyLoaded) {
+          this.props.lazyLoaded([leftMostSlide])
+        }
       }
     }
     this.adaptHeight();

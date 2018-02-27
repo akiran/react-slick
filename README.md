@@ -94,7 +94,7 @@ Props            | Type            | Default Value                   | Descripti
 `centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
 `centerPadding`  |                 | `'50px'`                        |                                                             |
 `cssEase`        |                 | `'ease'`                        |                                                             |
-`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)            | Yes
+`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)| Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
 `dotsClass`      | `string`        | `'slick-dots'`                  | CSS class for dots                                          | Yes
 `appendDots`     | `func`          | `dots => <ul>{dots}</ul>`       | Custom dots templates. Works same as customPaging           | Yes
@@ -105,6 +105,7 @@ Props            | Type            | Default Value                   | Descripti
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
 `initialSlide`   | `int`           | `0`                             | Index of first slide                                        | Yes
 `lazyLoad`       | `bool`          | `false`                         | Load images or render components on demand                  | Yes
+`lazyLoaded`     | `func`          | `null`                          | Callback after slides load lazily `slidesLoaded => {...}`   | Yes
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
 `rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes

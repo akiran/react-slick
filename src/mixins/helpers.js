@@ -90,10 +90,15 @@ var helpers = {
       startIndex = this.state.currentSlide
       endIndex = this.state.currentSlide + props.slidesToShow
     }
+    let notLoaded = []
     for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex += 1) {
       if (lazyLoadedList.indexOf(slideIndex) < 0) {
         lazyLoadedList.push(slideIndex)
+        notLoaded.push(slideIndex)
       }
+    }
+    if (this.props.lazyLoaded && notLoaded.length > 0) {
+      this.props.lazyLoaded(notLoaded)
     }
 
     this.setState({
@@ -183,6 +188,9 @@ var helpers = {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(animationTargetSlide)
         });
+        if (this.props.lazyLoaded) {
+          this.props.lazyLoaded([animationTargetSlide])
+        }
       }
 
       callback = () => {
@@ -305,6 +313,9 @@ var helpers = {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
         });
+        if (this.props.lazyLoaded) {
+          this.props.lazyLoaded(slidesToLoad)
+        }
       }
     }
 
