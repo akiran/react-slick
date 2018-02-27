@@ -14,7 +14,7 @@ export default class AdaptiveHeight extends Component {
     };
     return (
       <div dir="rtl">
-        <h2>Adaptive height</h2>
+        <h2>Adaptive height RTL</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div>

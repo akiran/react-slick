@@ -13,7 +13,7 @@ export default class MultipleItems extends Component {
     };
     return (
       <div dir="rtl">
-        <h2> Multiple items </h2>
+        <h2> Multiple items RTL</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>

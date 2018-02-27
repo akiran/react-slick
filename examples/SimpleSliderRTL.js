@@ -13,7 +13,7 @@ export default class SimpleSlider extends Component {
     };
     return (
       <div dir="rtl">
-        <h2> Single Item</h2>
+        <h2> Single Item RTL</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>

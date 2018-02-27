@@ -16,14 +16,7 @@ export default class Docs extends React.Component {
             <Demos />
           </div>
         </div>
-        <div className='title-bar primary'>
-            <span className='title'>React Slick RTL</span>
-        </div>
-        <div className=''>
-          <div className=''>
-            <DemosRTL />
-          </div>
-        </div>
+        <DemosRTL />
       </div>
     );
   }

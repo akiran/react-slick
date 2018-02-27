@@ -36,7 +36,7 @@ export default class Responsive extends Component {
     };
     return (
       <div dir="rtl">
-        <h2> Responsive </h2>
+        <h2> Responsive RTL</h2>
         <Slider {...settings}>
           <div><h3>1</h3></div>
           <div><h3>2</h3></div>
