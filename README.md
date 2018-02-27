@@ -140,20 +140,16 @@ Name              | Arguments       | Description
 #### Followings are not going to be implemented
 Name              |type             | Reason
 ------------------|-----------------|-------------------
-`unslick`         |method           | same functionality can be achieved with `unslick` prop
-`slickSetOption`  |method           | same functionality can be achieved via props and managing state for them in wrapper
-
+`unslick`         | method          | same functionality can be achieved with `unslick` prop
+`slickSetOption`  | method          | same functionality can be achieved via props and managing state for them in wrapper
+`slickFilter`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
+`slickUnfilter`   | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
+`slickAdd`        | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
+`slickRemove`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
 
 #### `responsive` property
 
 Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
-
-### Methods
-* `slickNext()`   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
-* `slickPrev()`   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
-* `slickGoTo(slideNumber)` - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
-* `slickPause()` - function called to pause a slider that is autoplaying
-* `slickPlay()` - function called to resume a paused slider (requires autoplay: true)
 
 ### Custom next/prev arrows
 
