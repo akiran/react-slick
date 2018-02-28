@@ -28,39 +28,32 @@ export var InnerSlider = createReactClass({
       currentSlide: this.props.initialSlide
     });
   },
+  getLazyLoadedList: function () {
+    let toLazyLoad = []
+    const slidesToShow = this.props.slidesToShow
+    const childrenLen = React.Children.count(this.props.children)
+    const currentSlide = this.state.currentSlide
+    // two variables below don't care about rtl mode, fix later
+    let slidesToLeft = this.props.centerMode
+      ? Math.floor(slidesToShow / 2) + (parseInt(this.props.centerPadding) > 0)
+      : 0
+    let slidesToRight = this.props.centerMode
+      ? Math.floor(slidesToShow / 2) + (parseInt(this.props.centerPadding) > 0) + 1 // because of for loop exclusion
+      : slidesToShow
+    for (let slideIndex = currentSlide - slidesToLeft; 
+      slideIndex < currentSlide + slidesToRight; slideIndex++) {
+      toLazyLoad.push(slideIndex)
+    }
+    console.log('lazyload:', toLazyLoad)
+    return toLazyLoad
+  },
   componentWillMount: function () {
     if (this.props.init) {
       this.props.init();
     }
-    let lazyLoadedList = [];
-    // number of slides shown in the active frame
-    const slidesToShow = this.props.slidesToShow;
-    const childrenLen = React.Children.count(this.props.children);
-    const currentSlide = this.state.currentSlide;
-    for (let i = 0; i < childrenLen; i++) {
-      // if currentSlide is the lastSlide of current frame and 
-      // rest of the active slides are on the left of currentSlide
-      // then the following might cause a problem
-      if (i >= currentSlide && i < currentSlide + slidesToShow) {
-        lazyLoadedList.push(i);
-      }
-    }
-    if (this.props.centerMode === true) {
-      // add slides to show on the left in case of centerMode with lazyLoad
-      let additionalCount = Math.floor(slidesToShow / 2);
-      if (parseInt(this.props.centerPadding) > 0) {
-        additionalCount += 1;
-      }
-      let additionalNum = currentSlide;
-      while(additionalCount--){
-        lazyLoadedList.push((--additionalNum + childrenLen) % childrenLen)
-      }
-    }
-
-    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
-      this.setState({
-        lazyLoadedList: lazyLoadedList
-      });
+    if (this.props.lazyLoad) {
+      const lazyLoadedList = this.getLazyLoadedList()
+      this.setState({ lazyLoadedList })
       if (this.props.lazyLoaded && lazyLoadedList.length > 0) {
         this.props.lazyLoaded(lazyLoadedList)
       }
@@ -127,7 +120,7 @@ export var InnerSlider = createReactClass({
       let rightMostSlide = (this.state.currentSlide + additionalCount) % childrenLen
       if(!this.state.lazyLoadedList.includes(leftMostSlide)){
         this.setState({
-          lazyLoadedList: this.state.lazyLoadedList + [leftMostSlide]
+          lazyLoadedList: this.state.lazyLoadedList.concat(leftMostSlide)
         })
         if (this.props.lazyLoaded) {
           this.props.lazyLoaded([leftMostSlide])
@@ -135,7 +128,7 @@ export var InnerSlider = createReactClass({
       }
       if(!this.state.lazyLoadedList.includes(rightMostSlide)){
         this.setState({
-          lazyLoadedList: this.state.lazyLoadedList + [rightMostSlide]
+          lazyLoadedList: this.state.lazyLoadedList.concat(rightMostSlide)
         })
         if (this.props.lazyLoaded) {
           this.props.lazyLoaded([leftMostSlide])
