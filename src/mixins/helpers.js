@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
+import { getOnDemandLazySlides } from '../utils/innerSliderUtils'
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -81,25 +82,7 @@ var helpers = {
       this.autoPlay(props.autoplay);
     }
     
-    const lazyLoadedList = this.state.lazyLoadedList
-    let startIndex, endIndex
-    if (props.centerMode) {
-      startIndex = this.state.currentSlide - props.slidesToShow / 2
-      endIndex = this.state.currentSlide + props.slidesToShow / 2
-    } else {
-      startIndex = this.state.currentSlide
-      endIndex = this.state.currentSlide + props.slidesToShow
-    }
-    let notLoaded = []
-    for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex += 1) {
-      if (lazyLoadedList.indexOf(slideIndex) < 0) {
-        lazyLoadedList.push(slideIndex)
-        notLoaded.push(slideIndex)
-      }
-    }
-    if (this.props.lazyLoaded && notLoaded.length > 0) {
-      this.props.lazyLoaded(notLoaded)
-    }
+    let slidesToLoad = getOnDemandLazySlides({}, this.props, this.state)
 
     this.setState({
       slideCount,
@@ -108,7 +91,7 @@ var helpers = {
       trackWidth,
       slideHeight,
       listHeight,
-      lazyLoadedList
+      lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -294,31 +277,10 @@ var helpers = {
     if (this.props.beforeChange) {
       this.props.beforeChange(this.state.currentSlide, finalTargetSlide);
     }
-
     if (this.props.lazyLoad) {
-      var slidesToLoad = [];
-      let slideCount = this.state.slideCount
-      for (var i = animationTargetSlide; i < animationTargetSlide + this.props.slidesToShow; i++ ) {
-        if (this.state.lazyLoadedList.indexOf(i) < 0) {
-          slidesToLoad.push(i)
-        }
-        if (i >= slideCount && this.state.lazyLoadedList.indexOf(i - slideCount) < 0) {
-          slidesToLoad.push(i - slideCount)
-        }
-        if (i < 0 && this.state.lazyLoadedList.indexOf(i + slideCount) < 0) {
-          slidesToLoad.push(i + slideCount)
-        }
-      }
-      if (slidesToLoad.length > 0) {
-        this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
-        });
-        if (this.props.lazyLoaded) {
-          this.props.lazyLoaded(slidesToLoad)
-        }
-      }
+      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state, {currentSlide: animationTargetSlide}))
+      slidesToLoad.length && this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
     }
-
     // Slide Transition happens here.
     // animated transition happens to target Slide and
     // non - animated transition happens to current Slide
