@@ -154,18 +154,21 @@ export var InnerSlider = createReactClass({
     delete this.animationEndCallback;
   },
   slickPrev: function () {
-    this.changeSlide({ message: 'previous' });
+    // this and fellow methods are wrapped in setTimeout
+    // to make sure initialize setState has happened before
+    // any of such methods are called
+    setTimeout(() => this.changeSlide({ message: 'previous' }), 0)
   },
   slickNext: function () {
-    this.changeSlide({ message: 'next' });
+    setTimeout(() => this.changeSlide({ message: 'next' }), 0)
   },
   slickGoTo: function (slide) {
     slide = Number(slide)
-    !isNaN(slide) && this.changeSlide({
+    !isNaN(slide) && setTimeout( () => this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
-    });
+    }), 0)
   },
   slickGetOption: function(option) {
     const options = assign({}, this.props, this.state)
