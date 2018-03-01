@@ -15,8 +15,18 @@ export const getOnDemandLazySlides = spec => {
       onDemandSlides.push(slideIndex)
     }
   }
-  // console.log('onDemandSlides:', onDemandSlides, 'spec:', spec)
   return onDemandSlides
+}
+
+export const getRequiredLazySlides = spec => {
+  let requiredSlides = []
+  let startIndex = lazyStartIndex(spec)
+  let endIndex = lazyEndIndex(spec)
+  for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
+    requiredSlides.push(slideIndex)
+  }
+  return requiredSlides
+
 }
 
 export const lazyStartIndex = spec => spec.currentSlide - slidesOnLeft(spec)
