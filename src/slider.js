@@ -125,6 +125,7 @@ export default class Slider extends React.Component {
       settings.slidesToShow = children.length
     } else if (children.length <= settings.slidesToShow) {
       settings.unslick = true
+      settings.slidesToShow = children.length
     }
     return (
       <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
