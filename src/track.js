@@ -4,6 +4,7 @@ import React from 'react';
 import assign from 'object-assign';
 import classnames from 'classnames';
 import { getPreClones } from './utils/trackUtils';
+import { lazyStartIndex, lazyEndIndex } from './utils/innerSliderUtils'
 
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
@@ -69,6 +70,8 @@ var renderSlides = function (spec) {
   var preCloneSlides = [];
   var postCloneSlides = [];
   var childrenCount = React.Children.count(spec.children);
+  let startIndex = lazyStartIndex(spec)
+  let endIndex = lazyEndIndex(spec)
 
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
@@ -87,14 +90,7 @@ var renderSlides = function (spec) {
     }
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
     const slideClass = child.props.className || ''
-
-    const onClick = function(e) {
-      child.props && child.props.onClick && child.props.onClick(e)
-      if (spec.focusOnSelect) {
-        spec.focusOnSelect(childOnClickOptions)
-      }
-    }
-
+    
     // push a cloned element of the desired slide
     slides.push(React.cloneElement(child, {
       key: 'original' + getKey(child, index),
@@ -102,35 +98,55 @@ var renderSlides = function (spec) {
       className: classnames(getSlideClasses(assign({index: index}, spec)), slideClass),
       tabIndex: '-1',
       style: assign({outline: 'none'}, child.props.style || {}, childStyle),
-      onClick
+      onClick: e => {
+        child.props && child.props.onClick && child.props.onClick(e)
+        if (spec.focusOnSelect) {
+          spec.focusOnSelect(childOnClickOptions)
+        }
+      }
     }));
-
-    // variableWidth doesn't wrap properly.
+    
     // if slide needs to be precloned or postcloned
     if (spec.infinite && spec.fade === false) {
       let preCloneNo = childrenCount - index
       if (preCloneNo <= getPreClones(spec)
         && childrenCount !== spec.slidesToShow){
         key = -preCloneNo;
+        if (key >= startIndex) {
+          child = elem
+        }
         preCloneSlides.push(React.cloneElement(child, {
           key: 'precloned' + getKey(child, key),
           'data-index': key,
           tabIndex: '-1',
           className: classnames(getSlideClasses(assign({index: key}, spec)), slideClass),
           style: assign({}, child.props.style || {}, childStyle),
-          onClick
+          onClick: e => {
+            child.props && child.props.onClick && child.props.onClick(e)
+            if (spec.focusOnSelect) {
+              spec.focusOnSelect(childOnClickOptions)
+            }
+          }
         }));
       }
-
+      
       if (childrenCount !== spec.slidesToShow) {
         key = childrenCount + index;
+        if (key < endIndex) {
+          child = elem
+        }
         postCloneSlides.push(React.cloneElement(child, {
           key: 'postcloned' + getKey(child, key),
           'data-index': key,
           tabIndex: '-1',
           className: classnames(getSlideClasses(assign({index: key}, spec)), slideClass),
           style: assign({}, child.props.style || {}, childStyle),
-          onClick
+          onClick: e => {
+            child.props && child.props.onClick && child.props.onClick(e)
+            if (spec.focusOnSelect) {
+              spec.focusOnSelect(childOnClickOptions)
+            }
+          }
         }));
       }
     }
