@@ -112,7 +112,7 @@ Props            | Type            | Default Value                   | Descripti
 `slidesToScroll` | `int`           | `1`                             |                                                             |
 `speed`          | `int`           | `500`                           |                                                             |
 `swipe`          | `bool`          | `true`                          |                                                             |
-`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swpie irrespective of `slidesToScroll`          | Yes
+`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swipe irrespective of `slidesToScroll`          | Yes
 `touchMove`      | `bool`          | `true`                          |                                                             |
 `touchThreshold` | `int`           | `5`                             |                                                             |
 `variableWidth`  | `bool`          | `false`                         |                                                             |
@@ -227,5 +227,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/react-slick/sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/react-slick/sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/react-slick/sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/9/avatar.svg"></a>
-
-
