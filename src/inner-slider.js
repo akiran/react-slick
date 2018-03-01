@@ -158,7 +158,8 @@ export var InnerSlider = createReactClass({
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
       variableWidth: this.props.variableWidth,
-      unslick: this.props.unslick
+      unslick: this.props.unslick,
+      centerPadding: this.props.centerPadding
     };
 
     var dots;
