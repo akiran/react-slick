@@ -12,11 +12,8 @@ var getSlideClasses = (spec) => {
   var slickActive, slickCenter, slickCloned;
   var centerOffset, index;
 
-  if (spec.rtl) { // if we're going right to left, index is reversed
-    index = spec.slideCount - 1 - spec.index;
-  } else { // index of the slide
-    index = spec.index;
-  }
+  index = spec.index;
+
   slickCloned = (index < 0) || (index >= spec.slideCount);
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
@@ -136,11 +133,7 @@ var renderSlides = function (spec) {
     }
   });
 
-  if (spec.rtl) {
-    return preCloneSlides.concat(slides, postCloneSlides).reverse();
-  } else {
-    return preCloneSlides.concat(slides, postCloneSlides);
-  }
+  return preCloneSlides.concat(slides, postCloneSlides);
 };
 
 export class Track extends React.Component {

@@ -23,20 +23,22 @@ export var getTrackCSS = function(spec) {
     trackHeight = trackChildren * spec.slideHeight;
   }
 
+  const direction = spec.rtl ? -1 : 1;
+
   var style = {
     opacity: 1,
-    WebkitTransform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
-    transform: !spec.vertical ? 'translate3d(' + spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+    WebkitTransform: !spec.vertical ? 'translate3d(' + direction * spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
+    transform: !spec.vertical ? 'translate3d(' + direction * spec.left + 'px, 0px, 0px)' : 'translate3d(0px, ' + spec.left + 'px, 0px)',
     transition: '',
     WebkitTransition: '',
-    msTransform: !spec.vertical ? 'translateX(' + spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
+    msTransform: !spec.vertical ? 'translateX(' + direction * spec.left + 'px)' : 'translateY(' + spec.left + 'px)',
   };
   if (spec.fade) {
     style = {
       opacity: 1
     }
   }
-  
+
   if (trackWidth) {
     assign(style, { width: trackWidth });
   }
@@ -75,7 +77,7 @@ export var getTrackLeft = function (spec) {
   checkSpecKeys(spec, [
    'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
    'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
-  
+
   const {slideIndex, trackRef, infinite, centerMode, slideCount, slidesToShow,
     slidesToScroll, slideWidth, listWidth, variableWidth, slideHeight, fade, vertical} = spec
 

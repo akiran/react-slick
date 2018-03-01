@@ -28,7 +28,7 @@ var helpers = {
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
-    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+    var currentSlide = props.initialSlide;
 
     this.setState({
       slideCount,
@@ -80,7 +80,7 @@ var helpers = {
     } else {
       this.autoPlay(props.autoplay);
     }
-    
+
     const lazyLoadedList = this.state.lazyLoadedList
     let startIndex, endIndex
     if (props.centerMode) {
@@ -270,10 +270,10 @@ var helpers = {
       finalTargetSlide = animationTargetSlide;
     }
 
-    /* 
+    /*
       stop: critical checkpoint
     */
-   
+
     animationTargetLeft = getTrackLeft(assign({
       slideIndex: animationTargetSlide,
       trackRef: this.track

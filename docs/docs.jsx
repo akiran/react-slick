@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Demos from './demos'
+import DemosRTL from './demosRTL'
 
 export default class Docs extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export default class Docs extends React.Component {
             <Demos />
           </div>
         </div>
+        <DemosRTL />
       </div>
     );
   }
