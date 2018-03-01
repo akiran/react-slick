@@ -34,10 +34,12 @@ export var InnerSlider = createReactClass({
       this.props.init();
     }
     if (this.props.lazyLoad) {
-      const slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
-      this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
-      if (this.props.lazyLoaded && slidesToLoad.length > 0) {
-        this.props.lazyLoaded(slidesToLoad)
+      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
+      if (slidesToLoad.length > 0) {
+        this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad(slidesToLoad)
+        }
       }
     }
   },
@@ -96,10 +98,15 @@ export var InnerSlider = createReactClass({
     }
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
-      slidesToLoad.length && this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
+      if (slidesToLoad.length > 0) {
+        this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })        
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad(slidesToLoad)
+        }
+      }
     }
-    // if (this.props.lazyLoaded) {
-    //   this.props.lazyLoaded([leftMostSlide])
+    // if (this.props.onLazyLoad) {
+    //   this.props.onLazyLoad([leftMostSlide])
     // }
     this.adaptHeight();
   },

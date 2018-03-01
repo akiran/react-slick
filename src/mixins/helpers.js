@@ -83,7 +83,9 @@ var helpers = {
     }
     
     let slidesToLoad = getOnDemandLazySlides({}, this.props, this.state)
-
+    if (slidesToLoad.length > 0 && this.props.onLazyLoad) {
+      this.props.onLazyLoad(slidesToLoad)
+    }
     this.setState({
       slideCount,
       slideWidth,
@@ -171,8 +173,8 @@ var helpers = {
         this.setState({
           lazyLoadedList: this.state.lazyLoadedList.concat(animationTargetSlide)
         });
-        if (this.props.lazyLoaded) {
-          this.props.lazyLoaded([animationTargetSlide])
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad([animationTargetSlide])
         }
       }
 
@@ -279,7 +281,12 @@ var helpers = {
     }
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state, {currentSlide: animationTargetSlide}))
-      slidesToLoad.length && this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
+      if (slidesToLoad.length > 0) {
+        this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad(slidesToLoad)
+        }
+      }
     }
     // Slide Transition happens here.
     // animated transition happens to target Slide and
