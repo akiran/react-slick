@@ -1,42 +1,26 @@
 import { mount } from 'enzyme'
 import assign from 'object-assign'
 import { getRequiredLazySlides } from '../src/utils/innerSliderUtils'
-import { createInnerSliderWrapper, clickNext, clickPrev, tryAllConfigs } from './testUtils'
+import { createInnerSliderWrapper, clickNext, clickPrev, 
+  tryAllConfigs, actualTrackLeft
+} from './testUtils'
 import { getTrackLeft } from '../src/mixins/trackHelper'
 
 
-const actualTrackLeft = wrapper => wrapper.find('.slick-track').props().style.transform
-  .match(/translate3d\((\d+)px/i)[1]
-
 const testSettings = settings => {
-  // console.log('settings:', settings)
   let slider = createInnerSliderWrapper(settings)
   for(let click = 0; click < settings.noOfSlides + 2; click++) {
-    let trackLeft = parseInt(actualTrackLeft(slider))
-    // console.log('=> next ', trackLeft)
-    let spec = assign({}, slider.props(), slider.state(), {
-      slideIndex: slider.state().currentSlide,
-      trackRef: null,
-    })
-    let expectedTrackLeft = getTrackLeft(spec)
-    expect(trackLeft).toEqual(expectedTrackLeft)
+    testTrackLeft(slider)
     clickNext(slider)
   }
   slider = createInnerSliderWrapper(settings)
   for(let click = 0; click < settings.noOfSlides + 2; click++) {
-    let trackLeft = parseInt(actualTrackLeft(slider))
-    // console.log('=> prev ', trackLeft)
-    let spec = assign({}, slider.props(), slider.state(), {
-      slideIndex: slider.state().currentSlide,
-      trackRef: null,
-    })
-    let expectedTrackLeft = getTrackLeft(spec)
-    expect(trackLeft).toEqual(expectedTrackLeft)
+    testTrackLeft(slider)
     clickPrev(slider)
   }
 }
 
-describe('CenterMode test', () => {
+describe('Slider Styles Tests', () => {
   let settings = {
     useCSS: false,
     speed: 0,

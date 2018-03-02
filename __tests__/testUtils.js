@@ -6,6 +6,7 @@ import Slider from '../src/slider'
 import {InnerSlider} from '../src/inner-slider'
 import defaultProps from '../src/default-props'
 import * as slickCarousel from 'slick-carousel' // defining slick in global environment
+import { getTrackLeft } from '../src/mixins/trackHelper'
 
 // finds active slide number in the last transition in the forward direction
 export function activeSlideInLastTransition(noOfSlides, slidesToShow, slidesToScroll){
@@ -140,4 +141,18 @@ export const tryAllConfigs = (settings, settingsList) => {
           settingsList.push(settings)
         }
   }
+}
+
+export const actualTrackLeft = wrapper => wrapper.find('.slick-track').props().style.transform
+  .match(/translate3d\((\d+)px/i)[1]
+
+
+export const testTrackLeft = wrapper => {
+  let trackLeft = parseInt(actualTrackLeft(wrapper))
+  let spec = assign({}, wrapper.props(), wrapper.state(), {
+    slideIndex: wrapper.state().currentSlide,
+    trackRef: null,
+  })
+  let expectedTrackLeft = getTrackLeft(spec)
+  expect(trackLeft).toEqual(expectedTrackLeft)
 }
