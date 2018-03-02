@@ -40,7 +40,7 @@ describe('CenterMode test', () => {
   let settings = {
     useCSS: false,
     speed: 0,
-    centerMode: true,
+    centerMode: [true, false],
     noOfSlides: [7, 8],
     initialSlide: [0, 5],
     slidesToShow: [1, 3, 4],
