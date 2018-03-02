@@ -36,7 +36,7 @@ export var getTrackCSS = function(spec) {
       opacity: 1
     }
   }
-  
+
   if (trackWidth) {
     assign(style, { width: trackWidth });
   }
@@ -75,7 +75,7 @@ export var getTrackLeft = function (spec) {
   checkSpecKeys(spec, [
    'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
    'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
-  
+
   const {slideIndex, trackRef, infinite, centerMode, slideCount, slidesToShow,
     slidesToScroll, slideWidth, listWidth, variableWidth, slideHeight, fade, vertical} = spec
 
@@ -120,7 +120,10 @@ export var getTrackLeft = function (spec) {
       var targetSlideIndex;
       var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
       var max = -(lastSlide.offsetLeft) + listWidth - lastSlide.offsetWidth;
-      targetSlideIndex = (slideIndex + getPreClones(spec));
+      targetSlideIndex = slideIndex;
+
+      if (infinite) targetSlideIndex += getPreClones(spec)
+
       targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (centerMode === true) {
