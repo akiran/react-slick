@@ -186,12 +186,12 @@ var helpers = {
           this.props.afterChange(animationTargetSlide);
         }
         delete this.animationEndCallback;
-        if (this.props.fade) {
-          const focusableSlide = ReactDOM.findDOMNode(this.track).children[animationTargetSlide]
-          if (elementInViewport(focusableSlide)) {
-            focusableSlide.focus()
-          }
-        }
+        // if (this.props.fade) {
+        //   const focusableSlide = ReactDOM.findDOMNode(this.track).children[animationTargetSlide]
+        //   if (elementInViewport(focusableSlide)) {
+        //     focusableSlide.focus()
+        //   }
+        // }
       };
 
       this.setState({
