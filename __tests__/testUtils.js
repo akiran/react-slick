@@ -44,7 +44,7 @@ export function createInnerSlider({noOfSlides, ...settings}){
     createReactSliderChildren(noOfSlides)
   )
   return (
-    <InnerSlider {...settings}>
+    <InnerSlider {...settings} ref={slider => this.innerSlider = slider}>
       {children}
     </InnerSlider>
   )
@@ -119,4 +119,25 @@ export function testSlider(settings){
   const settings2 = {direction: 'prev', ...settings}
   testSliderScroll(settings1)
   testSliderScroll(settings2)
+}
+
+export const clickNext = wrapper => wrapper.find('.slick-next').simulate('click')
+export const clickPrev = wrapper => wrapper.find('.slick-prev').simulate('click')
+
+export const tryAllConfigs = (settings, settingsList) => {
+  let leaf = true
+  for(let key of Object.keys(settings)) {
+    if (Array.isArray(settings[key])) {
+      leaf = false
+      for (let val of settings[key]) {
+        tryAllConfigs({...settings, [key]: val}, settingsList)
+      }
+    }
+  }
+  if (leaf) {
+    if (settingsList.map(
+        setting => JSON.stringify(setting)).indexOf(JSON.stringify(settings)) < 0) {
+          settingsList.push(settings)
+        }
+  }
 }

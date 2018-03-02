@@ -1,10 +1,8 @@
 import { mount } from 'enzyme'
-import { createInnerSliderWrapper } from './testUtils'
 import assign from 'object-assign'
 import { getRequiredLazySlides } from '../src/utils/innerSliderUtils'
+import { createInnerSliderWrapper, clickNext, clickPrev, tryAllConfigs } from './testUtils'
 
-const clickNext = wrapper => wrapper.find('.slick-next').simulate('click')
-const clickPrev = wrapper => wrapper.find('.slick-prev').simulate('click')
 
 const testSettings = settings => {
   let slider = createInnerSliderWrapper(settings)
@@ -37,24 +35,6 @@ const testSettings = settings => {
     lazyLoadedList.forEach(slideIndex => {
       expect(slider.find(`[data-index=${slideIndex}]`).props().children !== undefined).toBe(true)
     })
-  }
-}
-
-const tryAllConfigs = (settings, settingsList) => {
-  let leaf = true
-  for(let key of Object.keys(settings)) {
-    if (Array.isArray(settings[key])) {
-      leaf = false
-      for (let val of settings[key]) {
-        tryAllConfigs({...settings, [key]: val}, settingsList)
-      }
-    }
-  }
-  if (leaf) {
-    if (settingsList.map(
-        setting => JSON.stringify(setting)).indexOf(JSON.stringify(settings)) < 0) {
-          settingsList.push(settings)
-        }
   }
 }
 
