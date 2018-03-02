@@ -116,7 +116,7 @@ Props            | Type            | Default Value                   | Descripti
 `speed`          | `int`           | `500`                           | Animation speed in milliseconds                             | Yes
 `swipe`          | `bool`          | `true`                          | Enable/disable swiping to change slides                     | Yes
 `onSwipe`        | `func`          | `null`                          | Callback after slide changes by swiping                     | Yes
-`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swpie irrespective of `slidesToScroll`          | Yes
+`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swipe irrespective of `slidesToScroll`          | Yes
 `touchMove`      | `bool`          | `true`                          |                                                             | Yes
 `touchThreshold` | `int`           | `5`                             |                                                             | Yes
 `variableWidth`  | `bool`          | `false`                         |                                                             | Yes
@@ -249,5 +249,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/react-slick/sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/react-slick/sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/react-slick/sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/9/avatar.svg"></a>
-
-
