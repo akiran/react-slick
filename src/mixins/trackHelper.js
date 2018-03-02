@@ -135,7 +135,7 @@ export var getTrackLeft = function (spec) {
           }
           targetLeft += (listWidth - targetSlide.offsetWidth) / 2
       }
-      if (spec.infinite === false && targetLeft < max) {
+      if (infinite === false && targetLeft < max && targetSlideIndex > 0) {
         targetLeft = max;
       }
   }
