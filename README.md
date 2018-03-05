@@ -132,13 +132,11 @@ Props            | Type            | Default Value                   | Descripti
 ### Methods
 Name              | Arguments       | Description
 ------------------|-----------------|-------------------------
-`getSlick`        | None            | get an instance of the slider
 `slickPrev`       | None            | go to previous slide
 `slickNext`       | None            | go to next slide
 `slickGoTo`       | index:number    | go to the given slide index
 `slickPause`      | None            | pause the autoplay
 `slickPlay`       | None            | start the autoplay
-`slickGetOption`  | key:string      | get the value for given option from (props or states)
 
 
 #### Followings are not going to be implemented
@@ -150,7 +148,9 @@ Name              |type             | Reason
 `slickUnfilter`   | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
 `slickAdd`        | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
 `slickRemove`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
-`slickCurrentSlide`| method         | same functionality can be achieved with `slickGetOption('currentSlide')`
+`slickCurrentSlide`| method         | same functionality can be achieved with `beforeChange hook`
+`slickGetOption`  | method          | manage wrapper state for desired options
+`getSlick`        | method          | a simple ref will do
 
 #### `responsive` property
 

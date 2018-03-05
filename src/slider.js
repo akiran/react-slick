@@ -73,10 +73,6 @@ export default class Slider extends React.Component {
 
   slickPlay = () => this.innerSlider.autoPlay()
 
-  getSlick = () => this // returns slider instance
-
-  slickGetOption = option => this.innerSlider.slickGetOption(option)
-
   render() {
     var settings;
     var newProps;
