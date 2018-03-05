@@ -1,12 +1,10 @@
 ### react-slick
 
-<a href="https://opencollective.com/react-slick/donate" target="_blank">
-  <img align="right" src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
-</a>
-
 [![Backers on Open Collective](https://opencollective.com/react-slick/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/react-slick/sponsors/badge.svg)](#sponsors) [![Join the chat at https://gitter.im/akiran/react-slick](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/akiran/react-slick?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ##### Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
+
+## [Documentation](http://react-slick.neostack.com)
 
 ### Installation
 
@@ -36,10 +34,15 @@ or add cdn link in your html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
-### [Demos](http://react-slick.neostack.com)
+
 
 ### [PlayGround](https://codesandbox.io/s/zzloxr09mp)
 Use [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) to try react-slick with different settings.
+
+<a href="https://opencollective.com/react-slick/donate" target="_blank">
+  <img align="right" src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
+</a>
+
 
 ### Filing issues
 Please replicate your issue with [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) and post it along with issue to make it easy for me to debug.
