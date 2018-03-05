@@ -36,7 +36,7 @@ or add cdn link in your html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
-### [Demos](http://neostack.com/opensource/react-slick)
+### [Demos](http://react-slick.neostack.com)
 
 ### [PlayGround](https://codesandbox.io/s/zzloxr09mp)
 Use [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) to try react-slick with different settings.
@@ -83,6 +83,7 @@ class SimpleSlider extends React.Component {
 Props            | Type            | Default Value                   | Description                                                 | Working
 ---------------- | --------------- | ------------------------------- | -----------                                                 | -------
 `accessibility`  | `bool`          | `true`                          | Enable tabbing and arrow key navigation                     | Yes
+`asNavFor`       | `ref`           | `undefined`                     | provide ref to another slider and sync it with current slider| Yes
 `className`      | `string`        | `''`                            | CSS class for inner slider div                              | Yes
 `adaptiveHeight` | `bool`          | `false`                         | Adjust the slide's height automatically                     | Yes
 `arrows`         | `bool`          | `true`                          |                                                             | Yes
@@ -91,48 +92,69 @@ Props            | Type            | Default Value                   | Descripti
 `autoplay`       | `bool`          | `false`                         |                                                             | Yes
 `autoplaySpeed`  | `int`           | `3000`                          | Delay between each auto scroll (in milliseconds)            | Yes
 `centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
-`centerPadding`  |                 | `'50px'`                        |                                                             |
-`cssEase`        |                 | `'ease'`                        |                                                             |
-`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)            | Yes
+`centerPadding`  |                 | `'50px'`                        |                                                             | Yes
+`cssEase`        |                 | `'ease'`                        |                                                             | Yes
+`customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)| Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
 `dotsClass`      | `string`        | `'slick-dots'`                  | CSS class for dots                                          | Yes
 `appendDots`     | `func`          | `dots => <ul>{dots}</ul>`       | Custom dots templates. Works same as customPaging           | Yes
 `draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
-`easing`         | `string`        | `'linear'`                      |                                                             |
+`easing`         | `string`        | `'linear'`                      |                                                             | Yes
+`edgeEvent`      | `func`          | `null`                          | Edge dragged event in finite case, `direction => {...}`
 `fade`           | `bool`          | `Default`                       |                                                             | Yes
 `focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
 `initialSlide`   | `int`           | `0`                             | Index of first slide                                        | Yes
 `lazyLoad`       | `bool`          | `false`                         | Load images or render components on demand                  | Yes
+`onLazyLoad`     | `func`          | `null`                          | Callback after slides load lazily `slidesLoaded => {...}`   | Yes
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
 `rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes
-`slide`          | `string`        | `'div'`                         |                                                             |
-`slidesToShow`   | `int`           | `1`                             | Yes                                                         | Yes
-`slidesToScroll` | `int`           | `1`                             |                                                             |
-`speed`          | `int`           | `500`                           |                                                             |
-`swipe`          | `bool`          | `true`                          |                                                             |
-`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swpie irrespective of `slidesToScroll`          | Yes
-`touchMove`      | `bool`          | `true`                          |                                                             |
-`touchThreshold` | `int`           | `5`                             |                                                             |
-`variableWidth`  | `bool`          | `false`                         |                                                             |
+`slide`          | `string`        | `'div'`                         | Slide container type                                        | Yes
+`slidesToShow`   | `int`           | `1`                             | How many slides to show in one frame                        | Yes
+`slidesToScroll` | `int`           | `1`                             | How many slides to scroll at once                           | Yes
+`speed`          | `int`           | `500`                           | Animation speed in milliseconds                             | Yes
+`swipe`          | `bool`          | `true`                          | Enable/disable swiping to change slides                     | Yes
+`onSwipe`        | `func`          | `null`                          | Callback after slide changes by swiping                     | Yes
+`swipeToSlide`   | `bool`          | `false`                         | Enable drag/swipe irrespective of `slidesToScroll`          | Yes
+`touchMove`      | `bool`          | `true`                          |                                                             | Yes
+`touchThreshold` | `int`           | `5`                             |                                                             | Yes
+`variableWidth`  | `bool`          | `false`                         |                                                             | Yes
 `useCSS`         | `bool`          | `true`                          | Enable/Disable CSS Transitions                              | Yes
 `vertical`       | `bool`          | `false`                         |                                                             | Yes
-`init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                       | Yes
+`init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                   | Yes
+`reInit`         | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
-`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            |
+`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            | Yes
+
+
+### Methods
+Name              | Arguments       | Description
+------------------|-----------------|-------------------------
+`slickPrev`       | None            | go to previous slide
+`slickNext`       | None            | go to next slide
+`slickGoTo`       | index:number    | go to the given slide index
+`slickPause`      | None            | pause the autoplay
+`slickPlay`       | None            | start the autoplay
+
+
+#### Followings are not going to be implemented
+Name              |type             | Reason
+------------------|-----------------|-------------------
+`unslick`         | method          | same functionality can be achieved with `unslick` prop
+`slickSetOption`  | method          | same functionality can be achieved via props and managing state for them in wrapper
+`slickFilter`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickUnfilter`   | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickAdd`        | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickRemove`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickCurrentSlide`| method         | same functionality can be achieved with `beforeChange hook`
+`slickGetOption`  | method          | manage wrapper state for desired options
+`getSlick`        | method          | a simple ref will do
 
 #### `responsive` property
 
 Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
-
-### Methods
-* `slickNext()`   - function called to change current slide on next slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
-* `slickPrev()`   - function called to change current slide on previous slide ([Example](https://github.com/akiran/react-slick/blob/master/examples/PreviousNextMethods.js))
-* `slickGoTo(slideNumber)` - function called to change current slide to given slide number ([Example](https://github.com/akiran/react-slick/blob/master/examples/SlickGoTo.js))
-* `slickPause()` - function called to pause a slider that is autoplaying
-* `slickPlay()` - function called to resume a paused slider (requires autoplay: true)
 
 ### Custom next/prev arrows
 
@@ -227,5 +249,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/react-slick/sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/react-slick/sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/react-slick/sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/9/avatar.svg"></a>
-
-

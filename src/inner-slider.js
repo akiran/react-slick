@@ -8,6 +8,7 @@ import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
+import { getOnDemandLazySlides } from './utils/innerSliderUtils'
 
 import { Track } from './track';
 import { Dots } from './dots';
@@ -30,43 +31,16 @@ export var InnerSlider = createReactClass({
   },
   componentWillMount: function () {
     if (this.props.init) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn('init prop is deprecated and will be removed in next release')
-      }
       this.props.init();
     }
-    // this.setState({
-    //   mounted: true
-    // });
-    let lazyLoadedList = [];
-    // number of slides shown in the active frame
-    const slidesToShow = this.props.slidesToShow;
-    const childrenLen = React.Children.count(this.props.children);
-    const currentSlide = this.state.currentSlide;
-    for (let i = 0; i < childrenLen; i++) {
-      // if currentSlide is the lastSlide of current frame and 
-      // rest of the active slides are on the left of currentSlide
-      // then the following might cause a problem
-      if (i >= currentSlide && i < currentSlide + slidesToShow) {
-        lazyLoadedList.push(i);
+    if (this.props.lazyLoad) {
+      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
+      if (slidesToLoad.length > 0) {
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad(slidesToLoad)
+        }
       }
-    }
-    if (this.props.centerMode === true) {
-      // add slides to show on the left in case of centerMode with lazyLoad
-      let additionalCount = Math.floor(slidesToShow / 2);
-      if (parseInt(this.props.centerPadding) > 0) {
-        additionalCount += 1;
-      }
-      let additionalNum = currentSlide;
-      while(additionalCount--){
-        lazyLoadedList.push((--additionalNum + childrenLen) % childrenLen)
-      }
-    }
-
-    if (this.props.lazyLoad && this.state.lazyLoadedList.length === 0) {
-      this.setState({
-        lazyLoadedList: lazyLoadedList
-      });
     }
   },
   componentDidMount: function componentDidMount() {
@@ -119,23 +93,21 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidUpdate: function () {
-    if(this.props.lazyLoad && this.props.centerMode) {
-      let childrenLen = React.Children.count(this.props.children)
-      let additionalCount = Math.floor(this.props.slidesToShow / 2)
-      if(parseInt(this.props.centerPadding) > 0) additionalCount++;
-      let leftMostSlide = (this.state.currentSlide - additionalCount + childrenLen) % childrenLen
-      let rightMostSlide = (this.state.currentSlide + additionalCount) % childrenLen
-      if(!this.state.lazyLoadedList.includes(leftMostSlide)){
-        this.setState({
-          lazyLoadedList: this.state.lazyLoadedList + [leftMostSlide]
-        })
-      }
-      if(!this.state.lazyLoadedList.includes(rightMostSlide)){
-        this.setState({
-          lazyLoadedList: this.state.lazyLoadedList + [rightMostSlide]
-        })
+    if (this.props.reInit) {
+      this.props.reInit()
+    }
+    if (this.props.lazyLoad) {
+      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
+      if (slidesToLoad.length > 0) {
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad(slidesToLoad)
+        }
       }
     }
+    // if (this.props.onLazyLoad) {
+    //   this.props.onLazyLoad([leftMostSlide])
+    // }
     this.adaptHeight();
   },
   onWindowResized: function () {
@@ -148,18 +120,21 @@ export var InnerSlider = createReactClass({
     delete this.animationEndCallback;
   },
   slickPrev: function () {
-    this.changeSlide({ message: 'previous' });
+    // this and fellow methods are wrapped in setTimeout
+    // to make sure initialize setState has happened before
+    // any of such methods are called
+    setTimeout(() => this.changeSlide({ message: 'previous' }), 0)
   },
   slickNext: function () {
-    this.changeSlide({ message: 'next' });
+    setTimeout(() => this.changeSlide({ message: 'next' }), 0)
   },
   slickGoTo: function (slide) {
     slide = Number(slide)
-    !isNaN(slide) && this.changeSlide({
+    !isNaN(slide) && setTimeout( () => this.changeSlide({
       message: 'index',
       index: slide,
       currentSlide: this.state.currentSlide
-    });
+    }), 0)
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
@@ -186,7 +161,8 @@ export var InnerSlider = createReactClass({
       slideCount: this.state.slideCount,
       trackStyle: this.state.trackStyle,
       variableWidth: this.props.variableWidth,
-      unslick: this.props.unslick
+      unslick: this.props.unslick,
+      centerPadding: this.props.centerPadding
     };
 
     var dots;

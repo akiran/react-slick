@@ -35,6 +35,7 @@
     "babel-eslint": "^7.0.0",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-airbnb": "^2.1.1",
@@ -89,8 +90,8 @@
       "./test-setup.js"
     ],
     "testPathIgnorePatterns": [
-      "/__tests__\/scripts.js",
-      "/__tests__\/testUtils.js"
+      "/__tests__/scripts.js",
+      "/__tests__/testUtils.js"
     ]
   },
   "npmName": "react-slick",

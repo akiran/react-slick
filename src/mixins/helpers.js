@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
+import { getOnDemandLazySlides } from '../utils/innerSliderUtils'
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -81,21 +82,11 @@ var helpers = {
       this.autoPlay(props.autoplay);
     }
     
-    const lazyLoadedList = this.state.lazyLoadedList
-    let startIndex, endIndex
-    if (props.centerMode) {
-      startIndex = this.state.currentSlide - props.slidesToShow / 2
-      endIndex = this.state.currentSlide + props.slidesToShow / 2
-    } else {
-      startIndex = this.state.currentSlide
-      endIndex = this.state.currentSlide + props.slidesToShow
+    let slidesToLoad = getOnDemandLazySlides({}, this.props, this.state)
+    if (slidesToLoad.length > 0 && this.props.onLazyLoad) {
+      this.props.onLazyLoad(slidesToLoad)
     }
-    for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex += 1) {
-      if (lazyLoadedList.indexOf(slideIndex) < 0) {
-        lazyLoadedList.push(slideIndex)
-      }
-    }
-
+    let prevLazyLoadedList = this.state.lazyLoadedList
     this.setState({
       slideCount,
       slideWidth,
@@ -103,7 +94,7 @@ var helpers = {
       trackWidth,
       slideHeight,
       listHeight,
-      lazyLoadedList
+      lazyLoadedList: prevLazyLoadedList.concat(slidesToLoad)
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -152,7 +143,6 @@ var helpers = {
   },
   slideHandler: function (index) {
     // index is target slide index
-
     // Functionality of animateSlide and postSlide is merged into this function
     var animationTargetSlide, finalTargetSlide;
     var animationTargetLeft, finalTargetLeft;
@@ -181,9 +171,10 @@ var helpers = {
       }
 
       if (this.props.lazyLoad && this.state.lazyLoadedList.indexOf(animationTargetSlide) < 0) {
-        this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(animationTargetSlide)
-        });
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(animationTargetSlide) }))
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad([animationTargetSlide])
+        }
       }
 
       callback = () => {
@@ -194,16 +185,15 @@ var helpers = {
           this.props.afterChange(animationTargetSlide);
         }
         delete this.animationEndCallback;
-        if (this.props.fade) {
-          const focusableSlide = ReactDOM.findDOMNode(this.track).children[animationTargetSlide]
-          focusableSlide.focus()
-        }
       };
 
       this.setState({
         animating: true,
         currentSlide: animationTargetSlide
       }, function () {
+        if (this.props.asNavFor && this.props.asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide) {
+          this.props.asNavFor.innerSlider.slideHandler(index)
+        }
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
@@ -284,28 +274,15 @@ var helpers = {
     if (this.props.beforeChange) {
       this.props.beforeChange(this.state.currentSlide, finalTargetSlide);
     }
-
     if (this.props.lazyLoad) {
-      var slidesToLoad = [];
-      let slideCount = this.state.slideCount
-      for (var i = animationTargetSlide; i < animationTargetSlide + this.props.slidesToShow; i++ ) {
-        if (this.state.lazyLoadedList.indexOf(i) < 0) {
-          slidesToLoad.push(i)
-        }
-        if (i >= slideCount && this.state.lazyLoadedList.indexOf(i - slideCount) < 0) {
-          slidesToLoad.push(i - slideCount)
-        }
-        if (i < 0 && this.state.lazyLoadedList.indexOf(i + slideCount) < 0) {
-          slidesToLoad.push(i + slideCount)
-        }
-      }
+      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state, {currentSlide: animationTargetSlide}))
       if (slidesToLoad.length > 0) {
-        this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
-        });
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad)}))
+        if (this.props.onLazyLoad) {
+          this.props.onLazyLoad(slidesToLoad)
+        }
       }
     }
-
     // Slide Transition happens here.
     // animated transition happens to target Slide and
     // non - animated transition happens to current Slide
@@ -343,6 +320,9 @@ var helpers = {
         currentSlide: finalTargetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: animationTargetLeft}, this.props, this.state))
       }, function () {
+        if (this.props.asNavFor && this.props.asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide) {
+          this.props.asNavFor.innerSlider.slideHandler(index)
+        }
         this.animationEndCallback = setTimeout(callback, this.props.speed);
       });
 
@@ -397,21 +377,17 @@ var helpers = {
     this.slideHandler(nextIndex);
   },
   autoPlay: function (autoplay=false) {
-    if (this.state.autoPlayTimer) {
-      clearTimeout(this.state.autoPlayTimer);
+    if (this.autoplayTimer) {
+      clearTimeout(this.autoplayTimer)
     }
     if (autoplay || this.props.autoplay) {
-      this.setState({
-        autoPlayTimer: setTimeout(this.play, this.props.autoplaySpeed)
-      });
+      this.autoplayTimer = setTimeout(this.play, this.props.autoplaySpeed)
     }
   },
   pause: function () {
-    if (this.state.autoPlayTimer) {
-      clearTimeout(this.state.autoPlayTimer);
-      this.setState({
-        autoPlayTimer: null
-      });
+    if (this.autoplayTimer) {
+      clearTimeout(this.autoplayTimer)
+      this.autoplayTimer = null
     }
   }
 };
