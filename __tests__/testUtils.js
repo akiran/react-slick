@@ -154,5 +154,5 @@ export const testTrackLeft = wrapper => {
     trackRef: null,
   })
   let expectedTrackLeft = getTrackLeft(spec)
-  expect(trackLeft).toEqual(expectedTrackLeft)
+  expect(trackLeft).toEqual(parseInt(expectedTrackLeft))
 }
