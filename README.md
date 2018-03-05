@@ -6,6 +6,7 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
+
 ### Installation
 
 **npm**
