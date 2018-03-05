@@ -144,10 +144,10 @@ Name              |type             | Reason
 ------------------|-----------------|-------------------
 `unslick`         | method          | same functionality can be achieved with `unslick` prop
 `slickSetOption`  | method          | same functionality can be achieved via props and managing state for them in wrapper
-`slickFilter`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
-`slickUnfilter`   | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
-`slickAdd`        | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
-`slickRemove`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides example
+`slickFilter`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickUnfilter`   | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickAdd`        | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
+`slickRemove`     | method          | same functionality can be achieved as with dynamic slides, look at dynamic slides [example](https://github.com/akiran/react-slick/blob/master/examples/DynamicSlides.js)
 `slickCurrentSlide`| method         | same functionality can be achieved with `beforeChange hook`
 `slickGetOption`  | method          | manage wrapper state for desired options
 `getSlick`        | method          | a simple ref will do
