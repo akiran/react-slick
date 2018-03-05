@@ -242,9 +242,8 @@ var EventHandlers = {
 
     if (this.props.swipeToSlide) {
       let swipedSlide;
-
+      let slidesTraversed;
       const slickList = ReactDOM.findDOMNode(this.list);
-
       const slides = slickList.querySelectorAll('.slick-slide');
 
       Array.from(slides).every((slide) => {
@@ -262,9 +261,13 @@ var EventHandlers = {
 
         return true;
       });
-
+        
       const currentIndex = this.props.rtl === true ? this.state.slideCount - this.state.currentSlide : this.state.currentSlide; 
-      const slidesTraversed = Math.abs(swipedSlide.dataset.index - currentIndex) || 1;
+      if(swipedSlide && swipedSlide.dataset) {
+            slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+        } else {
+            slidesTraversed = 0;
+        }
 
       return slidesTraversed;
     } else {
