@@ -2,7 +2,7 @@ import { mount } from 'enzyme'
 import assign from 'object-assign'
 import { getRequiredLazySlides } from '../src/utils/innerSliderUtils'
 import { createInnerSliderWrapper, clickNext, clickPrev, 
-  tryAllConfigs, actualTrackLeft
+  tryAllConfigs, actualTrackLeft, testTrackLeft
 } from './testUtils'
 import { getTrackLeft } from '../src/mixins/trackHelper'
 
