@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
-import { getOnDemandLazySlides, elementInViewport } from '../utils/innerSliderUtils'
+import { getOnDemandLazySlides } from '../utils/innerSliderUtils'
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -185,12 +185,6 @@ var helpers = {
           this.props.afterChange(animationTargetSlide);
         }
         delete this.animationEndCallback;
-        // if (this.props.fade) {
-        //   const focusableSlide = ReactDOM.findDOMNode(this.track).children[animationTargetSlide]
-        //   if (elementInViewport(focusableSlide)) {
-        //     focusableSlide.focus()
-        //   }
-        // }
       };
 
       this.setState({
