@@ -86,6 +86,7 @@ var helpers = {
     if (slidesToLoad.length > 0 && this.props.onLazyLoad) {
       this.props.onLazyLoad(slidesToLoad)
     }
+    let prevLazyLoadedList = this.state.lazyLoadedList
     this.setState({
       slideCount,
       slideWidth,
@@ -93,7 +94,7 @@ var helpers = {
       trackWidth,
       slideHeight,
       listHeight,
-      lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+      lazyLoadedList: prevLazyLoadedList.concat(slidesToLoad)
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
@@ -170,9 +171,7 @@ var helpers = {
       }
 
       if (this.props.lazyLoad && this.state.lazyLoadedList.indexOf(animationTargetSlide) < 0) {
-        this.setState({
-          lazyLoadedList: this.state.lazyLoadedList.concat(animationTargetSlide)
-        });
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(animationTargetSlide) }))
         if (this.props.onLazyLoad) {
           this.props.onLazyLoad([animationTargetSlide])
         }
@@ -284,7 +283,7 @@ var helpers = {
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state, {currentSlide: animationTargetSlide}))
       if (slidesToLoad.length > 0) {
-        this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad)}))
         if (this.props.onLazyLoad) {
           this.props.onLazyLoad(slidesToLoad)
         }

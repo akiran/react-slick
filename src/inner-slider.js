@@ -36,7 +36,7 @@ export var InnerSlider = createReactClass({
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
       if (slidesToLoad.length > 0) {
-        this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
         if (this.props.onLazyLoad) {
           this.props.onLazyLoad(slidesToLoad)
         }
@@ -99,7 +99,7 @@ export var InnerSlider = createReactClass({
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
       if (slidesToLoad.length > 0) {
-        this.setState({ lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad) })        
+        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
         if (this.props.onLazyLoad) {
           this.props.onLazyLoad(slidesToLoad)
         }
