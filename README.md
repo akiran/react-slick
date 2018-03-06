@@ -52,11 +52,11 @@ get started with react-slick.
 ### Example
 
 ```js
-var React = require('react');
-var Slider = require('react-slick');
+import React from 'react'
+import Slider from 'react-slick'
 
 class SimpleSlider extends React.Component {
-  render: function () {
+  render () {
     var settings = {
       dots: true,
       infinite: true,
