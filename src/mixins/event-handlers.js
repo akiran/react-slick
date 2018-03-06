@@ -321,19 +321,17 @@ var EventHandlers = {
       switch (swipeDirection) {
 
         case 'left':
-        case 'down':
+        case 'up':
           newSlide = this.state.currentSlide + this.getSlideCount();
           slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
-          // this.state.currentDirection = 0; // critical: change this line with setState statement
-          this.setState({ currentDirection: 0 }) // unverified fix of above line
+          this.setState({ currentDirection: 0 })
           break;
 
         case 'right':
-        case 'up':
+        case 'down':
           newSlide = this.state.currentSlide - this.getSlideCount();
           slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
-          // this.state.currentDirection = 1; // critical: change this line with setState statement
-          this.setState({ currentDirection: 1 }) // unverified fix of above line
+          this.setState({ currentDirection: 1 })
           break;
 
         default:

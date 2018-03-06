@@ -67,9 +67,9 @@ export const getSwipeDirection = (touchObject, verticalSwiping=false) => {
   }
   if (verticalSwiping === true) {
     if ((swipeAngle >= 35) && (swipeAngle <= 135)) {
-      return 'down';
-    } else {
       return 'up';
+    } else {
+      return 'down';
     }
   }
 
