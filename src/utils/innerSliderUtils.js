@@ -50,7 +50,7 @@ export const getWidth = elem => elem && elem.offsetWidth || 0
 
 export const getHeight = elem => elem && elem.offsetHeight || 0
 
-export const swipeDirection = (touchObject, verticalSwiping=false) => {
+export const getSwipeDirection = (touchObject, verticalSwiping=false) => {
   var xDist, yDist, r, swipeAngle;
   xDist = touchObject.startX - touchObject.curX;
   yDist = touchObject.startY - touchObject.curY;

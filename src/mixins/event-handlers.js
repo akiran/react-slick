@@ -4,7 +4,7 @@ import helpers from './helpers';
 import assign from 'object-assign';
 import ReactDOM from 'react-dom';
 import { siblingDirection } from '../utils/trackUtils'
-import { getWidth, getHeight, swipeDirection } from '../utils/innerSliderUtils'
+import { getWidth, getHeight, getSwipeDirection } from '../utils/innerSliderUtils'
 
 var EventHandlers = {
   // Event handler for previous and next
@@ -147,7 +147,7 @@ var EventHandlers = {
 
     var currentSlide = this.state.currentSlide;
     var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll); // this might not be correct, using getDotCount may be more accurate
-    var swipeDirection = swipeDirection(this.state.touchObject, this.props.verticalSwiping);
+    var swipeDirection = getSwipeDirection(this.state.touchObject, this.props.verticalSwiping);
     var touchSwipeLength = touchObject.swipeLength;
 
     if (this.props.infinite === false) {
@@ -284,7 +284,7 @@ var EventHandlers = {
     }
     var touchObject = this.state.touchObject;
     var minSwipe = this.state.listWidth/this.props.touchThreshold;
-    var swipeDirection = swipeDirection(touchObject, this.props.verticalSwiping);
+    var swipeDirection = getSwipeDirection(touchObject, this.props.verticalSwiping);
 
     if (this.props.verticalSwiping) {
       minSwipe = this.state.listHeight/this.props.touchThreshold;
