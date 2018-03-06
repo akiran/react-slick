@@ -190,7 +190,7 @@ var helpers = {
       this.setState({
         animating: true,
         currentSlide: animationTargetSlide
-      }, function () {
+      }, () => {
         if (this.props.asNavFor && this.props.asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide) {
           this.props.asNavFor.innerSlider.slideHandler(index)
         }
@@ -319,7 +319,7 @@ var helpers = {
         animating: true,
         currentSlide: finalTargetSlide,
         trackStyle: getTrackAnimateCSS(assign({left: animationTargetLeft}, this.props, this.state))
-      }, function () {
+      }, () => {
         if (this.props.asNavFor && this.props.asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide) {
           this.props.asNavFor.innerSlider.slideHandler(index)
         }
