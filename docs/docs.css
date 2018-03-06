@@ -1,5 +1,16 @@
+/* 
+@import "foundation-apps/scss/foundation.scss";
+
+$slick-font-path: "/fonts/";
+$slick-arrow-color: $primary-color; */
+
+/* 
+@import "slick-carousel/slick/slick.scss";
+@import "slick-carousel/slick/slick-theme.scss";
+@import "./style.scss"; */
+
 h3 {
-  background: $primary-color;
+  background: #00558B;
   color: #fff;
   font-size: 36px;
   line-height: 100px;
@@ -9,7 +20,7 @@ h3 {
   text-align: center;
 }
 .variable-width .slick-slide p {
-  background: $primary-color;
+  background: #00558B;
   height: 100px;
   color: #fff;
   margin: 5px;
@@ -49,18 +60,16 @@ h3 {
 }
 .slick-thumb {
   bottom: -45px;
-  li {
-    width: 60px;
-    height: 45px;
-    img {
-      filter: grayscale(100%);
-    }
-    &.slick-active {
-      img {
-        filter: grayscale(0%);        
-      }
-    }
-  }
+}
+.slick-thumb li {
+  width: 60px;
+  height: 45px;
+}
+.slick-thumb li img {
+  filter: grayscale(100%);
+}
+.slick-thumb li img.slick-active img{
+    filter: grayscale(0%);        
 }
 @media (max-width: 768px) {
   h3 {
@@ -81,11 +90,6 @@ h3 {
     transition: all 300ms ease;
   }
 }
-// just like in the regular library, we cannot simply have a vertical
-// slider fill available space like in the horizontal case
-//
-// we have to therefore set the height of a slide in a vertical slider
-// explicitly in CSS or otherwise
 .slick-vertical .slick-slide {
   height: 180px;
 }
