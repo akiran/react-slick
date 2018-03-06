@@ -4,6 +4,7 @@ import helpers from './helpers';
 import assign from 'object-assign';
 import ReactDOM from 'react-dom';
 import { siblingDirection } from '../utils/trackUtils'
+import { getWidth, getHeight } from '../utils/innerSliderUtils'
 
 var EventHandlers = {
   // Event handler for previous and next
@@ -249,12 +250,12 @@ var EventHandlers = {
 
       Array.from(slides).every((slide) => {
         if (!this.props.vertical) {
-          if (slide.offsetLeft - centerOffset + (this.getWidth(slide) / 2) > this.state.swipeLeft * -1) {
+          if (slide.offsetLeft - centerOffset + (getWidth(slide) / 2) > this.state.swipeLeft * -1) {
             swipedSlide = slide;
             return false;
           }
         } else {
-          if (slide.offsetTop + (this.getHeight(slide) / 2) > this.state.swipeLeft * -1) {
+          if (slide.offsetTop + (getHeight(slide) / 2) > this.state.swipeLeft * -1) {
             swipedSlide = slide;
             return false;
           }

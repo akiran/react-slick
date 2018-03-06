@@ -45,3 +45,7 @@ export const slidesOnRight = spec => (
   ? Math.floor((spec.slidesToShow - 1) / 2) + 1 + (parseInt(spec.centerPadding) > 0 ? 1 : 0)
   : spec.slidesToShow
 )
+
+export const getWidth = elem => elem && elem.offsetWidth || 0
+
+export const getHeight = elem => elem && elem.offsetHeight || 0

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
-import { getOnDemandLazySlides } from '../utils/innerSliderUtils'
+import { getOnDemandLazySlides, getWidth, getHeight } from '../utils/innerSliderUtils'
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -12,8 +12,8 @@ var helpers = {
     const slickList = ReactDOM.findDOMNode(this.list);
 
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(slickList);
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
+    var listWidth = getWidth(slickList);
+    var trackWidth = getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth;
 
     if (!props.vertical) {
@@ -21,12 +21,12 @@ var helpers = {
       if (props.centerPadding.slice(-1) === '%') {
         centerPaddingAdj *= listWidth / 100
       }
-      slideWidth = Math.ceil((this.getWidth(slickList) - centerPaddingAdj)/props.slidesToShow)
+      slideWidth = Math.ceil((getWidth(slickList) - centerPaddingAdj)/props.slidesToShow)
     } else {
-      slideWidth = Math.ceil(this.getWidth(slickList))
+      slideWidth = Math.ceil(getWidth(slickList))
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -58,8 +58,8 @@ var helpers = {
     // This method has mostly same code as initialize method.
     // Refactor it
     var slideCount = React.Children.count(props.children);
-    var listWidth = this.getWidth(slickList);
-    var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
+    var listWidth = getWidth(slickList);
+    var trackWidth = getWidth(ReactDOM.findDOMNode(this.track));
     var slideWidth;
 
     if (!props.vertical) {
@@ -67,12 +67,12 @@ var helpers = {
       if (props.centerPadding.slice(-1) === '%') {
         centerPaddingAdj *= listWidth / 100
       }
-      slideWidth = Math.ceil((this.getWidth(slickList) - centerPaddingAdj)/props.slidesToShow)
+      slideWidth = Math.ceil((getWidth(slickList) - centerPaddingAdj)/props.slidesToShow)
     } else {
-      slideWidth = Math.ceil(this.getWidth(slickList))
+      slideWidth = Math.ceil(getWidth(slickList))
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
@@ -106,12 +106,6 @@ var helpers = {
 
       this.setState({trackStyle: trackStyle});
     });
-  },
-  getWidth: function getWidth(elem) {
-    return elem.offsetWidth || 0;
-  },
-  getHeight(elem) {
-    return elem.offsetHeight || 0;
   },
   adaptHeight: function () {
     if (this.props.adaptiveHeight) {
