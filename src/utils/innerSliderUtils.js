@@ -6,7 +6,7 @@ export const getOnDemandLazySlides = spec => {
   @TODO: call onLazyLoad event here
   */
   let onDemandSlides = []
-  // you might wanna use trackUtils functions for this
+  // you might wanna use trackUtils functions for it
   let startIndex = lazyStartIndex(spec)
   let endIndex = lazyEndIndex(spec)
 
@@ -49,3 +49,30 @@ export const slidesOnRight = spec => (
 export const getWidth = elem => elem && elem.offsetWidth || 0
 
 export const getHeight = elem => elem && elem.offsetHeight || 0
+
+export const swipeDirection = (touchObject, verticalSwiping=false) => {
+  var xDist, yDist, r, swipeAngle;
+  xDist = touchObject.startX - touchObject.curX;
+  yDist = touchObject.startY - touchObject.curY;
+  r = Math.atan2(yDist, xDist);
+  swipeAngle = Math.round(r * 180 / Math.PI);
+  if (swipeAngle < 0) {
+      swipeAngle = 360 - Math.abs(swipeAngle);
+  }
+  if ((swipeAngle <= 45) && (swipeAngle >= 0) || (swipeAngle <= 360) && (swipeAngle >= 315)) {
+      return 'left';
+  }
+  if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
+      return 'right';
+  }
+  if (verticalSwiping === true) {
+    if ((swipeAngle >= 35) && (swipeAngle <= 135)) {
+      return 'down';
+    } else {
+      return 'up';
+    }
+  }
+
+  return 'vertical';
+
+}
