@@ -246,6 +246,7 @@ export var InnerSlider = createReactClass({
       onMouseEnter: this.onInnerSliderEnter,
       onMouseLeave: this.onInnerSliderLeave,
       onMouseOver: this.onInnerSliderOver,
+      dir: 'ltr',
     }
 
     if (this.props.unslick) {
