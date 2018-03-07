@@ -79,6 +79,7 @@ var EventHandlers = {
   },
   // invoked when swiping/dragging starts (just once)
   swipeStart: function (e) {
+    e.preventDefault()
     var touches, posX, posY;
 
     // the condition after or looked redundant
