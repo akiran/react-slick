@@ -79,7 +79,9 @@ var EventHandlers = {
   },
   // invoked when swiping/dragging starts (just once)
   swipeStart: function (e) {
-    e.preventDefault()
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault()
+    }
     var touches, posX, posY;
 
     // the condition after or looked redundant
