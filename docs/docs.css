@@ -39,7 +39,16 @@ h3 {
 .content {
   padding: 20px;
   margin: auto;
-  width: 90%;
+}
+@media (min-width: 701px) {
+  .content {
+    width: 80%;
+  }
+}
+@media (max-width: 700px) {
+  .content {
+    width: 70%;
+  }
 }
 .slick-slide .image {
   padding: 10px;
@@ -48,6 +57,7 @@ h3 {
   border: 5px solid #FFF;
   display: block;
   margin: auto;
+  max-width: 80%;
 }
 .slick-slide img.slick-loading {
   border: 0
