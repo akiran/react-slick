@@ -98,7 +98,7 @@ Props            | Type            | Default Value                   | Descripti
 `autoplay`       | `bool`          | `false`                         |                                                             | Yes
 `autoplaySpeed`  | `int`           | `3000`                          | Delay between each auto scroll (in milliseconds)            | Yes
 `centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
-`centerPadding`  |                 | `'50px'`                        |                                                             | Yes
+`centerPadding`  | `string`        | `'50px'`                        |                                                             | Yes
 `cssEase`        |                 | `'ease'`                        |                                                             | Yes
 `customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)| Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
