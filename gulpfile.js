@@ -17,6 +17,12 @@ gulp.task('clean', function () {
 gulp.task('copy', function () {
   gulp.src('./docs/index.html')
     .pipe(gulp.dest('./build'));
+  gulp.src('./docs/docs.css')
+    .pipe(gulp.dest('./build'));
+  gulp.src('./docs/slick.css')
+    .pipe(gulp.dest('./build'));
+  gulp.src('./docs/slick-theme.css')
+    .pipe(gulp.dest('./build'));
   gulp.src('./docs/img/**/*')
       .pipe(gulp.dest('./build/img'));
   gulp.src('./node_modules/slick-carousel/slick/fonts/*')
