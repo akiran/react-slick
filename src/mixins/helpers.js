@@ -53,7 +53,7 @@ var helpers = {
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
   },
-  update: function (props) {
+  update: function (props, recursionLevel=0) {
     const slickList = ReactDOM.findDOMNode(this.list);
     // This method has mostly same code as initialize method.
     // Refactor it
@@ -96,7 +96,11 @@ var helpers = {
       listHeight,
       lazyLoadedList: prevLazyLoadedList.concat(slidesToLoad)
     }, function () {
-
+      if (!slideWidth) {
+        if (recursionLevel < 2) {
+          this.update(this.props, recursionLevel + 1)
+        }
+      }
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
