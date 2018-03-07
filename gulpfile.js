@@ -40,9 +40,12 @@ gulp.task('sass', function () {
 gulp.task('watch', ['copy', 'sass'], function () {
   gulp.watch(['./docs/**/*.{scss,sass}'], ['sass']);
   gulp.watch(['./docs/index.html'], ['copy']);
+  gulp.watch(['./docs/docs.css'], ['copy']);
+  gulp.watch(['./docs/slick.css'], ['copy']);
+  gulp.watch(['./docs/slick-theme.css'], ['copy']);
 });
 
-gulp.task('server', ['copy', 'sass'], function (callback) {
+gulp.task('server', ['watch', 'copy', 'sass'], function (callback) {
   var myConfig = require('./webpack.config');
   myConfig.plugins = myConfig.plugins.concat(
     new webpack.DefinePlugin({
