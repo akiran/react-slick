@@ -98,6 +98,12 @@ h3 {
 .slick-arrow {
   background-color: grey;
 }
+.slick-arrow:hover {
+  background-color: grey;
+}
+.slick-arrow:focus {
+  background-color: grey;
+}
 .button {
   background-color: #00558B;
   padding: 10px 20px;
