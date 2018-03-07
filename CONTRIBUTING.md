@@ -39,7 +39,7 @@ You can also reach us at hello@react-slick.opencollective.com.
 ### Contributors
 
 Thank you to all the people who have already contributed to react-slick!
-<a href="graphs/contributors"><img src="https://opencollective.com/react-slick/contributors.svg?width=890" /></a>
+<a href="https://github.com/akiran/react-slick/graphs/contributors"><img src="https://opencollective.com/react-slick/contributors.svg?width=890" /></a>
 
 
 ### Backers
