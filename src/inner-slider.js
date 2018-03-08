@@ -93,6 +93,12 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidUpdate: function () {
+    let images = document.querySelectorAll('.slick-slide img')
+    images.forEach(image => {
+      if (!image.onload) {
+        image.onload = () => this.update(this.props)
+      }
+    })
     if (this.props.reInit) {
       this.props.reInit()
     }
