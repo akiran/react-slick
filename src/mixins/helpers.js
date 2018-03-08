@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
-import { getOnDemandLazySlides, getWidth, getHeight } from '../utils/innerSliderUtils'
+import { getOnDemandLazySlides, getWidth, getHeight, canGoNext } from '../utils/innerSliderUtils'
 
 var helpers = {
   // supposed to start autoplay of slides
@@ -120,24 +120,6 @@ var helpers = {
         slickList.style.height = (elem.offsetHeight || 0) + 'px';
       }
     }
-  },
-  canGoNext: function (opts){
-    var canGo = true;
-    if (!opts.infinite) {
-      if (opts.centerMode) {
-        // check if current slide is last slide
-        if (opts.currentSlide >= (opts.slideCount - 1)) {
-          canGo = false;
-        }
-      } else {
-        // check if all slides are shown in slider
-        if (opts.slideCount <= opts.slidesToShow ||
-          opts.currentSlide >= (opts.slideCount - opts.slidesToShow)) {
-          canGo = false;
-        }
-      }
-    }
-    return canGo;
   },
   slideHandler: function (index) {
     // index is target slide index
@@ -338,7 +320,7 @@ var helpers = {
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
     } else {
-      if (this.canGoNext(Object.assign({}, this.props,this.state))) {
+      if (canGoNext(Object.assign({}, this.props,this.state))) {
         nextIndex = this.state.currentSlide + this.props.slidesToScroll;
       } else {
         return false;
