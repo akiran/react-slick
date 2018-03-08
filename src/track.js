@@ -42,6 +42,10 @@ var getSlideClasses = (spec) => {
 var getSlideStyle = function (spec) {
   var style = {};
 
+  if (spec.unslick) {
+    return style
+  }
+
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
     style.width = spec.slideWidth;
   }
@@ -89,7 +93,7 @@ var renderSlides = function (spec) {
     }
     var childStyle = getSlideStyle(assign({}, spec, {index: index}));
     const slideClass = child.props.className || ''
-    
+
     // push a cloned element of the desired slide
     slides.push(React.cloneElement(child, {
       key: 'original' + getKey(child, index),
@@ -104,7 +108,7 @@ var renderSlides = function (spec) {
         }
       }
     }));
-    
+
     // if slide needs to be precloned or postcloned
     if (spec.infinite && spec.fade === false) {
       let preCloneNo = childrenCount - index
@@ -128,7 +132,7 @@ var renderSlides = function (spec) {
           }
         }));
       }
-      
+
       if (childrenCount !== spec.slidesToShow) {
         key = childrenCount + index;
         if (key < endIndex) {
