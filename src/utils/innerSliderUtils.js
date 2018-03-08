@@ -1,15 +1,9 @@
 
-// Following function expects props and states from InnerSlider component
-// and returns a list of slides that need to be loaded in order to complete the list frame
+// return list of slides that need to be loaded and are not in lazyLoadedList
 export const getOnDemandLazySlides = spec => {
-  /*
-  @TODO: call onLazyLoad event here
-  */
   let onDemandSlides = []
-  // you might wanna use trackUtils functions for it
   let startIndex = lazyStartIndex(spec)
   let endIndex = lazyEndIndex(spec)
-
   for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
     if (spec.lazyLoadedList.indexOf(slideIndex) < 0) {
       onDemandSlides.push(slideIndex)
@@ -18,6 +12,7 @@ export const getOnDemandLazySlides = spec => {
   return onDemandSlides
 }
 
+// return list of slides that need to be present
 export const getRequiredLazySlides = spec => {
   let requiredSlides = []
   let startIndex = lazyStartIndex(spec)
@@ -29,27 +24,32 @@ export const getRequiredLazySlides = spec => {
 
 }
 
+// startIndex that needs to be present
 export const lazyStartIndex = spec => spec.currentSlide - slidesOnLeft(spec)
-export const lazyEndIndex = spec => spec.currentSlide + slidesOnRight(spec) // endIndex is exclusive
+// endIndex that needs to be present but is exclusive
+export const lazyEndIndex = spec => spec.currentSlide + slidesOnRight(spec)
 
-// may be compared with trackutils equivalents for betterment
+// no of slides on left of current in active frame
 export const slidesOnLeft = spec => (
   spec.centerMode
     ? Math.floor(spec.slidesToShow / 2) + (parseInt(spec.centerPadding) > 0 ? 1 : 0) 
     : 0
 )
 
-// may be compared with trackutils equivalents for betterment
+// no of slides on right of current in active frame
 export const slidesOnRight = spec => (
   spec.centerMode
   ? Math.floor((spec.slidesToShow - 1) / 2) + 1 + (parseInt(spec.centerPadding) > 0 ? 1 : 0)
   : spec.slidesToShow
 )
 
+// get width of an element
 export const getWidth = elem => elem && elem.offsetWidth || 0
 
+// get height of an element
 export const getHeight = elem => elem && elem.offsetHeight || 0
 
+// in case of swipe event, get direction of the swipe event
 export const getSwipeDirection = (touchObject, verticalSwiping=false) => {
   var xDist, yDist, r, swipeAngle;
   xDist = touchObject.startX - touchObject.curX;
@@ -77,6 +77,7 @@ export const getSwipeDirection = (touchObject, verticalSwiping=false) => {
 
 }
 
+// whether or not we can go next
 export const canGoNext = spec => {
   let canGo = true
   if (!spec.infinite) {
@@ -90,8 +91,10 @@ export const canGoNext = spec => {
   return canGo
 }
 
+// given an object and a list of keys, return new object with given keys
 export const extractObject = (spec, keys) => {
   let newObject = {}
   keys.forEach( key => newObject[key] = spec[key])
   return newObject
 }
+
