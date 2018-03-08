@@ -8,7 +8,7 @@ import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
-import { getOnDemandLazySlides } from './utils/innerSliderUtils'
+import { getOnDemandLazySlides, extractObject } from './utils/innerSliderUtils'
 
 import { Track } from './track';
 import { Dots } from './dots';
@@ -146,62 +146,27 @@ export var InnerSlider = createReactClass({
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
     });
-
-    var trackProps = {
-      fade: this.props.fade,
-      cssEase: this.props.cssEase,
-      speed: this.props.speed,
-      infinite: this.props.infinite,
-      centerMode: this.props.centerMode,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null,
-      currentSlide: this.state.currentSlide,
-      lazyLoad: this.props.lazyLoad,
-      lazyLoadedList: this.state.lazyLoadedList,
-      rtl: this.props.rtl,
-      slideWidth: this.state.slideWidth,
-      slideHeight: this.state.slideHeight,
-      listHeight: this.state.listHeight,
-      vertical: this.props.vertical,
-      slidesToShow: this.props.slidesToShow,
-      slidesToScroll: this.props.slidesToScroll,
-      slideCount: this.state.slideCount,
-      trackStyle: this.state.trackStyle,
-      variableWidth: this.props.variableWidth,
-      unslick: this.props.unslick,
-      centerPadding: this.props.centerPadding
-    };
+    let spec = assign({}, this.props, this.state)
+    let trackProps = extractObject(spec, [
+      'fade', 'cssEase', 'speed', 'infinite', 'centerMode', 'focusOnSelect',
+      'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth',
+      'slideHeight', 'listHeight', 'vertical', 'slidesToShow', 'slidesToScroll',
+      'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding' ])
+    trackProps.focusOnSelect = this.props.focusOnSelect? this.selectHandler: null
 
     var dots;
-
     if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
-      var dotProps = {
-        dotsClass: this.props.dotsClass,
-        slideCount: this.state.slideCount,
-        slidesToShow: this.props.slidesToShow,
-        currentSlide: this.state.currentSlide,
-        slidesToScroll: this.props.slidesToScroll,
-        clickHandler: this.changeSlide,
-        children: this.props.children,
-        customPaging: this.props.customPaging,
-        infinite: this.props.infinite,
-        appendDots: this.props.appendDots
-      };
-
+      let dotProps = extractObject(spec, [
+        'dotsClass', 'slideCount', 'slidesToShow', 'currentSlide', 'slidesToScroll',
+        'clickHandler', 'children', 'customPaging', 'infinite', 'appendDots' ])
+      dotProps.clickHandler = this.changeSlide
       dots = (<Dots {...dotProps} />);
     }
 
     var prevArrow, nextArrow;
-
-    var arrowProps = {
-      infinite: this.props.infinite,
-      centerMode: this.props.centerMode,
-      currentSlide: this.state.currentSlide,
-      slideCount: this.state.slideCount,
-      slidesToShow: this.props.slidesToShow,
-      prevArrow: this.props.prevArrow,
-      nextArrow: this.props.nextArrow,
-      clickHandler: this.changeSlide
-    };
+    let arrowProps = extractObject(spec, ['infinite', 'centerMode', 'currentSlide',
+      'slideCount', 'slidesToShow', 'prevArrow', 'nextArrow'])
+    arrowProps.clickHandler = this.changeSlide
 
     if (this.props.arrows) {
       prevArrow = (<PrevArrow {...arrowProps} />);

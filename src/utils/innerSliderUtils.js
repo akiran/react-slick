@@ -89,3 +89,9 @@ export const canGoNext = spec => {
   }
   return canGo
 }
+
+export const extractObject = (spec, keys) => {
+  let newObject = {}
+  keys.forEach( key => newObject[key] = spec[key])
+  return newObject
+}
