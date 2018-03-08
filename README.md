@@ -106,7 +106,7 @@ Props            | Type            | Default Value                   | Descripti
 `appendDots`     | `func`          | `dots => <ul>{dots}</ul>`       | Custom dots templates. Works same as customPaging           | Yes
 `draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
 `easing`         | `string`        | `'linear'`                      |                                                             | Yes
-`edgeEvent`      | `func`          | `null`                          | Edge dragged event in finite case, `direction => {...}`
+`edgeEvent`      | `func`          | `null`                          | Edge dragged event in finite case, `direction => {...}`     | Yes
 `fade`           | `bool`          | `Default`                       |                                                             | Yes
 `focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
