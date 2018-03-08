@@ -2,6 +2,23 @@
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
 
+
+## 0.20.0
+
+**Release Changes**
+
+- handled responsive breakpoint collision
+- renamed autoPlayTimer to autoplayTimer and removed it from state
+- changed es5 module.exports with es6 export default in src/index
+- implemented slider syncing with asNavFor prop
+- made all the slides untabbable
+- implemented getSlick method as in slick
+- implemented slickGetOption method
+- implemented lazyLoaded event
+- implemented reInit event
+- implemented onSwipe event and documented edgeEvent
+
+
 ## 0.19.0
 
 **Release Changes**
