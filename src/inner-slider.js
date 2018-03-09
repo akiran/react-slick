@@ -8,7 +8,8 @@ import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
-import { getOnDemandLazySlides, extractObject } from './utils/innerSliderUtils'
+import { getOnDemandLazySlides, extractObject, initializedState } from './utils/innerSliderUtils'
+import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
 import { Dots } from './dots';
@@ -44,9 +45,20 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidMount: function componentDidMount() {
-    // Hack for autoplay -- Inspect Later
-    this.initialize(this.props);
-    this.adaptHeight();
+    const spec = assign({listRef: this.list, trackRef: this.track}, this.props)
+    let initialState = initializedState(spec)
+    this.setState( initialState, () => {
+      let targetLeft = getTrackLeft(assign(
+        {slideIndex: this.state.currentSlide, trackRef: this.track},
+        this.props, this.state
+      ))
+      let trackStyle = getTrackCSS(assign(
+        {left: targetLeft}, this.props, this.state
+      ))
+      this.setState({ trackStyle })
+      this.adaptHeight()
+      this.autoPlay()  // it doesn't have to be here
+    })
 
     // To support server-side rendering
     if (!window) {
