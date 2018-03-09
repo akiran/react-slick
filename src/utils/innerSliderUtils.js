@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 // return list of slides that need to be loaded and are not in lazyLoadedList
 export const getOnDemandLazySlides = spec => {
@@ -106,7 +108,7 @@ export const initializedState = spec => {
   let trackWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.trackRef)))
   let slideWidth
   if (!spec.vertical) {
-    let centerPaddingAdj = spec.centerMode && parseInt(props.centerPadding) * 2
+    let centerPaddingAdj = spec.centerMode && parseInt(spec.centerPadding) * 2
     if (typeof spec.centerPadding === 'string' &&
       spec.centerPadding.slice(-1) === '%') {
       centerPaddingAdj *= listWidth / 100
@@ -118,10 +120,16 @@ export const initializedState = spec => {
   let slideHeight = getHeight(
     ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
   )
-  listHeight = slideHeight * spec.slidesToShow
-  let currentSlide = spec.initialSlide
-  if (spec.rtl) currentSlide = slideCount - 1 - spec.initialSlide
+  let listHeight = slideHeight * spec.slidesToShow
+  let currentSlide = spec.currentSlide || spec.initialSlide
+  if (spec.rtl && !spec.currentSlide) {
+    currentSlide = slideCount - 1 - spec.initialSlide
+  }
+  let lazyLoadedList = spec.lazyLoadedList || []
+  let slidesToLoad = getOnDemandLazySlides({currentSlide, lazyLoadedList}, spec)
+  lazyLoadedList.concat(slidesToLoad)
+  
   return { slideCount, slideWidth, listWidth, trackWidth, currentSlide, 
-  slideHeight, listHeight }
+  slideHeight, listHeight, lazyLoadedList }
 }
 

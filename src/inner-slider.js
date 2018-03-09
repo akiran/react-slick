@@ -84,16 +84,24 @@ export var InnerSlider = createReactClass({
     }
   },
   componentWillReceiveProps: function (nextProps) {
+    let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
+    let updatedState = initializedState(spec)
     if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
-      this.update(nextProps);
       this.changeSlide({
         message: 'index',
         index: React.Children.count(nextProps.children) - nextProps.slidesToShow,
         currentSlide: this.state.currentSlide
       });
-    } else {
-      this.update(nextProps);
     }
+    this.setState(updatedState, () => {
+      let targetLeft = getTrackLeft(assign({slideIndex: spec.currentSlide}, spec))
+      let trackStyle = getTrackCSS(assign({left:targetLeft}, nextProps, this.state))
+      this.setState({ trackStyle })
+      // the following doesn't have to be this way
+      if (!nextProps.autoplay) this.pause()
+      else this.autoPlay(nextProps.autoplay)
+    })
+    // this.update(nextProps);
   },
   componentDidUpdate: function () {
     let images = document.querySelectorAll('.slick-slide img')
