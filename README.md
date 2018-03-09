@@ -132,7 +132,6 @@ Props            | Type            | Default Value                   | Descripti
 `reInit`         | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
-`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            | Yes
 
 
 ### Methods
