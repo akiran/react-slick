@@ -86,22 +86,24 @@ export var InnerSlider = createReactClass({
   componentWillReceiveProps: function (nextProps) {
     let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
     let updatedState = initializedState(spec)
-    if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
-      this.changeSlide({
-        message: 'index',
-        index: React.Children.count(nextProps.children) - nextProps.slidesToShow,
-        currentSlide: this.state.currentSlide
-      });
-    }
+    // update the state, track, and change the slide if need be
     this.setState(updatedState, () => {
-      let targetLeft = getTrackLeft(assign({slideIndex: spec.currentSlide}, spec))
       let trackStyle = getTrackCSS(assign({left:targetLeft}, nextProps, this.state))
-      this.setState({ trackStyle })
+      let targetLeft = getTrackLeft(assign({slideIndex: spec.currentSlide}, spec))
+      this.setState({ trackStyle }, () => {
+        // in case quantity of slides change
+        if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
+          this.changeSlide({
+            message: 'index',
+            index: React.Children.count(nextProps.children) - nextProps.slidesToShow,
+            currentSlide: this.state.currentSlide
+          });
+        }
+      })
       // the following doesn't have to be this way
       if (!nextProps.autoplay) this.pause()
       else this.autoPlay(nextProps.autoplay)
     })
-    // this.update(nextProps);
   },
   componentDidUpdate: function () {
     let images = document.querySelectorAll('.slick-slide img')
