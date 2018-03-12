@@ -46,13 +46,13 @@ export var InnerSlider = createReactClass({
   },
   componentDidMount: function componentDidMount() {
     let spec = assign({listRef: this.list, trackRef: this.track}, this.props)
-    let initialState = initializedState(spec)
-    assign(spec, {slideIndex: initialState.currentSlide}, initialState)
+    let initState = initializedState(spec)
+    assign(spec, {slideIndex: initState.currentSlide}, initState)
     let targetLeft = getTrackLeft(spec)
     assign(spec, {left: targetLeft})
     let trackStyle = getTrackCSS(spec)
-    initialState['trackStyle'] = trackStyle
-    this.setState( initialState, () => {
+    initState['trackStyle'] = trackStyle
+    this.setState( initState, () => {
       this.adaptHeight()
       this.autoPlay()  // it doesn't have to be here
     })
