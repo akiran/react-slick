@@ -60,7 +60,7 @@ export var InnerSlider = createReactClass({
     initState['trackStyle'] = trackStyle
     this.setState( initState, () => {
       this.adaptHeight()
-      this.autoPlay()  // it doesn't have to be here
+      this.props.autoplay && this.autoPlay()
     })
 
     // To support server-side rendering
@@ -105,9 +105,11 @@ export var InnerSlider = createReactClass({
           currentSlide: this.state.currentSlide
         });
       }
-      // the following doesn't have to be this way
-      if (!nextProps.autoplay) this.pause()
-      else this.autoPlay(nextProps.autoplay)
+      if (nextProps.autoplay) {
+        this.autoPlay()
+      } else {
+        this.pause()
+      }
     })
   },
   componentDidUpdate: function () {

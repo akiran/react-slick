@@ -123,7 +123,6 @@ var helpers = {
         this.props.beforeChange(this.state.currentSlide, animationTargetSlide);
       }
 
-      this.autoPlay();
       return;
     }
 
@@ -249,15 +248,9 @@ var helpers = {
 
     }
 
-    this.autoPlay();
   },
   play: function(){
     var nextIndex;
-
-    // if (!this.state.mounted) {
-    //   return false
-    // }
-
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
     } else {
@@ -270,17 +263,16 @@ var helpers = {
 
     this.slideHandler(nextIndex);
   },
-  autoPlay: function (autoplay=false) {
+  autoPlay: function () {
     if (this.autoplayTimer) {
-      clearTimeout(this.autoplayTimer)
+      console.warn("autoPlay is triggered more than once")
+      clearInterval(this.autoplayTimer)
     }
-    if (autoplay || this.props.autoplay) {
-      this.autoplayTimer = setTimeout(this.play, this.props.autoplaySpeed)
-    }
+    this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed)
   },
   pause: function () {
     if (this.autoplayTimer) {
-      clearTimeout(this.autoplayTimer)
+      clearInterval(this.autoplayTimer)
       this.autoplayTimer = null
     }
   }
