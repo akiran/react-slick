@@ -87,7 +87,10 @@ export var InnerSlider = createReactClass({
     let targetLeft = getTrackLeft(spec)
     assign(spec, {left: targetLeft})
     let trackStyle = getTrackCSS(spec)
-    updatedState['trackStyle'] = trackStyle
+    // not setting trackStyle in other cases because no prop change can trigger slideChange
+    if (React.Children.count(this.props.children) !== React.Children.count(nextProps.children)) {
+      updatedState['trackStyle'] = trackStyle
+    }
     this.setState(updatedState, () => {
       if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
         this.changeSlide({

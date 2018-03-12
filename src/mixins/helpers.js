@@ -246,7 +246,6 @@ var helpers = {
           delete this.animationEndCallback;
         });
       };
-
       this.setState({
         animating: true,
         currentSlide: finalTargetSlide,
