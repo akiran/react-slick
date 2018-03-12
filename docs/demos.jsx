@@ -30,13 +30,11 @@ import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
 import AsNavFor from '../examples/AsNavFor'
 import AppendDots from '../examples/AppendDots'
-import BeforeChangeSetState from '../examples/BeforeChangeSetState'
 
 export default class App extends React.Component {
   render() {
     return (
       <div className='content'>
-        <BeforeChangeSetState />
         <SimpleSlider />
         <MultipleItems />
         <Responsive />
