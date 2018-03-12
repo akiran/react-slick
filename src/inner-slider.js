@@ -45,17 +45,14 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidMount: function componentDidMount() {
-    const spec = assign({listRef: this.list, trackRef: this.track}, this.props)
+    let spec = assign({listRef: this.list, trackRef: this.track}, this.props)
     let initialState = initializedState(spec)
+    assign(spec, {slideIndex: initialState.currentSlide}, initialState)
+    let targetLeft = getTrackLeft(spec)
+    assign(spec, {left: targetLeft})
+    let trackStyle = getTrackCSS(spec)
+    initialState['trackStyle'] = trackStyle
     this.setState( initialState, () => {
-      let targetLeft = getTrackLeft(assign(
-        {slideIndex: this.state.currentSlide, trackRef: this.track},
-        this.props, this.state
-      ))
-      let trackStyle = getTrackCSS(assign(
-        {left: targetLeft}, this.props, this.state
-      ))
-      this.setState({ trackStyle })
       this.adaptHeight()
       this.autoPlay()  // it doesn't have to be here
     })
@@ -86,20 +83,19 @@ export var InnerSlider = createReactClass({
   componentWillReceiveProps: function (nextProps) {
     let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
     let updatedState = initializedState(spec)
-    // update the state, track, and change the slide if need be
+    assign(spec, {slideIndex: updatedState.currentSlide}, updatedState)
+    let targetLeft = getTrackLeft(spec)
+    assign(spec, {left: targetLeft})
+    let trackStyle = getTrackCSS(spec)
+    updatedState['trackStyle'] = trackStyle
     this.setState(updatedState, () => {
-      let trackStyle = getTrackCSS(assign({left:targetLeft}, nextProps, this.state))
-      let targetLeft = getTrackLeft(assign({slideIndex: spec.currentSlide}, spec))
-      this.setState({ trackStyle }, () => {
-        // in case quantity of slides change
-        if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
-          this.changeSlide({
-            message: 'index',
-            index: React.Children.count(nextProps.children) - nextProps.slidesToShow,
-            currentSlide: this.state.currentSlide
-          });
-        }
-      })
+      if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
+        this.changeSlide({
+          message: 'index',
+          index: React.Children.count(nextProps.children) - nextProps.slidesToShow,
+          currentSlide: this.state.currentSlide
+        });
+      }
       // the following doesn't have to be this way
       if (!nextProps.autoplay) this.pause()
       else this.autoPlay(nextProps.autoplay)
