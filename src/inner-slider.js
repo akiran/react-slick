@@ -8,7 +8,7 @@ import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
-import { getOnDemandLazySlides, extractObject, initializedState } from './utils/innerSliderUtils'
+import { getOnDemandLazySlides, extractObject, initializedState, getHeight } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
@@ -24,6 +24,12 @@ export var InnerSlider = createReactClass({
   },
   trackRefHandler: function (ref) {
     this.track = ref;
+  },
+  adaptHeight: function () {
+    if (this.props.adaptiveHeight && this.list) {
+      const elem = this.list.querySelector(`[data-index="${this.state.currentSlide}"]`)
+      this.list.style.height = getHeight(elem) + 'px'
+    }
   },
   getInitialState: function () {
     return Object.assign({}, initialState, {

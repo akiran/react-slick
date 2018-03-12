@@ -63,16 +63,6 @@ var helpers = {
       this.setState({trackStyle: trackStyle});
     });
   },
-  adaptHeight: function () {
-    if (this.props.adaptiveHeight) {
-      var selector = '[data-index="' + this.state.currentSlide +'"]';
-      if (this.list) {
-        var slickList = ReactDOM.findDOMNode(this.list);
-        var elem = slickList.querySelector(selector) || {};
-        slickList.style.height = (elem.offsetHeight || 0) + 'px';
-      }
-    }
-  },
   slideHandler: function (index) {
     // index is target slide index
     // Functionality of animateSlide and postSlide is merged into this function
