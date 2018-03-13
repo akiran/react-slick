@@ -53,17 +53,10 @@ export var InnerSlider = createReactClass({
   },
   componentDidMount: function componentDidMount() {
     let spec = assign({listRef: this.list, trackRef: this.track}, this.props)
-    let initState = initializedState(spec)
-    assign(spec, {slideIndex: initState.currentSlide}, initState)
-    let targetLeft = getTrackLeft(spec)
-    assign(spec, {left: targetLeft})
-    let trackStyle = getTrackCSS(spec)
-    initState['trackStyle'] = trackStyle
-    this.setState( initState, () => {
+    this.updateState(spec, true, () => {
       this.adaptHeight()
       this.props.autoplay && this.autoPlay()
     })
-
     // To support server-side rendering
     if (!window) {
       return
@@ -89,16 +82,7 @@ export var InnerSlider = createReactClass({
   },
   componentWillReceiveProps: function (nextProps) {
     let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
-    let updatedState = initializedState(spec)
-    assign(spec, {slideIndex: updatedState.currentSlide}, updatedState)
-    let targetLeft = getTrackLeft(spec)
-    assign(spec, {left: targetLeft})
-    let trackStyle = getTrackCSS(spec)
-    // not setting trackStyle in other cases because no prop change can trigger slideChange
-    if (React.Children.count(this.props.children) !== React.Children.count(nextProps.children)) {
-      updatedState['trackStyle'] = trackStyle
-    }
-    this.setState(updatedState, () => {
+    this.updateState(spec, false, () => {
       if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
         this.changeSlide({
           message: 'index',
@@ -133,13 +117,29 @@ export var InnerSlider = createReactClass({
     this.adaptHeight();
   },
   onWindowResized: function () {
-    this.update(this.props);
+    let spec = assign({listRef: this.list, trackRef: this.track}, this.props, this.state)
+    this.updateState(spec, false, () => {
+      if (this.props.autoplay) this.autoPlay()
+      else this.pause()
+    })
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
       animating: false
     });
     clearTimeout(this.animationEndCallback);
     delete this.animationEndCallback;
+  },
+  updateState: function (spec, setTrackStyle, callback) {
+    let updatedState = initializedState(spec)
+    assign(spec, {slideIndex: updatedState.currentSlide}, updatedState)
+    let targetLeft = getTrackLeft(spec)
+    assign(spec, {left: targetLeft})
+    let trackStyle = getTrackCSS(spec)
+    if (setTrackStyle || (React.Children.count(this.props.children) !==
+      React.Children.count(spec.children))) {
+      updatedState['trackStyle'] = trackStyle
+    }
+    this.setState( updatedState, callback )
   },
   checkImagesLoad: function () {
     let images = document.querySelectorAll('.slick-slide img')

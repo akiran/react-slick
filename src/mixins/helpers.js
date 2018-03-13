@@ -7,62 +7,6 @@ import assign from 'object-assign';
 import { getOnDemandLazySlides, getWidth, getHeight, canGoNext } from '../utils/innerSliderUtils'
 
 var helpers = {
-  update: function (props, recursionLevel=0) {
-    const slickList = ReactDOM.findDOMNode(this.list);
-    var slideCount = React.Children.count(props.children);
-    var listWidth = getWidth(slickList);
-    var trackWidth = getWidth(ReactDOM.findDOMNode(this.track));
-    var slideWidth;
-
-    if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      if (props.centerPadding.slice(-1) === '%') {
-        centerPaddingAdj *= listWidth / 100
-      }
-      slideWidth = Math.ceil((getWidth(slickList) - centerPaddingAdj)/props.slidesToShow)
-    } else {
-      slideWidth = Math.ceil(getWidth(slickList))
-    }
-
-    const slideHeight = getHeight(slickList.querySelector('[data-index="0"]'));
-    const listHeight = slideHeight * props.slidesToShow;
-
-    // pause slider if autoplay is set to false
-    if(!props.autoplay) {
-      this.pause();
-    } else {
-      this.autoPlay(props.autoplay);
-    }
-    
-    let slidesToLoad = getOnDemandLazySlides({}, this.props, this.state)
-    if (slidesToLoad.length > 0 && this.props.onLazyLoad) {
-      this.props.onLazyLoad(slidesToLoad)
-    }
-    let prevLazyLoadedList = this.state.lazyLoadedList
-    this.setState({
-      slideCount,
-      slideWidth,
-      listWidth,
-      trackWidth,
-      slideHeight,
-      listHeight,
-      lazyLoadedList: prevLazyLoadedList.concat(slidesToLoad)
-    }, function () {
-      if (!slideWidth) {
-        if (recursionLevel < 2) {
-          this.update(this.props, recursionLevel + 1)
-        }
-      }
-      var targetLeft = getTrackLeft(assign({
-        slideIndex: this.state.currentSlide,
-        trackRef: this.track
-      }, props, this.state));
-      // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
-
-      this.setState({trackStyle: trackStyle});
-    });
-  },
   slideHandler: function (index) {
     // index is target slide index
     // Functionality of animateSlide and postSlide is merged into this function
