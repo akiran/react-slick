@@ -195,7 +195,7 @@ export var InnerSlider = createReactClass({
       console.warn("autoPlay is triggered more than once")
       clearInterval(this.autoplayTimer)
     }
-    this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed)
+    this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed+50)
   },
   pause: function () {
     if (this.autoplayTimer) {
