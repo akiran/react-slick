@@ -114,12 +114,7 @@ export var InnerSlider = createReactClass({
     })
   },
   componentDidUpdate: function () {
-    let images = document.querySelectorAll('.slick-slide img')
-    images.forEach(image => {
-      if (!image.onload) {
-        image.onload = () => setTimeout(() => this.update(this.props), this.props.speed)
-      }
-    })
+    this.checkImagesLoad()
     if (this.props.reInit) {
       this.props.reInit()
     }
@@ -145,6 +140,24 @@ export var InnerSlider = createReactClass({
     });
     clearTimeout(this.animationEndCallback);
     delete this.animationEndCallback;
+  },
+  checkImagesLoad: function () {
+    let images = document.querySelectorAll('.slick-slide img')
+    let imagesCount = images.length,
+      loadedCount = 0
+    images.forEach(image => {
+      const handler = () => ++loadedCount &&
+          (loadedCount >= imagesCount) && this.onWindowResized()
+      if (!image.onload) {
+        if (this.props.lazyLoad) {
+          image.onload = () => this.adaptHeight() ||
+            setTimeout(this.onWindowResized, this.props.speed)
+        } else {
+          image.onload = handler
+          image.onerror = handler
+        }
+      }
+    })
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout
