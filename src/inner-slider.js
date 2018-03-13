@@ -8,7 +8,8 @@ import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
-import { getOnDemandLazySlides, extractObject, initializedState, getHeight } from './utils/innerSliderUtils'
+import { getOnDemandLazySlides, extractObject, initializedState, 
+  getHeight, canGoNext } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
@@ -161,6 +162,33 @@ export var InnerSlider = createReactClass({
       index: slide,
       currentSlide: this.state.currentSlide
     }), 0)
+  },
+  play: function(){
+    var nextIndex;
+    if (this.props.rtl) {
+      nextIndex = this.state.currentSlide - this.props.slidesToScroll;
+    } else {
+      if (canGoNext(Object.assign({}, this.props,this.state))) {
+        nextIndex = this.state.currentSlide + this.props.slidesToScroll;
+      } else {
+        return false;
+      }
+    }
+
+    this.slideHandler(nextIndex);
+  },
+  autoPlay: function () {
+    if (this.autoplayTimer) {
+      console.warn("autoPlay is triggered more than once")
+      clearInterval(this.autoplayTimer)
+    }
+    this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed)
+  },
+  pause: function () {
+    if (this.autoplayTimer) {
+      clearInterval(this.autoplayTimer)
+      this.autoplayTimer = null
+    }
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {

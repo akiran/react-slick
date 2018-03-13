@@ -249,33 +249,6 @@ var helpers = {
     }
 
   },
-  play: function(){
-    var nextIndex;
-    if (this.props.rtl) {
-      nextIndex = this.state.currentSlide - this.props.slidesToScroll;
-    } else {
-      if (canGoNext(Object.assign({}, this.props,this.state))) {
-        nextIndex = this.state.currentSlide + this.props.slidesToScroll;
-      } else {
-        return false;
-      }
-    }
-
-    this.slideHandler(nextIndex);
-  },
-  autoPlay: function () {
-    if (this.autoplayTimer) {
-      console.warn("autoPlay is triggered more than once")
-      clearInterval(this.autoplayTimer)
-    }
-    this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed)
-  },
-  pause: function () {
-    if (this.autoplayTimer) {
-      clearInterval(this.autoplayTimer)
-      this.autoplayTimer = null
-    }
-  }
 };
 
 export default helpers;
