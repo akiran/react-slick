@@ -9,7 +9,7 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, 
-  getHeight, canGoNext } from './utils/innerSliderUtils'
+  getHeight, canGoNext, changeSlideHelper} from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
@@ -17,7 +17,7 @@ import { Dots } from './dots';
 import { PrevArrow, NextArrow } from './arrows';
 
 export var InnerSlider = createReactClass({
-  mixins: [HelpersMixin, EventHandlersMixin],
+  mixins: [EventHandlersMixin],
   list: null, // wraps the track
   track: null, // component that rolls out like a film
   listRefHandler: function (ref) {
@@ -158,6 +158,29 @@ export var InnerSlider = createReactClass({
         }
       }
     })
+  },
+  slideHandler: function(index) {
+    const {
+      asNavFor, currentSlide, beforeChange, onLazyLoad, speed, afterChange
+    } = this.props
+    let {state, nextState} = changeSlideHelper(
+      {index, ...this.props, ...this.state, trackRef: this.track})
+    if (!state) return
+    beforeChange && beforeChange(currentSlide, state.currentSlide)
+    let slidesToLoad = state.lazyLoadedList.filter(value =>
+      this.state.lazyLoadedList.indexOf(value) < 0)
+    onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad)
+    this.setState(state, () => {
+      asNavFor && asNavFor.innerSlider.state.currentSlide !== currentSlide
+        && asnavFor.innerSlider.slideHandler(index)
+      this.animationEndCallback = setTimeout(() => {
+        this.setState(nextState, () => {
+          afterChange && afterChange(state.currentSlide)
+          delete this.animationEndCallback
+        })
+      }, speed)
+    })
+
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout

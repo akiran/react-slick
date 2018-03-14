@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+import { getTrackLeft, getTrackCSS, getTrackAnimateCSS } from '../mixins/trackHelper.js'
 // return list of slides that need to be loaded and are not in lazyLoadedList
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = []
@@ -133,3 +133,78 @@ export const initializedState = spec => {
   slideHeight, listHeight, lazyLoadedList }
 }
 
+export const changeSlideHelper = spec => {
+  const {waitForAnimate, animating, fade, infinite, index, slideCount,
+    lazyLoadedList, lazyLoad, onLazyLoad, asNavFor, currentSlide, speed,
+    centerMode, slidesToScroll, slidesToShow, useCSS
+  } = spec
+  if (waitForAnimate && animating) return {}
+  let animationSlide = index, finalSlide, animationLeft, finalLeft
+  let state = {}, nextState = {}
+  if (fade) {
+    if (!infinite && (index < 0 || index >= slideCount)) return {}
+    if (index < 0) {
+      animationSlide = index + slideCount
+    } else if (index >= slideCount) {
+      animationSlide = index - slideCount
+    }
+    if (lazyLoad && lazyLoadedList.indexOf(animationSlide) < 0) {
+      lazyLoadedList.push(animationSlide)
+      //onLazyLoad && onLazyLoad(animationSlide)
+    }
+    state = {
+      animating: true,
+      currentSlide: animationSlide,
+      lazyLoadedList
+    }
+    nextState = { animating: false }
+  } else {
+    finalSlide = animationSlide
+    if (animationSlide < 0) {
+      finalSlide = animationSlide + slideCount
+      if (!inifinite) finalSlide = 0
+      else if(slideCount % slidesToScroll !== 0)
+        finalSlide = slideCount - slideCount % slidesToScroll
+    } else if (centerMode && animationSlide >= slideCount) {
+      animationSlide = infinite ? slideCount : slideCount - 1
+      finalSlide = infinite ? 0 : slideCount - 1
+    } else if (animationSlide >= slideCount) {
+      finalSlide = animationSlide - slideCount
+      if (!infinite) finalSlide = slideCount - slidesToShow
+      else if(slideCount % slidesToScroll !== 0) finalSlide = 0
+    } else if (currentSlide + slidesToShow < slideCount &&
+      animationSlide + slidesToShow >= slideCount) {
+      if (!infinite || (slideCount - animationSlide) % slidesToScroll !== 0)
+        finalSlide = slideCount - slidesToShow
+    }
+    animationLeft = getTrackLeft({...spec, slideIndex: animationSlide})
+    finalLeft = getTrackLeft({...spec, slideIndex: finalSlide})
+    if (!infinite) {
+      if(animationLeft === finalLeft) animationSlide = finalSlide
+      animationLeft = finalLeft
+    }
+    lazyLoad && lazyLoadedList.concat(
+      getOnDemandLazySlides({...spec, currentSlide: animationSlide}))
+    if (!useCSS) {
+      state = {
+        currentSlide: finalSlide,
+        trackStyle: getTrackCSS({...spec, left: finalLeft}),
+        lazyLoadedList
+      }
+    } else {
+      state = {
+        animating: true,
+        currentSlide: finalSlide,
+        trackStyle: getTrackAnimateCSS({...spec, left: animationLeft}),
+        lazyLoadedList
+      }
+      nextState = {
+        animating: false,
+        currentSlide: finalSlide,
+        trackStyle: getTrackCSS({...spec, left: finalLeft}),
+        swipeLeft: null
+      }
+    }
+  }
+  return {state, nextState}
+}
