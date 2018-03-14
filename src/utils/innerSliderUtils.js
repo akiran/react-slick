@@ -121,8 +121,9 @@ export const initializedState = spec => {
     ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
   )
   let listHeight = slideHeight * spec.slidesToShow
-  let currentSlide = spec.currentSlide || spec.initialSlide
-  if (spec.rtl && !spec.currentSlide) {
+  let currentSlide = spec.currentSlide === undefined
+    ? spec.initialSlide : spec.currentSlide
+  if (spec.rtl && spec.currentSlide === undefined) {
     currentSlide = slideCount - 1 - spec.initialSlide
   }
   let lazyLoadedList = spec.lazyLoadedList || []
@@ -150,7 +151,6 @@ export const changeSlideHelper = spec => {
     }
     if (lazyLoad && lazyLoadedList.indexOf(animationSlide) < 0) {
       lazyLoadedList.push(animationSlide)
-      //onLazyLoad && onLazyLoad(animationSlide)
     }
     state = {
       animating: true,
@@ -162,7 +162,7 @@ export const changeSlideHelper = spec => {
     finalSlide = animationSlide
     if (animationSlide < 0) {
       finalSlide = animationSlide + slideCount
-      if (!inifinite) finalSlide = 0
+      if (!infinite) finalSlide = 0
       else if(slideCount % slidesToScroll !== 0)
         finalSlide = slideCount - slideCount % slidesToScroll
     } else if (centerMode && animationSlide >= slideCount) {
@@ -171,10 +171,11 @@ export const changeSlideHelper = spec => {
     } else if (animationSlide >= slideCount) {
       finalSlide = animationSlide - slideCount
       if (!infinite) finalSlide = slideCount - slidesToShow
-      else if(slideCount % slidesToScroll !== 0) finalSlide = 0
+      else if((slideCount % slidesToScroll) !== 0) finalSlide = 0
     } else if (currentSlide + slidesToShow < slideCount &&
       animationSlide + slidesToShow >= slideCount) {
-      if (!infinite || (slideCount - animationSlide) % slidesToScroll !== 0)
+      if (!infinite) finalSlide = slideCount - slidesToShow
+      else if ((slideCount - animationSlide) % slidesToScroll !== 0)
         finalSlide = slideCount - slidesToShow
     }
     animationLeft = getTrackLeft({...spec, slideIndex: animationSlide})
