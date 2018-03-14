@@ -8,7 +8,7 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, 
-  getHeight, canGoNext, changeSlideHelper} from './utils/innerSliderUtils'
+  getHeight, canGoNext, slideHandler, changeSlide} from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
@@ -162,7 +162,7 @@ export var InnerSlider = createReactClass({
     const {
       asNavFor, currentSlide, beforeChange, onLazyLoad, speed, afterChange
     } = this.props
-    let {state, nextState} = changeSlideHelper(
+    let {state, nextState} = slideHandler(
       {index, ...this.props, ...this.state, trackRef: this.track})
     if (!state) return
     beforeChange && beforeChange(currentSlide, state.currentSlide)
@@ -180,6 +180,12 @@ export var InnerSlider = createReactClass({
       }, speed)
     })
 
+  },
+  changeSlide: function(options) {
+    const spec = {...this.props, ...this.state}
+    let targetSlide = changeSlide(spec, options)
+    if (targetSlide !== 0 && !targetSlide) return
+    this.slideHandler(targetSlide)
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout

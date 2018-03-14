@@ -8,54 +8,6 @@ import { getWidth, getHeight, getSwipeDirection } from '../utils/innerSliderUtil
 var EventHandlers = {
   // Event handler for previous and next
   // gets called if slide is changed via arrows or dots but not swiping/dragging
-  changeSlide: function (options) {
-    var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
-    const {slidesToScroll, slidesToShow, centerMode, rtl} = this.props
-    const {slideCount, currentSlide} = this.state
-    unevenOffset = (slideCount % slidesToScroll !== 0);
-    indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
-
-    if (options.message === 'previous') {
-      slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
-      targetSlide = currentSlide - slideOffset;
-      if (this.props.lazyLoad && !this.props.infinite) {
-        previousInt = currentSlide - slideOffset;
-        targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
-      }
-    } else if (options.message === 'next') {
-      slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
-      targetSlide = currentSlide + slideOffset;
-      if (this.props.lazyLoad && !this.props.infinite) {
-        targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
-      }
-    } else if (options.message === 'dots') {
-      // Click on dots
-      targetSlide = options.index * options.slidesToScroll
-      if (targetSlide === options.currentSlide) {
-        return;
-      }
-    } else if (options.message === 'children') {
-      // Click on the slides
-      targetSlide = options.index
-      if (targetSlide === options.currentSlide) {
-        return
-      }
-      if (this.props.infinite) {
-        let direction = siblingDirection({currentSlide, targetSlide, slidesToShow, centerMode, slideCount, rtl})
-        if (targetSlide > options.currentSlide && direction === 'left') {
-          targetSlide = targetSlide - slideCount
-        } else if (targetSlide < options.currentSlide && direction === 'right') {
-          targetSlide = targetSlide + slideCount
-        }
-      }
-    } else if (options.message === 'index') {
-      targetSlide = Number(options.index);
-      if (targetSlide === options.currentSlide) {
-        return;
-      }
-    }
-    this.slideHandler(targetSlide);
-  },
 
   // Accessiblity handler for previous and next
   keyHandler: function (e) {

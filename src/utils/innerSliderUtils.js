@@ -134,7 +134,7 @@ export const initializedState = spec => {
   slideHeight, listHeight, lazyLoadedList }
 }
 
-export const changeSlideHelper = spec => {
+export const slideHandler = spec => {
   const {waitForAnimate, animating, fade, infinite, index, slideCount,
     lazyLoadedList, lazyLoad, onLazyLoad, asNavFor, currentSlide, speed,
     centerMode, slidesToScroll, slidesToShow, useCSS
@@ -203,4 +203,55 @@ export const changeSlideHelper = spec => {
     }
   }
   return {state, nextState}
+}
+
+export const changeSlide = (spec, options) => {
+  var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
+  const {
+    slidesToScroll, slidesToShow, centerMode, rtl, slideCount, currentSlide,
+    lazyLoad, infinite
+  } = spec
+  unevenOffset = (slideCount % slidesToScroll !== 0);
+  indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
+
+  if (options.message === 'previous') {
+    slideOffset = (indexOffset === 0) ? slidesToScroll : slidesToShow - indexOffset;
+    targetSlide = currentSlide - slideOffset;
+    if (lazyLoad && !infinite) {
+      previousInt = currentSlide - slideOffset;
+      targetSlide = previousInt === -1 ? slideCount -1 : previousInt;
+    }
+  } else if (options.message === 'next') {
+    slideOffset = (indexOffset === 0) ? slidesToScroll : indexOffset;
+    targetSlide = currentSlide + slideOffset;
+    if (lazyLoad && !infinite) {
+      targetSlide = ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
+    }
+  } else if (options.message === 'dots') {
+    // Click on dots
+    targetSlide = options.index * options.slidesToScroll
+    if (targetSlide === options.currentSlide) {
+      return null
+    }
+  } else if (options.message === 'children') {
+    // Click on the slides
+    targetSlide = options.index
+    if (targetSlide === options.currentSlide) {
+      return null
+    }
+    if (infinite) {
+      let direction = siblingDirection({currentSlide, targetSlide, slidesToShow, centerMode, slideCount, rtl})
+      if (targetSlide > options.currentSlide && direction === 'left') {
+        targetSlide = targetSlide - slideCount
+      } else if (targetSlide < options.currentSlide && direction === 'right') {
+        targetSlide = targetSlide + slideCount
+      }
+    }
+  } else if (options.message === 'index') {
+    targetSlide = Number(options.index);
+    if (targetSlide === options.currentSlide) {
+      return null
+    }
+  }
+  return targetSlide
 }
