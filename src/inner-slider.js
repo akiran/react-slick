@@ -2,7 +2,6 @@
 
 import React from 'react';
 import EventHandlersMixin from './mixins/event-handlers';
-import HelpersMixin from './mixins/helpers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import createReactClass from 'create-react-class';

@@ -1,6 +1,5 @@
 'use strict';
 import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
-import helpers from './helpers';
 import assign from 'object-assign';
 import ReactDOM from 'react-dom';
 import { siblingDirection } from '../utils/trackUtils'
