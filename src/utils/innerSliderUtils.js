@@ -172,11 +172,6 @@ export const changeSlideHelper = spec => {
       finalSlide = animationSlide - slideCount
       if (!infinite) finalSlide = slideCount - slidesToShow
       else if((slideCount % slidesToScroll) !== 0) finalSlide = 0
-    } else if (currentSlide + slidesToShow < slideCount &&
-      animationSlide + slidesToShow >= slideCount) {
-      if (!infinite) finalSlide = slideCount - slidesToShow
-      else if ((slideCount - animationSlide) % slidesToScroll !== 0)
-        finalSlide = slideCount - slidesToShow
     }
     animationLeft = getTrackLeft({...spec, slideIndex: animationSlide})
     finalLeft = getTrackLeft({...spec, slideIndex: finalSlide})
