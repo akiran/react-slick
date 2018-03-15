@@ -7,101 +7,101 @@ import { getWidth, getHeight, getSwipeDirection } from '../utils/innerSliderUtil
 
 var EventHandlers = {
   // continuous invokation while swiping/dragging is going on
-  swipeMove: function (e) {
-    if (!this.state.dragging) {
-      e.preventDefault();
-      return;
-    }
-    if (this.state.scrolling) {
-      return;
-    }
-    if (this.state.animating) {
-      e.preventDefault();
-      return;
-    }
-    if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
-      e.preventDefault();
-    }
-    var swipeLeft;
-    var curLeft, positionOffset;
-    var touchObject = this.state.touchObject;
+  //swipeMove: function (e) {
+    //if (!this.state.dragging) {
+      //e.preventDefault();
+      //return;
+    //}
+    //if (this.state.scrolling) {
+      //return;
+    //}
+    //if (this.state.animating) {
+      //e.preventDefault();
+      //return;
+    //}
+    //if (this.props.vertical && this.props.swipeToSlide && this.props.verticalSwiping) {
+      //e.preventDefault();
+    //}
+    //var swipeLeft;
+    //var curLeft, positionOffset;
+    //var touchObject = this.state.touchObject;
 
-    curLeft = getTrackLeft(assign({
-      slideIndex: this.state.currentSlide,
-      trackRef: this.track
-    }, this.props, this.state));
-    touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
-    touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
-    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
-    var verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
+    //curLeft = getTrackLeft(assign({
+      //slideIndex: this.state.currentSlide,
+      //trackRef: this.track
+    //}, this.props, this.state));
+    //touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
+    //touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
+    //touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
+    //var verticalSwipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2)));
 
-    if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 10) {
-      this.setState({
-        scrolling: true
-      })
-      return;
-    }
+    //if (!this.props.verticalSwiping && !this.state.swiping && verticalSwipeLength > 10) {
+      //this.setState({
+        //scrolling: true
+      //})
+      //return;
+    //}
 
-    if (this.props.verticalSwiping) {
-      touchObject.swipeLength = verticalSwipeLength;
-    }
+    //if (this.props.verticalSwiping) {
+      //touchObject.swipeLength = verticalSwipeLength;
+    //}
 
-    positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+    //positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
 
-    if (this.props.verticalSwiping) {
-      positionOffset = touchObject.curY > touchObject.startY ? 1 : -1;
-    }
+    //if (this.props.verticalSwiping) {
+      //positionOffset = touchObject.curY > touchObject.startY ? 1 : -1;
+    //}
 
-    var currentSlide = this.state.currentSlide;
-    var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll); // this might not be correct, using getDotCount may be more accurate
-    var swipeDirection = getSwipeDirection(this.state.touchObject, this.props.verticalSwiping);
-    var touchSwipeLength = touchObject.swipeLength;
+    //var currentSlide = this.state.currentSlide;
+    //var dotCount = Math.ceil(this.state.slideCount / this.props.slidesToScroll); // this might not be correct, using getDotCount may be more accurate
+    //var swipeDirection = getSwipeDirection(this.state.touchObject, this.props.verticalSwiping);
+    //var touchSwipeLength = touchObject.swipeLength;
 
-    if (this.props.infinite === false) {
-      if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
-        touchSwipeLength = touchObject.swipeLength * this.props.edgeFriction;
+    //if (this.props.infinite === false) {
+      //if ((currentSlide === 0 && swipeDirection === 'right') || (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
+        //touchSwipeLength = touchObject.swipeLength * this.props.edgeFriction;
 
-        if (this.state.edgeDragged === false && this.props.edgeEvent) {
-          this.props.edgeEvent(swipeDirection);
-          this.setState({ edgeDragged: true });
-        }
-      }
-    }
-    if (this.state.swiped === false && this.props.swipeEvent) {
-      this.props.swipeEvent(swipeDirection);
-      this.setState({ swiped: true });
-    }
+        //if (this.state.edgeDragged === false && this.props.edgeEvent) {
+          //this.props.edgeEvent(swipeDirection);
+          //this.setState({ edgeDragged: true });
+        //}
+      //}
+    //}
+    //if (this.state.swiped === false && this.props.swipeEvent) {
+      //this.props.swipeEvent(swipeDirection);
+      //this.setState({ swiped: true });
+    //}
 
-    if (!this.props.vertical) {
-      if (!this.props.rtl) {
-        swipeLeft = curLeft + touchSwipeLength * positionOffset;
-      }
-      else {
-        swipeLeft = curLeft - touchSwipeLength * positionOffset;
-      }
-    } else {
-      swipeLeft = curLeft + (touchSwipeLength * (this.state.listHeight / this.state.listWidth)) * positionOffset;
-    }
+    //if (!this.props.vertical) {
+      //if (!this.props.rtl) {
+        //swipeLeft = curLeft + touchSwipeLength * positionOffset;
+      //}
+      //else {
+        //swipeLeft = curLeft - touchSwipeLength * positionOffset;
+      //}
+    //} else {
+      //swipeLeft = curLeft + (touchSwipeLength * (this.state.listHeight / this.state.listWidth)) * positionOffset;
+    //}
 
-    if (this.props.verticalSwiping) {
-      swipeLeft = curLeft + touchSwipeLength * positionOffset;
-    }
+    //if (this.props.verticalSwiping) {
+      //swipeLeft = curLeft + touchSwipeLength * positionOffset;
+    //}
 
-    this.setState({
-      touchObject: touchObject,
-      swipeLeft: swipeLeft,
-      trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
-    });
+    //this.setState({
+      //touchObject: touchObject,
+      //swipeLeft: swipeLeft,
+      //trackStyle: getTrackCSS(assign({left: swipeLeft}, this.props, this.state))
+    //});
 
-    if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
-      { return; }
-    if (touchObject.swipeLength > 10) {
-      this.setState({
-        swiping: true
-      })
-      e.preventDefault();
-    }
-  },
+    //if (Math.abs(touchObject.curX - touchObject.startX) < Math.abs(touchObject.curY - touchObject.startY) * 0.8)
+      //{ return; }
+    //if (touchObject.swipeLength > 10) {
+      //this.setState({
+        //swiping: true
+      //})
+      //e.preventDefault();
+    //}
+  //},
   getNavigableIndexes() {
     let max;
     let breakPoint = 0;

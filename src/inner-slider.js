@@ -8,7 +8,7 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
-  canGoNext, slideHandler, changeSlide, keyHandler, swipeStart
+  canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove
 } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
@@ -198,6 +198,16 @@ export var InnerSlider = createReactClass({
   swipeStart: function(e) {
     let state = swipeStart(e, this.props.swipe, this.props.draggable)
     state !== '' && this.setState(state)
+  },
+  swipeMove: function(e) {
+    let state = swipeMove(e, {
+      ...this.props,
+      ...this.state,
+      trackRef: this.track,
+      slideIndex: this.state.currentSlide
+    })
+    if (!state) return
+    this.setState(state)
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout

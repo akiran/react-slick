@@ -277,3 +277,72 @@ export const swipeStart = (e, swipe, draggable) => {
     }
   }
 }
+export const swipeMove = (e, spec) => {
+  // spec also contains, trackRef and slideIndex
+  const {scrolling, animating, vertical, swipeToSlide, verticalSwiping,
+    rtl, currentSlide, edgeFriction, edgeDragged, edgeEvent, swiped, swiping,
+    slideCount, slidesToScroll, infinite, touchObject, swipeEvent, listHeight,
+    listWidth
+  } = spec
+  if (scrolling) return
+  if (animating) return e.preventDefault()
+  if (vertical && swipeToSlide && verticalSwiping) e.preventDefault()
+  let swipeLeft, state = {}
+  let curLeft = getTrackLeft(spec)
+  touchObject.curX = e.touches ? e.touches[0].pageX : e.clientX
+  touchObject.curY = e.touches ? e.touches[0].pageY : e.clientY
+  touchObject.swipeLength = Math.round(Math.sqrt(
+    Math.pow(touchObject.curX - touchObject.startX, 2)))
+  let verticalSwipeLength = Math.round(Math.sqrt(
+    Math.pow(touchObject.curY - touchObject.startY, 2)))
+  if (!verticalSwiping && !swiping && verticalSwipeLength > 10) {
+    return {scrolling: true}
+  }
+  if (verticalSwiping) touchObject.swipeLength = verticalSwipeLength
+  let positionOffset = (!rtl ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1)
+  if (verticalSwiping)
+    positionOffset = touchObject.curY > touchObject.startY ? 1 : -1;
+
+  let dotCount = Math.ceil(slideCount / slidesToScroll)
+  let swipeDirection = getSwipeDirection(spec.touchObject, verticalSwiping)
+  let touchSwipeLength = touchObject.swipeLength
+  if (!infinite) {
+    if ((currentSlide === 0 && swipeDirection === 'right') ||
+      (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
+      touchSwipeLength = touchObject.swipeLength * edgeFriction
+      if (edgeDragged === false && edgeEvent) {
+        edgeEvent(swipeDirection)
+        state['edgeDragged'] = true
+      }
+    }
+  }
+  if (!swiped && swipeEvent) {
+    swipeEvent(swipeDirection)
+    state['swiped'] = true
+  }
+  if (!vertical) {
+    if (!rtl) {
+      swipeLeft = curLeft + touchSwipeLength * positionOffset;
+    } else {
+      swipeLeft = curLeft - touchSwipeLength * positionOffset;
+    }
+  } else {
+    swipeLeft = curLeft + (touchSwipeLength * (listHeight / listWidth)) * positionOffset;
+  }
+  if (verticalSwiping) {
+    swipeLeft = curLeft + touchSwipeLength * positionOffset
+  }
+  state = {
+    ...state,
+    touchObject,
+    swipeLeft,
+    trackStyle: getTrackCSS({...spec, left: swipeLeft})
+  }
+  if (Math.abs(touchObject.curX - touchObject.startX) <
+    Math.abs(touchObject.curY - touchObject.startY) * 0.8) return
+  if (touchObject.swipeLength > 10) {
+    state['swiping'] = true
+    e.preventDefault()
+  }
+  return state
+}
