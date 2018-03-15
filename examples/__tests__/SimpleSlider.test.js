@@ -4,9 +4,6 @@ import SimpleSlider from '../SimpleSlider';
 import { repeatClicks } from '../../test-helpers';
 import { html as beautify_html } from 'js-beautify'
 
-import { getReactSlickDetails } from '../../__tests__/reactSlickUtils'
-import { getJQuerySlickDetails } from '../../__tests__/jQSlickUtils'
-
 describe('Simple Slider', function () {
   it('should have 13 slides (1(preclone) + 6(actual) + 6(postclone))', function () {
     const wrapper = mount(<SimpleSlider />);
@@ -96,61 +93,3 @@ describe("Simple Slider Snapshots", function () {
   })
 });
 
-export function testWithParams(settings, actions, keys) {
-  let reactDetails = getReactSlickDetails(settings, actions, keys)
-  let jQueryDetails = getJQuerySlickDetails(settings, actions, keys)
-  test('currentSlide', () => {
-    expect(reactDetails.currentSlide).toEqual(jQueryDetails.currentSlide)
-  })
-  test('activeSlides', () => {
-    expect(reactDetails.activeSlides).toEqual(jQueryDetails.activeSlides)
-  })
-  test('allSlides', () => {
-    expect(reactDetails.allSlides).toEqual(jQueryDetails.allSlides)
-  })
-  test('activeSlides', () => {
-    expect(reactDetails.clonedSlides).toEqual(jQueryDetails.clonedSlides)
-  })
-}
-
-describe('Simple Slider React Vs jQuery', () => {
-  
-  let settings = {
-    noOfSlides: 5,
-    infinite: true,
-    speed: 0,
-    useCSS: false,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  }
-  let actions = {}
-  let keys = {
-    currentSlide: true,
-    activeSlides: true,
-    clonedSlides: true,
-    allSlides: true,
-    visibleSlides: true
-  }
-
-  // first section
-  testWithParams(settings, actions, keys)
-
-  // second section
-  actions = {
-    clickNext: 6
-  }
-  testWithParams(settings, actions, keys)
-
-  // third section
-  actions = {
-    clickPrev: 6
-  }
-  testWithParams(settings, actions, keys)
-
-  // fourth section
-  actions = {
-    clickSequence: 'nnpnnnnppnnnnnn'
-  }
-  testWithParams(settings, actions, keys)
-
-})
