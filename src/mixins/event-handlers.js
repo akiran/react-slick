@@ -6,31 +6,6 @@ import { siblingDirection } from '../utils/trackUtils'
 import { getWidth, getHeight, getSwipeDirection } from '../utils/innerSliderUtils'
 
 var EventHandlers = {
-  // invoked when swiping/dragging starts (just once)
-  swipeStart: function (e) {
-    if (e.target.tagName === 'IMG') {
-      e.preventDefault()
-    }
-    var touches, posX, posY;
-
-    // the condition after or looked redundant
-    if ((this.props.swipe === false)) { // || ('ontouchend' in document && this.props.swipe === false)) {
-      return;
-    } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
-      return;
-    }
-    posX = (e.touches !== undefined) ? e.touches[0].pageX : e.clientX;
-    posY = (e.touches !== undefined) ? e.touches[0].pageY : e.clientY;
-    this.setState({
-      dragging: true,
-      touchObject: {
-        startX: posX,
-        startY: posY,
-        curX: posX,
-        curY: posY
-      }
-    });
-  },
   // continuous invokation while swiping/dragging is going on
   swipeMove: function (e) {
     if (!this.state.dragging) {

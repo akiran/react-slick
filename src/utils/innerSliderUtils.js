@@ -264,3 +264,16 @@ export const keyHandler = (e, accessibility, rtl) => {
   return ''
 }
 
+export const swipeStart = (e, swipe, draggable) => {
+  e.target.tagName === 'IMG' && e.preventDefault()
+  if (!swipe || (!draggable && e.type.indexOf('mouse') !== -1)) return ''
+  return {
+    dragging: true,
+    touchObject: {
+      startX: e.touches ? e.touches[0].pageX : e.clientX,
+      startY: e.touches ? e.touches[0].pageY : e.clientY,
+      curX: e.touches ? e.touches[0].pageX : e.clientX,
+      curY: e.touches ? e.touches[0].pageY : e.clientY
+    }
+  }
+}
