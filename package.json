@@ -65,6 +65,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
+    "resize-observer-polyfill": "^1.5.0",
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.3",
     "sinon": "^2.1.0",

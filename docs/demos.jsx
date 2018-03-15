@@ -7,6 +7,7 @@ import SimpleSlider from '../examples/SimpleSlider'
 import SlideChangeHooks from '../examples/SlideChangeHooks'
 import MultipleItems from '../examples/MultipleItems'
 import Responsive from '../examples/Responsive'
+import ResponsiveElement from '../examples/ResponsiveElement'
 import UnevenSetsInfinite from '../examples/UnevenSetsInfinite'
 import UnevenSetsFinite from '../examples/UnevenSetsFinite'
 import CenterMode from '../examples/CenterMode'
@@ -37,6 +38,7 @@ export default class App extends React.Component {
         <SimpleSlider />
         <MultipleItems />
         <Responsive />
+        <ResponsiveElement />
         <UnevenSetsInfinite />
         <UnevenSetsFinite />
         <CenterMode />

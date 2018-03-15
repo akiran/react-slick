@@ -9,6 +9,7 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 import { getOnDemandLazySlides } from './utils/innerSliderUtils'
+import ResizeObserver from 'resize-observer-polyfill';
 
 import { Track } from './track';
 import { Dots } from './dots';
@@ -42,6 +43,12 @@ export var InnerSlider = createReactClass({
         }
       }
     }
+    // console.log('inner-slider ====> componentWillMount resizeElement', this.props.resizeElement);
+    if (this.props.resizeElement) {
+      this.ro = new ResizeObserver((...rest) => {
+        this.onResized()
+      })
+    }
   },
   componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
@@ -52,20 +59,30 @@ export var InnerSlider = createReactClass({
     if (!window) {
       return
     }
-    if (window.addEventListener) {
-      window.addEventListener('resize', this.onWindowResized);
+    // check element and observer
+    const isObserveElement = this.ro && typeof this.ro.observer === 'function' && this.props.resizeElement;
+    if (isObserveElement) {
+      this.ro.observer(this.props.responsiveElement); // register element for observer
+    } else if (window.addEventListener) {
+      window.addEventListener('resize', this.onResized);
     } else {
-      window.attachEvent('onresize', this.onWindowResized);
+      window.attachEvent('onresize', this.onResized);
     }
+    this.onResized(); // initial resize
   },
   componentWillUnmount: function componentWillUnmount() {
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
     }
+    const isObserveElement = this.ro && typeof this.ro.unobserver === 'function' && this.props.resizeElement;
+
+    if (isObserveElement) {
+      this.ro.unobserver(this.props.responsiveElement);
+    }
     if (window.addEventListener) {
-      window.removeEventListener('resize', this.onWindowResized);
+      window.removeEventListener('resize', this.onResized);
     } else {
-      window.detachEvent('onresize', this.onWindowResized);
+      window.detachEvent('onresize', this.onResized);
     }
     if (this.state.autoPlayTimer) {
       clearInterval(this.state.autoPlayTimer);
@@ -92,7 +109,7 @@ export var InnerSlider = createReactClass({
       this.update(nextProps);
     }
   },
-  componentDidUpdate: function () {
+  componentDidUpdate: function (oldProps) {
     if (this.props.reInit) {
       this.props.reInit()
     }
@@ -109,8 +126,13 @@ export var InnerSlider = createReactClass({
     //   this.props.onLazyLoad([leftMostSlide])
     // }
     this.adaptHeight();
+
+    // initial resize
+    if (this.props.resizeElement !== oldProps.resizeElement) {
+      this.onResized();
+    }
   },
-  onWindowResized: function () {
+  onResized: function () {
     this.update(this.props);
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
@@ -118,6 +140,9 @@ export var InnerSlider = createReactClass({
     });
     clearTimeout(this.animationEndCallback);
     delete this.animationEndCallback;
+    if (this.props.resizeElement) { // responsiveElement resize handler from observer
+      this.props.elementResizeHandler(this.props.responsiveElement.clientWidth);
+    }
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout

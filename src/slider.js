@@ -16,44 +16,48 @@ export default class Slider extends React.Component {
       breakpoint: null
     };
     this._responsiveMediaHandlers = [];
+    this.resizeElement = false;
   }
 
   innerSliderRefHandler = ref => this.innerSlider = ref
 
-  media(query, handler) {
+  elementResizeHandler = (size) => {
+    this._responsiveMediaHandlers.some(media => {
+      const { query, handler, point } = media;
+      if (query.minWidth >= 0 && query.maxWidth) {
+        if (size > query.minWidth && size <= query.maxWidth) {
+          if (this.state.breakpoint != point) {
+            handler();
+          }
+          return true;
+        }
+      } else if (query.minWidth >= 0) {
+        if (size > query.minWidth) {
+          if (this.state.breakpoint != point) {
+            handler();
+          }
+          return true;;
+        }
+      }
+    });
+  }
+
+  media(query, handler, point) {
     // javascript handler for  css media query
-    enquire.register(query, handler);
-    this._responsiveMediaHandlers.push({query, handler});
+    if (!this.resizeElement) {
+      enquire.register(query, handler);
+    }
+    this._responsiveMediaHandlers.push({query, handler, point});
   }
   
-  // handles responsive breakpoints
   componentWillMount() {
-    if (this.props.responsive) {
-      let breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
-      // sort them in increasing order of their numerical value
-      breakpoints.sort((x, y) => x - y);
+    this.parseResponsive(); // handle responsive
+  }
 
-      breakpoints.forEach((breakpoint, index) => {
-        // media query for each breakpoint
-        let bQuery;
-        if (index === 0) {
-          bQuery = json2mq({minWidth: 0, maxWidth: breakpoint});
-        } else {
-          bQuery = json2mq({minWidth: breakpoints[index-1] + 1, maxWidth: breakpoint});
-        }
-        // when not using server side rendering
-        canUseDOM && this.media(bQuery, () => {
-          this.setState({breakpoint: breakpoint});
-        })
-      });
-
-      // Register media query for full screen. Need to support resize from small to large
-      // convert javascript object to media query string
-      let query = json2mq({minWidth: breakpoints.slice(-1)[0]});
-
-      canUseDOM && this.media(query, () => {
-        this.setState({breakpoint: null});
-      });
+  componentWillUpdate(nextProps) {
+    // if responsiveElement ref no initialized on first render
+    if (this.props.responsiveElement !== nextProps.responsiveElement) {
+      this.parseResponsive(nextProps);
     }
   }
 
@@ -61,6 +65,55 @@ export default class Slider extends React.Component {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
     });
+  }
+
+  // handles responsive breakpoints
+  parseResponsive(props = this.props) {
+    this._responsiveMediaHandlers = [];
+    if (props.responsive) {
+      this.resizeElement = props.responsiveElement && props.responsiveElement instanceof HTMLElement;
+
+      let breakpoints = props.responsive.map(breakpt => breakpt.breakpoint);
+      // sort them in increasing order of their numerical value
+      breakpoints.sort((x, y) => x - y);
+
+      breakpoints.forEach((breakpoint, index) => {
+        // media query for each breakpoint
+        let mediaProps;
+        if (index === 0) {
+          mediaProps = {minWidth: 0, maxWidth: breakpoint};
+        } else {
+          mediaProps = {minWidth: breakpoints[index - 1], maxWidth: breakpoint};
+        }
+
+        if (this.resizeElement) { // responsiveElementMedia
+          canUseDOM && this.media(mediaProps, () => {
+            this.setState({ breakpoint: breakpoint });
+          }, breakpoint);
+        } else {
+          const bQuery = json2mq(mediaProps);
+          // when not using server side rendering
+          canUseDOM && this.media(bQuery, () => {
+            this.setState({breakpoint: breakpoint});
+          }, breakpoint)
+        }
+      });
+
+      // Register media query for full screen. Need to support resize from small to large
+      // convert javascript object to media query string
+      const mediaProps = {minWidth: breakpoints.slice(-1)[0]};
+      if (this.resizeElement) { // responsiveElementMedia
+        canUseDOM && this.media(mediaProps, () => {
+          this.setState({ breakpoint: null });
+        }, null);
+      } else {
+        let query = json2mq(mediaProps);
+
+        canUseDOM && this.media(query, () => {
+          this.setState({breakpoint: null});
+        });
+      }
+    }
   }
 
   slickPrev = () => this.innerSlider.slickPrev()
@@ -123,6 +176,11 @@ export default class Slider extends React.Component {
       settings.unslick = true
       settings.slidesToShow = children.length
     }
+    
+    // responsiveElement props
+    settings.resizeElement = this.resizeElement;
+    settings.elementResizeHandler = this.elementResizeHandler;
+
     return (
       <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
         {children}
