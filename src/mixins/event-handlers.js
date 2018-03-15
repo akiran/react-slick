@@ -6,28 +6,6 @@ import { siblingDirection } from '../utils/trackUtils'
 import { getWidth, getHeight, getSwipeDirection } from '../utils/innerSliderUtils'
 
 var EventHandlers = {
-  // Event handler for previous and next
-  // gets called if slide is changed via arrows or dots but not swiping/dragging
-
-  // Accessiblity handler for previous and next
-  //keyHandler: function (e) {
-    ////Dont slide if the cursor is inside the form fields and arrow keys are pressed
-    //if(!e.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
-        //if (e.keyCode === 37 && this.props.accessibility === true) {
-            //this.changeSlide({
-              //message: this.props.rtl === true ? 'next' :  'previous'
-            //});
-        //} else if (e.keyCode === 39 && this.props.accessibility === true) {
-            //this.changeSlide({
-              //message: this.props.rtl === true ? 'previous' : 'next'
-            //});
-        //}
-    //}
-  //},
-  // Focus on selecting a slide (click handler on track)
-  selectHandler: function (options) {
-    this.changeSlide(options)
-  },
   // invoked when swiping/dragging starts (just once)
   swipeStart: function (e) {
     if (e.target.tagName === 'IMG') {

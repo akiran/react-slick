@@ -190,8 +190,10 @@ export var InnerSlider = createReactClass({
   },
   keyHandler: function(e) {
     let dir = keyHandler(e, this.props.accessibility, this.props.rtl)
-    console.log('it\'s working:', dir)
     dir !== '' && this.changeSlide({ message: dir })
+  },
+  selectHandler: function(options) {
+    this.changeSlide(options)
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout

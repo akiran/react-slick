@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { getTrackLeft, getTrackCSS, getTrackAnimateCSS } from '../mixins/trackHelper.js'
+import { siblingDirection } from '../utils/trackUtils'
 // return list of slides that need to be loaded and are not in lazyLoadedList
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = []
@@ -262,3 +263,4 @@ export const keyHandler = (e, accessibility, rtl) => {
   if (e.keyCode === 39) return rtl ? 'previous' : 'next'
   return ''
 }
+
