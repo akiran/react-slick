@@ -8,8 +8,7 @@ import classnames from 'classnames';
 import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove, 
-  swipeEnd
-} from './utils/innerSliderUtils'
+  swipeEnd } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
@@ -115,7 +114,7 @@ export class InnerSlider extends React.Component {
   }
   onWindowResized = () => {
     let spec = assign({listRef: this.list, trackRef: this.track}, this.props, this.state)
-    this.updateState(spec, false, () => {
+    this.updateState(spec, true, () => {
       if (this.state.autoplaying === 'playing') this.autoPlay()
       else this.pause()
     })
