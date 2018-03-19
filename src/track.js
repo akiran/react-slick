@@ -3,8 +3,7 @@
 import React from 'react';
 import assign from 'object-assign';
 import classnames from 'classnames';
-import { getPreClones } from './utils/trackUtils';
-import { lazyStartIndex, lazyEndIndex } from './utils/innerSliderUtils'
+import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils'
 
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide

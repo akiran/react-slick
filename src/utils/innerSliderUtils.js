@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { siblingDirection } from '../utils/trackUtils'
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = []
@@ -29,19 +28,6 @@ export const getRequiredLazySlides = spec => {
 // startIndex that needs to be present
 export const lazyStartIndex = spec => spec.currentSlide - slidesOnLeft(spec)
 export const lazyEndIndex = spec => spec.currentSlide + slidesOnRight(spec)
-export const slidesOnLeft = spec => (
-  spec.centerMode
-    ? Math.floor(spec.slidesToShow / 2) + (parseInt(spec.centerPadding) > 0 ? 1 : 0) 
-    : 0
-)
-
-// no of slides on right of current in active frame
-export const slidesOnRight = spec => (
-  spec.centerMode
-  ? Math.floor((spec.slidesToShow - 1) / 2) + 1 + (parseInt(spec.centerPadding) > 0 ? 1 : 0)
-  : spec.slidesToShow
-)
-
 // get width of an element
 export const getWidth = elem => elem && elem.offsetWidth || 0
 export const getHeight = elem => elem && elem.offsetHeight || 0
@@ -239,7 +225,7 @@ export const changeSlide = (spec, options) => {
       return null
     }
     if (infinite) {
-      let direction = siblingDirection({currentSlide, targetSlide, slidesToShow, centerMode, slideCount, rtl})
+      let direction = siblingDirection(spec)
       if (targetSlide > options.currentSlide && direction === 'left') {
         targetSlide = targetSlide - slideCount
       } else if (targetSlide < options.currentSlide && direction === 'right') {
@@ -583,4 +569,64 @@ export const getTrackLeft = spec => {
   }
 
   return targetLeft;
+}
+
+
+export const getPreClones = spec => {
+  if(spec.unslick || !spec.infinite) {
+    return 0
+  }
+  if (spec.variableWidth) {
+    return spec.slideCount
+  }
+  return spec.slidesToShow + (spec.centerMode ? 1 : 0)
+}
+
+
+export const getPostClones = spec => {
+  if (spec.unslick || !spec.infinite) {
+    return 0
+  }
+  return spec.slideCount
+}
+
+export const getTotalSlides = spec => spec.slideCount === 1 ? 1 : getPreClones(spec) + spec.slideCount + getPostClones(spec)
+export const siblingDirection = (spec) => {
+  if (spec.targetSlide > spec.currentSlide) {
+    if (spec.targetSlide > spec.currentSlide + slidesOnRight(spec)) {
+      return 'left'
+    }
+    return 'right'
+  } else {
+    if (spec.targetSlide < spec.currentSlide - slidesOnLeft(spec)) {
+      return 'right'
+    }
+    return 'left'
+  }
+}
+
+export const slidesOnRight = ({ slidesToShow, centerMode, rtl, centerPadding }) => {
+  // returns no of slides on the right of active slide
+  if (centerMode) {
+    let right = (slidesToShow - 1) / 2 + 1 
+    if (parseInt(centerPadding) > 0) right += 1
+    if (rtl && slidesToShow % 2 === 0) right += 1
+    return right
+  }
+  if (rtl) { return 0 }
+  return slidesToShow - 1
+}
+
+export const slidesOnLeft = ({ slidesToShow, centerMode, rtl, centerPadding }) => {
+  // returns no of slides on the left of active slide
+  if (centerMode) {
+    let left = (slidesToShow - 1) / 2 + 1
+    if (parseInt(centerPadding) > 0) left += 1
+    if (!rtl && slidesToShow % 2 === 0) left += 1
+    return left
+  }
+  if (rtl) {
+    return slidesToShow - 1
+  }
+  return 0
 }
