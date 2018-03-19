@@ -164,16 +164,17 @@ var EventHandlers = {
   },
   onInnerSliderEnter: function (e) {
     if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause();
+      this.pause(hover=true);
     }
   },
   onInnerSliderOver: function (e) {
     if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause();
+      this.pause(hover=true);
     }
   },
   onInnerSliderLeave: function (e) {
-    if (this.props.autoplay && this.props.pauseOnHover) {
+    if (this.props.autoplay && this.props.pauseOnHover &&
+      this.state.autoplaying === 'hovered') {
       this.autoPlay();
     }
   }

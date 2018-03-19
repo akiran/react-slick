@@ -246,12 +246,15 @@ export var InnerSlider = createReactClass({
       clearInterval(this.autoplayTimer)
     }
     this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed+50)
+    this.setState({ autoplaying: 'playing' })
   },
-  pause: function () {
+  pause: function (hover=false) {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer)
       this.autoplayTimer = null
     }
+    if (hover) this.setState({ autoplaying: 'hovered' })
+    else this.setState({ autoplaying: 'paused' })
   },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {

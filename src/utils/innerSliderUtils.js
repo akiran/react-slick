@@ -130,9 +130,15 @@ export const initializedState = spec => {
   let lazyLoadedList = spec.lazyLoadedList || []
   let slidesToLoad = getOnDemandLazySlides({currentSlide, lazyLoadedList}, spec)
   lazyLoadedList.concat(slidesToLoad)
-  
-  return { slideCount, slideWidth, listWidth, trackWidth, currentSlide, 
+
+  let state = { slideCount, slideWidth, listWidth, trackWidth, currentSlide, 
   slideHeight, listHeight, lazyLoadedList }
+
+  if (spec.autoplaying !== 'paused' && spec.autoplay) {
+    state['autoplaying'] = 'playing'
+  }
+
+  return state
 }
 
 export const slideHandler = spec => {
