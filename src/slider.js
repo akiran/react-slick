@@ -130,8 +130,6 @@ export default class Slider extends React.Component {
     var settings;
     var newProps;
     if (this.state.breakpoint) {
-      // never executes in the first render
-      // so defaultProps should be already there in this.props
       newProps = this.props.responsive.filter(resp => resp.breakpoint === this.state.breakpoint);
       settings = newProps[0].settings === 'unslick' ? 'unslick' : assign({}, defaultProps, this.props, newProps[0].settings);
     } else {
@@ -172,9 +170,11 @@ export default class Slider extends React.Component {
     if (settings === 'unslick') {
       settings = assign({ unslick: true }, defaultProps, this.props)
       settings.slidesToShow = children.length
+      settings.className += ' unslicked'
     } else if (children.length <= settings.slidesToShow) {
       settings.unslick = true
       settings.slidesToShow = children.length
+      settings.className += ' unslicked'
     }
     
     // responsiveElement props

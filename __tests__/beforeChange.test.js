@@ -29,7 +29,7 @@ class SliderWithBeforeChange extends React.Component {
   }
 }
 
-describe('Slider', function() {
+describe.skip('Slider', function() {
   it('should render', function() {
     const wrapper = mount(<SliderWithBeforeChange />);
     wrapper.find('.slick-next').simulate('click')

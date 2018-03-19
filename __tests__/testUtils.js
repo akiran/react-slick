@@ -6,6 +6,7 @@ import Slider from '../src/slider'
 import {InnerSlider} from '../src/inner-slider'
 import defaultProps from '../src/default-props'
 import * as slickCarousel from 'slick-carousel' // defining slick in global environment
+import { getTrackLeft } from '../src/mixins/trackHelper'
 
 // finds active slide number in the last transition in the forward direction
 export function activeSlideInLastTransition(noOfSlides, slidesToShow, slidesToScroll){
@@ -44,7 +45,7 @@ export function createInnerSlider({noOfSlides, ...settings}){
     createReactSliderChildren(noOfSlides)
   )
   return (
-    <InnerSlider {...settings}>
+    <InnerSlider {...settings} ref={slider => this.innerSlider = slider}>
       {children}
     </InnerSlider>
   )
@@ -119,4 +120,39 @@ export function testSlider(settings){
   const settings2 = {direction: 'prev', ...settings}
   testSliderScroll(settings1)
   testSliderScroll(settings2)
+}
+
+export const clickNext = wrapper => wrapper.find('.slick-next').simulate('click')
+export const clickPrev = wrapper => wrapper.find('.slick-prev').simulate('click')
+
+export const tryAllConfigs = (settings, settingsList) => {
+  let leaf = true
+  for(let key of Object.keys(settings)) {
+    if (Array.isArray(settings[key])) {
+      leaf = false
+      for (let val of settings[key]) {
+        tryAllConfigs({...settings, [key]: val}, settingsList)
+      }
+    }
+  }
+  if (leaf) {
+    if (settingsList.map(
+        setting => JSON.stringify(setting)).indexOf(JSON.stringify(settings)) < 0) {
+          settingsList.push(settings)
+        }
+  }
+}
+
+export const actualTrackLeft = wrapper => wrapper.find('.slick-track').props().style.transform
+  .match(/translate3d\((\d+)px/i)[1]
+
+
+export const testTrackLeft = wrapper => {
+  let trackLeft = parseInt(actualTrackLeft(wrapper))
+  let spec = assign({}, wrapper.props(), wrapper.state(), {
+    slideIndex: wrapper.state().currentSlide,
+    trackRef: null,
+  })
+  let expectedTrackLeft = getTrackLeft(spec)
+  expect(trackLeft).toEqual(parseInt(expectedTrackLeft))
 }
