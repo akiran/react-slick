@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { getTrackLeft, getTrackCSS, getTrackAnimateCSS } from '../mixins/trackHelper.js'
 import { siblingDirection } from '../utils/trackUtils'
-// return list of slides that need to be loaded and are not in lazyLoadedList
+
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = []
   let startIndex = lazyStartIndex(spec)
@@ -29,10 +29,7 @@ export const getRequiredLazySlides = spec => {
 
 // startIndex that needs to be present
 export const lazyStartIndex = spec => spec.currentSlide - slidesOnLeft(spec)
-// endIndex that needs to be present but is exclusive
 export const lazyEndIndex = spec => spec.currentSlide + slidesOnRight(spec)
-
-// no of slides on left of current in active frame
 export const slidesOnLeft = spec => (
   spec.centerMode
     ? Math.floor(spec.slidesToShow / 2) + (parseInt(spec.centerPadding) > 0 ? 1 : 0) 
@@ -48,11 +45,7 @@ export const slidesOnRight = spec => (
 
 // get width of an element
 export const getWidth = elem => elem && elem.offsetWidth || 0
-
-// get height of an element
 export const getHeight = elem => elem && elem.offsetHeight || 0
-
-// in case of swipe event, get direction of the swipe event
 export const getSwipeDirection = (touchObject, verticalSwiping=false) => {
   var xDist, yDist, r, swipeAngle;
   xDist = touchObject.startX - touchObject.curX;
@@ -353,4 +346,32 @@ export const swipeMove = (e, spec) => {
     e.preventDefault()
   }
   return state
+}
+export const getNavigableIndexes = spec => {
+  let max = spec.infinite ? spec.slideCount * 2 : spec.slideCount
+  let breakpoint = spec.infinite ? spec.slidesToShow * -1 : 0
+  let counter = spec.infinite ? spec.slidesToShow * -1 : 0
+  let indexes = []
+  while (breakpoint < max) {
+    indexes.push(breakpoint)
+    breakpoint = counter + spec.slidesToScroll
+    counter += Math.min(spec.slidesToScroll, spec.slidesToShow)
+  }
+  return indexes
+}
+export const checkNavigable = (spec, index) => {
+  const navigables = getNavigableIndexes(spec)
+  let prevNavigable = 0
+  if (index > navigables[navigables.length - 1]) {
+    index = navigables[navigables.length - 1]
+  } else {
+    for (let n in navigables) {
+      if (index < navigables[n]) {
+        index = prevNavigable
+        break
+      }
+      prevNavigable = navigables[n]
+    }
+  }
+  return index
 }

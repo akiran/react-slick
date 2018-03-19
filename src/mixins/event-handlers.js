@@ -3,52 +3,9 @@ import {getTrackCSS, getTrackLeft, getTrackAnimateCSS} from './trackHelper';
 import assign from 'object-assign';
 import ReactDOM from 'react-dom';
 import { siblingDirection } from '../utils/trackUtils'
-import { getWidth, getHeight, getSwipeDirection } from '../utils/innerSliderUtils'
+import { getWidth, getHeight, getSwipeDirection, checkNavigable } from '../utils/innerSliderUtils'
 
 var EventHandlers = {
-  getNavigableIndexes() {
-    let max;
-    let breakPoint = 0;
-    let counter = 0;
-    let indexes = [];
-
-    if (!this.props.infinite) {
-      max = this.state.slideCount;
-    } else {
-      breakPoint = this.props.slidesToShow * -1;
-      counter = this.props.slidesToShow * -1;
-      max = this.state.slideCount * 2;
-    }
-
-    while (breakPoint < max) {
-      indexes.push(breakPoint);
-      breakPoint = counter + this.props.slidesToScroll;
-
-      counter += this.props.slidesToScroll <= this.props.slidesToShow ?
-        this.props.slidesToScroll : this.props.slidesToShow;
-    }
-
-    return indexes;
-  },
-  checkNavigable(index) {
-    const navigables = this.getNavigableIndexes();
-    let prevNavigable = 0;
-
-    if (index > navigables[navigables.length - 1]) {
-      index = navigables[navigables.length - 1];
-    } else {
-      for (var n in navigables) {
-        if (index < navigables[n]) {
-          index = prevNavigable;
-          break;
-        }
-
-        prevNavigable = navigables[n];
-      }
-    }
-
-    return index;
-  },
   getSlideCount() {
     const centerOffset = this.props.centerMode ? this.state.slideWidth * Math.floor(this.props.slidesToShow / 2) : 0;
 
@@ -134,14 +91,14 @@ var EventHandlers = {
         case 'left':
         case 'up':
           newSlide = this.state.currentSlide + this.getSlideCount();
-          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+          slideCount = this.props.swipeToSlide ? checkNavigable({...this.props, ...this.state}, newSlide) : newSlide;
           this.setState({ currentDirection: 0 })
           break;
 
         case 'right':
         case 'down':
           newSlide = this.state.currentSlide - this.getSlideCount();
-          slideCount = this.props.swipeToSlide ? this.checkNavigable(newSlide) : newSlide;
+          slideCount = this.props.swipeToSlide ? checkNavigable({...this.props, ...this.state}, newSlide) : newSlide;
           this.setState({ currentDirection: 1 })
           break;
 
