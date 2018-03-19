@@ -339,7 +339,9 @@ export const swipeMove = (e, spec) => {
     trackStyle: getTrackCSS({...spec, left: swipeLeft})
   }
   if (Math.abs(touchObject.curX - touchObject.startX) <
-    Math.abs(touchObject.curY - touchObject.startY) * 0.8) return
+    Math.abs(touchObject.curY - touchObject.startY) * 0.8) {
+    return state
+  }
   if (touchObject.swipeLength > 10) {
     state['swiping'] = true
     e.preventDefault()
