@@ -164,12 +164,12 @@ var EventHandlers = {
   },
   onInnerSliderEnter: function (e) {
     if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause(hover=true);
+      this.pause(true);
     }
   },
   onInnerSliderOver: function (e) {
     if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause(hover=true);
+      this.pause(true);
     }
   },
   onInnerSliderLeave: function (e) {

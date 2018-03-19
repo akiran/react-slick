@@ -119,7 +119,7 @@ export var InnerSlider = createReactClass({
   onWindowResized: function () {
     let spec = assign({listRef: this.list, trackRef: this.track}, this.props, this.state)
     this.updateState(spec, false, () => {
-      if (this.props.autoplay) this.autoPlay()
+      if (this.state.autoplaying === 'playing') this.autoPlay()
       else this.pause()
     })
     // animating state should be cleared while resizing, otherwise autoplay stops working
@@ -253,6 +253,7 @@ export var InnerSlider = createReactClass({
       clearInterval(this.autoplayTimer)
       this.autoplayTimer = null
     }
+    if (this.state.autoplaying === 'paused') return
     if (hover) this.setState({ autoplaying: 'hovered' })
     else this.setState({ autoplaying: 'paused' })
   },

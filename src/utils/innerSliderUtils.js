@@ -134,7 +134,7 @@ export const initializedState = spec => {
   let state = { slideCount, slideWidth, listWidth, trackWidth, currentSlide, 
   slideHeight, listHeight, lazyLoadedList }
 
-  if (spec.autoplaying !== 'paused' && spec.autoplay) {
+  if (spec.autoplaying === null && spec.autoplay) {
     state['autoplaying'] = 'playing'
   }
 
