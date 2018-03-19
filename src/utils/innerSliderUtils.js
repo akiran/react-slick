@@ -26,8 +26,19 @@ export const getRequiredLazySlides = spec => {
 }
 
 // startIndex that needs to be present
-export const lazyStartIndex = spec => spec.currentSlide - slidesOnLeft(spec)
-export const lazyEndIndex = spec => spec.currentSlide + slidesOnRight(spec)
+export const lazyStartIndex = spec => spec.currentSlide - lazySlidesOnLeft(spec)
+export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec)
+export const lazySlidesOnLeft = spec => (
+  spec.centerMode
+    ? Math.floor(spec.slidesToShow / 2) + (parseInt(spec.centerPadding) > 0 ? 1 : 0)
+    : 0
+)
+export const lazySlidesOnRight = spec => (
+  spec.centerMode
+  ? Math.floor((spec.slidesToShow - 1) / 2) + 1 + (parseInt(spec.centerPadding) > 0 ? 1 : 0)
+  : spec.slidesToShow
+)
+
 // get width of an element
 export const getWidth = elem => elem && elem.offsetWidth || 0
 export const getHeight = elem => elem && elem.offsetHeight || 0
