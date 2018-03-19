@@ -2,7 +2,6 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import Helpers from './mixins/helpers';
 import { canGoNext } from './utils/innerSliderUtils'
 
 export class PrevArrow extends React.Component {
