@@ -1,14 +1,14 @@
 'use strict';
 
 import React from 'react';
-import EventHandlersMixin from './mixins/event-handlers';
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
-  canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove
+  canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove, 
+  swipeEnd
 } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
@@ -17,7 +17,6 @@ import { Dots } from './dots';
 import { PrevArrow, NextArrow } from './arrows';
 
 export var InnerSlider = createReactClass({
-  mixins: [EventHandlersMixin],
   list: null, // wraps the track
   track: null, // component that rolls out like a film
   listRefHandler: function (ref) {
@@ -204,10 +203,27 @@ export var InnerSlider = createReactClass({
       ...this.props,
       ...this.state,
       trackRef: this.track,
+      listRef: this.list,
       slideIndex: this.state.currentSlide
     })
     if (!state) return
     this.setState(state)
+  },
+  swipeEnd: function(e) {
+    let state = swipeEnd(e, {
+      ...this.props,
+      ...this.state,
+      trackRef: this.track,
+      listRef: this.list,
+      slideIndex: this.state.currentSlide
+    })
+    if (!state) return
+    let triggerSlideHandler = state['triggerSlideHandler']
+    delete state['triggerSlideHandler']
+    this.setState(state)
+    if (triggerSlideHandler === undefined) return
+    this.slideHandler(triggerSlideHandler)
+    console.log('handling slide to:', triggerSlideHandler)
   },
   slickPrev: function () {
     // this and fellow methods are wrapped in setTimeout

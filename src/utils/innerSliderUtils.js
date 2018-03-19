@@ -347,6 +347,57 @@ export const swipeMove = (e, spec) => {
   }
   return state
 }
+export const swipeEnd = (e, spec) => {
+  const {dragging, swipe, touchObject, listWidth, touchThreshold,
+    verticalSwiping, listHeight, currentSlide, swipeToSlide, scrolling,
+    onSwipe } = spec
+  if (!dragging) {
+    if (swipe) e.preventDefault()
+    return {}
+  }
+  let minSwipe = verticalSwiping ?
+    listHeight/touchThreshold : listWidth/touchThreshold
+  let swipeDirection = getSwipeDirection(touchObject, verticalSwiping)
+  // reset the state of touch related state variables.
+  let state = {
+    dragging: false,
+    edgeDragged: false,
+    scrolling: false,
+    swiping: false,
+    swiped: false,
+    swipeLeft: null,
+    touchObject: {}
+  }
+  if (scrolling) { return state }
+  if (!touchObject.swipeLength) { return state }
+  if (touchObject.swipeLength > minSwipe) {
+    e.preventDefault()
+    if(onSwipe) { onSwipe(swipeDirection) }
+    let slideCount, newSlide
+    switch (swipeDirection) {
+      case 'left':
+      case 'up':
+        newSlide = currentSlide + getSlideCount(spec)
+        slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide
+        state['currentDirection'] = 0
+        break
+      case 'right':
+      case 'down':
+        newSlide = currentSlide - getSlideCount(spec)
+        slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide
+        state['currentDirection'] = 1
+        break
+      default:
+        slideCount = currentSlide
+    }
+    state['triggerSlideHandler'] = slideCount
+  } else {
+    // Adjust the track back to it's original position.
+    let currentLeft = getTrackLeft(spec)
+    state['trackStyle'] = getTrackAnimateCSS({...spec, left: currentLeft})
+  }
+  return state
+}
 export const getNavigableIndexes = spec => {
   let max = spec.infinite ? spec.slideCount * 2 : spec.slideCount
   let breakpoint = spec.infinite ? spec.slidesToShow * -1 : 0
@@ -407,3 +458,4 @@ export const getSlideCount = spec => {
       return spec.slidesToScroll
     }
 }
+
