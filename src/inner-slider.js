@@ -257,6 +257,22 @@ export var InnerSlider = createReactClass({
     if (hover) this.setState({ autoplaying: 'hovered' })
     else this.setState({ autoplaying: 'paused' })
   },
+  onInnerSliderEnter: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause(true);
+    }
+  },
+  onInnerSliderOver: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover) {
+      this.pause(true);
+    }
+  },
+  onInnerSliderLeave: function (e) {
+    if (this.props.autoplay && this.props.pauseOnHover &&
+      this.state.autoplaying === 'hovered') {
+      this.autoPlay();
+    }
+  },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,

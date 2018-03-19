@@ -81,22 +81,6 @@ var EventHandlers = {
         trackStyle: getTrackAnimateCSS(assign({left: currentLeft}, this.props, this.state))
       });
     }
-  },
-  onInnerSliderEnter: function (e) {
-    if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause(true);
-    }
-  },
-  onInnerSliderOver: function (e) {
-    if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause(true);
-    }
-  },
-  onInnerSliderLeave: function (e) {
-    if (this.props.autoplay && this.props.pauseOnHover &&
-      this.state.autoplaying === 'hovered') {
-      this.autoPlay();
-    }
   }
 };
 
