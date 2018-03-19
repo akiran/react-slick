@@ -2,6 +2,28 @@
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
 
+## 0.21.0
+
+**Release Changes**
+
+- Fixed issues
+  - dataset undefined error in case of swipeToSlide but finite slides
+  - slideWidth issue by transform scale
+  - variableWidth + finite alignment problems
+  - wrapper direction rtl issues
+  - added onload update handler for images
+  - fixed breaking of animation on setState
+
+- Mixins to Pure Functions
+  - getWidth, getHeight
+  - swipeDirection
+  - initialize, update
+
+- Other Changes
+  - removed sass, using pure CSS instead
+  - enforced dir='ltr' in the slider, so dir='rtl' in wrapper doesn't break the slider
+  - corrected up/down direction conventions
+  - added more tests along with snapshots
 
 ## 0.20.0
 

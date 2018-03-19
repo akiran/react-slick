@@ -29,6 +29,7 @@ import VerticalSwipeToSlide from '../examples/VerticalSwipeToSlide'
 import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
 import AsNavFor from '../examples/AsNavFor'
+import AppendDots from '../examples/AppendDots'
 
 export default class App extends React.Component {
   render() {
@@ -60,6 +61,7 @@ export default class App extends React.Component {
         <SwipeToSlide />
         <VerticalSwipeToSlide />
         <AsNavFor />
+        <AppendDots />
       </div>
     );
   }

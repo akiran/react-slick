@@ -8,7 +8,8 @@ import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import assign from 'object-assign';
-import { getOnDemandLazySlides } from './utils/innerSliderUtils'
+import { getOnDemandLazySlides, extractObject, initializedState } from './utils/innerSliderUtils'
+import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
 
 import { Track } from './track';
 import { Dots } from './dots';
@@ -44,9 +45,17 @@ export var InnerSlider = createReactClass({
     }
   },
   componentDidMount: function componentDidMount() {
-    // Hack for autoplay -- Inspect Later
-    this.initialize(this.props);
-    this.adaptHeight();
+    let spec = assign({listRef: this.list, trackRef: this.track}, this.props)
+    let initState = initializedState(spec)
+    assign(spec, {slideIndex: initState.currentSlide}, initState)
+    let targetLeft = getTrackLeft(spec)
+    assign(spec, {left: targetLeft})
+    let trackStyle = getTrackCSS(spec)
+    initState['trackStyle'] = trackStyle
+    this.setState( initState, () => {
+      this.adaptHeight()
+      this.autoPlay()  // it doesn't have to be here
+    })
 
     // To support server-side rendering
     if (!window) {
@@ -67,32 +76,41 @@ export var InnerSlider = createReactClass({
     } else {
       window.detachEvent('onresize', this.onWindowResized);
     }
-    if (this.state.autoPlayTimer) {
-      clearInterval(this.state.autoPlayTimer);
+    if (this.autoplayTimer) {
+      clearInterval(this.autoplayTimer);
     }
   },
   componentWillReceiveProps: function (nextProps) {
-    if (this.props.slickGoTo != nextProps.slickGoTo) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn('react-slick deprecation warning: slickGoTo prop is deprecated and it will be removed in next release. Use slickGoTo method instead')
-      }
-      this.changeSlide({
-        message: 'index',
-        index: nextProps.slickGoTo,
-        currentSlide: this.state.currentSlide
-      });
-    } else if (this.state.currentSlide >= nextProps.children.length) {
-      this.update(nextProps);
-      this.changeSlide({
-        message: 'index',
-        index: nextProps.children.length - nextProps.slidesToShow,
-        currentSlide: this.state.currentSlide
-      });
-    } else {
-      this.update(nextProps);
+    let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
+    let updatedState = initializedState(spec)
+    assign(spec, {slideIndex: updatedState.currentSlide}, updatedState)
+    let targetLeft = getTrackLeft(spec)
+    assign(spec, {left: targetLeft})
+    let trackStyle = getTrackCSS(spec)
+    // not setting trackStyle in other cases because no prop change can trigger slideChange
+    if (React.Children.count(this.props.children) !== React.Children.count(nextProps.children)) {
+      updatedState['trackStyle'] = trackStyle
     }
+    this.setState(updatedState, () => {
+      if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
+        this.changeSlide({
+          message: 'index',
+          index: React.Children.count(nextProps.children) - nextProps.slidesToShow,
+          currentSlide: this.state.currentSlide
+        });
+      }
+      // the following doesn't have to be this way
+      if (!nextProps.autoplay) this.pause()
+      else this.autoPlay(nextProps.autoplay)
+    })
   },
   componentDidUpdate: function () {
+    let images = document.querySelectorAll('.slick-slide img')
+    images.forEach(image => {
+      if (!image.onload) {
+        image.onload = () => setTimeout(() => this.update(this.props), this.props.speed)
+      }
+    })
     if (this.props.reInit) {
       this.props.reInit()
     }
@@ -140,62 +158,27 @@ export var InnerSlider = createReactClass({
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
     });
-
-    var trackProps = {
-      fade: this.props.fade,
-      cssEase: this.props.cssEase,
-      speed: this.props.speed,
-      infinite: this.props.infinite,
-      centerMode: this.props.centerMode,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null,
-      currentSlide: this.state.currentSlide,
-      lazyLoad: this.props.lazyLoad,
-      lazyLoadedList: this.state.lazyLoadedList,
-      rtl: this.props.rtl,
-      slideWidth: this.state.slideWidth,
-      slideHeight: this.state.slideHeight,
-      listHeight: this.state.listHeight,
-      vertical: this.props.vertical,
-      slidesToShow: this.props.slidesToShow,
-      slidesToScroll: this.props.slidesToScroll,
-      slideCount: this.state.slideCount,
-      trackStyle: this.state.trackStyle,
-      variableWidth: this.props.variableWidth,
-      unslick: this.props.unslick,
-      centerPadding: this.props.centerPadding
-    };
+    let spec = assign({}, this.props, this.state)
+    let trackProps = extractObject(spec, [
+      'fade', 'cssEase', 'speed', 'infinite', 'centerMode', 'focusOnSelect',
+      'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth',
+      'slideHeight', 'listHeight', 'vertical', 'slidesToShow', 'slidesToScroll',
+      'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding' ])
+    trackProps.focusOnSelect = this.props.focusOnSelect? this.selectHandler: null
 
     var dots;
-
     if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
-      var dotProps = {
-        dotsClass: this.props.dotsClass,
-        slideCount: this.state.slideCount,
-        slidesToShow: this.props.slidesToShow,
-        currentSlide: this.state.currentSlide,
-        slidesToScroll: this.props.slidesToScroll,
-        clickHandler: this.changeSlide,
-        children: this.props.children,
-        customPaging: this.props.customPaging,
-        infinite: this.props.infinite,
-        appendDots: this.props.appendDots
-      };
-
+      let dotProps = extractObject(spec, [
+        'dotsClass', 'slideCount', 'slidesToShow', 'currentSlide', 'slidesToScroll',
+        'clickHandler', 'children', 'customPaging', 'infinite', 'appendDots' ])
+      dotProps.clickHandler = this.changeSlide
       dots = (<Dots {...dotProps} />);
     }
 
     var prevArrow, nextArrow;
-
-    var arrowProps = {
-      infinite: this.props.infinite,
-      centerMode: this.props.centerMode,
-      currentSlide: this.state.currentSlide,
-      slideCount: this.state.slideCount,
-      slidesToShow: this.props.slidesToShow,
-      prevArrow: this.props.prevArrow,
-      nextArrow: this.props.nextArrow,
-      clickHandler: this.changeSlide
-    };
+    let arrowProps = extractObject(spec, ['infinite', 'centerMode', 'currentSlide',
+      'slideCount', 'slidesToShow', 'prevArrow', 'nextArrow'])
+    arrowProps.clickHandler = this.changeSlide
 
     if (this.props.arrows) {
       prevArrow = (<PrevArrow {...arrowProps} />);
@@ -246,6 +229,7 @@ export var InnerSlider = createReactClass({
       onMouseEnter: this.onInnerSliderEnter,
       onMouseLeave: this.onInnerSliderLeave,
       onMouseOver: this.onInnerSliderOver,
+      dir: 'ltr',
     }
 
     if (this.props.unslick) {

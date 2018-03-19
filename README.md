@@ -58,11 +58,11 @@ get started with react-slick.
 ### Example
 
 ```js
-var React = require('react');
-var Slider = require('react-slick');
+import React from 'react'
+import Slider from 'react-slick'
 
 class SimpleSlider extends React.Component {
-  render: function () {
+  render () {
     var settings = {
       dots: true,
       infinite: true,
@@ -98,7 +98,7 @@ Props            | Type            | Default Value                   | Descripti
 `autoplay`       | `bool`          | `false`                         |                                                             | Yes
 `autoplaySpeed`  | `int`           | `3000`                          | Delay between each auto scroll (in milliseconds)            | Yes
 `centerMode`     | `bool`          | `false`                         | Center current slide                                        | Yes
-`centerPadding`  |                 | `'50px'`                        |                                                             | Yes
+`centerPadding`  | `string`        | `'50px'`                        |                                                             | Yes
 `cssEase`        |                 | `'ease'`                        |                                                             | Yes
 `customPaging`   | `func`          | `i => <button>{i + 1}</button>` | Custom paging templates. [Example](examples/CustomPaging.js)| Yes
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
@@ -132,7 +132,6 @@ Props            | Type            | Default Value                   | Descripti
 `reInit`         | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
 `beforeChange`   | `func`          | `null`                          | Index change callback. `(oldIndex, newIndex) => ...`        | Yes
-`slickGoTo`      | `int`           | `Default`                       | Go to the specified slide number                            | Yes
 
 
 ### Methods
