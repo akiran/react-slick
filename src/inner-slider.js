@@ -172,7 +172,7 @@ export var InnerSlider = createReactClass({
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad)
     this.setState(state, () => {
       asNavFor && asNavFor.innerSlider.state.currentSlide !== currentSlide
-        && asnavFor.innerSlider.slideHandler(index)
+        && asNavFor.innerSlider.slideHandler(index)
       this.animationEndCallback = setTimeout(() => {
         this.setState(nextState, () => {
           afterChange && afterChange(state.currentSlide)
