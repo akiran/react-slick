@@ -9,7 +9,7 @@ import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove, 
   swipeEnd } from './utils/innerSliderUtils'
-import { getTrackLeft, getTrackCSS } from './mixins/trackHelper'
+import { getTrackLeft, getTrackCSS } from './utils/innerSliderUtils'
 
 import { Track } from './track';
 import { Dots } from './dots';

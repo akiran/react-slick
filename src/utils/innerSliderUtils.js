@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { getTrackLeft, getTrackCSS, getTrackAnimateCSS } from '../mixins/trackHelper.js'
 import { siblingDirection } from '../utils/trackUtils'
 
 export const getOnDemandLazySlides = spec => {
@@ -459,3 +458,129 @@ export const getSlideCount = spec => {
     }
 }
 
+export const checkSpecKeys = (spec, keysArray) => keysArray.reduce(
+    (value, key) => value && spec.hasOwnProperty(key), true
+  ) ? null : console.error('Key:', key, 'is missing from spec:', spec)
+
+export const getTrackCSS = spec => {
+  checkSpecKeys(spec, [
+    'left', 'variableWidth', 'slideCount', 'slidesToShow', 'slideWidth'
+  ])
+  let trackWidth, trackHeight
+  const trackChildren = (spec.slideCount + 2 * spec.slidesToShow)
+  if (!spec.vertical) {
+    trackWidth = getTotalSlides(spec) * spec.slideWidth
+  } else {
+    trackHeight = trackChildren * spec.slideHeight
+  }
+  let WebkitTransform = !spec.vertical ?
+    'translate3d(' + spec.left + 'px, 0px, 0px)' :
+    'translate3d(0px, ' + spec.left + 'px, 0px)'
+  let transform = !spec.vertical ?
+    'translate3d(' + spec.left + 'px, 0px, 0px)' :
+    'translate3d(0px, ' + spec.left + 'px, 0px)'
+  let msTransform = !spec.vertical ?
+    'translateX(' + spec.left + 'px)' :
+    'translateY(' + spec.left + 'px)'
+  let style = {
+    opacity: 1,
+    WebkitTransform,
+    transform,
+    transition: '',
+    WebkitTransition: '',
+    msTransform
+  }
+  if (spec.fade) style = { opacity: 1 }
+  if (trackWidth) style.width = trackWidth
+  if (trackHeight) style.height = trackHeight
+
+  // Fallback for IE8
+  if (window && !window.addEventListener && window.attachEvent) {
+    if (!spec.vertical) {
+      style.marginLeft = spec.left + 'px'
+    } else {
+      style.marginTop = spec.left + 'px'
+    }
+  }
+
+  return style
+}
+export const getTrackAnimateCSS = spec => {
+  checkSpecKeys(spec, [ 'left', 'variableWidth', 'slideCount',
+    'slidesToShow', 'slideWidth', 'speed', 'cssEase' ])
+  let style = getTrackCSS(spec)
+  // useCSS is true by default so it can be undefined
+  style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase
+  style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase
+  return style
+}
+export const getTrackLeft = spec => {
+
+  if (spec.unslick) {
+    return 0
+  }
+
+  checkSpecKeys(spec, [
+   'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
+   'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
+  
+  const {slideIndex, trackRef, infinite, centerMode, slideCount, slidesToShow,
+    slidesToScroll, slideWidth, listWidth, variableWidth, slideHeight, fade, vertical} = spec
+
+  var slideOffset = 0;
+  var targetLeft;
+  var targetSlide;
+  var verticalOffset = 0;
+
+  if (fade || spec.slideCount === 1) {
+    return 0;
+  }
+
+  let slidesToOffset = 0
+  if(infinite){
+    slidesToOffset = -getPreClones(spec) // bring active slide to the beginning of visual area
+    // if next scroll doesn't have enough children, just reach till the end of original slides instead of shifting slidesToScroll children
+    if (slideCount % slidesToScroll !== 0 && (slideIndex + slidesToScroll) > slideCount){
+      slidesToOffset = -(slideIndex > slideCount ? (slidesToShow - (slideIndex - slideCount)) : slideCount % slidesToScroll)
+    }
+    // shift current slide to center of the frame
+    if(centerMode){
+      slidesToOffset += parseInt(slidesToShow / 2)
+    }
+  } else {
+    if(slideCount % slidesToScroll !== 0 && slideIndex + slidesToScroll > slideCount){
+      slidesToOffset = slidesToShow - (slideCount % slidesToScroll)
+    }
+    if(centerMode){
+      slidesToOffset = parseInt(slidesToShow / 2)
+    }
+  }
+  slideOffset = slidesToOffset * slideWidth
+  verticalOffset = slidesToOffset * slideHeight
+
+  if (!vertical) {
+    targetLeft = ((slideIndex * slideWidth) * -1) + slideOffset;
+  } else {
+    targetLeft = ((slideIndex * slideHeight) * -1) + verticalOffset;
+  }
+
+  if (variableWidth === true) {
+      var targetSlideIndex;
+      var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
+      targetSlideIndex = (slideIndex + getPreClones(spec));
+      targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
+      targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+      if (centerMode === true) {
+          targetSlideIndex = infinite ? slideIndex + getPreClones(spec) : slideIndex
+          targetSlide = ReactDOM.findDOMNode(trackRef).children[targetSlideIndex]
+          targetLeft = 0
+          for (let slide = 0; slide < targetSlideIndex; slide++) {
+            targetLeft -= ReactDOM.findDOMNode(trackRef).children[slide].offsetWidth
+          }
+          targetLeft -= parseInt(spec.centerPadding)
+          targetLeft += (listWidth - targetSlide.offsetWidth) / 2
+      }
+  }
+
+  return targetLeft;
+}
