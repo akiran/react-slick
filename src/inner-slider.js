@@ -169,7 +169,9 @@ export class InnerSlider extends React.Component {
       asNavFor && asNavFor.innerSlider.state.currentSlide !== currentSlide
         && asNavFor.innerSlider.slideHandler(index)
       this.animationEndCallback = setTimeout(() => {
-        this.setState(nextState, () => {
+        const{animating, ...firstBatch} = nextState
+        this.setState(firstBatch, () => {
+          setTimeout(() => this.setState({ animating }), 10)
           afterChange && afterChange(state.currentSlide)
           delete this.animationEndCallback
         })
