@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import assign from 'object-assign';
 import classnames from 'classnames';
 import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils'
 
@@ -86,16 +85,16 @@ var renderSlides = function (spec) {
     } else {
       child = <div />
     }
-    var childStyle = getSlideStyle(assign({}, spec, {index: index}));
+    var childStyle = getSlideStyle({...spec, index})
     const slideClass = child.props.className || ''
     
     // push a cloned element of the desired slide
     slides.push(React.cloneElement(child, {
       key: 'original' + getKey(child, index),
       'data-index': index,
-      className: classnames(getSlideClasses(assign({index: index}, spec)), slideClass),
+      className: classnames(getSlideClasses({...spec, index}), slideClass),
       tabIndex: '-1',
-      style: assign({outline: 'none'}, child.props.style || {}, childStyle),
+      style: {outline: 'none', ...(child.props.style || {}), ...childStyle},
       onClick: e => {
         child.props && child.props.onClick && child.props.onClick(e)
         if (spec.focusOnSelect) {
@@ -117,8 +116,8 @@ var renderSlides = function (spec) {
           key: 'precloned' + getKey(child, key),
           'data-index': key,
           tabIndex: '-1',
-          className: classnames(getSlideClasses(assign({index: key}, spec)), slideClass),
-          style: assign({}, child.props.style || {}, childStyle),
+          className: classnames(getSlideClasses({...spec, index: key}), slideClass),
+          style: {...(child.props.style || {}), ...childStyle},
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e)
             if (spec.focusOnSelect) {
@@ -137,8 +136,8 @@ var renderSlides = function (spec) {
           key: 'postcloned' + getKey(child, key),
           'data-index': key,
           tabIndex: '-1',
-          className: classnames(getSlideClasses(assign({index: key}, spec)), slideClass),
-          style: assign({}, child.props.style || {}, childStyle),
+          className: classnames(getSlideClasses({...spec, index: key}), slideClass),
+          style: {...(child.props.style || {}), ...childStyle},
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e)
             if (spec.focusOnSelect) {

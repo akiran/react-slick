@@ -5,7 +5,6 @@ import initialState from './initial-state';
 import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
-import assign from 'object-assign';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove, 
   swipeEnd } from './utils/innerSliderUtils'
@@ -38,7 +37,7 @@ export class InnerSlider extends React.Component {
       this.props.init();
     }
     if (this.props.lazyLoad) {
-      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
+      let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
       if (slidesToLoad.length > 0) {
         this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
         if (this.props.onLazyLoad) {
@@ -48,7 +47,7 @@ export class InnerSlider extends React.Component {
     }
   }
   componentDidMount = () => {
-    let spec = assign({listRef: this.list, trackRef: this.track}, this.props)
+    let spec = {listRef: this.list, trackRef: this.track, ...this.props}
     this.updateState(spec, true, () => {
       this.adaptHeight()
       this.props.autoplay && this.autoPlay()
@@ -77,7 +76,7 @@ export class InnerSlider extends React.Component {
     }
   }
   componentWillReceiveProps = (nextProps) => {
-    let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
+    let spec = {listRef: this.list, trackRef: this.track, ...nextProps, ...this.state}
     this.updateState(spec, false, () => {
       if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
         this.changeSlide({
@@ -99,7 +98,7 @@ export class InnerSlider extends React.Component {
       this.props.reInit()
     }
     if (this.props.lazyLoad) {
-      let slidesToLoad = getOnDemandLazySlides(assign({}, this.props, this.state))
+      let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
       if (slidesToLoad.length > 0) {
         this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
         if (this.props.onLazyLoad) {
@@ -113,7 +112,7 @@ export class InnerSlider extends React.Component {
     this.adaptHeight();
   }
   onWindowResized = () => {
-    let spec = assign({listRef: this.list, trackRef: this.track}, this.props, this.state)
+    let spec = {listRef: this.list, trackRef: this.track, ...this.props, ...this.state}
     this.updateState(spec, true, () => {
       if (this.state.autoplaying === 'playing') this.autoPlay()
       else this.pause()
@@ -127,9 +126,9 @@ export class InnerSlider extends React.Component {
   }
   updateState = (spec, setTrackStyle, callback) => {
     let updatedState = initializedState(spec)
-    assign(spec, {slideIndex: updatedState.currentSlide}, updatedState)
+    spec = {...spec, ...updatedState, slideIndex: updatedState.currentSlide}
     let targetLeft = getTrackLeft(spec)
-    assign(spec, {left: targetLeft})
+    spec = {...spec, left: targetLeft}
     let trackStyle = getTrackCSS(spec)
     if (setTrackStyle || (React.Children.count(this.props.children) !==
       React.Children.count(spec.children))) {
@@ -243,7 +242,7 @@ export class InnerSlider extends React.Component {
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
     } else {
-      if (canGoNext(Object.assign({}, this.props,this.state))) {
+      if (canGoNext({...this.props, ...this.state})) {
         nextIndex = this.state.currentSlide + this.props.slidesToScroll;
       } else {
         return false;
@@ -289,7 +288,7 @@ export class InnerSlider extends React.Component {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
     });
-    let spec = assign({}, this.props, this.state)
+    let spec = {...this.props, ...this.state}
     let trackProps = extractObject(spec, [
       'fade', 'cssEase', 'speed', 'infinite', 'centerMode', 'focusOnSelect',
       'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth',
@@ -340,7 +339,7 @@ export class InnerSlider extends React.Component {
       }
     }
 
-    const listStyle = assign({}, verticalHeightStyle, centerPaddingStyle);
+    const listStyle = {...verticalHeightStyle, ...centerPaddingStyle}
     let listProps = {
       className: 'slick-list',
       style: listStyle,
