@@ -238,7 +238,7 @@ export const changeSlide = (spec, options) => {
       return null
     }
     if (infinite) {
-      let direction = siblingDirection(spec)
+      let direction = siblingDirection({...spec, targetSlide})
       if (targetSlide > options.currentSlide && direction === 'left') {
         targetSlide = targetSlide - slideCount
       } else if (targetSlide < options.currentSlide && direction === 'right') {
