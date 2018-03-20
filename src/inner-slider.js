@@ -130,7 +130,7 @@ export class InnerSlider extends React.Component {
     clearTimeout(this.animationEndCallback);
     delete this.animationEndCallback;
   }
-  updateState = (spec, setTrackStyle, callback) => {
+  updateState = (spec, setTrackStyle, callback, level=0) => {
     let updatedState = initializedState(spec)
     spec = {...spec, ...updatedState, slideIndex: updatedState.currentSlide}
     let targetLeft = getTrackLeft(spec)
@@ -140,7 +140,12 @@ export class InnerSlider extends React.Component {
       React.Children.count(spec.children))) {
       updatedState['trackStyle'] = trackStyle
     }
-    this.setState( updatedState, callback )
+    this.setState( updatedState, () => {
+      callback()
+      if (!this.state.slideWidth && level < 2) {
+        this.updateState(spec, true, callback, level+1)
+      }
+    })
   }
   checkImagesLoad = () => {
     let images = document.querySelectorAll('.slick-slide img')
