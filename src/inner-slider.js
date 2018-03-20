@@ -160,7 +160,10 @@ export class InnerSlider extends React.Component {
             setTimeout(this.onWindowResized, this.props.speed)
         } else {
           image.onload = handler
-          image.onerror = handler
+          image.onerror = () => {
+            handler()
+            this.props.onLazyLoadError && this.props.onLazyLoadError()
+          }
         }
       }
     })
