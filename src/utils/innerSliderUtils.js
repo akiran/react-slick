@@ -161,6 +161,8 @@ export const slideHandler = spec => {
       if (!infinite) finalSlide = 0
       else if(slideCount % slidesToScroll !== 0)
         finalSlide = slideCount - slideCount % slidesToScroll
+    } else if (!canGoNext(spec) && animationSlide > currentSlide) {
+      animationSlide = finalSlide = currentSlide
     } else if (centerMode && animationSlide >= slideCount) {
       animationSlide = infinite ? slideCount : slideCount - 1
       finalSlide = infinite ? 0 : slideCount - 1
@@ -303,7 +305,8 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength
   if (!infinite) {
     if ((currentSlide === 0 && swipeDirection === 'right') ||
-      (currentSlide + 1 >= dotCount && swipeDirection === 'left')) {
+      (currentSlide + 1 >= dotCount && swipeDirection === 'left') ||
+      (!canGoNext(spec) && swipeDirection === 'left')) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction
       if (edgeDragged === false && edgeEvent) {
         edgeEvent(swipeDirection)
