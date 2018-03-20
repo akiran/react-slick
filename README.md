@@ -111,7 +111,7 @@ Props            | Type            | Default Value                   | Descripti
 `focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
 `initialSlide`   | `int`           | `0`                             | Index of first slide                                        | Yes
-`lazyLoad`       | `bool`          | `false`                         | Load images or render components on demand                  | Yes
+`lazyLoad`       | `ondemand`/`progressive`| `null`                  | Load images or render components on demand or progressively | Yes
 `onLazyLoad`     | `func`          | `null`                          | Callback after slides load lazily `slidesLoaded => {...}`   | Yes
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes

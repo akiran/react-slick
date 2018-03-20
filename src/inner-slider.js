@@ -7,7 +7,7 @@ import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove, 
-  swipeEnd } from './utils/innerSliderUtils'
+  swipeEnd, getPreClones, getPostClones } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './utils/innerSliderUtils'
 
 import { Track } from './track';
@@ -52,6 +52,9 @@ export class InnerSlider extends React.Component {
       this.adaptHeight()
       this.props.autoplay && this.autoPlay()
     })
+    if (this.props.lazyLoad === 'progressive') {
+      this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000)
+    }
     // To support server-side rendering
     if (!window) {
       return
@@ -65,6 +68,9 @@ export class InnerSlider extends React.Component {
   componentWillUnmount = () => {
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
+    }
+    if (this.lazyLoadTimer) {
+      clearInterval(this.lazyLoadTimer)
     }
     if (window.addEventListener) {
       window.removeEventListener('resize', this.onWindowResized);
@@ -153,6 +159,37 @@ export class InnerSlider extends React.Component {
         }
       }
     })
+  }
+  progressiveLazyLoad = () => {
+    let slidesToLoad = []
+    const spec = {...this.props, ...this.state}
+    for(let index = this.state.currentSlide;
+      index < this.state.slideCount + getPostClones(spec); index++) {
+      if (this.state.lazyLoadedList.indexOf(index) < 0) {
+        slidesToLoad.push(index)
+        break
+      }
+    }
+    for(let index = this.state.currentSlide - 1;
+      index >= -getPreClones(spec); index--) {
+      if (this.state.lazyLoadedList.indexOf(index) < 0) {
+        slidesToLoad.push(index)
+        break
+      }
+    }
+    if (slidesToLoad.length > 0) {
+      this.setState( state => (
+        {lazyLoadedList: state.lazyLoadedList.concat(slidesToLoad)}
+      ))
+      if (this.props.onLazyLoad) {
+        this.props.onLazyLoad(slidesToLoad)
+      }
+    } else {
+      if (this.lazyLoadTimer) {
+        clearInterval(this.lazyLoadTimer)
+        delete this.lazyLoadTimer
+      }
+    }
   }
   slideHandler = (index) => {
     const {
