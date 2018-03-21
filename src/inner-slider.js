@@ -163,7 +163,7 @@ export var InnerSlider = createReactClass({
       'fade', 'cssEase', 'speed', 'infinite', 'centerMode', 'focusOnSelect',
       'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth',
       'slideHeight', 'listHeight', 'vertical', 'slidesToShow', 'slidesToScroll',
-      'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding' ])
+      'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding', 'centerGrow', 'listWidth'])
     trackProps.focusOnSelect = this.props.focusOnSelect? this.selectHandler: null
 
     var dots;
@@ -236,7 +236,7 @@ export var InnerSlider = createReactClass({
       listProps = { className: 'slick-list' }
       innerSliderProps = { className }
     }
-    
+
     return (
       <div {...innerSliderProps} >
         { !this.props.unslick ? prevArrow : '' }

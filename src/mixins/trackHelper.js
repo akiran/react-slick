@@ -36,7 +36,7 @@ export var getTrackCSS = function(spec) {
       opacity: 1
     }
   }
-  
+
   if (trackWidth) {
     assign(style, { width: trackWidth });
   }
@@ -69,6 +69,11 @@ export var getTrackAnimateCSS = function (spec) {
   return style;
 };
 
+function getMax({ trackRef, slideCount, listWidth }) {
+  var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
+  return -(lastSlide.offsetLeft) + listWidth - lastSlide.offsetWidth;
+}
+
 // gets total length of track that's on the left side of current slide
 export var getTrackLeft = function (spec) {
 
@@ -79,9 +84,9 @@ export var getTrackLeft = function (spec) {
   checkSpecKeys(spec, [
    'slideIndex', 'trackRef', 'infinite', 'centerMode', 'slideCount', 'slidesToShow',
    'slidesToScroll', 'slideWidth', 'listWidth', 'variableWidth', 'slideHeight']);
-  
+
   const {slideIndex, trackRef, infinite, centerMode, slideCount, slidesToShow,
-    slidesToScroll, slideWidth, listWidth, variableWidth, slideHeight, fade, vertical} = spec
+    slidesToScroll, slideWidth, listWidth, variableWidth, slideHeight, fade, vertical, centerGrow} = spec
 
   var slideOffset = 0;
   var targetLeft;
@@ -120,9 +125,39 @@ export var getTrackLeft = function (spec) {
     targetLeft = ((slideIndex * slideHeight) * -1) + verticalOffset;
   }
 
-  if (variableWidth === true) {
-      var targetSlideIndex;
-      var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
+
+  if(centerGrow) {
+    //  targetLeft = ((slideIndex * centerGrow.normal) * -1) + (listWidth - centerGrow.center - centerGrow.normal) / 2;
+
+    var getNumberOfExpandingSlides = () => {
+      if(slideIndex < 0) {
+        return 0;
+      }
+      if(slideIndex < slideCount) {
+        return 1;
+      }
+      return 2;
+    }
+
+    var targetSlideIndex;
+
+    targetSlideIndex = infinite ? slideIndex + getPreClones(spec) : slideIndex
+
+    targetLeft = 0;
+
+
+    targetLeft = -(targetSlideIndex ) * centerGrow.normal;
+    targetLeft += getNumberOfExpandingSlides()  * (centerGrow.normal - centerGrow.center);
+    targetLeft += (listWidth  - centerGrow.center) / 2
+
+
+    var max = getMax(spec);
+    if (spec.infinite === false && targetLeft < max) {
+      targetLeft = max;
+    }
+
+  } else if (variableWidth === true) {
+      var max = getMax(spec);
       targetSlideIndex = (slideIndex + getPreClones(spec));
       targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
