@@ -320,22 +320,11 @@ export class InnerSlider extends React.Component {
     if (hover) this.setState({ autoplaying: 'hovered' })
     else this.setState({ autoplaying: 'paused' })
   }
-  onInnerSliderEnter = (e) => {
-    if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause(true);
-    }
-  }
-  onInnerSliderOver = (e) => {
-    if (this.props.autoplay && this.props.pauseOnHover) {
-      this.pause(true);
-    }
-  }
-  onInnerSliderLeave = (e) => {
-    if (this.props.autoplay && this.props.pauseOnHover &&
-      this.state.autoplaying === 'hovered') {
-      this.autoPlay();
-    }
-  }
+  onDotsOver = e => this.props.autoplay && this.pause(true)
+  onDotsLeave = e => this.props.autoplay && this.state.autoplaying === 'hovered' && this.autoPlay()
+  onTrackOver = e => this.props.autoplay && this.pause(true)
+  onTrackLeave = e => this.props.autoplay && this.state.autoplaying === 'hovered' && this.autoPlay()
+
   render = () => {
     var className = classnames('regular', 'slider', 'slick-initialized', 'slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
@@ -346,11 +335,12 @@ export class InnerSlider extends React.Component {
       'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth',
       'slideHeight', 'listHeight', 'vertical', 'slidesToShow', 'slidesToScroll',
       'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding' ])
+    const {pauseOnHover} = this.props
     trackProps = {
       ...trackProps,
-      onMouseEnter: this.onInnerSliderEnter,
-      onMouseLeave: this.onInnerSliderLeave,
-      onMouseOver: this.onInnerSliderOver,
+      onMouseEnter: pauseOnHover ? this.onTrackOver : null,
+      onMouseLeave: pauseOnHover ? this.onTrackLeave : null,
+      onMouseOver: pauseOnHover ? this.onTrackOver : null,
       focusOnSelect: this.props.focusOnSelect? this.selectHandler: null
     }
 
@@ -359,7 +349,14 @@ export class InnerSlider extends React.Component {
       let dotProps = extractObject(spec, [
         'dotsClass', 'slideCount', 'slidesToShow', 'currentSlide', 'slidesToScroll',
         'clickHandler', 'children', 'customPaging', 'infinite', 'appendDots' ])
-      dotProps.clickHandler = this.changeSlide
+      const { pauseOnDotsHover } = this.props
+      dotProps = {
+        ...dotProps,
+        clickHandler: this.changeSlide,
+        onMouseEnter: pauseOnDotsHover ? this.onDotsLeave: null,
+        onMouseOver: pauseOnDotsHover ? this.onDotsOver: null,
+        onMouseLeave: pauseOnDotsHover ? this.onDotsLeave: null,
+      }
       dots = (<Dots {...dotProps} />);
     }
 
