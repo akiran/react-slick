@@ -33,9 +33,7 @@ export class InnerSlider extends React.Component {
     }
   }
   componentWillMount = () => {
-    if (this.props.init) {
-      this.props.init();
-    }
+    this.props.onInit && this.props.onInit()
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
       if (slidesToLoad.length > 0) {
@@ -100,9 +98,7 @@ export class InnerSlider extends React.Component {
   }
   componentDidUpdate = () => {
     this.checkImagesLoad()
-    if (this.props.reInit) {
-      this.props.reInit()
-    }
+    this.props.onReInit && this.props.onReInit()
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
       if (slidesToLoad.length > 0) {

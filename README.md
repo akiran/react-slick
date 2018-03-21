@@ -110,16 +110,16 @@ Props            | Type            | Default Value                   | Descripti
 `fade`           | `bool`          | `Default`                       |                                                             | Yes
 `focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
-`init`           | `func`          | `null`                          | componentWillMount callback. `() => void`                   | Yes
 `initialSlide`   | `int`           | `0`                             | Index of first slide                                        | Yes
 `lazyLoad`       | `ondemand`/`progressive`| `null`                  | Load images or render components on demand or progressively | Yes
 `nextArrow`      | React Element   | `null`                          | React element for next arrow. [Example](examples/CustomArrows.js)       | Yes
 `onEdge`         | `func`          | `null`                          | Edge dragged event in finite case, `direction => {...}`     | Yes
+`onInit`         | `func`          | `null`                          | componentWillMount callback. `() => void`                   | Yes
 `onLazyLoad`     | `func`          | `null`                          | Callback after slides load lazily `slidesLoaded => {...}`   | Yes
+`onReInit`       | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `onSwipe`        | `func`          | `null`                          | Callback after slide changes by swiping                     | Yes
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes
 `prevArrow`      | React Element   | `null`                          | React element for prev arrow. [Example](examples/CustomArrows.js)       | Yes
-`reInit`         | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
 `rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes
 `slide`          | `string`        | `'div'`                         | Slide container type                                        | Yes
