@@ -107,7 +107,6 @@ Props            | Type            | Default Value                   | Descripti
 `dots`           | `bool`          | `Default`                       |                                                             | Yes
 `draggable`      | `bool`          | `true`                          | Enable scrollable via dragging on desktop                   | Yes
 `easing`         | `string`        | `'linear'`                      |                                                             | Yes
-`edgeEvent`      | `func`          | `null`                          | Edge dragged event in finite case, `direction => {...}`     | Yes
 `fade`           | `bool`          | `Default`                       |                                                             | Yes
 `focusOnSelect`  | `bool`          | `false`                         | Go to slide on click                                        | Yes
 `infinite`       | `bool`          | `true`                          | Infinitely wrap around contents                             | Yes
@@ -115,6 +114,7 @@ Props            | Type            | Default Value                   | Descripti
 `initialSlide`   | `int`           | `0`                             | Index of first slide                                        | Yes
 `lazyLoad`       | `ondemand`/`progressive`| `null`                  | Load images or render components on demand or progressively | Yes
 `nextArrow`      | React Element   | `null`                          | React element for next arrow. [Example](examples/CustomArrows.js)       | Yes
+`onEdge`         | `func`          | `null`                          | Edge dragged event in finite case, `direction => {...}`     | Yes
 `onLazyLoad`     | `func`          | `null`                          | Callback after slides load lazily `slidesLoaded => {...}`   | Yes
 `onSwipe`        | `func`          | `null`                          | Callback after slide changes by swiping                     | Yes
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering                            | Yes

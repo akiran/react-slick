@@ -277,7 +277,7 @@ export const swipeStart = (e, swipe, draggable) => {
 export const swipeMove = (e, spec) => {
   // spec also contains, trackRef and slideIndex
   const {scrolling, animating, vertical, swipeToSlide, verticalSwiping,
-    rtl, currentSlide, edgeFriction, edgeDragged, edgeEvent, swiped, swiping,
+    rtl, currentSlide, edgeFriction, edgeDragged, onEdge, swiped, swiping,
     slideCount, slidesToScroll, infinite, touchObject, swipeEvent, listHeight,
     listWidth
   } = spec
@@ -308,8 +308,8 @@ export const swipeMove = (e, spec) => {
       (currentSlide + 1 >= dotCount && swipeDirection === 'left') ||
       (!canGoNext(spec) && swipeDirection === 'left')) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction
-      if (edgeDragged === false && edgeEvent) {
-        edgeEvent(swipeDirection)
+      if (edgeDragged === false && onEdge) {
+        onEdge(swipeDirection)
         state['edgeDragged'] = true
       }
     }
