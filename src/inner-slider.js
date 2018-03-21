@@ -346,7 +346,13 @@ export class InnerSlider extends React.Component {
       'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth',
       'slideHeight', 'listHeight', 'vertical', 'slidesToShow', 'slidesToScroll',
       'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding' ])
-    trackProps.focusOnSelect = this.props.focusOnSelect? this.selectHandler: null
+    trackProps = {
+      ...trackProps,
+      onMouseEnter: this.onInnerSliderEnter,
+      onMouseLeave: this.onInnerSliderLeave,
+      onMouseOver: this.onInnerSliderOver,
+      focusOnSelect: this.props.focusOnSelect? this.selectHandler: null
+    }
 
     var dots;
     if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
@@ -409,9 +415,6 @@ export class InnerSlider extends React.Component {
 
     let innerSliderProps = {
       className: className,
-      onMouseEnter: this.onInnerSliderEnter,
-      onMouseLeave: this.onInnerSliderLeave,
-      onMouseOver: this.onInnerSliderOver,
       dir: 'ltr',
     }
 

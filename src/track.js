@@ -158,10 +158,11 @@ var renderSlides = function (spec) {
 
 export class Track extends React.Component {
   render() {
-    // var slides = renderSlides.call(this, this.props);
-    var slides = renderSlides(this.props)
+    const slides = renderSlides(this.props)
+    const {onMouseEnter, onMouseOver, onMouseLeave} = this.props
+    const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave }
     return (
-      <div className='slick-track' style={this.props.trackStyle}>
+      <div className='slick-track' style={this.props.trackStyle} {...mouseEvents}>
         { slides }
       </div>
     );
