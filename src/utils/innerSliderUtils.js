@@ -460,7 +460,7 @@ export const getSlideCount = spec => {
 
 export const checkSpecKeys = (spec, keysArray) => keysArray.reduce(
     (value, key) => value && spec.hasOwnProperty(key), true
-  ) ? null : console.error('Key:', key, 'is missing from spec:', spec)
+  ) ? null : console.error('Keys Missing:', spec)
 
 export const getTrackCSS = spec => {
   checkSpecKeys(spec, [
