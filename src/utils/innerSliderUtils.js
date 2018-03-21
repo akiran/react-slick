@@ -473,22 +473,33 @@ export const getTrackCSS = spec => {
   } else {
     trackHeight = trackChildren * spec.slideHeight
   }
-  let WebkitTransform = !spec.vertical ?
-    'translate3d(' + spec.left + 'px, 0px, 0px)' :
-    'translate3d(0px, ' + spec.left + 'px, 0px)'
-  let transform = !spec.vertical ?
-    'translate3d(' + spec.left + 'px, 0px, 0px)' :
-    'translate3d(0px, ' + spec.left + 'px, 0px)'
-  let msTransform = !spec.vertical ?
-    'translateX(' + spec.left + 'px)' :
-    'translateY(' + spec.left + 'px)'
   let style = {
     opacity: 1,
-    WebkitTransform,
-    transform,
     transition: '',
-    WebkitTransition: '',
-    msTransform
+    WebkitTransition: ''
+  }
+  if (spec.useTransform) {
+    let WebkitTransform = !spec.vertical ?
+      'translate3d(' + spec.left + 'px, 0px, 0px)' :
+      'translate3d(0px, ' + spec.left + 'px, 0px)'
+    let transform = !spec.vertical ?
+      'translate3d(' + spec.left + 'px, 0px, 0px)' :
+      'translate3d(0px, ' + spec.left + 'px, 0px)'
+    let msTransform = !spec.vertical ?
+      'translateX(' + spec.left + 'px)' :
+      'translateY(' + spec.left + 'px)'
+    style = {
+      ...style,
+      WebkitTransform,
+      transform,
+      msTransform
+    }
+  } else {
+    if (spec.vertical) {
+      style['top'] = spec.left
+    } else {
+      style['left'] = spec.left
+    }
   }
   if (spec.fade) style = { opacity: 1 }
   if (trackWidth) style.width = trackWidth
@@ -510,8 +521,16 @@ export const getTrackAnimateCSS = spec => {
     'slidesToShow', 'slideWidth', 'speed', 'cssEase' ])
   let style = getTrackCSS(spec)
   // useCSS is true by default so it can be undefined
-  style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase
-  style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase
+  if (spec.useTransform) {
+    style.WebkitTransition = '-webkit-transform ' + spec.speed + 'ms ' + spec.cssEase
+    style.transition = 'transform ' + spec.speed + 'ms ' + spec.cssEase
+  } else {
+    if (spec.vertical) {
+      style.transition = 'top ' + spec.speed + 'ms ' + spec.cssEase
+    } else {
+      style.transition = 'left ' + spec.speed + 'ms ' + spec.cssEase
+    }
+  }
   return style
 }
 export const getTrackLeft = spec => {

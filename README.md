@@ -132,6 +132,7 @@ Props            | Type            | Default Value                   | Descripti
 `touchMove`      | `bool`          | `true`                          |                                                             | Yes
 `touchThreshold` | `int`           | `5`                             |                                                             | Yes
 `useCSS`         | `bool`          | `true`                          | Enable/Disable CSS Transitions                              | Yes
+`useTransform`   | `bool`          | `true`                          | Enable/Disable CSS transforms                               | Yes
 `variableWidth`  | `bool`          | `false`                         |                                                             | Yes
 `vertical`       | `bool`          | `false`                         |                                                             | Yes
 

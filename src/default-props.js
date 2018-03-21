@@ -44,6 +44,7 @@ var defaultProps = {
   touchMove: true,
   touchThreshold: 5,
   useCSS: true,
+  useTransform: true,
   variableWidth: false,
   vertical: false,
   waitForAnimate: true,
