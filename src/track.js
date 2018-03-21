@@ -46,6 +46,13 @@ var getSlideStyle = function (spec) {
     style.width = spec.slideWidth;
   }
 
+
+
+
+  if(spec.centerGrow) {
+    style.width = (spec.index === spec.currentSlide) ? spec.centerGrow.center : spec.centerGrow.normal;
+  }
+
   if (spec.fade) {
     style.position = 'relative';
     if (spec.vertical) {

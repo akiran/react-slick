@@ -30,6 +30,7 @@ import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
 import AsNavFor from '../examples/AsNavFor'
 import AppendDots from '../examples/AppendDots'
+import CenterGrow from '../examples/CenterGrow'
 
 export default class App extends React.Component {
   render() {
@@ -62,6 +63,7 @@ export default class App extends React.Component {
         <VerticalSwipeToSlide />
         <AsNavFor />
         <AppendDots />
+        <CenterGrow />
       </div>
     );
   }
