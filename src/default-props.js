@@ -30,6 +30,7 @@ var defaultProps = {
   onLazyLoadError: null,
   onReInit: null,
   pauseOnDotsHover: false,
+  pauseOnFocus: false,
   pauseOnHover: true,
   prevArrow: null,
   responsive: null,

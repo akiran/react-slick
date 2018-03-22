@@ -50,13 +50,17 @@ export class InnerSlider extends React.Component {
     let spec = {listRef: this.list, trackRef: this.track, ...this.props}
     this.updateState(spec, true, () => {
       this.adaptHeight()
-      this.props.autoplay && this.autoPlay()
+      this.props.autoplay && this.autoPlay('update')
     })
     if (this.props.lazyLoad === 'progressive') {
       this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000)
     }
     this.ro = new ResizeObserver( entries => this.onWindowResized())
     this.ro.observe(this.list)
+    Array.from(document.querySelectorAll('.slick-slide')).forEach( slide => {
+      slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null
+      slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null
+    })
     // To support server-side rendering
     if (!window) {
       return
@@ -98,9 +102,9 @@ export class InnerSlider extends React.Component {
         });
       }
       if (nextProps.autoplay) {
-        this.autoPlay()
+        this.autoPlay('update')
       } else {
-        this.pause()
+        this.pause('paused')
       }
     })
   }
@@ -124,8 +128,8 @@ export class InnerSlider extends React.Component {
   onWindowResized = () => {
     let spec = {listRef: this.list, trackRef: this.track, ...this.props, ...this.state}
     this.updateState(spec, true, () => {
-      if (this.state.autoplaying === 'playing') this.autoPlay()
-      else this.pause()
+      if (this.props.autoplay) this.autoPlay('update')
+      else this.pause('paused')
     })
     // animating state should be cleared while resizing, otherwise autoplay stops working
     this.setState({
@@ -315,27 +319,56 @@ export class InnerSlider extends React.Component {
 
     this.slideHandler(nextIndex);
   }
-  autoPlay = () => {
+  autoPlay = (playType) => {
     if (this.autoplayTimer) {
       console.warn("autoPlay is triggered more than once")
       clearInterval(this.autoplayTimer)
     }
+    const autoplaying = this.state.autoplaying
+    if (playType === 'update') {
+      if (autoplaying === 'hovered' ||
+        autoplaying === 'focused' || autoplaying === 'paused') {
+        return
+      }
+    } else if (playType === 'leave') {
+      if (autoplaying === 'paused' || autoplaying === 'focused') {
+        return
+      }
+    } else if (playType === 'blur') {
+      if (autoplaying === 'paused' || autoplaying === 'hovered') {
+        return
+      }
+    }
     this.autoplayTimer = setInterval(this.play, this.props.autoplaySpeed+50)
     this.setState({ autoplaying: 'playing' })
   }
-  pause = (hover=false) => {
+  pause = (pauseType) => {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer)
       this.autoplayTimer = null
     }
-    if (this.state.autoplaying === 'paused') return
-    if (hover) this.setState({ autoplaying: 'hovered' })
-    else this.setState({ autoplaying: 'paused' })
+    const autoplaying = this.state.autoplaying
+    if (pauseType === 'paused') {
+      this.setState({ autoplaying: 'paused' })
+    } else if (pauseType === 'focused') {
+      if (autoplaying === 'hovered' || autoplaying === 'playing') {
+        this.setState({ autoplaying: 'focused'})
+      }
+    } else { // pauseType  is 'hovered'
+      if (autoplaying === 'playing') {
+        this.setState({ autoplaying: 'hovered' })
+      }
+    }
   }
-  onDotsOver = e => this.props.autoplay && this.pause(true)
-  onDotsLeave = e => this.props.autoplay && this.state.autoplaying === 'hovered' && this.autoPlay()
-  onTrackOver = e => this.props.autoplay && this.pause(true)
-  onTrackLeave = e => this.props.autoplay && this.state.autoplaying === 'hovered' && this.autoPlay()
+  onDotsOver = e => this.props.autoplay && this.pause('hovered')
+  onDotsLeave = e => this.props.autoplay &&
+    this.state.autoplaying === 'hovered' && this.autoPlay('leave')
+  onTrackOver = e => this.props.autoplay && this.pause('hovered')
+  onTrackLeave = e => this.props.autoplay &&
+    this.state.autoplaying === 'hovered' && this.autoPlay('leave')
+  onSlideFocus = e => this.props.autoplay && this.pause('focused')
+  onSlideBlur = e => this.props.autoplay &&
+    this.state.autoplaying === 'focused' && this.autoPlay('blur')
 
   render = () => {
     var className = classnames('regular', 'slider', 'slick-initialized', 'slick-slider', this.props.className, {

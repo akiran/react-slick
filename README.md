@@ -119,6 +119,7 @@ Props            | Type            | Default Value                   | Descripti
 `onReInit`       | `func`          | `null`                          | componentDidUpdate callback. `() => void`                   | Yes
 `onSwipe`        | `func`          | `null`                          | Callback after slide changes by swiping                     | Yes
 `pauseOnDotsHover`| `bool`         | `false`                         | Prevents autoplay while hovering on dots                    | Yes
+`pauseOnFocus`   | `bool`          | `false`                         | Prevents autoplay while focused on slides                   | Yes
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering on track                   | Yes
 `prevArrow`      | React Element   | `null`                          | React element for prev arrow. [Example](examples/CustomArrows.js)       | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
