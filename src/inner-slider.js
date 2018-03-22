@@ -13,6 +13,7 @@ import { getTrackLeft, getTrackCSS } from './utils/innerSliderUtils'
 import { Track } from './track';
 import { Dots } from './dots';
 import { PrevArrow, NextArrow } from './arrows';
+import ResizeObserver from 'resize-observer-polyfill'
 
 export class InnerSlider extends React.Component {
   constructor(props) {
@@ -54,6 +55,8 @@ export class InnerSlider extends React.Component {
     if (this.props.lazyLoad === 'progressive') {
       this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000)
     }
+    this.ro = new ResizeObserver( entries => this.onWindowResized())
+    this.ro.observe(this.list)
     // To support server-side rendering
     if (!window) {
       return
