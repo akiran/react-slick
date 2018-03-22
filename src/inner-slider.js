@@ -19,6 +19,7 @@ export var InnerSlider = createReactClass({
   mixins: [HelpersMixin, EventHandlersMixin],
   list: null, // wraps the track
   track: null, // component that rolls out like a film
+  imageLoadedCallbacks: [],
   listRefHandler: function (ref) {
     this.list = ref;
   },
@@ -79,6 +80,10 @@ export var InnerSlider = createReactClass({
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
     }
+    if (this.imageLoadedCallbacks.length) {
+      this.imageLoadedCallbacks.forEach((imageLoadedCallback) => clearTimeout(imageLoadedCallback))
+      this.imageLoadedCallbacks.length = 0;
+    }
   },
   componentWillReceiveProps: function (nextProps) {
     let spec = assign({listRef: this.list, trackRef: this.track}, nextProps, this.state)
@@ -108,7 +113,7 @@ export var InnerSlider = createReactClass({
     let images = document.querySelectorAll('.slick-slide img')
     images.forEach(image => {
       if (!image.onload) {
-        image.onload = () => setTimeout(() => this.update(this.props), this.props.speed)
+        image.onload = () => this.imageLoadedCallbacks.push(setTimeout(() => this.update(this.props), this.props.speed))
       }
     })
     if (this.props.reInit) {
