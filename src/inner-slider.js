@@ -23,6 +23,7 @@ export class InnerSlider extends React.Component {
       ...initialState,
       currentSlide: this.props.initialSlide
     }
+    this.callbackTimers = []
   }
   listRefHandler = ref =>  this.list = ref
   trackRefHandler = ref => this.track = ref
@@ -69,6 +70,10 @@ export class InnerSlider extends React.Component {
     }
     if (this.lazyLoadTimer) {
       clearInterval(this.lazyLoadTimer)
+    }
+    if (this.callbackTimers.length) {
+      this.callbackTimers.forEach(timer => clearTimeout(timer))
+      this.callbackTimers = []
     }
     if (window.addEventListener) {
       window.removeEventListener('resize', this.onWindowResized);
@@ -163,7 +168,8 @@ export class InnerSlider extends React.Component {
         if (this.props.lazyLoad) {
           image.onload = () => {
             this.adaptHeight()
-            setTimeout(this.onWindowResized, this.props.speed)
+            this.callbackTimers.push(
+              setTimeout(this.onWindowResized, this.props.speed))
           }
         } else {
           image.onload = handler
@@ -223,7 +229,8 @@ export class InnerSlider extends React.Component {
       this.animationEndCallback = setTimeout(() => {
         const{animating, ...firstBatch} = nextState
         this.setState(firstBatch, () => {
-          setTimeout(() => this.setState({ animating }), 10)
+          this.callbackTimers.push(
+            setTimeout(() => this.setState({ animating }), 10))
           afterChange && afterChange(state.currentSlide)
           delete this.animationEndCallback
         })
@@ -278,18 +285,23 @@ export class InnerSlider extends React.Component {
     // this and fellow methods are wrapped in setTimeout
     // to make sure initialize setState has happened before
     // any of such methods are called
-    setTimeout(() => this.changeSlide({ message: 'previous' }), 0)
+    this.callbackTimers.push(
+      setTimeout(() => this.changeSlide({ message: 'previous' }), 0))
   }
   slickNext = () => {
-    setTimeout(() => this.changeSlide({ message: 'next' }), 0)
+    this.callbackTimers.push(
+      setTimeout(() => this.changeSlide({ message: 'next' }), 0))
   }
   slickGoTo = (slide) => {
     slide = Number(slide)
-    !isNaN(slide) && setTimeout( () => this.changeSlide({
-      message: 'index',
-      index: slide,
-      currentSlide: this.state.currentSlide
-    }), 0)
+    if (isNan(slide)) return ''
+    this.callbackTimers.push(
+      setTimeout( () => this.changeSlide({
+        message: 'index',
+        index: slide,
+        currentSlide: this.state.currentSlide
+      }), 0)
+    )
   }
   play = ()=> {
     var nextIndex;
