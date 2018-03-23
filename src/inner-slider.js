@@ -155,16 +155,45 @@ export class InnerSlider extends React.Component {
   }
 
   ssrInit = () => {
-    if (this.props.variableWidth) return
+    if (this.props.variableWidth) {
+      let trackWidth = 0, trackLeft = 0
+      let childrenWidths = []
+      let preClones = getPreClones({...this.props, ...this.state, slideCount: this.props.children.length})
+      let postClones = getPostClones({...this.props, ...this.state, slideCount: this.props.children.length})
+      this.props.children.forEach( child => {
+        childrenWidths.push(child.props.style.width)
+        trackWidth += child.props.style.width
+      })
+      for(let i = 0; i < preClones; i++) {
+        trackLeft += childrenWidths[childrenWidths.length - 1 - i]
+        trackWidth += childrenWidths[childrenWidths.length - 1 - i]
+      }
+      for (let i = 0; i < postClones; i++) {
+        trackWidth += childrenWidths[i]
+      }
+      for (let i = 0; i < this.state.currentSlide; i++) {
+        trackLeft += childrenWidths[i]
+      }
+      console.log('childrenWidths:', childrenWidths)
+      console.log('trackWidth:', trackWidth, 'trackLeft', trackLeft)
+      let trackStyle = {
+        width: trackWidth + 'px',
+        left: -trackLeft + 'px'
+      }
+      this.setState({
+        trackStyle
+      })
+      return
+    }
     let childrenCount = React.Children.count(this.props.children)
     const spec = {...this.props, ...this.state, slideCount: childrenCount}
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount
     let trackWidth = (100 / this.props.slidesToShow) * slideCount
     let slideWidth = 100 / slideCount
-    let trackLeft = slideWidth * (getPreClones(spec) + this.state.currentSlide) * trackWidth / 100
+    let trackLeft = -slideWidth * (getPreClones(spec) + this.state.currentSlide) * trackWidth / 100
     let trackStyle = {
       width: trackWidth + '%',
-      left: -trackLeft + '%'
+      left: trackLeft + '%'
     }
     this.setState({
       slideWidth: slideWidth + '%',
