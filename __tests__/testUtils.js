@@ -6,7 +6,7 @@ import Slider from '../src/slider'
 import {InnerSlider} from '../src/inner-slider'
 import defaultProps from '../src/default-props'
 import * as slickCarousel from 'slick-carousel' // defining slick in global environment
-import { getTrackLeft } from '../src/mixins/trackHelper'
+import { getTrackLeft } from '../src/utils/innerSliderUtils'
 
 // finds active slide number in the last transition in the forward direction
 export function activeSlideInLastTransition(noOfSlides, slidesToShow, slidesToScroll){
