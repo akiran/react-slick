@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom'
 import initialState from './initial-state';
 import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
@@ -126,6 +127,7 @@ export class InnerSlider extends React.Component {
     this.adaptHeight();
   }
   onWindowResized = () => {
+    if (!ReactDOM.findDOMNode(this.track)) return
     let spec = {listRef: this.list, trackRef: this.track, ...this.props, ...this.state}
     this.updateState(spec, true, () => {
       if (this.props.autoplay) this.autoPlay('update')
@@ -319,6 +321,7 @@ export class InnerSlider extends React.Component {
 
     this.slideHandler(nextIndex);
   }
+
   autoPlay = (playType) => {
     if (this.autoplayTimer) {
       console.warn("autoPlay is triggered more than once")

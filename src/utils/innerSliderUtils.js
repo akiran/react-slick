@@ -107,7 +107,7 @@ export const initializedState = spec => {
   } else {
     slideWidth = listWidth
   }
-  let slideHeight = getHeight(
+  let slideHeight = ReactDOM.findDOMNode(spec.listRef) && getHeight(
     ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
   )
   let listHeight = slideHeight * spec.slidesToShow
@@ -585,16 +585,17 @@ export const getTrackLeft = spec => {
 
   if (variableWidth === true) {
       var targetSlideIndex;
-      var lastSlide = ReactDOM.findDOMNode(trackRef).children[slideCount - 1];
+      let trackElem = ReactDOM.findDOMNode(trackRef)
+      var lastSlide = trackElem && trackElem.children[slideCount - 1];
       targetSlideIndex = (slideIndex + getPreClones(spec));
-      targetSlide = ReactDOM.findDOMNode(trackRef).childNodes[targetSlideIndex];
+      targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
       if (centerMode === true) {
           targetSlideIndex = infinite ? slideIndex + getPreClones(spec) : slideIndex
-          targetSlide = ReactDOM.findDOMNode(trackRef).children[targetSlideIndex]
+          targetSlide = trackElem && trackElem.children[targetSlideIndex]
           targetLeft = 0
           for (let slide = 0; slide < targetSlideIndex; slide++) {
-            targetLeft -= ReactDOM.findDOMNode(trackRef).children[slide].offsetWidth
+            targetLeft -= trackElem && trackElem.children[slide].offsetWidth
           }
           targetLeft -= parseInt(spec.centerPadding)
           targetLeft += (listWidth - targetSlide.offsetWidth) / 2
