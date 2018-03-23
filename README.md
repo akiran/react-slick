@@ -88,7 +88,6 @@ class SimpleSlider extends React.Component {
 
 Props            | Type            | Default Value                   | Description                                                 | Working
 ---------------- | --------------- | ------------------------------- | -----------                                                 | -------
-
 `accessibility`  | `bool`          | `true`                          | Enable tabbing and arrow key navigation                     | Yes
 `adaptiveHeight` | `bool`          | `false`                         | Adjust the slide's height automatically                     | Yes
 `afterChange`    | `func`          | `Default`                       | Index change callback. `index => ...`                       | Yes
