@@ -191,6 +191,9 @@ export class InnerSlider extends React.Component {
     let trackWidth = (100 / this.props.slidesToShow) * slideCount
     let slideWidth = 100 / slideCount
     let trackLeft = -slideWidth * (getPreClones(spec) + this.state.currentSlide) * trackWidth / 100
+    if (this.props.centerMode) {
+      trackLeft += (100 - (slideWidth * trackWidth / 100)) / 2
+    }
     let trackStyle = {
       width: trackWidth + '%',
       left: trackLeft + '%'
