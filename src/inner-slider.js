@@ -36,6 +36,7 @@ export class InnerSlider extends React.Component {
     }
   }
   componentWillMount = () => {
+    this.ssrInit()
     this.props.onInit && this.props.onInit()
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
@@ -151,6 +152,24 @@ export class InnerSlider extends React.Component {
       updatedState['trackStyle'] = trackStyle
     }
     this.setState( updatedState, callback )
+  }
+
+  ssrInit = () => {
+    if (this.props.variableWidth) return
+    let childrenCount = React.Children.count(this.props.children)
+    const spec = {...this.props, ...this.state, slideCount: childrenCount}
+    let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount
+    let slideWidth = 100 / slideCount
+    let trackLeft = slideWidth * (getPreClones(spec) + this.state.currentSlide) * trackWidth / 100
+    let trackStyle = {
+      width: trackWidth + '%',
+      left: -trackLeft + '%'
+    }
+    this.setState({
+      slideWidth: slideWidth + '%',
+      trackStyle: trackStyle
+    })
   }
   checkImagesLoad = () => {
     let images = document.querySelectorAll('.slick-slide img')
