@@ -21,7 +21,8 @@ export class InnerSlider extends React.Component {
     this.track = null
     this.state = {
       ...initialState,
-      currentSlide: this.props.initialSlide
+      currentSlide: this.props.initialSlide,
+      slideCount: React.Children.count(this.props.children)
     }
     this.callbackTimers = []
   }
@@ -528,7 +529,6 @@ export class InnerSlider extends React.Component {
       listProps = { className: 'slick-list' }
       innerSliderProps = { className }
     }
-
     return (
       <div {...innerSliderProps} >
         { !this.props.unslick ? prevArrow : '' }
