@@ -122,8 +122,10 @@ Props            | Type            | Default Value                   | Descripti
 `pauseOnHover`   | `bool`          | `true`                          | Prevents autoplay while hovering on track                   | Yes
 `prevArrow`      | React Element   | `null`                          | React element for prev arrow. [Example](examples/CustomArrows.js)       | Yes
 `responsive`     | `array`         | `null`                          | Customize based on breakpoints (detailed explanation below) | Yes
+`rows`           | `int`           | `1`                             | How may rows per slide you want to see                      | Yes
 `rtl`            | `bool`          | `false`                         | Reverses the slide order                                    | Yes
 `slide`          | `string`        | `'div'`                         | Slide container type                                        | Yes
+`slidesPerRow`   | `int`           | `1`                             | How many columns per row you want to see                    | Yes
 `slidesToScroll` | `int`           | `1`                             | How many slides to scroll at once                           | Yes
 `slidesToShow`   | `int`           | `1`                             | How many slides to show in one frame                        | Yes
 `speed`          | `int`           | `500`                           | Animation speed in milliseconds                             | Yes
