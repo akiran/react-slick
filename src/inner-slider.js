@@ -54,7 +54,17 @@ export class InnerSlider extends React.Component {
     if (this.props.lazyLoad === 'progressive') {
       this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000)
     }
-    this.ro = new ResizeObserver( () => this.onWindowResized())
+    this.ro = new ResizeObserver( () => {
+      if (this.state.animating) {
+        this.onWindowResized(false) // don't set trackStyle hence don't break animation
+        this.callbackTimers.push(setTimeout(
+          () => this.onWindowResized(),
+          this.props.speed
+        ))
+      } else {
+        this.onWindowResized()
+      }
+    })
     this.ro.observe(this.list)
     Array.from(document.querySelectorAll('.slick-slide')).forEach( slide => {
       slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null
@@ -124,10 +134,10 @@ export class InnerSlider extends React.Component {
     // }
     this.adaptHeight();
   }
-  onWindowResized = () => {
+  onWindowResized = (setTrackStyle=true) => {
     if (!ReactDOM.findDOMNode(this.track)) return
     let spec = {listRef: this.list, trackRef: this.track, ...this.props, ...this.state}
-    this.updateState(spec, true, () => {
+    this.updateState(spec, setTrackStyle, () => {
       if (this.props.autoplay) this.autoPlay('update')
       else this.pause('paused')
     })
