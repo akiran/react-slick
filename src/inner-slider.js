@@ -174,11 +174,13 @@ export class InnerSlider extends React.Component {
       for (let i = 0; i < this.state.currentSlide; i++) {
         trackLeft += childrenWidths[i]
       }
-      console.log('childrenWidths:', childrenWidths)
-      console.log('trackWidth:', trackWidth, 'trackLeft', trackLeft)
       let trackStyle = {
         width: trackWidth + 'px',
         left: -trackLeft + 'px'
+      }
+      if (this.props.centerMode) {
+        let currentWidth = `${childrenWidths[this.state.currentSlide]}px`
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `
       }
       this.setState({
         trackStyle
