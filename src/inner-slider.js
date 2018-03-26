@@ -34,6 +34,7 @@ export class InnerSlider extends React.Component {
     }
   }
   componentWillMount = () => {
+    this.ssrInit()
     this.props.onInit && this.props.onInit()
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
@@ -159,6 +160,58 @@ export class InnerSlider extends React.Component {
       updatedState['trackStyle'] = trackStyle
     }
     this.setState( updatedState, callback )
+  }
+
+  ssrInit = () => {
+    if (this.props.variableWidth) {
+      let trackWidth = 0, trackLeft = 0
+      let childrenWidths = []
+      let preClones = getPreClones({...this.props, ...this.state, slideCount: this.props.children.length})
+      let postClones = getPostClones({...this.props, ...this.state, slideCount: this.props.children.length})
+      this.props.children.forEach( child => {
+        childrenWidths.push(child.props.style.width)
+        trackWidth += child.props.style.width
+      })
+      for(let i = 0; i < preClones; i++) {
+        trackLeft += childrenWidths[childrenWidths.length - 1 - i]
+        trackWidth += childrenWidths[childrenWidths.length - 1 - i]
+      }
+      for (let i = 0; i < postClones; i++) {
+        trackWidth += childrenWidths[i]
+      }
+      for (let i = 0; i < this.state.currentSlide; i++) {
+        trackLeft += childrenWidths[i]
+      }
+      let trackStyle = {
+        width: trackWidth + 'px',
+        left: -trackLeft + 'px'
+      }
+      if (this.props.centerMode) {
+        let currentWidth = `${childrenWidths[this.state.currentSlide]}px`
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `
+      }
+      this.setState({
+        trackStyle
+      })
+      return
+    }
+    let childrenCount = React.Children.count(this.props.children)
+    const spec = {...this.props, ...this.state, slideCount: childrenCount}
+    let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount
+    let slideWidth = 100 / slideCount
+    let trackLeft = -slideWidth * (getPreClones(spec) + this.state.currentSlide) * trackWidth / 100
+    if (this.props.centerMode) {
+      trackLeft += (100 - (slideWidth * trackWidth / 100)) / 2
+    }
+    let trackStyle = {
+      width: trackWidth + '%',
+      left: trackLeft + '%'
+    }
+    this.setState({
+      slideWidth: slideWidth + '%',
+      trackStyle: trackStyle
+    })
   }
   checkImagesLoad = () => {
     let images = document.querySelectorAll('.slick-slide img')
