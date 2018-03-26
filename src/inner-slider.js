@@ -6,8 +6,8 @@ import initialState from './initial-state';
 import defaultProps from './default-props';
 import createReactClass from 'create-react-class';
 import classnames from 'classnames';
-import { getOnDemandLazySlides, extractObject, initializedState, getHeight, 
-  canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove, 
+import { getOnDemandLazySlides, extractObject, initializedState, getHeight,
+  canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove,
   swipeEnd, getPreClones, getPostClones } from './utils/innerSliderUtils'
 import { getTrackLeft, getTrackCSS } from './utils/innerSliderUtils'
 
@@ -298,7 +298,7 @@ export class InnerSlider extends React.Component {
   }
   slickGoTo = (slide) => {
     slide = Number(slide)
-    if (isNan(slide)) return ''
+    if (isNaN(slide)) return ''
     this.callbackTimers.push(
       setTimeout( () => this.changeSlide({
         message: 'index',
@@ -467,7 +467,7 @@ export class InnerSlider extends React.Component {
       listProps = { className: 'slick-list' }
       innerSliderProps = { className }
     }
-    
+
     return (
       <div {...innerSliderProps} >
         { !this.props.unslick ? prevArrow : '' }
