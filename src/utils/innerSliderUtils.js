@@ -132,7 +132,7 @@ export const initializedState = spec => {
 
 export const slideHandler = spec => {
   const {waitForAnimate, animating, fade, infinite, index, slideCount,
-    lazyLoadedList, lazyLoad, onLazyLoad, asNavFor, currentSlide, speed,
+    lazyLoadedList, lazyLoad, currentSlide,
     centerMode, slidesToScroll, slidesToShow, useCSS
   } = spec
   if (waitForAnimate && animating) return {}
@@ -206,7 +206,7 @@ export const slideHandler = spec => {
 export const changeSlide = (spec, options) => {
   var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
   const {
-    slidesToScroll, slidesToShow, centerMode, rtl, slideCount, currentSlide,
+    slidesToScroll, slidesToShow, slideCount, currentSlide,
     lazyLoad, infinite
   } = spec
   unevenOffset = (slideCount % slidesToScroll !== 0);
@@ -586,7 +586,6 @@ export const getTrackLeft = spec => {
   if (variableWidth === true) {
       var targetSlideIndex;
       let trackElem = ReactDOM.findDOMNode(trackRef)
-      var lastSlide = trackElem && trackElem.children[slideCount - 1];
       targetSlideIndex = (slideIndex + getPreClones(spec));
       targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
       targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;

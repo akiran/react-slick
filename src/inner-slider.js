@@ -3,8 +3,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import initialState from './initial-state';
-import defaultProps from './default-props';
-import createReactClass from 'create-react-class';
 import classnames from 'classnames';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight,
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove,
@@ -40,7 +38,7 @@ export class InnerSlider extends React.Component {
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
       if (slidesToLoad.length > 0) {
-        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
+        this.setState(prevState => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
         if (this.props.onLazyLoad) {
           this.props.onLazyLoad(slidesToLoad)
         }
@@ -56,7 +54,7 @@ export class InnerSlider extends React.Component {
     if (this.props.lazyLoad === 'progressive') {
       this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000)
     }
-    this.ro = new ResizeObserver( entries => this.onWindowResized())
+    this.ro = new ResizeObserver( () => this.onWindowResized())
     this.ro.observe(this.list)
     Array.from(document.querySelectorAll('.slick-slide')).forEach( slide => {
       slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null
@@ -115,7 +113,7 @@ export class InnerSlider extends React.Component {
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({...this.props, ...this.state})
       if (slidesToLoad.length > 0) {
-        this.setState((prevState, props) => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
+        this.setState(prevState => ({ lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad) }))
         if (this.props.onLazyLoad) {
           this.props.onLazyLoad(slidesToLoad)
         }
@@ -363,14 +361,14 @@ export class InnerSlider extends React.Component {
       }
     }
   }
-  onDotsOver = e => this.props.autoplay && this.pause('hovered')
-  onDotsLeave = e => this.props.autoplay &&
+  onDotsOver = () => this.props.autoplay && this.pause('hovered')
+  onDotsLeave = () => this.props.autoplay &&
     this.state.autoplaying === 'hovered' && this.autoPlay('leave')
-  onTrackOver = e => this.props.autoplay && this.pause('hovered')
-  onTrackLeave = e => this.props.autoplay &&
+  onTrackOver = () => this.props.autoplay && this.pause('hovered')
+  onTrackLeave = () => this.props.autoplay &&
     this.state.autoplaying === 'hovered' && this.autoPlay('leave')
-  onSlideFocus = e => this.props.autoplay && this.pause('focused')
-  onSlideBlur = e => this.props.autoplay &&
+  onSlideFocus = () => this.props.autoplay && this.pause('focused')
+  onSlideBlur = () => this.props.autoplay &&
     this.state.autoplaying === 'focused' && this.autoPlay('blur')
 
   render = () => {
