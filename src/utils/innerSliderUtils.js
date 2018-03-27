@@ -663,3 +663,10 @@ export const slidesOnLeft = ({ slidesToShow, centerMode, rtl, centerPadding }) =
   }
   return 0
 }
+
+export const canUseDOM = () => !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+)
+

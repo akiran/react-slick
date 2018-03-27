@@ -4,8 +4,8 @@ import React from 'react';
 import {InnerSlider} from './inner-slider';
 import json2mq from 'json2mq';
 import defaultProps from './default-props';
-import canUseDOM from 'can-use-dom';
-const enquire = canUseDOM && require('enquire.js');
+import { canUseDOM } from './utils/innerSliderUtils'
+const enquire = canUseDOM() && require('enquire.js');
 
 export default class Slider extends React.Component {
 
@@ -41,7 +41,7 @@ export default class Slider extends React.Component {
           bQuery = json2mq({minWidth: breakpoints[index-1] + 1, maxWidth: breakpoint});
         }
         // when not using server side rendering
-        canUseDOM && this.media(bQuery, () => {
+        canUseDOM() && this.media(bQuery, () => {
           this.setState({breakpoint: breakpoint});
         })
       });
@@ -50,7 +50,7 @@ export default class Slider extends React.Component {
       // convert javascript object to media query string
       let query = json2mq({minWidth: breakpoints.slice(-1)[0]});
 
-      canUseDOM && this.media(query, () => {
+      canUseDOM() && this.media(query, () => {
         this.setState({breakpoint: null});
       });
     }
