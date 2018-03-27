@@ -45,16 +45,6 @@ Use [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) to try react-sli
   <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
 </a>
 
-
-
-### Filing issues
-Please replicate your issue with [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) and post it along with issue to make it easy for me to debug.
-
-
-### Starter Kit
-Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly
-get started with react-slick.
-
 ### Example
 
 ```js
@@ -166,7 +156,6 @@ and add below jest config in package.json
 }
 ```
 
-
 ### Development
 Want to run demos locally
 
@@ -180,6 +169,10 @@ open http://localhost:8080
 
 ### Polyfills for old IE support
 `matchMedia` support from [media-match](https://github.com/weblinc/media-match)
+
+<a href="https://opencollective.com/react-slick/donate" target="_blank">
+  <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
+</a>
 
 ## Contributors
 
