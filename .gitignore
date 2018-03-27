@@ -13,3 +13,4 @@ dist
 yarn.lock
 .vscode
 exampleslib
+examples/scripts/configs.json
