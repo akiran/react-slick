@@ -13,7 +13,8 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "eslint src && jest",
     "test:watch": "jest --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html"
   },
   "author": "Kiran Abburi",
   "license": "MIT",

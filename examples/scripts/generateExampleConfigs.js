@@ -53,8 +53,8 @@ const fetchExampleConfigs = (fileName, index) => {
   try {
     // react string without jsx
     childrenString = eval(
-      transpile('<div>' + childrenString +'</div>')
-      .replace(/baseUrl/g, "'/img/react-slick'")
+      transpile(`<div name="${exampleName}">` + childrenString +'</div>')
+      .replace(/baseUrl/g, "'./img/react-slick'")
     )
     console.log('success')
   } catch (error) {

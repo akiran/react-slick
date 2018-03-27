@@ -14,3 +14,4 @@ yarn.lock
 .vscode
 exampleslib
 examples/scripts/configs.json
+jquery.html
