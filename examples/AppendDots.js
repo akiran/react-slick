@@ -21,7 +21,7 @@ export default class AppendDots extends Component {
             }}>
           {i+1}
         </div>
-      )
+      ),
     };
     return (
       <div>

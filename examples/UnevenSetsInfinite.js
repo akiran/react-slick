@@ -8,7 +8,7 @@ export default class UnevenSetsInfinite extends Component {
       infinite: true,
       speed: 500,
       slidesToScroll: 4,
-      slidesToShow: 4
+      slidesToShow: 4,
     };
     return (
       <div>

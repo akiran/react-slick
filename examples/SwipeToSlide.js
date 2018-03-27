@@ -11,7 +11,7 @@ export default class SwipeToSlide extends Component {
       swipeToSlide: true,
       afterChange: function (index) {
         console.log(`Slider Changed to: ${index + 1}, background: #222; color: #bada55`);
-      }
+      },
     };
     return (
       <div>

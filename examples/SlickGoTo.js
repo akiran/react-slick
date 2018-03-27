@@ -17,7 +17,7 @@ export default class SlickGoTo extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       afterChange: () => this.setState(state => ({ updateCount: state.updateCount + 1 })),
-      beforeChange: (current, next) => this.setState( { slideIndex: next } )
+      beforeChange: (current, next) => this.setState( { slideIndex: next } ),
     };
     return (
       <div>
