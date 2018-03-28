@@ -129,26 +129,26 @@ export default class Slider extends React.Component {
             currentWidth = children[k].props.style.width
           }
           if (k >= children.length) break
-          row.push(React.cloneElement(children[k], {style: {
+          row.push(React.cloneElement(children[k], {key: 100*i+10*j+k, style: {
             width: `${100 / settings.slidesPerRow}%`,
             display: 'inline-block'
           }}))
         }
         newSlide.push((
-          <div>
+          <div key={10*i+j}>
             {row}
           </div>
         ))
       }
       if (settings.variableWidth) {
         newChildren.push((
-          <div style={{ width: currentWidth }}>
+          <div key={i} style={{ width: currentWidth }}>
             {newSlide}
           </div>
         ))
       } else {
         newChildren.push((
-          <div>
+          <div key={i}>
             {newSlide}
           </div>
         ))
