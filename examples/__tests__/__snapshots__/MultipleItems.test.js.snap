@@ -7,67 +7,151 @@ exports[`Multiple Items should have 3 active slides 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -87,67 +171,151 @@ exports[`Multiple Items should have 3 dots 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -167,67 +335,151 @@ exports[`Multiple Items should have 9 actual slides and (3(pre) + 9(post)) clone
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -247,67 +499,151 @@ exports[`Multiple Items should show first 3 slides 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -327,67 +663,151 @@ exports[`Multiple Items should show last 3 slides when last dot is clicked 1`] =
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -407,67 +827,151 @@ exports[`Multiple Items should show last 3 slides when previous button is clicke
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -487,67 +991,151 @@ exports[`Multiple Items should show slides first 3 slides when middle dot is cli
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -567,67 +1155,151 @@ exports[`Multiple Items should show slides from 4 to 6 when middle dot is clicke
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -647,67 +1319,151 @@ exports[`Multiple Items should show slides from 4 to 6 when next button is click
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>7</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>7</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>8</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>8</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>9</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>9</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>

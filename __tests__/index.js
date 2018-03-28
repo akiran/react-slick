@@ -7,6 +7,6 @@ import Slider from '../src/index';
 describe('Slider', function() {
   it('should render', function() {
     const wrapper = shallow(<Slider><div>slide1</div></Slider>);
-    expect(wrapper.contains(<div>slide1</div>)).toBe(true);
+    expect(wrapper.contains(<div style={{ width: '100%', display: 'inline-block' }}>slide1</div>)).toBe(true);
   });
 });

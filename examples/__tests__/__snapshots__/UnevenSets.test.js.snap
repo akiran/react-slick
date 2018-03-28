@@ -7,22 +7,46 @@ exports[`UnevenSets Finite Activity test 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next slick-disabled\\" style=\\"display: block;\\"> Next</button>
@@ -41,22 +65,46 @@ exports[`UnevenSets Finite Counting test 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -75,22 +123,46 @@ exports[`UnevenSets Finite Positioning test 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -109,52 +181,116 @@ exports[`UnevenSets Infinite Activity test 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-active slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-active slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -173,52 +309,116 @@ exports[`UnevenSets Infinite Counting test 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
@@ -237,52 +437,116 @@ exports[`UnevenSets Infinite Positioning test 1`] = `
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"3\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" style=\\"outline: none; width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>1</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>2</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>3</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>4</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>5</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
                 </div>
                 <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
-                    <h3>6</h3>
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
