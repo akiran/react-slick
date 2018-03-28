@@ -386,7 +386,6 @@ export class InnerSlider extends React.Component {
 
   autoPlay = (playType) => {
     if (this.autoplayTimer) {
-      console.warn("autoPlay is triggered more than once")
       clearInterval(this.autoplayTimer)
     }
     const autoplaying = this.state.autoplaying
