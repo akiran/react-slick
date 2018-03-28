@@ -1,6 +1,8 @@
 const fs = require('fs')
 const exampleConfigs = require('./configs.json')
+const exec = require('child_process').exec
 
+var procCode = exec('cp -r node_modules/slick-carousel/slick/fonts node_modules/slick-carousel/slick/ajax-loader.gif docs/')
 
 const toString = obj => {
   let ret = '{\n'
@@ -23,7 +25,12 @@ Object.keys(exampleConfigs).forEach(key => {
   const props = exampleConfigs[key]['props']
   const children = exampleConfigs[key]['children']
   if (!props || !children) return
-  bodyHTML += children + "\n"
+  bodyHTML += `
+    <div>
+      <h2>${key}</h2>
+      ${children}
+    </div>
+  `
   bodyScript += `
 $('[name="${key}"').slick(${toString(props)})
   `
@@ -32,14 +39,28 @@ $('[name="${key}"').slick(${toString(props)})
 let HTMLString = `<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="./slick.css">
     <link rel="stylesheet" href="./slick-theme.css">
     <link rel="stylesheet" href="./docs.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="../node_modules/slick-carousel/slick/slick.min.js"></script>
+    <!--
+    <style>
+      .slick-dots li button:before {
+        content: "•";
+      }
+      .slick-prev:before {
+        content: "←";
+      }
+      .slick-next:before {
+        content: "→";
+      }
+      -->
+    </style>
   </head>
   <body>
-    <div>
+    <div class="content">
       ${bodyHTML}
     </div>
     <script type='text/javascript'>
