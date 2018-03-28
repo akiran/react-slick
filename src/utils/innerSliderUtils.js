@@ -594,10 +594,11 @@ export const getTrackLeft = spec => {
           targetSlide = trackElem && trackElem.children[targetSlideIndex]
           targetLeft = 0
           for (let slide = 0; slide < targetSlideIndex; slide++) {
-            targetLeft -= trackElem && trackElem.children[slide].offsetWidth
+            targetLeft -= trackElem && trackElem.children[slide] &&
+              trackElem.children[slide].offsetWidth
           }
           targetLeft -= parseInt(spec.centerPadding)
-          targetLeft += (listWidth - targetSlide.offsetWidth) / 2
+          targetLeft += targetSlide && (listWidth - targetSlide.offsetWidth) / 2
       }
   }
 
