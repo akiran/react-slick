@@ -68,7 +68,7 @@ export class InnerSlider extends React.Component {
       }
     })
     this.ro.observe(this.list)
-    Array.from(document.querySelectorAll('.slick-slide')).forEach( slide => {
+    Array.prototype.forEach.call(document.querySelectorAll('.slick-slide'), slide => {
       slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null
       slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null
     })
@@ -218,7 +218,7 @@ export class InnerSlider extends React.Component {
     let images = document.querySelectorAll('.slick-slide img')
     let imagesCount = images.length,
       loadedCount = 0
-    Array.from(images).forEach(image => {
+    Array.prototype.forEach.call(images, image => {
       const handler = () => ++loadedCount &&
           (loadedCount >= imagesCount) && this.onWindowResized()
       if (!image.onclick) {
