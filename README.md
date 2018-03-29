@@ -143,7 +143,7 @@ Name              | Arguments       | Description
 ------------------|-----------------|-------------------------
 `slickPrev`       | None            | go to previous slide
 `slickNext`       | None            | go to next slide
-`slickGoTo`       | index:number    | go to the given slide index
+`slickGoTo`       | index, dontAnimate| go to the given slide index
 `slickPause`      | None            | pause the autoplay
 `slickPlay`       | None            | start the autoplay
 
