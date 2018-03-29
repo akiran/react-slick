@@ -74,7 +74,8 @@
     "slick-carousel": "^1.8.1",
     "style-loader": "^0.16.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
+    "webpack-dev-server": "^1.16.1",
+    "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",

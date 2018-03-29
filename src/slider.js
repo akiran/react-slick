@@ -27,6 +27,11 @@ export default class Slider extends React.Component {
   
   // handles responsive breakpoints
   componentWillMount() {
+    // performance monitoring
+    if (process.env.NODE_ENV !== 'production') {
+      const { whyDidYouUpdate } = require('why-did-you-update')
+      whyDidYouUpdate(React)
+    }
     if (this.props.responsive) {
       let breakpoints = this.props.responsive.map(breakpt => breakpt.breakpoint);
       // sort them in increasing order of their numerical value

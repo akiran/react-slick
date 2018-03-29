@@ -156,7 +156,7 @@ var renderSlides = function (spec) {
   }
 };
 
-export class Track extends React.Component {
+export class Track extends React.PureComponent {
   render() {
     const slides = renderSlides(this.props)
     const {onMouseEnter, onMouseOver, onMouseLeave} = this.props

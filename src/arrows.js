@@ -4,7 +4,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { canGoNext } from './utils/innerSliderUtils'
 
-export class PrevArrow extends React.Component {
+export class PrevArrow extends React.PureComponent {
   clickHandler(options, e) {
     if (e) { e.preventDefault(); }
     this.props.clickHandler(options, e);
@@ -42,7 +42,7 @@ export class PrevArrow extends React.Component {
 }
 
 
-export class NextArrow extends React.Component {
+export class NextArrow extends React.PureComponent {
   clickHandler(options, e) {
     if (e) { e.preventDefault(); }
     this.props.clickHandler(options, e);
