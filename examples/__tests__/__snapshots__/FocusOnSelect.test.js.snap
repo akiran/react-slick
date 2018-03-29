@@ -4,7 +4,7 @@ exports[`FocusOnSelect Tests Activity Test 1`] = `
 "<div>
     <h2>FocusOnSelect</h2>
     <div>Click on any slide to select and make it current slide</div>
-    <div class=\\"slick-initialized slick-slider\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"regular slider slick-initialized slick-slider\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">
@@ -61,7 +61,7 @@ exports[`FocusOnSelect Tests Activity Test 2`] = `
 "<div>
     <h2>FocusOnSelect</h2>
     <div>Click on any slide to select and make it current slide</div>
-    <div class=\\"slick-initialized slick-slider\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"regular slider slick-initialized slick-slider\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: 0px;\\">

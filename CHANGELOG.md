@@ -2,6 +2,41 @@
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
 
+## 0.22.0
+
+**Release Changes**
+
+- Internal Changes
+  - converted InnerSlider from createReactClass object to ES6 class
+  - removed all the mixins, created classMethods and pure utility functions instead
+  - changed autoplay from setTimeout to setInterval
+  - added images onload handlers to update dynamically
+  - added autoplaying state for the betterment of autoplay and pause
+  - removed usage of assign or Object.assign, using object spreading instead
+  - implemented effects of touchMove props
+  - fixed transition in opposite direction in case of continuous scrolling
+  - added separate onclick event listener for images
+  - added missing classes `regular` and `slider`
+  - renamed events
+    - edgeEvent => onEdge
+    - init => onInit
+    - reInit => onReInit
+  - implemented `pauseOnDotsHover` property
+  - implemented Progressive LazyLoad property, lazyLoad is now ondemand/progressive
+  - implemented lazyloadError event
+  - implemented useTransform property
+  - implemented pauseOnFocus property
+  - added resize observer to update on slider resize
+
+- Bug Fixes
+  - dynamic track updates on image load
+  - fixed slickPause and autoPlay issues (paused slider would resume autoplay sometime)
+  - fixed trackStyle update on window resize
+  - fixed NodeList forEach problem for chrome 51 or below
+  - fixed bugs due to uncleared callback timers
+  - fixed update issues on just slider resize
+
+
 ## 0.21.0
 
 **Release Changes**

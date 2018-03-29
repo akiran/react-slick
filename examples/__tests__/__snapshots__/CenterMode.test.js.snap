@@ -3,7 +3,7 @@
 exports[`CenterMode Tests Activity test 1`] = `
 "<div>
     <h2>Center Mode</h2>
-    <div class=\\"slick-initialized slick-slider center\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"regular slider slick-initialized slick-slider center\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1; width: -640px;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: -40px;\\">
@@ -62,7 +62,7 @@ exports[`CenterMode Tests Activity test 1`] = `
 exports[`CenterMode Tests Counting test 1`] = `
 "<div>
     <h2>Center Mode</h2>
-    <div class=\\"slick-initialized slick-slider center\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"regular slider slick-initialized slick-slider center\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1; width: -640px;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: -40px;\\">
@@ -121,7 +121,7 @@ exports[`CenterMode Tests Counting test 1`] = `
 exports[`CenterMode Tests Positioning test 1`] = `
 "<div>
     <h2>Center Mode</h2>
-    <div class=\\"slick-initialized slick-slider center\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"regular slider slick-initialized slick-slider center\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1; width: -640px;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" style=\\"width: -40px;\\">
