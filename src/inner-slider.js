@@ -6,8 +6,8 @@ import initialState from './initial-state';
 import classnames from 'classnames';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight,
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove,
-  swipeEnd, getPreClones, getPostClones } from './utils/innerSliderUtils'
-import { getTrackLeft, getTrackCSS } from './utils/innerSliderUtils'
+  swipeEnd, getPreClones, getPostClones, getTrackLeft, getTrackCSS, canUseDOM
+} from './utils/innerSliderUtils'
 
 import { Track } from './track';
 import { Dots } from './dots';
@@ -459,8 +459,9 @@ export class InnerSlider extends React.Component {
     this.state.autoplaying === 'focused' && this.autoPlay('blur')
 
   render = () => {
-    var className = classnames('slick-initialized', 'slick-slider', this.props.className, {
+    var className = classnames('slick-slider', this.props.className, {
       'slick-vertical': this.props.vertical,
+      'slick-initialized': canUseDOM(),
     });
     let spec = {...this.props, ...this.state}
     let trackProps = extractObject(spec, [
