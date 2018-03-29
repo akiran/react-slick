@@ -7,34 +7,32 @@ import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderU
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
 var getSlideClasses = (spec) => {
-  // if spec has currentSlideIndex, we can also apply slickCurrent class according to that (https://github.com/kenwheeler/slick/blob/master/slick/slick.js#L2300-L2302)
   var slickActive, slickCenter, slickCloned;
   var centerOffset, index;
 
-  if (spec.rtl) { // if we're going right to left, index is reversed
+  if (spec.rtl) {
     index = spec.slideCount - 1 - spec.index;
-  } else { // index of the slide
+  } else {
     index = spec.index;
   }
   slickCloned = (index < 0) || (index >= spec.slideCount);
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
-    slickCenter = (index - spec.currentSlide) % spec.slideCount === 0; // concern: not sure if this should be correct (https://github.com/kenwheeler/slick/blob/master/slick/slick.js#L2328-L2346)
+    slickCenter = (index - spec.currentSlide) % spec.slideCount === 0;
     if ((index > spec.currentSlide - centerOffset - 1) && (index <= spec.currentSlide + centerOffset)) {
       slickActive = true;
     }
   } else {
-    // concern: following can be incorrect in case where currentSlide is lastSlide in frame and rest of the slides to show have index smaller than currentSlideIndex
     slickActive = (spec.currentSlide <= index) && (index < spec.currentSlide + spec.slidesToShow);
   }
   let slickCurrent = index === spec.currentSlide
-  return classnames({
+  return {
     'slick-slide': true,
     'slick-active': slickActive,
     'slick-center': slickCenter,
     'slick-cloned': slickCloned,
     'slick-current': slickCurrent // dubious in case of RTL
-  });
+  }
 };
 
 var getSlideStyle = function (spec) {
@@ -87,13 +85,14 @@ var renderSlides = function (spec) {
     }
     var childStyle = getSlideStyle({...spec, index})
     const slideClass = child.props.className || ''
-    
+    let slideClasses = getSlideClasses({...spec, index})
     // push a cloned element of the desired slide
     slides.push(React.cloneElement(child, {
       key: 'original' + getKey(child, index),
       'data-index': index,
-      className: classnames(getSlideClasses({...spec, index}), slideClass),
+      className: classnames(slideClasses, slideClass),
       tabIndex: '-1',
+      'aria-hidden': !slideClasses['slick-active'],
       style: {outline: 'none', ...(child.props.style || {}), ...childStyle},
       onClick: e => {
         child.props && child.props.onClick && child.props.onClick(e)
@@ -112,11 +111,13 @@ var renderSlides = function (spec) {
         if (key >= startIndex) {
           child = elem
         }
+        slideClasses = getSlideClasses({...spec, index: key})
         preCloneSlides.push(React.cloneElement(child, {
           key: 'precloned' + getKey(child, key),
           'data-index': key,
           tabIndex: '-1',
-          className: classnames(getSlideClasses({...spec, index: key}), slideClass),
+          className: classnames(slideClasses, slideClass),
+          'aria-hidden': !slideClasses['slick-active'],
           style: {...(child.props.style || {}), ...childStyle},
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e)
@@ -132,11 +133,13 @@ var renderSlides = function (spec) {
         if (key < endIndex) {
           child = elem
         }
+        slideClasses = getSlideClasses({...spec, index: key})
         postCloneSlides.push(React.cloneElement(child, {
           key: 'postcloned' + getKey(child, key),
           'data-index': key,
           tabIndex: '-1',
-          className: classnames(getSlideClasses({...spec, index: key}), slideClass),
+          className: classnames(slideClasses, slideClass),
+          'aria-hidden': !slideClasses['slick-active'],
           style: {...(child.props.style || {}), ...childStyle},
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e)
