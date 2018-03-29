@@ -25,6 +25,7 @@ export class InnerSlider extends React.Component {
       slideCount: React.Children.count(this.props.children)
     }
     this.callbackTimers = []
+    this.clickable = true
   }
   listRefHandler = ref =>  this.list = ref
   trackRefHandler = ref => this.track = ref
@@ -310,6 +311,13 @@ export class InnerSlider extends React.Component {
     if (targetSlide !== 0 && !targetSlide) return
     this.slideHandler(targetSlide)
   }
+  clickHandler = e => {
+    if (this.clickable === false) {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+    this.clickable = true
+  }
   keyHandler = (e) => {
     let dir = keyHandler(e, this.props.accessibility, this.props.rtl)
     dir !== '' && this.changeSlide({ message: dir })
@@ -330,6 +338,9 @@ export class InnerSlider extends React.Component {
       slideIndex: this.state.currentSlide
     })
     if (!state) return
+    if (state['swiping']) {
+      this.clickable = false
+    }
     this.setState(state)
   }
   swipeEnd = (e) => {
@@ -508,6 +519,7 @@ export class InnerSlider extends React.Component {
     let listProps = {
       className: 'slick-list',
       style: listStyle,
+      onClick: this.clickHandler,
       onMouseDown: touchMove ? this.swipeStart : null,
       onMouseMove: this.state.dragging && touchMove ? this.swipeMove : null,
       onMouseUp: touchMove ? this.swipeEnd : null,
