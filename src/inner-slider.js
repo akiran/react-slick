@@ -368,7 +368,9 @@ export class InnerSlider extends React.Component {
     window.ontouchmove = null
   }
   swipeStart = (e) => {
-    this.disableBodyScroll()
+    if (this.props.verticalSwiping) {
+      this.disableBodyScroll()
+    }
     let state = swipeStart(e, this.props.swipe, this.props.draggable)
     state !== '' && this.setState(state)
   }
@@ -400,7 +402,9 @@ export class InnerSlider extends React.Component {
     this.setState(state)
     if (triggerSlideHandler === undefined) return
     this.slideHandler(triggerSlideHandler)
-    this.enableBodyScroll()
+    if (this.props.verticalSwiping) {
+      this.enableBodyScroll()
+    }
   }
   slickPrev = () => {
     // this and fellow methods are wrapped in setTimeout
