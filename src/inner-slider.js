@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import initialState from './initial-state';
+import debounce from 'lodash.debounce'
 import classnames from 'classnames';
 import { getOnDemandLazySlides, extractObject, initializedState, getHeight,
   canGoNext, slideHandler, changeSlide, keyHandler, swipeStart, swipeMove,
@@ -26,8 +27,7 @@ export class InnerSlider extends React.Component {
     }
     this.callbackTimers = []
     this.clickable = true
-    this.resizeQueue = 0
-    this.resizeQueueTimer = null
+    this.debouncedResize = null
   }
   listRefHandler = ref =>  this.list = ref
   trackRefHandler = ref => this.track = ref
@@ -140,17 +140,9 @@ export class InnerSlider extends React.Component {
     this.adaptHeight();
   }
   onWindowResized = (setTrackStyle) => {
-    this.resizeQueue += 1
-    if (this.resizeQueueTimer === null) {
-      this.resizeQueueTimer = setInterval(() => {
-        this.resizeQueue /= 1.2
-        if (this.resizeQueue < 1) {
-          this.resizeWindow(setTrackStyle) // setTrackStyle value may not be correct
-          clearInterval(this.resizeQueueTimer)
-          this.resizeQueueTimer = null
-        }
-      }, 50)
-    }
+    if (this.debouncedResize) this.debouncedResize.cancel()
+    this.debouncedResize = debounce(() => this.resizeWindow(setTrackStyle), 50)
+    this.debouncedResize()
   }
   resizeWindow = (setTrackStyle=true) => {
     if (!ReactDOM.findDOMNode(this.track)) return
