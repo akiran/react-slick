@@ -107,9 +107,20 @@ export class InnerSlider extends React.Component {
   }
   componentWillReceiveProps = (nextProps) => {
     let spec = {listRef: this.list, trackRef: this.track, ...nextProps, ...this.state}
-    let setTrackStyle
-    if (this.state.animating) setTrackStyle = false
-    else setTrackStyle = true
+    let setTrackStyle = false
+    for (let key of Object.keys(this.props)) {
+      if (!nextProps.hasOwnProperty(key)) {
+        setTrackStyle = true
+        break
+      }
+      if (typeof nextProps[key] === 'object' || typeof nextProps[key] === 'function') {
+        continue
+      }
+      if (nextProps[key] !== this.props[key]) {
+        setTrackStyle = true
+        break
+      }
+    }
     this.updateState(spec, setTrackStyle, () => {
       if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
         this.changeSlide({
