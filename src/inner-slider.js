@@ -107,7 +107,10 @@ export class InnerSlider extends React.Component {
   }
   componentWillReceiveProps = (nextProps) => {
     let spec = {listRef: this.list, trackRef: this.track, ...nextProps, ...this.state}
-    this.updateState(spec, false, () => {
+    let setTrackStyle
+    if (this.state.animating) setTrackStyle = false
+    else setTrackStyle = true
+    this.updateState(spec, setTrackStyle, () => {
       if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
         this.changeSlide({
           message: 'index',
