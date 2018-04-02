@@ -309,7 +309,7 @@ export class InnerSlider extends React.Component {
       ...this.props,
       ...this.state,
       trackRef: this.track,
-      useCSS: !dontAnimate,
+      useCSS: this.props.useCSS && !dontAnimate,
     })
     if (!state) return
     beforeChange && beforeChange(currentSlide, state.currentSlide)
