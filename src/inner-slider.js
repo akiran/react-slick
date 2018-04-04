@@ -20,8 +20,7 @@ import {
   getPreClones,
   getPostClones,
   getTrackLeft,
-  getTrackCSS,
-  canUseDOM
+  getTrackCSS
 } from "./utils/innerSliderUtils";
 
 import { Track } from "./track";
