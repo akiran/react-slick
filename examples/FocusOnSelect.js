@@ -8,7 +8,7 @@ export default class FocusOnSelect extends Component {
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      speed: 500
+      speed: 500,
     };
     return (
       <div>

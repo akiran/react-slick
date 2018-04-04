@@ -11,9 +11,10 @@
     "start": "gulp server",
     "build": "gulp clean && gulp sass && gulp copy && webpack",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
-    "test": "jest",
+    "test": "eslint src && jest",
     "test:watch": "jest --watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
@@ -49,6 +50,7 @@
     "enzyme-adapter-react-16": "^1.1.0",
     "es5-shim": "^4.5.9",
     "eslint": "^3.6.1",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-react": "^6.3.0",
     "express": "^4.14.0",
     "foundation-apps": "^1.2.0",
@@ -72,14 +74,14 @@
     "slick-carousel": "^1.8.1",
     "style-loader": "^0.16.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
+    "webpack-dev-server": "^1.16.1",
+    "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
-    "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
-    "create-react-class": "^15.5.2",
     "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",
+    "lodash.debounce": "^4.0.8",
     "resize-observer-polyfill": "^1.5.0"
   },
   "peerDependencies": {

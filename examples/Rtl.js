@@ -11,7 +11,7 @@ export default class Rtl extends Component {
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 2000,
-      rtl: true
+      rtl: true,
     };
     return (
       <div>

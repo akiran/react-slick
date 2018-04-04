@@ -10,7 +10,7 @@ export default class VariableWidth extends Component {
       centerMode: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      variableWidth: true
+      variableWidth: true,
     };
     return (
       <div>

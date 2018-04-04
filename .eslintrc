@@ -5,10 +5,14 @@
     "strict": 0,
     "no-underscore-dangle": 0,
     "space-infix-ops": 0,
-    "no-alert": 0
+    "no-alert": 0,
+    "react/prop-types": 0,
+    "react/no-find-dom-node": 0,
+    "react/display-name": 0,
+    "no-console": 0
   },
   "ecmaFeatures": {
-    "jsx": true,
+    "jsx": true
   },
   "env": {
     "node": true,
@@ -18,6 +22,12 @@
   },
   "parser": "babel-eslint",
   "plugins": [
-      "react"
+      "react",
+      "import"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended"
   ]
 }

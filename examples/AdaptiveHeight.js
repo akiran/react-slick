@@ -9,7 +9,7 @@ export default class AdaptiveHeight extends Component {
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      adaptiveHeight: true
+      adaptiveHeight: true,
     };
     return (
       <div>
