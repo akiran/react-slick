@@ -20,8 +20,7 @@ import {
   getPreClones,
   getPostClones,
   getTrackLeft,
-  getTrackCSS,
-  canUseDOM
+  getTrackCSS
 } from "./utils/innerSliderUtils";
 
 import { Track } from "./track";
@@ -589,7 +588,7 @@ export class InnerSlider extends React.Component {
   render = () => {
     var className = classnames("slick-slider", this.props.className, {
       "slick-vertical": this.props.vertical,
-      "slick-initialized": canUseDOM()
+      "slick-initialized": true
     });
     let spec = { ...this.props, ...this.state };
     let trackProps = extractObject(spec, [
