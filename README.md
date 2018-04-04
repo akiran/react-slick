@@ -94,10 +94,6 @@ npm start
 open http://localhost:8080
 ```
 
-### Polyfills for old IE support
-
-`matchMedia` support from [media-match](https://github.com/weblinc/media-match)
-
 <a href="https://opencollective.com/react-slick/donate" target="_blank">
   <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
 </a>

@@ -60,3 +60,7 @@ and add below jest config in package.json
     "setupFiles": ["test-setup.js"]
 }
 ```
+
+### Polyfills for old IE support
+
+`matchMedia` support from [media-match](https://github.com/weblinc/media-match)
