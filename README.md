@@ -82,10 +82,6 @@ For all available props, go [here](https://react-slick.neostack.com/docs/api/).
 
 For all available methods, go [here](https://react-slick.neostack.com/docs/api#methods)
 
-#### `responsive` property
-
-Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
-
 ### Custom next/prev arrows
 
 To customize the next/prev arrow elements, simply create new React components and set them

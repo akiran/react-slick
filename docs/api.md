@@ -24,3 +24,8 @@ Name              |type             | Reason
 `slickGetOption`  | method          | manage wrapper state for desired options
 `getSlick`        | method          | a simple ref will do
 
+
+#### `responsive` property
+
+Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smallest to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`
+
