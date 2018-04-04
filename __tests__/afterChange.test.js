@@ -1,20 +1,20 @@
-import React from 'react';
-import {mount} from 'enzyme';
-import Slider from '../src/index';
+import React from "react";
+import { mount } from "enzyme";
+import Slider from "../src/index";
 
 class SliderWithBeforeChange extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      currentSlide: null,
-    }
-    this.afterChange = this.afterChange.bind(this)
+      currentSlide: null
+    };
+    this.afterChange = this.afterChange.bind(this);
   }
   afterChange(currentSlide) {
-    console.log(currentSlide, 'afterChange')
+    console.log(currentSlide, "afterChange");
     this.setState({
-      currentSlide,
-    })
+      currentSlide
+    });
   }
   render() {
     return (
@@ -24,15 +24,15 @@ class SliderWithBeforeChange extends React.Component {
         <div>slide3</div>
         <div>slide4</div>
       </Slider>
-    )
+    );
   }
 }
 
-describe('After change Slider', function() {
-  it('should render', function() {
+describe("After change Slider", function() {
+  it("should render", function() {
     const wrapper = mount(<SliderWithBeforeChange />);
-    expect(wrapper.state()).toEqual({currentSlide: null})
-    wrapper.find('.slick-next').simulate('click')
+    expect(wrapper.state()).toEqual({ currentSlide: null });
+    wrapper.find(".slick-next").simulate("click");
 
     //TBD . fix this test
 

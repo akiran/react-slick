@@ -1,21 +1,23 @@
-import React, { Component } from 'react'
-import Slider from '../src/slider'
+import React, { Component } from "react";
+import Slider from "../src/slider";
 
 export default class AdaptiveHeight extends Component {
   render() {
     var settings = {
-      className: '',
+      className: "",
       dots: true,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      adaptiveHeight: true,
+      adaptiveHeight: true
     };
     return (
       <div>
         <h2>Adaptive height</h2>
         <Slider {...settings}>
-          <div><h3>1</h3></div>
+          <div>
+            <h3>1</h3>
+          </div>
           <div>
             <h3>2</h3>
             <p>Hello</p>

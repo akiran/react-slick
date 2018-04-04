@@ -82,6 +82,10 @@ class SimpleSlider extends React.Component {
 
 For all available props, go [here](https://react-slick.neostack.com/docs/api/).
 
+### Methods
+
+For all available methods, go [here](https://react-slick.neostack.com/docs/api#methods)
+
 ### Development
 
 Want to run demos locally
