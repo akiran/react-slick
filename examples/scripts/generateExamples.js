@@ -1,40 +1,50 @@
-const fs = require('fs')
-const exampleConfigs = require('./configs.json')
-const exec = require('child_process').exec
+const fs = require("fs");
+const exampleConfigs = require("./configs.json");
+const exec = require("child_process").exec;
 
-var procCode = exec('cp -r node_modules/slick-carousel/slick/fonts node_modules/slick-carousel/slick/ajax-loader.gif docs/')
+var procCode = exec(
+  "cp -r node_modules/slick-carousel/slick/fonts node_modules/slick-carousel/slick/ajax-loader.gif docs/"
+);
 
 const toString = obj => {
-  let ret = '{\n'
+  let ret = "{\n";
   Object.keys(obj).forEach(key => {
-    if (obj[key].match('function') ||
-      obj[key].match('React.createElement'|| obj[key].match('\n'))) {
-      return
+    if (
+      obj[key].match("function") ||
+      obj[key].match("React.createElement" || obj[key].match("\n"))
+    ) {
+      return;
     }
-    if (key.match('style') || key.match('src') || key.match('border') ||
-      key.match('settings') || key.match('responsive')) return
-    ret += '\t' + key + ': ' + obj[key] + ',\n'
-  })
-  ret += '}\n'
-  return ret
-}
+    if (
+      key.match("style") ||
+      key.match("src") ||
+      key.match("border") ||
+      key.match("settings") ||
+      key.match("responsive")
+    )
+      return;
+    ret += "\t" + key + ": " + obj[key] + ",\n";
+  });
+  ret += "}\n";
+  return ret;
+};
 
-let bodyHTML = ''
-let bodyScript = ''
+let bodyHTML = "";
+let bodyScript = "";
 Object.keys(exampleConfigs).forEach(key => {
-  const props = exampleConfigs[key]['props']
-  const children = exampleConfigs[key]['children']
-  if (!props || !children) return
+  const props = exampleConfigs[key]["props"];
+  const children = exampleConfigs[key]["children"];
+  if (!props || !children) return;
   bodyHTML += `
     <div>
       <h2>${key}</h2>
       ${children}
     </div>
-  `
+  `;
   bodyScript += `
 $('[name="${key}"').slick(${toString(props)})
-  `
-})
+  `;
+});
 
 let HTMLString = `<!DOCTYPE html>
 <html>
@@ -70,6 +80,6 @@ let HTMLString = `<!DOCTYPE html>
     </script>
   </body>
 </html>
-`
+`;
 
-fs.writeFileSync('docs/jquery.html', HTMLString)
+fs.writeFileSync("docs/jquery.html", HTMLString);

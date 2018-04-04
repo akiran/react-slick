@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import Slider from '../src/slider';
+import React, { Component } from "react";
+import Slider from "../src/slider";
 
 export default class Resizable extends Component {
   state = {
     display: true,
-    width: 600,
+    width: 600
   };
   render() {
     const settings = {
@@ -12,7 +12,7 @@ export default class Resizable extends Component {
       infinite: true,
       speed: 500,
       slidesToShow: 3,
-      slidesToScroll: 1,
+      slidesToScroll: 1
     };
     return (
       <div>
@@ -21,37 +21,41 @@ export default class Resizable extends Component {
           className="button"
           onClick={() =>
             this.setState({
-              width: this.state.width + 100,
+              width: this.state.width + 100
             })
-          }>
-          {' '}
-          increase{' '}
+          }
+        >
+          {" "}
+          increase{" "}
         </button>
         <button
           className="button"
           onClick={() =>
             this.setState({
-              width: this.state.width - 100,
+              width: this.state.width - 100
             })
-          }>
-          {' '}
-          decrease{' '}
+          }
+        >
+          {" "}
+          decrease{" "}
         </button>
         <button
           className="button"
           onClick={() =>
             this.setState({
-              display: !this.state.display,
+              display: !this.state.display
             })
-          }>
-          {' '}
-          toggle{' '}
+          }
+        >
+          {" "}
+          toggle{" "}
         </button>
         <div
           style={{
-            width: this.state.width + 'px',
-            display: this.state.display ? 'block' : 'none',
-          }}>
+            width: this.state.width + "px",
+            display: this.state.display ? "block" : "none"
+          }}
+        >
           <Slider {...settings}>
             <div>
               <h3>1</h3>
