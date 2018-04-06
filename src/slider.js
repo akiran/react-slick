@@ -148,32 +148,26 @@ export default class Slider extends React.Component {
       return !!child;
     });
 
+    let rows = settings.rows || 1;
+    let slidesPerRow = settings.slidesPerRow || 1;
+    let variableWidth = settings.variableWidth || false;
+
     // rows and slidesPerRow logic is handled here
-    if (
-      settings.variableWidth &&
-      (settings.rows > 1 || settings.slidesPerRow > 1)
-    ) {
+    if (variableWidth && (rows > 1 || slidesPerRow > 1)) {
       console.warn(
         `variableWidth is not supported in case of rows > 1 or slidesPerRow > 1`
       );
+      variableWidth = false;
       settings.variableWidth = false;
     }
     let newChildren = [];
     let currentWidth = null;
-    for (
-      let i = 0;
-      i < children.length;
-      i += settings.rows * settings.slidesPerRow
-    ) {
+    for (let i = 0; i < children.length; i += rows * slidesPerRow) {
       let newSlide = [];
-      for (
-        let j = i;
-        j < i + settings.rows * settings.slidesPerRow;
-        j += settings.slidesPerRow
-      ) {
+      for (let j = i; j < i + rows * slidesPerRow; j += slidesPerRow) {
         let row = [];
-        for (let k = j; k < j + settings.slidesPerRow; k += 1) {
-          if (settings.variableWidth && children[k].props.style) {
+        for (let k = j; k < j + slidesPerRow; k += 1) {
+          if (variableWidth && children[k].props.style) {
             currentWidth = children[k].props.style.width;
           }
           if (k >= children.length) break;
@@ -182,7 +176,7 @@ export default class Slider extends React.Component {
               key: 100 * i + 10 * j + k,
               tabIndex: -1,
               style: {
-                width: `${100 / settings.slidesPerRow}%`,
+                width: `${100 / slidesPerRow}%`,
                 display: "inline-block"
               }
             })
@@ -190,7 +184,7 @@ export default class Slider extends React.Component {
         }
         newSlide.push(<div key={10 * i + j}>{row}</div>);
       }
-      if (settings.variableWidth) {
+      if (variableWidth) {
         newChildren.push(
           <div key={i} style={{ width: currentWidth }}>
             {newSlide}
