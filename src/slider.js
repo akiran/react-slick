@@ -24,17 +24,30 @@ export default class Slider extends React.Component {
     this._responsiveMediaHandlers.push({ query, handler });
   }
 
-  // handles responsive breakpoints
   componentWillMount() {
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
     //whyDidYouUpdate(React)
     //}
-    if (this.props.responsive) {
-      let breakpoints = this.props.responsive.map(
-        breakpt => breakpt.breakpoint
-      );
+    this.registerBreakpoints(this.props.responsive);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.responsive !== nextProps.responsive) {
+      this.unregisterBreakpoints();
+      this.registerBreakpoints(nextProps.responsive);
+    }
+  }
+
+  componentWillUnmount() {
+    this.unregisterBreakpoints();
+  }
+
+  // handles responsive breakpoints
+  registerBreakpoints(responsive) {
+    if (responsive) {
+      let breakpoints = responsive.map(breakpt => breakpt.breakpoint);
       // sort them in increasing order of their numerical value
       breakpoints.sort((x, y) => x - y);
 
@@ -67,7 +80,7 @@ export default class Slider extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  unregisterBreakpoints() {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
     });
