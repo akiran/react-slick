@@ -639,6 +639,9 @@ export const getTrackAnimateCSS = spec => {
   }
   return style;
 };
+
+
+
 export const getTrackLeft = spec => {
   if (spec.unslick) {
     return 0;
@@ -671,8 +674,10 @@ export const getTrackLeft = spec => {
     variableWidth,
     slideHeight,
     fade,
-    vertical
+    vertical,
+    centerGrow
   } = spec;
+
 
   var slideOffset = 0;
   var targetLeft;
@@ -718,8 +723,31 @@ export const getTrackLeft = spec => {
   } else {
     targetLeft = slideIndex * slideHeight * -1 + verticalOffset;
   }
+  
+  var targetSlideIndex;
+  
+  if(centerGrow) {
+    //  targetLeft = ((slideIndex * centerGrow.normal) * -1) + (listWidth - centerGrow.center - centerGrow.normal) / 2;
 
-  if (variableWidth === true) {
+    var getNumberOfExpandingSlides = () => {
+      if(slideIndex < 0) {
+        return 0;
+      }
+      if(slideIndex < slideCount) {
+        return 1;
+      }
+      return 2;
+    }
+
+    var targetSlideIndex;
+    targetSlideIndex = infinite ? slideIndex + getPreClones(spec) : slideIndex;
+    targetLeft = 0;
+
+    targetLeft = -(targetSlideIndex ) * centerGrow.normal;
+    targetLeft += getNumberOfExpandingSlides()  * (centerGrow.normal - centerGrow.center);
+    targetLeft += (listWidth  - centerGrow.center) / 2;
+
+  } else if (variableWidth === true) {
     var targetSlideIndex;
     let trackElem = ReactDOM.findDOMNode(trackRef);
     targetSlideIndex = slideIndex + getPreClones(spec);
@@ -824,3 +852,4 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
+
