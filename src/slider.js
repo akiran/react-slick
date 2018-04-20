@@ -166,6 +166,7 @@ export default class Slider extends React.Component {
       i += settings.rows * settings.slidesPerRow
     ) {
       let newSlide = [];
+      const childKey = children[i].key;
       for (
         let j = i;
         j < i + settings.rows * settings.slidesPerRow;
@@ -179,7 +180,7 @@ export default class Slider extends React.Component {
           if (k >= children.length) break;
           row.push(
             React.cloneElement(children[k], {
-              key: 100 * i + 10 * j + k,
+              key: childKey !== undefined ? childKey : 100 * i + 10 * j + k,
               tabIndex: -1,
               style: {
                 width: `${100 / settings.slidesPerRow}%`,
@@ -188,16 +189,23 @@ export default class Slider extends React.Component {
             })
           );
         }
-        newSlide.push(<div key={10 * i + j}>{row}</div>);
+        newSlide.push(
+          <div key={childKey !== undefined ? childKey : 10 * i + j}>{row}</div>
+        );
       }
       if (settings.variableWidth) {
         newChildren.push(
-          <div key={i} style={{ width: currentWidth }}>
+          <div
+            key={childKey !== undefined ? childKey : i}
+            style={{ width: currentWidth }}
+          >
             {newSlide}
           </div>
         );
       } else {
-        newChildren.push(<div key={i}>{newSlide}</div>);
+        newChildren.push(
+          <div key={childKey !== undefined ? childKey : i}>{newSlide}</div>
+        );
       }
     }
 
