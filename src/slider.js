@@ -58,7 +58,7 @@ export default class Slider extends React.Component {
 
       // Register media query for full screen. Need to support resize from small to large
       // convert javascript object to media query string
-      let query = json2mq({ minWidth: breakpoints.slice(-1)[0] });
+      let query = json2mq({ minWidth: breakpoints.slice(-1)[0] + 1 });
 
       canUseDOM() &&
         this.media(query, () => {
