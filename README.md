@@ -35,7 +35,7 @@ or add cdn link in your html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
-### [PlayGround](https://codesandbox.io/s/zzloxr09mp)
+### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
 
 ### Example
 
