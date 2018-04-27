@@ -1,7 +1,7 @@
 {
-  "name": "react-slick",
+  "name": "@onedior/react-slick",
   "version": "0.23.2",
-  "description": " React port of slick carousel",
+  "description": "React port of slick carousel",
   "main": "./lib",
   "files": ["dist", "lib"],
   "scripts": {
@@ -19,7 +19,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/onedior/react-slick"
   },
   "keywords": [
     "slick",
@@ -107,9 +107,9 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/akiran/react-slick/issues"
+    "url": "https://github.com/onedior/react-slick/issues"
   },
-  "homepage": "https://github.com/akiran/react-slick",
+  "homepage": "https://github.com/onedior/react-slick",
   "collective": {
     "type": "opencollective",
     "url": "https://opencollective.com/react-slick",
