@@ -67,6 +67,23 @@ export default class Slider extends React.Component {
     }
   }
 
+  onInnerResize = rect => {
+    const { responsive } = this.props;
+    if (responsive && rect) {
+      const { width } = rect;
+
+      // find next effective breakpoint (without mutating the original responsive array)
+      const nextBreakpoint = responsive
+        .map(resp => resp.breakpoint)
+        .sort((a, b) => a - b)
+        .find(brkp => brkp >= width);
+
+      if (nextBreakpoint) {
+        this.setState({ breakpoint: nextBreakpoint });
+      }
+    }
+  };
+
   componentWillUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
@@ -208,7 +225,11 @@ export default class Slider extends React.Component {
       settings.unslick = true;
     }
     return (
-      <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider
+        ref={this.innerSliderRefHandler}
+        {...settings}
+        onResize={this.onInnerResize}
+      >
         {newChildren}
       </InnerSlider>
     );

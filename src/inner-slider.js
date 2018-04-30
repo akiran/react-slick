@@ -79,7 +79,7 @@ export class InnerSlider extends React.Component {
     if (this.props.lazyLoad === "progressive") {
       this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000);
     }
-    this.ro = new ResizeObserver(() => {
+    this.ro = new ResizeObserver(entries => {
       if (this.state.animating) {
         this.onWindowResized(false); // don't set trackStyle hence don't break animation
         this.callbackTimers.push(
@@ -87,6 +87,12 @@ export class InnerSlider extends React.Component {
         );
       } else {
         this.onWindowResized();
+      }
+
+      // find the relevant observed target
+      const listEntry = entries.find(entry => entry.target === this.list);
+      if (listEntry) {
+        this.props.onResize && this.props.onResize(listEntry.contentRect);
       }
     });
     this.ro.observe(this.list);
