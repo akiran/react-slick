@@ -299,38 +299,36 @@ export class InnerSlider extends React.Component {
     let images = document.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
-
-    if (imagesCount) {
-      Array.prototype.forEach.call(images, image => {
-        const handler = () =>
-          ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
-        if (!image.onclick) {
-          image.onclick = () => image.parentNode.focus();
+    images = Array.from(images);
+    Array.prototype.forEach.call(images, image => {
+      const handler = () =>
+        ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
+      if (!image.onclick) {
+        image.onclick = () => image.parentNode.focus();
+      } else {
+        const prevClickHandler = image.onclick;
+        image.onclick = () => {
+          prevClickHandler();
+          image.parentNode.focus();
+        };
+      }
+      if (!image.onload) {
+        if (this.props.lazyLoad) {
+          image.onload = () => {
+            this.adaptHeight();
+            this.callbackTimers.push(
+              setTimeout(this.onWindowResized, this.props.speed)
+            );
+          };
         } else {
-          const prevClickHandler = image.onclick;
-          image.onclick = () => {
-            prevClickHandler();
-            image.parentNode.focus();
+          image.onload = handler;
+          image.onerror = () => {
+            handler();
+            this.props.onLazyLoadError && this.props.onLazyLoadError();
           };
         }
-        if (!image.onload) {
-          if (this.props.lazyLoad) {
-            image.onload = () => {
-              this.adaptHeight();
-              this.callbackTimers.push(
-                setTimeout(this.onWindowResized, this.props.speed)
-              );
-            };
-          } else {
-            image.onload = handler;
-            image.onerror = () => {
-              handler();
-              this.props.onLazyLoadError && this.props.onLazyLoadError();
-            };
-          }
-        }
-      });
-    }
+      }
+    });
   };
   progressiveLazyLoad = () => {
     let slidesToLoad = [];
