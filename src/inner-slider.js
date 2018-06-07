@@ -299,6 +299,7 @@ export class InnerSlider extends React.Component {
     let images = document.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
+    images = Array.from(images);
     Array.prototype.forEach.call(images, image => {
       const handler = () =>
         ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
