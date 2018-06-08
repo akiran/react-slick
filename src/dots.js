@@ -3,7 +3,7 @@
 import React from "react";
 import classnames from "classnames";
 
-var getDotCount = function(spec) {
+export var getDotCount = function(spec) {
   var dots;
 
   if (spec.infinite) {
@@ -46,10 +46,13 @@ export class Dots extends React.PureComponent {
       var leftBound = i * this.props.slidesToScroll;
       var rightBound =
         i * this.props.slidesToScroll + (this.props.slidesToScroll - 1);
+
+      var activeDot =
+        this.props.currentSlide >= leftBound &&
+        this.props.currentSlide <= rightBound;
+
       var className = classnames({
-        "slick-active":
-          this.props.currentSlide >= leftBound &&
-          this.props.currentSlide <= rightBound
+        "slick-active": activeDot
       });
 
       var dotOptions = {
@@ -62,7 +65,7 @@ export class Dots extends React.PureComponent {
       var onClick = this.clickHandler.bind(this, dotOptions);
       return (
         <li key={i} className={className}>
-          {React.cloneElement(this.props.customPaging(i), { onClick })}
+          {React.cloneElement(this.props.customPaging(i, activeDot), { onClick })}
         </li>
       );
     });
