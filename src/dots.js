@@ -3,7 +3,7 @@
 import React from "react";
 import classnames from "classnames";
 
-export var getDotCount = function(spec) {
+var getDotCount = function(spec) {
   var dots;
 
   if (spec.infinite) {
