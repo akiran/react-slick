@@ -517,7 +517,7 @@ export const getSlideCount = spec => {
     let swipedSlide;
     const slickList = ReactDOM.findDOMNode(spec.listRef);
     const slides = slickList.querySelectorAll(".slick-slide");
-    Array.from(slides).every(slide => {
+    Array.prototype.every.call(slides, slide => {
       if (!spec.vertical) {
         if (
           slide.offsetLeft - centerOffset + getWidth(slide) / 2 >
