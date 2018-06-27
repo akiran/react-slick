@@ -37,12 +37,10 @@ export class Dots extends React.PureComponent {
     // Credit: http://stackoverflow.com/a/13735425/1849458
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
-    var dots = Array.apply(
-      null,
+    var dots = 
       Array(dotCount + 1)
         .join("0")
-        .split("")
-    ).map((x, i) => {
+        .split("").map((x, i) => {
       var leftBound = i * this.props.slidesToScroll;
       var rightBound =
         i * this.props.slidesToScroll + (this.props.slidesToScroll - 1);
