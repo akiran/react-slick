@@ -441,6 +441,7 @@ export class InnerSlider extends React.Component {
     window.ontouchmove = null;
   };
   swipeStart = e => {
+    this.pause('focused');
     if (this.props.verticalSwiping) {
       this.disableBodyScroll();
     }
@@ -462,6 +463,7 @@ export class InnerSlider extends React.Component {
     this.setState(state);
   };
   swipeEnd = e => {
+    this.autoPlay('blur');
     let state = swipeEnd(e, {
       ...this.props,
       ...this.state,
