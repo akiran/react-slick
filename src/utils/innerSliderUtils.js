@@ -28,17 +28,21 @@ export const getRequiredLazySlides = spec => {
 export const lazyStartIndex = spec =>
   spec.currentSlide - lazySlidesOnLeft(spec);
 export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec);
-export const lazySlidesOnLeft = spec =>
-  spec.centerMode
+export const lazySlidesOnLeft = spec => {
+  var slidesToPreload = spec.slidesToPreload || 0;
+  return spec.centerMode
     ? Math.floor(spec.slidesToShow / 2) +
       (parseInt(spec.centerPadding) > 0 ? 1 : 0)
-    : 0;
-export const lazySlidesOnRight = spec =>
-  spec.centerMode
+    : slidesToPreload
+  };
+export const lazySlidesOnRight = spec => {
+  var slidesToPreload = spec.slidesToPreload || 0;
+  return spec.centerMode
     ? Math.floor((spec.slidesToShow - 1) / 2) +
       1 +
       (parseInt(spec.centerPadding) > 0 ? 1 : 0)
-    : spec.slidesToShow;
+    : spec.slidesToShow + slidesToPreload;
+}
 
 // get width of an element
 export const getWidth = elem => (elem && elem.offsetWidth) || 0;
