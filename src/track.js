@@ -163,7 +163,7 @@ var renderSlides = function(spec) {
         );
       }
 
-      if (childrenCount !== spec.slidesToShow) {
+      if (childrenCount !== spec.slidesToShow  && index < spec.slidesToShow) {
         key = childrenCount + index;
         if (key < endIndex) {
           child = elem;
