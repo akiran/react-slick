@@ -11,7 +11,7 @@
 **npm**
 
 ```bash
-npm install react-slick
+npm install react-slick --save
 ```
 
 **yarn**
