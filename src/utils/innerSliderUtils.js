@@ -48,7 +48,7 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   xDist = touchObject.startX - touchObject.curX;
   yDist = touchObject.startY - touchObject.curY;
   r = Math.atan2(yDist, xDist);
-  swipeAngle = Math.round(r * 180 / Math.PI);
+  swipeAngle = Math.round((r * 180) / Math.PI);
   if (swipeAngle < 0) {
     swipeAngle = 360 - Math.abs(swipeAngle);
   }
@@ -79,8 +79,9 @@ export const canGoNext = spec => {
     if (spec.centerMode && spec.currentSlide >= spec.slideCount - 1) {
       canGo = false;
     } else if (
-      spec.slideCount <= spec.slidesToShow ||
-      spec.currentSlide >= spec.slideCount - spec.slidesToShow
+      !spec.centerMode &&
+      (spec.slideCount <= spec.slidesToShow ||
+        spec.currentSlide >= spec.slideCount - spec.slidesToShow)
     ) {
       canGo = false;
     }
@@ -195,7 +196,7 @@ export const slideHandler = spec => {
       finalSlide = animationSlide + slideCount;
       if (!infinite) finalSlide = 0;
       else if (slideCount % slidesToScroll !== 0)
-        finalSlide = slideCount - slideCount % slidesToScroll;
+        finalSlide = slideCount - (slideCount % slidesToScroll);
     } else if (!canGoNext(spec) && animationSlide > currentSlide) {
       animationSlide = finalSlide = currentSlide;
     } else if (centerMode && animationSlide >= slideCount) {
@@ -265,7 +266,8 @@ export const changeSlide = (spec, options) => {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
     targetSlide = currentSlide + slideOffset;
     if (lazyLoad && !infinite) {
-      targetSlide = (currentSlide + slidesToScroll) % slideCount + indexOffset;
+      targetSlide =
+        ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     }
   } else if (options.message === "dots") {
     // Click on dots
@@ -565,9 +567,12 @@ export const getTrackCSS = spec => {
     "slideWidth"
   ]);
   let trackWidth, trackHeight;
+  const variableWidthMax = 5000; // Arbitrary width, mirrors what is used by Slick Carousel
   const trackChildren = spec.slideCount + 2 * spec.slidesToShow;
-  if (!spec.vertical) {
+  if (!spec.vertical && !spec.variableWidth) {
     trackWidth = getTotalSlides(spec) * spec.slideWidth;
+  } else if (!spec.vertical && spec.variableWidth) {
+    trackWidth = trackChildren * variableWidthMax;
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
@@ -704,7 +709,7 @@ export const getTrackLeft = spec => {
       slideCount % slidesToScroll !== 0 &&
       slideIndex + slidesToScroll > slideCount
     ) {
-      slidesToOffset = slidesToShow - slideCount % slidesToScroll;
+      slidesToOffset = slidesToShow - (slideCount % slidesToScroll);
     }
     if (centerMode) {
       slidesToOffset = parseInt(slidesToShow / 2);

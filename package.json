@@ -1,9 +1,12 @@
 {
   "name": "react-slick",
-  "version": "0.23.1",
+  "version": "0.23.2-1",
   "description": " React port of slick carousel",
   "main": "./lib",
-  "files": ["dist", "lib"],
+  "files": [
+    "dist",
+    "lib"
+  ],
   "scripts": {
     "start": "gulp server",
     "build": "gulp clean && gulp sass && gulp copy && webpack",
@@ -11,8 +14,7 @@
     "test": "eslint src && jest",
     "test:watch": "jest --watch",
     "lint": "eslint src",
-    "gen":
-      "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
+    "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged"
   },
   "author": "Kiran Abburi",
@@ -90,20 +92,27 @@
     "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0"
   },
   "jest": {
-    "setupFiles": ["./test-setup.js"],
+    "setupFiles": [
+      "./test-setup.js"
+    ],
     "testPathIgnorePatterns": [
       "/__tests__/scripts.js",
       "/__tests__/testUtils.js"
     ]
   },
   "lint-staged": {
-    "*.{js,json,md}": ["prettier --write", "git add"]
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "npmName": "react-slick",
   "npmFileMap": [
     {
       "basePath": "/dist/",
-      "files": ["*.js"]
+      "files": [
+        "*.js"
+      ]
     }
   ],
   "bugs": {
