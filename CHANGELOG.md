@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
 
-## 0.24.0
+## 0.24.1
 
 **Release Changes**
 
