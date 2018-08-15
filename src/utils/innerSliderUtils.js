@@ -742,6 +742,9 @@ export const getTrackLeft = spec => {
       }
       if (widthUntilListRightEnd < listWidth) {
         targetLeft += listWidth - widthUntilListRightEnd;
+        if (targetLeft >= 0) {
+          targetLeft = 0;
+        }
       }
     }
     if (centerMode === true) {
