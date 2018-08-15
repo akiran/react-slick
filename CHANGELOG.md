@@ -2,6 +2,14 @@
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
 
+## 0.24.2
+
+**Release Changes**
+
+- Bug fixes
+  - It removes the need of slidesToscroll/slidesToShow === 1
+  - It fixes the issue of right snapping when the images inside the gallery doesn't fill the sliding window.
+
 ## 0.24.1
 
 **Release Changes**
