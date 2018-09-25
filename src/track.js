@@ -58,6 +58,7 @@ var getSlideStyle = function(spec) {
       style.left = -spec.index * parseInt(spec.slideWidth);
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
+    style.visibility = spec.currentSlide === spec.index ? 'visible' : 'hidden';
     style.transition =
       "opacity " +
       spec.speed +
