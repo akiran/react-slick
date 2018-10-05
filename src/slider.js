@@ -32,38 +32,7 @@ export default class Slider extends React.Component {
     //whyDidYouUpdate(React)
     //}
     if (this.props.responsive) {
-      let breakpoints = this.props.responsive.map(
-        breakpt => breakpt.breakpoint
-      );
-      // sort them in increasing order of their numerical value
-      breakpoints.sort((x, y) => x - y);
-
-      breakpoints.forEach((breakpoint, index) => {
-        // media query for each breakpoint
-        let bQuery;
-        if (index === 0) {
-          bQuery = json2mq({ minWidth: 0, maxWidth: breakpoint });
-        } else {
-          bQuery = json2mq({
-            minWidth: breakpoints[index - 1] + 1,
-            maxWidth: breakpoint
-          });
-        }
-        // when not using server side rendering
-        canUseDOM() &&
-          this.media(bQuery, () => {
-            this.setState({ breakpoint: breakpoint });
-          });
-      });
-
-      // Register media query for full screen. Need to support resize from small to large
-      // convert javascript object to media query string
-      let query = json2mq({ minWidth: breakpoints.slice(-1)[0] });
-
-      canUseDOM() &&
-        this.media(query, () => {
-          this.setState({ breakpoint: null });
-        });
+      this.calculateBreakpoints(this.props.responsive);
     }
   }
 
@@ -71,6 +40,47 @@ export default class Slider extends React.Component {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.responsive !== nextProps.responsive) {
+      this.calculateBreakpoints(nextProps.responsive);
+    }
+  }
+
+  calculateBreakpoints = (responsive) => {
+    let breakpoints = responsive.map(
+      breakpt => breakpt.breakpoint
+    );
+    // sort them in increasing order of their numerical value
+    breakpoints.sort((x, y) => x - y);
+
+    breakpoints.forEach((breakpoint, index) => {
+      // media query for each breakpoint
+      let bQuery;
+      if (index === 0) {
+        bQuery = json2mq({ minWidth: 0, maxWidth: breakpoint });
+      } else {
+        bQuery = json2mq({
+          minWidth: breakpoints[index - 1] + 1,
+          maxWidth: breakpoint
+        });
+      }
+      // when not using server side rendering
+      canUseDOM() &&
+        this.media(bQuery, () => {
+          this.setState({ breakpoint: breakpoint });
+        });
+    });
+
+    // Register media query for full screen. Need to support resize from small to large
+    // convert javascript object to media query string
+    let query = json2mq({ minWidth: breakpoints.slice(-1)[0] });
+
+    canUseDOM() &&
+      this.media(query, () => {
+        this.setState({ breakpoint: null });
+      });
   }
 
   slickPrev = () => this.innerSlider.slickPrev();
