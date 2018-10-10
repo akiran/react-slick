@@ -659,7 +659,8 @@ export class InnerSlider extends React.Component {
       "slideCount",
       "slidesToShow",
       "prevArrow",
-      "nextArrow"
+      "nextArrow",
+      "tileType"
     ]);
     arrowProps.clickHandler = this.changeSlide;
 

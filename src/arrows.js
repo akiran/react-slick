@@ -29,6 +29,9 @@ export class PrevArrow extends React.PureComponent {
       "data-role": "none",
       className: classnames(prevClasses),
       style: { display: "block" },
+      "data-interaction-context": this.props.tileType ? "" : undefined,
+      "data-interaction-type": this.props.tileType,
+      "data-interaction-name": this.props.tileType ? "left" : undefined,
       onClick: prevHandler
     };
     let customProps = {
@@ -76,6 +79,9 @@ export class NextArrow extends React.PureComponent {
       "data-role": "none",
       className: classnames(nextClasses),
       style: { display: "block" },
+      "data-interaction-context": this.props.tileType ? "" : undefined,
+      "data-interaction-type": this.props.tileType,
+      "data-interaction-name": this.props.tileType ? "right" : undefined,
       onClick: nextHandler
     };
     let customProps = {
