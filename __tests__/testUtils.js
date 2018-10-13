@@ -47,7 +47,7 @@ export function createInnerSlider({ noOfSlides, ...settings }) {
     createReactSliderChildren(noOfSlides)
   );
   return (
-    <InnerSlider {...settings} ref={slider => (this.innerSlider = slider)}>
+    <InnerSlider {...settings} ref={React.createRef()}>
       {children}
     </InnerSlider>
   );
