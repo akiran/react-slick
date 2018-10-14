@@ -43,17 +43,18 @@ gulp.task("sass", function() {
 gulp.task(
   "watch",
   gulp.series(["copy", "sass"], function() {
-    gulp.watch(["./docs/**/*.{scss,sass}"], ["sass"]);
-    gulp.watch(["./docs/index.html"], ["copy"]);
-    gulp.watch(["./docs/docs.css"], ["copy"]);
-    gulp.watch(["./docs/slick.css"], ["copy"]);
-    gulp.watch(["./docs/slick-theme.css"], ["copy"]);
+    gulp.watch(["./docs/**/*.{scss,sass}"], gulp.parallel(["sass"]));
+    gulp.watch(["./docs/index.html"], gulp.parallel(["copy"]));
+    gulp.watch(["./docs/docs.css"], gulp.parallel(["copy"]));
+    gulp.watch(["./docs/slick.css"], gulp.parallel(["copy"]));
+    gulp.watch(["./docs/slick-theme.css"], gulp.parallel(["copy"]));
   })
 );
 
 gulp.task(
   "server",
-  gulp.series(["watch", "copy", "sass"], function(callback) {
+  gulp.series(["watch", "copy", "sass"], function(done) {
+    console.log("Start");
     var myConfig = require("./webpack.config");
     myConfig.plugins = myConfig.plugins.concat(
       new webpack.DefinePlugin({
@@ -76,7 +77,7 @@ gulp.task(
         opn(server_url);
       }
     });
-    callback();
+    done();
   })
 );
 
