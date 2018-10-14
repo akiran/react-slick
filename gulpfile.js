@@ -5,13 +5,10 @@ var del = require("del");
 var sass = require("gulp-sass");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
-var runSequence = require("run-sequence");
 var assign = require("object-assign");
 var opn = require("opn");
 
 const DEV_PORT = 8080;
-
-gulp.task("default", ["watch", "server"]);
 
 gulp.task("clean", function() {
   return del(["./build/*"]);
@@ -43,39 +40,45 @@ gulp.task("sass", function() {
     .pipe(gulp.dest("./build"));
 });
 
-gulp.task("watch", ["copy", "sass"], function() {
-  gulp.watch(["./docs/**/*.{scss,sass}"], ["sass"]);
-  gulp.watch(["./docs/index.html"], ["copy"]);
-  gulp.watch(["./docs/docs.css"], ["copy"]);
-  gulp.watch(["./docs/slick.css"], ["copy"]);
-  gulp.watch(["./docs/slick-theme.css"], ["copy"]);
-});
+gulp.task(
+  "watch",
+  gulp.series(["copy", "sass"], function() {
+    gulp.watch(["./docs/**/*.{scss,sass}"], ["sass"]);
+    gulp.watch(["./docs/index.html"], ["copy"]);
+    gulp.watch(["./docs/docs.css"], ["copy"]);
+    gulp.watch(["./docs/slick.css"], ["copy"]);
+    gulp.watch(["./docs/slick-theme.css"], ["copy"]);
+  })
+);
 
-gulp.task("server", ["watch", "copy", "sass"], function(callback) {
-  var myConfig = require("./webpack.config");
-  myConfig.plugins = myConfig.plugins.concat(
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("dev_docs")
+gulp.task(
+  "server",
+  gulp.series(["watch", "copy", "sass"], function(callback) {
+    var myConfig = require("./webpack.config");
+    myConfig.plugins = myConfig.plugins.concat(
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("dev_docs")
+        }
+      })
+    );
+
+    new WebpackDevServer(webpack(myConfig), {
+      contentBase: "./build",
+      hot: true,
+      debug: true
+    }).listen(DEV_PORT, "0.0.0.0", function(err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        const server_url = `http://localhost:${DEV_PORT}`;
+        console.log(`> Dev Server started at ${server_url}`);
+        opn(server_url);
       }
-    })
-  );
-
-  new WebpackDevServer(webpack(myConfig), {
-    contentBase: "./build",
-    hot: true,
-    debug: true
-  }).listen(DEV_PORT, "0.0.0.0", function(err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      const server_url = `http://localhost:${DEV_PORT}`;
-      console.log(`> Dev Server started at ${server_url}`);
-      opn(server_url);
-    }
-  });
-  callback();
-});
+    });
+    callback();
+  })
+);
 
 // gulp tasks for building dist files
 gulp.task("dist-clean", function() {
@@ -108,6 +111,16 @@ gulp.task("dist-min", function(cb) {
   });
 });
 
-gulp.task("dist", function(cb) {
-  runSequence("dist-clean", "dist-unmin", "dist-min", cb);
-});
+gulp.task(
+  "dist",
+  gulp.series(["dist-clean", "dist-unmin", "dist-min"], function(done) {
+    done();
+  })
+);
+
+gulp.task(
+  "default",
+  gulp.series(["watch", "server"], function(done) {
+    done();
+  })
+);
