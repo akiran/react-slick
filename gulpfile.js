@@ -42,12 +42,13 @@ gulp.task("sass", function() {
 
 gulp.task(
   "watch",
-  gulp.series(["copy", "sass"], function() {
+  gulp.series(["copy", "sass"], function(done) {
     gulp.watch(["./docs/**/*.{scss,sass}"], gulp.parallel(["sass"]));
     gulp.watch(["./docs/index.html"], gulp.parallel(["copy"]));
     gulp.watch(["./docs/docs.css"], gulp.parallel(["copy"]));
     gulp.watch(["./docs/slick.css"], gulp.parallel(["copy"]));
     gulp.watch(["./docs/slick-theme.css"], gulp.parallel(["copy"]));
+    done();
   })
 );
 
