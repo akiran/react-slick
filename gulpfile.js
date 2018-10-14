@@ -120,9 +120,4 @@ gulp.task(
   })
 );
 
-gulp.task(
-  "default",
-  gulp.series(["watch", "server"], function(done) {
-    done();
-  })
-);
+gulp.task("default", gulp.series(["watch", "server"]));
