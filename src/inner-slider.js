@@ -369,12 +369,13 @@ export class InnerSlider extends React.Component {
   slideHandler = (index, dontAnimate = false) => {
     const {
       asNavFor,
-      currentSlide,
       beforeChange,
       onLazyLoad,
       speed,
       afterChange
     } = this.props;
+    // capture currentslide before state is updated
+    const currentSlide = this.state.currentSlide;
     let { state, nextState } = slideHandler({
       index,
       ...this.props,
