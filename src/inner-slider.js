@@ -46,10 +46,13 @@ export class InnerSlider extends React.Component {
   trackRefHandler = ref => (this.track = ref);
   adaptHeight = () => {
     if (this.props.adaptiveHeight && this.list) {
-      const elem = this.list.querySelector(
-        `[data-index="${this.state.currentSlide}"]`
-      );
-      this.list.style.height = getHeight(elem) + "px";
+      let maxHeight = 0;
+      for (let i = 0; i < this.props.slidesToShow; i++) {
+        const slideIndex = this.state.currentSlide + i;
+        const elem = this.list.querySelector(`[data-index="${slideIndex}"]`);
+        maxHeight = Math.max(getHeight(elem), maxHeight);
+      }
+      this.list.style.height = maxHeight + "px";
     }
   };
   componentWillMount = () => {
@@ -276,15 +279,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",

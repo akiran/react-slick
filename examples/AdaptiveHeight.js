@@ -7,7 +7,7 @@ export default class AdaptiveHeight extends Component {
       className: "",
       dots: true,
       infinite: true,
-      slidesToShow: 1,
+      slidesToShow: 3,
       slidesToScroll: 1,
       adaptiveHeight: true
     };
