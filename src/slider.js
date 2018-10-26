@@ -136,6 +136,18 @@ export default class Slider extends React.Component {
       settings.slidesToScroll = 1;
     }
 
+    // force showing finite scrolling if the noRightPadding mode is on
+    if (settings.noRightPadding) {
+      if (settings.infinite && process.env.NODE_ENV !== "production") {
+        console.warn(
+          `infinite should be false when noRightPadding is true, you're using ${
+            settings.infinite
+          }`
+        );
+      }
+      settings.infinite = false;
+    }
+
     // makes sure that children is an array, even when there is only 1 child
     let children = React.Children.toArray(this.props.children);
 
