@@ -462,6 +462,7 @@ export class InnerSlider extends React.Component {
     this.setState(state);
     if (triggerSlideHandler === undefined) return;
     this.slideHandler(triggerSlideHandler);
+    this.clickable = true;
   };
   slickPrev = () => {
     // this and fellow methods are wrapped in setTimeout
