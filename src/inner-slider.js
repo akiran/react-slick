@@ -429,8 +429,21 @@ export class InnerSlider extends React.Component {
   selectHandler = options => {
     this.changeSlide(options);
   };
-
+  disableBodyScroll = () => {
+    const preventDefault = e => {
+      e = e || window.event;
+      if (e.preventDefault) e.preventDefault();
+      e.returnValue = false;
+    };
+    window.ontouchmove = preventDefault;
+  };
+  enableBodyScroll = () => {
+    window.ontouchmove = null;
+  };
   swipeStart = e => {
+    if (this.props.verticalSwiping) {
+      this.disableBodyScroll();
+    }
     let state = swipeStart(e, this.props.swipe, this.props.draggable);
     state !== "" && this.setState(state);
   };
@@ -462,6 +475,9 @@ export class InnerSlider extends React.Component {
     this.setState(state);
     if (triggerSlideHandler === undefined) return;
     this.slideHandler(triggerSlideHandler);
+    if (this.props.verticalSwiping) {
+      this.enableBodyScroll();
+    }
     this.clickable = true;
   };
   slickPrev = () => {
