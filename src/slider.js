@@ -24,13 +24,13 @@ export default class Slider extends React.Component {
     this._responsiveMediaHandlers.push({ query, handler });
   }
 
-  // handles responsive breakpoints
-  componentWillMount() {
-    // performance monitoring
-    //if (process.env.NODE_ENV !== 'production') {
-    //const { whyDidYouUpdate } = require('why-did-you-update')
-    //whyDidYouUpdate(React)
-    //}
+  componentDidUpdate(prevProps) {
+    if (this.props.breakpoint !== prevProps.breakpoint) {
+      this.setBreakPoint();
+    }
+  }
+
+  setBreakPoint = () => {
     if (this.props.responsive) {
       let breakpoints = this.props.responsive.map(
         breakpt => breakpt.breakpoint
@@ -51,9 +51,9 @@ export default class Slider extends React.Component {
         }
         // when not using server side rendering
         canUseDOM() &&
-          this.media(bQuery, () => {
-            this.setState({ breakpoint: breakpoint });
-          });
+        this.media(bQuery, () => {
+          this.setState({ breakpoint: breakpoint });
+        });
       });
 
       // Register media query for full screen. Need to support resize from small to large
@@ -61,10 +61,20 @@ export default class Slider extends React.Component {
       let query = json2mq({ minWidth: breakpoints.slice(-1)[0] });
 
       canUseDOM() &&
-        this.media(query, () => {
-          this.setState({ breakpoint: null });
-        });
+      this.media(query, () => {
+        this.setState({ breakpoint: null });
+      });
     }
+  };
+
+  // handles responsive breakpoints
+  componentWillMount() {
+    // performance monitoring
+    //if (process.env.NODE_ENV !== 'production') {
+    //const { whyDidYouUpdate } = require('why-did-you-update')
+    //whyDidYouUpdate(React)
+    //}
+    this.setBreakPoint();
   }
 
   componentWillUnmount() {
@@ -108,7 +118,7 @@ export default class Slider extends React.Component {
         console.warn(
           `slidesToScroll should be equal to 1 in centerMode, you are using ${
             settings.slidesToScroll
-          }`
+            }`
         );
       }
       settings.slidesToScroll = 1;
@@ -119,7 +129,7 @@ export default class Slider extends React.Component {
         console.warn(
           `slidesToShow should be equal to 1 when fade is true, you're using ${
             settings.slidesToShow
-          }`
+            }`
         );
       }
       if (
@@ -129,7 +139,7 @@ export default class Slider extends React.Component {
         console.warn(
           `slidesToScroll should be equal to 1 when fade is true, you're using ${
             settings.slidesToScroll
-          }`
+            }`
         );
       }
       settings.slidesToShow = 1;
