@@ -14,8 +14,8 @@ function CustomArrow(props) {
   return (
     <span
       className="sample"
-      data-currentSlide={props.currentSlide}
-      data-slideCount={props.slideCount}
+      data-currentslide={props.currentSlide}
+      data-slidecount={props.slideCount}
     />
   );
 }
