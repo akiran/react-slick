@@ -707,7 +707,8 @@ export class InnerSlider extends React.Component {
       onTouchMove: this.state.dragging && touchMove ? this.swipeMove : null,
       onTouchEnd: touchMove ? this.swipeEnd : null,
       onTouchCancel: this.state.dragging && touchMove ? this.swipeEnd : null,
-      onKeyDown: this.props.accessibility ? this.keyHandler : null
+      onKeyDown: this.props.accessibility ? this.keyHandler : null,
+      role: 'list',
     };
 
     let innerSliderProps = {
