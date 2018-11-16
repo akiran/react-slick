@@ -4,7 +4,7 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
@@ -115,7 +115,7 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
@@ -226,7 +226,7 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
@@ -337,7 +337,7 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>

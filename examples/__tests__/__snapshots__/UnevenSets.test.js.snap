@@ -4,7 +4,7 @@ exports[`UnevenSets Finite Activity test 1`] = `
 "<div>
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: 0px;\\">
                     <div>
@@ -62,7 +62,7 @@ exports[`UnevenSets Finite Counting test 1`] = `
 "<div>
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: 0px;\\">
                     <div>
@@ -120,7 +120,7 @@ exports[`UnevenSets Finite Positioning test 1`] = `
 "<div>
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: 0px;\\">
                     <div>
@@ -178,7 +178,7 @@ exports[`UnevenSets Infinite Activity test 1`] = `
 "<div>
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
@@ -306,7 +306,7 @@ exports[`UnevenSets Infinite Counting test 1`] = `
 "<div>
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
@@ -434,7 +434,7 @@ exports[`UnevenSets Infinite Positioning test 1`] = `
 "<div>
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
-        <div class=\\"slick-list\\">
+        <div class=\\"slick-list\\" role=\\"list\\">
             <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
