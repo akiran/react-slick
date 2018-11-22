@@ -5,7 +5,7 @@ export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
-  for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
+  for (let slideIndex = startIndex; slideIndex <= endIndex; slideIndex++) {
     if (spec.lazyLoadedList.indexOf(slideIndex) < 0) {
       onDemandSlides.push(slideIndex);
     }
@@ -18,7 +18,7 @@ export const getRequiredLazySlides = spec => {
   let requiredSlides = [];
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
-  for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
+  for (let slideIndex = startIndex; slideIndex <= endIndex; slideIndex++) {
     requiredSlides.push(slideIndex);
   }
   return requiredSlides;
