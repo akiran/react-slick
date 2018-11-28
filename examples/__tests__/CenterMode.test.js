@@ -17,8 +17,8 @@ describe("CenterMode Tests", () => {
   });
   test("Positioning test", () => {
     const slider = mount(<CenterMode />);
-    let currentSlide = slider.find("div.slick-current");
-    let activeSlides = slider.find("div.slick-active");
+    let currentSlide = slider.find("li.slick-current");
+    let activeSlides = slider.find("li.slick-active");
     expect(currentSlide.props()["data-index"]).toEqual(0);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       -1,
@@ -29,8 +29,8 @@ describe("CenterMode Tests", () => {
   });
   test("Activity test", () => {
     const slider = mount(<CenterMode />);
-    let currentSlide = slider.find("div.slick-current");
-    let activeSlides = slider.find("div.slick-active");
+    let currentSlide = slider.find("li.slick-current");
+    let activeSlides = slider.find("li.slick-active");
     expect(currentSlide.props()["data-index"]).toEqual(0);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       -1,
@@ -40,8 +40,8 @@ describe("CenterMode Tests", () => {
 
     clickNext(slider);
 
-    currentSlide = slider.find("div.slick-current");
-    activeSlides = slider.find("div.slick-active");
+    currentSlide = slider.find("li.slick-current");
+    activeSlides = slider.find("li.slick-active");
     expect(currentSlide.props()["data-index"]).toEqual(1);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       0,
