@@ -307,36 +307,37 @@ export class InnerSlider extends React.Component {
     });
   };
 
+  normalizeSlideIndex = index => {
+    if (index < 0) {
+      return index + this.state.slideCount;
+    }
+
+    if (index > this.state.slideCount - 1) {
+      return index - this.state.slideCount;
+    }
+
+    return index;
+  };
+
   onDemandLazyLoad = () => {
     let slidesToLoad = [];
-    const { currentSlide, slideCount, lazyLoadedList } = this.state;
+    const { currentSlide, lazyLoadedList } = this.state;
     if (lazyLoadedList.indexOf(currentSlide) < 0) {
       slidesToLoad.push(currentSlide);
     }
 
-    // next slide to current one
-    if (currentSlide < slideCount - 1) {
-      if (lazyLoadedList.indexOf(currentSlide + 1) < 0) {
-        slidesToLoad.push(currentSlide + 1);
+    const candidatesToBeLazyLoaded = [
+      currentSlide,
+      this.normalizeSlideIndex(currentSlide + 1),
+      this.normalizeSlideIndex(currentSlide + 2),
+      this.normalizeSlideIndex(currentSlide - 1),
+      this.normalizeSlideIndex(currentSlide - 2)
+    ];
+    candidatesToBeLazyLoaded.forEach(index => {
+      if (lazyLoadedList.indexOf(index) < 0) {
+        slidesToLoad.push(index);
       }
-      // if it is last slide
-    } else if (currentSlide === slideCount - 1) {
-      if (lazyLoadedList.indexOf(0) < 0) {
-        slidesToLoad.push(0);
-      }
-    }
-
-    // previous slide to current one
-    if (currentSlide > 0) {
-      if (lazyLoadedList.indexOf(currentSlide - 1) < 0) {
-        slidesToLoad.push(currentSlide - 1);
-      }
-      // if it is first slide
-    } else if (currentSlide === 0) {
-      if (lazyLoadedList.indexOf(slideCount - 1) < 0) {
-        slidesToLoad.push(slideCount - 1);
-      }
-    }
+    });
 
     if (slidesToLoad.length > 0) {
       this.setState(state => ({
