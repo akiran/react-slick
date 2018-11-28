@@ -6,7 +6,6 @@ import initialState from "./initial-state";
 import debounce from "lodash.debounce";
 import classnames from "classnames";
 import {
-  getOnDemandLazySlides,
   extractObject,
   initializedState,
   getHeight,
@@ -56,19 +55,7 @@ export class InnerSlider extends React.Component {
     this.ssrInit();
     this.props.onInit && this.props.onInit();
     if (this.props.lazyLoad) {
-      console.log('LazyLoad from react-slick');
-      let slidesToLoad = getOnDemandLazySlides({
-        ...this.props,
-        ...this.state
-      });
-      if (slidesToLoad.length > 0) {
-        this.setState(prevState => ({
-          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad)
-        }));
-        if (this.props.onLazyLoad) {
-          this.props.onLazyLoad(slidesToLoad);
-        }
-      }
+      this.onDemandLazyLoad();
     }
   };
   componentDidMount = () => {
@@ -172,18 +159,7 @@ export class InnerSlider extends React.Component {
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
     if (this.props.lazyLoad) {
-      let slidesToLoad = getOnDemandLazySlides({
-        ...this.props,
-        ...this.state
-      });
-      if (slidesToLoad.length > 0) {
-        this.setState(prevState => ({
-          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad)
-        }));
-        if (this.props.onLazyLoad) {
-          this.props.onLazyLoad(slidesToLoad);
-        }
-      }
+      this.onDemandLazyLoad();
     }
     // if (this.props.onLazyLoad) {
     //   this.props.onLazyLoad([leftMostSlide])
@@ -277,15 +253,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -330,6 +306,48 @@ export class InnerSlider extends React.Component {
       }
     });
   };
+
+  onDemandLazyLoad = () => {
+    let slidesToLoad = [];
+    const { currentSlide, slideCount, lazyLoadedList } = this.state;
+    if (lazyLoadedList.indexOf(currentSlide) < 0) {
+      slidesToLoad.push(currentSlide);
+    }
+
+    // next slide to current one
+    if (currentSlide < slideCount - 1) {
+      if (lazyLoadedList.indexOf(currentSlide + 1) < 0) {
+        slidesToLoad.push(currentSlide + 1);
+      }
+      // if it is last slide
+    } else if (currentSlide === slideCount - 1) {
+      if (lazyLoadedList.indexOf(0) < 0) {
+        slidesToLoad.push(0);
+      }
+    }
+
+    // previous slide to current one
+    if (currentSlide > 0) {
+      if (lazyLoadedList.indexOf(currentSlide - 1) < 0) {
+        slidesToLoad.push(currentSlide - 1);
+      }
+      // if it is first slide
+    } else if (currentSlide === 0) {
+      if (lazyLoadedList.indexOf(slideCount - 1) < 0) {
+        slidesToLoad.push(slideCount - 1);
+      }
+    }
+
+    if (slidesToLoad.length > 0) {
+      this.setState(state => ({
+        lazyLoadedList: state.lazyLoadedList.concat(slidesToLoad)
+      }));
+      if (this.props.onLazyLoad) {
+        this.props.onLazyLoad(slidesToLoad);
+      }
+    }
+  };
+
   progressiveLazyLoad = () => {
     let slidesToLoad = [];
     const spec = { ...this.props, ...this.state };
