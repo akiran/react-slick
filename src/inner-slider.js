@@ -56,6 +56,7 @@ export class InnerSlider extends React.Component {
     this.ssrInit();
     this.props.onInit && this.props.onInit();
     if (this.props.lazyLoad) {
+      console.log('LazyLoad from react-slick');
       let slidesToLoad = getOnDemandLazySlides({
         ...this.props,
         ...this.state
