@@ -4,6 +4,11 @@
 {
     background: #fff url('./ajax-loader.gif') center center no-repeat;
 }
+.slick-track {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 
 /* Icons */
 @font-face
