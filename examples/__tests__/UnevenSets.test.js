@@ -10,7 +10,8 @@ describe("UnevenSets Finite", () => {
     const slider = mount(<UnevenSetsFinite />);
     let totalSlides = slider.find(".slick-slide").length;
     let clonedSlides = slider.find(".slick-cloned").length;
-    let activeSlides = slider.find(".slick-slide.slick-active").length;
+    let activeSlides = slider.find(".slick-slide.slick-active.slick-slide")
+      .length;
     let dots = slider.find(".slick-dots").children().length;
     expect(totalSlides).toEqual(6);
     expect(clonedSlides).toEqual(0);
@@ -20,8 +21,8 @@ describe("UnevenSets Finite", () => {
   });
   test("Positioning test", () => {
     const slider = mount(<UnevenSetsFinite />);
-    let currentSlide = slider.find("div.slick-current");
-    let activeSlides = slider.find("div.slick-active");
+    let currentSlide = slider.find("li.slick-current");
+    let activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(0);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       0,
@@ -33,8 +34,8 @@ describe("UnevenSets Finite", () => {
   });
   test("Activity test", () => {
     const slider = mount(<UnevenSetsFinite />);
-    let currentSlide = slider.find("div.slick-current");
-    let activeSlides = slider.find("div.slick-active");
+    let currentSlide = slider.find("li.slick-current");
+    let activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(0);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       0,
@@ -45,8 +46,8 @@ describe("UnevenSets Finite", () => {
 
     clickNext(slider);
 
-    currentSlide = slider.find("div.slick-current");
-    activeSlides = slider.find("div.slick-active");
+    currentSlide = slider.find("li.slick-current");
+    activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(4);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       4,
@@ -55,8 +56,8 @@ describe("UnevenSets Finite", () => {
 
     clickNext(slider);
 
-    currentSlide = slider.find("div.slick-current");
-    activeSlides = slider.find("div.slick-active");
+    currentSlide = slider.find("li.slick-current");
+    activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(4);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       4,
@@ -72,7 +73,8 @@ describe("UnevenSets Infinite", () => {
     const slider = mount(<UnevenSetsInfinite />);
     let totalSlides = slider.find(".slick-slide").length;
     let clonedSlides = slider.find(".slick-cloned").length;
-    let activeSlides = slider.find(".slick-slide.slick-active").length;
+    let activeSlides = slider.find(".slick-slide.slick-active.slick-slide")
+      .length;
     let dots = slider.find(".slick-dots").children().length;
     expect(totalSlides).toEqual(16);
     expect(clonedSlides).toEqual(10);
@@ -82,8 +84,8 @@ describe("UnevenSets Infinite", () => {
   });
   test("Positioning test", () => {
     const slider = mount(<UnevenSetsInfinite />);
-    let currentSlide = slider.find("div.slick-current");
-    let activeSlides = slider.find("div.slick-active");
+    let currentSlide = slider.find("li.slick-current");
+    let activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(0);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       0,
@@ -95,8 +97,8 @@ describe("UnevenSets Infinite", () => {
   });
   test("Activity test", () => {
     const slider = mount(<UnevenSetsInfinite />);
-    let currentSlide = slider.find("div.slick-current");
-    let activeSlides = slider.find("div.slick-active");
+    let currentSlide = slider.find("li.slick-current");
+    let activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(0);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       0,
@@ -107,8 +109,8 @@ describe("UnevenSets Infinite", () => {
 
     clickNext(slider);
 
-    currentSlide = slider.find("div.slick-current");
-    activeSlides = slider.find("div.slick-active");
+    currentSlide = slider.find("li.slick-current");
+    activeSlides = slider.find("li.slick-active.slick-slide");
     expect(currentSlide.props()["data-index"]).toEqual(4);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
       4,

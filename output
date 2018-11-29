@@ -1,0 +1,299 @@
+yarn run v1.3.2
+$ eslint src && jest
+
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        1s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        2s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        3s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        4s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        5s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        6s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        7s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        8s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        9s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        10s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        11s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        12s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        13s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        14s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        15s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        16s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        17s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        18s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        19s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        20s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        21s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        22s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        23s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        24s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        25s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        26s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        27s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        28s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        29s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        30s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        31s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        32s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        33s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        34s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        35s, estimated 44s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+ RUNS  ...centerMode.test.js
+ RUNS  ...lazyload.test.js
+ RUNS  ...simple.test.js
+
+Test Suites: 0 of 20 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        36s, estimated 44s

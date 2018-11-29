@@ -4,7 +4,11 @@ var defaultProps = {
   accessibility: true,
   adaptiveHeight: false,
   afterChange: null,
-  appendDots: dots => <ul style={{ display: "block" }}>{dots}</ul>,
+  appendDots: dots => (
+    <ul role="tablist" style={{ display: "block" }}>
+      {dots}
+    </ul>
+  ),
   arrows: true,
   autoplay: false,
   autoplaySpeed: 3000,

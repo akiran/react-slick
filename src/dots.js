@@ -46,11 +46,11 @@ export class Dots extends React.PureComponent {
       var leftBound = i * this.props.slidesToScroll;
       var rightBound =
         i * this.props.slidesToScroll + (this.props.slidesToScroll - 1);
-      var className = classnames({
-        "slick-active":
-          this.props.currentSlide >= leftBound &&
-          this.props.currentSlide <= rightBound
-      });
+      var isSlideActive =
+        this.props.currentSlide >= leftBound &&
+        this.props.currentSlide <= rightBound;
+
+      var className = classnames({ "slick-active": isSlideActive });
 
       var dotOptions = {
         message: "dots",
@@ -61,7 +61,14 @@ export class Dots extends React.PureComponent {
 
       var onClick = this.clickHandler.bind(this, dotOptions);
       return (
-        <li key={i} className={className}>
+        <li
+          key={i}
+          role="tab"
+          aria-labelledby={`slide-${i}`}
+          aria-controls={`slide-${i}`}
+          aria-selected={isSlideActive}
+          className={className}
+        >
           {React.cloneElement(this.props.customPaging(i), { onClick })}
         </li>
       );

@@ -190,15 +190,17 @@ export default class Slider extends React.Component {
         }
         newSlide.push(<div key={10 * i + j}>{row}</div>);
       }
-      if (settings.variableWidth) {
-        newChildren.push(
-          <div key={i} style={{ width: currentWidth }}>
-            {newSlide}
-          </div>
-        );
-      } else {
-        newChildren.push(<div key={i}>{newSlide}</div>);
-      }
+
+      newChildren.push(
+        <li
+          key={i}
+          role="tabpanel"
+          id={`slide-${i}`}
+          style={settings.variableWidth ? { width: currentWidth } : null}
+        >
+          {newSlide}
+        </li>
+      );
     }
 
     if (settings === "unslick") {
