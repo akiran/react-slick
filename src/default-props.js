@@ -25,6 +25,7 @@ var defaultProps = {
   edgeFriction: 0.35,
   fade: false,
   focusOnSelect: false,
+  hiddenPlayPauseButton: false,
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,
