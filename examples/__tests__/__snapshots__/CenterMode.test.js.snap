@@ -3,7 +3,11 @@
 exports[`CenterMode Tests Activity test 1`] = `
 "<div>
     <h2>Center Mode</h2>
-    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\">
+        <ul class=\\"controls\\" aria-label=\\"Controls\\">
+            <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
+            <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
+        </ul>
         <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
             <ul class=\\"slick-track\\" style=\\"width: -640px; opacity: 1; transform: translate3d(160px, 0px, 0px);\\">
                 <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: -40px;\\" data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
@@ -119,7 +123,7 @@ exports[`CenterMode Tests Activity test 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+        </div>
     </div>
 </div>"
 `;
@@ -127,7 +131,11 @@ exports[`CenterMode Tests Activity test 1`] = `
 exports[`CenterMode Tests Counting test 1`] = `
 "<div>
     <h2>Center Mode</h2>
-    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\">
+        <ul class=\\"controls\\" aria-label=\\"Controls\\">
+            <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
+            <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
+        </ul>
         <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
             <ul class=\\"slick-track\\" style=\\"width: -640px; opacity: 1; transform: translate3d(120px, 0px, 0px);\\">
                 <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: -40px;\\" data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
@@ -243,7 +251,7 @@ exports[`CenterMode Tests Counting test 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+        </div>
     </div>
 </div>"
 `;
@@ -251,7 +259,11 @@ exports[`CenterMode Tests Counting test 1`] = `
 exports[`CenterMode Tests Positioning test 1`] = `
 "<div>
     <h2>Center Mode</h2>
-    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\">
+        <ul class=\\"controls\\" aria-label=\\"Controls\\">
+            <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
+            <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
+        </ul>
         <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
             <ul class=\\"slick-track\\" style=\\"width: -640px; opacity: 1; transform: translate3d(120px, 0px, 0px);\\">
                 <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: -40px;\\" data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
@@ -367,7 +379,7 @@ exports[`CenterMode Tests Positioning test 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+        </div>
     </div>
 </div>"
 `;

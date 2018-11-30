@@ -4,7 +4,11 @@ exports[`FocusOnSelect Tests Activity Test 1`] = `
 "<div>
     <h2>FocusOnSelect</h2>
     <div>Click on any slide to select and make it current slide</div>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul class=\\"controls\\" aria-label=\\"Controls\\">
+            <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
+            <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
@@ -113,7 +117,7 @@ exports[`FocusOnSelect Tests Activity Test 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+        </div>
     </div>
 </div>"
 `;
@@ -122,7 +126,11 @@ exports[`FocusOnSelect Tests Activity Test 2`] = `
 "<div>
     <h2>FocusOnSelect</h2>
     <div>Click on any slide to select and make it current slide</div>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul class=\\"controls\\" aria-label=\\"Controls\\">
+            <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
+            <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
@@ -231,7 +239,7 @@ exports[`FocusOnSelect Tests Activity Test 2`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+        </div>
     </div>
 </div>"
 `;
