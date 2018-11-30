@@ -10,6 +10,17 @@
     list-style: none;
 }
 
+/* className for screen-readers only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  border: 0;
+}
+
 /* Icons */
 @font-face
 {
