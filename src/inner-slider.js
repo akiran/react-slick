@@ -26,6 +26,7 @@ import {
 import { Track } from "./track";
 import { Dots } from "./dots";
 import { PrevArrow, NextArrow } from "./arrows";
+import { HiddenPlayPauseButton } from "./hiddenPlayPauseButton";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class InnerSlider extends React.Component {
@@ -276,15 +277,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -652,7 +653,7 @@ export class InnerSlider extends React.Component {
       dots = <Dots {...dotProps} />;
     }
 
-    var prevArrow, nextArrow;
+    var prevArrow, nextArrow, hiddenPlayPauseButton;
     let arrowProps = extractObject(spec, [
       "infinite",
       "centerMode",
@@ -664,9 +665,24 @@ export class InnerSlider extends React.Component {
     ]);
     arrowProps.clickHandler = this.changeSlide;
 
+    let hiddenPlayPauseButtonProps = {
+      isPaused: this.state.autoplaying === "paused"
+    };
+
+    hiddenPlayPauseButtonProps.clickHandler =
+      this.state.autoplaying && this.state.autoplaying === "paused"
+        ? this.autoPlay
+        : () => this.pause("paused");
+
     if (this.props.arrows) {
       prevArrow = <PrevArrow {...arrowProps} />;
       nextArrow = <NextArrow {...arrowProps} />;
+    }
+
+    if (this.props.hiddenPlayPauseButton && this.state.autoplaying) {
+      hiddenPlayPauseButton = (
+        <HiddenPlayPauseButton {...hiddenPlayPauseButtonProps} />
+      );
     }
 
     var verticalHeightStyle = null;
@@ -721,6 +737,7 @@ export class InnerSlider extends React.Component {
     }
     return (
       <div {...innerSliderProps}>
+        {this.props.hiddenPlayPauseButton ? hiddenPlayPauseButton : ""}
         {!this.props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>
