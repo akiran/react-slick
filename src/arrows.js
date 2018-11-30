@@ -29,7 +29,8 @@ export class PrevArrow extends React.PureComponent {
       "data-role": "none",
       className: classnames(prevClasses),
       style: { display: "block" },
-      onClick: prevHandler
+      onClick: prevHandler,
+      "aria-label": "Previous"
     };
     let customProps = {
       currentSlide: this.props.currentSlide,
@@ -44,10 +45,12 @@ export class PrevArrow extends React.PureComponent {
       });
     } else {
       prevArrow = (
-        <button key="0" type="button" {...prevArrowProps}>
-          {" "}
-          Previous
-        </button>
+        <li aria-label="Control-previous">
+          <button key="0" type="button" {...prevArrowProps}>
+            {" "}
+            Previous
+          </button>
+        </li>
       );
     }
 
@@ -76,7 +79,8 @@ export class NextArrow extends React.PureComponent {
       "data-role": "none",
       className: classnames(nextClasses),
       style: { display: "block" },
-      onClick: nextHandler
+      onClick: nextHandler,
+      "aria-label": "Next"
     };
     let customProps = {
       currentSlide: this.props.currentSlide,
@@ -91,10 +95,12 @@ export class NextArrow extends React.PureComponent {
       });
     } else {
       nextArrow = (
-        <button key="1" type="button" {...nextArrowProps}>
-          {" "}
-          Next
-        </button>
+        <li aria-label="Control-next">
+          <button key="1" type="button" {...nextArrowProps}>
+            {" "}
+            Next
+          </button>
+        </li>
       );
     }
 

@@ -32,6 +32,11 @@
     src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
 }
 /* Arrows */
+.controls {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 .slick-prev,
 .slick-next
 {
