@@ -244,7 +244,6 @@ export const changeSlide = (spec, options) => {
   var indexOffset, previousInt, slideOffset, unevenOffset, targetSlide;
   const {
     slidesToScroll,
-    slidesToShow,
     slideCount,
     currentSlide,
     lazyLoad,
@@ -255,7 +254,7 @@ export const changeSlide = (spec, options) => {
 
   if (options.message === "previous") {
     slideOffset =
-      indexOffset === 0 ? slidesToScroll : slidesToShow - indexOffset;
+      indexOffset === 0 ? slidesToScroll : slidesToScroll - indexOffset;
     targetSlide = currentSlide - slideOffset;
     if (lazyLoad && !infinite) {
       previousInt = currentSlide - slideOffset;
