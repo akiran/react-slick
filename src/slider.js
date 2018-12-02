@@ -25,7 +25,7 @@ export default class Slider extends React.Component {
   }
 
   // handles responsive breakpoints
-  componentWillMount() {
+  componentDidMount() {
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
@@ -40,15 +40,14 @@ export default class Slider extends React.Component {
 
       breakpoints.forEach((breakpoint, index) => {
         // media query for each breakpoint
-        let bQuery;
-        if (index === 0) {
-          bQuery = json2mq({ minWidth: 0, maxWidth: breakpoint });
-        } else {
-          bQuery = json2mq({
-            minWidth: breakpoints[index - 1] + 1,
-            maxWidth: breakpoint
-          });
-        }
+        const bQuery = json2mq(
+          index === 0
+            ? { minWidth: 0, maxWidth: breakpoint }
+            : {
+                minWidth: breakpoints[index - 1] + 1,
+                maxWidth: breakpoint
+              }
+        );
         // when not using server side rendering
         canUseDOM() &&
           this.media(bQuery, () => {
@@ -58,7 +57,7 @@ export default class Slider extends React.Component {
 
       // Register media query for full screen. Need to support resize from small to large
       // convert javascript object to media query string
-      let query = json2mq({ minWidth: breakpoints.slice(-1)[0] });
+      const query = json2mq({ minWidth: breakpoints.slice(-1)[0] });
 
       canUseDOM() &&
         this.media(query, () => {
