@@ -4,6 +4,14 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>3</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"false\\" class=\\"\\"><button>6</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -103,14 +111,6 @@ exports[`Simple Slider Snapshots click on 3rd dot 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>3</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"false\\" class=\\"\\"><button>6</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -119,6 +119,14 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"false\\" class=\\"\\"><button>6</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -218,14 +226,6 @@ exports[`Simple Slider Snapshots click on next button 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"false\\" class=\\"\\"><button>6</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -234,6 +234,14 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>6</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -333,14 +341,6 @@ exports[`Simple Slider Snapshots click on prev button 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>6</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -349,6 +349,14 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
 "<div>
     <h2> Single Item</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"false\\" class=\\"\\"><button>6</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -448,14 +456,6 @@ exports[`Simple Slider Snapshots slider initial state 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-3\\" aria-controls=\\"slide-3\\" aria-selected=\\"false\\" class=\\"\\"><button>4</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-4\\" aria-controls=\\"slide-4\\" aria-selected=\\"false\\" class=\\"\\"><button>5</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-5\\" aria-controls=\\"slide-5\\" aria-selected=\\"false\\" class=\\"\\"><button>6</button></li>
-        </ul>
     </div>
 </div>"
 `;

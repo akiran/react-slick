@@ -4,6 +4,10 @@ exports[`UnevenSets Finite Activity test 1`] = `
 "<div>
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next slick-disabled\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -54,10 +58,6 @@ exports[`UnevenSets Finite Activity test 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -66,6 +66,10 @@ exports[`UnevenSets Finite Counting test 1`] = `
 "<div>
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -116,10 +120,6 @@ exports[`UnevenSets Finite Counting test 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -128,6 +128,10 @@ exports[`UnevenSets Finite Positioning test 1`] = `
 "<div>
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -178,10 +182,6 @@ exports[`UnevenSets Finite Positioning test 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -190,6 +190,10 @@ exports[`UnevenSets Infinite Activity test 1`] = `
 "<div>
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -310,10 +314,6 @@ exports[`UnevenSets Infinite Activity test 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -322,6 +322,10 @@ exports[`UnevenSets Infinite Counting test 1`] = `
 "<div>
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -442,10 +446,6 @@ exports[`UnevenSets Infinite Counting test 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-        </ul>
     </div>
 </div>"
 `;
@@ -454,6 +454,10 @@ exports[`UnevenSets Infinite Positioning test 1`] = `
 "<div>
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+        </ul>
         <ul class=\\"controls\\" aria-label=\\"Controls\\">
             <li aria-label=\\"Control-previous\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\" aria-label=\\"Previous\\"> Previous</button></li>
             <li aria-label=\\"Control-next\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\" aria-label=\\"Next\\"> Next</button></li>
@@ -574,10 +578,6 @@ exports[`UnevenSets Infinite Positioning test 1`] = `
                 </li>
             </ul>
         </div>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-        </ul>
     </div>
 </div>"
 `;
