@@ -20,7 +20,9 @@ export class HiddenPlayPauseButton extends React.PureComponent {
 
     return (
       <button type="button" {...playPauseButtonProps}>
-        {this.props.isPaused ? "play" : "pause"}
+        {this.props.isPaused
+          ? this.props.accessibilityPlayLabel
+          : this.props.accessibilityPauseLabel}
       </button>
     );
   }
