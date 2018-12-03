@@ -2,6 +2,11 @@ import React from "react";
 
 var defaultProps = {
   accessibility: true,
+  accessibilityNextLabel: "Next",
+  accessibilityPauseLabel: "Pause",
+  accessibilityPlayLabel: "Play",
+  accessibilityPreviousLabel: "Previous",
+  accessibilitySlideLabel: "Slide",
   adaptiveHeight: false,
   afterChange: null,
   appendDots: dots => (
@@ -25,6 +30,7 @@ var defaultProps = {
   edgeFriction: 0.35,
   fade: false,
   focusOnSelect: false,
+  hiddenPlayPauseButton: false,
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,

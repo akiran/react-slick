@@ -3,150 +3,159 @@
 exports[`Multiple Items should have 3 active slides 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -154,12 +163,7 @@ exports[`Multiple Items should have 3 active slides 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -167,150 +171,159 @@ exports[`Multiple Items should have 3 active slides 1`] = `
 exports[`Multiple Items should have 3 dots 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -318,12 +331,7 @@ exports[`Multiple Items should have 3 dots 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -331,150 +339,159 @@ exports[`Multiple Items should have 3 dots 1`] = `
 exports[`Multiple Items should have 9 actual slides and (3(pre) + 9(post)) clone slides 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -482,12 +499,7 @@ exports[`Multiple Items should have 9 actual slides and (3(pre) + 9(post)) clone
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -495,150 +507,159 @@ exports[`Multiple Items should have 9 actual slides and (3(pre) + 9(post)) clone
 exports[`Multiple Items should show first 3 slides 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -646,12 +667,7 @@ exports[`Multiple Items should show first 3 slides 1`] = `
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -659,150 +675,159 @@ exports[`Multiple Items should show first 3 slides 1`] = `
 exports[`Multiple Items should show last 3 slides when last dot is clicked 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -810,12 +835,7 @@ exports[`Multiple Items should show last 3 slides when last dot is clicked 1`] =
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -823,150 +843,159 @@ exports[`Multiple Items should show last 3 slides when last dot is clicked 1`] =
 exports[`Multiple Items should show last 3 slides when previous button is clicked 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -974,12 +1003,7 @@ exports[`Multiple Items should show last 3 slides when previous button is clicke
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -987,150 +1011,159 @@ exports[`Multiple Items should show last 3 slides when previous button is clicke
 exports[`Multiple Items should show slides first 3 slides when middle dot is clicked 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -1138,12 +1171,7 @@ exports[`Multiple Items should show slides first 3 slides when middle dot is cli
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"false\\" class=\\"\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -1151,150 +1179,159 @@ exports[`Multiple Items should show slides first 3 slides when middle dot is cli
 exports[`Multiple Items should show slides from 4 to 6 when middle dot is clicked 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -1302,12 +1339,7 @@ exports[`Multiple Items should show slides from 4 to 6 when middle dot is clicke
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
@@ -1315,150 +1347,159 @@ exports[`Multiple Items should show slides from 4 to 6 when middle dot is clicke
 exports[`Multiple Items should show slides from 4 to 6 when next button is clicked 1`] = `
 "<div>
     <h2> Multiple items </h2>
-    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\">
+        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
+            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
+            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
+        </ul>
+        <ul class=\\"controls\\">
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\">Previous</button></li>
+            <li><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\">Next</button></li>
+        </ul>
         <div class=\\"slick-list\\">
             <ul class=\\"slick-track\\" style=\\"opacity: 1;\\">
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"outline: none; width: 0px;\\" data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"outline: none; width: 0px;\\" data-index=\\"1\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"outline: none; width: 0px;\\" data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"outline: none; width: 0px;\\" data-index=\\"3\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"outline: none; width: 0px;\\" data-index=\\"4\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"outline: none; width: 0px;\\" data-index=\\"5\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"outline: none; width: 0px;\\" data-index=\\"6\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"outline: none; width: 0px;\\" data-index=\\"7\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"outline: none; width: 0px;\\" data-index=\\"8\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-0\\" aria-label=\\"Slide-0\\" style=\\"width: 0px;\\" data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>1</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-1\\" aria-label=\\"Slide-1\\" style=\\"width: 0px;\\" data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>2</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-2\\" aria-label=\\"Slide-2\\" style=\\"width: 0px;\\" data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>3</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-3\\" aria-label=\\"Slide-3\\" style=\\"width: 0px;\\" data-index=\\"12\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>4</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-4\\" aria-label=\\"Slide-4\\" style=\\"width: 0px;\\" data-index=\\"13\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>5</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-5\\" aria-label=\\"Slide-5\\" style=\\"width: 0px;\\" data-index=\\"14\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>6</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-6\\" aria-label=\\"Slide-6\\" style=\\"width: 0px;\\" data-index=\\"15\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>7</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-7\\" aria-label=\\"Slide-7\\" style=\\"width: 0px;\\" data-index=\\"16\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>8</h3>
                         </div>
                     </div>
                 </li>
-                <li role=\\"tabpanel\\" id=\\"slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
+                <li role=\\"tabpanel\\" id=\\"slide-8\\" aria-label=\\"Slide-8\\" style=\\"width: 0px;\\" data-index=\\"17\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
                             <h3>9</h3>
@@ -1466,12 +1507,7 @@ exports[`Multiple Items should show slides from 4 to 6 when next button is click
                     </div>
                 </li>
             </ul>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-        <ul role=\\"tablist\\" style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li role=\\"tab\\" aria-labelledby=\\"slide-0\\" aria-controls=\\"slide-0\\" aria-selected=\\"false\\" class=\\"\\"><button>1</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-1\\" aria-controls=\\"slide-1\\" aria-selected=\\"true\\" class=\\"slick-active\\"><button>2</button></li>
-            <li role=\\"tab\\" aria-labelledby=\\"slide-2\\" aria-controls=\\"slide-2\\" aria-selected=\\"false\\" class=\\"\\"><button>3</button></li>
-        </ul>
+        </div>
     </div>
 </div>"
 `;
