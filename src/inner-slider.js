@@ -614,7 +614,8 @@ export class InnerSlider extends React.Component {
       "trackStyle",
       "variableWidth",
       "unslick",
-      "centerPadding"
+      "centerPadding",
+      "accessibilitySlideLabel"
     ]);
     const { pauseOnHover } = this.props;
     trackProps = {
@@ -661,13 +662,18 @@ export class InnerSlider extends React.Component {
       "slideCount",
       "slidesToShow",
       "prevArrow",
-      "nextArrow"
+      "nextArrow",
+      "accessibilityNextLabel",
+      "accessibilityPreviousLabel"
     ]);
     arrowProps.clickHandler = this.changeSlide;
 
-    let hiddenPlayPauseButtonProps = {
-      isPaused: this.state.autoplaying === "paused"
-    };
+    let hiddenPlayPauseButtonProps = extractObject(spec, [
+      "accessibilityPauseLabel",
+      "accessibilityPlayLabel"
+    ]);
+
+    hiddenPlayPauseButtonProps.isPaused = this.state.autoplaying === "paused";
 
     hiddenPlayPauseButtonProps.clickHandler =
       this.state.autoplaying && this.state.autoplaying === "paused"
@@ -738,7 +744,7 @@ export class InnerSlider extends React.Component {
     return (
       <div {...innerSliderProps}>
         {this.props.hiddenPlayPauseButton ? hiddenPlayPauseButton : ""}
-        <ul className="controls" aria-label="Controls">
+        <ul className="controls">
           {!this.props.unslick ? prevArrow : ""}
           {!this.props.unslick ? nextArrow : ""}
         </ul>
