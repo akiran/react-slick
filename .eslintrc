@@ -11,9 +11,6 @@
     "react/display-name": 0,
     "no-console": 0
   },
-  "ecmaFeatures": {
-    "jsx": true
-  },
   "env": {
     "node": true,
     "browser": true,
