@@ -1,3 +1,29 @@
 language: node_js
+
 node_js:
   - "stable"
+  - "10"
+  - "8"
+  - "6"
+
+sudo: false
+
+cache:
+  npm: true
+  directories:
+    - node_modules
+
+# so as to ensure slick-carousel is always there
+before_script:
+  - npm install -g gulp-cli
+  - npm install slick-carousel
+
+script:
+  - npm run lint
+  - npm run build
+  - npm run test
+
+notifications:
+  email:
+    on_failure: always
+    on_success: always
