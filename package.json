@@ -59,7 +59,7 @@
     "gulp-sass": "^4.0.0",
     "husky": "^0.14.3",
     "jasmine-core": "^2.5.2",
-    "jest": "^19.0.2",
+    "jest": "^23.6.0",
     "jquery": "^3.2.1",
     "js-beautify": "^1.7.5",
     "json-loader": "^0.5.4",
