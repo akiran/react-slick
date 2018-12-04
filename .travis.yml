@@ -19,7 +19,6 @@ before_script:
   - npm install slick-carousel
 
 script:
-  - npm run lint
   - npm run build
   - npm run test
 
