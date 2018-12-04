@@ -11,7 +11,7 @@
     "start": "gulp server",
     "build": "gulp clean && gulp sass && gulp copy && webpack",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
-    "test": "eslint src && jest",
+    "test": "npm run lint && jest",
     "test:watch": "jest --watch",
     "lint": "eslint src",
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
