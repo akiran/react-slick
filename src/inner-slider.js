@@ -744,7 +744,6 @@ export class InnerSlider extends React.Component {
     return (
       <div {...innerSliderProps}>
         {this.props.hiddenPlayPauseButton ? hiddenPlayPauseButton : ""}
-        {!this.props.unslick ? dots : ""}
         <ul className="controls">
           {!this.props.unslick ? prevArrow : ""}
           {!this.props.unslick ? nextArrow : ""}
@@ -754,6 +753,7 @@ export class InnerSlider extends React.Component {
             {this.props.children}
           </Track>
         </div>
+        {!this.props.unslick ? dots : ""}
       </div>
     );
   };
