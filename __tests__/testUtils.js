@@ -46,11 +46,7 @@ export function createInnerSlider({ noOfSlides, ...settings }) {
   const children = React.Children.toArray(
     createReactSliderChildren(noOfSlides)
   );
-  return (
-    <InnerSlider {...settings} ref={slider => (this.innerSlider = slider)}>
-      {children}
-    </InnerSlider>
-  );
+  return <InnerSlider {...settings}>{children}</InnerSlider>;
 }
 
 export function createInnerSliderWrapper(settings) {

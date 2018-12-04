@@ -6,14 +6,16 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
-
 ### Installation
 
 **npm**
+
 ```bash
-npm install react-slick
+npm install react-slick --save
 ```
+
 **yarn**
+
 ```bash
 yarn add react-slick
 ```
@@ -26,8 +28,6 @@ npm install slick-carousel
 @import "~slick-carousel/slick/slick-theme.css";
 ```
 
-But be aware slick-carousel has a peer-dependancy on jQuery which you, or your colleagues may not like to see in your console output, so you can always grab the CSS from there and convert it into any CSS in JS solution that you might be using.
-
 or add cdn link in your html
 
 ```html
@@ -35,20 +35,16 @@ or add cdn link in your html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
-
-
-### [PlayGround](https://codesandbox.io/s/zzloxr09mp)
-Use [CodeSandbox template](https://codesandbox.io/s/zzloxr09mp) to try react-slick with different settings.
-
+### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
 
 ### Example
 
 ```js
-import React from 'react'
-import Slider from 'react-slick'
+import React from "react";
+import Slider from "react-slick";
 
 class SimpleSlider extends React.Component {
-  render () {
+  render() {
     var settings = {
       dots: true,
       infinite: true,
@@ -58,12 +54,24 @@ class SimpleSlider extends React.Component {
     };
     return (
       <Slider {...settings}>
-        <div><h3>1</h3></div>
-        <div><h3>2</h3></div>
-        <div><h3>3</h3></div>
-        <div><h3>4</h3></div>
-        <div><h3>5</h3></div>
-        <div><h3>6</h3></div>
+        <div>
+          <h3>1</h3>
+        </div>
+        <div>
+          <h3>2</h3>
+        </div>
+        <div>
+          <h3>3</h3>
+        </div>
+        <div>
+          <h3>4</h3>
+        </div>
+        <div>
+          <h3>5</h3>
+        </div>
+        <div>
+          <h3>6</h3>
+        </div>
       </Slider>
     );
   }
@@ -79,6 +87,7 @@ For all available props, go [here](https://react-slick.neostack.com/docs/api/).
 For all available methods, go [here](https://react-slick.neostack.com/docs/api#methods)
 
 ### Development
+
 Want to run demos locally
 
 ```bash
@@ -89,9 +98,6 @@ npm start
 open http://localhost:8080
 ```
 
-### Polyfills for old IE support
-`matchMedia` support from [media-match](https://github.com/weblinc/media-match)
-
 <a href="https://opencollective.com/react-slick/donate" target="_blank">
   <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
 </a>
@@ -101,13 +107,11 @@ open http://localhost:8080
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <a href="https://github.com/akiran/react-slick/graphs/contributors"><img src="https://opencollective.com/react-slick/contributors.svg?width=890" /></a>
 
-
 ## Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/react-slick#backer)]
 
 <a href="https://opencollective.com/react-slick#backers" target="_blank"><img src="https://opencollective.com/react-slick/backers.svg?width=890"></a>
-
 
 ## Sponsors
 
