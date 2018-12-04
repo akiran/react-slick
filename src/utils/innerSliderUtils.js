@@ -199,8 +199,8 @@ export const slideHandler = spec => {
     } else if (!canGoNext(spec) && animationSlide > currentSlide) {
       animationSlide = finalSlide = currentSlide;
     } else if (centerMode && animationSlide >= slideCount) {
-      animationSlide = infinite ? slideCount : slideCount - 1;
-      finalSlide = infinite ? 0 : slideCount - 1;
+      animationSlide = infinite ? animationSlide : slideCount - 1;
+      finalSlide = infinite ? animationSlide % slideCount : slideCount - 1;
     } else if (animationSlide >= slideCount) {
       finalSlide = animationSlide - slideCount;
       if (!infinite) finalSlide = slideCount - slidesToShow;
@@ -767,16 +767,36 @@ export const getTotalSlides = spec =>
     ? 1
     : getPreClones(spec) + spec.slideCount + getPostClones(spec);
 export const siblingDirection = spec => {
-  if (spec.targetSlide > spec.currentSlide) {
-    if (spec.targetSlide > spec.currentSlide + slidesOnRight(spec)) {
+  if (!spec.centerMode) {
+    if (spec.targetSlide > spec.currentSlide) {
+      if (spec.targetSlide > spec.currentSlide + slidesOnRight(spec)) {
+        return "left";
+      }
+      return "right";
+    } else {
+      if (spec.targetSlide < spec.currentSlide - slidesOnLeft(spec)) {
+        return "right";
+      }
       return "left";
     }
-    return "right";
   } else {
-    if (spec.targetSlide < spec.currentSlide - slidesOnLeft(spec)) {
+    if (spec.targetSlide > spec.currentSlide) {
+      if (
+        spec.targetSlide - spec.currentSlide <
+        spec.slideCount - spec.targetSlide + spec.currentSlide
+      ) {
+        return "right";
+      }
+      return "left";
+    } else {
+      if (
+        spec.currentSlide - spec.targetSlide <
+        spec.slideCount + spec.targetSlide - spec.currentSlide
+      ) {
+        return "left";
+      }
       return "right";
     }
-    return "left";
   }
 };
 
