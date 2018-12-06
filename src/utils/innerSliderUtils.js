@@ -353,7 +353,7 @@ export const swipeMove = (e, spec) => {
   let verticalSwipeLength = Math.round(
     Math.sqrt(Math.pow(touchObject.curY - touchObject.startY, 2))
   );
-  if (!verticalSwiping && !swiping && verticalSwipeLength > 10) {
+  if (!verticalSwiping && !swiping && verticalSwipeLength > 10 && touchObject.swipeLength <= 10) {
     return { scrolling: true };
   }
   if (verticalSwiping) touchObject.swipeLength = verticalSwipeLength;
