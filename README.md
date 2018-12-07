@@ -86,6 +86,10 @@ For all available props, go [here](https://react-slick.neostack.com/docs/api/).
 
 For all available methods, go [here](https://react-slick.neostack.com/docs/api#methods)
 
+### Examples
+
+For simple examples covering most of the features, go [here](https://react-slick.neostack.com/docs/example/simple-slider)
+
 ### Development
 
 Want to run demos locally
