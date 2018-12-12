@@ -12,6 +12,16 @@ export class PrevArrow extends React.PureComponent {
     this.props.clickHandler(options, e);
   }
   render() {
+    const prevArrowStyle =
+      (this.props.prevArrow &&
+        this.props.prevArrow.props &&
+        this.props.prevArrow.props.style) ||
+      {};
+    const prevArrowClass =
+      (this.props.prevArrow &&
+        this.props.prevArrow.props &&
+        this.props.prevArrow.props.className) ||
+      "";
     let prevClasses = { "slick-arrow": true, "slick-prev": true };
     let prevHandler = this.clickHandler.bind(this, { message: "previous" });
 
@@ -27,8 +37,8 @@ export class PrevArrow extends React.PureComponent {
     let prevArrowProps = {
       key: "0",
       "data-role": "none",
-      className: classnames(prevClasses),
-      style: { display: "block" },
+      className: classnames(prevClasses, prevArrowClass),
+      style: { display: "block", ...prevArrowStyle },
       onClick: prevHandler
     };
     let customProps = {
@@ -63,6 +73,16 @@ export class NextArrow extends React.PureComponent {
     this.props.clickHandler(options, e);
   }
   render() {
+    const nextArrowStyle =
+      (this.props.nextArrow &&
+        this.props.nextArrow.props &&
+        this.props.nextArrow.props.style) ||
+      {};
+    const nextArrowClass =
+      (this.props.nextArrow &&
+        this.props.nextArrow.props &&
+        this.props.nextArrow.props.className) ||
+      "";
     let nextClasses = { "slick-arrow": true, "slick-next": true };
     let nextHandler = this.clickHandler.bind(this, { message: "next" });
 
@@ -74,8 +94,8 @@ export class NextArrow extends React.PureComponent {
     let nextArrowProps = {
       key: "1",
       "data-role": "none",
-      className: classnames(nextClasses),
-      style: { display: "block" },
+      className: classnames(nextClasses, nextArrowClass),
+      style: { display: "block", ...nextArrowStyle },
       onClick: nextHandler
     };
     let customProps = {
