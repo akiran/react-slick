@@ -118,7 +118,8 @@ var renderSlides = function(spec) {
     // push a cloned element of the desired slide
     slides.push(
       React.cloneElement(child, {
-        key: "original" + getKey(child, index),
+        key: `slide-${index}`,
+        id: `slide-${index}`,
         "data-index": index,
         className: classnames(slideClasses, slideClass),
         tabIndex: "-1",
