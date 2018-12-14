@@ -17,6 +17,25 @@ var getDotCount = function(spec) {
   return dots;
 };
 
+var getNthDotAssociatedSlides = function(n, spec) {
+  var nthDotAssociatedSlides = "";
+  for (
+    var i = spec.slidesToScroll * n;
+    (i < spec.slideCount || spec.infinite) &&
+    i < spec.slidesToScroll * n + spec.slidesToShow;
+    i = i + 1
+  ) {
+    if (i >= spec.slideCount && spec.infinite) {
+      var newIndex = i - spec.slideCount;
+      nthDotAssociatedSlides += ` slide-${newIndex}`;
+    } else {
+      nthDotAssociatedSlides += ` slide-${i}`;
+    }
+  }
+
+  return nthDotAssociatedSlides;
+};
+
 export class Dots extends React.PureComponent {
   clickHandler(options, e) {
     // In Autoplay the focus stays on clicked button even after transition
@@ -64,12 +83,30 @@ export class Dots extends React.PureComponent {
         <li
           key={i}
           role="tab"
-          aria-labelledby={`slide-${i}`}
-          aria-controls={`slide-${i}`}
+          aria-labelledby={getNthDotAssociatedSlides(i, {
+            slideCount: this.props.slideCount,
+            slidesToScroll: this.props.slidesToScroll,
+            slidesToShow: this.props.slidesToShow,
+            infinite: this.props.infinite
+          })}
+          aria-controls={getNthDotAssociatedSlides(i, {
+            slideCount: this.props.slideCount,
+            slidesToScroll: this.props.slidesToScroll,
+            slidesToShow: this.props.slidesToShow,
+            infinite: this.props.infinite
+          })}
           aria-selected={isSlideActive}
           className={className}
         >
-          {React.cloneElement(this.props.customPaging(i), { onClick })}
+          {React.cloneElement(this.props.customPaging(i), {
+            onClick,
+            "aria-labelledby": getNthDotAssociatedSlides(i, {
+              slideCount: this.props.slideCount,
+              slidesToScroll: this.props.slidesToScroll,
+              slidesToShow: this.props.slidesToShow,
+              infinite: this.props.infinite
+            })
+          })}
         </li>
       );
     });
