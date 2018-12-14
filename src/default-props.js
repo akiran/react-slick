@@ -22,7 +22,7 @@ var defaultProps = {
   centerPadding: "50px",
   className: "",
   cssEase: "ease",
-  customPaging: i => <button>{i + 1}</button>,
+  customPaging: i => <button aria-labelledby={`slide-${i}`} >{i + 1}</button>,
   dots: false,
   dotsClass: "slick-dots",
   draggable: true,
