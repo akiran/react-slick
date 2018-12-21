@@ -34,6 +34,7 @@ var defaultProps = {
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,
+  name: "",
   nextArrow: null,
   onEdge: null,
   onInit: null,
