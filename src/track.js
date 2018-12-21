@@ -119,7 +119,7 @@ var renderSlides = function(spec) {
     slides.push(
       React.cloneElement(child, {
         key: `slide-${index}`,
-        id: `slide-${index}`,
+        id: `${spec.name}-${index}`,
         "data-index": index,
         className: classnames(slideClasses, slideClass),
         tabIndex: "-1",
