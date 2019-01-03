@@ -27,9 +27,9 @@ var getNthDotAssociatedSlides = function(n, spec) {
   ) {
     if (i >= spec.slideCount && spec.infinite) {
       var newIndex = i - spec.slideCount;
-      nthDotAssociatedSlides += ` slide-${newIndex}`;
+      nthDotAssociatedSlides += ` ${spec.name}-${newIndex}`;
     } else {
-      nthDotAssociatedSlides += ` slide-${i}`;
+      nthDotAssociatedSlides += ` ${spec.name}-${i}`;
     }
   }
 
@@ -87,13 +87,15 @@ export class Dots extends React.PureComponent {
             slideCount: this.props.slideCount,
             slidesToScroll: this.props.slidesToScroll,
             slidesToShow: this.props.slidesToShow,
-            infinite: this.props.infinite
+            infinite: this.props.infinite,
+            name: this.props.name
           })}
           aria-controls={getNthDotAssociatedSlides(i, {
             slideCount: this.props.slideCount,
             slidesToScroll: this.props.slidesToScroll,
             slidesToShow: this.props.slidesToShow,
-            infinite: this.props.infinite
+            infinite: this.props.infinite,
+            name: this.props.name
           })}
           aria-selected={isSlideActive}
           className={className}
@@ -104,7 +106,8 @@ export class Dots extends React.PureComponent {
               slideCount: this.props.slideCount,
               slidesToScroll: this.props.slidesToScroll,
               slidesToShow: this.props.slidesToShow,
-              infinite: this.props.infinite
+              infinite: this.props.infinite,
+              name: this.props.name
             })
           })}
         </li>
