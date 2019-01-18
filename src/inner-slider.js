@@ -442,7 +442,10 @@ export class InnerSlider extends React.Component {
     window.ontouchmove = null;
   };
   swipeStart = e => {
-    if (this.props.verticalSwiping) {
+    const isTouchableDevice =
+      "ontouchstart" in document.documentElement || 
+      navigator.msMaxTouchPoints
+    if (this.props.verticalSwiping && !isTouchableDevice) {
       this.disableBodyScroll();
     }
     let state = swipeStart(e, this.props.swipe, this.props.draggable);
@@ -476,7 +479,10 @@ export class InnerSlider extends React.Component {
     this.setState(state);
     if (triggerSlideHandler === undefined) return;
     this.slideHandler(triggerSlideHandler);
-    if (this.props.verticalSwiping) {
+    const isTouchableDevice =
+      "ontouchstart" in document.documentElement || 
+      navigator.msMaxTouchPoints
+    if (this.props.verticalSwiping && !isTouchableDevice) {
       this.enableBodyScroll();
     }
   };
