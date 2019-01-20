@@ -41,10 +41,10 @@ export class InnerSlider extends React.Component {
       currentSlide: this.props.initialSlide,
       slideCount: React.Children.count(this.props.children)
     };
-    const srrState = this.computeSsrState();
+    const ssrState = this.computeSsrState();
     this.state = {
       ...this.state,
-      ...srrState
+      ...ssrState
     };
   }
   listRefHandler = ref => (this.list = ref);
@@ -277,7 +277,6 @@ export class InnerSlider extends React.Component {
       return {
         trackStyle
       };
-      //return;
     }
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
