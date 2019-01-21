@@ -26,11 +26,7 @@ module.exports = {
           "includePaths[]=" +
           path.resolve(__dirname, "./node_modules")
       },
-      { test: /\.md$/, loader: "html!markdown" },
-      {
-        test: /\.svg$/,
-        loader: "svg-inline-loader"
-      }
+      { test: /\.md$/, loader: "html!markdown" }
     ]
   },
   postcss: [autoprefixer({ browsers: ["last 2 version"] })],

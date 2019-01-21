@@ -1,8 +1,18 @@
 "use strict";
 
 import React from "react";
-import Play from "../assets/images/play.svg";
-import Pause from "../assets/images/pause.svg";
+
+const playSvg = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 356">
+    <path d="M.3-1v357l280.5-178.5L.3-1z" />
+  </svg>
+);
+
+const pauseSvg = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 354">
+    <path d="M.1 353.6h109V0H.1v353.6zM162.5 0v353.6h109V0h-109z" />
+  </svg>
+);
 
 export class PlayPauseButton extends React.PureComponent {
   clickHandler(options, e) {
@@ -25,11 +35,7 @@ export class PlayPauseButton extends React.PureComponent {
 
     return (
       <button type="button" {...playPauseButtonProps}>
-        <span
-          dangerouslySetInnerHTML={{
-            __html: this.props.isPaused ? Play : Pause
-          }}
-        />
+        {this.props.isPaused ? playSvg : pauseSvg}
       </button>
     );
   }
