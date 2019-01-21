@@ -140,20 +140,25 @@
     margin-bottom: 30px;
 }
 
-.slick-dots
-{
+.slick-bottom {
     position: absolute;
     bottom: -25px;
 
-    display: block;
+    display: flex;
+    justify-content: center;
 
     width: 100%;
     padding: 0;
     margin: 0;
 
-    list-style: none;
-
     text-align: center;
+}
+
+.slick-dots
+{
+    display: flex;
+    margin: 0;
+    list-style: none;
 }
 .slick-dots li
 {
@@ -222,4 +227,21 @@
 {
     opacity: .75;
     color: black;
+}
+
+.slick-play-pause-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: inherit;
+    font: inherit;
+    color:inherit;
+    text-decoration: none;
+    padding: 0;
+    margin-left: 10px;
+}
+
+.slick-play-pause-button svg {
+    width: 10px;
+    height: 10px;
 }
