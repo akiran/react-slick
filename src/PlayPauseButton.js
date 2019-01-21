@@ -1,8 +1,8 @@
 "use strict";
 
 import React from "react";
-import Play from "./assets/images/play.svg";
-import Pause from "./assets/images/pause.svg";
+import Play from "../assets/images/play.svg";
+import Pause from "../assets/images/pause.svg";
 
 export class PlayPauseButton extends React.PureComponent {
   clickHandler(options, e) {
