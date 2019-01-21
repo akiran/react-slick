@@ -9,11 +9,7 @@ var defaultProps = {
   accessibilitySlideLabel: "Slide",
   adaptiveHeight: false,
   afterChange: null,
-  appendDots: dots => (
-    <ul role="tablist" style={{ display: "block" }}>
-      {dots}
-    </ul>
-  ),
+  appendDots: dots => <ul role="tablist">{dots}</ul>,
   arrows: true,
   autoplay: false,
   autoplaySpeed: 3000,
@@ -22,7 +18,7 @@ var defaultProps = {
   centerPadding: "50px",
   className: "",
   cssEase: "ease",
-  customPaging: i => <button aria-labelledby={`slide-${i}`} >{i + 1}</button>,
+  customPaging: i => <button aria-labelledby={`slide-${i}`}>{i + 1}</button>,
   dots: false,
   dotsClass: "slick-dots",
   draggable: true,
@@ -30,7 +26,6 @@ var defaultProps = {
   edgeFriction: 0.35,
   fade: false,
   focusOnSelect: false,
-  hiddenPlayPauseButton: false,
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,
