@@ -26,7 +26,7 @@ import {
 import { Track } from "./track";
 import { Dots } from "./dots";
 import { PrevArrow, NextArrow } from "./arrows";
-import { HiddenPlayPauseButton } from "./hiddenPlayPauseButton";
+import { PlayPauseButton } from "./PlayPauseButton";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class InnerSlider extends React.Component {
@@ -656,7 +656,7 @@ export class InnerSlider extends React.Component {
       dots = <Dots {...dotProps} />;
     }
 
-    var prevArrow, nextArrow, hiddenPlayPauseButton;
+    var prevArrow, nextArrow, playPauseButton;
     let arrowProps = extractObject(spec, [
       "infinite",
       "centerMode",
@@ -670,14 +670,14 @@ export class InnerSlider extends React.Component {
     ]);
     arrowProps.clickHandler = this.changeSlide;
 
-    let hiddenPlayPauseButtonProps = extractObject(spec, [
+    let playPauseButtonProps = extractObject(spec, [
       "accessibilityPauseLabel",
       "accessibilityPlayLabel"
     ]);
 
-    hiddenPlayPauseButtonProps.isPaused = this.state.autoplaying === "paused";
+    playPauseButtonProps.isPaused = this.state.autoplaying === "paused";
 
-    hiddenPlayPauseButtonProps.clickHandler =
+    playPauseButtonProps.clickHandler =
       this.state.autoplaying && this.state.autoplaying === "paused"
         ? this.autoPlay
         : () => this.pause("paused");
@@ -687,10 +687,8 @@ export class InnerSlider extends React.Component {
       nextArrow = <NextArrow {...arrowProps} />;
     }
 
-    if (this.props.hiddenPlayPauseButton && this.state.autoplaying) {
-      hiddenPlayPauseButton = (
-        <HiddenPlayPauseButton {...hiddenPlayPauseButtonProps} />
-      );
+    if (this.state.autoplaying) {
+      playPauseButton = <PlayPauseButton {...playPauseButtonProps} />;
     }
 
     var verticalHeightStyle = null;
@@ -745,7 +743,6 @@ export class InnerSlider extends React.Component {
     }
     return (
       <div {...innerSliderProps}>
-        {this.props.hiddenPlayPauseButton ? hiddenPlayPauseButton : ""}
         <ul className="controls">
           {!this.props.unslick ? prevArrow : ""}
           {!this.props.unslick ? nextArrow : ""}
@@ -755,7 +752,10 @@ export class InnerSlider extends React.Component {
             {this.props.children}
           </Track>
         </div>
-        {!this.props.unslick ? dots : ""}
+        <div className="slick-bottom">
+          {!this.props.unslick ? dots : ""}
+          {this.props.autoplay ? playPauseButton : ""}
+        </div>
       </div>
     );
   };
