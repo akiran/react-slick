@@ -147,6 +147,10 @@ export const initializedState = spec => {
     state["autoplaying"] = "playing";
   }
 
+  if (spec.mountedDom) {
+    state["mountedDom"] = true;
+  }
+
   return state;
 };
 
