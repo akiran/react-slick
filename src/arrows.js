@@ -40,7 +40,8 @@ export class PrevArrow extends React.PureComponent {
     if (this.props.prevArrow) {
       prevArrow = React.cloneElement(this.props.prevArrow, {
         ...prevArrowProps,
-        ...customProps
+        ...customProps,
+        className: classnames(prevArrowProps.className, this.props.prevArrow.className)
       });
     } else {
       prevArrow = (
@@ -87,7 +88,8 @@ export class NextArrow extends React.PureComponent {
     if (this.props.nextArrow) {
       nextArrow = React.cloneElement(this.props.nextArrow, {
         ...nextArrowProps,
-        ...customProps
+        ...customProps,
+        className: classnames(nextArrowProps.className, this.props.nextArrow.className)
       });
     } else {
       nextArrow = (
