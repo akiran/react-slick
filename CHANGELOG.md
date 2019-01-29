@@ -2,6 +2,8 @@
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
 
+- added option to enable lazy loading for the closest slides images (for previous and next slide images)
+
 ## 0.22.0
 
 **Release Changes**
