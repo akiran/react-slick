@@ -27,13 +27,15 @@ export const getRequiredLazySlides = spec => {
 // startIndex that needs to be present
 export const lazyStartIndex = spec => {
   const { lazyLoad } = spec;
-  const lazyLoadSlides = typeof lazyLoad === "number" ? lazyLoad : 0;
+  // update the index if lazyload is positive integer
+  const lazyLoadSlides = /^\d+$/.test(lazyLoad) ? parseInt(lazyLoad, 10) : 0;
   return spec.currentSlide - lazySlidesOnLeft(spec) - lazyLoadSlides;
 };
 
 export const lazyEndIndex = spec => {
   const { lazyLoad } = spec;
-  const lazyLoadSlides = typeof lazyLoad === "number" ? lazyLoad : 0;
+  // update the index if lazyload is positive integer
+  const lazyLoadSlides = /^\d+$/.test(lazyLoad) ? parseInt(lazyLoad, 10) : 0;
   return spec.currentSlide + lazySlidesOnRight(spec) + lazyLoadSlides;
 };
 
