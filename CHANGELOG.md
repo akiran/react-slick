@@ -7,6 +7,7 @@
 **Release Changes**
 
 - Internal Changes
+  - added option to enable lazy loading for the closest slides images (for previous and next slide images)
   - converted InnerSlider from createReactClass object to ES6 class
   - removed all the mixins, created classMethods and pure utility functions instead
   - changed autoplay from setTimeout to setInterval
