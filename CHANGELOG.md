@@ -1,13 +1,17 @@
 # Change Log
 
 ## [Unreleased](https://github.com/akiran/react-slick/tree/HEAD)
+- Note
+  - Project forked by Domain at this point to maintain this codebase.
+
+- Added 
+  - option to enable lazy loading for the closest slides images (for previous and next slide images) See example `LazyLoadClosestImages`
 
 ## 0.22.0
 
 **Release Changes**
 
 - Internal Changes
-  - added option to enable lazy loading for the closest slides images (for previous and next slide images)
   - converted InnerSlider from createReactClass object to ES6 class
   - removed all the mixins, created classMethods and pure utility functions instead
   - changed autoplay from setTimeout to setInterval

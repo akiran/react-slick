@@ -6,7 +6,7 @@ export default class LazyLoadClosestImages extends Component {
     render() {
         const settings = {
             dots: true,
-            lazyLoad: [0, 1],
+            lazyLoad: [0, 1],  // preload 0 images before the current image, preload 1 image after the current image
             infinite: true,
             speed: 500,
             slidesToShow: 1,
