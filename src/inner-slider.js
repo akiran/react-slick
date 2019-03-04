@@ -491,6 +491,7 @@ export class InnerSlider extends React.Component {
     const { previouslyDragged } = this.state;
     if (previouslyDragged) {
       e.stopPropagation();
+      e.preventDefault();
       return;
     }
   };
