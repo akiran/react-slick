@@ -103,10 +103,12 @@ export const initializedState = spec => {
   let trackWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.trackRef)));
   let slideWidth;
   if (!spec.vertical) {
-    let centerPaddingAdj = spec.centerMode && parseInt(spec.centerPadding) * 2;
+    let centerPaddingAdj =
+      spec.centerMode && parseFloat(spec.centerPadding) * 2;
     if (
       typeof spec.centerPadding === "string" &&
-      spec.centerPadding.slice(-1) === "%"
+      (spec.centerPadding.slice(-1) === "%" ||
+        spec.centerPadding.slice(-2) === "vw")
     ) {
       centerPaddingAdj *= listWidth / 100;
     }
