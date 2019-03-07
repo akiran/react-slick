@@ -156,7 +156,7 @@ export class InnerSlider extends React.Component {
     }
 
     if (
-      !setTrackStyle ||
+      !setTrackStyle &&
       React.Children.count(this.props.children) ===
         React.Children.count(prevProps.children)
     ) {
