@@ -661,7 +661,7 @@ exports[`Multiple Items should show last 3 slides when last dot is clicked 1`] =
     <h2> Multiple items </h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px); transition: transform 500ms ease;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -825,7 +825,7 @@ exports[`Multiple Items should show last 3 slides when previous button is clicke
     <h2> Multiple items </h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px); transition: transform 500ms ease;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -1153,7 +1153,7 @@ exports[`Multiple Items should show slides from 4 to 6 when middle dot is clicke
     <h2> Multiple items </h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px); transition: transform 500ms ease;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -1317,7 +1317,7 @@ exports[`Multiple Items should show slides from 4 to 6 when next button is click
     <h2> Multiple items </h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px); transition: transform 500ms ease;\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
