@@ -6,7 +6,8 @@ export default class LazyLoad extends Component {
   render() {
     const settings = {
       dots: true,
-      lazyLoad: true,
+      lazyLoad: "offset",
+      lazyLoadOffset: 1,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
