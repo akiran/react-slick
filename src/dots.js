@@ -38,7 +38,6 @@ export class Dots extends React.PureComponent {
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
     const activeDotClass = this.props.activeDotClass || "slick-active";
-    console.log(activeDotClass);
     var dots = Array.apply(
       null,
       Array(dotCount + 1)
