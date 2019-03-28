@@ -37,6 +37,8 @@ export class Dots extends React.PureComponent {
     // Credit: http://stackoverflow.com/a/13735425/1849458
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
+    const activeDotClass = this.props.activeDotClass || "slick-active";
+    console.log(activeDotClass);
     var dots = Array.apply(
       null,
       Array(dotCount + 1)
@@ -46,11 +48,11 @@ export class Dots extends React.PureComponent {
       var leftBound = i * this.props.slidesToScroll;
       var rightBound =
         i * this.props.slidesToScroll + (this.props.slidesToScroll - 1);
-      var className = classnames({
-        "slick-active":
-          this.props.currentSlide >= leftBound &&
-          this.props.currentSlide <= rightBound
-      });
+      var classDict = {};
+      classDict[activeDotClass] =
+        this.props.currentSlide >= leftBound &&
+        this.props.currentSlide <= rightBound;
+      var className = classnames(classDict);
 
       var dotOptions = {
         message: "dots",
