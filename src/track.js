@@ -118,7 +118,8 @@ var renderSlides = function(spec) {
     // push a cloned element of the desired slide
     slides.push(
       React.cloneElement(child, {
-        key: "original" + getKey(child, index),
+        key: `slide-${index}`,
+        id: `slide-${index}`,
         "data-index": index,
         className: classnames(slideClasses, slideClass),
         tabIndex: "-1",
@@ -202,13 +203,13 @@ export class Track extends React.PureComponent {
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
     return (
-      <div
+      <ul
         className="slick-track"
         style={this.props.trackStyle}
         {...mouseEvents}
       >
         {slides}
-      </div>
+      </ul>
     );
   }
 }

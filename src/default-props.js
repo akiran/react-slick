@@ -2,9 +2,18 @@ import React from "react";
 
 var defaultProps = {
   accessibility: true,
+  accessibilityNextLabel: "Next",
+  accessibilityPauseLabel: "Pause",
+  accessibilityPlayLabel: "Play",
+  accessibilityPreviousLabel: "Previous",
+  accessibilitySlideLabel: "Slide",
   adaptiveHeight: false,
   afterChange: null,
-  appendDots: dots => <ul style={{ display: "block" }}>{dots}</ul>,
+  appendDots: dots => (
+    <ul role="tablist" style={{ display: "block" }}>
+      {dots}
+    </ul>
+  ),
   arrows: true,
   autoplay: false,
   autoplaySpeed: 3000,
@@ -21,6 +30,7 @@ var defaultProps = {
   edgeFriction: 0.35,
   fade: false,
   focusOnSelect: false,
+  hiddenPlayPauseButton: false,
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,

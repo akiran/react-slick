@@ -17,6 +17,25 @@ var getDotCount = function(spec) {
   return dots;
 };
 
+var getNthDotAssociatedSlides = function(n, spec) {
+  var nthDotAssociatedSlides = "";
+  for (
+    var i = spec.slidesToScroll * n;
+    (i < spec.slideCount || spec.infinite) &&
+    i < spec.slidesToScroll * n + spec.slidesToShow;
+    i = i + 1
+  ) {
+    if (i >= spec.slideCount && spec.infinite) {
+      var newIndex = i - spec.slideCount;
+      nthDotAssociatedSlides += ` slide-${newIndex}`;
+    } else {
+      nthDotAssociatedSlides += ` slide-${i}`;
+    }
+  }
+
+  return nthDotAssociatedSlides;
+};
+
 export class Dots extends React.PureComponent {
   clickHandler(options, e) {
     // In Autoplay the focus stays on clicked button even after transition
@@ -46,11 +65,11 @@ export class Dots extends React.PureComponent {
       var leftBound = i * this.props.slidesToScroll;
       var rightBound =
         i * this.props.slidesToScroll + (this.props.slidesToScroll - 1);
-      var className = classnames({
-        "slick-active":
-          this.props.currentSlide >= leftBound &&
-          this.props.currentSlide <= rightBound
-      });
+      var isSlideActive =
+        this.props.currentSlide >= leftBound &&
+        this.props.currentSlide <= rightBound;
+
+      var className = classnames({ "slick-active": isSlideActive });
 
       var dotOptions = {
         message: "dots",
@@ -61,8 +80,33 @@ export class Dots extends React.PureComponent {
 
       var onClick = this.clickHandler.bind(this, dotOptions);
       return (
-        <li key={i} className={className}>
-          {React.cloneElement(this.props.customPaging(i), { onClick })}
+        <li
+          key={i}
+          role="tab"
+          aria-labelledby={getNthDotAssociatedSlides(i, {
+            slideCount: this.props.slideCount,
+            slidesToScroll: this.props.slidesToScroll,
+            slidesToShow: this.props.slidesToShow,
+            infinite: this.props.infinite
+          })}
+          aria-controls={getNthDotAssociatedSlides(i, {
+            slideCount: this.props.slideCount,
+            slidesToScroll: this.props.slidesToScroll,
+            slidesToShow: this.props.slidesToShow,
+            infinite: this.props.infinite
+          })}
+          aria-selected={isSlideActive}
+          className={className}
+        >
+          {React.cloneElement(this.props.customPaging(i), {
+            onClick,
+            "aria-labelledby": getNthDotAssociatedSlides(i, {
+              slideCount: this.props.slideCount,
+              slidesToScroll: this.props.slidesToScroll,
+              slidesToShow: this.props.slidesToShow,
+              infinite: this.props.infinite
+            })
+          })}
         </li>
       );
     });

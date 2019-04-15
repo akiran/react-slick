@@ -4,6 +4,22 @@
 {
     background: #fff url('./ajax-loader.gif') center center no-repeat;
 }
+.slick-track {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* className for screen-readers only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  border: 0;
+}
 
 /* Icons */
 @font-face
@@ -16,6 +32,11 @@
     src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
 }
 /* Arrows */
+.controls {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 .slick-prev,
 .slick-next
 {
