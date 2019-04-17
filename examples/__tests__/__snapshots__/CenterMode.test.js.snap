@@ -119,8 +119,7 @@ exports[`CenterMode Tests Activity test 1`] = `
                     </div>
                 </div>
             </div>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-    </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button></div>
 </div>"
 `;
 
@@ -243,8 +242,7 @@ exports[`CenterMode Tests Counting test 1`] = `
                     </div>
                 </div>
             </div>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-    </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button></div>
 </div>"
 `;
 
@@ -367,7 +365,6 @@ exports[`CenterMode Tests Positioning test 1`] = `
                     </div>
                 </div>
             </div>
-        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
-    </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button></div>
 </div>"
 `;
