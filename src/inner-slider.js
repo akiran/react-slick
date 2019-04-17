@@ -33,15 +33,21 @@ export class InnerSlider extends React.Component {
     super(props);
     this.list = null;
     this.track = null;
+    this.callbackTimers = [];
+    this.clickable = true;
+    this.debouncedResize = null;
     this.state = {
       ...initialState,
       currentSlide: this.props.initialSlide,
       slideCount: React.Children.count(this.props.children)
     };
-    this.callbackTimers = [];
-    this.clickable = true;
-    this.debouncedResize = null;
-    this.ssrInit();
+
+    const ssrState = this.computeSsrState();
+    this.state = {
+      ...this.state,
+      ...ssrState
+    };
+
     props.onInit && props.onInit();
     if (props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({
@@ -227,7 +233,7 @@ export class InnerSlider extends React.Component {
     this.setState(updatedState, callback);
   };
 
-  ssrInit = () => {
+  computeSsrState = () => {
     if (this.props.variableWidth) {
       let trackWidth = 0,
         trackLeft = 0;
@@ -266,10 +272,9 @@ export class InnerSlider extends React.Component {
           trackStyle.left
         } + (100% - ${currentWidth}) / 2 ) `;
       }
-      this.setState({
+      return {
         trackStyle
-      });
-      return;
+      };
     }
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
@@ -288,10 +293,10 @@ export class InnerSlider extends React.Component {
       width: trackWidth + "%",
       left: trackLeft + "%"
     };
-    this.setState({
+    return {
       slideWidth: slideWidth + "%",
       trackStyle: trackStyle
-    });
+    };
   };
   checkImagesLoad = () => {
     let images = document.querySelectorAll(".slick-slide img");
