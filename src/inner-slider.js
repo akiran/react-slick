@@ -41,6 +41,22 @@ export class InnerSlider extends React.Component {
     this.callbackTimers = [];
     this.clickable = true;
     this.debouncedResize = null;
+    this.ssrInit();
+    props.onInit && props.onInit();
+    if (props.lazyLoad) {
+      let slidesToLoad = getOnDemandLazySlides({
+        ...props,
+        ...this.state
+      });
+      if (slidesToLoad.length > 0) {
+        this.state = {
+          lazyLoadedList: this.state.lazyLoadedList.concat(slidesToLoad)
+        };
+        if (props.onLazyLoad) {
+          props.onLazyLoad(slidesToLoad);
+        }
+      }
+    }
   }
   listRefHandler = ref => (this.list = ref);
   trackRefHandler = ref => (this.track = ref);
@@ -50,24 +66,6 @@ export class InnerSlider extends React.Component {
         `[data-index="${this.state.currentSlide}"]`
       );
       this.list.style.height = getHeight(elem) + "px";
-    }
-  };
-  componentWillMount = () => {
-    this.ssrInit();
-    this.props.onInit && this.props.onInit();
-    if (this.props.lazyLoad) {
-      let slidesToLoad = getOnDemandLazySlides({
-        ...this.props,
-        ...this.state
-      });
-      if (slidesToLoad.length > 0) {
-        this.setState(prevState => ({
-          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad)
-        }));
-        if (this.props.onLazyLoad) {
-          this.props.onLazyLoad(slidesToLoad);
-        }
-      }
     }
   };
   componentDidMount = () => {
@@ -276,15 +274,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
