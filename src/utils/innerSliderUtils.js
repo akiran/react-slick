@@ -725,6 +725,25 @@ export const getTrackLeft = spec => {
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    if (!infinite) {
+      let widthUntilListRightEnd = 0;
+      for (
+        let slide = targetSlideIndex;
+        slide < trackElem.childNodes.length;
+        slide++
+      ) {
+        widthUntilListRightEnd +=
+          trackElem &&
+          trackElem.children[slide] &&
+          trackElem.children[slide].offsetWidth;
+      }
+      if (widthUntilListRightEnd < listWidth) {
+        targetLeft += listWidth - widthUntilListRightEnd;
+        if (targetLeft >= 0) {
+          targetLeft = 0;
+        }
+      }
+    }
     if (centerMode === true) {
       targetSlideIndex = infinite
         ? slideIndex + getPreClones(spec)
