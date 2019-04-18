@@ -32,6 +32,7 @@ export class InnerSlider extends React.Component {
   constructor(props) {
     super(props);
     this.list = null;
+    this.mountedDom = false;
     this.track = null;
     this.state = {
       ...initialState,
@@ -72,6 +73,7 @@ export class InnerSlider extends React.Component {
   };
   componentDidMount = () => {
     let spec = { listRef: this.list, trackRef: this.track, ...this.props };
+    spec.mountedDom = true;
     this.updateState(spec, true, () => {
       this.adaptHeight();
       this.props.autoplay && this.autoPlay("update");
@@ -226,6 +228,7 @@ export class InnerSlider extends React.Component {
     ) {
       updatedState["trackStyle"] = trackStyle;
     }
+    updatedState.mountedDom = spec.mountedDom;
     this.setState(updatedState, callback);
   };
 
@@ -276,21 +279,30 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
-    let slideWidth = 100 / slideCount;
-    let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
-      100;
+    let trackWidth, slideWidth, trackLeft, trackHeight, slideHeight;
+    if (this.props.vertical) {
+      trackHeight = (100 / this.props.slidesToShow) * slideCount;
+      slideHeight = 100 / slideCount;
+      slideWidth = 100;
+    } else {
+      trackWidth = (100 / this.props.slidesToShow) * slideCount;
+      slideWidth = 100 / slideCount;
+      trackLeft =
+        (-slideWidth *
+          (getPreClones(spec) + this.state.currentSlide) *
+          trackWidth) /
+        100;
+    }
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
+      height: trackHeight + "%",
       width: trackWidth + "%",
       left: trackLeft + "%"
     };
     this.setState({
+      slideHeight: slideHeight + "%",
       slideWidth: slideWidth + "%",
       trackStyle: trackStyle
     });
@@ -613,7 +625,8 @@ export class InnerSlider extends React.Component {
       "trackStyle",
       "variableWidth",
       "unslick",
-      "centerPadding"
+      "centerPadding",
+      "mountedDom"
     ]);
     const { pauseOnHover } = this.props;
     trackProps = {
@@ -672,9 +685,15 @@ export class InnerSlider extends React.Component {
     var verticalHeightStyle = null;
 
     if (this.props.vertical) {
-      verticalHeightStyle = {
-        height: this.state.listHeight
-      };
+      if (!this.state.mountedDom) {
+        verticalHeightStyle = {
+          height: "100%"
+        };
+      } else {
+        verticalHeightStyle = {
+          height: this.state.listHeight
+        };
+      }
     }
 
     var centerPaddingStyle = null;
@@ -719,8 +738,16 @@ export class InnerSlider extends React.Component {
       listProps = { className: "slick-list" };
       innerSliderProps = { className };
     }
+    let sliderHeightStyle = null, sliderStyle;
+    if (!this.state.mountedDom) {
+      sliderHeightStyle = {
+        height: "100%"
+      }
+    }
+    sliderStyle = {...sliderHeightStyle};
+
     return (
-      <div {...innerSliderProps}>
+      <div {...innerSliderProps} style={sliderStyle}>
         {!this.props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>

@@ -50,6 +50,10 @@ var getSlideStyle = function(spec) {
     style.width = spec.slideWidth;
   }
 
+  if (!spec.mountedDom) {
+    style.height = spec.slideHeight;
+  }
+
   if (spec.fade) {
     style.position = "relative";
     if (spec.vertical) {

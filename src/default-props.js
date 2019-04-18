@@ -1,6 +1,7 @@
 import React from "react";
 
 var defaultProps = {
+  mountedDom: false,
   accessibility: true,
   adaptiveHeight: false,
   afterChange: null,

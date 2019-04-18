@@ -15,6 +15,7 @@ const initialState = {
   slideCount: null,
   slideHeight: null,
   slideWidth: null,
+  mountedDom: false,
   swipeLeft: null,
   swiped: false, // used by swipeEvent. differentites between touch and swipe.
   swiping: false,
