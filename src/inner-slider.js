@@ -276,15 +276,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -526,6 +526,12 @@ export class InnerSlider extends React.Component {
     this.slideHandler(nextIndex);
   };
 
+  canGoNext = () => {
+    const canGoNext = canGoNext({ ...this.props, ...this.state });
+    // console.log(canGoNext)
+    // expose it to outside.
+    // this.setState({ canGoNext })
+  };
   autoPlay = playType => {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
@@ -663,6 +669,10 @@ export class InnerSlider extends React.Component {
       "nextArrow"
     ]);
     arrowProps.clickHandler = this.changeSlide;
+    arrowProps.trackRef = this.track;
+    arrowProps.slideIndex = this.state.currentSlide;
+    arrowProps.listWidth = this.state.listWidth;
+    arrowProps.canGoNext = canGoNext(arrowProps);
 
     if (this.props.arrows) {
       prevArrow = <PrevArrow {...arrowProps} />;
@@ -733,3 +743,4 @@ export class InnerSlider extends React.Component {
     );
   };
 }
+// vim: tabstop=2 sw=2

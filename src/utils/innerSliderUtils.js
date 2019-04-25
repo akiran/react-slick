@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { setPrototype } from "nodelist-to-array";
+setPrototype("toArray");
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -48,7 +50,7 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   xDist = touchObject.startX - touchObject.curX;
   yDist = touchObject.startY - touchObject.curY;
   r = Math.atan2(yDist, xDist);
-  swipeAngle = Math.round(r * 180 / Math.PI);
+  swipeAngle = Math.round((r * 180) / Math.PI);
   if (swipeAngle < 0) {
     swipeAngle = 360 - Math.abs(swipeAngle);
   }
@@ -72,15 +74,55 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   return "vertical";
 };
 
+// Is this need extra option in config❔
+// ATM it is default for (!infinite && variableWidth)
+export const isStickedToRight = spec => {
+  const { trackRef, slideIndex, listWidth } = spec;
+  if (trackRef) {
+    const trackElem = ReactDOM.findDOMNode(trackRef);
+    const targetSlideIndex = slideIndex + getPreClones(spec);
+    const targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
+    const targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    const sumSlidesWidth =
+      trackElem &&
+      trackElem.childNodes
+        .toArray()
+        .reduce((sum, el) => sum + el.getBoundingClientRect().width, 0);
+    const maxLeft =
+      sumSlidesWidth - listWidth ? (sumSlidesWidth - listWidth) * -1 : 0;
+
+    if (targetLeft < maxLeft) {
+      return maxLeft;
+    } else {
+      return false;
+    }
+  }
+};
+
 // whether or not we can go next
 export const canGoNext = spec => {
+  const {
+    trackRef,
+    infinite,
+    centerMode,
+    currentSlide,
+    slideCount,
+    slidesToShow
+  } = spec;
+  const variableWidth = trackRef ? trackRef.props.variableWidth : null;
+
   let canGo = true;
-  if (!spec.infinite) {
-    if (spec.centerMode && spec.currentSlide >= spec.slideCount - 1) {
+  if (!infinite) {
+    if (centerMode && currentSlide >= slideCount - 1) {
       canGo = false;
     } else if (
-      spec.slideCount <= spec.slidesToShow ||
-      spec.currentSlide >= spec.slideCount - spec.slidesToShow
+      variableWidth &&
+      isStickedToRight(spec) !== false // it returning number or false
+    ) {
+      canGo = false;
+    } else if (
+      slideCount <= slidesToShow ||
+      currentSlide >= slideCount - slidesToShow
     ) {
       canGo = false;
     }
@@ -98,6 +140,8 @@ export const extractObject = (spec, keys) => {
 // get initialized state
 export const initializedState = spec => {
   // spec also contains listRef, trackRef
+  const { listRef, trackRef } = spec;
+
   let slideCount = React.Children.count(spec.children);
   let listWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.listRef)));
   let trackWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.trackRef)));
@@ -140,7 +184,9 @@ export const initializedState = spec => {
     currentSlide,
     slideHeight,
     listHeight,
-    lazyLoadedList
+    lazyLoadedList,
+    listRef,
+    trackRef
   };
 
   if (spec.autoplaying === null && spec.autoplay) {
@@ -195,7 +241,7 @@ export const slideHandler = spec => {
       finalSlide = animationSlide + slideCount;
       if (!infinite) finalSlide = 0;
       else if (slideCount % slidesToScroll !== 0)
-        finalSlide = slideCount - slideCount % slidesToScroll;
+        finalSlide = slideCount - (slideCount % slidesToScroll);
     } else if (!canGoNext(spec) && animationSlide > currentSlide) {
       animationSlide = finalSlide = currentSlide;
     } else if (centerMode && animationSlide >= slideCount) {
@@ -208,8 +254,8 @@ export const slideHandler = spec => {
     }
     animationLeft = getTrackLeft({ ...spec, slideIndex: animationSlide });
     finalLeft = getTrackLeft({ ...spec, slideIndex: finalSlide });
-    if (!infinite) {
-      if (animationLeft === finalLeft) animationSlide = finalSlide;
+    if (!infinite && animationLeft === finalLeft) {
+      animationSlide = finalSlide;
       animationLeft = finalLeft;
     }
     lazyLoad &&
@@ -265,7 +311,8 @@ export const changeSlide = (spec, options) => {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
     targetSlide = currentSlide + slideOffset;
     if (lazyLoad && !infinite) {
-      targetSlide = (currentSlide + slidesToScroll) % slideCount + indexOffset;
+      targetSlide =
+        ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     }
   } else if (options.message === "dots") {
     // Click on dots
@@ -704,7 +751,7 @@ export const getTrackLeft = spec => {
       slideCount % slidesToScroll !== 0 &&
       slideIndex + slidesToScroll > slideCount
     ) {
-      slidesToOffset = slidesToShow - slideCount % slidesToScroll;
+      slidesToOffset = slidesToShow - (slideCount % slidesToScroll);
     }
     if (centerMode) {
       slidesToOffset = parseInt(slidesToShow / 2);
@@ -725,6 +772,12 @@ export const getTrackLeft = spec => {
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    if (!infinite) {
+      const stickToRight = isStickedToRight(spec);
+      if (stickToRight) {
+        targetLeft = stickToRight;
+      }
+    }
     if (centerMode === true) {
       targetSlideIndex = infinite
         ? slideIndex + getPreClones(spec)
@@ -824,3 +877,4 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
+// vim: tabstop=2 sw=2
