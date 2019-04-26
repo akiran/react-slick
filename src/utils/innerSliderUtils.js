@@ -74,13 +74,13 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   return "vertical";
 };
 
-// Is this need extra option in config❔
+//  Need extra option in config❔
 // ATM it is default for (!infinite && variableWidth)
 export const isStickedToRight = spec => {
-  const { trackRef, slideIndex, listWidth } = spec;
+  const { trackRef, listWidth } = spec;
   if (trackRef) {
     const trackElem = ReactDOM.findDOMNode(trackRef);
-    const targetSlideIndex = slideIndex + getPreClones(spec);
+    const targetSlideIndex = spec.slideIndex + getPreClones(spec);
     const targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     const targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
     const sumSlidesWidth =
@@ -88,14 +88,13 @@ export const isStickedToRight = spec => {
       trackElem.childNodes
         .toArray()
         .reduce((sum, el) => sum + el.getBoundingClientRect().width, 0);
-    const maxLeft =
+    let maxLeft =
       sumSlidesWidth - listWidth ? (sumSlidesWidth - listWidth) * -1 : 0;
 
-    if (targetLeft < maxLeft) {
-      return maxLeft;
-    } else {
-      return false;
+    if (targetLeft > maxLeft) {
+      maxLeft = false;
     }
+    return maxLeft;
   }
 };
 
@@ -117,7 +116,7 @@ export const canGoNext = spec => {
       canGo = false;
     } else if (
       variableWidth &&
-      isStickedToRight(spec) !== false // it returning number or false
+      isStickedToRight({ ...spec, slideIndex: currentSlide })
     ) {
       canGo = false;
     } else if (
@@ -273,7 +272,8 @@ export const slideHandler = spec => {
         animating: true,
         currentSlide: finalSlide,
         trackStyle: getTrackAnimateCSS({ ...spec, left: animationLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        canGoNext: canGoNext(spec)
       };
       nextState = {
         animating: false,
@@ -772,11 +772,9 @@ export const getTrackLeft = spec => {
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
-    if (!infinite) {
-      const stickToRight = isStickedToRight(spec);
-      if (stickToRight) {
-        targetLeft = stickToRight;
-      }
+    const stickToRight = isStickedToRight(spec);
+    if (!infinite && stickToRight) {
+      targetLeft = stickToRight;
     }
     if (centerMode === true) {
       targetSlideIndex = infinite

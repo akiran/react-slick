@@ -52,6 +52,8 @@ export class InnerSlider extends React.Component {
       this.list.style.height = getHeight(elem) + "px";
     }
   };
+  canGoNext = () => canGoNext({ ...this.props, ...this.state });
+
   componentWillMount = () => {
     this.ssrInit();
     this.props.onInit && this.props.onInit();
@@ -167,6 +169,11 @@ export class InnerSlider extends React.Component {
       }
     });
   };
+  componentWillUpdate = () => {
+    if (this.state.canGoNext !== this.canGoNext()) {
+      this.setState({ ...this.state, canGoNext: this.canGoNext() });
+    }
+  };
   componentDidUpdate = () => {
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
@@ -216,7 +223,8 @@ export class InnerSlider extends React.Component {
   updateState = (spec, setTrackStyle, callback) => {
     let updatedState = initializedState(spec);
     spec = { ...spec, ...updatedState, slideIndex: updatedState.currentSlide };
-    let targetLeft = getTrackLeft(spec);
+
+    const targetLeft = getTrackLeft(spec);
     spec = { ...spec, left: targetLeft };
     let trackStyle = getTrackCSS(spec);
     if (
@@ -516,7 +524,7 @@ export class InnerSlider extends React.Component {
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
     } else {
-      if (canGoNext({ ...this.props, ...this.state })) {
+      if (this.canGoNext()) {
         nextIndex = this.state.currentSlide + this.props.slidesToScroll;
       } else {
         return false;
@@ -526,12 +534,6 @@ export class InnerSlider extends React.Component {
     this.slideHandler(nextIndex);
   };
 
-  canGoNext = () => {
-    const canGoNext = canGoNext({ ...this.props, ...this.state });
-    // console.log(canGoNext)
-    // expose it to outside.
-    // this.setState({ canGoNext })
-  };
   autoPlay = playType => {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
@@ -669,10 +671,7 @@ export class InnerSlider extends React.Component {
       "nextArrow"
     ]);
     arrowProps.clickHandler = this.changeSlide;
-    arrowProps.trackRef = this.track;
-    arrowProps.slideIndex = this.state.currentSlide;
-    arrowProps.listWidth = this.state.listWidth;
-    arrowProps.canGoNext = canGoNext(arrowProps);
+    arrowProps.canGoNext = this.canGoNext();
 
     if (this.props.arrows) {
       prevArrow = <PrevArrow {...arrowProps} />;
