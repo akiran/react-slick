@@ -1,6 +1,6 @@
 {
   "name": "@onedior/react-slick",
-  "version": "0.26.2",
+  "version": "0.26.3",
   "description": "React port of slick carousel",
   "main": "./lib",
   "files": [
