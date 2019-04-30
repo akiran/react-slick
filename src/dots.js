@@ -27,9 +27,9 @@ var getNthDotAssociatedSlides = function(n, spec) {
   ) {
     if (i >= spec.slideCount && spec.infinite) {
       var newIndex = i - spec.slideCount;
-      nthDotAssociatedSlides += ` ${spec.name}-${newIndex}`;
+      nthDotAssociatedSlides += `${spec.name}-${newIndex}`;
     } else {
-      nthDotAssociatedSlides += ` ${spec.name}-${i}`;
+      nthDotAssociatedSlides += `${spec.name}-${i}`;
     }
   }
 
