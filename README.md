@@ -36,6 +36,7 @@ or add cdn link in your html
 ```
 
 ### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
+### [PlayGround with examples](https://bit.dev/akiran/react-slick/slider)
 
 ### Example
 
