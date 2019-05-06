@@ -384,7 +384,12 @@ export class InnerSlider extends React.Component {
       useCSS: this.props.useCSS && !dontAnimate
     });
     if (!state) return;
-    beforeChange && beforeChange(currentSlide, state.currentSlide);
+    if (beforeChange) {
+      if (beforeChange(currentSlide, state.currentSlide) === false) {
+        // prevent slide change when beforeChange return false
+        return;
+      }
+    }
     let slidesToLoad = state.lazyLoadedList.filter(
       value => this.state.lazyLoadedList.indexOf(value) < 0
     );
