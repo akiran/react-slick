@@ -32,6 +32,7 @@ import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
 import AsNavFor from '../examples/AsNavFor'
 import AppendDots from '../examples/AppendDots'
+import LazyLoadNextSlide from '../examples/LazyLoadNextSlide';
 
 export default class App extends React.Component {
   render() {
@@ -53,6 +54,7 @@ export default class App extends React.Component {
         <VariableWidth />
         <AdaptiveHeight />
         <LazyLoad />
+        <LazyLoadNextSlide />
         <Fade />
         <SlideChangeHooks />
         <SlickGoTo />
