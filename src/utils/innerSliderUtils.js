@@ -27,8 +27,9 @@ export const getRequiredLazySlides = spec => {
 };
 
 // startIndex that needs to be present
-export const lazyStartIndex = spec =>
+export const lazyStartIndex = spec => {
   spec.currentSlide - lazySlidesOnLeft(spec);
+};
 export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec);
 export const lazySlidesOnLeft = spec =>
   spec.centerMode
@@ -80,18 +81,37 @@ export const isStickedToRight = spec => {
   const { trackRef, listWidth } = spec;
   if (trackRef) {
     const trackElem = ReactDOM.findDOMNode(trackRef);
+    const slackList = trackElem.offsetParent; // it have real full width of visible slider
+
+    const slackListWidth = slackList.offsetWidth;
+
     const targetSlideIndex = spec.slideIndex + getPreClones(spec);
     const targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     const targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+
     const sumSlidesWidth =
       trackElem &&
       trackElem.childNodes
         .toArray()
         .reduce((sum, el) => sum + el.getBoundingClientRect().width, 0);
+
     let maxLeft =
       sumSlidesWidth - listWidth ? (sumSlidesWidth - listWidth) * -1 : 0;
 
-    if (targetLeft > maxLeft) {
+    const stayOnLeft = slackListWidth > sumSlidesWidth;
+
+    let log = `-----------------
+        slackListWidth: ${slackListWidth}
+        sumSlidesWidth: ${sumSlidesWidth}
+        stayOnLeft: ${stayOnLeft}
+        -----------------
+        targetLeft: ${targetLeft}
+        maxLeft: ${maxLeft}
+        -----------------`;
+    console.log(log);
+    // return true
+
+    if (targetLeft > maxLeft || stayOnLeft) {
       maxLeft = false;
     }
     return maxLeft;
@@ -875,4 +895,3 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
-// vim: tabstop=2 sw=2

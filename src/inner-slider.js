@@ -742,4 +742,3 @@ export class InnerSlider extends React.Component {
     );
   };
 }
-// vim: tabstop=2 sw=2
