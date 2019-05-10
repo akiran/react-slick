@@ -24,7 +24,7 @@ var defaultProps = {
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,
-  lazyLoadNextSlide: false,
+  preloadNextSlide: false,
   nextArrow: null,
   onEdge: null,
   onInit: null,

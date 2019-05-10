@@ -38,7 +38,7 @@ export const lazySlidesOnRight = spec =>
     ? Math.floor((spec.slidesToShow - 1) / 2) +
       1 +
       (parseInt(spec.centerPadding) > 0 ? 1 : 0)
-    : spec.slidesToShow + (spec.lazyLoadNextSlide ? 1 : 0);
+    : spec.slidesToShow + (spec.preloadNextSlide ? 1 : 0);
 
 // get width of an element
 export const getWidth = elem => (elem && elem.offsetWidth) || 0;
