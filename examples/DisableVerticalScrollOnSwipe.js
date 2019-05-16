@@ -8,6 +8,8 @@ class Carousel extends React.Component {
       isTouchDevice: false,
     };
   }
+  
+  // Check if the device is a touch-device - if yes, add a listener
   componentDidMount () {
     if (window && 'ontouchstart' in window) {
       this.setState({ isTouchDevice: true });
@@ -16,6 +18,7 @@ class Carousel extends React.Component {
     }
   }
 
+  // Check if the device is a touch-device - if yes, clean up listener
   componentWillUnmount () {
     if (window && 'ontouchstart' in window) {
       window.removeEventListener('touchstart', this.touchStart);
@@ -23,18 +26,20 @@ class Carousel extends React.Component {
     }
   }
 
+  // Find the initial point of touch
   touchStart (e) {
     this.firstClientX = e.touches[0].clientX;
     this.firstClientY = e.touches[0].clientY;
   }
-
+  
+  // Prevent scroll if the horizontal gesture dominates the vertical gesture, 
+  // or when the horizontal gesture exceeds some threshold
   preventTouch (e) {
     const minValue = 5; // threshold
 
     this.clientX = e.touches[0].clientX - this.firstClientX;
     this.clientY = e.touches[0].clientY - this.firstClientY;
 
-    // Vertical scrolling does not work when you start swiping horizontally.
     if (Math.abs(this.clientX) > minValue || Math.abs(this.clientX) > Math.abs(this.clientY)) {
       e.preventDefault();
       e.returnValue = false;
