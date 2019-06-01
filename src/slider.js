@@ -4,7 +4,7 @@ import React from "react";
 import { InnerSlider } from "./inner-slider";
 import json2mq from "json2mq";
 import defaultProps from "./default-props";
-import { canUseDOM } from "./utils/innerSliderUtils";
+import { canUseDOM, getChildrenStyle } from "./utils/innerSliderUtils";
 const enquire = canUseDOM() && require("enquire.js");
 
 export default class Slider extends React.Component {
@@ -181,10 +181,7 @@ export default class Slider extends React.Component {
             React.cloneElement(children[k], {
               key: 100 * i + 10 * j + k,
               tabIndex: -1,
-              style: {
-                width: `${100 / settings.slidesPerRow}%`,
-                display: "inline-block"
-              }
+              style: getChildrenStyle(settings.slidesPerRow)
             })
           );
         }
