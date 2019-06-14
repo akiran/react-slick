@@ -163,7 +163,7 @@ export class InnerSlider extends React.Component {
       return null;
     }
 
-    return this.getUpdateState(spec, setTrackStyle);
+    return this.getUpdatedState(spec, setTrackStyle);
   };
 
   componentDidUpdate = prevProps => {
