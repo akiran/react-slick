@@ -305,6 +305,7 @@ export const keyHandler = (e, accessibility, rtl) => {
 
 export const swipeStart = (e, swipe, draggable) => {
   e.target.tagName === "IMG" && e.preventDefault();
+  if (e.target.classList.contains("no-swiping")) return "";
   if (!swipe || (!draggable && e.type.indexOf("mouse") !== -1)) return "";
   return {
     dragging: true,
