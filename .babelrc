@@ -1,11 +1,9 @@
 {
-  "presets":[
-    "react",
-    ["es2015", {"loose": true}]
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    "transform-object-assign", 
-    "transform-object-rest-spread",
-    "transform-class-properties"
+    "@babel/plugin-proposal-class-properties"
   ]
 }

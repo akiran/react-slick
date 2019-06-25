@@ -5,7 +5,7 @@ exports[`UnevenSets Finite Activity test 1`] = `
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"0\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -63,7 +63,7 @@ exports[`UnevenSets Finite Counting test 1`] = `
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -121,7 +121,7 @@ exports[`UnevenSets Finite Positioning test 1`] = `
     <h2>Uneven sets (finite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -179,7 +179,7 @@ exports[`UnevenSets Infinite Activity test 1`] = `
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -307,7 +307,7 @@ exports[`UnevenSets Infinite Counting test 1`] = `
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
@@ -435,7 +435,7 @@ exports[`UnevenSets Infinite Positioning test 1`] = `
     <h2>Uneven sets (infinite)</h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">

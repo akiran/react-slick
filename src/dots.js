@@ -3,20 +3,17 @@
 import React from "react";
 import classnames from "classnames";
 
-var getDotCount = function({
-  infinite,
-  slideCount,
-  slidesToScroll,
-  slidesToShow
-}) {
-  var dots;
+const getDotCount = spec => {
+  let dots;
 
-  if (infinite) {
-    dots = Math.ceil(slideCount / slidesToScroll);
-  } else if (slidesToScroll > 1) {
-    dots = Math.ceil((slideCount - slidesToShow) / slidesToScroll) + 1;
+  if (spec.infinite) {
+    dots = Math.ceil(spec.slideCount / spec.slidesToScroll);
+  } else if (spec.slidesToScroll > 1) {
+    dots =
+      Math.ceil((spec.slideCount - spec.slidesToShow) / spec.slidesToScroll) +
+      1;
   } else {
-    dots = Math.ceil(slideCount);
+    dots = Math.ceil(spec.slideCount);
   }
 
   return dots;
@@ -30,7 +27,7 @@ export class Dots extends React.PureComponent {
     this.props.clickHandler(options);
   }
   render() {
-    var dotCount = getDotCount({
+    let dotCount = getDotCount({
       slideCount: this.props.slideCount,
       slidesToScroll: this.props.slidesToScroll,
       slidesToShow: this.props.slidesToShow,
@@ -42,29 +39,29 @@ export class Dots extends React.PureComponent {
     // Credit: http://stackoverflow.com/a/13735425/1849458
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
-    var dots = Array.apply(
+    let dots = Array.apply(
       null,
       Array(dotCount + 1)
         .join("0")
         .split("")
     ).map((x, i) => {
-      var leftBound = i * this.props.slidesToScroll;
-      var rightBound =
+      let leftBound = i * this.props.slidesToScroll;
+      let rightBound =
         i * this.props.slidesToScroll + (this.props.slidesToScroll - 1);
-      var className = classnames({
+      let className = classnames({
         "slick-active":
           this.props.currentSlide >= leftBound &&
           this.props.currentSlide <= rightBound
       });
 
-      var dotOptions = {
+      let dotOptions = {
         message: "dots",
         index: i,
         slidesToScroll: this.props.slidesToScroll,
         currentSlide: this.props.currentSlide
       };
 
-      var onClick = this.clickHandler.bind(this, dotOptions);
+      let onClick = this.clickHandler.bind(this, dotOptions);
       return (
         <li key={i} className={className}>
           {React.cloneElement(this.props.customPaging(i), { onClick })}

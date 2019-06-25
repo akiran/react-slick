@@ -2,6 +2,8 @@ var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
+  mode: "production",
+
   entry: "./src/index",
 
   output: {
@@ -11,40 +13,45 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      { test: /\.jsx$/, loaders: ["babel"] },
-      { test: /\.js$/, loaders: ["babel"], exclude: /node_modules/ }
+    rules: [
+      {
+        test: /\.js/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
     ]
   },
 
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: [".js", ".jsx"]
   },
 
-  externals: [
-    {
-      react: {
-        root: "React",
-        commonjs2: "react",
-        commonjs: "react",
-        amd: "react"
-      },
-      "react-dom": {
-        root: "ReactDOM",
-        commonjs2: "react-dom",
-        commonjs: "react-dom",
-        amd: "react-dom"
-      }
+  externals: {
+    react: {
+      root: "React",
+      commonjs2: "react",
+      commonjs: "react",
+      amd: "react"
+    },
+    "react-dom": {
+      root: "ReactDOM",
+      commonjs2: "react-dom",
+      commonjs: "react-dom",
+      amd: "react-dom"
     }
-  ],
+  },
 
   node: {
     Buffer: false
   },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
-    })
-  ]
+  devtool: "source-map",
+
+  performance: {
+    hints: "warning"
+  },
+
+  plugins: []
 };

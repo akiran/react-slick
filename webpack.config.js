@@ -1,41 +1,38 @@
 var webpack = require("webpack");
 var path = require("path");
-var autoprefixer = require("autoprefixer");
 
 module.exports = {
-  devtool: "#inline-source-map",
+  mode: "production",
+  devtool: "source-map",
   entry: {
-    "docs.js": [
-      "./docs/index.jsx"
-      // 'webpack/hot/only-dev-server',
-      // 'webpack-dev-server/client?http://localhost:8000'
-    ]
+    "docs.js": "./docs/index.jsx"
   },
   output: {
     path: path.join(__dirname, "build"),
     filename: "[name]"
   },
   module: {
-    loaders: [
-      { test: /\.jsx$/, loaders: ["babel"] },
-      { test: /\.js$/, loaders: ["babel"], exclude: /node_modules/ },
+    rules: [
       {
-        test: /\.scss$/,
-        loader:
-          "style!css!sass?outputStyle=expanded&" +
-          "includePaths[]=" +
-          path.resolve(__dirname, "./node_modules")
+        test: /\.jsx?/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader"
+        }
       },
-      { test: /\.md$/, loader: "html!markdown" }
+      {
+        test: /\.md$/,
+        loader: "html!markdown"
+      }
     ]
   },
-  postcss: [autoprefixer({ browsers: ["last 2 version"] })],
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: [".js", ".jsx"]
   },
-  plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.IgnorePlugin(/vertx/)
-  ]
+  plugins: [new webpack.IgnorePlugin(/vertx/)],
+  devServer: {
+    contentBase: path.join(__dirname, "./build"),
+    port: 8080,
+    hot: true
+  }
 };

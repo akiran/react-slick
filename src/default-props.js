@@ -1,6 +1,6 @@
 import React from "react";
 
-var defaultProps = {
+let defaultProps = {
   accessibility: true,
   adaptiveHeight: false,
   afterChange: null,
