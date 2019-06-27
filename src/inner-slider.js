@@ -168,7 +168,7 @@ export class InnerSlider extends React.Component {
     });
   };
   componentDidUpdate = () => {
-    this.checkImagesLoad();
+    // this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({
@@ -264,9 +264,7 @@ export class InnerSlider extends React.Component {
       };
       if (this.props.centerMode) {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
-        trackStyle.left = `calc(${
-          trackStyle.left
-        } + (100% - ${currentWidth}) / 2 ) `;
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
       }
       this.setState({
         trackStyle
@@ -276,15 +274,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -295,38 +293,47 @@ export class InnerSlider extends React.Component {
       trackStyle: trackStyle
     });
   };
+
+  onClickImage = image => {
+    if (!image.onclick) {
+      image.onclick = () => image.parentNode.focus();
+    } else {
+      const prevClickHandler = image.onclick;
+      image.onclick = () => {
+        prevClickHandler();
+        image.parentNode.focus();
+      };
+    }
+  };
+
+  onLoadImage = (image, handler) => {
+    if (!image.onload) {
+      if (this.props.lazyLoad) {
+        image.onload = () => {
+          this.adaptHeight();
+          this.callbackTimers.push(
+            setTimeout(this.onWindowResized, this.props.speed)
+          );
+        };
+      } else {
+        image.onload = handler;
+        image.onerror = () => {
+          handler();
+          this.props.onLazyLoadError && this.props.onLazyLoadError();
+        };
+      }
+    }
+  };
+
   checkImagesLoad = () => {
     let images = document.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
+    let handler = () =>
+      ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
     Array.prototype.forEach.call(images, image => {
-      const handler = () =>
-        ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
-      if (!image.onclick) {
-        image.onclick = () => image.parentNode.focus();
-      } else {
-        const prevClickHandler = image.onclick;
-        image.onclick = () => {
-          prevClickHandler();
-          image.parentNode.focus();
-        };
-      }
-      if (!image.onload) {
-        if (this.props.lazyLoad) {
-          image.onload = () => {
-            this.adaptHeight();
-            this.callbackTimers.push(
-              setTimeout(this.onWindowResized, this.props.speed)
-            );
-          };
-        } else {
-          image.onload = handler;
-          image.onerror = () => {
-            handler();
-            this.props.onLazyLoadError && this.props.onLazyLoadError();
-          };
-        }
-      }
+      image.onclick = this.onClickImage.bind(image);
+      image.onload = this.onLoadImage.bind(image, handler);
     });
   };
   progressiveLazyLoad = () => {
@@ -369,13 +376,12 @@ export class InnerSlider extends React.Component {
   slideHandler = (index, dontAnimate = false) => {
     const {
       asNavFor,
+      currentSlide,
       beforeChange,
       onLazyLoad,
       speed,
       afterChange
     } = this.props;
-    // capture currentslide before state is updated
-    const currentSlide = this.state.currentSlide;
     let { state, nextState } = slideHandler({
       index,
       ...this.props,
@@ -391,7 +397,7 @@ export class InnerSlider extends React.Component {
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
     this.setState(state, () => {
       asNavFor &&
-        asNavFor.innerSlider.state.currentSlide !== this.state.currentSlide &&
+        asNavFor.innerSlider.state.currentSlide !== currentSlide &&
         asNavFor.innerSlider.slideHandler(index);
       if (!nextState) return;
       this.animationEndCallback = setTimeout(() => {
