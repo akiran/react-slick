@@ -1,7 +1,7 @@
 {
-  "name": "react-slick",
+  "name": "@undg/react-slick_wkcd",
   "version": "0.24.2",
-  "description": " React port of slick carousel",
+  "description": "Fork of react-slick.",
   "main": "./lib",
   "files": [
     "dist",
@@ -17,11 +17,11 @@
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged"
   },
-  "author": "Kiran Abburi",
+  "author": "und3rdg",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/und3rdg/react-slick.git"
   },
   "keywords": [
     "slick",
