@@ -95,9 +95,6 @@ export const isStickedToRight = spec => {
     // && variableWidth
     // && !infinite
   ) {
-    // dbg("spec", spec, fs,
-    // ReactDOM.findDOMNode(spec.listRef)
-    // );
     document.globalTMP = variableWidth;
     const trackElem = ReactDOM.findDOMNode(trackRef);
     const slickList = trackElem.offsetParent; // it have real full width of visible slider
@@ -133,7 +130,6 @@ export const isStickedToRight = spec => {
     cantGoNext = stayOnLeft ? true : false;
     // dbg('cantgonext', cantGoNext)
 
-    console.log(`maxLeft: ${maxLeft}`);
     return maxLeft;
   }
 };
@@ -171,7 +167,6 @@ export const canGoNext = spec => {
     }
 
     if (cantGoNext && !document.querySelectorAll(".on_fullscreen").length) {
-      dbg("fullscreen -------------------------------------");
       canGo = false;
     }
   }
