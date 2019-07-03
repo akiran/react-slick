@@ -75,45 +75,63 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   return "vertical";
 };
 
+const calculateSlidesWidth = trackElem =>
+  trackElem &&
+  trackElem.childNodes
+    .toArray()
+    .reduce((sum, el) => sum + el.getBoundingClientRect().width, 0);
+
+// const maxLeft = (sumSlidesWidth, listWidth) => sumSlidesWidth - listWidth ? (sumSlidesWidth - listWidth) * -1 : 0
+
+let cantGoNext = false;
 //  Need extra option in config❔
 // ATM it is default for (!infinite && variableWidth)
 export const isStickedToRight = spec => {
-  const { trackRef, listWidth } = spec;
-  if (trackRef) {
-    const trackElem = ReactDOM.findDOMNode(trackRef);
-    const slackList = trackElem.offsetParent; // it have real full width of visible slider
+  const { trackRef, listWidth, infinite, centerMode, fs } = spec;
+  const variableWidth = trackRef ? trackRef.props.variableWidth : null;
 
-    const slackListWidth = slackList.offsetWidth;
+  if (
+    trackRef
+    // && variableWidth
+    // && !infinite
+  ) {
+    dbg("spec", spec, fs);
+    const trackElem = ReactDOM.findDOMNode(trackRef);
+    const slickList = trackElem.offsetParent; // it have real full width of visible slider
+
+    const slickListWidth = slickList.offsetWidth;
 
     const targetSlideIndex = spec.slideIndex + getPreClones(spec);
     const targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
-    const targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    const targetLeft = targetSlide ? 5 + targetSlide.offsetLeft * -1 : 0;
 
-    const sumSlidesWidth =
-      trackElem &&
-      trackElem.childNodes
-        .toArray()
-        .reduce((sum, el) => sum + el.getBoundingClientRect().width, 0);
+    const sumSlidesWidth = calculateSlidesWidth(trackElem);
 
     let maxLeft =
       sumSlidesWidth - listWidth ? (sumSlidesWidth - listWidth) * -1 : 0;
 
-    const stayOnLeft = slackListWidth > sumSlidesWidth;
+    const fromEnd = slickListWidth + maxLeft * -1 - sumSlidesWidth;
 
-    let log = `-----------------
-        slackListWidth: ${slackListWidth}
+    const stayOnLeft = slickListWidth > sumSlidesWidth;
+    let log = `
+        -----------------
+        slickListWidth: ${slickListWidth}
         sumSlidesWidth: ${sumSlidesWidth}
         stayOnLeft: ${stayOnLeft}
         -----------------
-        targetLeft: ${targetLeft}
+        targetLeft: ${targetLeft} // blinking into what is in translate3d, can be compared with ${maxLeft}
         maxLeft: ${maxLeft}
-        -----------------`;
+        fromEnd: ${fromEnd}
+        -----------------
+        `;
     console.log(log);
     // return true
-
     if (targetLeft > maxLeft || stayOnLeft) {
       maxLeft = false;
     }
+    cantGoNext = stayOnLeft ? true : false;
+
+    console.log(`maxLeft: ${maxLeft}`);
     return maxLeft;
   }
 };
@@ -134,15 +152,23 @@ export const canGoNext = spec => {
   if (!infinite) {
     if (centerMode && currentSlide >= slideCount - 1) {
       canGo = false;
-    } else if (
+    }
+
+    if (
+      slideCount <= slidesToShow ||
+      currentSlide >= slideCount - slidesToShow
+    ) {
+      canGo = false;
+    }
+
+    if (
       variableWidth &&
       isStickedToRight({ ...spec, slideIndex: currentSlide })
     ) {
       canGo = false;
-    } else if (
-      slideCount <= slidesToShow ||
-      currentSlide >= slideCount - slidesToShow
-    ) {
+    }
+
+    if (cantGoNext) {
       canGo = false;
     }
   }
