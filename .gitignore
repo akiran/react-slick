@@ -17,7 +17,6 @@ examples/scripts/configs.json
 jquery.html
 docs/fonts/
 docs/ajax-loader.gif
-package-lock.json
 *.vim
 *.swo
 *.swp
