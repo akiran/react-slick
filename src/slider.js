@@ -106,9 +106,7 @@ export default class Slider extends React.Component {
         process.env.NODE_ENV !== "production"
       ) {
         console.warn(
-          `slidesToScroll should be equal to 1 in centerMode, you are using ${
-            settings.slidesToScroll
-          }`
+          `slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`
         );
       }
       settings.slidesToScroll = 1;
@@ -117,9 +115,7 @@ export default class Slider extends React.Component {
     if (settings.fade) {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {
         console.warn(
-          `slidesToShow should be equal to 1 when fade is true, you're using ${
-            settings.slidesToShow
-          }`
+          `slidesToShow should be equal to 1 when fade is true, you're using ${settings.slidesToShow}`
         );
       }
       if (
@@ -127,9 +123,7 @@ export default class Slider extends React.Component {
         process.env.NODE_ENV !== "production"
       ) {
         console.warn(
-          `slidesToScroll should be equal to 1 when fade is true, you're using ${
-            settings.slidesToScroll
-          }`
+          `slidesToScroll should be equal to 1 when fade is true, you're using ${settings.slidesToScroll}`
         );
       }
       settings.slidesToShow = 1;
@@ -192,18 +186,22 @@ export default class Slider extends React.Component {
       }
       if (settings.variableWidth) {
         newChildren.push(
-          <div key={i} style={{ width: currentWidth }}>
+          <settings.slide key={i} style={{ width: currentWidth }}>
             {newSlide}
-          </div>
+          </settings.slide>
         );
       } else {
-        newChildren.push(<div key={i}>{newSlide}</div>);
+        newChildren.push(<settings.slide key={i}>{newSlide}</settings.slide>);
       }
     }
 
     if (settings === "unslick") {
       const className = "regular slider " + (this.props.className || "");
-      return <div className={className}>{newChildren}</div>;
+      return (
+        <settings.slidesWrapper className={className}>
+          {newChildren}
+        </settings.slidesWrapper>
+      );
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
     }
