@@ -68,7 +68,7 @@ export default class Slider extends React.Component {
   }
 
   componentWillUnmount() {
-    this._responsiveMediaHandlers.forEach(function(obj) {
+    this._responsiveMediaHandlers.forEach(function (obj) {
       enquire.unregister(obj.query, obj.handler);
     });
   }
@@ -91,10 +91,14 @@ export default class Slider extends React.Component {
       newProps = this.props.responsive.filter(
         resp => resp.breakpoint === this.state.breakpoint
       );
-      settings =
+      const isNewProp = newProps.length > 0
+      settings = { ...defaultProps, ...this.props };
+      if (isNewProp) {
+        settings =
         newProps[0].settings === "unslick"
           ? "unslick"
-          : { ...defaultProps, ...this.props, ...newProps[0].settings };
+          : { ...settings, ...newProps[0].settings };
+      }
     } else {
       settings = { ...defaultProps, ...this.props };
     }
@@ -107,7 +111,7 @@ export default class Slider extends React.Component {
       ) {
         console.warn(
           `slidesToScroll should be equal to 1 in centerMode, you are using ${
-            settings.slidesToScroll
+          settings.slidesToScroll
           }`
         );
       }
@@ -118,7 +122,7 @@ export default class Slider extends React.Component {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {
         console.warn(
           `slidesToShow should be equal to 1 when fade is true, you're using ${
-            settings.slidesToShow
+          settings.slidesToShow
           }`
         );
       }
@@ -128,7 +132,7 @@ export default class Slider extends React.Component {
       ) {
         console.warn(
           `slidesToScroll should be equal to 1 when fade is true, you're using ${
-            settings.slidesToScroll
+          settings.slidesToScroll
           }`
         );
       }
