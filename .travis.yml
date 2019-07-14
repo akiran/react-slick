@@ -1,5 +1,6 @@
 language: node_js
 
+# version 11.10.1 is temporary workaround for issue https://github.com/facebook/jest/issues/8069
 node_js:
-  - "stable"
+  - "11.10.1"
 
