@@ -24,6 +24,7 @@ let defaultProps = {
   infinite: true,
   initialSlide: 0,
   lazyLoad: null,
+  slidesToPreload: 0,
   nextArrow: null,
   onEdge: null,
   onInit: null,
