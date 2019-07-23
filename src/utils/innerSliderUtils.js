@@ -430,6 +430,7 @@ export const swipeEnd = (e, spec) => {
     currentSlide,
     swipeToSlide,
     scrolling,
+    swipeEvent,
     onSwipe
   } = spec;
   if (!dragging) {
@@ -482,6 +483,11 @@ export const swipeEnd = (e, spec) => {
   } else {
     // Adjust the track back to it's original position.
     let currentLeft = getTrackLeft(spec);
+    if (swipeEvent) {
+      // Notify that the swipe was canceled
+      let swipeDirection = getSwipeDirection(spec.touchObject, verticalSwiping);
+      swipeEvent(swipeDirection, 0);
+    }
     state["trackStyle"] = getTrackAnimateCSS({ ...spec, left: currentLeft });
   }
   return state;

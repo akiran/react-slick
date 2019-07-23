@@ -12,7 +12,10 @@ export default class SwipeAnimated extends Component {
   };
 
   swipeEvent = (swipeDirection, slideOffset) => {
-    if (slideOffset && slideOffset !== this.state.tempIndexOffset) {
+    if (
+      typeof slideOffset === "number" &&
+      slideOffset !== this.state.tempIndexOffset
+    ) {
       this.setState({ tempIndexOffset: slideOffset });
     }
   };
