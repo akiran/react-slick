@@ -9,9 +9,9 @@ import {
 } from "./utils/innerSliderUtils";
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
-var getSlideClasses = spec => {
-  var slickActive, slickCenter, slickCloned;
-  var centerOffset, index;
+const getSlideClasses = spec => {
+  let slickActive, slickCenter, slickCloned;
+  let centerOffset, index;
 
   if (spec.rtl) {
     index = spec.slideCount - 1 - spec.index;
@@ -43,8 +43,8 @@ var getSlideClasses = spec => {
   };
 };
 
-var getSlideStyle = function(spec) {
-  var style = {};
+const getSlideStyle = spec => {
+  let style = {};
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
     style.width = spec.slideWidth;
@@ -85,18 +85,18 @@ var getSlideStyle = function(spec) {
 
 const getKey = (child, fallbackKey) => child.key || fallbackKey;
 
-var renderSlides = function(spec) {
-  var key;
-  var slides = [];
-  var preCloneSlides = [];
-  var postCloneSlides = [];
-  var childrenCount = React.Children.count(spec.children);
+const renderSlides = spec => {
+  let key;
+  let slides = [];
+  let preCloneSlides = [];
+  let postCloneSlides = [];
+  let childrenCount = React.Children.count(spec.children);
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
 
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
-    var childOnClickOptions = {
+    let childOnClickOptions = {
       message: "children",
       index: index,
       slidesToScroll: spec.slidesToScroll,
@@ -112,8 +112,8 @@ var renderSlides = function(spec) {
     } else {
       child = <div />;
     }
-    var childStyle = getSlideStyle({ ...spec, index });
-    const slideClass = child.props.className || "";
+    let childStyle = getSlideStyle({ ...spec, index });
+    let slideClass = child.props.className || "";
     let slideClasses = getSlideClasses({ ...spec, index });
     // push a cloned element of the desired slide
     slides.push(

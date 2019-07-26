@@ -24,8 +24,10 @@ yarn add react-slick
 
 ```bash
 npm install slick-carousel
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 ```
 
 or add cdn link in your html
