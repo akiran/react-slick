@@ -4,11 +4,14 @@ var path = require("path");
 module.exports = {
   mode: "production",
 
+  target: "node",
+
   entry: "./src/index",
 
   output: {
     library: "Slider",
     libraryTarget: "umd",
+    globalObject: "this",
     path: path.join(__dirname, "dist")
   },
 
