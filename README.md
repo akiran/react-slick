@@ -20,7 +20,7 @@ npm install react-slick --save
 yarn add react-slick
 ```
 
-⚠️ Also install slick-carousel for css and font
+⚠️ Also install slick-carousel or [react-slick-styles](https://github.com/ivoilic/react-slick-styles) for css and font
 
 ```bash
 npm install slick-carousel
@@ -28,6 +28,14 @@ npm install slick-carousel
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+// or
+
+npm install react-slick-styles
+
+// Import css files
+import "react-slick-styles/slick/slick.css";
+import "react-slick-styles/slick/slick-theme.css";
 ```
 
 or add cdn link in your html
