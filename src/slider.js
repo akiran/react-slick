@@ -67,7 +67,7 @@ export default class Slider extends React.Component {
     }
   }
 
-  UNSAFE_componentWillUnmount() {
+  componentWillUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
     });

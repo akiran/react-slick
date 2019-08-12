@@ -107,7 +107,7 @@ export class InnerSlider extends React.Component {
       window.attachEvent("onresize", this.onWindowResized);
     }
   };
-  UNSAFE_componentWillUnmount = () => {
+  componentWillUnmount = () => {
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
     }
