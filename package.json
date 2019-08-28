@@ -1,6 +1,6 @@
 {
   "name": "@undg/react-slick_wkcd",
-  "version": "0.24.3",
+  "version": "0.24.4",
   "description": "Fork of react-slick.",
   "main": "./lib",
   "files": [
