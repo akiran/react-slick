@@ -559,6 +559,7 @@ export const swipeEnd = (e, spec) => {
             case "right":
             case "down":
                 newSlide = currentSlide - getSlideCount(spec);
+                newSlide = newSlide === -1 ? 0 : newSlide  // 🌻
                 slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide;
                 state["currentDirection"] = 1;
                 break;
@@ -585,6 +586,7 @@ export const getNavigableIndexes = spec => {
     }
     return indexes;
 };
+
 export const checkNavigable = (spec, index) => {
     const navigables = getNavigableIndexes(spec);
     let prevNavigable = 0;
@@ -601,6 +603,7 @@ export const checkNavigable = (spec, index) => {
     }
     return index;
 };
+
 export const getSlideCount = spec => {
     const centerOffset = spec.centerMode
         ? spec.slideWidth * Math.floor(spec.slidesToShow / 2)

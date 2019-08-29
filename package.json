@@ -13,12 +13,13 @@
         "test": "npm run lint && jest",
         "test:watch": "jest --watch",
         "lint": "eslint src",
-        "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html"
+        "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
+        "make": "babel ./src --out-dir ./lib && gulp dist"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm test",
-            "pre-publish": "babel ./src --out-dir ./lib && gulp dist"
+            "pre-commit": "npm test && npm run make",
+            "pre-publish": "npm run make"
         }
     },
     "author": "und3rdg",
