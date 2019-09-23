@@ -265,9 +265,7 @@ export class InnerSlider extends React.Component {
       };
       if (this.props.centerMode) {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
-        trackStyle.left = `calc(${
-          trackStyle.left
-        } + (100% - ${currentWidth}) / 2 ) `;
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
       }
       this.setState({
         trackStyle
@@ -744,8 +742,8 @@ export class InnerSlider extends React.Component {
     return (
       <div {...innerSliderProps}>
         <ul className="controls">
-          {!this.props.unslick ? prevArrow : ""}
-          {!this.props.unslick ? nextArrow : ""}
+          {!this.props.unslick ? <li>{prevArrow}</li> : ""}
+          {!this.props.unslick ? <li>{nextArrow}</li> : ""}
         </ul>
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>
