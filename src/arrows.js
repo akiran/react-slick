@@ -44,11 +44,9 @@ export class PrevArrow extends React.PureComponent {
       });
     } else {
       prevArrow = (
-        <li>
-          <button key="0" type="button" {...prevArrowProps}>
-            {this.props.accessibilityPreviousLabel}
-          </button>
-        </li>
+        <button key="0" type="button" {...prevArrowProps}>
+          {this.props.accessibilityPreviousLabel}
+        </button>
       );
     }
 
@@ -92,11 +90,9 @@ export class NextArrow extends React.PureComponent {
       });
     } else {
       nextArrow = (
-        <li>
-          <button key="1" type="button" {...nextArrowProps}>
-            {this.props.accessibilityNextLabel}
-          </button>
-        </li>
+        <button key="1" type="button" {...nextArrowProps}>
+          {this.props.accessibilityNextLabel}
+        </button>
       );
     }
 
