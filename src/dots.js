@@ -14,6 +14,11 @@ const getDotCount = spec => {
       1;
   }
 
+  if (dots < 0) {
+    const remainingAmount = parseInt(spec.slidesToScroll / spec.slideCount) + 1;
+    dots = spec.slideCount - remainingAmount;
+  }
+
   return dots;
 };
 
