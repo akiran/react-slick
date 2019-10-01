@@ -528,11 +528,7 @@ export class InnerSlider extends React.Component {
     }
     const autoplaying = this.state.autoplaying;
     if (playType === "update") {
-      if (
-        autoplaying === "hovered" ||
-        autoplaying === "focused" ||
-        autoplaying === "paused"
-      ) {
+      if (autoplaying === "hovered" || autoplaying === "focused") {
         return;
       }
     } else if (playType === "leave") {
@@ -709,7 +705,7 @@ export class InnerSlider extends React.Component {
     let innerSliderProps = {
       className: className,
       dir: "ltr",
-      style:this.props.style
+      style: this.props.style
     };
 
     if (this.props.unslick) {
