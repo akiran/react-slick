@@ -52,7 +52,8 @@ class SimpleSlider extends React.Component {
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      initialSlide: 2 // default is 0
     };
     return (
       <Slider {...settings}>
