@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Slider from "../src/slider";
 import { baseUrl } from "./config";
 
-export default class SlickGoTo extends React.Component {
+export default class SlickGoTo extends Component {
   state = {
     slideIndex: 0,
     updateCount: 0

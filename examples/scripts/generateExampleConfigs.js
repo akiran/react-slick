@@ -1,4 +1,3 @@
-const React = require("react");
 const fs = require("fs");
 const babel = require("babel-core");
 const ReactDOMServer = require("react-dom/server");
@@ -20,7 +19,7 @@ const extractConfig = exampleString => {
   let extraction = exampleString.match(pattern);
   if (extraction) extraction = extraction[2];
   else return null;
-  const propPattern = /(\w+)\:((?:.|\n)+?)(?=(,\n)|(\n\s*};))/g;
+  const propPattern = /(\w+):((?:.|\n)+?)(?=(,\n)|(\n\s*};))/g;
   let match;
   let matchObject = {};
   do {
@@ -34,7 +33,7 @@ const extractConfig = exampleString => {
 };
 
 const extractChildren = exampleString => {
-  const pattern = /\<Slider(?:.|\n)*?\>((.|\n)*?)\<\/Slider\>/;
+  const pattern = /<Slider(?:.|\n)*?>((.|\n)*?)<\/Slider>/;
   return exampleString.match(pattern)[1];
 };
 
@@ -48,11 +47,11 @@ const transpile = exampleString =>
     ]
   }).code;
 
-const fetchExampleConfigs = (fileName, index) => {
+const fetchExampleConfigs = fileName => {
   const exampleName = fileName.substring(0, fileName.length - 3);
   const exampleString = fetchExampleString(exampleName);
   const transformedString = transpile(exampleString);
-  let childrenString = extractChildren(exampleString.replace(/\=\>/g, "$$$")); // jsx type string
+  let childrenString = extractChildren(exampleString.replace(/=>/g, "$$$")); // jsx type string
   try {
     // react string without jsx
     childrenString = eval(
@@ -77,8 +76,7 @@ const fetchExampleConfigs = (fileName, index) => {
   }
 };
 
-const exampleFiles = fs
-  .readdirSync("examples")
+fs.readdirSync("examples")
   .filter(file => file.endsWith(".js") && file[0] === file[0].toUpperCase())
   .forEach((fileName, index) => fetchExampleConfigs(fileName, index));
 fs.writeFileSync(

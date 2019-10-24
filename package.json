@@ -13,7 +13,7 @@
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "npm run lint && jest",
     "test:watch": "jest --watch",
-    "lint": "eslint src",
+    "lint": "eslint --ext .js,.jsx src docs examples",
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged"
   },
@@ -52,6 +52,8 @@
     "es5-shim": "^4.5.9",
     "eslint": "^5.9.0",
     "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jasmine": "^2.10.1",
+    "eslint-plugin-jest": "^22.20.0",
     "eslint-plugin-react": "^6.3.0",
     "express": "^4.14.0",
     "foundation-apps": "^1.2.0",

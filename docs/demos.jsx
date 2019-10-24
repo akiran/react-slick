@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Slider from '../src/slider';
 
 import SimpleSlider from '../examples/SimpleSlider'
 import SlideChangeHooks from '../examples/SlideChangeHooks'

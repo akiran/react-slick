@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import SimpleSlider from "../SimpleSlider";
-import { repeatClicks } from "../../test-helpers";
 import { html as beautify_html } from "js-beautify";
 
 describe("Simple Slider", function() {

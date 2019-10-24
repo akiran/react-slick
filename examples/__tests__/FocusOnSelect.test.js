@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import { html as beautify_html } from "js-beautify";
-import { clickNext } from "../../__tests__/testUtils";
 import FocusOnSelect from "../FocusOnSelect";
 
 describe("FocusOnSelect Tests", () => {

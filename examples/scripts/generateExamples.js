@@ -2,7 +2,7 @@ const fs = require("fs");
 const exampleConfigs = require("./configs.json");
 const exec = require("child_process").exec;
 
-var procCode = exec(
+exec(
   "cp -r node_modules/slick-carousel/slick/fonts node_modules/slick-carousel/slick/ajax-loader.gif docs/"
 );
 
