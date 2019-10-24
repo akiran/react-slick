@@ -1,15 +1,9 @@
 // this is for fetching details after initializing react and jquery slicks
 // and compare those details to see if things are going different
 
-import {
-  createSliderReact,
-  createJQuerySliderChildren,
-  activeSlideInLastTransition
-} from "./testUtils";
+import { createJQuerySliderChildren } from "./testUtils";
 import $ from "jquery";
-import * as slickCarousel from "slick-carousel";
-import util from "util";
-import js_beautify, { html as html_beautify } from "js-beautify";
+import "slick-carousel";
 
 // simulates actions from given actions object
 // takes document from the scope from where it's called
@@ -39,7 +33,7 @@ function simulateActions(actions) {
 
 // takes an object of keys and returns those details
 /* Possible keys can be one of the following
-currentSlide(index and value), activeSlides(index and value), 
+currentSlide(index and value), activeSlides(index and value),
 allSlides(index and value), clonedSlides(index and value)
 */
 function fetchDetails(keys) {

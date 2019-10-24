@@ -1,6 +1,5 @@
 // includes tests of
 // SimpleSlider, MultipleItems
-import { mount } from "enzyme";
 import { testSlider } from "./testUtils";
 
 describe("SimpleSlider with combinations of possibilities", function() {
@@ -8,7 +7,8 @@ describe("SimpleSlider with combinations of possibilities", function() {
   let _noOfSlides = [2, 5, 12];
   let _slidesToShow = [2, 5, 10];
   let _slidesToScroll = [1, 2, 3, 10];
-  if (true) {
+
+  {
     // for switching real quick to lesser/easier tests for simplicity
     _noOfSlides = [5];
     _slidesToShow = [2];

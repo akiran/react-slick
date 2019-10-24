@@ -4,12 +4,13 @@
 
 sinon.stub(console, "error");
 
-import { render, shallow } from "enzyme";
+import { shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";
 
 import { NextArrow, PrevArrow } from "../src/arrows";
 
+/*
 function CustomArrow(props) {
   return (
     <span
@@ -19,6 +20,7 @@ function CustomArrow(props) {
     />
   );
 }
+*/
 
 describe("Previous arrows", () => {
   it("should render arrow", () => {

@@ -1,7 +1,8 @@
-import { getJQuerySlickDetails } from "../jQSlickUtils";
-import { getReactSlickDetails } from "../reactSlickUtils";
+// import { getJQuerySlickDetails } from "../jQSlickUtils";
+// import { getReactSlickDetails } from "../reactSlickUtils";
 
 describe("live testing module", () => {
+  /*
   let settings = {
     infinite: true,
     speed: 0,
@@ -24,6 +25,7 @@ describe("live testing module", () => {
   };
   let reactDetails = getReactSlickDetails(settings, actions, keys);
   let jqueryDetails = getJQuerySlickDetails(settings, actions, keys);
+  */
 
   // for(let noOfSlides of [5, 12]){
   //   for (let slidesToShow of [1, 11, 12]){

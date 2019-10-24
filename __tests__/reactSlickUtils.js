@@ -43,7 +43,7 @@ function fetchDOMDetails(slider, keys) {
     allSlides = [],
     clonedSlides = [],
     visibleSlides = []; // currently no way to find these
-  slider.find("div.slick-slide").forEach((slide, index) => {
+  slider.find("div.slick-slide").forEach(slide => {
     const slideObj = {
       index: slide.prop("data-index").toString(),
       value: slide.find("h3").length === 1 ? slide.find("h3").text() : "..."
