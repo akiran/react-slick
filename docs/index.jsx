@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Docs from './docs'
+import React from "react";
+import ReactDOM from "react-dom";
+import Docs from "./docs";
 
 React.initializeTouchEvents && React.initializeTouchEvents(true);
-ReactDOM.render(<Docs />, document.getElementById('rapp'));
+ReactDOM.render(<Docs />, document.getElementById("rapp"));
