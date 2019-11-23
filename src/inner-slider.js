@@ -230,20 +230,14 @@ export class InnerSlider extends React.Component {
   };
 
   ssrInit = () => {
+    const childrenCount = React.Children.count(this.props.children);
+    const spec = { ...this.props, ...this.state, slideCount: childrenCount };
+    let preClones = getPreClones(spec);
+    let postClones = getPostClones(spec);
     if (this.props.variableWidth) {
       let trackWidth = 0,
         trackLeft = 0;
       let childrenWidths = [];
-      let preClones = getPreClones({
-        ...this.props,
-        ...this.state,
-        slideCount: this.props.children.length
-      });
-      let postClones = getPostClones({
-        ...this.props,
-        ...this.state,
-        slideCount: this.props.children.length
-      });
       this.props.children.forEach(child => {
         childrenWidths.push(child.props.style.width);
         trackWidth += child.props.style.width;
@@ -271,16 +265,11 @@ export class InnerSlider extends React.Component {
       });
       return;
     }
-    let childrenCount = React.Children.count(this.props.children);
-    const spec = { ...this.props, ...this.state, slideCount: childrenCount };
-    let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
+    let slideCount = preClones + postClones + childrenCount;
     let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      (-slideWidth *
-        (getPreClones(spec) + this.state.currentSlide) *
-        trackWidth) /
-      100;
+      (-slideWidth * (preClones + this.state.currentSlide) * trackWidth) / 100;
     if (this.props.centerMode) {
       trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
@@ -709,7 +698,7 @@ export class InnerSlider extends React.Component {
     let innerSliderProps = {
       className: className,
       dir: "ltr",
-      style:this.props.style
+      style: this.props.style
     };
 
     if (this.props.unslick) {
