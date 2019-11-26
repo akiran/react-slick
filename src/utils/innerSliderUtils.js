@@ -24,10 +24,19 @@ export const getRequiredLazySlides = spec => {
   return requiredSlides;
 };
 
+const getPreloadNumber = (lazyLoad) => {
+  const [preloadBefore = 0, preloadAfter = 0] = Array.isArray(lazyLoad) ? lazyLoad : [0, 0];
+  return {
+    preloadBefore: parseInt(preloadBefore, 10),
+    preloadAfter: parseInt(preloadAfter, 10)
+  }
+}
+
 // startIndex that needs to be present
 export const lazyStartIndex = spec =>
-  spec.currentSlide - lazySlidesOnLeft(spec);
-export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec);
+  spec.currentSlide - lazySlidesOnLeft(spec) - getPreloadNumber(spec.lazyLoad).preloadBefore;
+export const lazyEndIndex = spec =>
+  spec.currentSlide + lazySlidesOnRight(spec) + getPreloadNumber(spec.lazyLoad).preloadAfter;
 export const lazySlidesOnLeft = spec =>
   spec.centerMode
     ? Math.floor(spec.slidesToShow / 2) +
