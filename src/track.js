@@ -113,13 +113,13 @@ const renderSlides = spec => {
     ) {
       child = elem;
     } else {
-      child = <div />;
+      child = React.createElement(spec.slide);
     }
-    //console.log(spec);
+
     let childStyle = getSlideStyle({ ...spec, index });
     let slideClass = child.props.className || "";
     let slideClasses = getSlideClasses({ ...spec, index });
-    //console.log(elem);
+
     // push a cloned element of the desired slide
     slides.push(
       React.cloneElement(child, {

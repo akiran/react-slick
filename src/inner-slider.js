@@ -604,6 +604,7 @@ export class InnerSlider extends React.Component {
       "slideHeight",
       "listHeight",
       "vertical",
+      "slide",
       "slideClass",
       "slidesToShow",
       "slidesToScroll",
