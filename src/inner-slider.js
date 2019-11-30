@@ -583,9 +583,10 @@ export class InnerSlider extends React.Component {
     this.autoPlay("blur");
 
   render = () => {
-    var className = classnames("slick-slider", this.props.className, {
+    var className = classnames(this.props.className, "slick-slider", {
       "slick-vertical": this.props.vertical,
-      "slick-initialized": true
+      "slick-initialized": true,
+      "slick-dotted": true
     });
     let spec = { ...this.props, ...this.state };
     let trackProps = extractObject(spec, [
@@ -603,6 +604,7 @@ export class InnerSlider extends React.Component {
       "slideHeight",
       "listHeight",
       "vertical",
+      "slideClass",
       "slidesToShow",
       "slidesToScroll",
       "slideCount",
@@ -709,7 +711,7 @@ export class InnerSlider extends React.Component {
     let innerSliderProps = {
       className: className,
       dir: "ltr",
-      style:this.props.style
+      style: this.props.style
     };
 
     if (this.props.unslick) {

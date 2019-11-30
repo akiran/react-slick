@@ -182,16 +182,20 @@ export default class Slider extends React.Component {
             })
           );
         }
-        newSlide.push(<div key={10 * i + j}>{row}</div>);
+        newSlide.push(row);
       }
       if (settings.variableWidth) {
         newChildren.push(
-          <div key={i} style={{ width: currentWidth }}>
-            {newSlide}
-          </div>
+          React.createElement(
+            settings.slide,
+            { style: { width: currentWidth }, key: i },
+            newSlide
+          )
         );
       } else {
-        newChildren.push(<div key={i}>{newSlide}</div>);
+        newChildren.push(
+          React.createElement(settings.slide, { key: i }, newSlide)
+        );
       }
     }
 
@@ -202,7 +206,11 @@ export default class Slider extends React.Component {
       settings.unslick = true;
     }
     return (
-      <InnerSlider style={this.props.style} ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider
+        style={this.props.style}
+        ref={this.innerSliderRefHandler}
+        {...settings}
+      >
         {newChildren}
       </InnerSlider>
     );

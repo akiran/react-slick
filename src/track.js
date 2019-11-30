@@ -34,13 +34,16 @@ const getSlideClasses = spec => {
       index < spec.currentSlide + spec.slidesToShow;
   }
   let slickCurrent = index === spec.currentSlide;
-  return {
-    "slick-slide": true,
-    "slick-active": slickActive,
-    "slick-center": slickCenter,
-    "slick-cloned": slickCloned,
-    "slick-current": slickCurrent // dubious in case of RTL
-  };
+  return Object.assign(
+    { [spec.slideClass]: !!spec.slideClass },
+    {
+      "slick-slide": true,
+      "slick-active": slickActive,
+      "slick-center": slickCenter,
+      "slick-cloned": slickCloned,
+      "slick-current": slickCurrent // dubious in case of RTL
+    }
+  );
 };
 
 const getSlideStyle = spec => {
@@ -112,9 +115,11 @@ const renderSlides = spec => {
     } else {
       child = <div />;
     }
+    //console.log(spec);
     let childStyle = getSlideStyle({ ...spec, index });
     let slideClass = child.props.className || "";
     let slideClasses = getSlideClasses({ ...spec, index });
+    //console.log(elem);
     // push a cloned element of the desired slide
     slides.push(
       React.cloneElement(child, {
