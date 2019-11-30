@@ -36,7 +36,7 @@ let defaultProps = {
   responsive: null,
   rows: 1,
   rtl: false,
-  slide: "div",
+  slide: <div />,
   slideClass: "",
   slidesPerRow: 1,
   slidesToScroll: 1,

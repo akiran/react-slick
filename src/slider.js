@@ -186,7 +186,7 @@ export default class Slider extends React.Component {
       }
       if (settings.variableWidth) {
         newChildren.push(
-          React.createElement(
+          React.cloneElement(
             settings.slide,
             { style: { width: currentWidth }, key: i },
             newSlide
@@ -194,7 +194,7 @@ export default class Slider extends React.Component {
         );
       } else {
         newChildren.push(
-          React.createElement(settings.slide, { key: i }, newSlide)
+          React.cloneElement(settings.slide, { key: i }, newSlide)
         );
       }
     }

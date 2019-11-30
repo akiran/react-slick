@@ -113,7 +113,7 @@ const renderSlides = spec => {
     ) {
       child = elem;
     } else {
-      child = React.createElement(spec.slide);
+      child = spec.slide;
     }
 
     let childStyle = getSlideStyle({ ...spec, index });
