@@ -126,9 +126,9 @@ const renderSlides = spec => {
         key: "original" + getKey(child, index),
         "data-index": index,
         className: classnames(slideClasses, slideClass),
-        tabIndex: "-1",
+        tabIndex: slideClasses["slick-active"] ? "0" : "-1",
         "aria-hidden": !slideClasses["slick-active"],
-        style: { outline: "none", ...(child.props.style || {}), ...childStyle },
+        style: { ...(child.props.style || {}), ...childStyle },
         onClick: e => {
           child.props && child.props.onClick && child.props.onClick(e);
           if (spec.focusOnSelect) {
