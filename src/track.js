@@ -50,7 +50,9 @@ const getSlideStyle = spec => {
   let style = {};
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
-    style.width = spec.slideWidth - 30;
+    style.width = !isNaN(spec.slideWidth)
+      ? spec.slideWidth - spec.subWidth
+      : spec.slideWidth;
   }
 
   if (spec.fade) {
@@ -96,6 +98,19 @@ const renderSlides = spec => {
   let childrenCount = React.Children.count(spec.children);
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
+  let subWidth = 0;
+
+  if (childrenCount > 0) {
+    const elem = document.querySelector(`.${spec.slideClass}`);
+
+    if (elem) {
+      const styles = window.getComputedStyle(elem);
+
+      subWidth =
+        parseInt(styles.getPropertyValue("margin-left")) +
+        parseInt(styles.getPropertyValue("margin-right"));
+    }
+  }
 
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
@@ -116,7 +131,7 @@ const renderSlides = spec => {
       child = spec.slide;
     }
 
-    let childStyle = getSlideStyle({ ...spec, index });
+    let childStyle = getSlideStyle({ ...spec, index, subWidth });
     let slideClass = child.props.className || "";
     let slideClasses = getSlideClasses({ ...spec, index });
 
