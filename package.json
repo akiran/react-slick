@@ -1,6 +1,6 @@
 {
   "name": "react-slick-fixed-dom",
-  "version": "0.25.6",
+  "version": "0.25.7",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
