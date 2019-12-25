@@ -1,6 +1,6 @@
 {
-  "name": "react-slick",
-  "version": "0.25.2",
+  "name": "@ant-design/react-slick",
+  "version": "0.25.3",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/ant-design/react-slick"
   },
   "keywords": [
     "slick",
@@ -119,12 +119,10 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/akiran/react-slick/issues"
+    "url": "https://github.com/ant-design/react-slick/issues"
   },
-  "homepage": "https://github.com/akiran/react-slick",
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/react-slick",
-    "logo": "https://opencollective.com/opencollective/logo.txt"
+  "homepage": "https://github.com/ant-design/react-slick",
+  "publishConfig": {
+    "access": "public"
   }
 }
