@@ -1,11 +1,13 @@
 {
   "name": "@ant-design/react-slick",
-  "version": "0.25.3",
+  "version": "0.25.4",
   "description": " React port of slick carousel",
   "main": "./lib",
+  "types": "./types.d.ts",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "types.d.ts"
   ],
   "scripts": {
     "start": "gulp server",
