@@ -3,7 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import initialState from "./initial-state";
-import debounce from "lodash.debounce";
+import debounce from "lodash/debounce";
 import classnames from "classnames";
 import {
   getOnDemandLazySlides,
