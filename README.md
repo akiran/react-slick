@@ -104,6 +104,10 @@ open http://localhost:8080
   <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
 </a>
 
+## Contributing
+
+Please see the [contributing guidelines](./CONTRIBUTING.md)
+
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
