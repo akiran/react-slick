@@ -85,8 +85,8 @@ export default class Slider extends React.Component {
   slickPlay = () => this.innerSlider.autoPlay("play");
 
   render() {
-    var settings;
-    var newProps;
+    let settings;
+    let newProps;
     if (this.state.breakpoint) {
       newProps = this.props.responsive.filter(
         resp => resp.breakpoint === this.state.breakpoint
@@ -142,6 +142,8 @@ export default class Slider extends React.Component {
       return !!child;
     });
 
+    const childrenLength = children.length;
+
     // rows and slidesPerRow logic is handled here
     if (
       settings.variableWidth &&
@@ -156,7 +158,7 @@ export default class Slider extends React.Component {
     let currentWidth = null;
     for (
       let i = 0;
-      i < children.length;
+      i < childrenLength;
       i += settings.rows * settings.slidesPerRow
     ) {
       let newSlide = [];
@@ -170,7 +172,7 @@ export default class Slider extends React.Component {
           if (settings.variableWidth && children[k].props.style) {
             currentWidth = children[k].props.style.width;
           }
-          if (k >= children.length) break;
+          if (k >= childrenLength) break;
           row.push(
             React.cloneElement(children[k], {
               key: 100 * i + 10 * j + k,
