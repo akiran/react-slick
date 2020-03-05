@@ -27,12 +27,19 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      react: "preact-compat",
+      "react-dom": "preact-compat"
+    }
   },
   plugins: [new webpack.IgnorePlugin(/vertx/)],
   devServer: {
     contentBase: path.join(__dirname, "./build"),
     port: 8080,
     hot: true
+  },
+  optimization: {
+    minimize: false
   }
 };

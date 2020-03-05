@@ -25,7 +25,11 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      react: "preact-compat",
+      "react-dom": "preact-compat"
+    }
   },
 
   externals: {
@@ -53,5 +57,9 @@ module.exports = {
     hints: "warning"
   },
 
-  plugins: []
+  plugins: [],
+
+  optimization: {
+    minimize: false
+  }
 };
