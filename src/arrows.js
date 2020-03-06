@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import React from "preact-compat";
 import classnames from "classnames";
 import { canGoNext } from "./utils/innerSliderUtils";
 

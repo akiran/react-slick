@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact-compat";
 import { mount } from "enzyme";
 import Slider from "../src/index";
 

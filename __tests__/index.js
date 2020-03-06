@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import React from "preact-compat";
 import { shallow, mount } from "enzyme";
 import Slider from "../src/index";
 

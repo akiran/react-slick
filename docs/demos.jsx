@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React from 'preact-compat';
 import Slider from '../src/slider';
 
 import SimpleSlider from '../examples/SimpleSlider'

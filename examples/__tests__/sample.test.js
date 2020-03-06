@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact-compat";
 import { mount } from "enzyme";
 
 export default class Counter extends React.Component {

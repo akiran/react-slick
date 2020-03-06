@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact-compat";
 import { mount } from "enzyme";
 import CenterMode from "../CenterMode";
 import { html as beautify_html } from "js-beautify";

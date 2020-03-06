@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact-compat";
 import $ from "jquery";
 import assign from "object-assign";
 import { mount } from "enzyme";

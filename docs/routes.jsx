@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react');
+var React = require('preact-compat');
 var Router = require('react-router');
 var Route = Router.Route;
 var Docs = require('./docs');

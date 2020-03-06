@@ -1,7 +1,7 @@
 "use strict";
 
-import React from "react";
-import ReactDOM from "react-dom";
+import React from "preact-compat";
+import ReactDOM from "preact-compat";
 import initialState from "./initial-state";
 import debounce from "lodash.debounce";
 import classnames from "classnames";
@@ -705,7 +705,7 @@ export class InnerSlider extends React.Component {
     let innerSliderProps = {
       className: className,
       dir: "ltr",
-      style:this.props.style
+      style: this.props.style
     };
 
     if (this.props.unslick) {

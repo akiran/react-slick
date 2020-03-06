@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import React from "preact-compat";
 import { InnerSlider } from "./inner-slider";
 import json2mq from "json2mq";
 import defaultProps from "./default-props";
@@ -202,7 +202,11 @@ export default class Slider extends React.Component {
       settings.unslick = true;
     }
     return (
-      <InnerSlider style={this.props.style} ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider
+        style={this.props.style}
+        ref={this.innerSliderRefHandler}
+        {...settings}
+      >
         {newChildren}
       </InnerSlider>
     );

@@ -5,7 +5,7 @@
 sinon.stub(console, "error");
 
 import { render, shallow } from "enzyme";
-import React from "react";
+import React from "preact-compat";
 import sinon from "sinon";
 
 import { NextArrow, PrevArrow } from "../src/arrows";

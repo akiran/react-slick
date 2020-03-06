@@ -1,4 +1,4 @@
-const React = require("react");
+const React = require("preact-compat");
 const fs = require("fs");
 const babel = require("babel-core");
 const ReactDOMServer = require("react-dom/server");

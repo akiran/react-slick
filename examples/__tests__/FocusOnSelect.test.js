@@ -1,4 +1,4 @@
-import React from "react";
+import React from "preact-compat";
 import { mount } from "enzyme";
 import { html as beautify_html } from "js-beautify";
 import { clickNext } from "../../__tests__/testUtils";

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "preact-compat";
 import Slider from "../src/slider";
 
 export default class MultipleRows extends Component {

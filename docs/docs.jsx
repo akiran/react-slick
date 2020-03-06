@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react'
+import React from 'preact-compat'
 import Demos from './demos'
 
 export default class Docs extends React.Component {
