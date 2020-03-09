@@ -38,7 +38,7 @@ const testSettings = settings => {
     let lazyLoadedList = slider.state().lazyLoadedList;
     lazyLoadedList.forEach(slideIndex => {
       expect(
-        slider.find(`[data-index=${slideIndex}]`).props().children !== undefined
+        slider.find(`[data-index=${slideIndex}]`).children() !== undefined
       ).toBe(true);
     });
   }
