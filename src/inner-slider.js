@@ -297,10 +297,16 @@ export class InnerSlider extends React.Component {
       const handler = () =>
         ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
       if (!image.onclick) {
-        image.onclick = () => image.parentNode.focus();
+        image.onclick = () => {
+          if (this.props.centerMode) return;
+
+          image.parentNode.focus();
+        };
       } else {
         const prevClickHandler = image.onclick;
         image.onclick = () => {
+          if (this.props.centerMode) return;
+
           prevClickHandler();
           image.parentNode.focus();
         };
@@ -705,7 +711,7 @@ export class InnerSlider extends React.Component {
     let innerSliderProps = {
       className: className,
       dir: "ltr",
-      style:this.props.style
+      style: this.props.style
     };
 
     if (this.props.unslick) {
