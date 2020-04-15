@@ -3,12 +3,16 @@ import Slider from "../src/slider";
 
 export default class SimpleSlider extends Component {
   render() {
+    const slidesToScroll = this.props.slidesToScroll
+      ? this.props.slidesToScroll
+      : 1;
+
     const settings = {
       dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: slidesToScroll
     };
     return (
       <div>

@@ -5,6 +5,8 @@ import { repeatClicks } from "../../test-helpers";
 import { html as beautify_html } from "js-beautify";
 
 describe("Simple Slider", function() {
+  jest.spyOn(global.console, "warn");
+
   it("should have 13 slides (1(preclone) + 6(actual) + 6(postclone))", function() {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find(".slick-slide").length).toEqual(13);
@@ -20,6 +22,17 @@ describe("Simple Slider", function() {
   it("should have 6 dots", function() {
     const wrapper = mount(<SimpleSlider />);
     expect(wrapper.find(".slick-dots").children().length).toEqual(6);
+  });
+  it("should have 3 dots", function() {
+    const wrapper = mount(<SimpleSlider slidesToScroll={2} />);
+    expect(wrapper.find(".slick-dots").children().length).toEqual(3);
+  });
+  it("should have 6 dots and throws an warn", function() {
+    const wrapper = mount(<SimpleSlider slidesToScroll={-1} />);
+    expect(wrapper.find(".slick-dots").children().length).toEqual(6);
+    expect(console.warn).toBeCalledWith(
+      "slidesToScroll value must be at least 1."
+    );
   });
   it("should have 1 active dot", function() {
     const wrapper = mount(<SimpleSlider />);
