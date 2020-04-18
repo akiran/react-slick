@@ -328,6 +328,7 @@ export const swipeMove = (e, spec) => {
     currentSlide,
     edgeFriction,
     edgeDragged,
+    disableEdgeSwiping,
     onEdge,
     swiped,
     swiping,
@@ -371,7 +372,7 @@ export const swipeMove = (e, spec) => {
       (currentSlide + 1 >= dotCount && swipeDirection === "left") ||
       (!canGoNext(spec) && swipeDirection === "left")
     ) {
-      touchSwipeLength = touchObject.swipeLength * edgeFriction;
+      touchSwipeLength = !disableEdgeSwiping ? touchObject.swipeLength * edgeFriction : 0;
       if (edgeDragged === false && onEdge) {
         onEdge(swipeDirection);
         state["edgeDragged"] = true;
