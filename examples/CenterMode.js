@@ -7,7 +7,7 @@ export default class CenterMode extends Component {
       className: "center",
       centerMode: true,
       infinite: true,
-      centerPadding: "60px",
+      centerPadding: "-200px",
       slidesToShow: 3,
       speed: 500
     };
