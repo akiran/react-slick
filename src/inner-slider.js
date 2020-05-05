@@ -383,20 +383,50 @@ export class InnerSlider extends React.Component {
       value => this.state.lazyLoadedList.indexOf(value) < 0
     );
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
-    this.setState(state, () => {
-      asNavFor && asNavFor.innerSlider.slideHandler(index);
-      if (!nextState) return;
-      this.animationEndCallback = setTimeout(() => {
-        const { animating, ...firstBatch } = nextState;
-        this.setState(firstBatch, () => {
-          this.callbackTimers.push(
-            setTimeout(() => this.setState({ animating }), 10)
-          );
-          afterChange && afterChange(state.currentSlide);
-          delete this.animationEndCallback;
-        });
-      }, speed);
-    });
+
+    // Factorize this peace of code to be able to use it as a callback when needed.
+    const setStates = () => {
+      this.setState(state, () => {
+        asNavFor && asNavFor.innerSlider.slideHandler(index);
+        if (!nextState) return;
+        this.animationEndCallback = setTimeout(() => {
+          const { animating, ...firstBatch } = nextState;
+          this.setState(firstBatch, () => {
+            this.callbackTimers.push(
+              setTimeout(() => this.setState({ animating }), 10)
+            );
+            afterChange && afterChange(state.currentSlide);
+            delete this.animationEndCallback;
+          });
+        }, speed);
+      });
+    };
+
+    // If an animation is already running.
+    if (this.animationEndCallback) {
+      // Cancel current animation callback.
+      clearTimeout(this.animationEndCallback);
+      // Compute current transformation value.
+      const currentTransform = getComputedStyle(this.list.firstChild).transform;
+      // Build a state to apply it as a style.
+      const currentTransformState = {
+        ...state,
+        ...{
+          trackStyle: {
+            ...state.trackStyle,
+            ...{
+              transform: currentTransform,
+              WebkitTransform: currentTransform
+              // todo: mstranform
+            }
+          }
+        }
+      };
+      // Set this state before the other ones (this is needed to avoid animation "jumps").
+      this.setState(currentTransformState, setStates);
+    } else {
+      setStates();
+    }
   };
   changeSlide = (options, dontAnimate = false) => {
     const spec = { ...this.props, ...this.state };
@@ -705,7 +735,7 @@ export class InnerSlider extends React.Component {
     let innerSliderProps = {
       className: className,
       dir: "ltr",
-      style:this.props.style
+      style: this.props.style
     };
 
     if (this.props.unslick) {
