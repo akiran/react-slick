@@ -122,6 +122,7 @@ export class InnerSlider extends React.Component {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
     }
+    this.ro.disconnect();
   };
   UNSAFE_componentWillReceiveProps = nextProps => {
     let spec = {
