@@ -291,7 +291,7 @@ export class InnerSlider extends React.Component {
     });
   };
   checkImagesLoad = () => {
-    let images = document.querySelectorAll(".slick-slide img");
+    let images = this.list.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
     Array.prototype.forEach.call(images, image => {
