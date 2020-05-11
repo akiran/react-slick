@@ -647,6 +647,7 @@ export class InnerSlider extends React.Component {
 
     var prevArrow, nextArrow;
     let arrowProps = extractObject(spec, [
+      "rtl",
       "infinite",
       "centerMode",
       "currentSlide",

@@ -5,15 +5,16 @@ export default class Rtl extends Component {
   render() {
     const settings = {
       dots: true,
-      infinite: false,
+      infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      autoplay: false,
+      autoplay: true,
+      autoplaySpeed: 2000,
       rtl: true
     };
     return (
       <div>
-        <h2>Right to Left (finite)</h2>
+        <h2>Right to Left (infinite)</h2>
         <Slider {...settings}>
           <div>
             <h3>1</h3>
