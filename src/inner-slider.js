@@ -464,6 +464,7 @@ export class InnerSlider extends React.Component {
       slideIndex: this.state.currentSlide
     });
     if (!state) return;
+    // Check how many slides I have to move
     let triggerSlideHandler = state["triggerSlideHandler"];
     delete state["triggerSlideHandler"];
     this.setState(state);
