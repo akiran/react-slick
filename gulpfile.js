@@ -59,6 +59,11 @@ gulp.task(
   gulp.series(["watch", "copy", "sass"], function() {
     console.log("Start");
     var myConfig = require("./webpack.config");
+    if (process.env.SINGLE_DEMO) {
+      myConfig.entry = {
+        "docs.js": "./docs/single-demo.js"
+      };
+    }
     myConfig.plugins = myConfig.plugins.concat(
       new webpack.DefinePlugin({
         "process.env": {
