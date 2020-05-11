@@ -48,7 +48,7 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   xDist = touchObject.startX - touchObject.curX;
   yDist = touchObject.startY - touchObject.curY;
   r = Math.atan2(yDist, xDist);
-  swipeAngle = Math.round(r * 180 / Math.PI);
+  swipeAngle = Math.round((r * 180) / Math.PI);
   if (swipeAngle < 0) {
     swipeAngle = 360 - Math.abs(swipeAngle);
   }
@@ -195,7 +195,7 @@ export const slideHandler = spec => {
       finalSlide = animationSlide + slideCount;
       if (!infinite) finalSlide = 0;
       else if (slideCount % slidesToScroll !== 0)
-        finalSlide = slideCount - slideCount % slidesToScroll;
+        finalSlide = slideCount - (slideCount % slidesToScroll);
     } else if (!canGoNext(spec) && animationSlide > currentSlide) {
       animationSlide = finalSlide = currentSlide;
     } else if (centerMode && animationSlide >= slideCount) {
@@ -265,7 +265,8 @@ export const changeSlide = (spec, options) => {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
     targetSlide = currentSlide + slideOffset;
     if (lazyLoad && !infinite) {
-      targetSlide = (currentSlide + slidesToScroll) % slideCount + indexOffset;
+      targetSlide =
+        ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     }
   } else if (options.message === "dots") {
     // Click on dots
@@ -345,8 +346,12 @@ export const swipeMove = (e, spec) => {
   let swipeLeft,
     state = {};
   let curLeft = getTrackLeft(spec);
-  touchObject.curX = e.touches ? e.touches[0].pageX : e.clientX;
-  touchObject.curY = e.touches ? e.touches[0].pageY : e.clientY;
+  /**
+   * See here for details on this API: https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches
+   */
+  const touchList = e.touches;
+  touchObject.curX = touchList ? touchList[0].pageX : e.clientX;
+  touchObject.curY = touchList ? touchList[0].pageY : e.clientY;
   touchObject.swipeLength = Math.round(
     Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2))
   );
@@ -407,7 +412,13 @@ export const swipeMove = (e, spec) => {
   ) {
     return state;
   }
-  if (touchObject.swipeLength > 10) {
+  /**
+   * If we don't have a touch list this means we are on a device that doesn't have a touch event (i.e., desktop).
+   * Since for these devices this function tends to fire much sooner we will make the threshold much smaller.
+   * If we don't make the threshold smaller swiping state may not get set correctly on a non-touch device.
+   */
+  const swipeThreshold = touchList ? 11 : 1;
+  if (touchObject.swipeLength >= swipeThreshold) {
     state["swiping"] = true;
     e.preventDefault();
   }
@@ -704,7 +715,7 @@ export const getTrackLeft = spec => {
       slideCount % slidesToScroll !== 0 &&
       slideIndex + slidesToScroll > slideCount
     ) {
-      slidesToOffset = slidesToShow - slideCount % slidesToScroll;
+      slidesToOffset = slidesToShow - (slideCount % slidesToScroll);
     }
     if (centerMode) {
       slidesToOffset = parseInt(slidesToShow / 2);

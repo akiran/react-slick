@@ -409,13 +409,14 @@ export class InnerSlider extends React.Component {
       this.slideHandler(targetSlide);
     }
   };
-  clickHandler = e => {
+  stopPropagationIfNotClickable = e => {
     if (this.clickable === false) {
       e.stopPropagation();
       e.preventDefault();
     }
     this.clickable = true;
   };
+  clickHandler = this.stopPropagationIfNotClickable;
   keyHandler = e => {
     let dir = keyHandler(e, this.props.accessibility, this.props.rtl);
     dir !== "" && this.changeSlide({ message: dir });
@@ -435,6 +436,11 @@ export class InnerSlider extends React.Component {
     window.ontouchmove = null;
   };
   swipeStart = e => {
+    /**
+     * Make sure we keep track if clickable property on each swipe.
+     * If we don't do this we end up with this bug: https://github.com/akiran/react-slick/issues/1783
+     */
+    this.stopPropagationIfNotClickable(e);
     if (this.props.verticalSwiping) {
       this.disableBodyScroll();
     }
