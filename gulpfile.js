@@ -78,11 +78,11 @@ gulp.task(
       stats: {
         colors: true
       }
-    }).listen(DEV_PORT, "localhost", function(err, result) {
+    }).listen(DEV_PORT, "0.0.0.0", function(err, result) {
       if (err) {
         console.log(err);
       } else {
-        const server_url = `http://localhost:${DEV_PORT}`;
+        const server_url = `http://0.0.0.0:${DEV_PORT}`;
         console.log(`> Dev Server started at ${server_url}`);
         opn(server_url);
       }
