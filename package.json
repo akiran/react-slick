@@ -1,6 +1,6 @@
 {
-  "name": "@ant-design/react-slick",
-  "version": "0.25.6",
+  "name": "react-slick",
+  "version": "0.26.1",
   "description": " React port of slick carousel",
   "main": "./lib",
   "types": "./types.d.ts",
@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "start": "gulp server",
+    "demo": "SINGLE_DEMO=true gulp server",
     "build": "gulp clean && gulp sass && gulp copy && webpack",
     "prepublish": "babel ./src --out-dir ./lib && gulp dist",
     "test": "npm run lint && jest",
@@ -122,8 +123,16 @@
   "bugs": {
     "url": "https://github.com/ant-design/react-slick/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/ant-design/react-slick",
   "publishConfig": {
     "access": "public"
+=======
+  "homepage": "https://react-slick.neostack.com",
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/react-slick",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
+>>>>>>> 7a30f6940d41fe0237c7d8e81a0698d7c71912f9
   }
 }
