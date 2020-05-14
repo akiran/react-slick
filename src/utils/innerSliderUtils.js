@@ -126,10 +126,7 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides(
-    { currentSlide, lazyLoadedList },
-    spec
-  );
+  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {
