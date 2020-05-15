@@ -565,7 +565,14 @@ export const getTrackCSS = spec => {
   let trackWidth, trackHeight;
   const trackChildren = spec.slideCount + 2 * spec.slidesToShow;
   if (!spec.vertical) {
-    trackWidth = getTotalSlides(spec) * spec.slideWidth;
+    if (spec.variableWidth) {
+      trackWidth = 0;
+      spec.children.forEach(function(child) {
+        trackWidth += child.props.style.width;
+      });
+    } else {
+      trackWidth = getTotalSlides(spec) * spec.slideWidth;
+    }
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
@@ -723,6 +730,25 @@ export const getTrackLeft = spec => {
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    if (!infinite) {
+      let widthUntilListRightEnd = 0;
+      for (
+        let slide = targetSlideIndex;
+        slide < trackElem.childNodes.length;
+        slide++
+      ) {
+        widthUntilListRightEnd +=
+          trackElem &&
+          trackElem.children[slide] &&
+          trackElem.children[slide].offsetWidth;
+      }
+      if (widthUntilListRightEnd < listWidth) {
+        targetLeft += listWidth - widthUntilListRightEnd;
+        if (targetLeft >= 0) {
+          targetLeft = 0;
+        }
+      }
+    }
     if (centerMode === true) {
       targetSlideIndex = infinite
         ? slideIndex + getPreClones(spec)

@@ -10,6 +10,7 @@ import {
   extractObject,
   initializedState,
   getHeight,
+  getWidth,
   canGoNext,
   slideHandler,
   changeSlide,
@@ -36,7 +37,8 @@ export class InnerSlider extends React.Component {
     this.state = {
       ...initialState,
       currentSlide: this.props.initialSlide,
-      slideCount: React.Children.count(this.props.children)
+      slideCount: React.Children.count(this.props.children),
+      slidesToShow: this.props.slidesToShow
     };
     this.callbackTimers = [];
     this.clickable = true;
@@ -191,8 +193,35 @@ export class InnerSlider extends React.Component {
     this.debouncedResize = debounce(() => this.resizeWindow(setTrackStyle), 50);
     this.debouncedResize();
   };
+  calcRealSlideShowed = () => {
+    var realSlideShowed = 0;
+    if (!this.props.infinite && this.props.variableWidth) {
+      let widthUntilListRightEnd = 0;
+      var trackElem = ReactDOM.findDOMNode(this.track);
+      var listWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(this.list)));
+      for (
+        let slide = this.state.currentSlide;
+        slide < trackElem.childNodes.length;
+        slide++
+      ) {
+        widthUntilListRightEnd +=
+          trackElem &&
+          trackElem.children[slide] &&
+          trackElem.children[slide].offsetWidth;
+
+        if (widthUntilListRightEnd >= listWidth) {
+          realSlideShowed = slide - 2;
+          break;
+        }
+      }
+    }
+    this.setState({
+      slidesToShow: realSlideShowed || this.props.slidesToShow
+    });
+  };
   resizeWindow = (setTrackStyle = true) => {
     if (!ReactDOM.findDOMNode(this.track)) return;
+    this.calcRealSlideShowed();
     let spec = {
       listRef: this.list,
       trackRef: this.track,
