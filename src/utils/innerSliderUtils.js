@@ -13,17 +13,6 @@ export const getOnDemandLazySlides = spec => {
   return onDemandSlides;
 };
 
-// return list of slides that need to be present
-export const getRequiredLazySlides = spec => {
-  let requiredSlides = [];
-  let startIndex = lazyStartIndex(spec);
-  let endIndex = lazyEndIndex(spec);
-  for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
-    requiredSlides.push(slideIndex);
-  }
-  return requiredSlides;
-};
-
 // startIndex that needs to be present
 export const lazyStartIndex = spec =>
   spec.currentSlide - lazySlidesOnLeft(spec);
@@ -126,7 +115,11 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
+  let slidesToLoad = getOnDemandLazySlides({
+    ...spec,
+    currentSlide,
+    lazyLoadedList
+  });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {

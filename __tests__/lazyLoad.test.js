@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
 import assign from "object-assign";
-import { getRequiredLazySlides } from "../src/utils/innerSliderUtils";
+import { getRequiredLazySlides } from "./testUtils";
 import {
   createInnerSliderWrapper,
   clickNext,

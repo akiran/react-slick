@@ -6,7 +6,11 @@ import Slider from "../src/slider";
 import { InnerSlider } from "../src/inner-slider";
 import defaultProps from "../src/default-props";
 import * as slickCarousel from "slick-carousel"; // defining slick in global environment
-import { getTrackLeft } from "../src/utils/innerSliderUtils";
+import {
+  getTrackLeft,
+  lazyEndIndex,
+  lazyStartIndex
+} from "../src/utils/innerSliderUtils";
 
 // finds active slide number in the last transition in the forward direction
 export function activeSlideInLastTransition(
@@ -168,4 +172,15 @@ export const testTrackLeft = wrapper => {
   });
   let expectedTrackLeft = getTrackLeft(spec);
   expect(trackLeft).toEqual(parseInt(expectedTrackLeft));
+};
+
+// return list of slides that need to be present
+export const getRequiredLazySlides = spec => {
+  let requiredSlides = [];
+  let startIndex = lazyStartIndex(spec);
+  let endIndex = lazyEndIndex(spec);
+  for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
+    requiredSlides.push(slideIndex);
+  }
+  return requiredSlides;
 };
