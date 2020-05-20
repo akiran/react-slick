@@ -126,7 +126,11 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
+  let slidesToLoad = getOnDemandLazySlides({
+    ...spec,
+    currentSlide,
+    lazyLoadedList
+  });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {
@@ -335,7 +339,8 @@ export const swipeMove = (e, spec) => {
     touchObject,
     swipeEvent,
     listHeight,
-    listWidth
+    listWidth,
+    minSwipeLength = 10
   } = spec;
   if (scrolling) return;
   if (animating) return e.preventDefault();
@@ -405,7 +410,7 @@ export const swipeMove = (e, spec) => {
   ) {
     return state;
   }
-  if (touchObject.swipeLength > 10) {
+  if (touchObject.swipeLength > minSwipeLength) {
     state["swiping"] = true;
     e.preventDefault();
   }
