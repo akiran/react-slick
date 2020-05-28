@@ -195,7 +195,7 @@ export default class Slider extends React.Component {
         <li
           key={i}
           role="tabpanel"
-          aria-label={`${settings.accessibilitySlideLabel}-${i + 1}`}
+          aria-label={this.props.accessibilitySlideLabel && `${this.props.accessibilitySlideLabel}-${i + 1}`}
           style={settings.variableWidth ? { width: currentWidth } : null}
         >
           {newSlide}

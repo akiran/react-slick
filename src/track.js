@@ -123,6 +123,7 @@ var renderSlides = function(spec) {
         "data-index": index,
         className: classnames(slideClasses, slideClass),
         tabIndex: "-1",
+        "aria-label": slideClasses["slick-active"] ? undefined : elem.props["aria-label"],
         "aria-hidden": !slideClasses["slick-active"],
         style: { outline: "none", ...(child.props.style || {}), ...childStyle },
         onClick: e => {
