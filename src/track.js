@@ -73,7 +73,7 @@ const getSlideStyle = spec => {
   return style;
 };
 
-const getKey = (child, fallbackKey) => child.key || fallbackKey;
+const getKey = (child, fallbackKey) => child.key + "-" + fallbackKey;
 
 const renderSlides = spec => {
   let key;
@@ -126,31 +126,33 @@ const renderSlides = spec => {
     // if slide needs to be precloned or postcloned
     if (spec.infinite && spec.fade === false) {
       let preCloneNo = childrenCount - index;
-      if (
-        preCloneNo <= getPreClones(spec) &&
-        childrenCount !== spec.slidesToShow
-      ) {
-        key = -preCloneNo;
-        if (key >= startIndex) {
-          child = elem;
-        }
-        slideClasses = getSlideClasses({ ...spec, index: key });
-        preCloneSlides.push(
-          React.cloneElement(child, {
-            key: "precloned" + getKey(child, key),
-            "data-index": key,
-            tabIndex: "-1",
-            className: classnames(slideClasses, slideClass),
-            "aria-hidden": !slideClasses["slick-active"],
-            style: { ...(child.props.style || {}), ...childStyle },
-            onClick: e => {
-              child.props && child.props.onClick && child.props.onClick(e);
-              if (spec.focusOnSelect) {
-                spec.focusOnSelect(childOnClickOptions);
+      if (childrenCount !== spec.slidesToShow) {
+        if (
+          (preCloneNo <= getPreClones(spec) && !spec.rtl) ||
+          (index < getPreClones(spec) && spec.rtl)
+        ) {
+          key = -preCloneNo;
+          if (key >= startIndex) {
+            child = elem;
+          }
+          slideClasses = getSlideClasses({ ...spec, index: key });
+          preCloneSlides.push(
+            React.cloneElement(child, {
+              key: "precloned" + getKey(child, key),
+              "data-index": key,
+              tabIndex: "-1",
+              className: classnames(slideClasses, slideClass),
+              "aria-hidden": !slideClasses["slick-active"],
+              style: { ...(child.props.style || {}), ...childStyle },
+              onClick: e => {
+                child.props && child.props.onClick && child.props.onClick(e);
+                if (spec.focusOnSelect) {
+                  spec.focusOnSelect(childOnClickOptions);
+                }
               }
-            }
-          })
-        );
+            })
+          );
+        }
       }
 
       if (childrenCount !== spec.slidesToShow) {
@@ -180,7 +182,7 @@ const renderSlides = spec => {
   });
 
   if (spec.rtl) {
-    return preCloneSlides.concat(slides, postCloneSlides).reverse();
+    return preCloneSlides.concat(slides.reverse(), postCloneSlides.reverse());
   } else {
     return preCloneSlides.concat(slides, postCloneSlides);
   }
