@@ -584,7 +584,11 @@ export class InnerSlider extends React.Component {
       "slick-vertical": this.props.vertical,
       "slick-initialized": true
     });
-    let spec = { ...this.props, ...this.state };
+    let spec = {
+      ...this.props,
+      ...this.state,
+      trackStyle: { ...this.props.trackStyle, ...this.state.trackStyle }
+    };
     let trackProps = extractObject(spec, [
       "fade",
       "cssEase",
