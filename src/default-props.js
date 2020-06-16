@@ -7,6 +7,7 @@ let defaultProps = {
   appendDots: dots => <ul style={{ display: "block" }}>{dots}</ul>,
   arrows: true,
   autoplay: false,
+  onHover: () => {},
   autoplaySpeed: 3000,
   beforeChange: null,
   centerMode: false,

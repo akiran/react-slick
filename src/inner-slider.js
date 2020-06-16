@@ -568,7 +568,10 @@ export class InnerSlider extends React.Component {
     this.props.autoplay &&
     this.state.autoplaying === "hovered" &&
     this.autoPlay("leave");
-  onTrackOver = () => this.props.autoplay && this.pause("hovered");
+  onTrackOver = () => {
+    this.props.autoplay && this.pause("hovered");
+    this.props.onHover();
+  }
   onTrackLeave = () =>
     this.props.autoplay &&
     this.state.autoplaying === "hovered" &&
