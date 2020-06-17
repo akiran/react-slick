@@ -159,15 +159,14 @@ export class InnerSlider extends React.Component {
         });
       }
       if (
-        autoplay === nextProps.autoplay &&
-        autoplaySpeed === nextProps.autoplaySpeed
+        autoplay !== nextProps.autoplay ||
+        autoplaySpeed !== nextProps.autoplaySpeed
       ) {
-        return;
-      }
-      if (nextProps.autoplay) {
-        this.autoPlay("update");
-      } else {
-        this.pause("paused");
+        if (nextProps.autoplay) {
+          this.autoPlay("update");
+        } else {
+          this.pause("paused");
+        }
       }
     });
   };
