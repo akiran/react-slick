@@ -1,5 +1,5 @@
 {
-  "name": "react-slick",
+  "name": "@rtgdev/react-slick",
   "version": "0.26.4",
   "description": " React port of slick carousel",
   "main": "./lib",
@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/RoomstoGoDigital/react-slick"
   },
   "keywords": [
     "slick",
