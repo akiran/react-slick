@@ -1,0 +1,10 @@
+.slick-dots li.slick-active button:focus:before,
+.slick-dots li button:hover:before
+{
+    opacity: 1;
+}
+
+.slick-dots li button:focus:before
+{
+    opacity: 0.25;
+}

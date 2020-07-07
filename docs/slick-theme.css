@@ -170,11 +170,6 @@
 {
     outline: none;
 }
-.slick-dots li button:hover:before,
-.slick-dots li button:focus:before
-{
-    opacity: 1;
-}
 .slick-dots li button:before
 {
     font-family: 'slick';

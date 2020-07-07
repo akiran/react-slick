@@ -23,6 +23,10 @@ module.exports = {
       {
         test: /\.md$/,
         loader: "html!markdown"
+      },
+      {
+        test: /\.css$/,
+        use: "css-loader"
       }
     ]
   },
