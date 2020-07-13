@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/react-slick",
-  "version": "0.26.2",
+  "version": "0.26.3",
   "description": " React port of slick carousel",
   "main": "./lib",
   "types": "./types.d.ts",
@@ -38,6 +38,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
@@ -87,6 +88,7 @@
     "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.10.4",
     "classnames": "^2.2.5",
     "json2mq": "^0.2.0",
     "lodash": "^4.17.15",
