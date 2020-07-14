@@ -45,7 +45,7 @@
     "autoprefixer": "^7.1.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
-    "babel-jest": "^24.8.0",
+    "babel-jest": "^26.1.0",
     "babel-loader": "^8.0.4",
     "babel-preset-airbnb": "^5.0.0",
     "css-loader": "^3.6.0",
