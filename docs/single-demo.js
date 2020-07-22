@@ -48,4 +48,9 @@ function App() {
 }
 
 React.initializeTouchEvents && React.initializeTouchEvents(true);
-ReactDOM.render(<App />, document.getElementById("rapp"));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("rapp")
+);

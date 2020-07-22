@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -99,8 +98,10 @@ export const extractObject = (spec, keys) => {
 export const initializedState = spec => {
   // spec also contains listRef, trackRef
   let slideCount = React.Children.count(spec.children);
-  let listWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.listRef)));
-  let trackWidth = Math.ceil(getWidth(ReactDOM.findDOMNode(spec.trackRef)));
+  const listNode = spec.listRef;
+  let listWidth = Math.ceil(getWidth(listNode));
+  const trackNode = spec.trackRef && spec.trackRef.node;
+  let trackWidth = Math.ceil(getWidth(trackNode));
   let slideWidth;
   if (!spec.vertical) {
     let centerPaddingAdj = spec.centerMode && parseInt(spec.centerPadding) * 2;
@@ -115,10 +116,7 @@ export const initializedState = spec => {
     slideWidth = listWidth;
   }
   let slideHeight =
-    ReactDOM.findDOMNode(spec.listRef) &&
-    getHeight(
-      ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
-    );
+    listNode && getHeight(listNode.querySelector('[data-index="0"]'));
   let listHeight = slideHeight * spec.slidesToShow;
   let currentSlide =
     spec.currentSlide === undefined ? spec.initialSlide : spec.currentSlide;
@@ -126,7 +124,11 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
+  let slidesToLoad = getOnDemandLazySlides({
+    ...spec,
+    currentSlide,
+    lazyLoadedList
+  });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {
@@ -513,7 +515,7 @@ export const getSlideCount = spec => {
     : 0;
   if (spec.swipeToSlide) {
     let swipedSlide;
-    const slickList = ReactDOM.findDOMNode(spec.listRef);
+    const slickList = spec.listRef;
     const slides = slickList.querySelectorAll(".slick-slide");
     Array.from(slides).every(slide => {
       if (!spec.vertical) {
@@ -719,7 +721,7 @@ export const getTrackLeft = spec => {
 
   if (variableWidth === true) {
     var targetSlideIndex;
-    let trackElem = ReactDOM.findDOMNode(trackRef);
+    const trackElem = trackRef && trackRef.node;
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
