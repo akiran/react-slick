@@ -33,6 +33,10 @@ const getSlideClasses = spec => {
       spec.currentSlide <= index &&
       index < spec.currentSlide + spec.slidesToShow;
   }
+  let inferiorlimit = spec.slideCount - spec.slidesToShow
+  if (index >= inferiorlimit && index < spec.currentSlide + spec.slidesToShow) {
+    slickActive = true;
+  }
   let slickCurrent = index === spec.currentSlide;
   return {
     "slick-slide": true,
