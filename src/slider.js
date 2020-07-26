@@ -25,7 +25,7 @@ export default class Slider extends React.Component {
   }
 
   // handles responsive breakpoints
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
