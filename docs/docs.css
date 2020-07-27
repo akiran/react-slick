@@ -1,5 +1,6 @@
+
 h3 {
-  background: $primary-color;
+  background: #00558B;
   color: #fff;
   font-size: 36px;
   line-height: 100px;
@@ -9,7 +10,7 @@ h3 {
   text-align: center;
 }
 .variable-width .slick-slide p {
-  background: $primary-color;
+  background: #00558B;
   height: 100px;
   color: #fff;
   margin: 5px;
@@ -28,7 +29,16 @@ h3 {
 .content {
   padding: 20px;
   margin: auto;
-  width: 90%;
+}
+@media (min-width: 701px) {
+  .content {
+    width: 80%;
+  }
+}
+@media (max-width: 700px) {
+  .content {
+    width: 70%;
+  }
 }
 .slick-slide .image {
   padding: 10px;
@@ -37,6 +47,7 @@ h3 {
   border: 5px solid #FFF;
   display: block;
   margin: auto;
+  max-width: 80%;
 }
 .slick-slide img.slick-loading {
   border: 0
@@ -49,18 +60,18 @@ h3 {
 }
 .slick-thumb {
   bottom: -45px;
-  li {
-    width: 60px;
-    height: 45px;
-    img {
-      filter: grayscale(100%);
-    }
-    &.slick-active {
-      img {
-        filter: grayscale(0%);        
-      }
-    }
-  }
+}
+.slick-thumb li {
+  width: 60px;
+  height: 45px;
+}
+.slick-thumb li img {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(100%);
+}
+.slick-thumb li.slick-active img{
+    filter: grayscale(0%);
 }
 @media (max-width: 768px) {
   h3 {
@@ -81,11 +92,25 @@ h3 {
     transition: all 300ms ease;
   }
 }
-// just like in the regular library, we cannot simply have a vertical
-// slider fill available space like in the horizontal case
-//
-// we have to therefore set the height of a slide in a vertical slider
-// explicitly in CSS or otherwise
 .slick-vertical .slick-slide {
   height: 180px;
+}
+.slick-arrow {
+  background-color: grey;
+}
+.slick-arrow:hover {
+  background-color: grey;
+}
+.slick-arrow:focus {
+  background-color: grey;
+}
+.button {
+  background-color: #00558B;
+  padding: 10px 20px;
+  margin: 0px 20px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  min-height: 45px
 }

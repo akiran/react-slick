@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CenterMode Tests Activity test 1`] = `
+"<div>
+    <h2>Center Mode</h2>
+    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
+            <div class=\\"slick-track\\" style=\\"width: -640px; opacity: 1; transform: translate3d(160px, 0px, 0px); transition: transform 500ms ease;\\">
+                <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"0\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" class=\\"slick-slide slick-active slick-center slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-center slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;
+
+exports[`CenterMode Tests Counting test 1`] = `
+"<div>
+    <h2>Center Mode</h2>
+    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
+            <div class=\\"slick-track\\" style=\\"width: -640px; opacity: 1; transform: translate3d(120px, 0px, 0px);\\">
+                <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-active slick-cloned\\" aria-hidden=\\"false\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-center slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-center slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;
+
+exports[`CenterMode Tests Positioning test 1`] = `
+"<div>
+    <h2>Center Mode</h2>
+    <div class=\\"slick-slider center slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\" style=\\"padding: 0px 60px;\\">
+            <div class=\\"slick-track\\" style=\\"width: -640px; opacity: 1; transform: translate3d(120px, 0px, 0px);\\">
+                <div data-index=\\"-4\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-2\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"-1\\" tabindex=\\"-1\\" class=\\"slick-slide slick-active slick-cloned\\" aria-hidden=\\"false\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"0\\" class=\\"slick-slide slick-active slick-center slick-current\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" class=\\"slick-slide slick-active\\" tabindex=\\"-1\\" aria-hidden=\\"false\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"4\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"5\\" class=\\"slick-slide\\" tabindex=\\"-1\\" aria-hidden=\\"true\\" style=\\"outline: none; width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"6\\" tabindex=\\"-1\\" class=\\"slick-slide slick-center slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"7\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"8\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"9\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"10\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"11\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: -40px;\\">
+                    <div>
+                        <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;

@@ -1,78 +1,101 @@
-'use strict';
+"use strict";
 
-import React from 'react';
-import classnames from 'classnames';
-import Helpers from './mixins/helpers';
+import React from "react";
+import classnames from "classnames";
+import { canGoNext } from "./utils/innerSliderUtils";
 
-export class PrevArrow extends React.Component {
+export class PrevArrow extends React.PureComponent {
   clickHandler(options, e) {
-    if (e) { e.preventDefault(); }
+    if (e) {
+      e.preventDefault();
+    }
     this.props.clickHandler(options, e);
   }
   render() {
-    var prevClasses = {'slick-arrow': true, 'slick-prev': true};
-    var prevHandler = this.clickHandler.bind(this, {message: 'previous'});
+    let prevClasses = { "slick-arrow": true, "slick-prev": true };
+    let prevHandler = this.clickHandler.bind(this, { message: "previous" });
 
-    if (!this.props.infinite && (this.props.currentSlide === 0 || this.props.slideCount <= this.props.slidesToShow)) {
-      prevClasses['slick-disabled'] = true;
+    if (
+      !this.props.infinite &&
+      (this.props.currentSlide === 0 ||
+        this.props.slideCount <= this.props.slidesToShow)
+    ) {
+      prevClasses["slick-disabled"] = true;
       prevHandler = null;
     }
 
-    var prevArrowProps = {
-      key: '0',
-      'data-role': 'none',
+    let prevArrowProps = {
+      key: "0",
+      "data-role": "none",
       className: classnames(prevClasses),
-      style: {display: 'block'},
+      style: { display: "block" },
       onClick: prevHandler
     };
-    var customProps = {
+    let customProps = {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
-    var prevArrow;
+    let prevArrow;
 
     if (this.props.prevArrow) {
-      prevArrow = React.cloneElement(this.props.prevArrow, { ...prevArrowProps, ...customProps });
+      prevArrow = React.cloneElement(this.props.prevArrow, {
+        ...prevArrowProps,
+        ...customProps
+      });
     } else {
-      prevArrow = <button key='0' type='button' {...prevArrowProps}> Previous</button>;
+      prevArrow = (
+        <button key="0" type="button" {...prevArrowProps}>
+          {" "}
+          Previous
+        </button>
+      );
     }
 
     return prevArrow;
   }
 }
 
-
-export class NextArrow extends React.Component {
+export class NextArrow extends React.PureComponent {
   clickHandler(options, e) {
-    if (e) { e.preventDefault(); }
+    if (e) {
+      e.preventDefault();
+    }
     this.props.clickHandler(options, e);
   }
   render() {
-    var nextClasses = {'slick-arrow': true, 'slick-next': true};
-    var nextHandler = this.clickHandler.bind(this, {message: 'next'});
+    let nextClasses = { "slick-arrow": true, "slick-next": true };
+    let nextHandler = this.clickHandler.bind(this, { message: "next" });
 
-    if (!Helpers.canGoNext(this.props)) {
-      nextClasses['slick-disabled'] = true;
+    if (!canGoNext(this.props)) {
+      nextClasses["slick-disabled"] = true;
       nextHandler = null;
     }
 
-    var nextArrowProps = {
-      key: '1',
-      'data-role': 'none',
+    let nextArrowProps = {
+      key: "1",
+      "data-role": "none",
       className: classnames(nextClasses),
-      style: {display: 'block'},
+      style: { display: "block" },
       onClick: nextHandler
     };
-    var customProps = {
+    let customProps = {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
-    var nextArrow;
+    let nextArrow;
 
     if (this.props.nextArrow) {
-      nextArrow = React.cloneElement(this.props.nextArrow, { ...nextArrowProps, ...customProps });
+      nextArrow = React.cloneElement(this.props.nextArrow, {
+        ...nextArrowProps,
+        ...customProps
+      });
     } else {
-      nextArrow = <button key='1' type='button' {...nextArrowProps}> Next</button>;
+      nextArrow = (
+        <button key="1" type="button" {...nextArrowProps}>
+          {" "}
+          Next
+        </button>
+      );
     }
 
     return nextArrow;
