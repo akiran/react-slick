@@ -116,10 +116,7 @@ export const initializedState = spec => {
     slideWidth = listWidth;
   }
   let slideHeight =
-    listNode &&
-    getHeight(
-      listNode.querySelector('[data-index="0"]')
-    );
+    listNode && getHeight(listNode.querySelector('[data-index="0"]'));
   let listHeight = slideHeight * spec.slidesToShow;
   let currentSlide =
     spec.currentSlide === undefined ? spec.initialSlide : spec.currentSlide;
@@ -127,7 +124,11 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
+  let slidesToLoad = getOnDemandLazySlides({
+    ...spec,
+    currentSlide,
+    lazyLoadedList
+  });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {
@@ -218,20 +219,23 @@ export const slideHandler = spec => {
       state = {
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        targetSlide: index
       };
     } else {
       state = {
         animating: true,
         currentSlide: finalSlide,
         trackStyle: getTrackAnimateCSS({ ...spec, left: animationLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        targetSlide: index
       };
       nextState = {
         animating: false,
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
-        swipeLeft: null
+        swipeLeft: null,
+        targetSlide: index
       };
     }
   }
