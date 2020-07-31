@@ -1,6 +1,6 @@
 {
   "name": "react-slick",
-  "version": "0.27.1",
+  "version": "0.27.2-beta-0",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
