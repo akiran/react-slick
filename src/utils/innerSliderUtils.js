@@ -273,15 +273,9 @@ export const changeSlide = (spec, options) => {
   } else if (options.message === "dots") {
     // Click on dots
     targetSlide = options.index * options.slidesToScroll;
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
   } else if (options.message === "children") {
     // Click on the slides
     targetSlide = options.index;
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
     if (infinite) {
       let direction = siblingDirection({ ...spec, targetSlide });
       if (targetSlide > options.currentSlide && direction === "left") {
@@ -292,9 +286,6 @@ export const changeSlide = (spec, options) => {
     }
   } else if (options.message === "index") {
     targetSlide = Number(options.index);
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
   }
   return targetSlide;
 };
