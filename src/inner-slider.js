@@ -605,7 +605,8 @@ export class InnerSlider extends React.Component {
       "trackStyle",
       "variableWidth",
       "unslick",
-      "centerPadding"
+      "centerPadding",
+      "targetSlide"
     ]);
     const { pauseOnHover } = this.props;
     trackProps = {

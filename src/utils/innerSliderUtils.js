@@ -116,10 +116,7 @@ export const initializedState = spec => {
     slideWidth = listWidth;
   }
   let slideHeight =
-    listNode &&
-    getHeight(
-      listNode.querySelector('[data-index="0"]')
-    );
+    listNode && getHeight(listNode.querySelector('[data-index="0"]'));
   let listHeight = slideHeight * spec.slidesToShow;
   let currentSlide =
     spec.currentSlide === undefined ? spec.initialSlide : spec.currentSlide;
@@ -127,7 +124,11 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
+  let slidesToLoad = getOnDemandLazySlides({
+    ...spec,
+    currentSlide,
+    lazyLoadedList
+  });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {
@@ -218,20 +219,23 @@ export const slideHandler = spec => {
       state = {
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        targetSlide: index
       };
     } else {
       state = {
         animating: true,
         currentSlide: finalSlide,
         trackStyle: getTrackAnimateCSS({ ...spec, left: animationLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        targetSlide: index
       };
       nextState = {
         animating: false,
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
-        swipeLeft: null
+        swipeLeft: null,
+        targetSlide: index
       };
     }
   }
@@ -269,15 +273,9 @@ export const changeSlide = (spec, options) => {
   } else if (options.message === "dots") {
     // Click on dots
     targetSlide = options.index * options.slidesToScroll;
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
   } else if (options.message === "children") {
     // Click on the slides
     targetSlide = options.index;
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
     if (infinite) {
       let direction = siblingDirection({ ...spec, targetSlide });
       if (targetSlide > options.currentSlide && direction === "left") {
@@ -288,9 +286,6 @@ export const changeSlide = (spec, options) => {
     }
   } else if (options.message === "index") {
     targetSlide = Number(options.index);
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
   }
   return targetSlide;
 };

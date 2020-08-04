@@ -33,7 +33,16 @@ const getSlideClasses = spec => {
       spec.currentSlide <= index &&
       index < spec.currentSlide + spec.slidesToShow;
   }
-  let slickCurrent = index === spec.currentSlide;
+
+  let focusedSlide;
+  if (spec.targetSlide < 0) {
+    focusedSlide = spec.targetSlide + spec.slideCount;
+  } else if (spec.targetSlide >= spec.slideCount) {
+    focusedSlide = spec.targetSlide - spec.slideCount;
+  } else {
+    focusedSlide = spec.targetSlide;
+  }
+  let slickCurrent = index === focusedSlide;
   return {
     "slick-slide": true,
     "slick-active": slickActive,
@@ -189,7 +198,9 @@ const renderSlides = spec => {
 export class Track extends React.PureComponent {
   node = null;
 
-  handleRef = ref => { this.node = ref };
+  handleRef = ref => {
+    this.node = ref;
+  };
 
   render() {
     const slides = renderSlides(this.props);
