@@ -1,5 +1,9 @@
 import React from "react";
 
+export function clamp(number, lowerBound, upperBound) {
+  return Math.max(lowerBound, Math.min(number, upperBound));
+}
+
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
   let startIndex = lazyStartIndex(spec);
@@ -172,6 +176,7 @@ export const slideHandler = spec => {
     finalLeft;
   let state = {},
     nextState = {};
+  const targetSlide = infinite ? index : clamp(index, 0, slideCount);
   if (fade) {
     if (!infinite && (index < 0 || index >= slideCount)) return {};
     if (index < 0) {
@@ -220,7 +225,7 @@ export const slideHandler = spec => {
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
         lazyLoadedList,
-        targetSlide: index
+        targetSlide
       };
     } else {
       state = {
@@ -228,14 +233,14 @@ export const slideHandler = spec => {
         currentSlide: finalSlide,
         trackStyle: getTrackAnimateCSS({ ...spec, left: animationLeft }),
         lazyLoadedList,
-        targetSlide: index
+        targetSlide
       };
       nextState = {
         animating: false,
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
         swipeLeft: null,
-        targetSlide: index
+        targetSlide
       };
     }
   }
