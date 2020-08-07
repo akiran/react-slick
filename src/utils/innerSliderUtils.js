@@ -210,6 +210,11 @@ export const slideHandler = spec => {
       if (!infinite) finalSlide = slideCount - slidesToShow;
       else if (slideCount % slidesToScroll !== 0) finalSlide = 0;
     }
+
+    if (!infinite && animationSlide + slidesToShow >= slideCount) {
+      finalSlide = slideCount - slidesToShow;
+    }
+
     animationLeft = getTrackLeft({ ...spec, slideIndex: animationSlide });
     finalLeft = getTrackLeft({ ...spec, slideIndex: finalSlide });
     if (!infinite) {
