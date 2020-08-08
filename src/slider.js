@@ -19,7 +19,7 @@ export default class Slider extends React.Component {
   innerSliderRefHandler = ref => (this.innerSlider = ref);
 
   media(query, handler) {
-    // javascript handler for  css media query
+    // javascript handler for css media query
     enquire.register(query, handler);
     this._responsiveMediaHandlers.push({ query, handler });
   }
