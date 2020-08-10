@@ -989,7 +989,7 @@ exports[`Multiple Items should show slides first 3 slides when middle dot is cli
     <h2> Multiple items </h2>
     <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
         <div class=\\"slick-list\\">
-            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px); transition: transform 500ms ease;\\">
+            <div class=\\"slick-track\\" style=\\"opacity: 1; transform: translate3d(0px, 0px, 0px);\\">
                 <div data-index=\\"-3\\" tabindex=\\"-1\\" class=\\"slick-slide slick-cloned\\" aria-hidden=\\"true\\" style=\\"width: 0px;\\">
                     <div>
                         <div tabindex=\\"-1\\" style=\\"width: 100%; display: inline-block;\\">

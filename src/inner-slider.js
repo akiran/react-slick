@@ -383,6 +383,9 @@ export class InnerSlider extends React.Component {
       value => this.state.lazyLoadedList.indexOf(value) < 0
     );
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
+    if (!this.props.waitForAnimate && this.animationEndCallback) {
+      clearTimeout(this.animationEndCallback);
+    }
     this.setState(state, () => {
       asNavFor && asNavFor.innerSlider.slideHandler(index);
       if (!nextState) return;
@@ -401,6 +404,7 @@ export class InnerSlider extends React.Component {
   changeSlide = (options, dontAnimate = false) => {
     const spec = { ...this.props, ...this.state };
     let targetSlide = changeSlide(spec, options);
+    if (targetSlide === this.state.targetSlide) return;
     if (targetSlide !== 0 && !targetSlide) return;
     if (dontAnimate === true) {
       this.slideHandler(targetSlide, dontAnimate);
