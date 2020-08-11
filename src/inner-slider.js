@@ -624,7 +624,8 @@ export class InnerSlider extends React.Component {
     var dots;
     if (
       this.props.dots === true &&
-      this.state.slideCount >= this.props.slidesToShow
+      this.state.slideCount >= this.props.slidesToShow &&
+      this.props.slidesToScroll > 0 // Added to hide dots when slides to scroll is less than equal to 0
     ) {
       let dotProps = extractObject(spec, [
         "dotsClass",
