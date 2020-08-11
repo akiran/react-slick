@@ -387,7 +387,11 @@ export class InnerSlider extends React.Component {
       clearTimeout(this.animationEndCallback);
     }
     this.setState(state, () => {
-      asNavFor && asNavFor.innerSlider.slideHandler(index);
+      // asNavForIndex check is to avoid recursive calls of slideHandler in waitForAnimate=false mode
+      if (asNavFor && this.asNavForIndex !== index) {
+        this.asNavForIndex = index;
+        asNavFor.innerSlider.slideHandler(index);
+      }
       if (!nextState) return;
       this.animationEndCallback = setTimeout(() => {
         const { animating, ...firstBatch } = nextState;
