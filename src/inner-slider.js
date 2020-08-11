@@ -618,7 +618,8 @@ export class InnerSlider extends React.Component {
       onMouseEnter: pauseOnHover ? this.onTrackOver : null,
       onMouseLeave: pauseOnHover ? this.onTrackLeave : null,
       onMouseOver: pauseOnHover ? this.onTrackOver : null,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null
+      focusOnSelect:
+        this.props.focusOnSelect && this.clickable ? this.selectHandler : null
     };
 
     var dots;
