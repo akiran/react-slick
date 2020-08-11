@@ -70,6 +70,12 @@ export class InnerSlider extends React.Component {
       }
     }
     let spec = { listRef: this.list, trackRef: this.track, ...this.props };
+    this.list.addEventListener("mousemove", this.swipeMove, {
+      passive: false
+    });
+    this.list.addEventListener("touchmove", this.swipeMove, {
+      passive: false
+    });
     this.updateState(spec, true, () => {
       this.adaptHeight();
       this.props.autoplay && this.autoPlay("update");
@@ -102,6 +108,12 @@ export class InnerSlider extends React.Component {
     }
   };
   componentWillUnmount = () => {
+    this.list.removeEventListener("mousemove", this.swipeMove, {
+      passive: false
+    });
+    this.list.removeEventListener("touchmove", this.swipeMove, {
+      passive: false
+    });
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
     }
@@ -449,18 +461,21 @@ export class InnerSlider extends React.Component {
     state !== "" && this.setState(state);
   };
   swipeMove = e => {
-    let state = swipeMove(e, {
-      ...this.props,
-      ...this.state,
-      trackRef: this.track,
-      listRef: this.list,
-      slideIndex: this.state.currentSlide
-    });
-    if (!state) return;
-    if (state["swiping"]) {
-      this.clickable = false;
+    const touchMove = this.props.touchMove;
+    if (this.state.dragging && touchMove) {
+      let state = swipeMove(e, {
+        ...this.props,
+        ...this.state,
+        trackRef: this.track,
+        listRef: this.list,
+        slideIndex: this.state.currentSlide
+      });
+      if (!state) return;
+      if (state["swiping"]) {
+        this.clickable = false;
+      }
+      this.setState(state);
     }
-    this.setState(state);
   };
   swipeEnd = e => {
     let state = swipeEnd(e, {
@@ -703,11 +718,9 @@ export class InnerSlider extends React.Component {
       style: listStyle,
       onClick: this.clickHandler,
       onMouseDown: touchMove ? this.swipeStart : null,
-      onMouseMove: this.state.dragging && touchMove ? this.swipeMove : null,
       onMouseUp: touchMove ? this.swipeEnd : null,
       onMouseLeave: this.state.dragging && touchMove ? this.swipeEnd : null,
       onTouchStart: touchMove ? this.swipeStart : null,
-      onTouchMove: this.state.dragging && touchMove ? this.swipeMove : null,
       onTouchEnd: touchMove ? this.swipeEnd : null,
       onTouchCancel: this.state.dragging && touchMove ? this.swipeEnd : null,
       onKeyDown: this.props.accessibility ? this.keyHandler : null
