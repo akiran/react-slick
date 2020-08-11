@@ -429,7 +429,9 @@ export const swipeEnd = (e, spec) => {
     swipeToSlide,
     scrolling,
     onSwipe,
-    targetSlide
+    targetSlide,
+    currentSlide,
+    infinite
   } = spec;
   if (!dragging) {
     if (swipe) e.preventDefault();
@@ -461,21 +463,22 @@ export const swipeEnd = (e, spec) => {
       onSwipe(swipeDirection);
     }
     let slideCount, newSlide;
+    let activeSlide = infinite ? currentSlide : targetSlide;
     switch (swipeDirection) {
       case "left":
       case "up":
-        newSlide = targetSlide + getSlideCount(spec);
+        newSlide = activeSlide + getSlideCount(spec);
         slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide;
         state["currentDirection"] = 0;
         break;
       case "right":
       case "down":
-        newSlide = targetSlide - getSlideCount(spec);
+        newSlide = activeSlide - getSlideCount(spec);
         slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide;
         state["currentDirection"] = 1;
         break;
       default:
-        slideCount = targetSlide;
+        slideCount = activeSlide;
     }
     state["triggerSlideHandler"] = slideCount;
   } else {
