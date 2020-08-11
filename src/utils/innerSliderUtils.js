@@ -426,7 +426,6 @@ export const swipeEnd = (e, spec) => {
     touchThreshold,
     verticalSwiping,
     listHeight,
-    currentSlide,
     swipeToSlide,
     scrolling,
     onSwipe,
