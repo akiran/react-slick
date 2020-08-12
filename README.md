@@ -6,6 +6,8 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
+### Don't upgrade to react-slick@0.27 yet. Stick with react-slick@0.26 until we release react-slick@0.28
+
 ### Installation
 
 **npm**
