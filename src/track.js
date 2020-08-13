@@ -67,16 +67,18 @@ const getSlideStyle = spec => {
       style.left = -spec.index * parseInt(spec.slideWidth);
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
-    style.transition =
-      "opacity " +
-      spec.speed +
-      "ms " +
-      spec.cssEase +
-      ", " +
-      "visibility " +
-      spec.speed +
-      "ms " +
-      spec.cssEase;
+    if (!spec.useCSS) {
+      style.transition =
+        "opacity " +
+        spec.speed +
+        "ms " +
+        spec.cssEase +
+        ", " +
+        "visibility " +
+        spec.speed +
+        "ms " +
+        spec.cssEase;
+    }
   }
 
   return style;

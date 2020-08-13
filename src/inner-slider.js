@@ -415,6 +415,7 @@ export class InnerSlider extends React.Component {
     } else {
       this.slideHandler(targetSlide);
     }
+    this.props.autoplay && this.autoPlay("update");
   };
   clickHandler = e => {
     if (this.clickable === false) {
@@ -618,7 +619,8 @@ export class InnerSlider extends React.Component {
       "variableWidth",
       "unslick",
       "centerPadding",
-      "targetSlide"
+      "targetSlide",
+      "useCSS"
     ]);
     const { pauseOnHover } = this.props;
     trackProps = {
