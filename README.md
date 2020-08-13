@@ -6,7 +6,11 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
-### Don't upgrade to react-slick@0.27 yet. Stick with react-slick@0.26 until we release react-slick@0.28
+### Alert
+
+react-slick@0.27._ releases are experimental.
+**Use react-slick@0.26 in production** until we make our next stable release (react-slick@0.28)
+We welcome if you like to test react-slick@0.27._ and report any breaking changes.
 
 ### Installation
 
@@ -35,8 +39,17 @@ import "slick-carousel/slick/slick-theme.css";
 or add cdn link in your html
 
 ```html
-<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  charset="UTF-8"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+/>
 ```
 
 ### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
