@@ -115,27 +115,7 @@ npm start
 open http://localhost:8080
 ```
 
-<a href="https://opencollective.com/react-slick/donate" target="_blank">
-  <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
-</a>
-
 ## Contributing
 
 Please see the [contributing guidelines](./CONTRIBUTING.md)
 
-## Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/akiran/react-slick/graphs/contributors"><img src="https://opencollective.com/react-slick/contributors.svg?width=890" /></a>
-
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/react-slick#backer)]
-
-<a href="https://opencollective.com/react-slick#backers" target="_blank"><img src="https://opencollective.com/react-slick/backers.svg?width=890"></a>
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/react-slick#sponsor)]
-
-<a href="https://opencollective.com/react-slick/sponsor/1/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/1/avatar.svg"></a>
