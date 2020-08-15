@@ -6,11 +6,11 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
-### Alert
+### :warning: Alert
 
-react-slick@0.27.* releases are experimental.  
-**Use react-slick@0.26 in production** until we make our next stable release (react-slick@0.28)  
-We invite you to test react-slick@0.27.* in dev environment and report any breaking changes.
+:construction: react-slick@0.27.* releases are experimental.  
+:white_check_mark: **Use react-slick@0.26 in production** until we make our next stable release (react-slick@0.28)  
+:pray: We invite you to test react-slick@0.27.* in dev environment and report any breaking changes.
 
 ### Installation
 
