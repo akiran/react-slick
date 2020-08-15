@@ -831,3 +831,14 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
+
+const styleCache = {};
+export const getChildrenStyle = slidesPerRow => {
+  if (!styleCache[slidesPerRow]) {
+    styleCache[slidesPerRow] = {
+      width: `${100 / slidesPerRow}%`,
+      display: "inline-block"
+    };
+  }
+  return styleCache[slidesPerRow];
+};
