@@ -2,6 +2,7 @@
 
 import React from "react";
 import classnames from "classnames";
+import defaultProps from "./default-props";
 
 const getDotCount = spec => {
   let dots;
@@ -17,6 +18,15 @@ const getDotCount = spec => {
   return dots;
 };
 
+const validateSlidesToScrool = value => {
+  if (value <= 0) {
+    console.warn("slidesToScroll value must be at least 1.");
+    return defaultProps.slidesToScroll;
+  }
+
+  return value;
+};
+
 export class Dots extends React.PureComponent {
   clickHandler(options, e) {
     // In Autoplay the focus stays on clicked button even after transition
@@ -24,10 +34,11 @@ export class Dots extends React.PureComponent {
     e.preventDefault();
     this.props.clickHandler(options);
   }
+
   render() {
     let dotCount = getDotCount({
       slideCount: this.props.slideCount,
-      slidesToScroll: this.props.slidesToScroll,
+      slidesToScroll: validateSlidesToScrool(this.props.slidesToScroll),
       slidesToShow: this.props.slidesToShow,
       infinite: this.props.infinite
     });
