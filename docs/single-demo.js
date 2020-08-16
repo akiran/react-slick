@@ -3,7 +3,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Slider from "../src/slider";
-
 function SimpleSlider() {
   const settings = {
     dots: true,

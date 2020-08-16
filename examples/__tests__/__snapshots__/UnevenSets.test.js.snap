@@ -51,8 +51,8 @@ exports[`UnevenSets Finite Activity test 1`] = `
             </div>
         </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next slick-disabled\\" style=\\"display: block;\\"> Next</button>
         <ul style=\\"display: block;\\" class=\\"slick-dots\\">
-            <li class=\\"slick-active\\"><button>1</button></li>
-            <li class=\\"\\"><button>2</button></li>
+            <li class=\\"\\"><button>1</button></li>
+            <li class=\\"slick-active\\"><button>2</button></li>
         </ul>
     </div>
 </div>"
