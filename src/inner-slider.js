@@ -385,6 +385,8 @@ export class InnerSlider extends React.Component {
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
     if (!this.props.waitForAnimate && this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
+      afterChange && afterChange(currentSlide);
+      delete this.animationEndCallback;
     }
     this.setState(state, () => {
       // asNavForIndex check is to avoid recursive calls of slideHandler in waitForAnimate=false mode
