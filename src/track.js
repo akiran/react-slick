@@ -67,7 +67,7 @@ const getSlideStyle = spec => {
       style.left = -spec.index * parseInt(spec.slideWidth);
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
-    if (!spec.useCSS) {
+    if (spec.useCSS) {
       style.transition =
         "opacity " +
         spec.speed +
