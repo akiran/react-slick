@@ -122,47 +122,33 @@ export class InnerSlider extends React.Component {
     }
     this.ro.disconnect();
   };
-  UNSAFE_componentWillReceiveProps = nextProps => {
-    let spec = {
-      listRef: this.list,
-      trackRef: this.track,
-      ...nextProps,
-      ...this.state
-    };
+
+  didPropsChange(prevProps) {
     let setTrackStyle = false;
     for (let key of Object.keys(this.props)) {
-      if (!nextProps.hasOwnProperty(key)) {
+      if (!prevProps.hasOwnProperty(key)) {
         setTrackStyle = true;
         break;
       }
       if (
-        typeof nextProps[key] === "object" ||
-        typeof nextProps[key] === "function"
+        typeof prevProps[key] === "object" ||
+        typeof prevProps[key] === "function"
       ) {
         continue;
       }
-      if (nextProps[key] !== this.props[key]) {
+      if (prevProps[key] !== this.props[key]) {
         setTrackStyle = true;
         break;
       }
     }
-    this.updateState(spec, setTrackStyle, () => {
-      if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
-        this.changeSlide({
-          message: "index",
-          index:
-            React.Children.count(nextProps.children) - nextProps.slidesToShow,
-          currentSlide: this.state.currentSlide
-        });
-      }
-      if (nextProps.autoplay) {
-        this.autoPlay("update");
-      } else {
-        this.pause("paused");
-      }
-    });
-  };
-  componentDidUpdate = () => {
+    return (
+      setTrackStyle ||
+      React.Children.count(this.props.children) !==
+        React.Children.count(prevProps.children)
+    );
+  }
+
+  componentDidUpdate = prevProps => {
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
     if (this.props.lazyLoad) {
@@ -183,6 +169,32 @@ export class InnerSlider extends React.Component {
     //   this.props.onLazyLoad([leftMostSlide])
     // }
     this.adaptHeight();
+    let spec = {
+      listRef: this.list,
+      trackRef: this.track,
+      ...this.props,
+      ...this.state
+    };
+    const setTrackStyle = this.didPropsChange(prevProps);
+    setTrackStyle &&
+      this.updateState(spec, setTrackStyle, () => {
+        if (
+          this.state.currentSlide >= React.Children.count(this.props.children)
+        ) {
+          this.changeSlide({
+            message: "index",
+            index:
+              React.Children.count(this.props.children) -
+              this.props.slidesToShow,
+            currentSlide: this.state.currentSlide
+          });
+        }
+        if (this.props.autoplay) {
+          this.autoPlay("update");
+        } else {
+          this.pause("paused");
+        }
+      });
   };
   onWindowResized = setTrackStyle => {
     if (this.debouncedResize) this.debouncedResize.cancel();
