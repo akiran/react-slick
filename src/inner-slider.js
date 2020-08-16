@@ -147,7 +147,7 @@ export class InnerSlider extends React.Component {
       }
     }
     this.updateState(spec, setTrackStyle, () => {
-      if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
+      if (this.state.currentSlide > React.Children.count(nextProps.children)) {
         this.changeSlide({
           message: "index",
           index:
