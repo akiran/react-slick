@@ -3,9 +3,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Slider from "../src/slider";
-import UnevenSetsFinite from "../examples/UnevenSetsFinite";
-import UnevenSetsInfinite from "../examples/UnevenSetsInfinite";
-
 function SimpleSlider() {
   const settings = {
     dots: true,
@@ -44,8 +41,7 @@ function SimpleSlider() {
 function App() {
   return (
     <div className="content">
-      <UnevenSetsFinite />
-      {/* <UnevenSetsInfinite /> */}
+      <SimpleSlider />
     </div>
   );
 }
