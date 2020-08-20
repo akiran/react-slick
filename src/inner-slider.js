@@ -429,6 +429,10 @@ export class InnerSlider extends React.Component {
       this.slideHandler(targetSlide);
     }
     this.props.autoplay && this.autoPlay("update");
+    if (this.props.focusOnSelect) {
+      const nodes = this.list.querySelectorAll(".slick-current");
+      nodes[0] && nodes[0].focus();
+    }
   };
   clickHandler = e => {
     if (this.clickable === false) {
