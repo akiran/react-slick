@@ -6,6 +6,12 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
+### :warning: Alert
+
+:construction: react-slick@0.27._ releases are experimental.  
+:white_check_mark: **Use react-slick@0.26 in production** until we make our next stable release (react-slick@0.28)  
+:pray: We invite you to test react-slick@0.27._ in dev environment and report any breaking changes.
+
 ### Installation
 
 **npm**
@@ -20,7 +26,7 @@ npm install react-slick --save
 yarn add react-slick
 ```
 
-⚠️ Also install slick-carousel for css and font
+**Also install slick-carousel for css and font**
 
 ```bash
 npm install slick-carousel
@@ -33,8 +39,17 @@ import "slick-carousel/slick/slick-theme.css";
 or add cdn link in your html
 
 ```html
-<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  charset="UTF-8"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+/>
 ```
 
 ### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
@@ -100,36 +115,6 @@ npm start
 open http://localhost:8080
 ```
 
-<a href="https://opencollective.com/react-slick/donate" target="_blank">
-  <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
-</a>
-
 ## Contributing
 
 Please see the [contributing guidelines](./CONTRIBUTING.md)
-
-## Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/akiran/react-slick/graphs/contributors"><img src="https://opencollective.com/react-slick/contributors.svg?width=890" /></a>
-
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/react-slick#backer)]
-
-<a href="https://opencollective.com/react-slick#backers" target="_blank"><img src="https://opencollective.com/react-slick/backers.svg?width=890"></a>
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/react-slick#sponsor)]
-
-<a href="https://opencollective.com/react-slick/sponsor/0/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/1/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/2/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/3/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/4/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/5/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/6/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/react-slick/sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-slick/sponsor/9/avatar.svg"></a>

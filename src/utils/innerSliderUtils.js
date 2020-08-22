@@ -1,5 +1,9 @@
 import React from "react";
 
+export function clamp(number, lowerBound, upperBound) {
+  return Math.max(lowerBound, Math.min(number, upperBound));
+}
+
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
   let startIndex = lazyStartIndex(spec);
@@ -172,6 +176,7 @@ export const slideHandler = spec => {
     finalLeft;
   let state = {},
     nextState = {};
+  const targetSlide = infinite ? index : clamp(index, 0, slideCount - 1);
   if (fade) {
     if (!infinite && (index < 0 || index >= slideCount)) return {};
     if (index < 0) {
@@ -205,6 +210,11 @@ export const slideHandler = spec => {
       if (!infinite) finalSlide = slideCount - slidesToShow;
       else if (slideCount % slidesToScroll !== 0) finalSlide = 0;
     }
+
+    if (!infinite && animationSlide + slidesToShow >= slideCount) {
+      finalSlide = slideCount - slidesToShow;
+    }
+
     animationLeft = getTrackLeft({ ...spec, slideIndex: animationSlide });
     finalLeft = getTrackLeft({ ...spec, slideIndex: finalSlide });
     if (!infinite) {
@@ -219,20 +229,23 @@ export const slideHandler = spec => {
       state = {
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        targetSlide
       };
     } else {
       state = {
         animating: true,
         currentSlide: finalSlide,
         trackStyle: getTrackAnimateCSS({ ...spec, left: animationLeft }),
-        lazyLoadedList
+        lazyLoadedList,
+        targetSlide
       };
       nextState = {
         animating: false,
         currentSlide: finalSlide,
         trackStyle: getTrackCSS({ ...spec, left: finalLeft }),
-        swipeLeft: null
+        swipeLeft: null,
+        targetSlide
       };
     }
   }
@@ -246,6 +259,7 @@ export const changeSlide = (spec, options) => {
     slidesToShow,
     slideCount,
     currentSlide,
+    targetSlide: previousTargetSlide,
     lazyLoad,
     infinite
   } = spec;
@@ -260,6 +274,9 @@ export const changeSlide = (spec, options) => {
       previousInt = currentSlide - slideOffset;
       targetSlide = previousInt === -1 ? slideCount - 1 : previousInt;
     }
+    if (!infinite) {
+      targetSlide = previousTargetSlide - slidesToScroll;
+    }
   } else if (options.message === "next") {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
     targetSlide = currentSlide + slideOffset;
@@ -267,18 +284,15 @@ export const changeSlide = (spec, options) => {
       targetSlide =
         ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     }
+    if (!infinite) {
+      targetSlide = previousTargetSlide + slidesToScroll;
+    }
   } else if (options.message === "dots") {
     // Click on dots
     targetSlide = options.index * options.slidesToScroll;
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
   } else if (options.message === "children") {
     // Click on the slides
     targetSlide = options.index;
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
     if (infinite) {
       let direction = siblingDirection({ ...spec, targetSlide });
       if (targetSlide > options.currentSlide && direction === "left") {
@@ -289,9 +303,6 @@ export const changeSlide = (spec, options) => {
     }
   } else if (options.message === "index") {
     targetSlide = Number(options.index);
-    if (targetSlide === options.currentSlide) {
-      return null;
-    }
   }
   return targetSlide;
 };
@@ -422,10 +433,12 @@ export const swipeEnd = (e, spec) => {
     touchThreshold,
     verticalSwiping,
     listHeight,
-    currentSlide,
     swipeToSlide,
     scrolling,
-    onSwipe
+    onSwipe,
+    targetSlide,
+    currentSlide,
+    infinite
   } = spec;
   if (!dragging) {
     if (swipe) e.preventDefault();
@@ -457,21 +470,22 @@ export const swipeEnd = (e, spec) => {
       onSwipe(swipeDirection);
     }
     let slideCount, newSlide;
+    let activeSlide = infinite ? currentSlide : targetSlide;
     switch (swipeDirection) {
       case "left":
       case "up":
-        newSlide = currentSlide + getSlideCount(spec);
+        newSlide = activeSlide + getSlideCount(spec);
         slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide;
         state["currentDirection"] = 0;
         break;
       case "right":
       case "down":
-        newSlide = currentSlide - getSlideCount(spec);
+        newSlide = activeSlide - getSlideCount(spec);
         slideCount = swipeToSlide ? checkNavigable(spec, newSlide) : newSlide;
         state["currentDirection"] = 1;
         break;
       default:
-        slideCount = currentSlide;
+        slideCount = activeSlide;
     }
     state["triggerSlideHandler"] = slideCount;
   } else {

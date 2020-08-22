@@ -40,6 +40,8 @@ export class InnerSlider extends React.Component {
     this.callbackTimers = [];
     this.clickable = true;
     this.debouncedResize = null;
+    const ssrState = this.ssrInit();
+    this.state = { ...this.state, ...ssrState };
   }
   listRefHandler = ref => (this.list = ref);
   trackRefHandler = ref => (this.track = ref);
@@ -51,8 +53,7 @@ export class InnerSlider extends React.Component {
       this.list.style.height = getHeight(elem) + "px";
     }
   };
-  UNSAFE_componentWillMount = () => {
-    this.ssrInit();
+  componentDidMount = () => {
     this.props.onInit && this.props.onInit();
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({
@@ -68,8 +69,6 @@ export class InnerSlider extends React.Component {
         }
       }
     }
-  };
-  componentDidMount = () => {
     let spec = { listRef: this.list, trackRef: this.track, ...this.props };
     this.updateState(spec, true, () => {
       this.adaptHeight();
@@ -123,53 +122,33 @@ export class InnerSlider extends React.Component {
     }
     this.ro.disconnect();
   };
-  UNSAFE_componentWillReceiveProps = nextProps => {
-    const { autoplay, autoplaySpeed } = this.props;
-    let spec = {
-      listRef: this.list,
-      trackRef: this.track,
-      ...nextProps,
-      ...this.state
-    };
+
+  didPropsChange(prevProps) {
     let setTrackStyle = false;
     for (let key of Object.keys(this.props)) {
-      if (!nextProps.hasOwnProperty(key)) {
+      if (!prevProps.hasOwnProperty(key)) {
         setTrackStyle = true;
         break;
       }
       if (
-        typeof nextProps[key] === "object" ||
-        typeof nextProps[key] === "function"
+        typeof prevProps[key] === "object" ||
+        typeof prevProps[key] === "function"
       ) {
         continue;
       }
-      if (nextProps[key] !== this.props[key]) {
+      if (prevProps[key] !== this.props[key]) {
         setTrackStyle = true;
         break;
       }
     }
-    this.updateState(spec, setTrackStyle, () => {
-      if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
-        this.changeSlide({
-          message: "index",
-          index:
-            React.Children.count(nextProps.children) - nextProps.slidesToShow,
-          currentSlide: this.state.currentSlide
-        });
-      }
-      if (
-        autoplay !== nextProps.autoplay ||
-        autoplaySpeed !== nextProps.autoplaySpeed
-      ) {
-        if (nextProps.autoplay) {
-          this.autoPlay("update");
-        } else {
-          this.pause("paused");
-        }
-      }
-    });
-  };
-  componentDidUpdate = () => {
+    return (
+      setTrackStyle ||
+      React.Children.count(this.props.children) !==
+        React.Children.count(prevProps.children)
+    );
+  }
+
+  componentDidUpdate = prevProps => {
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
     if (this.props.lazyLoad) {
@@ -190,6 +169,37 @@ export class InnerSlider extends React.Component {
     //   this.props.onLazyLoad([leftMostSlide])
     // }
     this.adaptHeight();
+    let spec = {
+      listRef: this.list,
+      trackRef: this.track,
+      ...this.props,
+      ...this.state
+    };
+    const setTrackStyle = this.didPropsChange(prevProps);
+    setTrackStyle &&
+      this.updateState(spec, setTrackStyle, () => {
+        if (
+          this.state.currentSlide >= React.Children.count(this.props.children)
+        ) {
+          this.changeSlide({
+            message: "index",
+            index:
+              React.Children.count(this.props.children) -
+              this.props.slidesToShow,
+            currentSlide: this.state.currentSlide
+          });
+        }
+        if (
+          prevProps.autoplay !== this.props.autoplay ||
+          prevProps.autoplaySpeed !== this.props.autoplaySpeed
+        ) {
+          if (this.props.autoplay) {
+            this.autoPlay("update");
+          } else {
+            this.pause("paused");
+          }
+        }
+      });
   };
   onWindowResized = setTrackStyle => {
     if (this.debouncedResize) this.debouncedResize.cancel();
@@ -270,10 +280,9 @@ export class InnerSlider extends React.Component {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
         trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
       }
-      this.setState({
+      return {
         trackStyle
-      });
-      return;
+      };
     }
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
@@ -292,10 +301,10 @@ export class InnerSlider extends React.Component {
       width: trackWidth + "%",
       left: trackLeft + "%"
     };
-    this.setState({
+    return {
       slideWidth: slideWidth + "%",
       trackStyle: trackStyle
-    });
+    };
   };
   checkImagesLoad = () => {
     let images = this.list.querySelectorAll(".slick-slide img");
@@ -391,8 +400,17 @@ export class InnerSlider extends React.Component {
       value => this.state.lazyLoadedList.indexOf(value) < 0
     );
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
+    if (!this.props.waitForAnimate && this.animationEndCallback) {
+      clearTimeout(this.animationEndCallback);
+      afterChange && afterChange(currentSlide);
+      delete this.animationEndCallback;
+    }
     this.setState(state, () => {
-      asNavFor && asNavFor.innerSlider.slideHandler(index);
+      // asNavForIndex check is to avoid recursive calls of slideHandler in waitForAnimate=false mode
+      if (asNavFor && this.asNavForIndex !== index) {
+        this.asNavForIndex = index;
+        asNavFor.innerSlider.slideHandler(index);
+      }
       if (!nextState) return;
       this.animationEndCallback = setTimeout(() => {
         const { animating, ...firstBatch } = nextState;
@@ -414,6 +432,11 @@ export class InnerSlider extends React.Component {
       this.slideHandler(targetSlide, dontAnimate);
     } else {
       this.slideHandler(targetSlide);
+    }
+    this.props.autoplay && this.autoPlay("update");
+    if (this.props.focusOnSelect) {
+      const nodes = this.list.querySelectorAll(".slick-current");
+      nodes[0] && nodes[0].focus();
     }
   };
   clickHandler = e => {
@@ -479,6 +502,10 @@ export class InnerSlider extends React.Component {
     if (this.props.verticalSwiping) {
       this.enableBodyScroll();
     }
+  };
+  touchEnd = e => {
+    this.swipeEnd(e);
+    this.clickable = true;
   };
   slickPrev = () => {
     // this and fellow methods are wrapped in setTimeout
@@ -613,7 +640,9 @@ export class InnerSlider extends React.Component {
       "trackStyle",
       "variableWidth",
       "unslick",
-      "centerPadding"
+      "centerPadding",
+      "targetSlide",
+      "useCSS"
     ]);
     const { pauseOnHover } = this.props;
     trackProps = {
@@ -621,7 +650,8 @@ export class InnerSlider extends React.Component {
       onMouseEnter: pauseOnHover ? this.onTrackOver : null,
       onMouseLeave: pauseOnHover ? this.onTrackLeave : null,
       onMouseOver: pauseOnHover ? this.onTrackOver : null,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null
+      focusOnSelect:
+        this.props.focusOnSelect && this.clickable ? this.selectHandler : null
     };
 
     var dots;
@@ -705,7 +735,7 @@ export class InnerSlider extends React.Component {
       onMouseLeave: this.state.dragging && touchMove ? this.swipeEnd : null,
       onTouchStart: touchMove ? this.swipeStart : null,
       onTouchMove: this.state.dragging && touchMove ? this.swipeMove : null,
-      onTouchEnd: touchMove ? this.swipeEnd : null,
+      onTouchEnd: touchMove ? this.touchEnd : null,
       onTouchCancel: this.state.dragging && touchMove ? this.swipeEnd : null,
       onKeyDown: this.props.accessibility ? this.keyHandler : null
     };

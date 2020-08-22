@@ -49,6 +49,8 @@ describe("UnevenSets Finite", () => {
     activeSlides = slider.find("div.slick-active");
     expect(currentSlide.props()["data-index"]).toEqual(4);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
+      2,
+      3,
       4,
       5
     ]);
@@ -59,6 +61,8 @@ describe("UnevenSets Finite", () => {
     activeSlides = slider.find("div.slick-active");
     expect(currentSlide.props()["data-index"]).toEqual(4);
     expect(activeSlides.map(slide => slide.props()["data-index"])).toEqual([
+      2,
+      3,
       4,
       5
     ]);

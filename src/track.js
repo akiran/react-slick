@@ -33,7 +33,16 @@ const getSlideClasses = spec => {
       spec.currentSlide <= index &&
       index < spec.currentSlide + spec.slidesToShow;
   }
-  let slickCurrent = index === spec.currentSlide;
+
+  let focusedSlide;
+  if (spec.targetSlide < 0) {
+    focusedSlide = spec.targetSlide + spec.slideCount;
+  } else if (spec.targetSlide >= spec.slideCount) {
+    focusedSlide = spec.targetSlide - spec.slideCount;
+  } else {
+    focusedSlide = spec.targetSlide;
+  }
+  let slickCurrent = index === focusedSlide;
   return {
     "slick-slide": true,
     "slick-active": slickActive,
@@ -58,16 +67,18 @@ const getSlideStyle = spec => {
       style.left = -spec.index * parseInt(spec.slideWidth);
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
-    style.transition =
-      "opacity " +
-      spec.speed +
-      "ms " +
-      spec.cssEase +
-      ", " +
-      "visibility " +
-      spec.speed +
-      "ms " +
-      spec.cssEase;
+    if (spec.useCSS) {
+      style.transition =
+        "opacity " +
+        spec.speed +
+        "ms " +
+        spec.cssEase +
+        ", " +
+        "visibility " +
+        spec.speed +
+        "ms " +
+        spec.cssEase;
+    }
   }
 
   return style;
