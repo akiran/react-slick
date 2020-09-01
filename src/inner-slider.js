@@ -639,6 +639,7 @@ export class InnerSlider extends React.Component {
       "targetSlide",
       "useCSS"
     ]);
+    const SlideTagName = this.props.slide;
     const { pauseOnHover } = this.props;
     trackProps = {
       ...trackProps,
@@ -746,7 +747,7 @@ export class InnerSlider extends React.Component {
       innerSliderProps = { className };
     }
     return (
-      <div {...innerSliderProps}>
+      <SlideTagName {...innerSliderProps}>
         {!this.props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>
@@ -755,7 +756,7 @@ export class InnerSlider extends React.Component {
         </div>
         {!this.props.unslick ? nextArrow : ""}
         {!this.props.unslick ? dots : ""}
-      </div>
+      </SlideTagName>
     );
   };
 }
