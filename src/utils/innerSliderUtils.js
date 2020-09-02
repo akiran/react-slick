@@ -259,7 +259,6 @@ export const changeSlide = (spec, options) => {
     slidesToShow,
     slideCount,
     currentSlide,
-    targetSlide: previousTargetSlide,
     lazyLoad,
     infinite
   } = spec;
@@ -275,7 +274,7 @@ export const changeSlide = (spec, options) => {
       targetSlide = previousInt === -1 ? slideCount - 1 : previousInt;
     }
     if (!infinite) {
-      targetSlide = previousTargetSlide - slidesToScroll;
+      targetSlide = currentSlide - slidesToScroll;
     }
   } else if (options.message === "next") {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
@@ -285,7 +284,7 @@ export const changeSlide = (spec, options) => {
         ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     }
     if (!infinite) {
-      targetSlide = previousTargetSlide + slidesToScroll;
+      targetSlide = currentSlide + slidesToScroll;
     }
   } else if (options.message === "dots") {
     // Click on dots
