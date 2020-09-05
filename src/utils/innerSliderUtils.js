@@ -304,7 +304,6 @@ export const changeSlide = (spec, options) => {
   } else if (options.message === "index") {
     targetSlide = Number(options.index);
   }
-  console.log(targetSlide, "targetSlide");
   return targetSlide;
 };
 export const keyHandler = (e, accessibility, rtl) => {
