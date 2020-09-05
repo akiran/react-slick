@@ -190,9 +190,10 @@ export const slideHandler = spec => {
     state = {
       animating: true,
       currentSlide: animationSlide,
-      lazyLoadedList
+      lazyLoadedList,
+      targetSlide: animationSlide
     };
-    nextState = { animating: false };
+    nextState = { animating: false, targetSlide: animationSlide };
   } else {
     finalSlide = animationSlide;
     if (animationSlide < 0) {
@@ -265,7 +266,6 @@ export const changeSlide = (spec, options) => {
   } = spec;
   unevenOffset = slideCount % slidesToScroll !== 0;
   indexOffset = unevenOffset ? 0 : (slideCount - currentSlide) % slidesToScroll;
-
   if (options.message === "previous") {
     slideOffset =
       indexOffset === 0 ? slidesToScroll : slidesToShow - indexOffset;
@@ -304,6 +304,7 @@ export const changeSlide = (spec, options) => {
   } else if (options.message === "index") {
     targetSlide = Number(options.index);
   }
+  console.log(targetSlide, "targetSlide");
   return targetSlide;
 };
 export const keyHandler = (e, accessibility, rtl) => {
