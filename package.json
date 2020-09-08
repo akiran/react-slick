@@ -63,7 +63,7 @@
     "foundation-apps": "^1.2.0",
     "gulp": "^4.0.0",
     "gulp-sass": "^4.0.0",
-    "husky": "^0.14.3",
+    "husky": "^4.3.0",
     "jasmine-core": "^2.5.2",
     "jest": "^24.8.0",
     "jquery": "^3.2.1",
