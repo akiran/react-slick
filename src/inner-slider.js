@@ -745,15 +745,28 @@ export class InnerSlider extends React.Component {
       listProps = { className: "slick-list" };
       innerSliderProps = { className };
     }
+    let showPrevBtn, showNextBtn;
+
+    if (this.props.infinite) {
+      showNextBtn = true;
+      showPrevBtn = true;
+    } else {
+      let slideDiff = this.props.slidesToShow > 1 ? this.props.slidesToShow : 1;
+      showPrevBtn = this.state.currentSlide !== 0 ? true : false;
+      showNextBtn =
+        this.state.currentSlide !== this.props.children.length - slideDiff
+          ? true
+          : false;
+    }
     return (
       <div {...innerSliderProps}>
-        {!this.props.unslick ? prevArrow : ""}
+        {!this.props.unslick && showPrevBtn ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>
             {this.props.children}
           </Track>
         </div>
-        {!this.props.unslick ? nextArrow : ""}
+        {!this.props.unslick && showNextBtn ? nextArrow : ""}
         {!this.props.unslick ? dots : ""}
       </div>
     );
