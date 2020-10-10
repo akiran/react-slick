@@ -6,12 +6,6 @@
 
 ## [Documentation](http://react-slick.neostack.com)
 
-### :warning: Alert
-
-:construction: react-slick@0.27._ releases are experimental.  
-:white_check_mark: **Use react-slick@0.26 in production** until we make our next stable release (react-slick@0.28)  
-:pray: We invite you to test react-slick@0.27._ in dev environment and report any breaking changes.
-
 ### Installation
 
 **npm**
@@ -60,38 +54,36 @@ or add cdn link in your html
 import React from "react";
 import Slider from "react-slick";
 
-class SimpleSlider extends React.Component {
-  render() {
-    var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    return (
-      <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-      </Slider>
-    );
-  }
+export default funtion SimpleSlider() {
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+  return (
+    <Slider {...settings}>
+      <div>
+        <h3>1</h3>
+      </div>
+      <div>
+        <h3>2</h3>
+      </div>
+      <div>
+        <h3>3</h3>
+      </div>
+      <div>
+        <h3>4</h3>
+      </div>
+      <div>
+        <h3>5</h3>
+      </div>
+      <div>
+        <h3>6</h3>
+      </div>
+    </Slider>
+  );
 }
 ```
 
