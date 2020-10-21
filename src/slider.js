@@ -25,7 +25,7 @@ export default class Slider extends React.Component {
   }
 
   // handles responsive breakpoints
-  componentWillMount() {
+  componentWillMount = () => {
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
@@ -65,7 +65,7 @@ export default class Slider extends React.Component {
           this.setState({ breakpoint: null });
         });
     }
-  }
+  };
 
   componentWillUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
@@ -106,9 +106,7 @@ export default class Slider extends React.Component {
         process.env.NODE_ENV !== "production"
       ) {
         console.warn(
-          `slidesToScroll should be equal to 1 in centerMode, you are using ${
-            settings.slidesToScroll
-          }`
+          `slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`
         );
       }
       settings.slidesToScroll = 1;
@@ -117,9 +115,7 @@ export default class Slider extends React.Component {
     if (settings.fade) {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {
         console.warn(
-          `slidesToShow should be equal to 1 when fade is true, you're using ${
-            settings.slidesToShow
-          }`
+          `slidesToShow should be equal to 1 when fade is true, you're using ${settings.slidesToShow}`
         );
       }
       if (
@@ -127,9 +123,7 @@ export default class Slider extends React.Component {
         process.env.NODE_ENV !== "production"
       ) {
         console.warn(
-          `slidesToScroll should be equal to 1 when fade is true, you're using ${
-            settings.slidesToScroll
-          }`
+          `slidesToScroll should be equal to 1 when fade is true, you're using ${settings.slidesToScroll}`
         );
       }
       settings.slidesToShow = 1;
@@ -180,7 +174,6 @@ export default class Slider extends React.Component {
           row.push(
             React.cloneElement(children[k], {
               key: 100 * i + 10 * j + k,
-              tabIndex: -1,
               style: {
                 width: `${100 / settings.slidesPerRow}%`,
                 display: "inline-block"
@@ -208,7 +201,11 @@ export default class Slider extends React.Component {
       settings.unslick = true;
     }
     return (
-      <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider
+        ref={this.innerSliderRefHandler}
+        type={this.props.type}
+        {...settings}
+      >
         {newChildren}
       </InnerSlider>
     );

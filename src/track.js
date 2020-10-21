@@ -43,6 +43,25 @@ var getSlideClasses = spec => {
   };
 };
 
+var getSlideAttributes = type => {
+  return type === "radiogroup"
+    ? {
+        track: "radiogroup",
+        slide: "radio",
+        pressed: "false",
+        required: "true",
+        tabindex: "-1",
+        ariaChecked: true
+      }
+    : {
+        track: "list",
+        slide: "listitem",
+        pressed: null,
+        required: null,
+        tabindex: null,
+        ariaChecked: false
+      };
+};
 var getSlideStyle = function(spec) {
   var style = {};
 
@@ -93,6 +112,16 @@ var renderSlides = function(spec) {
   var childrenCount = React.Children.count(spec.children);
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
+  const sliderAttr = getSlideAttributes(spec.type);
+  const getTabIndex = index => {
+    if (sliderAttr.tabindex && index === 0) {
+      return { index: index, truthy: true };
+    } else if (sliderAttr.tabindex && index) {
+      return { index: sliderAttr.tabindex, truthy: false };
+    } else {
+      return { index: null, truthy: null };
+    }
+  };
 
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
@@ -102,7 +131,6 @@ var renderSlides = function(spec) {
       slidesToScroll: spec.slidesToScroll,
       currentSlide: spec.currentSlide
     };
-
     // in case of lazyLoad, whether or not we want to fetch the slide
     if (
       !spec.lazyLoad ||
@@ -114,20 +142,77 @@ var renderSlides = function(spec) {
     }
     var childStyle = getSlideStyle({ ...spec, index });
     const slideClass = child.props.className || "";
+    const tabOrder = getTabIndex(index);
     let slideClasses = getSlideClasses({ ...spec, index });
+
+    const setElementAttrs = (ele, target) => {
+      if (ele) {
+        ele.setAttribute("tabindex", -1);
+        ele.setAttribute("aria-checked", false);
+        ele.classList.remove("slick-current");
+      }
+      if (target) {
+        target.setAttribute("tabindex", 0);
+        target.setAttribute("aria-checked", true);
+        target.classList.add("slick-current");
+      }
+    };
+    const handleRadioKeydown = e => {
+      let ele = e.currentTarget,
+        previous = ele.previousElementSibling,
+        next = ele.nextElementSibling,
+        key = e.keyCode;
+
+      if (key === 37 && previous) {
+        setElementAttrs(ele, previous);
+        previous.focus();
+        previous.click();
+      }
+      if (key === 39 && next) {
+        setElementAttrs(ele, next);
+        next.focus();
+        next.click();
+      }
+    };
+    const handleRadioClick = e => {
+      let ele = e.currentTarget,
+        siblings = ele.parentElement.childNodes;
+
+      siblings.forEach(elem => {
+        setElementAttrs(elem);
+      });
+      setElementAttrs(null, ele);
+    };
     // push a cloned element of the desired slide
     slides.push(
       React.cloneElement(child, {
         key: "original" + getKey(child, index),
         "data-index": index,
+        "aria-checked": tabOrder.truthy,
+        "aria-required": sliderAttr.required,
+        tabIndex: tabOrder.index,
+        role: sliderAttr.slide,
         className: classnames(slideClasses, slideClass),
-        tabIndex: "-1",
-        "aria-hidden": !slideClasses["slick-active"],
         style: { outline: "none", ...(child.props.style || {}), ...childStyle },
         onClick: e => {
+          if (spec.type === "radiogroup") {
+            handleRadioClick(e);
+          }
           child.props && child.props.onClick && child.props.onClick(e);
+          if (typeof spec.slideOnClick === "function") {
+            spec.slideOnClick(e);
+          }
           if (spec.focusOnSelect) {
             spec.focusOnSelect(childOnClickOptions);
+          }
+        },
+        onKeyDown: e => {
+          if (spec.type === "radiogroup") {
+            handleRadioKeydown(e);
+          }
+          child.props && child.props.onKeyDown && child.props.onKeyDown(e);
+          if (typeof spec.slideOnKeyDown === "function") {
+            spec.slideOnKeyDown(e);
           }
         }
       })
@@ -149,7 +234,6 @@ var renderSlides = function(spec) {
           React.cloneElement(child, {
             key: "precloned" + getKey(child, key),
             "data-index": key,
-            tabIndex: "-1",
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
@@ -173,7 +257,6 @@ var renderSlides = function(spec) {
           React.cloneElement(child, {
             key: "postcloned" + getKey(child, key),
             "data-index": key,
-            tabIndex: "-1",
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
@@ -201,8 +284,11 @@ export class Track extends React.PureComponent {
     const slides = renderSlides(this.props);
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
+    const sliderAttr = getSlideAttributes(this.props.type);
     return (
       <div
+        aria-labelledby={`${this.props.labelId}Label ${this.props.labelId}Inst`}
+        role={sliderAttr.track}
         className="slick-track"
         style={this.props.trackStyle}
         {...mouseEvents}

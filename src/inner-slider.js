@@ -41,6 +41,8 @@ export class InnerSlider extends React.Component {
     this.callbackTimers = [];
     this.clickable = true;
     this.debouncedResize = null;
+    // the current props
+    this.theProps = { ...props };
   }
   listRefHandler = ref => (this.list = ref);
   trackRefHandler = ref => (this.track = ref);
@@ -127,47 +129,66 @@ export class InnerSlider extends React.Component {
       clearInterval(this.autoplayTimer);
     }
   };
-  componentWillReceiveProps = nextProps => {
+
+  getUpdatedStateIfPropsChanged = prevProps => {
     let spec = {
       listRef: this.list,
       trackRef: this.track,
-      ...nextProps,
+      ...this.props,
       ...this.state
     };
     let setTrackStyle = false;
-    for (let key of Object.keys(this.props)) {
-      if (!nextProps.hasOwnProperty(key)) {
+    for (let key of Object.keys(prevProps)) {
+      if (!this.props.hasOwnProperty(key)) {
         setTrackStyle = true;
         break;
       }
       if (
-        typeof nextProps[key] === "object" ||
-        typeof nextProps[key] === "function"
+        typeof this.props[key] === "object" ||
+        typeof this.props[key] === "function"
       ) {
         continue;
       }
-      if (nextProps[key] !== this.props[key]) {
+      if (this.props[key] !== prevProps[key]) {
         setTrackStyle = true;
         break;
       }
     }
-    this.updateState(spec, setTrackStyle, () => {
-      if (this.state.currentSlide >= React.Children.count(nextProps.children)) {
-        this.changeSlide({
-          message: "index",
-          index:
-            React.Children.count(nextProps.children) - nextProps.slidesToShow,
-          currentSlide: this.state.currentSlide
-        });
-      }
-      if (nextProps.autoplay) {
-        this.autoPlay("update");
-      } else {
-        this.pause("paused");
-      }
-    });
+
+    if (
+      !setTrackStyle &&
+      React.Children.count(this.props.children) ===
+        React.Children.count(prevProps.children)
+    ) {
+      return null;
+    }
+
+    return this.getUpdatedState(spec, setTrackStyle);
   };
-  componentDidUpdate = () => {
+
+  componentDidUpdate = prevProps => {
+    const updatedState = this.getUpdatedStateIfPropsChanged(prevProps);
+    if (updatedState) {
+      this.setState(updatedState, () => {
+        if (
+          this.state.currentSlide >= React.Children.count(this.props.children)
+        ) {
+          this.changeSlide({
+            message: "index",
+            index:
+              React.Children.count(this.props.children) -
+              this.props.slidesToShow,
+            currentSlide: this.state.currentSlide
+          });
+        }
+        if (this.props.autoplay) {
+          this.autoPlay("update");
+        } else {
+          this.pause("paused");
+        }
+      });
+    }
+
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
     if (this.props.lazyLoad) {
@@ -188,6 +209,10 @@ export class InnerSlider extends React.Component {
     //   this.props.onLazyLoad([leftMostSlide])
     // }
     this.adaptHeight();
+
+    // after this.state have been updated to reflect the new props (this.props)
+    // the new props become the current props
+    this.theProps = { ...this.props };
   };
   onWindowResized = setTrackStyle => {
     if (this.debouncedResize) this.debouncedResize.cancel();
@@ -213,7 +238,8 @@ export class InnerSlider extends React.Component {
     clearTimeout(this.animationEndCallback);
     delete this.animationEndCallback;
   };
-  updateState = (spec, setTrackStyle, callback) => {
+
+  getUpdatedState = (spec, setTrackStyle) => {
     let updatedState = initializedState(spec);
     spec = { ...spec, ...updatedState, slideIndex: updatedState.currentSlide };
     let targetLeft = getTrackLeft(spec);
@@ -226,7 +252,11 @@ export class InnerSlider extends React.Component {
     ) {
       updatedState["trackStyle"] = trackStyle;
     }
-    this.setState(updatedState, callback);
+    return updatedState;
+  };
+
+  updateState = (spec, setTrackStyle, callback) => {
+    this.setState(this.getUpdatedState(spec, setTrackStyle), callback);
   };
 
   ssrInit = () => {
@@ -264,9 +294,7 @@ export class InnerSlider extends React.Component {
       };
       if (this.props.centerMode) {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
-        trackStyle.left = `calc(${
-          trackStyle.left
-        } + (100% - ${currentWidth}) / 2 ) `;
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
       }
       this.setState({
         trackStyle
@@ -276,15 +304,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -587,11 +615,15 @@ export class InnerSlider extends React.Component {
     this.autoPlay("blur");
 
   render = () => {
-    var className = classnames("slick-slider", this.props.className, {
-      "slick-vertical": this.props.vertical,
+    // in render we use the current props because this.props may be new props
+    // and the this.state is not updated yet to reflect these new props
+    const props = this.theProps;
+
+    var className = classnames("slick-slider", props.className, {
+      "slick-vertical": props.vertical,
       "slick-initialized": true
     });
-    let spec = { ...this.props, ...this.state };
+    let spec = { ...props, ...this.state };
     let trackProps = extractObject(spec, [
       "fade",
       "cssEase",
@@ -615,20 +647,19 @@ export class InnerSlider extends React.Component {
       "unslick",
       "centerPadding"
     ]);
-    const { pauseOnHover } = this.props;
+    const { pauseOnHover } = props;
     trackProps = {
       ...trackProps,
       onMouseEnter: pauseOnHover ? this.onTrackOver : null,
       onMouseLeave: pauseOnHover ? this.onTrackLeave : null,
       onMouseOver: pauseOnHover ? this.onTrackOver : null,
-      focusOnSelect: this.props.focusOnSelect ? this.selectHandler : null
+      focusOnSelect: props.focusOnSelect ? this.selectHandler : null,
+      slideOnClick: props.slideOnClick ? props.slideOnClick : null,
+      slideOnKeyDown: props.slideOnKeyDown ? props.slideOnKeyDown : null
     };
 
     var dots;
-    if (
-      this.props.dots === true &&
-      this.state.slideCount >= this.props.slidesToShow
-    ) {
+    if (props.dots === true && this.state.slideCount >= props.slidesToShow) {
       let dotProps = extractObject(spec, [
         "dotsClass",
         "slideCount",
@@ -641,7 +672,7 @@ export class InnerSlider extends React.Component {
         "infinite",
         "appendDots"
       ]);
-      const { pauseOnDotsHover } = this.props;
+      const { pauseOnDotsHover } = props;
       dotProps = {
         ...dotProps,
         clickHandler: this.changeSlide,
@@ -664,14 +695,14 @@ export class InnerSlider extends React.Component {
     ]);
     arrowProps.clickHandler = this.changeSlide;
 
-    if (this.props.arrows) {
+    if (props.arrows) {
       prevArrow = <PrevArrow {...arrowProps} />;
       nextArrow = <NextArrow {...arrowProps} />;
     }
 
     var verticalHeightStyle = null;
 
-    if (this.props.vertical) {
+    if (props.vertical) {
       verticalHeightStyle = {
         height: this.state.listHeight
       };
@@ -679,22 +710,22 @@ export class InnerSlider extends React.Component {
 
     var centerPaddingStyle = null;
 
-    if (this.props.vertical === false) {
-      if (this.props.centerMode === true) {
+    if (props.vertical === false) {
+      if (props.centerMode === true) {
         centerPaddingStyle = {
-          padding: "0px " + this.props.centerPadding
+          padding: "0px " + props.centerPadding
         };
       }
     } else {
-      if (this.props.centerMode === true) {
+      if (props.centerMode === true) {
         centerPaddingStyle = {
-          padding: this.props.centerPadding + " 0px"
+          padding: props.centerPadding + " 0px"
         };
       }
     }
 
     const listStyle = { ...verticalHeightStyle, ...centerPaddingStyle };
-    const touchMove = this.props.touchMove;
+    const touchMove = props.touchMove;
     let listProps = {
       className: "slick-list",
       style: listStyle,
@@ -707,7 +738,7 @@ export class InnerSlider extends React.Component {
       onTouchMove: this.state.dragging && touchMove ? this.swipeMove : null,
       onTouchEnd: touchMove ? this.swipeEnd : null,
       onTouchCancel: this.state.dragging && touchMove ? this.swipeEnd : null,
-      onKeyDown: this.props.accessibility ? this.keyHandler : null
+      onKeyDown: props.accessibility ? this.keyHandler : null
     };
 
     let innerSliderProps = {
@@ -715,20 +746,37 @@ export class InnerSlider extends React.Component {
       dir: "ltr"
     };
 
-    if (this.props.unslick) {
+    if (props.unslick) {
       listProps = { className: "slick-list" };
       innerSliderProps = { className };
     }
+
+    const uniqueNameForId = this.props.label
+      ? this.props.label.replace(/ /g, "")
+      : "slickSlider";
     return (
       <div {...innerSliderProps}>
-        {!this.props.unslick ? prevArrow : ""}
+        {!props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
-          <Track ref={this.trackRefHandler} {...trackProps}>
-            {this.props.children}
+          {this.props.label && (
+            <span className={this.props.cssHideClass}>
+              <span id={`${uniqueNameForId}Label`}>{this.props.label}</span>
+              <span id={`${uniqueNameForId}Inst`}>
+                {this.props.instructions}
+              </span>
+            </span>
+          )}
+          <Track
+            ref={this.trackRefHandler}
+            {...trackProps}
+            type={this.props.type}
+            labelId={uniqueNameForId}
+          >
+            {props.children}
           </Track>
         </div>
-        {!this.props.unslick ? nextArrow : ""}
-        {!this.props.unslick ? dots : ""}
+        {!props.unslick ? nextArrow : ""}
+        {!props.unslick ? dots : ""}
       </div>
     );
   };

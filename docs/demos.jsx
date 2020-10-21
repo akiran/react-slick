@@ -32,11 +32,13 @@ import CustomPaging from '../examples/CustomPaging'
 import CustomSlides from '../examples/CustomSlides'
 import AsNavFor from '../examples/AsNavFor'
 import AppendDots from '../examples/AppendDots'
+import RadioAccessibility from '../examples/RadioAccessibility'
 
 export default class App extends React.Component {
   render() {
     return (
       <div className='content'>
+        <RadioAccessibility />
         <SimpleSlider />
         <MultipleItems />
         <MultipleRows />

@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import Slider from "../src/index";
 
 describe("Slider", function() {
@@ -13,9 +13,7 @@ describe("Slider", function() {
     );
     expect(
       wrapper.contains(
-        <div tabIndex={-1} style={{ width: "100%", display: "inline-block" }}>
-          slide1
-        </div>
+        <div style={{ width: "100%", display: "inline-block" }}>slide1</div>
       )
     ).toBe(true);
   });

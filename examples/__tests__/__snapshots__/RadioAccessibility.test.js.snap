@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio Accessibility should have 3 active slides 1`] = `
+"<div>
+    <h2> Radio Accessibility </h2>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\"><span class=\\"hide508\\"><span id=\\"DeliveryCalendarLabel\\">Delivery Calendar</span><span id=\\"DeliveryCalendarInst\\">Change your delivery date</span></span>
+            <div aria-labelledby=\\"DeliveryCalendarLabel DeliveryCalendarInst\\" role=\\"radiogroup\\" class=\\"slick-track\\" style=\\"opacity: 1;\\">
+                <div data-index=\\"0\\" aria-checked=\\"true\\" aria-required=\\"true\\" tabindex=\\"0\\" role=\\"radio\\" class=\\"slick-slide slick-active slick-current\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\"><a href=\\"/goto\\">Focusable Link</a><button>Focusable Button</button>
+                            <h3>Header 1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"4\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"5\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"6\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"7\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"8\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;
+
+exports[`Radio Accessibility should have 9 slides and no cloned slides 1`] = `
+"<div>
+    <h2> Radio Accessibility </h2>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\"><span class=\\"hide508\\"><span id=\\"DeliveryCalendarLabel\\">Delivery Calendar</span><span id=\\"DeliveryCalendarInst\\">Change your delivery date</span></span>
+            <div aria-labelledby=\\"DeliveryCalendarLabel DeliveryCalendarInst\\" role=\\"radiogroup\\" class=\\"slick-track\\" style=\\"opacity: 1;\\">
+                <div data-index=\\"0\\" aria-checked=\\"true\\" aria-required=\\"true\\" tabindex=\\"0\\" role=\\"radio\\" class=\\"slick-slide slick-active slick-current\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\"><a href=\\"/goto\\">Focusable Link</a><button>Focusable Button</button>
+                            <h3>Header 1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"4\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"5\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"6\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"7\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"8\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;
+
+exports[`Radio Accessibility should show first 3 slides 1`] = `
+"<div>
+    <h2> Radio Accessibility </h2>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev slick-disabled\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\"><span class=\\"hide508\\"><span id=\\"DeliveryCalendarLabel\\">Delivery Calendar</span><span id=\\"DeliveryCalendarInst\\">Change your delivery date</span></span>
+            <div aria-labelledby=\\"DeliveryCalendarLabel DeliveryCalendarInst\\" role=\\"radiogroup\\" class=\\"slick-track\\" style=\\"opacity: 1;\\">
+                <div data-index=\\"0\\" aria-checked=\\"true\\" aria-required=\\"true\\" tabindex=\\"0\\" role=\\"radio\\" class=\\"slick-slide slick-active slick-current\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\"><a href=\\"/goto\\">Focusable Link</a><button>Focusable Button</button>
+                            <h3>Header 1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"4\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"5\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"6\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"7\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"8\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;
+
+exports[`Radio Accessibility should show slides from 4 to 6 when next button is clicked 1`] = `
+"<div>
+    <h2> Radio Accessibility </h2>
+    <div class=\\"slick-slider slick-initialized\\" dir=\\"ltr\\"><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-prev\\" style=\\"display: block;\\"> Previous</button>
+        <div class=\\"slick-list\\"><span class=\\"hide508\\"><span id=\\"DeliveryCalendarLabel\\">Delivery Calendar</span><span id=\\"DeliveryCalendarInst\\">Change your delivery date</span></span>
+            <div aria-labelledby=\\"DeliveryCalendarLabel DeliveryCalendarInst\\" role=\\"radiogroup\\" class=\\"slick-track\\" style=\\"opacity: 1;\\">
+                <div data-index=\\"0\\" aria-checked=\\"true\\" aria-required=\\"true\\" tabindex=\\"0\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\"><a href=\\"/goto\\">Focusable Link</a><button>Focusable Button</button>
+                            <h3>Header 1</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"1\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"2\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"3\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active slick-current\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>4</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"4\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>5</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"5\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide slick-active\\" style=\\"outline: none; width: 0px;\\">
+                    <div>
+                        <div style=\\"width: 100%; display: inline-block;\\">
+                            <h3>6</h3>
+                        </div>
+                    </div>
+                </div>
+                <div data-index=\\"6\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"7\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+                <div data-index=\\"8\\" aria-checked=\\"false\\" aria-required=\\"true\\" tabindex=\\"-1\\" role=\\"radio\\" class=\\"slick-slide\\" style=\\"outline: none; width: 0px;\\"></div>
+            </div>
+        </div><button type=\\"button\\" data-role=\\"none\\" class=\\"slick-arrow slick-next\\" style=\\"display: block;\\"> Next</button>
+    </div>
+</div>"
+`;
