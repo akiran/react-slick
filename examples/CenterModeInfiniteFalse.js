@@ -9,7 +9,7 @@ export default class CenterModeInfiniteFalse extends Component {
       infinite: false,
       centerPadding: "60px",
       slidesToShow: 3,
-      initialSlide: 1,
+      initialSlide: 2,
       speed: 500
     };
     return (

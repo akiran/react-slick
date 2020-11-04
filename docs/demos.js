@@ -12,6 +12,7 @@ import Resizable from "../examples/Resizable";
 import UnevenSetsInfinite from "../examples/UnevenSetsInfinite";
 import UnevenSetsFinite from "../examples/UnevenSetsFinite";
 import CenterMode from "../examples/CenterMode";
+import CenterModeInfiniteFalse from "../examples/CenterModeInfiniteFalse";
 import FocusOnSelect from "../examples/FocusOnSelect";
 import AutoPlay from "../examples/AutoPlay";
 import AutoPlayMethods from "../examples/AutoPlayMethods";
@@ -45,6 +46,7 @@ export default class App extends React.Component {
         <UnevenSetsInfinite />
         <UnevenSetsFinite />
         <CenterMode />
+        <CenterModeInfiniteFalse />
         <FocusOnSelect />
         <AutoPlay />
         <AutoPlayMethods />
