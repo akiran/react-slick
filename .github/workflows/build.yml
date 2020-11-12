@@ -1,0 +1,32 @@
+name: 'Build & Test'
+on: [pull_request]
+
+jobs:
+  build:
+    name: 'Setup and test'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read nodejs version from package.json
+        run: echo "NODE_VERSION=$(node -p -e "require('./package.json').engines.node")" >> $GITHUB_ENV
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install Client dependencies
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Run Build
+        run: npm run build
+
+      - name: Run Test
+        run: npm run test

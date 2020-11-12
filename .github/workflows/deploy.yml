@@ -1,0 +1,38 @@
+name: 'NPM Publish'
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    name: 'Publish'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read nodejs version from package.json
+        run: echo "NODE_VERSION=$(node -p -e "require('./package.json').engines.node")" >> $GITHUB_ENV
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Setup NPM options
+        working-directory:
+        run: |
+          npm set init.author.name "Q4"
+          npm set init.author.email "alexc@q4inc.com"
+          npm config set scope q4
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+      - name: Run Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
