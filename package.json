@@ -1,7 +1,7 @@
 {
   "name": "@q4/react-slick",
   "version": "0.27.13",
-  "description": " React port of slick carousel",
+  "description": "React port of slick carousel",
   "main": "./lib",
   "files": [
     "dist",
@@ -20,11 +20,11 @@
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged"
   },
-  "author": "Kiran Abburi",
-  "license": "MIT",
+  "author": "Q4",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/q4mobile/react-slick"
   },
   "keywords": [
     "slick",
@@ -121,13 +121,5 @@
       ]
     }
   ],
-  "bugs": {
-    "url": "https://github.com/akiran/react-slick/issues"
-  },
-  "homepage": "https://react-slick.neostack.com",
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/react-slick",
-    "logo": "https://opencollective.com/opencollective/logo.txt"
-  }
+  "homepage": "https://github.com/q4mobile/react-slick#readme"
 }
