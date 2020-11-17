@@ -1,5 +1,5 @@
 version: "1"
 rules:
   - base: master
-    upstream: akiran/react-slick:master
+    upstream: akiran:master
     mergeMethod: hardreset
