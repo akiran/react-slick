@@ -49,11 +49,12 @@ describe("LazyLoad test", () => {
     lazyLoad: true,
     useCSS: false,
     speed: 0,
-    noOfSlides: [7, 8],
-    initialSlide: [0, 5],
+    noOfSlides: [12, 15],
+    initialSlide: [0, 3],
     slidesToShow: [1, 3, 4],
     slidesToScroll: [1, 3],
-    centerMode: [true, false]
+    centerMode: [true, false],
+    ondemandLazyPageMultiplier: [0, 1, 2]
   };
   let settingsList = [];
   tryAllConfigs(settings, settingsList);

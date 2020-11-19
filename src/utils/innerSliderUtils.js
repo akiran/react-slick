@@ -41,6 +41,9 @@ export const lazySlidesOnRight = spec =>
     ? Math.floor((spec.slidesToShow - 1) / 2) +
       1 +
       (parseInt(spec.centerPadding) > 0 ? 1 : 0)
+    : typeof spec.ondemandLazyPageMultiplier === "number" &&
+      spec.ondemandLazyPageMultiplier > 0
+    ? spec.slidesToShow * spec.ondemandLazyPageMultiplier
     : spec.slidesToShow;
 
 // get width of an element
