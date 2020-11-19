@@ -25,7 +25,7 @@ export default class Slider extends React.Component {
   }
 
   // handles responsive breakpoints
-  componentWillMount() {
+  componentDidMount() {
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
@@ -199,14 +199,18 @@ export default class Slider extends React.Component {
       const className = "regular slider " + (this.props.className || "");
       return (
         <settings.slidesWrapper className={className}>
-          {newChildren}
+          {children}
         </settings.slidesWrapper>
       );
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
     }
     return (
-      <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider
+        style={this.props.style}
+        ref={this.innerSliderRefHandler}
+        {...settings}
+      >
         {newChildren}
       </InnerSlider>
     );

@@ -59,6 +59,11 @@ gulp.task(
   gulp.series(["watch", "copy", "sass"], function() {
     console.log("Start");
     var myConfig = require("./webpack.config");
+    if (process.env.SINGLE_DEMO) {
+      myConfig.entry = {
+        "docs.js": "./docs/single-demo.js"
+      };
+    }
     myConfig.plugins = myConfig.plugins.concat(
       new webpack.DefinePlugin({
         "process.env": {
@@ -73,11 +78,11 @@ gulp.task(
       stats: {
         colors: true
       }
-    }).listen(DEV_PORT, "localhost", function(err, result) {
+    }).listen(DEV_PORT, "0.0.0.0", function(err, result) {
       if (err) {
         console.log(err);
       } else {
-        const server_url = `http://localhost:${DEV_PORT}`;
+        const server_url = `http://0.0.0.0:${DEV_PORT}`;
         console.log(`> Dev Server started at ${server_url}`);
         opn(server_url);
       }
