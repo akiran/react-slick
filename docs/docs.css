@@ -1,3 +1,10 @@
+img {
+  z-index: -1;
+}
+
+div {
+  z-index: 0;
+}
 
 h3 {
   background: #00558B;
