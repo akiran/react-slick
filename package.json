@@ -3,6 +3,7 @@
   "version": "0.27.14",
   "description": " React port of slick carousel",
   "main": "./lib",
+  "module": "./es",
   "types": "./types.d.ts",
   "files": [
     "dist",
@@ -14,7 +15,8 @@
     "demo": "SINGLE_DEMO=true gulp server",
     "build-dev": "gulp clean && gulp sass && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
-    "build": "npm run lib && gulp dist",
+    "es": "ESMODULES=true babel ./src --out-dir ./es",
+    "build": "npm run lib && npm run es && gulp dist",
     "prepublishOnly": "npm run build",
     "test": "npm run lint && jest",
     "test:watch": "jest --watch",
