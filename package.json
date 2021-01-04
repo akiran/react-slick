@@ -3,6 +3,7 @@
   "version": "0.27.14",
   "description": " React port of slick carousel",
   "main": "./lib",
+  "module": "./es",
   "types": "./types.d.ts",
   "files": [
     "dist",
@@ -14,7 +15,8 @@
     "demo": "SINGLE_DEMO=true gulp server",
     "build-dev": "gulp clean && gulp sass && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
-    "build": "npm run lib && gulp dist",
+    "es": "ESMODULES=true babel ./src --out-dir ./es",
+    "build": "npm run lib && npm run es && gulp dist",
     "prepublishOnly": "npm run build",
     "test": "npm run lint && jest",
     "test:watch": "jest --watch",
@@ -95,10 +97,6 @@
     "json2mq": "^0.2.0",
     "lodash": "^4.17.15",
     "resize-observer-polyfill": "^1.5.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0",
-    "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0"
   },
   "jest": {
     "setupFiles": [
