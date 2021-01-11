@@ -88,13 +88,14 @@ export class InnerSlider extends React.Component {
       }
     });
     this.ro.observe(this.list);
-    Array.prototype.forEach.call(
-      document.querySelectorAll(".slick-slide"),
-      slide => {
-        slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null;
-        slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
-      }
-    );
+    document.querySelectorAll &&
+      Array.prototype.forEach.call(
+        document.querySelectorAll(".slick-slide"),
+        slide => {
+          slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null;
+          slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
+        }
+      );
     if (window.addEventListener) {
       window.addEventListener("resize", this.onWindowResized);
     } else {
@@ -302,7 +303,10 @@ export class InnerSlider extends React.Component {
     };
   };
   checkImagesLoad = () => {
-    let images = this.list.querySelectorAll(".slick-slide img");
+    let images =
+      (this.list.querySelectorAll &&
+        this.list.querySelectorAll(".slick-slide img")) ||
+      [];
     let imagesCount = images.length,
       loadedCount = 0;
     Array.prototype.forEach.call(images, image => {
