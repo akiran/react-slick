@@ -584,7 +584,11 @@ export const getTrackCSS = spec => {
   let trackWidth, trackHeight;
   const trackChildren = spec.slideCount + 2 * spec.slidesToShow;
   if (!spec.vertical) {
-    trackWidth = getTotalSlides(spec) * spec.slideWidth;
+    // We take 3 times the width of the children because of the preClones and postClones.
+    trackWidth = spec.variableWidth
+      ? spec.children.reduce((sum, child) => sum + child.props.style.width, 0) *
+        3
+      : getTotalSlides(spec) * spec.slideWidth;
   } else {
     trackHeight = trackChildren * spec.slideHeight;
   }
