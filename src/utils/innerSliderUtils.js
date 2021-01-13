@@ -133,7 +133,7 @@ export const initializedState = spec => {
     currentSlide,
     lazyLoadedList
   });
-  lazyLoadedList.concat(slidesToLoad);
+  lazyLoadedList = lazyLoadedList.concat(slidesToLoad);
 
   let state = {
     slideCount,
@@ -161,7 +161,6 @@ export const slideHandler = spec => {
     infinite,
     index,
     slideCount,
-    lazyLoadedList,
     lazyLoad,
     currentSlide,
     centerMode,
@@ -169,6 +168,7 @@ export const slideHandler = spec => {
     slidesToShow,
     useCSS
   } = spec;
+  let { lazyLoadedList } = spec;
   if (waitForAnimate && animating) return {};
   let animationSlide = index,
     finalSlide,
@@ -185,7 +185,7 @@ export const slideHandler = spec => {
       animationSlide = index - slideCount;
     }
     if (lazyLoad && lazyLoadedList.indexOf(animationSlide) < 0) {
-      lazyLoadedList.push(animationSlide);
+      lazyLoadedList = lazyLoadedList.concat(animationSlide);
     }
     state = {
       animating: true,
@@ -222,10 +222,11 @@ export const slideHandler = spec => {
       if (animationLeft === finalLeft) animationSlide = finalSlide;
       animationLeft = finalLeft;
     }
-    lazyLoad &&
-      lazyLoadedList.concat(
+    if (lazyLoad) {
+      lazyLoadedList = lazyLoadedList.concat(
         getOnDemandLazySlides({ ...spec, currentSlide: animationSlide })
       );
+    }
     if (!useCSS) {
       state = {
         currentSlide: finalSlide,
