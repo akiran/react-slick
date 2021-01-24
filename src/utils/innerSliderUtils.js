@@ -4,6 +4,13 @@ export function clamp(number, lowerBound, upperBound) {
   return Math.max(lowerBound, Math.min(number, upperBound));
 }
 
+export const safePreventDefault = event => {
+  const passiveEvents = ["onTouchStart", "onTouchMove", "onTouchEnd"];
+  if(!passiveEvents.includes(event._reactName)) {
+    event.preventDefault();
+  }
+}
+
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
   let startIndex = lazyStartIndex(spec);
@@ -316,7 +323,7 @@ export const keyHandler = (e, accessibility, rtl) => {
 };
 
 export const swipeStart = (e, swipe, draggable) => {
-  e.target.tagName === "IMG" && e.preventDefault();
+  e.target.tagName === "IMG" && safePreventDefault(e);
   if (!swipe || (!draggable && e.type.indexOf("mouse") !== -1)) return "";
   return {
     dragging: true,
@@ -352,8 +359,8 @@ export const swipeMove = (e, spec) => {
     listWidth
   } = spec;
   if (scrolling) return;
-  if (animating) return e.preventDefault();
-  if (vertical && swipeToSlide && verticalSwiping) e.preventDefault();
+  if (animating) return safePreventDefault(e);
+  if (vertical && swipeToSlide && verticalSwiping) safePreventDefault(e);
   let swipeLeft,
     state = {};
   let curLeft = getTrackLeft(spec);
@@ -421,7 +428,7 @@ export const swipeMove = (e, spec) => {
   }
   if (touchObject.swipeLength > 10) {
     state["swiping"] = true;
-    e.preventDefault();
+    safePreventDefault(e);
   }
   return state;
 };
@@ -442,7 +449,7 @@ export const swipeEnd = (e, spec) => {
     infinite
   } = spec;
   if (!dragging) {
-    if (swipe) e.preventDefault();
+    if (swipe) safePreventDefault(e);
     return {};
   }
   let minSwipe = verticalSwiping
@@ -466,7 +473,7 @@ export const swipeEnd = (e, spec) => {
     return state;
   }
   if (touchObject.swipeLength > minSwipe) {
-    e.preventDefault();
+    safePreventDefault(e);
     if (onSwipe) {
       onSwipe(swipeDirection);
     }
