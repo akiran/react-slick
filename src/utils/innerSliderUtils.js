@@ -316,7 +316,7 @@ export const keyHandler = (e, accessibility, rtl) => {
 };
 
 export const swipeStart = (e, swipe, draggable) => {
-  e.target.tagName === "IMG";
+  e.target.tagName === "IMG" && e.preventDefault();
   if (!swipe || (!draggable && e.type.indexOf("mouse") !== -1)) return "";
   return {
     dragging: true,
@@ -352,6 +352,7 @@ export const swipeMove = (e, spec) => {
     listWidth
   } = spec;
   if (scrolling) return;
+  if (animating) return e.preventDefault();
   if (vertical && swipeToSlide && verticalSwiping) e.preventDefault();
   let swipeLeft,
     state = {};
@@ -420,6 +421,7 @@ export const swipeMove = (e, spec) => {
   }
   if (touchObject.swipeLength > 10) {
     state["swiping"] = true;
+    e.preventDefault();
   }
   return state;
 };
