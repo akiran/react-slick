@@ -5,7 +5,7 @@ export function clamp(number, lowerBound, upperBound) {
 }
 
 export const safePreventDefault = event => {
-  const passiveEvents = ["onTouchStart", "onTouchMove", "onTouchEnd"];
+  const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
   if(!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
