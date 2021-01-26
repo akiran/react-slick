@@ -304,7 +304,8 @@ export class InnerSlider extends React.Component {
   };
   checkImagesLoad = () => {
     let images =
-      (this.list && this.list.querySelectorAll &&
+      (this.list &&
+        this.list.querySelectorAll &&
         this.list.querySelectorAll(".slick-slide img")) ||
       [];
     let imagesCount = images.length,
@@ -584,7 +585,7 @@ export class InnerSlider extends React.Component {
     }
     const autoplaying = this.state.autoplaying;
     if (pauseType === "paused") {
-      this.setState({ autoplaying: "paused" });
+      if (autoplaying !== "paused") this.setState({ autoplaying: "paused" });
     } else if (pauseType === "focused") {
       if (autoplaying === "hovered" || autoplaying === "playing") {
         this.setState({ autoplaying: "focused" });
