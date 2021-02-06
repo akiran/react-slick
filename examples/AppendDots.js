@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "../src/slider";
 
-export default class AppendDots extends Component {
-  render() {
+const AppendDots = () => {
+ 
     const settings = {
       dots: true,
       infinite: true,
@@ -32,6 +32,7 @@ export default class AppendDots extends Component {
         </div>
       )
     };
+  
     return (
       <div>
         <h2>Append Dots</h2>
@@ -58,4 +59,5 @@ export default class AppendDots extends Component {
       </div>
     );
   }
-}
+
+export default AppendDots;
