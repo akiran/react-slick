@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "../src/slider";
 
-export default class CenterMode extends Component {
-  render() {
+const CenterMode = () => {
+
     const settings = {
       className: "center",
       centerMode: true,
@@ -11,6 +11,7 @@ export default class CenterMode extends Component {
       slidesToShow: 3,
       speed: 500
     };
+
     return (
       <div>
         <h2>Center Mode</h2>
@@ -37,4 +38,5 @@ export default class CenterMode extends Component {
       </div>
     );
   }
-}
+
+export default CenterMode;
