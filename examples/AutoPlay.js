@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "../src/slider";
 
-export default class AutoPlay extends Component {
-  render() {
+const AutoPlay = () => {
+  
     const settings = {
       dots: true,
       infinite: true,
@@ -13,6 +13,7 @@ export default class AutoPlay extends Component {
       autoplaySpeed: 2000,
       cssEase: "linear"
     };
+  
     return (
       <div>
         <h2>Auto Play</h2>
@@ -39,4 +40,5 @@ export default class AutoPlay extends Component {
       </div>
     );
   }
-}
+
+export default AutoPlay;
