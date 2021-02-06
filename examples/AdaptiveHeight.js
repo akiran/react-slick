@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "../src/slider";
 
-export default class AdaptiveHeight extends Component {
-  render() {
-    var settings = {
+const AdaptiveHeight = () => {
+  
+    const settings = {
       className: "",
       dots: true,
       infinite: true,
@@ -11,6 +11,7 @@ export default class AdaptiveHeight extends Component {
       slidesToScroll: 1,
       adaptiveHeight: true
     };
+  
     return (
       <div>
         <h2>Adaptive height</h2>
@@ -40,4 +41,5 @@ export default class AdaptiveHeight extends Component {
       </div>
     );
   }
-}
+
+export default AdaptiveHeight;
