@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "../src/slider";
 import { baseUrl } from "./config";
 
-export default class LazyLoad extends Component {
-  render() {
+const LazyLoad = () => {
+  
     const settings = {
       dots: true,
       lazyLoad: true,
@@ -13,6 +13,7 @@ export default class LazyLoad extends Component {
       slidesToScroll: 1,
       initialSlide: 2
     };
+  
     return (
       <div>
         <h2> Lazy Load</h2>
@@ -34,3 +35,5 @@ export default class LazyLoad extends Component {
     );
   }
 }
+
+export default LazyLoad;
