@@ -10,6 +10,7 @@ class SliderWithBeforeChange extends React.Component {
     };
     this.afterChange = this.afterChange.bind(this);
   }
+
   afterChange(currentSlide) {
     console.log(currentSlide, "afterChange");
     this.setState({
@@ -33,16 +34,34 @@ describe("After change Slider", function() {
     const wrapper = mount(<SliderWithBeforeChange />);
     expect(wrapper.state()).toEqual({ currentSlide: null });
     wrapper.find(".slick-next").simulate("click");
-
-    //TBD . fix this test
-
-    // expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('slide2');
-    // expect(wrapper.state()).toEqual({currentSlide: 1})
-    // wrapper.find('.slick-next').simulate('click')
-    // expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('slide3');
-    // expect(wrapper.state()).toEqual({currentSlide: 2})
-    // wrapper.find('.slick-prev').simulate('click')
-    // expect(wrapper.find('.slick-slide.slick-active').first().text()).toEqual('slide2');
-    // expect(wrapper.state()).toEqual({currentSlide: 1})
+    setTimeout(() => {
+      expect(
+        wrapper
+          .find(".slick-slide.slick-active")
+          .first()
+          .text()
+      ).toEqual("slide2");
+      expect(wrapper.state()).toEqual({ currentSlide: 1 });
+    }, 1);
+    wrapper.find(".slick-next").simulate("click");
+    setTimeout(() => {
+      expect(
+        wrapper
+          .find(".slick-slide.slick-active")
+          .first()
+          .text()
+      ).toEqual("slide3");
+      expect(wrapper.state()).toEqual({ currentSlide: 2 });
+    }, 1);
+    wrapper.find(".slick-prev").simulate("click");
+    setTimeout(() => {
+      expect(
+        wrapper
+          .find(".slick-slide.slick-active")
+          .first()
+          .text()
+      ).toEqual("slide2");
+      expect(wrapper.state()).toEqual({ currentSlide: 1 });
+    }, 1);
   });
 });

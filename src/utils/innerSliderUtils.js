@@ -4,6 +4,13 @@ export function clamp(number, lowerBound, upperBound) {
   return Math.max(lowerBound, Math.min(number, upperBound));
 }
 
+export const safePreventDefault = event => {
+  const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
+  if(!passiveEvents.includes(event._reactName)) {
+    event.preventDefault();
+  }
+}
+
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
   let startIndex = lazyStartIndex(spec);
@@ -133,7 +140,7 @@ export const initializedState = spec => {
     currentSlide,
     lazyLoadedList
   });
-  lazyLoadedList.concat(slidesToLoad);
+  lazyLoadedList = lazyLoadedList.concat(slidesToLoad);
 
   let state = {
     slideCount,
@@ -161,7 +168,6 @@ export const slideHandler = spec => {
     infinite,
     index,
     slideCount,
-    lazyLoadedList,
     lazyLoad,
     currentSlide,
     centerMode,
@@ -169,6 +175,7 @@ export const slideHandler = spec => {
     slidesToShow,
     useCSS
   } = spec;
+  let { lazyLoadedList } = spec;
   if (waitForAnimate && animating) return {};
   let animationSlide = index,
     finalSlide,
@@ -185,7 +192,7 @@ export const slideHandler = spec => {
       animationSlide = index - slideCount;
     }
     if (lazyLoad && lazyLoadedList.indexOf(animationSlide) < 0) {
-      lazyLoadedList.push(animationSlide);
+      lazyLoadedList = lazyLoadedList.concat(animationSlide);
     }
     state = {
       animating: true,
@@ -222,10 +229,11 @@ export const slideHandler = spec => {
       if (animationLeft === finalLeft) animationSlide = finalSlide;
       animationLeft = finalLeft;
     }
-    lazyLoad &&
-      lazyLoadedList.concat(
+    if (lazyLoad) {
+      lazyLoadedList = lazyLoadedList.concat(
         getOnDemandLazySlides({ ...spec, currentSlide: animationSlide })
       );
+    }
     if (!useCSS) {
       state = {
         currentSlide: finalSlide,
@@ -315,7 +323,7 @@ export const keyHandler = (e, accessibility, rtl) => {
 };
 
 export const swipeStart = (e, swipe, draggable) => {
-  e.target.tagName === "IMG" && e.preventDefault();
+  e.target.tagName === "IMG" && safePreventDefault(e);
   if (!swipe || (!draggable && e.type.indexOf("mouse") !== -1)) return "";
   return {
     dragging: true,
@@ -351,8 +359,8 @@ export const swipeMove = (e, spec) => {
     listWidth
   } = spec;
   if (scrolling) return;
-  if (animating) return e.preventDefault();
-  if (vertical && swipeToSlide && verticalSwiping) e.preventDefault();
+  if (animating) return safePreventDefault(e);
+  if (vertical && swipeToSlide && verticalSwiping) safePreventDefault(e);
   let swipeLeft,
     state = {};
   let curLeft = getTrackLeft(spec);
@@ -420,7 +428,7 @@ export const swipeMove = (e, spec) => {
   }
   if (touchObject.swipeLength > 10) {
     state["swiping"] = true;
-    e.preventDefault();
+    safePreventDefault(e);
   }
   return state;
 };
@@ -441,7 +449,7 @@ export const swipeEnd = (e, spec) => {
     infinite
   } = spec;
   if (!dragging) {
-    if (swipe) e.preventDefault();
+    if (swipe) safePreventDefault(e);
     return {};
   }
   let minSwipe = verticalSwiping
@@ -465,7 +473,7 @@ export const swipeEnd = (e, spec) => {
     return state;
   }
   if (touchObject.swipeLength > minSwipe) {
-    e.preventDefault();
+    safePreventDefault(e);
     if (onSwipe) {
       onSwipe(swipeDirection);
     }
@@ -530,7 +538,10 @@ export const getSlideCount = spec => {
   if (spec.swipeToSlide) {
     let swipedSlide;
     const slickList = spec.listRef;
-    const slides = slickList.querySelectorAll(".slick-slide");
+    const slides =
+      (slickList.querySelectorAll &&
+        slickList.querySelectorAll(".slick-slide")) ||
+      [];
     Array.from(slides).every(slide => {
       if (!spec.vertical) {
         if (
