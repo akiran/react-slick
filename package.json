@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/react-slick",
-  "version": "0.28.1",
+  "version": "0.28.2",
   "description": " React port of slick carousel",
   "main": "./lib",
   "module": "./es",
