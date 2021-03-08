@@ -2,36 +2,44 @@ import React, { Component } from "react";
 import Slider from "../src/slider";
 
 export default class AppendDots extends Component {
+  static defaultProps = {
+    setting: {}
+  };
+
   render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      appendDots: dots => (
-        <div
-          style={{
-            backgroundColor: "#ddd",
-            borderRadius: "10px",
-            padding: "10px"
-          }}
-        >
-          <ul style={{ margin: "0px" }}> {dots} </ul>
-        </div>
-      ),
-      customPaging: i => (
-        <div
-          style={{
-            width: "30px",
-            color: "blue",
-            border: "1px blue solid"
-          }}
-        >
-          {i + 1}
-        </div>
-      )
-    };
+    const { settings: propsSettings } = this.props;
+    const settings = Object.assign(
+      {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        appendDots: dots => (
+          <div
+            style={{
+              backgroundColor: "#ddd",
+              borderRadius: "10px",
+              padding: "10px"
+            }}
+          >
+            <ul style={{ margin: "0px" }}>{dots}</ul>
+          </div>
+        ),
+        customPaging: i => (
+          <div
+            style={{
+              width: "30px",
+              color: "blue",
+              border: "1px blue solid"
+            }}
+          >
+            {i + 1}
+          </div>
+        )
+      },
+      propsSettings
+    );
     return (
       <div>
         <h2>Append Dots</h2>
