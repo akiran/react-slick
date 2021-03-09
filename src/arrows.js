@@ -31,19 +31,9 @@ export class PrevArrow extends React.PureComponent {
       style: { display: "block" },
       onClick: prevHandler
     };
-    let customProps = {
-      currentSlide: this.props.currentSlide,
-      slideCount: this.props.slideCount
-    };
-    let prevArrow;
 
-    if (this.props.prevArrow) {
-      prevArrow = React.cloneElement(this.props.prevArrow, {
-        ...prevArrowProps,
-        ...customProps
-      });
-    } else {
-      prevArrow = (
+    if (!this.props.prevArrow) {
+      return (
         <button key="0" type="button" {...prevArrowProps}>
           {" "}
           Previous
@@ -51,7 +41,24 @@ export class PrevArrow extends React.PureComponent {
       );
     }
 
-    return prevArrow;
+    let isReactElement = typeof this.props.prevArrow.type === "string";
+
+    if (isReactElement) {
+      return React.cloneElement(this.props.prevArrow, {
+        ...prevArrowProps,
+        ...this.props.prevArrow.props
+      });
+    }
+
+    let customProps = {
+      currentSlide: this.props.currentSlide,
+      slideCount: this.props.slideCount
+    };
+
+    return React.cloneElement(this.props.prevArrow, {
+      ...prevArrowProps,
+      ...customProps
+    });
   }
 }
 
@@ -78,26 +85,33 @@ export class NextArrow extends React.PureComponent {
       style: { display: "block" },
       onClick: nextHandler
     };
-    let customProps = {
-      currentSlide: this.props.currentSlide,
-      slideCount: this.props.slideCount
-    };
-    let nextArrow;
 
-    if (this.props.nextArrow) {
-      nextArrow = React.cloneElement(this.props.nextArrow, {
-        ...nextArrowProps,
-        ...customProps
-      });
-    } else {
-      nextArrow = (
-        <button key="1" type="button" {...nextArrowProps}>
+    if (!this.props.nextArrow) {
+      return (
+        <button key="0" type="button" {...nextArrowProps}>
           {" "}
           Next
         </button>
       );
     }
 
-    return nextArrow;
+    let isReactElement = typeof this.props.nextArrow.type === "string";
+
+    if (isReactElement) {
+      return React.cloneElement(this.props.nextArrow, {
+        ...nextArrowProps,
+        ...this.props.nextArrow.props
+      });
+    }
+
+    let customProps = {
+      currentSlide: this.props.currentSlide,
+      slideCount: this.props.slideCount
+    };
+
+    return React.cloneElement(this.props.nextArrow, {
+      ...nextArrowProps,
+      ...customProps
+    });
   }
 }
