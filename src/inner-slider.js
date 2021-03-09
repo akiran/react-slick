@@ -753,7 +753,11 @@ export class InnerSlider extends React.Component {
       <div {...innerSliderProps}>
         {!this.props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
-          <Track ref={this.trackRefHandler} {...trackProps}>
+          <Track
+            ref={this.trackRefHandler}
+            {...trackProps}
+            slidesWrapper={this.props.slidesWrapper}
+          >
             {this.props.children}
           </Track>
         </div>

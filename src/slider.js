@@ -186,18 +186,22 @@ export default class Slider extends React.Component {
       }
       if (settings.variableWidth) {
         newChildren.push(
-          <div key={i} style={{ width: currentWidth }}>
+          <settings.slide key={i} style={{ width: currentWidth }}>
             {newSlide}
-          </div>
+          </settings.slide>
         );
       } else {
-        newChildren.push(<div key={i}>{newSlide}</div>);
+        newChildren.push(<settings.slide key={i}>{newSlide}</settings.slide>);
       }
     }
 
     if (settings === "unslick") {
       const className = "regular slider " + (this.props.className || "");
-      return <div className={className}>{children}</div>;
+      return (
+        <settings.slidesWrapper className={className}>
+          {children}
+        </settings.slidesWrapper>
+      );
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
     }

@@ -40,6 +40,7 @@ let defaultProps = {
   slidesPerRow: 1,
   slidesToScroll: 1,
   slidesToShow: 1,
+  slidesWrapper: "div",
   speed: 500,
   swipe: true,
   swipeEvent: null,
