@@ -3,7 +3,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Slider from "../src/slider";
-
 function SimpleSlider() {
   const settings = {
     dots: true,
@@ -48,4 +47,9 @@ function App() {
 }
 
 React.initializeTouchEvents && React.initializeTouchEvents(true);
-ReactDOM.render(<App />, document.getElementById("rapp"));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("rapp")
+);
