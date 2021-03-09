@@ -312,15 +312,12 @@ export class InnerSlider extends React.Component {
     Array.prototype.forEach.call(images, image => {
       const handler = () =>
         ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
-      if (!image.onclick) {
-        image.onclick = () => image.parentNode.focus();
-      } else {
-        const prevClickHandler = image.onclick;
-        image.onclick = () => {
-          prevClickHandler();
+        image.addEventListener("click", function () {
+          if(document.activeElement == image.parentNode){
+            return;
+          }
           image.parentNode.focus();
-        };
-      }
+        }, false)
       if (!image.onload) {
         if (this.props.lazyLoad) {
           image.onload = () => {
