@@ -63,7 +63,7 @@ const getSlideStyle = spec => {
     style.position = "relative";
     if (spec.vertical) {
       style.top = -spec.index * parseInt(spec.slideHeight);
-    } else {
+    } else if (spec.slideWidth) {
       style.left = -spec.index * parseInt(spec.slideWidth);
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
