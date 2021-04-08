@@ -386,9 +386,9 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && swipeDirection === "right") ||
-      (currentSlide + 1 >= dotCount && swipeDirection === "left") ||
-      (!canGoNext(spec) && swipeDirection === "left")
+      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
