@@ -237,6 +237,7 @@ export class InnerSlider extends React.Component {
       updatedState["trackStyle"] = trackStyle;
     }
     this.setState(updatedState, callback);
+    this.setState({ currentSlide: this.props.initialSlide });
   };
 
   ssrInit = () => {
