@@ -116,13 +116,14 @@ const renderSlides = spec => {
     let childStyle = getSlideStyle({ ...spec, index });
     let slideClass = child.props.className || "";
     let slideClasses = getSlideClasses({ ...spec, index });
+    const tabIndex = !slideClasses["slick-active"] ? undefined : "-1";
     // push a cloned element of the desired slide
     slides.push(
       React.cloneElement(child, {
         key: "original" + getKey(child, index),
         "data-index": index,
         className: classnames(slideClasses, slideClass),
-        tabIndex: "-1",
+        tabIndex,
         "aria-hidden": !slideClasses["slick-active"],
         style: { outline: "none", ...(child.props.style || {}), ...childStyle },
         onClick: e => {
@@ -146,11 +147,12 @@ const renderSlides = spec => {
           child = elem;
         }
         slideClasses = getSlideClasses({ ...spec, index: key });
+        const tabIndex = !slideClasses["slick-active"] ? undefined : "-1";
         preCloneSlides.push(
           React.cloneElement(child, {
             key: "precloned" + getKey(child, key),
             "data-index": key,
-            tabIndex: "-1",
+            tabIndex,
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
@@ -170,11 +172,12 @@ const renderSlides = spec => {
           child = elem;
         }
         slideClasses = getSlideClasses({ ...spec, index: key });
+        const tabIndex = !slideClasses["slick-active"] ? undefined : "-1";
         postCloneSlides.push(
           React.cloneElement(child, {
             key: "postcloned" + getKey(child, key),
             "data-index": key,
-            tabIndex: "-1",
+            tabIndex,
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
