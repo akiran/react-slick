@@ -1,6 +1,6 @@
 {
   "name": "@rue21/react-slick",
-  "version": "0.28.2-rue21",
+  "version": "0.28.2-r21",
   "description": "React port of slick carousel",
   "main": "./lib",
   "files": [
