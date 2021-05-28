@@ -1,6 +1,6 @@
 {
-  "name": "react-slick",
-  "version": "0.28.2",
+  "name": "@rue21/react-slick",
+  "version": "0.28.2-rue21",
   "description": "React port of slick carousel",
   "main": "./lib",
   "files": [
@@ -15,7 +15,7 @@
     "build": "npm run lib && gulp dist",
     "prepublish": "npm run build",
     "test": "npm run lint && jest",
-    "udpateSnapshot": "jest --updateSnapshot",
+    "updateSnapshot": "jest --updateSnapshot",
     "test:watch": "jest --watch",
     "lint": "eslint src",
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "https://github.com/rue21/react-slick"
   },
   "keywords": [
     "slick",
@@ -130,5 +130,8 @@
     "type": "opencollective",
     "url": "https://opencollective.com/react-slick",
     "logo": "https://opencollective.com/opencollective/logo.txt"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
