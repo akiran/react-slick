@@ -6,10 +6,10 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
-}
+};
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -35,9 +35,16 @@ export const getRequiredLazySlides = spec => {
 };
 
 // startIndex that needs to be present
-export const lazyStartIndex = spec =>
-  spec.currentSlide - lazySlidesOnLeft(spec);
-export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec);
+export const lazyStartIndex = spec => {
+  let startIndex = spec.currentSlide - lazySlidesOnLeft(spec);
+  if (spec.lazyLoad === "anticipated") startIndex -= 1;
+  return startIndex;
+};
+export const lazyEndIndex = spec => {
+  let endIndex = spec.currentSlide + lazySlidesOnRight(spec);
+  if (spec.lazyLoad === "anticipated") endIndex += 1;
+  return endIndex;
+};
 export const lazySlidesOnLeft = spec =>
   spec.centerMode
     ? Math.floor(spec.slidesToShow / 2) +
@@ -386,9 +393,12 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
-      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
-      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
+      (currentSlide === 0 &&
+        (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount &&
+        (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) &&
+        (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
