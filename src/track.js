@@ -86,6 +86,8 @@ const getSlideStyle = spec => {
 
 const getKey = (child, fallbackKey) => child.key || fallbackKey;
 
+const shouldOmitLazy = (omitLazyForSlides = [], index) => omitLazyForSlides.includes(index);
+
 const renderSlides = spec => {
   let key;
   let slides = [];
@@ -107,7 +109,8 @@ const renderSlides = spec => {
     // in case of lazyLoad, whether or not we want to fetch the slide
     if (
       !spec.lazyLoad ||
-      (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)
+      (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0) ||
+      shouldOmitLazy(spec.omitLazyForSlides, index)
     ) {
       child = elem;
     } else {
