@@ -2147,7 +2147,8 @@
                   "unslick",
                   "centerPadding",
                   "targetSlide",
-                  "useCSS"
+                  "useCSS",
+                  "omitLazyForSlides"
                 ]);
                 var pauseOnHover = _this.props.pauseOnHover;
                 trackProps = _objectSpread(
@@ -4609,6 +4610,15 @@
           return child.key || fallbackKey;
         };
 
+        var shouldOmitLazy = function shouldOmitLazy() {
+          var omitLazyForSlides =
+            arguments.length > 0 && arguments[0] !== undefined
+              ? arguments[0]
+              : [];
+          var index = arguments.length > 1 ? arguments[1] : undefined;
+          return omitLazyForSlides.includes(index);
+        };
+
         var renderSlides = function renderSlides(spec) {
           var key;
           var slides = [];
@@ -4638,7 +4648,8 @@
 
               if (
                 !spec.lazyLoad ||
-                (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)
+                (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0) ||
+                shouldOmitLazy(spec.omitLazyForSlides, index)
               ) {
                 child = elem;
               } else {
