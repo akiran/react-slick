@@ -3,10 +3,6 @@
   "version": "0.28.1",
   "description": " React port of slick carousel",
   "main": "./lib",
-  "files": [
-    "dist",
-    "lib"
-  ],
   "scripts": {
     "start": "gulp server",
     "demo": "SINGLE_DEMO=true gulp server",
