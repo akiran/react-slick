@@ -13,7 +13,7 @@
     "build-dev": "gulp clean && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
     "build": "npm run lib && gulp dist",
-    "postinstall": "npm run build",
+    "prepublish": "npm run build",
     "test": "npm run lint && jest",
     "test:watch": "jest --watch",
     "lint": "eslint src",
