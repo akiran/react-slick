@@ -6,9 +6,9 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
-    event.preventDefault();
-  }
+//   if(!passiveEvents.includes(event._reactName)) {
+//     event.preventDefault();
+//   }
 }
 
 export const getOnDemandLazySlides = spec => {
