@@ -320,6 +320,10 @@
             (_typeof(call) === "object" || typeof call === "function")
           ) {
             return call;
+          } else if (call !== void 0) {
+            throw new TypeError(
+              "Derived constructors may only return object or undefined"
+            );
           }
           return _assertThisInitialized(self);
         }
@@ -974,6 +978,10 @@
             (_typeof(call) === "object" || typeof call === "function")
           ) {
             return call;
+          } else if (call !== void 0) {
+            throw new TypeError(
+              "Derived constructors may only return object or undefined"
+            );
           }
           return _assertThisInitialized(self);
         }
@@ -3281,10 +3289,14 @@
         }; // startIndex that needs to be present
 
         var lazyStartIndex = function lazyStartIndex(spec) {
-          return spec.currentSlide - lazySlidesOnLeft(spec);
+          var startIndex = spec.currentSlide - lazySlidesOnLeft(spec);
+          if (spec.lazyLoad === "anticipated") startIndex -= 1;
+          return startIndex;
         };
         var lazyEndIndex = function lazyEndIndex(spec) {
-          return spec.currentSlide + lazySlidesOnRight(spec);
+          var endIndex = spec.currentSlide + lazySlidesOnRight(spec);
+          if (spec.lazyLoad === "anticipated") endIndex += 1;
+          return endIndex;
         };
         var lazySlidesOnLeft = function lazySlidesOnLeft(spec) {
           return spec.centerMode
@@ -4428,6 +4440,10 @@
             (_typeof(call) === "object" || typeof call === "function")
           ) {
             return call;
+          } else if (call !== void 0) {
+            throw new TypeError(
+              "Derived constructors may only return object or undefined"
+            );
           }
           return _assertThisInitialized(self);
         }
@@ -5068,6 +5084,10 @@
             (_typeof(call) === "object" || typeof call === "function")
           ) {
             return call;
+          } else if (call !== void 0) {
+            throw new TypeError(
+              "Derived constructors may only return object or undefined"
+            );
           }
           return _assertThisInitialized(self);
         }
@@ -5434,6 +5454,10 @@
             (_typeof(call) === "object" || typeof call === "function")
           ) {
             return call;
+          } else if (call !== void 0) {
+            throw new TypeError(
+              "Derived constructors may only return object or undefined"
+            );
           }
           return _assertThisInitialized(self);
         }
