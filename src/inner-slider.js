@@ -72,7 +72,7 @@ export class InnerSlider extends React.Component {
     let spec = { listRef: this.list, trackRef: this.track, ...this.props };
     this.updateState(spec, true, () => {
       this.adaptHeight();
-      this.props.autoplay && this.autoPlay("update");
+      this.props.autoplay && this.autoPlay("playing");
     });
     if (this.props.lazyLoad === "progressive") {
       this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000);
@@ -195,7 +195,9 @@ export class InnerSlider extends React.Component {
           prevProps.autoplay !== this.props.autoplay ||
           prevProps.autoplaySpeed !== this.props.autoplaySpeed
         ) {
-          if (this.props.autoplay) {
+          if (!prevProps.autoplay && this.props.autoplay) {
+            this.autoPlay("playing");
+          } else if (this.props.autoplay) {
             this.autoPlay("update");
           } else {
             this.pause("paused");
