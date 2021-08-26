@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import classnames from "classnames";
+import clsx from "clsx";
 import { canGoNext } from "./utils/innerSliderUtils";
 
 export class PrevArrow extends React.PureComponent {
@@ -27,7 +27,7 @@ export class PrevArrow extends React.PureComponent {
     let prevArrowProps = {
       key: "0",
       "data-role": "none",
-      className: classnames(prevClasses),
+      className: clsx(prevClasses),
       style: { display: "block" },
       onClick: prevHandler
     };
@@ -74,7 +74,7 @@ export class NextArrow extends React.PureComponent {
     let nextArrowProps = {
       key: "1",
       "data-role": "none",
-      className: classnames(nextClasses),
+      className: clsx(nextClasses),
       style: { display: "block" },
       onClick: nextHandler
     };

@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import classnames from "classnames";
+import clsx from "clsx";
 import { clamp } from "./utils/innerSliderUtils";
 
 const getDotCount = spec => {
@@ -55,7 +55,7 @@ export class Dots extends React.PureComponent {
         ? _leftBound
         : clamp(_leftBound, 0, slideCount - 1);
 
-      let className = classnames({
+      let className = clsx({
         "slick-active": infinite
           ? currentSlide >= leftBound && currentSlide <= rightBound
           : currentSlide === leftBound
