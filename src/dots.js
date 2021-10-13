@@ -71,7 +71,15 @@ export class Dots extends React.PureComponent {
       let onClick = this.clickHandler.bind(this, dotOptions);
       dots = dots.concat(
         <li key={i} className={className}>
-          {React.cloneElement(this.props.customPaging(i), { onClick })}
+          {React.cloneElement(
+            this.props.customPaging(i, {
+              slidesToScroll,
+              currentSlide,
+              slidesToShow,
+              slideCount
+            }),
+            { onClick }
+          )}
         </li>
       );
     }
