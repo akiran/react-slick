@@ -55,6 +55,9 @@ export class InnerSlider extends React.Component {
   };
   componentDidMount = () => {
     this.props.onInit && this.props.onInit();
+    if (this.props?.rtl && this.state?.slideCount) {
+        this.setState({ ...this.state, targetSlide: this.state.slideCount - 1 });
+    }
     if (this.props.lazyLoad) {
       let slidesToLoad = getOnDemandLazySlides({
         ...this.props,
