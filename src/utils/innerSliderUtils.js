@@ -6,10 +6,10 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
-}
+};
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -82,7 +82,7 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
   return "vertical";
 };
 
-export const isStickedToRight = (spec) => {
+export const isStickedToRight = spec => {
   const { trackRef, listWidth } = spec;
   if (trackRef) {
     const trackElem = trackRef && trackRef.node;
@@ -91,12 +91,12 @@ export const isStickedToRight = (spec) => {
     const targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
     const sumSlidesWidth =
       trackElem &&
-      trackElem.childNodes
-        .toArray()
-        .reduce((sum, el) => sum + el.getBoundingClientRect().width, 0);
+      Array.from(trackElem.childNodes).reduce(
+        (sum, el) => sum + el.getBoundingClientRect().width,
+        0
+      );
     let maxLeft =
       sumSlidesWidth >= listWidth ? (sumSlidesWidth - listWidth) * -1 : 0.1;
-
     if (targetLeft > maxLeft) {
       maxLeft = false;
     }
@@ -106,7 +106,9 @@ export const isStickedToRight = (spec) => {
 
 // whether or not we can go next
 export const canGoNext = spec => {
-  const variableWidth = spec.trackRef ? spec.trackRef.props.variableWidth : null;
+  const variableWidth = spec.trackRef
+    ? spec.trackRef.props.variableWidth
+    : null;
   let canGo = true;
   if (!spec.infinite) {
     if (spec.centerMode && spec.currentSlide >= spec.slideCount - 1) {
@@ -136,6 +138,7 @@ export const extractObject = (spec, keys) => {
 // get initialized state
 export const initializedState = spec => {
   // spec also contains listRef, trackRef
+  const { listRef, trackRef } = spec;
   let slideCount = React.Children.count(spec.children);
   const listNode = spec.listRef;
   let listWidth = Math.ceil(getWidth(listNode));
@@ -178,7 +181,9 @@ export const initializedState = spec => {
     currentSlide,
     slideHeight,
     listHeight,
-    lazyLoadedList
+    lazyLoadedList,
+    listRef,
+    trackRef
   };
 
   if (spec.autoplaying === null && spec.autoplay) {
@@ -274,6 +279,7 @@ export const slideHandler = spec => {
         animating: true,
         currentSlide: finalSlide,
         trackStyle: getTrackAnimateCSS({ ...spec, left: animationLeft }),
+        canGoNext: canGoNext(spec),
         lazyLoadedList,
         targetSlide
       };
@@ -414,9 +420,12 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
-      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
-      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
+      (currentSlide === 0 &&
+        (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount &&
+        (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) &&
+        (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
