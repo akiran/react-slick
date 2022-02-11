@@ -21,12 +21,8 @@ gulp.task("copy", function() {
   gulp.src("./docs/slick.css").pipe(gulp.dest("./build"));
   gulp.src("./docs/slick-theme.css").pipe(gulp.dest("./build"));
   gulp.src("./docs/img/**/*").pipe(gulp.dest("./build/img"));
-  gulp
-    .src("./node_modules/slick-carousel/slick/fonts/*")
-    .pipe(gulp.dest("./build/fonts"));
-  return gulp
-    .src("./node_modules/slick-carousel/slick/ajax-loader.gif")
-    .pipe(gulp.dest("./build"));
+  gulp.src("./node_modules/slick-carousel/slick/fonts/*").pipe(gulp.dest("./build/fonts"));
+  return gulp.src("./node_modules/slick-carousel/slick/ajax-loader.gif").pipe(gulp.dest("./build"));
 });
 
 gulp.task(
@@ -47,14 +43,14 @@ gulp.task(
     var myConfig = require("./webpack.config");
     if (process.env.SINGLE_DEMO) {
       myConfig.entry = {
-        "docs.js": "./docs/single-demo.js"
+        "docs.js": "./docs/single-demo.js",
       };
     }
     myConfig.plugins = myConfig.plugins.concat(
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify("dev_docs")
-        }
+          NODE_ENV: JSON.stringify("dev_docs"),
+        },
       })
     );
 
@@ -62,13 +58,13 @@ gulp.task(
       contentBase: "./build",
       hot: true,
       stats: {
-        colors: true
-      }
-    }).listen(DEV_PORT, "0.0.0.0", function(err, result) {
+        colors: true,
+      },
+    }).listen(DEV_PORT, "127.0.0.1", function(err, result) {
       if (err) {
         console.log(err);
       } else {
-        const server_url = `http://0.0.0.0:${DEV_PORT}`;
+        const server_url = `http://127.0.0.1:${DEV_PORT}`;
         console.log(`> Dev Server started at ${server_url}`);
         opn(server_url);
       }
@@ -101,8 +97,8 @@ gulp.task("dist-min", function(cb) {
       parallel: true,
       sourceMap: true,
       uglifyOptions: {
-        warnings: false
-      }
+        warnings: false,
+      },
     })
   );
   return webpack(minConfig, function(err, stat) {
