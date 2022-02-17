@@ -14,6 +14,7 @@ export class PrevArrow extends React.PureComponent {
   render() {
     let prevClasses = { "slick-arrow": true, "slick-prev": true };
     let prevHandler = this.clickHandler.bind(this, { message: "previous" });
+    let prevArrowProps = {};
 
     if (
       !this.props.infinite &&
@@ -21,15 +22,16 @@ export class PrevArrow extends React.PureComponent {
         this.props.slideCount <= this.props.slidesToShow)
     ) {
       prevClasses["slick-disabled"] = true;
+      prevArrowProps.disabled = true;
       prevHandler = null;
     }
 
-    let prevArrowProps = {
+    prevArrowProps = {
+      ...prevArrowProps,
       key: "0",
-      "data-role": "none",
       className: classnames(prevClasses),
       style: { display: "block" },
-      onClick: prevHandler
+      onClick: prevHandler,
     };
     let customProps = {
       currentSlide: this.props.currentSlide,
@@ -66,17 +68,20 @@ export class NextArrow extends React.PureComponent {
     let nextClasses = { "slick-arrow": true, "slick-next": true };
     let nextHandler = this.clickHandler.bind(this, { message: "next" });
 
+    let nextArrowProps = {};
+
     if (!canGoNext(this.props)) {
       nextClasses["slick-disabled"] = true;
-      nextHandler = null;
+      nextHandler = null;   
+      nextArrowProps.disabled = true;   
     }
 
-    let nextArrowProps = {
+    nextArrowProps = {
+      ...nextArrowProps,
       key: "1",
-      "data-role": "none",
       className: classnames(nextClasses),
       style: { display: "block" },
-      onClick: nextHandler
+      onClick: nextHandler,
     };
     let customProps = {
       currentSlide: this.props.currentSlide,

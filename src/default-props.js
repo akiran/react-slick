@@ -2,6 +2,7 @@ import React from "react";
 
 let defaultProps = {
   accessibility: true,
+  ac360: false,
   adaptiveHeight: false,
   afterChange: null,
   appendDots: dots => <ul style={{ display: "block" }}>{dots}</ul>,

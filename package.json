@@ -22,10 +22,10 @@
   },
   "author": "Kiran Abburi",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
+  "repository": "git://github.com/yankaindustries/react-slick.git",
   "keywords": [
     "slick",
     "carousel",

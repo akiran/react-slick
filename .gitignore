@@ -9,7 +9,7 @@ npm-debug.log
 lib
 *.sublime-*
 .idea
-dist
+# dist
 yarn.lock
 .vscode
 exampleslib

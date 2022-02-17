@@ -4,6 +4,7 @@ import React from "react";
 import { InnerSlider } from "./inner-slider";
 import json2mq from "json2mq";
 import defaultProps from "./default-props";
+import accessibilityProps from "./accessibility/accessibility-props";
 import { canUseDOM } from "./utils/innerSliderUtils";
 const enquire = canUseDOM() && require("enquire.js");
 
@@ -97,6 +98,10 @@ export default class Slider extends React.Component {
           : { ...defaultProps, ...this.props, ...newProps[0].settings };
     } else {
       settings = { ...defaultProps, ...this.props };
+    }
+
+    if (settings.accessibility && settings.ac360) {
+      settings = { ...settings, ...accessibilityProps };
     }
 
     // force scrolling by one if centerMode is on
