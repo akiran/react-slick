@@ -25,7 +25,7 @@ import {
 import { Track } from "./track";
 import { Dots } from "./dots";
 import { PrevArrow, NextArrow } from "./arrows";
-import ResizeObserver from "resize-observer-polyfill";
+import { ResizeObserver } from "@juggle/resize-observer";
 
 export class InnerSlider extends React.Component {
   constructor(props) {
