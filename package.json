@@ -14,8 +14,6 @@
     "lib": "babel ./src --out-dir ./lib",
     "build": "npm run lib && gulp dist",
     "prepublish": "npm run build",
-    "test": "npm run lint && jest",
-    "test:watch": "jest --watch",
     "lint": "eslint src",
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged"
@@ -50,8 +48,6 @@
     "css-loader": "^2.1.1",
     "deepmerge": "^1.1.0",
     "del": "^2.2.2",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0",
     "es5-shim": "^4.5.9",
     "eslint": "^8.4.1",
     "eslint-plugin-import": "^2.25.3",
@@ -60,9 +56,6 @@
     "foundation-apps": "^1.2.0",
     "gulp": "^4.0.0",
     "husky": "^0.14.3",
-    "jasmine-core": "^2.5.2",
-    "jest": "^24.8.0",
-    "jquery": "^3.2.1",
     "js-beautify": "^1.7.5",
     "json-loader": "^0.5.4",
     "lint-staged": "^12.1.2",
@@ -72,7 +65,6 @@
     "raf": "^3.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-test-renderer": "^18.0.0",
     "sinon": "^2.1.0",
     "slick-carousel": "^1.8.1",
     "style-loader": "^0.16.1",
@@ -92,15 +84,6 @@
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "./test-setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/__tests__/scripts.js",
-      "/__tests__/testUtils.js"
-    ]
   },
   "lint-staged": {
     "*.{js,json,md}": [
