@@ -4,7 +4,7 @@
 
 sinon.stub(console, "error");
 
-import { render, shallow } from "enzyme";
+import { render, mount, shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";
 
@@ -21,7 +21,7 @@ function CustomArrow(props) {
 }
 
 describe("Previous arrows", () => {
-  it("should render arrow", () => {
+  it("should render button as default", () => {
     const wrapper = shallow(<PrevArrow />);
     expect(wrapper.find("button")).toHaveLength(1);
   });
@@ -29,6 +29,34 @@ describe("Previous arrows", () => {
   it("should not result in errors", () => {
     shallow(<PrevArrow />);
 
+    expect(console.error.called).toBe(false);
+  });
+
+  it("should render functional component custom arrow", () => {
+    const CustomArrow = props => {
+      return (
+        <span className="customArrow" onClick={props.onClick}>
+          Previous
+        </span>
+      );
+    };
+
+    const wrapper = mount(<PrevArrow prevArrow={<CustomArrow />} />);
+
+    expect(wrapper.find("span.customArrow")).toHaveLength(1);
+    expect(console.error.called).toBe(false);
+  });
+
+  it("sould render React element custom arrow", () => {
+    const customHandlingOfPrevClick = () => null;
+
+    const customImageArrow = (
+      <img className="customArrowImage" onClick={customHandlingOfPrevClick} />
+    );
+
+    const wrapper = mount(<PrevArrow prevArrow={customImageArrow} />);
+
+    expect(wrapper.find("img.customArrowImage")).toHaveLength(1);
     expect(console.error.called).toBe(false);
   });
 
@@ -45,16 +73,44 @@ describe("Previous arrows", () => {
 });
 
 describe("Next arrows", () => {
-  it("should render arrow", () => {
+  it("should render button as default", () => {
     const wrapper = shallow(<NextArrow />);
     expect(wrapper.find("button")).toHaveLength(1);
   });
 
-  // it('should not result in errors', () => {
-  //   shallow(<NextArrow />);
-  //
-  //   expect(console.error.called).toBe(false);
-  // });
+  it("should not result in errors", () => {
+    shallow(<NextArrow />);
+
+    expect(console.error.called).toBe(false);
+  });
+
+  it("should render functional component custom arrow", () => {
+    const CustomArrow = props => {
+      return (
+        <span className="customArrow" onClick={props.onClick}>
+          Next
+        </span>
+      );
+    };
+
+    const wrapper = mount(<NextArrow nextArrow={<CustomArrow />} />);
+
+    expect(wrapper.find("span.customArrow")).toHaveLength(1);
+    expect(console.error.called).toBe(false);
+  });
+
+  it("sould render React element custom arrow", () => {
+    const customHandlingOfNextClick = () => null;
+
+    const customImageArrow = (
+      <img className="customArrowImage" onClick={customHandlingOfNextClick} />
+    );
+
+    const wrapper = mount(<NextArrow nextArrow={customImageArrow} />);
+
+    expect(wrapper.find("img.customArrowImage")).toHaveLength(1);
+    expect(console.error.called).toBe(false);
+  });
 
   // it('should pass slide data to custom arrow', () => {
   //   let elAttributes;
