@@ -99,8 +99,24 @@ export default class Slider extends React.Component {
       settings = { ...defaultProps, ...this.props };
     }
 
-    // force scrolling by one if centerMode is on
+    // scrollbar
+    if (settings.scrollBar) {
+      if (
+        settings.slidesToScroll > 1 &&
+        process.env.NODE_ENV !== "production"
+      ) {
+        console.warn(
+          `slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`
+        );
+      }
+      settings.slidesToScroll = 1;
+      settings.arrows = false;
+      settings.dots = false;
+      settings.infinite = false;
+    }
+
     if (settings.centerMode) {
+      // force scrolling by one if centerMode is on
       if (
         settings.slidesToScroll > 1 &&
         process.env.NODE_ENV !== "production"
@@ -111,6 +127,7 @@ export default class Slider extends React.Component {
       }
       settings.slidesToScroll = 1;
     }
+
     // force showing one slide and scrolling by one if the fade mode is on
     if (settings.fade) {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {

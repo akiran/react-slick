@@ -722,10 +722,50 @@ export class InnerSlider extends React.Component {
       }
     }
 
-    const listStyle = { ...verticalHeightStyle, ...centerPaddingStyle };
+    var scrollBarStyle = null;
+    var scrollBarTrackStyle = null;
+    var scrollBarHoverStyle = null;
+
+    if (this.props.scrollBar) {
+      if (this.props.scrollBarColor) {
+        scrollBarStyle = { "--scrollbar-color": this.props.scrollBarColor };
+      } else {
+        scrollBarStyle = {
+          "--scrollbar-color": "#00000025"
+        };
+      }
+
+      if (this.props.scrollBarTrackColor) {
+        scrollBarTrackStyle = {
+          "--scrollbar-track-bg": this.props.scrollBarTrackColor
+        };
+      } else {
+        scrollBarTrackStyle = {
+          "--default-scrollbar-track-bg": "#00000030"
+        };
+      }
+
+      if (this.props.scrollBarHoverColor) {
+        scrollBarHoverStyle = {
+          "--scrollbar-hover-color": this.props.scrollBarTrackColor
+        };
+      } else {
+        scrollBarHoverStyle = {
+          "--scrollbar-hover-color": "#00000075"
+        };
+      }
+    }
+
+    const listStyle = {
+      ...verticalHeightStyle,
+      ...centerPaddingStyle,
+      ...scrollBarStyle,
+      ...scrollBarTrackStyle,
+      ...scrollBarHoverStyle
+    };
     const touchMove = this.props.touchMove;
     let listProps = {
-      className: "slick-list",
+      className: `slick-list ${this.props.scrollBar && "scroll-bar"}`,
       style: listStyle,
       onClick: this.clickHandler,
       onMouseDown: touchMove ? this.swipeStart : null,
