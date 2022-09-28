@@ -22,13 +22,15 @@
   "parserOptions": {
     "requireConfigFile": false
   },
-  "plugins": [
-    "react",
-    "import"
-  ],
+  "plugins": ["react", "import"],
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:react/recommended"
-  ]
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
