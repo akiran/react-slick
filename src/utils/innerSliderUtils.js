@@ -15,6 +15,9 @@ export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
+  if(!isNaN(spec.ondemandSlidesToLoad) && spec.ondemandSlidesToLoad > 0 && spec.ondemandSlidesToLoad < spec.slideCount){
+    endIndex = endIndex + spec.ondemandSlidesToLoad;
+  }
   for (let slideIndex = startIndex; slideIndex < endIndex; slideIndex++) {
     if (spec.lazyLoadedList.indexOf(slideIndex) < 0) {
       onDemandSlides.push(slideIndex);
