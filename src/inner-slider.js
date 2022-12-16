@@ -2,7 +2,7 @@
 
 import React from "react";
 import initialState from "./initial-state";
-import debounce from "lodash/debounce";
+import { debounce } from "throttle-debounce";
 import classnames from "classnames";
 import {
   getOnDemandLazySlides,
@@ -207,7 +207,7 @@ export class InnerSlider extends React.Component {
   };
   onWindowResized = (setTrackStyle) => {
     if (this.debouncedResize) this.debouncedResize.cancel();
-    this.debouncedResize = debounce(() => this.resizeWindow(setTrackStyle), 50);
+    this.debouncedResize = debounce(50, () => this.resizeWindow(setTrackStyle));
     this.debouncedResize();
   };
   resizeWindow = (setTrackStyle = true) => {
