@@ -24,7 +24,7 @@ export default class AutoPlayMethods extends Component {
     };
     return (
       <div>
-        <h2>Auto Play & Pause with buttons</h2>
+        <h2>Auto Play & Pause with methods</h2>
         <Slider ref={slider => (this.slider = slider)} {...settings}>
           <div>
             <h3>1</h3>

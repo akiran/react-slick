@@ -2,7 +2,6 @@
 
 var gulp = require("gulp");
 var del = require("del");
-var sass = require("gulp-sass");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var assign = require("object-assign");
@@ -30,22 +29,9 @@ gulp.task("copy", function() {
     .pipe(gulp.dest("./build"));
 });
 
-gulp.task("sass", function() {
-  return gulp
-    .src(["./docs/**/*.{scss,sass}"])
-    .pipe(
-      sass({
-        includePaths: ["bower_components", "node_modules"],
-        errLogToConsole: true
-      })
-    )
-    .pipe(gulp.dest("./build"));
-});
-
 gulp.task(
   "watch",
-  gulp.series(["copy", "sass"], function(done) {
-    gulp.watch(["./docs/**/*.{scss,sass}"], gulp.parallel(["sass"]));
+  gulp.series(["copy"], function(done) {
     gulp.watch(["./docs/index.html"], gulp.parallel(["copy"]));
     gulp.watch(["./docs/docs.css"], gulp.parallel(["copy"]));
     gulp.watch(["./docs/slick.css"], gulp.parallel(["copy"]));
@@ -56,7 +42,7 @@ gulp.task(
 
 gulp.task(
   "server",
-  gulp.series(["watch", "copy", "sass"], function() {
+  gulp.series(["watch", "copy"], function() {
     console.log("Start");
     var myConfig = require("./webpack.config");
     if (process.env.SINGLE_DEMO) {

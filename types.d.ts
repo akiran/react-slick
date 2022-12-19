@@ -9,10 +9,6 @@
 
 import * as React from "react";
 
-type ComponentConstructor<TProps> =
-    | React.ComponentClass<TProps>
-    | React.StatelessComponent<TProps>;
-
 export interface CustomArrowProps {
     className?: string;
     style?: React.CSSProperties;
