@@ -68,17 +68,21 @@ export class Dots extends React.PureComponent {
         currentSlide
       };
 
+      const style = { color: this.props.dotsColor };
+
       let onClick = this.clickHandler.bind(this, dotOptions);
       dots = dots.concat(
-        <li key={i} className={className}>
+        <li key={i} className={className} style={style}>
           {React.cloneElement(this.props.customPaging(i), { onClick })}
         </li>
       );
     }
 
-    return React.cloneElement(this.props.appendDots(dots), {
+    var returnedCompo = React.cloneElement(this.props.appendDots(dots), {
       className: this.props.dotsClass,
       ...mouseEvents
     });
+
+    return returnedCompo;
   }
 }

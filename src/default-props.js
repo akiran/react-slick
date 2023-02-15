@@ -16,6 +16,7 @@ let defaultProps = {
   customPaging: i => <button>{i + 1}</button>,
   dots: false,
   dotsClass: "slick-dots",
+  dotsColor: "Black",
   draggable: true,
   easing: "linear",
   edgeFriction: 0.35,
