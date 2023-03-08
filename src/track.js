@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react";
+import React, { forwardRef, memo } from "react";
 import classnames from "classnames";
 import {
   lazyStartIndex,
@@ -94,7 +94,6 @@ const renderSlides = spec => {
   let childrenCount = React.Children.count(spec.children);
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
-
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
     let childOnClickOptions = {
@@ -103,7 +102,6 @@ const renderSlides = spec => {
       slidesToScroll: spec.slidesToScroll,
       currentSlide: spec.currentSlide
     };
-
     // in case of lazyLoad, whether or not we want to fetch the slide
     if (
       !spec.lazyLoad ||
@@ -133,7 +131,6 @@ const renderSlides = spec => {
         }
       })
     );
-
     // if slide needs to be precloned or postcloned
     if (spec.infinite && spec.fade === false) {
       let preCloneNo = childrenCount - index;
@@ -163,7 +160,6 @@ const renderSlides = spec => {
           })
         );
       }
-
       if (childrenCount !== spec.slidesToShow) {
         key = childrenCount + index;
         if (key < endIndex) {
@@ -189,7 +185,6 @@ const renderSlides = spec => {
       }
     }
   });
-
   if (spec.rtl) {
     return preCloneSlides.concat(slides, postCloneSlides).reverse();
   } else {
@@ -197,26 +192,20 @@ const renderSlides = spec => {
   }
 };
 
-export class Track extends React.PureComponent {
-  node = null;
-
-  handleRef = ref => {
-    this.node = ref;
-  };
-
-  render() {
-    const slides = renderSlides(this.props);
-    const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
+export const Track = memo(
+  forwardRef((props, ref) => {
+    const slides = renderSlides(props);
+    const { onMouseEnter, onMouseOver, onMouseLeave } = props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
     return (
       <div
-        ref={this.handleRef}
+        ref={ref}
         className="slick-track"
-        style={this.props.trackStyle}
+        style={props.trackStyle}
         {...mouseEvents}
       >
         {slides}
       </div>
     );
-  }
-}
+  })
+);

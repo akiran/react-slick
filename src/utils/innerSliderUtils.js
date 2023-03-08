@@ -6,10 +6,10 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
-}
+};
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -111,7 +111,7 @@ export const initializedState = spec => {
   let slideCount = React.Children.count(spec.children);
   const listNode = spec.listRef;
   let listWidth = Math.ceil(getWidth(listNode));
-  const trackNode = spec.trackRef && spec.trackRef.node;
+  const trackNode = spec.trackRef && spec.trackRef;
   let trackWidth = Math.ceil(getWidth(trackNode));
   let slideWidth;
   if (!spec.vertical) {
@@ -141,7 +141,6 @@ export const initializedState = spec => {
     lazyLoadedList
   });
   lazyLoadedList = lazyLoadedList.concat(slidesToLoad);
-
   let state = {
     slideCount,
     slideWidth,
@@ -152,9 +151,8 @@ export const initializedState = spec => {
     listHeight,
     lazyLoadedList
   };
-
   if (spec.autoplaying === null && spec.autoplay) {
-    state["autoplaying"] = "playing";
+    state.autoplaying = "playing";
   }
 
   return state;
@@ -249,6 +247,7 @@ export const slideHandler = spec => {
         lazyLoadedList,
         targetSlide
       };
+
       nextState = {
         animating: false,
         currentSlide: finalSlide,
@@ -386,9 +385,12 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
-      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
-      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
+      (currentSlide === 0 &&
+        (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount &&
+        (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) &&
+        (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
@@ -576,10 +578,14 @@ export const getSlideCount = spec => {
   }
 };
 
-export const checkSpecKeys = (spec, keysArray) =>
-  keysArray.reduce((value, key) => value && spec.hasOwnProperty(key), true)
+export function checkSpecKeys(spec, keysArray) {
+  return keysArray.reduce(
+    (value, key) => value && spec.hasOwnProperty(key),
+    true
+  )
     ? null
     : console.error("Keys Missing:", spec);
+}
 
 export const getTrackCSS = spec => {
   checkSpecKeys(spec, [
@@ -601,6 +607,7 @@ export const getTrackCSS = spec => {
     transition: "",
     WebkitTransition: ""
   };
+
   if (spec.useTransform) {
     let WebkitTransform = !spec.vertical
       ? "translate3d(" + spec.left + "px, 0px, 0px)"
@@ -611,6 +618,7 @@ export const getTrackCSS = spec => {
     let msTransform = !spec.vertical
       ? "translateX(" + spec.left + "px)"
       : "translateY(" + spec.left + "px)";
+
     style = {
       ...style,
       WebkitTransform,
@@ -636,7 +644,6 @@ export const getTrackCSS = spec => {
       style.marginTop = spec.left + "px";
     }
   }
-
   return style;
 };
 export const getTrackAnimateCSS = spec => {
@@ -711,6 +718,7 @@ export const getTrackLeft = spec => {
   let slidesToOffset = 0;
   if (infinite) {
     slidesToOffset = -getPreClones(spec); // bring active slide to the beginning of visual area
+
     // if next scroll doesn't have enough children, just reach till the end of original slides instead of shifting slidesToScroll children
     if (
       slideCount % slidesToScroll !== 0 &&
@@ -746,7 +754,7 @@ export const getTrackLeft = spec => {
 
   if (variableWidth === true) {
     var targetSlideIndex;
-    const trackElem = trackRef && trackRef.node;
+    const trackElem = trackRef;
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
@@ -766,7 +774,6 @@ export const getTrackLeft = spec => {
       targetLeft += targetSlide && (listWidth - targetSlide.offsetWidth) / 2;
     }
   }
-
   return targetLeft;
 };
 
