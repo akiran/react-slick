@@ -5,11 +5,11 @@ import classnames from "classnames";
 import {
   lazyStartIndex,
   lazyEndIndex,
-  getPreClones
+  getPreClones,
 } from "./utils/innerSliderUtils";
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
-const getSlideClasses = spec => {
+const getSlideClasses = (spec) => {
   let slickActive, slickCenter, slickCloned;
   let centerOffset, index;
 
@@ -48,11 +48,11 @@ const getSlideClasses = spec => {
     "slick-active": slickActive,
     "slick-center": slickCenter,
     "slick-cloned": slickCloned,
-    "slick-current": slickCurrent // dubious in case of RTL
+    "slick-current": slickCurrent, // dubious in case of RTL
   };
 };
 
-const getSlideStyle = spec => {
+const getSlideStyle = (spec) => {
   let style = {};
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
@@ -61,7 +61,7 @@ const getSlideStyle = spec => {
 
   if (spec.fade) {
     style.position = "relative";
-    if (spec.vertical) {
+    if (spec.vertical && spec.slideHeight) {
       style.top = -spec.index * parseInt(spec.slideHeight);
     } else {
       style.left = -spec.index * parseInt(spec.slideWidth);
@@ -86,7 +86,7 @@ const getSlideStyle = spec => {
 
 const getKey = (child, fallbackKey) => child.key + "-" + fallbackKey;
 
-const renderSlides = spec => {
+const renderSlides = (spec) => {
   let key;
   let slides = [];
   let preCloneSlides = [];
@@ -101,7 +101,7 @@ const renderSlides = spec => {
       message: "children",
       index: index,
       slidesToScroll: spec.slidesToScroll,
-      currentSlide: spec.currentSlide
+      currentSlide: spec.currentSlide,
     };
 
     // in case of lazyLoad, whether or not we want to fetch the slide
@@ -125,12 +125,12 @@ const renderSlides = spec => {
         tabIndex: "-1",
         "aria-hidden": !slideClasses["slick-active"],
         style: { outline: "none", ...(child.props.style || {}), ...childStyle },
-        onClick: e => {
+        onClick: (e) => {
           child.props && child.props.onClick && child.props.onClick(e);
           if (spec.focusOnSelect) {
             spec.focusOnSelect(childOnClickOptions);
           }
-        }
+        },
       })
     );
 
@@ -154,12 +154,12 @@ const renderSlides = spec => {
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
-            onClick: e => {
+            onClick: (e) => {
               child.props && child.props.onClick && child.props.onClick(e);
               if (spec.focusOnSelect) {
                 spec.focusOnSelect(childOnClickOptions);
               }
-            }
+            },
           })
         );
       }
@@ -178,12 +178,12 @@ const renderSlides = spec => {
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
-            onClick: e => {
+            onClick: (e) => {
               child.props && child.props.onClick && child.props.onClick(e);
               if (spec.focusOnSelect) {
                 spec.focusOnSelect(childOnClickOptions);
               }
-            }
+            },
           })
         );
       }
@@ -200,7 +200,7 @@ const renderSlides = spec => {
 export class Track extends React.PureComponent {
   node = null;
 
-  handleRef = ref => {
+  handleRef = (ref) => {
     this.node = ref;
   };
 
