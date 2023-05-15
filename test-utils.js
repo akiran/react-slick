@@ -12,6 +12,29 @@ export function getActiveSlidesCount(container) {
   return container.querySelectorAll(".slick-slide.slick-active").length;
 }
 
+export function getCurrentSlide(container) {
+  return container.querySelectorAll(".slick-current");
+}
+
+export function getButtons(container) {
+  return container.querySelectorAll(".slick-dots")[0].children;
+}
+
+export function hasClass(element, classname) {
+  if (element.className != undefined) {
+    return element.className == classname;
+  }
+  return false;
+}
+export function activeSlides(container) {
+  return container.querySelectorAll(".slick-dots .slick-active");
+}
+export function activeSlide(container) {
+  return Array.from(
+    container.querySelectorAll(".slick-dots .slick-active")[0].children
+  ).map(e => parseInt(e.textContent) - 1)[0];
+}
+
 export function getActiveSlides(container) {
   return container.querySelectorAll(".slick-slide.slick-active");
 }
