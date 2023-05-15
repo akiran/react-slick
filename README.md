@@ -111,7 +111,6 @@ open http://localhost:8080
 
 Join our [discord channel](https://discord.gg/z7stRE4Cyb) to discuss react-slick bugs and ask for help
 
-
 ## Contributing
 
-Please see the [contributing guidelines](./CONTRIBUTING.md)
+Please see the [contributing guidelines](./CONTRIBUTING.md).
