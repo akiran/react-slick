@@ -1,6 +1,7 @@
 import React from "react";
 import SimpleSlider from "../SimpleSlider";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
+import { clickNext } from "../../test-utils";
 
 describe("SimpleSlider example", () => {
   it("should have 13 slides (1(preclone) + 6(actual) + 6(postclone))", function() {
@@ -9,7 +10,6 @@ describe("SimpleSlider example", () => {
   });
   it("should have 7 clone slides", function() {
     const { container } = render(<SimpleSlider />);
-
     expect(container.getElementsByClassName("slick-cloned").length).toBe(7);
   });
   it("should have 1 active slide", function() {
@@ -17,6 +17,7 @@ describe("SimpleSlider example", () => {
     expect(container.querySelectorAll(".slick-slide.slick-active").length).toBe(
       1
     );
+    expect(activeSlide(container)).toBe(0);
   });
   it("should have 6 dots", function() {
     const { container } = render(<SimpleSlider />);
@@ -40,13 +41,7 @@ describe("SimpleSlider example", () => {
   });
   it("should got to second slide when next button is clicked", function() {
     const { container } = render(<SimpleSlider />);
-    fireEvent(
-      container.getElementsByClassName("slick-next")[0],
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true
-      })
-    );
+    clickNext(container);
     expect(
       container.querySelectorAll(".slick-slide.slick-active")[0].textContent
     ).toBe("2");
@@ -54,9 +49,7 @@ describe("SimpleSlider example", () => {
       1
     );
     expect(
-      container
-        .querySelectorAll(".slick-dots")[0]
-        .children[1].classList.contains("slick-active")
-    ).toBe(true);
+      container.querySelectorAll(".slick-dots")[0].children[1]
+    ).toHaveClass("slick-active");
   });
 });
