@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnevenSets Finite Activity test 1`] = `"[object Undefined]"`;
+
+exports[`UnevenSets Finite Counting test 1`] = `"[object Undefined]"`;
+
+exports[`UnevenSets Finite Positioning test 1`] = `"[object Undefined]"`;
+
+exports[`UnevenSets Infinite Activity test 1`] = `"[object Undefined]"`;
+
+exports[`UnevenSets Infinite Counting test 1`] = `"[object Undefined]"`;
+
+exports[`UnevenSets Infinite Positioning test 1`] = `"[object Undefined]"`;

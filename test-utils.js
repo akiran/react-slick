@@ -13,13 +13,19 @@ export function getActiveSlidesCount(container) {
 }
 
 export function getCurrentSlide(container) {
-  return container.querySelectorAll(".slick-current");
+  return container.querySelector(".slick-current");
 }
 
 export function getButtons(container) {
-  return container.querySelectorAll(".slick-dots")[0].children;
+  return container.querySelectorAll(".slick-dots button");
 }
 
+export function getButtonsListItem(container) {
+  return container.querySelectorAll(".slick-dots")[0].children;
+}
+export function getButtonsLength(container) {
+  return container.querySelectorAll(".slick-dots")[0].children.length;
+}
 export function hasClass(element, classname) {
   if (element.className != undefined) {
     return element.className == classname;
@@ -27,12 +33,10 @@ export function hasClass(element, classname) {
   return false;
 }
 export function activeSlides(container) {
-  return container.querySelectorAll(".slick-dots .slick-active");
+  return container.querySelectorAll(".slick-slide.slick-active");
 }
 export function activeSlide(container) {
-  return Array.from(
-    container.querySelectorAll(".slick-dots .slick-active")[0].children
-  ).map(e => parseInt(e.textContent) - 1)[0];
+  return container.querySelector(".slick-slide.slick-active");
 }
 
 export function getActiveSlides(container) {

@@ -10,7 +10,8 @@ import {
   getActiveSlides,
   getActiveSlidesCount,
   getActiveSlidesText,
-  getButtons
+  getButtons,
+  getButtonsListItem
 } from "../../test-utils";
 
 describe("SimpleSlider example", () => {
@@ -27,7 +28,11 @@ describe("SimpleSlider example", () => {
     expect(container.querySelectorAll(".slick-slide.slick-active").length).toBe(
       1
     );
-    expect(activeSlide(container)).toBe(0);
+    expect(
+      Array.from(activeSlide(container).children).map(
+        e => parseInt(e.textContent) - 1
+      )[0]
+    ).toBe(0);
   });
   it("should have 6 dots", function() {
     const { container } = render(<SimpleSlider />);
@@ -87,7 +92,9 @@ describe("SimpleSlider example", () => {
     );
     expect(getActiveSlidesText(container)[0]).toEqual("4");
     expect(getActiveSlidesCount(container)).toEqual(1);
-    expect(hasClass(getButtons(container)[3], "slick-active")).toEqual(true);
+    expect(hasClass(getButtonsListItem(container)[3], "slick-active")).toEqual(
+      true
+    );
   });
 });
 
@@ -109,7 +116,7 @@ describe("Simple Slider Snapshots", function() {
   it("click on 3rd dot", function() {
     const { container } = render(<SimpleSlider />);
     fireEvent(
-      container.querySelectorAll(".slick-dots button")[2],
+      getButtons(container)[2],
       new MouseEvent("click", {
         bubbles: true,
         cancelable: true
