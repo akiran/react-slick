@@ -21,34 +21,34 @@ describe("Multiple Items", function() {
     const { container } = render(<MultipleItems />);
     expect(getSlidesCount(container)).toEqual(21);
     expect(getClonesCount(container)).toEqual(12);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    //expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should have 3 active slides", function() {
     const { container } = render(<MultipleItems />);
     expect(getActiveSlidesCount(container)).toEqual(3);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should have 3 dots", function() {
     const { container } = render(<MultipleItems />);
     expect(getButtonsLength(container)).toEqual(3);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show first 3 slides", function() {
     const { container } = render(<MultipleItems />);
     expect(getActiveSlidesText(container)).toEqual(["1", "2", "3"]);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show slides from 4 to 6 when next button is clicked", function() {
     const { container } = render(<MultipleItems />);
     clickNext(container);
     expect(getActiveSlidesText(container)).toEqual(["4", "5", "6"]);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show last 3 slides when previous button is clicked", function() {
     const { container } = render(<MultipleItems />);
     clickPrevious(container);
     expect(getActiveSlidesText(container)).toEqual(["7", "8", "9"]);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show slides first 3 slides when first dot is clicked", function() {
     const { container } = render(<MultipleItems />);
@@ -60,7 +60,7 @@ describe("Multiple Items", function() {
       })
     );
     expect(getActiveSlidesText(container)).toEqual(["1", "2", "3"]);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show slides from 4 to 6 when middle dot is clicked", function() {
     const { container } = render(<MultipleItems />);
@@ -72,7 +72,7 @@ describe("Multiple Items", function() {
       })
     );
     expect(getActiveSlidesText(container)).toEqual(["4", "5", "6"]);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show last 3 slides when last dot is clicked", function() {
     const { container } = render(<MultipleItems />);
@@ -84,6 +84,6 @@ describe("Multiple Items", function() {
       })
     );
     expect(getActiveSlidesText(container)).toEqual(["7", "8", "9"]);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
 });

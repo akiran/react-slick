@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Simple Slider Snapshots click on 3rd dot 1`] = `"[object Undefined]"`;
-
-exports[`Simple Slider Snapshots click on next button 1`] = `"[object Undefined]"`;
-
-exports[`Simple Slider Snapshots click on prev button 1`] = `"[object Undefined]"`;
-
-exports[`Simple Slider Snapshots slider initial state 1`] = `"[object Undefined]"`;

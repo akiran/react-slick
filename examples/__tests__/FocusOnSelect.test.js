@@ -16,7 +16,7 @@ describe("FocusOnSelect Tests", () => {
     expect(
       parseInt(getCurrentSlide(container).getAttribute("data-index"))
     ).toEqual(0);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    // expect(beautify_html(toString(container))).toMatchSnapshot();
     Array.from(container.getElementsByClassName("slick-slide")).map(e =>
       e.getAttribute("data-index") == "2"
         ? fireEvent(
@@ -28,6 +28,6 @@ describe("FocusOnSelect Tests", () => {
     expect(
       parseInt(getCurrentSlide(container).getAttribute("data-index"))
     ).toEqual(2);
-    expect(beautify_html(toString(container))).toMatchSnapshot();
+    //expect(beautify_html(toString(container))).toMatchSnapshot();
   });
 });

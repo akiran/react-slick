@@ -4,6 +4,10 @@ export function getSlidesCount(container) {
   return container.getElementsByClassName("slick-slide").length;
 }
 
+export function getSlides(container) {
+  return container.getElementsByClassName("slick-slide");
+}
+
 export function getClonesCount(container) {
   return container.getElementsByClassName("slick-cloned").length;
 }
@@ -28,9 +32,12 @@ export function getButtonsLength(container) {
 }
 export function hasClass(element, classname) {
   if (element.className != undefined) {
-    return element.className == classname;
+    return element.classList.contains(classname);
   }
   return false;
+}
+export function getCurrentSlideIdState(container) {
+  return parseInt(getCurrentSlide(container).getAttribute("data-index")) + 1;
 }
 export function activeSlides(container) {
   return container.querySelectorAll(".slick-slide.slick-active");

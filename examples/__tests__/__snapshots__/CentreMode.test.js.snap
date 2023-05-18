@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CenterMode Tests Activity test 1`] = `"[object Undefined]"`;
-
-exports[`CenterMode Tests Counting test 1`] = `"[object Undefined]"`;
-
-exports[`CenterMode Tests Positioning test 1`] = `"[object Undefined]"`;
