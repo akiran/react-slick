@@ -6,13 +6,16 @@ import {
   activeSlides,
   clickNext,
   clickPrevious,
+  getActiveButton,
   getActiveSlidesCount,
   getActiveSlidesText,
   getButtons,
   getButtonsLength,
+  getButtonsListItem,
   getClonesCount,
   getCurrentSlide,
-  getSlidesCount
+  getSlidesCount,
+  hasClass
 } from "../../test-utils";
 import MultipleItems from "../MultipleItems";
 
@@ -35,18 +38,22 @@ describe("Multiple Items", function() {
   });
   it("should show first 3 slides", function() {
     const { container } = render(<MultipleItems />);
+    expect(getActiveButton(container)).toEqual(["1"]);
     expect(getActiveSlidesText(container)).toEqual(["1", "2", "3"]);
     // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show slides from 4 to 6 when next button is clicked", function() {
     const { container } = render(<MultipleItems />);
     clickNext(container);
+    // Array.from(container.querySelectorAll(".slick-current")).map(e=>console.log(e.textContent))
+    expect(getActiveButton(container)).toEqual(["2"]);
     expect(getActiveSlidesText(container)).toEqual(["4", "5", "6"]);
     // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should show last 3 slides when previous button is clicked", function() {
     const { container } = render(<MultipleItems />);
     clickPrevious(container);
+    expect(getActiveButton(container)).toEqual(["3"]);
     expect(getActiveSlidesText(container)).toEqual(["7", "8", "9"]);
     // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
@@ -59,6 +66,7 @@ describe("Multiple Items", function() {
         cancelable: true
       })
     );
+    expect(getActiveButton(container)).toEqual(["1"]);
     expect(getActiveSlidesText(container)).toEqual(["1", "2", "3"]);
     // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
@@ -71,6 +79,7 @@ describe("Multiple Items", function() {
         cancelable: true
       })
     );
+    expect(getActiveButton(container)).toEqual(["2"]);
     expect(getActiveSlidesText(container)).toEqual(["4", "5", "6"]);
     // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
@@ -83,6 +92,7 @@ describe("Multiple Items", function() {
         cancelable: true
       })
     );
+    expect(getActiveButton(container)).toEqual(["3"]);
     expect(getActiveSlidesText(container)).toEqual(["7", "8", "9"]);
     // expect(beautify_html(toString(container))).toMatchSnapshot();
   });

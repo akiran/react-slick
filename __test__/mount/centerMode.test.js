@@ -25,7 +25,6 @@ let keys = {
 const testsUtil = (settings, actions, keys) => {
   const jqDetails = getJQuerySlickDetails(settings, actions, keys);
   const reactDetails = getReactSlickDetails(settings, actions, keys);
-  console.log(reactDetails, jqDetails);
   test("checking current slide jQuery vs react", () => {
     //currentSlide of react is 1 times more than currentSlide of JQuery
     expect(parseInt(reactDetails.currentSlide) - 1).toEqual(

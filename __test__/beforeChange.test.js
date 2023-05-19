@@ -40,18 +40,9 @@ describe("Slider", function() {
     const { container } = render(<SliderWithBeforeChange />);
     clickNext(container);
     expect(activeSlide(container).textContent).toEqual("slide2");
-    console.log(
-      parseInt(getCurrentSlide(container).getAttribute("data-index"))
-    );
     clickNext(container);
     expect(activeSlide(container).textContent).toEqual("slide3");
-    console.log(
-      parseInt(getCurrentSlide(container).getAttribute("data-index"))
-    );
     clickPrevious(container);
     expect(activeSlide(container).textContent).toEqual("slide2");
-    console.log(
-      parseInt(getCurrentSlide(container).getAttribute("data-index"))
-    );
   });
 });

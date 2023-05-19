@@ -36,6 +36,11 @@ export function hasClass(element, classname) {
   }
   return false;
 }
+export function getActiveButton(container) {
+  return Array.from(
+    container.querySelectorAll(".slick-dots .slick-active button")
+  ).map(e => e.textContent);
+}
 export function getCurrentSlideIdState(container) {
   return parseInt(getCurrentSlide(container).getAttribute("data-index")) + 1;
 }
