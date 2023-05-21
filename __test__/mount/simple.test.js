@@ -71,6 +71,9 @@ describe("InnerSlider component tests: Part 7", () => {
   actions.clickSequence = ["n", "n", "n", "n", "n", "n", "p", "p", "p"];
   testsUtil(settings, actions, keys);
 });
+
+//TODO: old tests used this sequence `actions.clickSequence = ["p", "p", "p", "p", "p", "p", "n", "n", "n"];`
+// Debug why tests failing with that sequence
 describe("InnerSlider component tests: Part 8", () => {
   actions.clickSequence = ["p", "p", "p", "p", "p", "p", "p", "n", "n", "n"];
   testsUtil(settings, actions, keys);
