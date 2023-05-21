@@ -1,12 +1,18 @@
 import React from "react";
 import $ from "jquery";
 import assign from "object-assign";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import Slider from "../src/slider";
 import { InnerSlider } from "../src/inner-slider";
 import defaultProps from "../src/default-props";
 import * as slickCarousel from "slick-carousel"; // defining slick in global environment
 import { getTrackLeft } from "../src/utils/innerSliderUtils";
+import {
+  getActiveSlides,
+  getActiveSlidesCount,
+  clickNext,
+  clickPrevious
+} from "../test-utils";
 
 // finds active slide number in the last transition in the forward direction
 export function activeSlideInLastTransition(
@@ -50,7 +56,7 @@ export function createInnerSlider({ noOfSlides, ...settings }) {
 }
 
 export function createInnerSliderWrapper(settings) {
-  return mount(createInnerSlider(settings));
+  return render(createInnerSlider(settings)).container;
 }
 
 // creates a dom string, containing children of slick children
@@ -66,7 +72,7 @@ export function createJQuerySliderChildren(noOfSlides) {
 export function testSliderScroll({ direction, ...settings }) {
   const { noOfSlides, slidesToShow, slidesToScroll, initialSlide } = settings;
   // initialize react slider
-  const slider = mount(createReactSlider(settings));
+  const { container } = render(createReactSlider(settings));
   // initialize jquery slider
   document.body.innerHTML = `
   <section class="regular slider">
@@ -80,15 +86,15 @@ export function testSliderScroll({ direction, ...settings }) {
 
   let expectedSlideIndex = initialSlide || 0;
   for (let click = 0; click < 2 * noOfSlides + 2; click++) {
-    let activeSlides = slider.find(".slick-slide.slick-active");
+    let activeslides = getActiveSlides(container);
     let $activeSlides = $(".regular.slider").find("div.slick-active");
-    expect(activeSlides.length).toEqual(slidesToShow || 1);
+    expect(getActiveSlidesCount(container)).toEqual(slidesToShow || 1);
     expect($activeSlides.length).toEqual(slidesToShow || 1);
-    let firstActiveSlide = activeSlides.first();
+    let firstActiveSlide = activeslides[0];
     let $firstActiveSlide = $activeSlides.first();
     // console.log('classes', $firstActiveSlide.attr('data-slick-index'))
     // console.warn('currentSlide:', firstActiveSlide.prop('data-index'), 'expected slide', expectedSlideIndex)
-    expect(firstActiveSlide.prop("data-index")).toEqual(
+    expect(parseInt(firstActiveSlide.getAttribute("data-index"))).toEqual(
       expectedSlideIndex % noOfSlides
     );
     expect(parseInt($firstActiveSlide.attr("data-slick-index"))).toEqual(
@@ -96,7 +102,7 @@ export function testSliderScroll({ direction, ...settings }) {
     );
     if (direction === "next") {
       // click the next arrow button
-      slider.find(".slick-next").simulate("click");
+      clickNext(container);
       $("button.slick-next").click();
       expectedSlideIndex += slidesToScroll || 1;
       if (expectedSlideIndex >= noOfSlides) {
@@ -104,7 +110,7 @@ export function testSliderScroll({ direction, ...settings }) {
       }
     } else {
       // click on the prev arrow button
-      slider.find(".slick-prev").simulate("click");
+      clickPrevious(container);
       $("button.slick-prev").click();
       expectedSlideIndex -= slidesToScroll || 1;
       if (expectedSlideIndex < 0) {
@@ -128,11 +134,6 @@ export function testSlider(settings) {
   testSliderScroll(settings2);
 }
 
-export const clickNext = wrapper =>
-  wrapper.find(".slick-next").simulate("click");
-export const clickPrev = wrapper =>
-  wrapper.find(".slick-prev").simulate("click");
-
 export const tryAllConfigs = (settings, settingsList) => {
   let leaf = true;
   for (let key of Object.keys(settings)) {
@@ -154,14 +155,13 @@ export const tryAllConfigs = (settings, settingsList) => {
   }
 };
 
-export const actualTrackLeft = wrapper =>
-  wrapper
-    .find(".slick-track")
-    .props()
+export const actualTrackLeft = container =>
+  container
+    .querySelector(".slick-track")
     .style.transform.match(/translate3d\((\d+)px/i)[1];
 
-export const testTrackLeft = wrapper => {
-  let trackLeft = parseInt(actualTrackLeft(wrapper));
+export const testTrackLeft = container => {
+  let trackLeft = parseInt(actualTrackLeft(container));
   let spec = assign({}, wrapper.props(), wrapper.state(), {
     slideIndex: wrapper.state().currentSlide,
     trackRef: null
@@ -169,3 +169,6 @@ export const testTrackLeft = wrapper => {
   let expectedTrackLeft = getTrackLeft(spec);
   expect(trackLeft).toEqual(parseInt(expectedTrackLeft));
 };
+test("fake test", () => {
+  expect(1).toBe(1);
+});

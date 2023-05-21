@@ -26,7 +26,7 @@ const testsUtil = (settings, actions, keys) => {
   const jqDetails = getJQuerySlickDetails(settings, actions, keys);
   const reactDetails = getReactSlickDetails(settings, actions, keys);
   test("checking current slide jQuery vs react", () => {
-    expect(reactDetails.currentSlide).toEqual(jqDetails.currentSlide);
+    expect(reactDetails.currentSlide).toEqual(parseInt(jqDetails.currentSlide));
   });
   test("checking active slides jQuery vs react", () => {
     expect(reactDetails.activeSlides).toEqual(jqDetails.activeSlides);

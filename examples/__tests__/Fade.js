@@ -1,18 +1,18 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import Fade from "../Fade";
-import { clickNext, clickPrev } from "../../__tests__/testUtils";
+import { getActiveSlide, clickNext, clickPrevious } from "../../test-utils";
 
 describe("Fade", () => {
   it("should change slides when clicked on next & prev buttons", () => {
-    const slider = mount(<Fade />);
-    let activeSlide = slider.find("div.slick-active");
-    expect(activeSlide.props()["data-index"]).toEqual(0);
-    clickNext(slider);
-    activeSlide = slider.find("div.slick-active");
-    expect(activeSlide.props()["data-index"]).toEqual(1);
-    clickPrev(slider);
-    activeSlide = slider.find("div.slick-active");
-    expect(activeSlide.props()["data-index"]).toEqual(0);
+    const { container } = render(<Fade />);
+    let activeslide = getActiveSlide(container);
+    expect(parseInt(activeslide.getAttribute("data-index"))).toEqual(0);
+    clickNext(container);
+    activeslide = getActiveSlide(container);
+    expect(parseInt(activeslide.getAttribute("data-index"))).toEqual(1);
+    clickPrevious(container);
+    activeslide = getActiveSlide(container);
+    expect(parseInt(activeslide.getAttribute("data-index"))).toEqual(0);
   });
 });
