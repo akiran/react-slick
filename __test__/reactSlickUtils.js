@@ -37,7 +37,10 @@ function simulateActions(slider, actions) {
 function fetchDetails(container, keys) {
   let details = { ...fetchDOMDetails(container, keys) };
   if (keys.currentSlide) {
-    details.currentSlide = getCurrentSlide(container).textContent;
+    // details.currentSlide = getCurrentSlide(container).textContent;
+    details.currentSlide = parseInt(
+      getCurrentSlide(container).getAttribute("data-index")
+    );
   }
   return details;
 }

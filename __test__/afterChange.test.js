@@ -35,9 +35,6 @@ class SliderWithAfterChange extends React.Component {
   }
 }
 
-test("fake test", () => {
-  expect(1).toBe(1);
-});
 describe("After change Slider", function() {
   it("should render", function() {
     const { container } = render(<SliderWithAfterChange />);
