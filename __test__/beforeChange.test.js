@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import Slider from "../src/index";
 import {
-  activeSlide,
+  getActiveSlide,
   clickNext,
   clickPrevious,
   getCurrentSlide
@@ -39,10 +39,10 @@ describe("Slider", function() {
   it("should render", function() {
     const { container } = render(<SliderWithBeforeChange />);
     clickNext(container);
-    expect(activeSlide(container).textContent).toEqual("slide2");
+    expect(getActiveSlide(container).textContent).toEqual("slide2");
     clickNext(container);
-    expect(activeSlide(container).textContent).toEqual("slide3");
+    expect(getActiveSlide(container).textContent).toEqual("slide3");
     clickPrevious(container);
-    expect(activeSlide(container).textContent).toEqual("slide2");
+    expect(getActiveSlide(container).textContent).toEqual("slide2");
   });
 });

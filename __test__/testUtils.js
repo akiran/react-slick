@@ -8,7 +8,7 @@ import defaultProps from "../src/default-props";
 import * as slickCarousel from "slick-carousel"; // defining slick in global environment
 import { getTrackLeft } from "../src/utils/innerSliderUtils";
 import {
-  activeSlides,
+  getActiveSlides,
   getActiveSlidesCount,
   clickNext,
   clickPrevious
@@ -86,7 +86,7 @@ export function testSliderScroll({ direction, ...settings }) {
 
   let expectedSlideIndex = initialSlide || 0;
   for (let click = 0; click < 2 * noOfSlides + 2; click++) {
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     let $activeSlides = $(".regular.slider").find("div.slick-active");
     expect(getActiveSlidesCount(container)).toEqual(slidesToShow || 1);
     expect($activeSlides.length).toEqual(slidesToShow || 1);

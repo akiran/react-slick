@@ -4,7 +4,7 @@ import UnevenSetsFinite from "../UnevenSetsFinite";
 import UnevenSetsInfinite from "../UnevenSetsInfinite";
 import { html as beautify_html } from "js-beautify";
 import {
-  activeSlides,
+  getActiveSlides,
   clickNext,
   getActiveSlidesCount,
   getButtonsLength,
@@ -29,7 +29,7 @@ describe("UnevenSets Finite", () => {
   test("Positioning test", () => {
     const { container } = render(<UnevenSetsFinite />);
     let currentSlide = getCurrentSlide(container);
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(0);
     expect(
       Array.from(activeslides).map(slide =>
@@ -41,7 +41,7 @@ describe("UnevenSets Finite", () => {
   test("Activity test", () => {
     const { container } = render(<UnevenSetsFinite />);
     let currentSlide = getCurrentSlide(container);
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(0);
     expect(
       Array.from(activeslides).map(slide =>
@@ -52,7 +52,7 @@ describe("UnevenSets Finite", () => {
     clickNext(container);
 
     currentSlide = getCurrentSlide(container);
-    activeslides = activeSlides(container);
+    activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(4);
     expect(
       Array.from(activeslides).map(slide =>
@@ -63,7 +63,7 @@ describe("UnevenSets Finite", () => {
     clickNext(container);
 
     currentSlide = getCurrentSlide(container);
-    activeslides = activeSlides(container);
+    activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(4);
     expect(
       Array.from(activeslides).map(slide =>
@@ -91,7 +91,7 @@ describe("UnevenSets Infinite", () => {
   test("Positioning test", () => {
     const { container } = render(<UnevenSetsInfinite />);
     let currentSlide = getCurrentSlide(container);
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(0);
     expect(
       Array.from(activeslides).map(slide =>
@@ -103,7 +103,7 @@ describe("UnevenSets Infinite", () => {
   test("Activity test", () => {
     const { container } = render(<UnevenSetsInfinite />);
     let currentSlide = getCurrentSlide(container);
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(0);
     expect(
       Array.from(activeslides).map(slide =>
@@ -114,7 +114,7 @@ describe("UnevenSets Infinite", () => {
     clickNext(container);
 
     currentSlide = getCurrentSlide(container);
-    activeslides = activeSlides(container);
+    activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(4);
     expect(
       Array.from(activeslides).map(slide =>

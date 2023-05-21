@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import Slider from "../src/index";
 import {
-  activeSlide,
+  getActiveSlide,
   clickNext,
   clickPrevious,
   getCurrentSlide
@@ -43,16 +43,15 @@ describe("After change Slider", function() {
     const { container } = render(<SliderWithAfterChange />);
     clickNext(container);
     setTimeout(() => {
-      expect(activeSlide(container).textContent).toEqual("slide2");
+      expect(getActiveSlide(container).textContent).toEqual("slide2");
     }, 1000);
     clickNext(container);
     setTimeout(() => {
-      console.log(activeSlide(container).textContent);
-      expect(activeSlide(container).textContent).toEqual("slide3");
+      expect(getActiveSlide(container).textContent).toEqual("slide3");
     }, 1000);
     clickPrevious(container);
     setTimeout(() => {
-      expect(activeSlide(container).textContent).toEqual("slide2");
+      expect(getActiveSlide(container).textContent).toEqual("slide2");
     }, 1000);
   });
 });

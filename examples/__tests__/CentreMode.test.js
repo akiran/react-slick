@@ -3,7 +3,7 @@ import CenterMode from "../CenterMode";
 import { render } from "@testing-library/react";
 import { html as beautify_html } from "js-beautify";
 import {
-  activeSlides,
+  getActiveSlides,
   getActiveSlidesCount,
   getClonesCount,
   getCurrentSlide,
@@ -25,7 +25,7 @@ describe("CenterMode Tests", () => {
   test("Positioning test", () => {
     const { container } = render(<CenterMode />);
     let currentSlide = getCurrentSlide(container);
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(0);
     expect(
       Array.from(activeslides).map(e => parseInt(e.getAttribute("data-index")))
@@ -35,7 +35,7 @@ describe("CenterMode Tests", () => {
   test("Activity test", () => {
     const { container } = render(<CenterMode />);
     let currentSlide = getCurrentSlide(container);
-    let activeslides = activeSlides(container);
+    let activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(0);
     expect(
       Array.from(activeslides).map(e => parseInt(e.getAttribute("data-index")))
@@ -43,7 +43,7 @@ describe("CenterMode Tests", () => {
     clickNext(container);
 
     currentSlide = getCurrentSlide(container);
-    activeslides = activeSlides(container);
+    activeslides = getActiveSlides(container);
     expect(parseInt(currentSlide.getAttribute("data-index"))).toEqual(1);
     expect(
       Array.from(activeslides).map(e => parseInt(e.getAttribute("data-index")))

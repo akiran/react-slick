@@ -10,7 +10,7 @@ describe.skip("SlickGoTo", () => {
       target: { value: 1 }
     });
     let currentImg = Array.from(
-      activeSlide(container).getElementsByTagName("img")
+      getActiveSlide(container).getElementsByTagName("img")
     )[0];
     expect(currentImg.getAttribute("src")).toEqual(
       "/img/react-slick/abstract02.jpg"
@@ -22,7 +22,7 @@ describe.skip("SlickGoTo", () => {
       target: { value: "1" }
     });
     let currentImg = Array.from(
-      activeSlide(container).getElementsByTagName("img")
+      getActiveSlide(container).getElementsByTagName("img")
     )[0];
     expect(currentImg.getAttribute("src")).toEqual(
       "/img/react-slick/abstract02.jpg"
@@ -34,7 +34,7 @@ describe.skip("SlickGoTo", () => {
       target: { value: 0 }
     });
     let currentImg = Array.from(
-      activeSlide(container).getElementsByTagName("img")
+      getActiveSlide(container).getElementsByTagName("img")
     )[0];
     expect(currentImg.getAttribute("src")).toEqual(
       "/img/react-slick/abstract01.jpg"

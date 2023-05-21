@@ -3,7 +3,7 @@ import SimpleSlider from "../SimpleSlider";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import { html as beautify_html } from "js-beautify";
 import {
-  activeSlide,
+  getActiveSlide,
   clickNext,
   clickPrevious,
   hasClass,
@@ -29,7 +29,7 @@ describe("SimpleSlider example", () => {
       1
     );
     expect(
-      Array.from(activeSlide(container).children).map(
+      Array.from(getActiveSlide(container).children).map(
         e => parseInt(e.textContent) - 1
       )[0]
     ).toBe(0);

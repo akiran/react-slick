@@ -41,13 +41,13 @@ export function getActiveButton(container) {
     container.querySelectorAll(".slick-dots .slick-active button")
   ).map(e => e.textContent);
 }
-export function getCurrentSlideIdState(container) {
-  return parseInt(getCurrentSlide(container).getAttribute("data-index")) + 1;
-}
-export function activeSlides(container) {
-  return container.querySelectorAll(".slick-slide.slick-active");
-}
-export function activeSlide(container) {
+// export function getCurrentSlideIdState(container) {
+//   return parseInt(getCurrentSlide(container).getAttribute("data-index")) + 1;
+// }
+// export function activeSlides(container) {
+//   return container.querySelectorAll(".slick-slide.slick-active");
+// }
+export function getActiveSlide(container) {
   return container.querySelector(".slick-slide.slick-active");
 }
 
@@ -56,7 +56,7 @@ export function getActiveSlides(container) {
 }
 
 export function getActiveSlidesText(container) {
-  const slides = activeSlides(container);
+  const slides = getActiveSlides(container);
   return Array.from(slides).map(e => e.textContent);
 }
 
