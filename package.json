@@ -13,7 +13,7 @@
     "build-dev": "gulp clean && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
     "build": "npm run lib && gulp dist",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "lint": "eslint src",
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged",
