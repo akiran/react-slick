@@ -7,7 +7,7 @@ const AdaptiveHeight = () => {
       className: "",
       dots: true,
       infinite: true,
-      slidesToShow: 1,
+      slidesToShow: 3,
       slidesToScroll: 1,
       adaptiveHeight: true
     };
@@ -21,11 +21,11 @@ const AdaptiveHeight = () => {
           </div>
           <div>
             <h3>2</h3>
-            <p>Hello</p>
+            <p>You should see one text line here...</p>
           </div>
           <div>
             <h3>3</h3>
-            <p>See ....</p>
+            <p>You should see two text lines here...</p>
             <p>Height is adaptive</p>
           </div>
           <div>
