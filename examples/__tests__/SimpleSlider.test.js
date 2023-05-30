@@ -24,14 +24,14 @@ describe("SimpleSlider example", () => {
     const { container } = render(<SimpleSlider />);
     expect(container.getElementsByClassName("slick-cloned").length).toBe(7);
   });
-  it("should have 1 current slide(When initialSlide is 2)", function() {
+  it("should have 1 current slide", function() {
     const { container } = render(<SimpleSlider />);
     expect(
       container.querySelectorAll(".slick-slide.slick-current").length
     ).toBe(1);
-    expect(parseInt(getCurrentSlide(container).textContent) - 1).toBe(2);
+    expect(parseInt(getCurrentSlide(container).textContent) - 1).toBe(0);
   });
-  it("should have 1 active slide(When initialSlide is 2)", function() {
+  it("should have 1 active slide", function() {
     const { container } = render(<SimpleSlider />);
     expect(container.querySelectorAll(".slick-slide.slick-active").length).toBe(
       1
@@ -40,7 +40,7 @@ describe("SimpleSlider example", () => {
       Array.from(getActiveSlide(container).children).map(
         e => parseInt(e.textContent) - 1
       )[0]
-    ).toBe(2);
+    ).toBe(0);
   });
   it("should have 6 dots", function() {
     const { container } = render(<SimpleSlider />);
@@ -68,12 +68,12 @@ describe("SimpleSlider example", () => {
     clickNext(container);
     expect(
       container.querySelectorAll(".slick-slide.slick-active")[0].textContent
-    ).toBe("4");
+    ).toBe("2");
     expect(container.querySelectorAll(".slick-dots .slick-active").length).toBe(
       1
     );
     expect(
-      container.querySelectorAll(".slick-dots")[0].children[3]
+      container.querySelectorAll(".slick-dots")[0].children[1]
     ).toHaveClass("slick-active");
   });
   it("should goto previous slide when prev button is clicked", function() {
@@ -81,12 +81,12 @@ describe("SimpleSlider example", () => {
     clickPrevious(container);
     expect(
       container.querySelectorAll(".slick-slide.slick-active")[0].textContent
-    ).toBe("2");
+    ).toBe("6");
     expect(container.querySelectorAll(".slick-dots .slick-active").length).toBe(
       1
     );
     expect(
-      container.querySelectorAll(".slick-dots")[0].children[1]
+      container.querySelectorAll(".slick-dots")[0].children[5]
     ).toHaveClass("slick-active");
   });
   it("should goto 4th slide when 4th dot is clicked", function() {

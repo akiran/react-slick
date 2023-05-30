@@ -1,18 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "../src/slider";
 
-function FocusOnSelect() {
-  const settings = {
-    focusOnSelect: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    speed: 500
-  };
+function SliderComponent(props) {
+  const { settings } = props;
   return (
     <div>
-      <h2>FocusOnSelect</h2>
-      <div>Click on any slide to select and make it current slide</div>
+      <h2>Slider</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>
@@ -37,4 +30,4 @@ function FocusOnSelect() {
   );
 }
 
-export default FocusOnSelect;
+export default SliderComponent;
