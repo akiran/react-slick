@@ -1,10 +1,38 @@
-### react-slick
+<div style="text-align:center">
 
-[![Backers on Open Collective](https://opencollective.com/react-slick/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/react-slick/sponsors/badge.svg)](#sponsors)
+# React-Slick
 
-##### Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
+</div>
+
+<img src="https://user-images.githubusercontent.com/102548637/236898690-2ceb993f-5335-4bfa-bb6c-ca9fe7ae2883.png" alt="React Slick" width="300" />
+
+React-Slick is a useful and intuitive carousel component built with React. 
+
+This tool enables one to build beautiful and responsive carousels that effectively integrate into a variety of web application projects. React-Slick has efficient documentation and an engaging community, which makes it the perfect tool to use when building dynamic & interactive carousel slideshows for any web application. 
+
+To get setup, please look below at the table of contents.
+
+## Links to Contents:
+- [Link to documentation](http://react-slick.neostack.com/)
+- [Link to Installation](https://github.com/akiran/react-slick#installation)
+- [Link to npm package](https://www.npmjs.com/package/react-slick)
+- [Link to playground](https://codesandbox.io/s/ppwkk5l6xx)
+- [Link to community Discord](https://discord.gg/z7stRE4Cyb)
+- [Link to contributing guidelines](https://github.com/akiran/react-slick/blob/master/CONTRIBUTING.md)
+- [Link to MIT License](https://github.com/akiran/react-slick/blob/master/LICENSE)
+
+
+
+
+
+
 
 ## [Documentation](http://react-slick.neostack.com)
+
+
+
+
+
 
 ### Installation
 
