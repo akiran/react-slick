@@ -35,7 +35,6 @@ export class InnerSlider extends React.Component {
     this.state = {
       ...initialState,
       currentSlide: this.props.initialSlide,
-      targetSlide: this.props.initialSlide ? this.props.initialSlide : 0,
       slideCount: React.Children.count(this.props.children)
     };
     this.callbackTimers = [];
