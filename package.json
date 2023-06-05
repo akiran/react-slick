@@ -8,8 +8,8 @@
     "lib"
   ],
   "scripts": {
-    "start": "gulp server",
-    "demo": "SINGLE_DEMO=true gulp server",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider gulp server",
+    "demo": "SINGLE_DEMO=true NODE_OPTIONS=--openssl-legacy-provider gulp server",
     "build-dev": "gulp clean && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
     "build": "npm run lib && gulp dist",
