@@ -11,7 +11,8 @@ import {
   getActiveSlidesCount,
   getActiveSlidesText,
   getButtons,
-  getButtonsListItem
+  getButtonsListItem,
+  getCurrentSlide
 } from "../../test-utils";
 
 describe("SimpleSlider example", () => {
@@ -22,6 +23,13 @@ describe("SimpleSlider example", () => {
   it("should have 7 clone slides", function() {
     const { container } = render(<SimpleSlider />);
     expect(container.getElementsByClassName("slick-cloned").length).toBe(7);
+  });
+  it("should have 1 current slide", function() {
+    const { container } = render(<SimpleSlider />);
+    expect(
+      container.querySelectorAll(".slick-slide.slick-current").length
+    ).toBe(1);
+    expect(parseInt(getCurrentSlide(container).textContent) - 1).toBe(0);
   });
   it("should have 1 active slide", function() {
     const { container } = render(<SimpleSlider />);
@@ -55,7 +63,7 @@ describe("SimpleSlider example", () => {
     const { container } = render(<SimpleSlider />);
     expect(container.getElementsByClassName("slick-next").length).toBe(1);
   });
-  it("should got to second slide when next button is clicked", function() {
+  it("should got to next slide when next button is clicked", function() {
     const { container } = render(<SimpleSlider />);
     clickNext(container);
     expect(
@@ -68,7 +76,7 @@ describe("SimpleSlider example", () => {
       container.querySelectorAll(".slick-dots")[0].children[1]
     ).toHaveClass("slick-active");
   });
-  it("should goto last slide when prev button is clicked", function() {
+  it("should goto previous slide when prev button is clicked", function() {
     const { container } = render(<SimpleSlider />);
     clickPrevious(container);
     expect(

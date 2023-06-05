@@ -304,7 +304,8 @@ export class InnerSlider extends React.Component {
   };
   checkImagesLoad = () => {
     let images =
-      (this.list && this.list.querySelectorAll &&
+      (this.list &&
+        this.list.querySelectorAll &&
         this.list.querySelectorAll(".slick-slide img")) ||
       [];
     let imagesCount = images.length,
@@ -316,7 +317,7 @@ export class InnerSlider extends React.Component {
         image.onclick = () => image.parentNode.focus();
       } else {
         const prevClickHandler = image.onclick;
-        image.onclick = (e) => {
+        image.onclick = e => {
           prevClickHandler(e);
           image.parentNode.focus();
         };
