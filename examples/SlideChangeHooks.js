@@ -22,15 +22,13 @@ function SlideChangeHooks() {
     <div>
       <h2>beforeChange and afterChange hooks</h2>
       <p>
-        BeforeChange {"=>"} oldSlide: <strong>{this.state.oldSlide}</strong>
+        BeforeChange {"=>"} oldSlide: <strong>{oldSlide}</strong>
       </p>
       <p>
-        BeforeChange {"=>"} activeSlide:{" "}
-        <strong>{this.state.activeSlide}</strong>
+        BeforeChange {"=>"} activeSlide: <strong>{activeSlide}</strong>
       </p>
       <p>
-        AfterChange {"=>"} activeSlide:{" "}
-        <strong>{this.state.activeSlide2}</strong>
+        AfterChange {"=>"} activeSlide: <strong>{activeSlide2}</strong>
       </p>
       <Slider {...settings}>
         <div>

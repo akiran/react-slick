@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Slider from "../src/slider";
 
 function CustomSlide(props) {
-  const { index, ...props } = props;
+  const { index, ...otherProps } = props;
   return (
-    <div {...props}>
+    <div {...otherProps}>
       <h3>{index}</h3>
     </div>
   );

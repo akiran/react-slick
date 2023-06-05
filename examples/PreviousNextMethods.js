@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 import Slider from "../src/slider";
 
 function PreviousNextMethods(props) {
-  const sliderRef = useRef(null);
+  let sliderRef = useRef(null);
   const next = () => {
-    this.slider.slickNext();
+    sliderRef.slickNext();
   };
   const previous = () => {
-    this.slider.slickPrev();
+    sliderRef.slickPrev();
   };
   const settings = {
     dots: true,
@@ -20,7 +20,12 @@ function PreviousNextMethods(props) {
   return (
     <div>
       <h2>Previous and Next methods</h2>
-      <Slider ref={slider => (sliderRef = slider)} {...settings}>
+      <Slider
+        ref={slider => {
+          sliderRef = slider;
+        }}
+        {...settings}
+      >
         <div key={1}>
           <h3>1</h3>
         </div>
