@@ -34,8 +34,8 @@ const testsUtil = (settings, actions, keys) => {
 
   // Following two tests fail
   test("checking cloned slides jQuery vs react", () => {
-    expect(reactDetails.clonedSlides.map(slide => slide.value)).toEqual(
-      jqDetails.clonedSlides.map(slide => slide.value)
+    expect(reactDetails.clonedSlides.map(slide => slide.index)).toEqual(
+      jqDetails.clonedSlides.map(slide => slide.index)
     );
   });
   test("checking all slides jQuery vs react", () => {
