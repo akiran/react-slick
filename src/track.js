@@ -5,7 +5,8 @@ import classnames from "classnames";
 import {
   lazyStartIndex,
   lazyEndIndex,
-  getPreClones
+  getPreClones,
+  getPostClones
 } from "./utils/innerSliderUtils";
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
@@ -18,7 +19,8 @@ const getSlideClasses = spec => {
   } else {
     index = spec.index;
   }
-  slickCloned = index < 0 || index >= spec.slideCount;
+  slickCloned =
+    (index < spec.slidesToShow && index < 0) || index >= spec.slideCount;
   if (spec.centerMode) {
     centerOffset = Math.floor(spec.slidesToShow / 2);
     slickCenter = (index - spec.currentSlide) % spec.slideCount === 0;
@@ -163,9 +165,12 @@ const renderSlides = spec => {
           })
         );
       }
-
-      if (childrenCount !== spec.slidesToShow) {
-        key = childrenCount + index;
+      let postCloneNo = index;
+      if (
+        postCloneNo < getPostClones(spec) &&
+        childrenCount !== spec.slidesToShow
+      ) {
+        key = postCloneNo + childrenCount;
         if (key < endIndex) {
           child = elem;
         }
