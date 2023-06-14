@@ -4,7 +4,7 @@
 
 ##### Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
-## [Documentation](http://react-slick.neostack.com)
+## [Documentation of react-slick](http://react-slick.neostack.com)
 
 ### Installation
 
