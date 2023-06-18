@@ -18,7 +18,8 @@ export class PrevArrow extends React.PureComponent {
     if (
       !this.props.infinite &&
       (this.props.currentSlide === 0 ||
-        this.props.slideCount <= this.props.slidesToShow)
+        this.props.slideCount <= this.props.slidesToShow ||
+        (this.props.initialSlide && this.props.currentSlide === 1))
     ) {
       prevClasses["slick-disabled"] = true;
       prevHandler = null;
