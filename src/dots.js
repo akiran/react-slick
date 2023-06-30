@@ -2,7 +2,11 @@
 
 import React from "react";
 import classnames from "classnames";
-import { clamp } from "./utils/innerSliderUtils";
+import {
+  clamp,
+  dotClicked,
+  getActiveParentTagName
+} from "./utils/innerSliderUtils";
 
 const getDotCount = spec => {
   let dots;
@@ -24,6 +28,11 @@ export class Dots extends React.PureComponent {
     // to next slide. That only goes away by click somewhere outside
     e.preventDefault();
     this.props.clickHandler(options);
+    document.activeElement.addEventListener("blur", e => {
+      if (!dotClicked()) {
+        this.props.autoPlayHandler("play");
+      }
+    });
   }
   render() {
     const {

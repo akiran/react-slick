@@ -97,7 +97,22 @@ export const canGoNext = spec => {
   }
   return canGo;
 };
-
+export const getActiveElement = () => {
+  return document.activeElement;
+};
+export const getActiveParentTagName = () => {
+  return getActiveElement().parentElement.tagName;
+};
+export const getActiveParentClassName = () => {
+  return getActiveElement().parentElement.classList.value;
+};
+export const dotClicked = () => {
+  return (
+    getActiveElement().tagName === "BUTTON" &&
+    getActiveParentTagName() === "LI" &&
+    getActiveParentClassName() === "slick-active"
+  );
+};
 // given an object and a list of keys, return new object with given keys
 export const extractObject = (spec, keys) => {
   let newObject = {};

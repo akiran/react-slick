@@ -19,7 +19,8 @@ import {
   getPreClones,
   getPostClones,
   getTrackLeft,
-  getTrackCSS
+  getTrackCSS,
+  dotClicked
 } from "./utils/innerSliderUtils";
 
 import { Track } from "./track";
@@ -438,6 +439,11 @@ export class InnerSlider extends React.Component {
       const nodes = this.list.querySelectorAll(".slick-current");
       nodes[0] && nodes[0].focus();
     }
+    window.addEventListener("click", () => {
+      if (this.props.autoplay && dotClicked()) {
+        this.pause("pause");
+      }
+    });
   };
   clickHandler = e => {
     if (this.clickable === false) {
@@ -674,6 +680,7 @@ export class InnerSlider extends React.Component {
       const { pauseOnDotsHover } = this.props;
       dotProps = {
         ...dotProps,
+        autoPlayHandler: this.autoPlay,
         clickHandler: this.changeSlide,
         onMouseEnter: pauseOnDotsHover ? this.onDotsLeave : null,
         onMouseOver: pauseOnDotsHover ? this.onDotsOver : null,
