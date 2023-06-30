@@ -810,28 +810,7 @@ export const siblingDirection = spec => {
     return "left";
   }
 };
-export const getActiveElementClassnames = () => {
-  return document.activeElement.parentElement.classList.value.toString();
-};
-export const getActiveParentTagName = () => {
-  return document.activeElement.parentElement.tagName;
-};
-export const getActiveParentClassnames = () => {
-  return document.activeElement.parentElement.classList.value.toString();
-};
-export const getActiveElementTagName = () => {
-  return document.activeElement.tagName;
-};
-export const dotClicked = () => {
-  if (
-    getActiveParentTagName() === "LI" &&
-    getActiveParentClassnames() === "slick-active"
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-};
+
 export const slidesOnRight = ({
   slidesToShow,
   centerMode,

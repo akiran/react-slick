@@ -19,12 +19,7 @@ import {
   getPreClones,
   getPostClones,
   getTrackLeft,
-  getTrackCSS,
-  getActiveElementTagName,
-  getActiveParentTagName,
-  getActiveParentClassnames,
-  getActiveElementClassnames,
-  dotClicked
+  getTrackCSS
 } from "./utils/innerSliderUtils";
 
 import { Track } from "./track";
@@ -101,7 +96,6 @@ export class InnerSlider extends React.Component {
           slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
         }
       );
-    console.log(this.props.pauseOnFocus);
     if (window.addEventListener) {
       window.addEventListener("resize", this.onWindowResized);
     } else {
@@ -172,11 +166,10 @@ export class InnerSlider extends React.Component {
         }
       }
     }
-    document.querySelectorAll &&
-      // if (this.props.onLazyLoad) {
-      //   this.props.onLazyLoad([leftMostSlide])
-      // }
-      this.adaptHeight();
+    // if (this.props.onLazyLoad) {
+    //   this.props.onLazyLoad([leftMostSlide])
+    // }
+    this.adaptHeight();
     let spec = {
       listRef: this.list,
       trackRef: this.track,
@@ -445,11 +438,6 @@ export class InnerSlider extends React.Component {
       const nodes = this.list.querySelectorAll(".slick-current");
       nodes[0] && nodes[0].focus();
     }
-    window.addEventListener("click", event => {
-      if (this.props.autoplay && dotClicked()) {
-        this.pause("paused");
-      }
-    });
   };
   clickHandler = e => {
     if (this.clickable === false) {
@@ -681,16 +669,11 @@ export class InnerSlider extends React.Component {
         "children",
         "customPaging",
         "infinite",
-        "appendDots",
-        "autoplay",
-        "autoplaying",
-        "autoplaySpeed"
+        "appendDots"
       ]);
       const { pauseOnDotsHover } = this.props;
       dotProps = {
         ...dotProps,
-        autoPlayHandler: this.autoPlay,
-        pauseHandler: this.pause,
         clickHandler: this.changeSlide,
         onMouseEnter: pauseOnDotsHover ? this.onDotsLeave : null,
         onMouseOver: pauseOnDotsHover ? this.onDotsOver : null,

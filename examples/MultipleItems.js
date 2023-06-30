@@ -25,7 +25,7 @@ function MultipleItems() {
         <div>
           <h3>4</h3>
         </div>
-        {/*  <div>
+        <div>
           <h3>5</h3>
         </div>
         <div>
@@ -39,7 +39,7 @@ function MultipleItems() {
         </div>
         <div>
           <h3>9</h3>
-        </div> */}
+        </div>
       </Slider>
     </div>
   );

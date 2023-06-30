@@ -10,7 +10,6 @@ function AutoPlay() {
     autoplay: true,
     speed: 2000,
     autoplaySpeed: 2000,
-    pauseOnFocus: true,
     cssEase: "linear"
   };
   return (
