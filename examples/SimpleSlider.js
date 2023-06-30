@@ -8,6 +8,7 @@ function SimpleSlider(props) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    initialSlide: 5,
     ...props
   };
   return (
