@@ -20,7 +20,8 @@ import {
   getPostClones,
   getTrackLeft,
   getTrackCSS,
-  dotClicked
+  dotClicked,
+  x
 } from "./utils/innerSliderUtils";
 
 import { Track } from "./track";
@@ -149,7 +150,9 @@ export class InnerSlider extends React.Component {
         React.Children.count(prevProps.children)
     );
   }
-
+  dotReferenceHandler = ref => {
+    this.Dotcollection = ref;
+  };
   componentDidUpdate = prevProps => {
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
@@ -434,16 +437,15 @@ export class InnerSlider extends React.Component {
     } else {
       this.slideHandler(targetSlide);
     }
-    this.props.autoplay && this.autoPlay("update");
+    if (this.props.autoPlay && this.state.autoplaying !== "playing") {
+      console.log("hi3");
+      this.props.autoplay && this.autoPlay("update");
+    }
     if (this.props.focusOnSelect) {
       const nodes = this.list.querySelectorAll(".slick-current");
       nodes[0] && nodes[0].focus();
     }
-    window.addEventListener("click", () => {
-      if (this.props.autoplay && dotClicked()) {
-        this.pause("pause");
-      }
-    });
+    console.log(options);
   };
   clickHandler = e => {
     if (this.clickable === false) {
@@ -591,6 +593,7 @@ export class InnerSlider extends React.Component {
     }
     const autoplaying = this.state.autoplaying;
     if (pauseType === "paused") {
+      console.log(pauseType, pauseType === "paused");
       this.setState({ autoplaying: "paused" });
     } else if (pauseType === "focused") {
       if (autoplaying === "hovered" || autoplaying === "playing") {
@@ -675,18 +678,21 @@ export class InnerSlider extends React.Component {
         "children",
         "customPaging",
         "infinite",
-        "appendDots"
+        "appendDots",
+        "autoplay",
+        "autoplaying"
       ]);
       const { pauseOnDotsHover } = this.props;
       dotProps = {
         ...dotProps,
         autoPlayHandler: this.autoPlay,
+        pauseHandler: this.pause,
         clickHandler: this.changeSlide,
         onMouseEnter: pauseOnDotsHover ? this.onDotsLeave : null,
         onMouseOver: pauseOnDotsHover ? this.onDotsOver : null,
         onMouseLeave: pauseOnDotsHover ? this.onDotsLeave : null
       };
-      dots = <Dots {...dotProps} />;
+      dots = <Dots ref={this.dotReferenceHandler} {...dotProps} />;
     }
 
     var prevArrow, nextArrow;

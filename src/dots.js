@@ -5,7 +5,8 @@ import classnames from "classnames";
 import {
   clamp,
   dotClicked,
-  getActiveParentTagName
+  getActiveParentTagName,
+  x
 } from "./utils/innerSliderUtils";
 
 const getDotCount = spec => {
@@ -27,12 +28,34 @@ export class Dots extends React.PureComponent {
     // In Autoplay the focus stays on clicked button even after transition
     // to next slide. That only goes away by click somewhere outside
     e.preventDefault();
+    if (this.props.autoplay && this.props.autoplaying === "playing") {
+      this.props.pauseHandler("paused");
+      console.log(this.props.autoplaying);
+    }
     this.props.clickHandler(options);
-    document.activeElement.addEventListener("blur", e => {
-      if (!dotClicked()) {
+    document.activeElement.addEventListener("blur", () => {
+      console.log("hi1");
+      if (
+        !dotClicked() &&
+        this.props.autoplay &&
+        this.props.autoplaying === "paused"
+      ) {
         this.props.autoPlayHandler("play");
       }
     });
+    window.addEventListener("blur", e => {
+      if (dotClicked()) {
+        this.props.pauseHandler("paused");
+      }
+    });
+    window.addEventListener("focus", e => {
+      if (this.props.autoplay && this.props.autoplaying === "paused") {
+        this.props.pauseHandler("paused");
+      } else if (this.props.autoplay) {
+        this.props.autoPlayHandler("play");
+      }
+    });
+    console.log(x);
   }
   render() {
     const {

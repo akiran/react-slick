@@ -33,7 +33,7 @@ export const getRequiredLazySlides = spec => {
   }
   return requiredSlides;
 };
-
+export let x = 0;
 // startIndex that needs to be present
 export const lazyStartIndex = spec =>
   spec.currentSlide - lazySlidesOnLeft(spec);
