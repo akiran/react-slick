@@ -30,11 +30,9 @@ export class Dots extends React.PureComponent {
     e.preventDefault();
     if (this.props.autoplay && this.props.autoplaying === "playing") {
       this.props.pauseHandler("paused");
-      console.log(this.props.autoplaying);
     }
     this.props.clickHandler(options);
     document.activeElement.addEventListener("blur", () => {
-      console.log("hi1");
       if (
         !dotClicked() &&
         this.props.autoplay &&
@@ -55,7 +53,6 @@ export class Dots extends React.PureComponent {
         this.props.autoPlayHandler("play");
       }
     });
-    console.log(x);
   }
   render() {
     const {

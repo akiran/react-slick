@@ -438,14 +438,12 @@ export class InnerSlider extends React.Component {
       this.slideHandler(targetSlide);
     }
     if (this.props.autoPlay && this.state.autoplaying !== "playing") {
-      console.log("hi3");
       this.props.autoplay && this.autoPlay("update");
     }
     if (this.props.focusOnSelect) {
       const nodes = this.list.querySelectorAll(".slick-current");
       nodes[0] && nodes[0].focus();
     }
-    console.log(options);
   };
   clickHandler = e => {
     if (this.clickable === false) {
@@ -593,7 +591,6 @@ export class InnerSlider extends React.Component {
     }
     const autoplaying = this.state.autoplaying;
     if (pauseType === "paused") {
-      console.log(pauseType, pauseType === "paused");
       this.setState({ autoplaying: "paused" });
     } else if (pauseType === "focused") {
       if (autoplaying === "hovered" || autoplaying === "playing") {
