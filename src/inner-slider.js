@@ -742,7 +742,7 @@ export class InnerSlider extends React.Component {
 
     let innerSliderProps = {
       className: className,
-      dir: "ltr",
+      dir: this.props.rtl ? "rtl" :"ltr",
       style: this.props.style
     };
 
