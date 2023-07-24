@@ -39,6 +39,7 @@ export interface Settings {
     centerMode?: boolean;
     centerPadding?: string;
     className?: string;
+    style?: React.CSSProperties;
     cssEase?: string;
     customPaging?(index: number): JSX.Element;
     dotsClass?: string;
