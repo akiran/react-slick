@@ -4,10 +4,11 @@ import React from "react";
 import { InnerSlider } from "./inner-slider";
 import json2mq from "json2mq";
 import defaultProps from "./default-props";
+import PropTypes from 'prop-types';
 import { canUseDOM } from "./utils/innerSliderUtils";
 const enquire = canUseDOM() && require("enquire.js");
 
-export default class Slider extends React.Component {
+class Slider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -212,3 +213,57 @@ export default class Slider extends React.Component {
     );
   }
 }
+
+Slider.prototypes = {
+  accessibility: PropTypes.bool,
+  adaptiveHeight: PropTypes.bool,
+  afterChange: PropTypes.func,
+  appendDots: PropTypes.func,
+  arrows: PropTypes.bool,
+  autoplay: PropTypes.bool,
+  autoplaySpeed: PropTypes.number,
+  beforeChange: PropTypes.func,
+  centerMode: PropTypes.bool,
+  centerPadding: PropTypes.string,
+  className: PropTypes.string,
+  cssEase: PropTypes.string,
+  customPaging: PropTypes.func,
+  dots: PropTypes.bool,
+  dotsClass: PropTypes.string,
+  draggable: PropTypes.bool,
+  easing: PropTypes.string,
+  edgeFriction: PropTypes.number,
+  fade: PropTypes.bool,
+  focusOnSelect: PropTypes.bool,
+  infinite: PropTypes.bool,
+  initialSlide: PropTypes.number,
+  // lazyLoad: null,
+  // nextArrow: null,
+  onEdge: PropTypes.func,
+  onInit: PropTypes.func,
+  // onLazyLoadError: null,
+  onReInit: PropTypes.func,
+  pauseOnDotsHover: PropTypes.bool,
+  pauseOnFocus: PropTypes.bool,
+  pauseOnHover: PropTypes.bool,
+  // prevArrow: null,
+  responsive: PropTypes.array,
+  rows: PropTypes.number,
+  rtl: PropTypes.bool,
+  // slide: "div",
+  slidesPerRow: PropTypes.number,
+  slidesToScroll: PropTypes.number,
+  slidesToShow: PropTypes.number,
+  speed: PropTypes.number,
+  swipe: PropTypes.bool,
+  swipeToSlide: PropTypes.bool,
+  touchMove: PropTypes.bool,
+  touchThreshold: PropTypes.number,
+  useCSS: PropTypes.bool,
+  useTransform: PropTypes.bool,
+  variableWidth: PropTypes.bool,
+  vertical: PropTypes.bool,
+  waitForAnimate: PropTypes.bool
+}
+
+export default Slider;
