@@ -16,14 +16,14 @@ import {
 } from "../../test-utils";
 
 describe("Variable Width example", () => {
-  it("should have 10 slides (2(preclone) + 6(actual) + 2(postclone))", function() {
+  it("should have 18 slides (6(preclone) + 6(actual) + 6(postclone))", function() {
     const { container } = render(<VariableWidth />);
-    //Should be 10
+    //Should be 18
     expect(container.getElementsByClassName("slick-slide").length).toBe(18);
   });
-  it("should have 4 clone slides", function() {
+  it("should have 12 clone slides", function() {
     const { container } = render(<VariableWidth />);
-    //Should be 4
+    //Should be 12
     expect(container.getElementsByClassName("slick-cloned").length).toBe(12);
   });
   it("should have 1 current slide", function() {
