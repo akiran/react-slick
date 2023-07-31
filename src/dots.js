@@ -74,8 +74,13 @@ export class Dots extends React.PureComponent {
 
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
     let dots = [];
-    for (let i = 0; i < dotCount; i++) {
-      let _rightBound = (i + 1) * slidesToScroll - 1;
+    for (
+      let i = this.props.rtl ? dotCount - 1 : 0;
+      this.props.rtl ? i >= 0 : i < dotCount;
+      this.props.rtl ? i-- : i++
+    ) {
+      let _rightBound =
+        ((this.props.rtl ? dotCount - 1 - i : i) + 1) * slidesToScroll - 1;
       let rightBound = infinite
         ? _rightBound
         : clamp(_rightBound, 0, slideCount - 1);
@@ -92,7 +97,7 @@ export class Dots extends React.PureComponent {
 
       let dotOptions = {
         message: "dots",
-        index: i,
+        index: this.props.rtl ? dotCount - 1 - i : i,
         slidesToScroll,
         currentSlide
       };
@@ -105,6 +110,41 @@ export class Dots extends React.PureComponent {
       );
     }
 
+    // if(this.props.rtl){
+    //   for (let i = dotCount-1; i >= 0; i--) {
+    //     let _rightBound = (i + 1) * slidesToScroll - 1;
+    //     let rightBound = infinite
+    //       ? _rightBound
+    //       : clamp(_rightBound, 0, slideCount - 1);
+    //     let _leftBound = rightBound - (slidesToScroll - 1);
+    //     let leftBound = infinite
+    //       ? _leftBound
+    //       : clamp(_leftBound, 0, slideCount - 1);
+
+    //     let className = classnames({
+    //       "slick-active": infinite
+    //         ? currentSlide >= leftBound && currentSlide <= rightBound
+    //         : currentSlide === leftBound
+    //     });
+
+    //     let dotOptions = {
+    //       message: "dots",
+    //       index: (dotCount-1)-i,
+    //       slidesToScroll,
+    //       currentSlide
+    //     };
+
+    //     let onClick = this.clickHandler.bind(this, dotOptions);
+    //     dots = dots.concat(
+    //       <li key={i} className={className}>
+    //         {React.cloneElement(this.props.customPaging(i), { onClick })}
+    //       </li>
+    //     );
+    //     if(this.props.rtl){
+    //       console.log(this.props.rtl)
+    //     }
+    //   }
+    // }
     return React.cloneElement(this.props.appendDots(dots), {
       className: this.props.dotsClass,
       ...mouseEvents

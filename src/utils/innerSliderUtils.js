@@ -147,7 +147,9 @@ export const initializedState = spec => {
   let currentSlide =
     spec.currentSlide === undefined ? spec.initialSlide : spec.currentSlide;
   if (spec.rtl && spec.currentSlide === undefined) {
-    currentSlide = slideCount - 1 - spec.initialSlide;
+    currentSlide = spec.infinite
+      ? slideCount - 1 - spec.initialSlide
+      : slideCount - spec.slidesToShow - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
   let slidesToLoad = getOnDemandLazySlides({
@@ -156,7 +158,6 @@ export const initializedState = spec => {
     lazyLoadedList
   });
   lazyLoadedList = lazyLoadedList.concat(slidesToLoad);
-
   let state = {
     slideCount,
     slideWidth,
@@ -295,10 +296,18 @@ export const changeSlide = (spec, options) => {
     targetSlide = currentSlide - slideOffset;
     if (lazyLoad && !infinite) {
       previousInt = currentSlide - slideOffset;
+
       targetSlide = previousInt === -1 ? slideCount - 1 : previousInt;
     }
     if (!infinite) {
-      targetSlide = previousTargetSlide - slidesToScroll;
+      if (spec.rtl) {
+        targetSlide =
+          previousTargetSlide === 0
+            ? slidesToShow
+            : previousTargetSlide - slidesToScroll;
+      } else {
+        targetSlide = previousTargetSlide - slidesToScroll;
+      }
     }
   } else if (options.message === "next") {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
