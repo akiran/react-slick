@@ -94,7 +94,9 @@
 {
     content: '→';
 }
-
+.slick-disabled{
+    filter: grayscale(1);
+  }
 .slick-next
 {
     right: -25px;
