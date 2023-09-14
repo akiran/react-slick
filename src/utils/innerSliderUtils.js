@@ -6,7 +6,7 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
 }
@@ -591,10 +591,12 @@ export const getTrackCSS = spec => {
     "slideWidth"
   ]);
   let trackWidth, trackHeight;
-  const trackChildren = spec.slideCount + 2 * spec.slidesToShow;
   if (!spec.vertical) {
     trackWidth = getTotalSlides(spec) * spec.slideWidth;
   } else {
+    const trackChildren = spec.unslick
+      ? spec.slideCount
+      : spec.slideCount + 2 * spec.slidesToShow;
     trackHeight = trackChildren * spec.slideHeight;
   }
   let style = {
