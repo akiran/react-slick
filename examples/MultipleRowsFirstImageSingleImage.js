@@ -1,28 +1,27 @@
 import React from "react";
 import Slider from "../src/slider";
 
-function MultipleRows() {
+function MultipleRowsFirstSingleImage() {
   const settings = {
-    className: "center",
-    centerMode: false,
-    infinite: false,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500,
+    firstImageSingle: true,
     rows: 2,
-    slidesPerRow: 2
+    infinite: false,
+    centerMode: false,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    variableWidth: true
   };
   return (
     <div>
-      <h2>Multiple Rows</h2>
+      <h2>Multiple Rows With Single First Image</h2>
       <Slider {...settings}>
-        <div>
+        <div style={{ width: 600 }}>
           <h3>1</h3>
         </div>
-        <div>
+        <div style={{ width: 300 }}>
           <h3>2</h3>
         </div>
-        <div>
+        <div style={{ width: 300 }}>
           <h3>3</h3>
         </div>
         <div>
@@ -69,4 +68,4 @@ function MultipleRows() {
   );
 }
 
-export default MultipleRows;
+export default MultipleRowsFirstSingleImage;

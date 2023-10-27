@@ -7,6 +7,7 @@ import SimpleSlider from "../examples/SimpleSlider";
 import SlideChangeHooks from "../examples/SlideChangeHooks";
 import MultipleItems from "../examples/MultipleItems";
 import MultipleRows from "../examples/MultipleRows";
+import MultipleRowsFirstImageSingleImage from "../examples/MultipleRowsFirstImageSingleImage";
 import Responsive from "../examples/Responsive";
 import Resizable from "../examples/Resizable";
 import UnevenSetsInfinite from "../examples/UnevenSetsInfinite";
@@ -40,6 +41,7 @@ export default class App extends React.Component {
         <SimpleSlider />
         <MultipleItems />
         <MultipleRows />
+        <MultipleRowsFirstImageSingleImage />
         <Responsive />
         <Resizable />
         <UnevenSetsInfinite />

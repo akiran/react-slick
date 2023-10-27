@@ -150,10 +150,25 @@ export default class Slider extends React.Component {
       console.warn(
         `variableWidth is not supported in case of rows > 1 or slidesPerRow > 1`
       );
-      settings.variableWidth = false;
+      // settings.variableWidth = false;
     }
     let newChildren = [];
     let currentWidth = null;
+
+    if (settings.firstImageSingle) {
+      const firstSlide = children.shift();
+      // If the first image is the only image, don't do anything
+      if (children.length === 1) {
+        newChildren = children;
+      } else {
+        newChildren.push(
+          React.cloneElement(firstSlide, {
+            tabIndex: -1
+          })
+        );
+      }
+    }
+
     for (
       let i = 0;
       i < children.length;
@@ -167,8 +182,8 @@ export default class Slider extends React.Component {
       ) {
         let row = [];
         for (let k = j; k < j + settings.slidesPerRow; k += 1) {
-          if (settings.variableWidth && children[k].props.style) {
-            currentWidth = children[k].props.style.width;
+          if (settings.variableWidth && children[k]?.props?.style) {
+            currentWidth = children[k]?.props?.style?.width;
           }
           if (k >= children.length) break;
           row.push(
