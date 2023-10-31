@@ -752,6 +752,7 @@ export class InnerSlider extends React.Component {
     }
     return (
       <div {...innerSliderProps}>
+        {!this.props.unslick && this.props.dotsAboveSlider ? dots : ""}
         {!this.props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>
@@ -759,7 +760,7 @@ export class InnerSlider extends React.Component {
           </Track>
         </div>
         {!this.props.unslick ? nextArrow : ""}
-        {!this.props.unslick ? dots : ""}
+        {!this.props.unslick && !this.props.dotsAboveSlider ? dots : ""}
       </div>
     );
   };
