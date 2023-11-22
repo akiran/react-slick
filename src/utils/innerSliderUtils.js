@@ -6,10 +6,10 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
-}
+};
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -386,9 +386,12 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
-      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
-      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
+      (currentSlide === 0 &&
+        (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount &&
+        (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) &&
+        (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
@@ -849,3 +852,7 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
+export function roundToDecimal(number, decimalPlaces) {
+  const factor = Math.pow(10, decimalPlaces);
+  return Math.round(number * factor) / factor;
+}

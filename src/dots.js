@@ -2,8 +2,7 @@
 
 import React from "react";
 import classnames from "classnames";
-import { clamp } from "./utils/innerSliderUtils";
-
+import { clamp, roundToDecimal } from "./utils/innerSliderUtils";
 const getDotCount = spec => {
   let dots;
 
@@ -46,14 +45,14 @@ export class Dots extends React.PureComponent {
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
     let dots = [];
     for (let i = 0; i < dotCount; i++) {
-      let _rightBound = (i + 1) * slidesToScroll - 1;
+      let _rightBound = roundToDecimal((i + 1) * slidesToScroll - 1, 2);
       let rightBound = infinite
         ? _rightBound
         : clamp(_rightBound, 0, slideCount - 1);
-      let _leftBound = rightBound - (slidesToScroll - 1);
+      let _leftBound = roundToDecimal(rightBound - (slidesToScroll - 1), 2);
       let leftBound = infinite
         ? _leftBound
-        : clamp(_leftBound, 0, slideCount - 1);
+        : clamp(_leftBound, 0, roundToDecimal(slideCount - slidesToShow, 2));
 
       let className = classnames({
         "slick-active": infinite
