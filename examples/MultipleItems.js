@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "../src/slider";
 
 function MultipleItems() {
+  const [countOfSlides, setCountOfSlides] = useState(3);
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3
+    slidesToShow: countOfSlides,
+    slidesToScroll: countOfSlides
   };
   return (
     <div>
       <h2> Multiple items </h2>
+      <button
+        onClick={() =>
+          countOfSlides < 9
+            ? setCountOfSlides(countOfSlides + 1)
+            : setCountOfSlides(8)
+        }
+        className="button"
+      >
+        Add slides
+      </button>
+      <button
+        onClick={() =>
+          countOfSlides > 1
+            ? setCountOfSlides(countOfSlides - 1)
+            : setCountOfSlides(1)
+        }
+        className="button"
+      >
+        Remove slides
+      </button>
       <Slider {...settings}>
         <div>
           <h3>1</h3>
