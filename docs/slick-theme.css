@@ -19,7 +19,7 @@
 .slick-prev,
 .slick-next
 {
-    font-size: 0;
+    font-size: 0; /* You can change this to your desired size, e.g., font-size: 24px; */
     line-height: 0;
 
     position: absolute;
@@ -27,8 +27,8 @@
 
     display: block;
 
-    width: 20px;
-    height: 20px;
+    width: 20px; /* Change this to your desired width */
+    height: 20px; /* Change this to your desired height */
     padding: 0;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
@@ -67,7 +67,7 @@
 .slick-next:before
 {
     font-family: 'slick';
-    font-size: 20px;
+    font-size: 20px; /* You can change this to your desired size */
     line-height: 1;
 
     opacity: .75;
