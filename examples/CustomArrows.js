@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Slider from "../src/slider";
+import Slider from "react-slick";
 
 function SampleNextArrow(props) {
+  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
