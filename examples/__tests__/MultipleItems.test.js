@@ -20,10 +20,10 @@ import {
 import MultipleItems from "../MultipleItems";
 
 describe("Multiple Items", function() {
-  it("should have 9 actual slides and (3(pre) + 9(post)) clone slides", function() {
+  it("should have 9 actual slides and (3(pre) + 3(post)) clone slides", function() {
     const { container } = render(<MultipleItems />);
-    expect(getSlidesCount(container)).toEqual(21);
-    expect(getClonesCount(container)).toEqual(12);
+    expect(getSlidesCount(container)).toEqual(15);
+    expect(getClonesCount(container)).toEqual(6);
     //expect(beautify_html(toString(container))).toMatchSnapshot();
   });
   it("should have 3 active slides", function() {

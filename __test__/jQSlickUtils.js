@@ -53,10 +53,12 @@ function fetchDetails(keys) {
     const slideObj = {
       index: $(slide).attr("data-slick-index"),
       value: $(slide)
-        .find("div")
-        .find("div")
         .find("h3")
         .text()
+      //.find("div")
+      // .find("div")
+      // .find("h3")
+      // .text()
     };
     allSlides.push(slideObj);
     if ($(slide).hasClass("slick-current")) {

@@ -6,10 +6,10 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
-}
+};
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -386,9 +386,12 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
-      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
-      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
+      (currentSlide === 0 &&
+        (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount &&
+        (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) &&
+        (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
@@ -784,7 +787,10 @@ export const getPostClones = spec => {
   if (spec.unslick || !spec.infinite) {
     return 0;
   }
-  return spec.slideCount;
+  if (spec.variableWidth) {
+    return spec.slideCount;
+  }
+  return spec.slidesToShow + (spec.centerMode ? 1 : 0);
 };
 
 export const getTotalSlides = spec =>
