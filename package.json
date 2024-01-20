@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "NODE_OPTIONS=--openssl-legacy-provider gulp server",
-    "demo": "SINGLE_DEMO=true NODE_OPTIONS=--openssl-legacy-provider gulp server",
+    "demo": "SINGLE_DEMO=true DEV_PORT=8000 NODE_OPTIONS=--openssl-legacy-provider gulp server",
     "build-dev": "gulp clean && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
     "build": "npm run lib && gulp dist",
