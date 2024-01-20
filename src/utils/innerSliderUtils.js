@@ -6,10 +6,10 @@ export function clamp(number, lowerBound, upperBound) {
 
 export const safePreventDefault = event => {
   const passiveEvents = ["onTouchStart", "onTouchMove", "onWheel"];
-  if(!passiveEvents.includes(event._reactName)) {
+  if (!passiveEvents.includes(event._reactName)) {
     event.preventDefault();
   }
-}
+};
 
 export const getOnDemandLazySlides = spec => {
   let onDemandSlides = [];
@@ -33,7 +33,7 @@ export const getRequiredLazySlides = spec => {
   }
   return requiredSlides;
 };
-
+export let x = 0;
 // startIndex that needs to be present
 export const lazyStartIndex = spec =>
   spec.currentSlide - lazySlidesOnLeft(spec);
@@ -97,7 +97,22 @@ export const canGoNext = spec => {
   }
   return canGo;
 };
-
+export const getActiveElement = () => {
+  return document.activeElement;
+};
+export const getActiveParentTagName = () => {
+  return getActiveElement().parentElement.tagName;
+};
+export const getActiveParentClassName = () => {
+  return getActiveElement().parentElement.classList.value;
+};
+export const dotClicked = () => {
+  return (
+    getActiveElement().tagName === "BUTTON" &&
+    getActiveParentTagName() === "LI" &&
+    getActiveParentClassName() === "slick-active"
+  );
+};
 // given an object and a list of keys, return new object with given keys
 export const extractObject = (spec, keys) => {
   let newObject = {};
@@ -386,9 +401,12 @@ export const swipeMove = (e, spec) => {
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
-      (currentSlide === 0 && (swipeDirection === "right" || swipeDirection === "down")) ||
-      (currentSlide + 1 >= dotCount && (swipeDirection === "left" || swipeDirection === "up")) ||
-      (!canGoNext(spec) && (swipeDirection === "left" || swipeDirection === "up"))
+      (currentSlide === 0 &&
+        (swipeDirection === "right" || swipeDirection === "down")) ||
+      (currentSlide + 1 >= dotCount &&
+        (swipeDirection === "left" || swipeDirection === "up")) ||
+      (!canGoNext(spec) &&
+        (swipeDirection === "left" || swipeDirection === "up"))
     ) {
       touchSwipeLength = touchObject.swipeLength * edgeFriction;
       if (edgeDragged === false && onEdge) {
@@ -784,7 +802,10 @@ export const getPostClones = spec => {
   if (spec.unslick || !spec.infinite) {
     return 0;
   }
-  return spec.slideCount;
+  if (spec.variableWidth) {
+    return spec.slideCount;
+  }
+  return spec.slidesToShow + (spec.centerMode ? 1 : 0);
 };
 
 export const getTotalSlides = spec =>

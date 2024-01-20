@@ -1,5 +1,5 @@
 import React from "react";
-import SimpleSlider from "../SimpleSlider";
+import SimpleSlider from "../CustomSlides";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import { html as beautify_html } from "js-beautify";
 import {
@@ -15,9 +15,9 @@ import {
   getCurrentSlide
 } from "../../test-utils";
 
-describe("SimpleSlider example", () => {
+describe("Custom Slider example", () => {
   it("should have 13 slides (1(preclone) + 6(actual) + 1(postclone))", function() {
-    const { container } = render(<SimpleSlider a={5} />);
+    const { container } = render(<SimpleSlider />);
     expect(container.getElementsByClassName("slick-slide").length).toBe(8);
   });
   it("should have 3 clone slides", function() {

@@ -19,7 +19,9 @@ import {
   getPreClones,
   getPostClones,
   getTrackLeft,
-  getTrackCSS
+  getTrackCSS,
+  dotClicked,
+  x
 } from "./utils/innerSliderUtils";
 
 import { Track } from "./track";
@@ -148,7 +150,9 @@ export class InnerSlider extends React.Component {
         React.Children.count(prevProps.children)
     );
   }
-
+  dotReferenceHandler = ref => {
+    this.Dotcollection = ref;
+  };
   componentDidUpdate = prevProps => {
     this.checkImagesLoad();
     this.props.onReInit && this.props.onReInit();
@@ -433,7 +437,9 @@ export class InnerSlider extends React.Component {
     } else {
       this.slideHandler(targetSlide);
     }
-    this.props.autoplay && this.autoPlay("update");
+    if (this.props.autoPlay && this.state.autoplaying !== "playing") {
+      this.props.autoplay && this.autoPlay("update");
+    }
     if (this.props.focusOnSelect) {
       const nodes = this.list.querySelectorAll(".slick-current");
       nodes[0] && nodes[0].focus();
@@ -669,17 +675,21 @@ export class InnerSlider extends React.Component {
         "children",
         "customPaging",
         "infinite",
-        "appendDots"
+        "appendDots",
+        "autoplay",
+        "autoplaying"
       ]);
       const { pauseOnDotsHover } = this.props;
       dotProps = {
         ...dotProps,
+        autoPlayHandler: this.autoPlay,
+        pauseHandler: this.pause,
         clickHandler: this.changeSlide,
         onMouseEnter: pauseOnDotsHover ? this.onDotsLeave : null,
         onMouseOver: pauseOnDotsHover ? this.onDotsOver : null,
         onMouseLeave: pauseOnDotsHover ? this.onDotsLeave : null
       };
-      dots = <Dots {...dotProps} />;
+      dots = <Dots ref={this.dotReferenceHandler} {...dotProps} />;
     }
 
     var prevArrow, nextArrow;

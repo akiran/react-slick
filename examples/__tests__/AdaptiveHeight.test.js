@@ -15,8 +15,8 @@ import {
   getCurrentSlide
 } from "../../test-utils";
 
-describe("SimpleSlider example", () => {
-  it("should have 13 slides (1(preclone) + 6(actual) + 1(postclone))", function() {
+describe("Adaptive Height example", () => {
+  it("should have 8 slides (1(preclone) + 6(actual) + 1(postclone))", function() {
     const { container } = render(<SimpleSlider a={5} />);
     expect(container.getElementsByClassName("slick-slide").length).toBe(8);
   });
@@ -103,33 +103,5 @@ describe("SimpleSlider example", () => {
     expect(hasClass(getButtonsListItem(container)[3], "slick-active")).toEqual(
       true
     );
-  });
-});
-
-describe("Simple Slider Snapshots", function() {
-  it("slider initial state", function() {
-    const { container } = render(<SimpleSlider />);
-    // expect(beautify_html(toString(container))).toMatchSnapshot();
-  });
-  it("click on next button", function() {
-    const { container } = render(<SimpleSlider />);
-    clickNext(container);
-    //expect(beautify_html(toString(container))).toMatchSnapshot();
-  });
-  it("click on prev button", function() {
-    const { container } = render(<SimpleSlider />);
-    clickPrevious(container);
-    // expect(beautify_html(toString(container))).toMatchSnapshot();
-  });
-  it("click on 3rd dot", function() {
-    const { container } = render(<SimpleSlider />);
-    fireEvent(
-      getButtons(container)[2],
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true
-      })
-    );
-    // expect(beautify_html(toString(container))).toMatchSnapshot();
   });
 });
