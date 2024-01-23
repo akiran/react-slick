@@ -292,7 +292,9 @@ export const changeSlide = (spec, options) => {
     if (lazyLoad && !infinite) {
       targetSlide =
         ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
-    } else if (!infinite) {
+    } 
+    
+    if (!infinite) {
       targetSlide = previousTargetSlide + slidesToScroll;
     }
   } else if (options.message === "dots") {
