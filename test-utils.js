@@ -20,6 +20,11 @@ export function getCurrentSlide(container) {
   return container.querySelector(".slick-current");
 }
 
+export function getCurrentSlideContent(container) {
+  const slide = container.querySelector(".slick-current");
+  return slide.textContent;
+}
+
 export function getButtons(container) {
   return container.querySelectorAll(".slick-dots button");
 }
