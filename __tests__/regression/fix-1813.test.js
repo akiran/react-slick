@@ -2,11 +2,8 @@
 
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import Slider from "../../src/index";
 
 import {
-  activeSlide,
-  activeSlides,
   clickNext,
   clickPrevious,
   getActiveButton,
@@ -14,11 +11,9 @@ import {
   getActiveSlidesText,
   getButtons,
   getButtonsLength,
-  getButtonsListItem,
   getClonesCount,
   getCurrentSlide,
-  getSlidesCount,
-  hasClass
+  getSlidesCount
 } from "../../test-utils";
 import { GenericSliderComponent } from "../TestComponents";
 
