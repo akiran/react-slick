@@ -12,7 +12,7 @@
     "demo": "SINGLE_DEMO=true DEV_PORT=8000 NODE_OPTIONS=--openssl-legacy-provider gulp server",
     "build-dev": "gulp clean && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
-    "build": "npm run lib && gulp dist",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider npm run lib && NODE_OPTIONS=--openssl-legacy-provider gulp dist",
     "prepublishOnly": "npm run build",
     "lint": "eslint src",
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
