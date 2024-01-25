@@ -4,7 +4,7 @@ import React from "react";
 import { InnerSlider } from "./inner-slider";
 import json2mq from "json2mq";
 import defaultProps from "./default-props";
-import { canUseDOM } from "./utils/innerSliderUtils";
+import { canUseDOM, filterSettings } from "./utils/innerSliderUtils";
 const enquire = canUseDOM() && require("enquire.js");
 
 export default class Slider extends React.Component {
@@ -198,14 +198,17 @@ export default class Slider extends React.Component {
     if (settings === "unslick") {
       const className = "regular slider " + (this.props.className || "");
       return <div className={className}>{children}</div>;
-    } else if (newChildren.length <= settings.slidesToShow && !settings.infinite) {
+    } else if (
+      newChildren.length <= settings.slidesToShow &&
+      !settings.infinite
+    ) {
       settings.unslick = true;
     }
     return (
       <InnerSlider
         style={this.props.style}
         ref={this.innerSliderRefHandler}
-        {...settings}
+        {...filterSettings(settings)}
       >
         {newChildren}
       </InnerSlider>
