@@ -28,7 +28,6 @@ npm install slick-carousel
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// Copy `slick-carousel/slick/fonts` into your static assets folder and make sure the fonts are loadable by css request
 ```
 
 or add cdn link in your html
