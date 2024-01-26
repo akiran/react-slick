@@ -134,7 +134,8 @@ export class InnerSlider extends React.Component {
       }
       if (
         typeof prevProps[key] === "object" ||
-        typeof prevProps[key] === "function"
+        typeof prevProps[key] === "function" ||
+        isNaN(prevProps[key])
       ) {
         continue;
       }
