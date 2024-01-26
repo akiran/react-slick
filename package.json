@@ -18,7 +18,8 @@
     "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
     "precommit": "lint-staged",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "clear-jest": "jest --clearCache"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
