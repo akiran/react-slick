@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Slider from "../src/slider";
+import Slider from "react-slick";
 
 function PreviousNextMethods(props) {
   let sliderRef = useRef(null);

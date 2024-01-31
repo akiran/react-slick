@@ -46,6 +46,13 @@ or add cdn link in your html
 />
 ```
 
+or copy `slick-carousel/slick` folder into your static assets folder and link to css
+
+```html
+<link rel="stylesheet" type="text/css" href="slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+```
+
 ### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
 
 ### Example
@@ -110,7 +117,6 @@ open http://localhost:8080
 ## Community
 
 Join our [discord channel](https://discord.gg/z7stRE4Cyb) to discuss react-slick bugs and ask for help
-
 
 ## Contributing
 

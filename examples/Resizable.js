@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Slider from "../src/slider";
+import Slider from "react-slick";
 
 function Resizable() {
   const [display, setDisplay] = useState(true);

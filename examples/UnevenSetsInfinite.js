@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "../src/slider";
+import Slider from "react-slick";
 
 function UnevenSetsInfinite() {
   var settings = {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Slider from "../src/slider";
+import Slider from "react-slick";
 
 function AsNavFor(props) {
   const [nav1, setNav1] = useState(null);

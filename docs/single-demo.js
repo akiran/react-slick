@@ -3,6 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Slider from "../src/slider";
+import MultipleItems from "../examples/MultipleItems";
 function SimpleSlider() {
   const settings = {
     dots: true,
@@ -41,7 +42,8 @@ function SimpleSlider() {
 function App() {
   return (
     <div className="content">
-      <SimpleSlider />
+      {/* <SimpleSlider /> */}
+      <MultipleItems />
     </div>
   );
 }

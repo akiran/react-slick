@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Slider from "../src/slider";
+import Slider from "react-slick";
 
 function SlideChangeHooks() {
   const [oldSlide, setOldSlide] = useState(0);
