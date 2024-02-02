@@ -39,11 +39,23 @@ export const getRequiredLazySlides = spec => {
 export const lazyStartIndex = spec =>
   spec.currentSlide - lazySlidesOnLeft(spec);
 export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec);
-export const lazySlidesOnLeft = spec =>
-  spec.centerMode
-    ? Math.floor(spec.slidesToShow / 2) +
+export const lazySlidesOnLeft = spec => {
+  if (spec.centerMode) {
+    return (
+      Math.floor(spec.slidesToShow / 2) +
       (parseInt(spec.centerPadding) > 0 ? 1 : 0)
-    : 0;
+    );
+  }
+
+  const numPages = Math.ceil(spec.slideCount / spec.slidesToShow);
+  const lastPageStartIndex = (numPages - 1) * spec.slidesToShow;
+
+  if (spec.currentSlide >= lastPageStartIndex) {
+    return spec.currentSlide + spec.slidesToShow - spec.slideCount;
+  }
+
+  return 0;
+};
 export const lazySlidesOnRight = spec =>
   spec.centerMode
     ? Math.floor((spec.slidesToShow - 1) / 2) +
