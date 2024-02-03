@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Slider from "react-slick";
 
-function AutoPlayMethods(props) {
+function AutoPlayMethods() {
   let sliderRef = useRef(null);
   const play = () => {
     sliderRef.slickPlay();

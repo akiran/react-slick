@@ -11,7 +11,6 @@ function FocusOnSelect() {
   };
   return (
     <div>
-      <h2>FocusOnSelect</h2>
       <div>Click on any slide to select and make it current slide</div>
       <Slider {...settings}>
         <div>

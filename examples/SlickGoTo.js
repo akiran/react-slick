@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Slider from "react-slick";
 import { baseUrl } from "./config";
 
-function SlickGoTo(props) {
+function SlickGoTo() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [updateCount, setUpdateCount] = useState(0);
   let sliderRef = useRef(null);
@@ -13,12 +13,10 @@ function SlickGoTo(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     afterChange: () => setUpdateCount(updateCount + 1),
-    beforeChange: (current, next) => setSlideIndex(next),
-    ...props
+    beforeChange: (current, next) => setSlideIndex(next)
   };
   return (
     <div>
-      <h2>Slick Go To</h2>
       <p>Total updates: {updateCount} </p>
       <input
         onChange={e => sliderRef.slickGoTo(e.target.value)}

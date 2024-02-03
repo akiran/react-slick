@@ -11,7 +11,6 @@ function UnevenSetsInfinite() {
   };
   return (
     <div>
-      <h2>Uneven sets (infinite)</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

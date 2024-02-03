@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Slider from "react-slick";
 
-function PreviousNextMethods(props) {
+function PreviousNextMethods() {
   let sliderRef = useRef(null);
   const next = () => {
     sliderRef.slickNext();
@@ -14,12 +14,10 @@ function PreviousNextMethods(props) {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1,
-    ...props
+    slidesToScroll: 1
   };
   return (
     <div>
-      <h2>Previous and Next methods</h2>
       <Slider
         ref={slider => {
           sliderRef = slider;

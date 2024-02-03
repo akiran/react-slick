@@ -14,7 +14,6 @@ function MultipleRows() {
   };
   return (
     <div>
-      <h2>Multiple Rows</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

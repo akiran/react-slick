@@ -12,7 +12,6 @@ function CenterMode() {
   };
   return (
     <div>
-      <h2>Center Mode</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

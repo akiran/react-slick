@@ -14,7 +14,6 @@ function Fade() {
   };
   return (
     <div>
-      <h2>Fade</h2>
       <Slider {...settings}>
         <div>
           <img src={baseUrl + "/abstract01.jpg"} />

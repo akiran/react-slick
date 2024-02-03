@@ -20,7 +20,6 @@ function CustomPaging() {
   };
   return (
     <div>
-      <h2>Custom Paging</h2>
       <Slider {...settings}>
         <div>
           <img src={baseUrl + "/abstract01.jpg"} />

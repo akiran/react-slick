@@ -13,7 +13,6 @@ function PauseOnHover() {
   };
   return (
     <div>
-      <h2>Pause On Hover</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

@@ -13,7 +13,6 @@ function VariableWidth() {
   };
   return (
     <div>
-      <h2>Variable width</h2>
       <Slider {...settings}>
         <div style={{ width: 100 }}>
           <p>100</p>

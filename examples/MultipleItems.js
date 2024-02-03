@@ -11,7 +11,6 @@ function MultipleItems() {
   };
   return (
     <div>
-      <h2> Multiple items </h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

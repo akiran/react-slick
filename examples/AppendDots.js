@@ -33,7 +33,6 @@ function AppendDots() {
   };
   return (
     <div>
-      <h2>Append Dots</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

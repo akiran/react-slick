@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 
 function SampleNextArrow(props) {
-  console.log(props);
   const { className, style, onClick } = props;
   return (
     <div
@@ -35,7 +34,6 @@ function CustomArrows() {
   };
   return (
     <div>
-      <h2>Custom Arrows</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

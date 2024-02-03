@@ -10,7 +10,7 @@ function CustomSlide(props) {
   );
 }
 
-function SimpleSlider() {
+function CustomSlides() {
   const settings = {
     dots: true,
     infinite: true,
@@ -20,7 +20,6 @@ function SimpleSlider() {
   };
   return (
     <div>
-      <h2>Custom Slides</h2>
       <Slider {...settings}>
         <CustomSlide index={1} />
         <CustomSlide index={2} />

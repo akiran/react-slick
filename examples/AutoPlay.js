@@ -14,7 +14,6 @@ function AutoPlay() {
   };
   return (
     <div>
-      <h2>Auto Play</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>

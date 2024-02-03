@@ -13,7 +13,6 @@ function AdaptiveHeight() {
 
   return (
     <div>
-      <h2>Adaptive height</h2>
       <Slider {...settings}>
         <div>
           <h3>1</h3>
