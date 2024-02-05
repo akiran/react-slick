@@ -37,23 +37,16 @@ or add cdn link in your html
   rel="stylesheet"
   type="text/css"
   charset="UTF-8"
-  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
 />
 <link
   rel="stylesheet"
   type="text/css"
-  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
 />
 ```
 
-or copy `slick-carousel/slick` folder into your static assets folder and link to css
-
-```html
-<link rel="stylesheet" type="text/css" href="slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
-```
-
-### [PlayGround](https://codesandbox.io/s/ppwkk5l6xx)
+### [PlayGround](https://stackblitz.com/edit/vitejs-vite-ownrun?file=src%2FImageSlider.jsx)
 
 ### Example
 
