@@ -19,7 +19,7 @@ function AutoPlayMethods() {
     autoplaySpeed: 2000
   };
   return (
-    <div>
+    <div className="slider-container">
       <h2>Auto Play {"&"} Pause with buttons</h2>
       <Slider ref={slider => (sliderRef = slider)} {...settings}>
         <div>

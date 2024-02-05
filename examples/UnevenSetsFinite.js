@@ -10,7 +10,7 @@ function UnevenSetsFinite() {
     slidesToShow: 4
   };
   return (
-    <div>
+    <div className="slider-container">
       <Slider {...settings}>
         <div>
           <h3>1</h3>

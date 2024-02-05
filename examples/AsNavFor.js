@@ -12,7 +12,7 @@ function AsNavFor() {
     setNav2(sliderRef2);
   }, []);
   return (
-    <div>
+    <div className="slider-container">
       <h2>Slider Syncing (AsNavFor)</h2>
       <h4>First Slider</h4>
       <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>

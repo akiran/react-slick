@@ -12,7 +12,7 @@ function Rtl() {
     rtl: true
   };
   return (
-    <div>
+    <div className="slider-container">
       <h2>Right to Left</h2>
       <Slider {...settings}>
         <div>

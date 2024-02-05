@@ -17,7 +17,7 @@ function PreviousNextMethods() {
     slidesToScroll: 1
   };
   return (
-    <div>
+    <div className="slider-container">
       <Slider
         ref={slider => {
           sliderRef = slider;

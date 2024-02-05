@@ -19,7 +19,7 @@ function CustomSlides() {
     slidesToScroll: 1
   };
   return (
-    <div>
+    <div className="slider-container">
       <Slider {...settings}>
         <CustomSlide index={1} />
         <CustomSlide index={2} />
@@ -32,4 +32,4 @@ function CustomSlides() {
   );
 }
 
-export default SimpleSlider;
+export default CustomSlides;

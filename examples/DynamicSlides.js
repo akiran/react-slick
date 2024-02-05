@@ -16,7 +16,7 @@ function DynamicSlides() {
     slidesToScroll: 3
   };
   return (
-    <div>
+    <div className="slider-container">
       <button className="button" onClick={handleClick}>
         Click to change slide count
       </button>

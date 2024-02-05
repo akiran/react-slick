@@ -13,7 +13,7 @@ function Resizable() {
     slidesToScroll: 1
   };
   return (
-    <div>
+    <div className="slider-container">
       <h2> Resizable Collapsible </h2>
       <button className="button" onClick={() => setWidth(width + 100)}>
         {" "}

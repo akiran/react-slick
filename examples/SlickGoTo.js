@@ -16,7 +16,7 @@ function SlickGoTo() {
     beforeChange: (current, next) => setSlideIndex(next)
   };
   return (
-    <div>
+    <div className="slider-container">
       <p>Total updates: {updateCount} </p>
       <input
         onChange={e => sliderRef.slickGoTo(e.target.value)}

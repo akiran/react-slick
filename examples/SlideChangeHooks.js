@@ -19,7 +19,7 @@ function SlideChangeHooks() {
     afterChange: current => setActiveSlide2(current)
   };
   return (
-    <div>
+    <div className="slider-container">
       <h2>beforeChange and afterChange hooks</h2>
       <p>
         BeforeChange {"=>"} oldSlide: <strong>{oldSlide}</strong>
