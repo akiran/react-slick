@@ -111,6 +111,21 @@ export default class Slider extends React.Component {
       }
       settings.slidesToScroll = 1;
     }
+
+    if (settings.slidesToScroll <= 0) {
+      console.warn(
+        `slidesToScroll should be equal to 1 in centerMode, please use greater than 0 value, you are using ${settings.slidesToScroll}`
+      );
+      settings.slidesToScroll = 1;
+    }
+
+    if (settings.slidesToShow <= 0) {
+      console.warn(
+        `slidesToShow should be equal to 1 in centerMode, please use greater than 0 value, you are using ${settings.slidesToShow}`
+      );
+      settings.slidesToShow = 1;
+    }
+
     // force showing one slide and scrolling by one if the fade mode is on
     if (settings.fade) {
       if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {
