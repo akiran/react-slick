@@ -752,7 +752,7 @@ export const getTrackLeft = spec => {
     var targetSlideIndex;
     const trackElem = trackRef && trackRef.node;
     targetSlideIndex = slideIndex + getPreClones(spec);
-    targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
+    targetSlide = trackElem && trackElem.children[targetSlideIndex];
     targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
     if (centerMode === true) {
       targetSlideIndex = infinite
