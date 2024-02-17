@@ -679,7 +679,8 @@ export class InnerSlider extends React.Component {
         clickHandler: this.changeSlide,
         onMouseEnter: pauseOnDotsHover ? this.onDotsLeave : null,
         onMouseOver: pauseOnDotsHover ? this.onDotsOver : null,
-        onMouseLeave: pauseOnDotsHover ? this.onDotsLeave : null
+        onMouseLeave: pauseOnDotsHover ? this.onDotsLeave : null,
+        currentSlide: Math.round(dotProps.currentSlide)
       };
       dots = <Dots {...dotProps} />;
     }
