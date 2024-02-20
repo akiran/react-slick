@@ -283,9 +283,9 @@ export const changeSlide = (spec, options) => {
       previousInt = currentSlide - slideOffset;
       targetSlide = previousInt === -1 ? slideCount - 1 : previousInt;
     }
-    if (!infinite) {
-      targetSlide = previousTargetSlide - slidesToScroll;
-    }
+    // if (!infinite) {
+    //   targetSlide = previousTargetSlide - slidesToScroll;
+    // }
   } else if (options.message === "next") {
     slideOffset = indexOffset === 0 ? slidesToScroll : indexOffset;
     targetSlide = currentSlide + slideOffset;
@@ -293,9 +293,9 @@ export const changeSlide = (spec, options) => {
       targetSlide =
         ((currentSlide + slidesToScroll) % slideCount) + indexOffset;
     }
-    if (!infinite) {
-      targetSlide = previousTargetSlide + slidesToScroll;
-    }
+    // if (!infinite) {
+    //   targetSlide = previousTargetSlide + slidesToScroll;
+    // }
   } else if (options.message === "dots") {
     // Click on dots
     targetSlide = options.index * options.slidesToScroll;
