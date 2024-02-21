@@ -54,6 +54,7 @@ export class InnerSlider extends React.Component {
       this.list.style.height = getHeight(elem) + "px";
     }
   };
+  canGoNext = () => canGoNext({ ...this.props, ...this.state });
   componentDidMount = () => {
     this.props.onInit && this.props.onInit();
     if (this.props.lazyLoad) {
@@ -198,6 +199,14 @@ export class InnerSlider extends React.Component {
           this.pause("paused");
         }
       });
+  };
+  shouldComponentUpdate = (nextProps, nextState) => {
+    const nextCanGoNext = canGoNext({ ...nextProps, ...nextState });
+    if (this.state.canGoNext !== nextCanGoNext) {
+      this.setState({ canGoNext: nextCanGoNext });
+      return false;
+    }
+    return true;
   };
   onWindowResized = setTrackStyle => {
     if (this.debouncedResize) this.debouncedResize.cancel();
@@ -545,7 +554,7 @@ export class InnerSlider extends React.Component {
     if (this.props.rtl) {
       nextIndex = this.state.currentSlide - this.props.slidesToScroll;
     } else {
-      if (canGoNext({ ...this.props, ...this.state })) {
+      if (this.canGoNext()) {
         nextIndex = this.state.currentSlide + this.props.slidesToScroll;
       } else {
         return false;
@@ -695,6 +704,7 @@ export class InnerSlider extends React.Component {
       "nextArrow"
     ]);
     arrowProps.clickHandler = this.changeSlide;
+    arrowProps.canGoNext = this.canGoNext();
 
     if (this.props.arrows) {
       prevArrow = <PrevArrow {...arrowProps} />;
