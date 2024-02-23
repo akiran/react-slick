@@ -1,6 +1,6 @@
 {
-  "name": "react-slick",
-  "version": "0.30.2",
+  "name": "react-slick-fixed-dots",
+  "version": "0.30.4",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [
@@ -21,11 +21,11 @@
     "test-watch": "jest --watch",
     "clear-jest": "jest --clearCache"
   },
-  "author": "Kiran Abburi",
+  "author": "Yurii Kovalchuk",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akiran/react-slick.git"
+    "url": "git+https://github.com/jimbokid/react-slick-fixed-dots.git"
   },
   "keywords": [
     "slick",
