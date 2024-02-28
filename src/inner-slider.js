@@ -48,9 +48,7 @@ export class InnerSlider extends React.Component {
   trackRefHandler = ref => (this.track = ref);
   adaptHeight = () => {
     if (this.props.adaptiveHeight && this.list) {
-      const elem = this.list.querySelector(
-        `[data-index="${this.state.currentSlide}"]`
-      );
+      const elem = this.list.querySelector(".slick-current");
       this.list.style.height = getHeight(elem) + "px";
     }
   };
