@@ -203,6 +203,7 @@ export default class Slider extends React.Component {
       !settings.infinite
     ) {
       settings.unslick = true;
+      settings.infinite = false;
     }
     return (
       <InnerSlider
