@@ -357,7 +357,8 @@ export const swipeMove = (e, spec) => {
     touchObject,
     swipeEvent,
     listHeight,
-    listWidth
+    listWidth,
+    minSwipeLength = 10
   } = spec;
   if (scrolling) return;
   if (animating) return safePreventDefault(e);
@@ -430,7 +431,7 @@ export const swipeMove = (e, spec) => {
   ) {
     return state;
   }
-  if (touchObject.swipeLength > 10) {
+  if (touchObject.swipeLength > minSwipeLength) {
     state["swiping"] = true;
     safePreventDefault(e);
   }
