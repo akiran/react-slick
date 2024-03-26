@@ -1,11 +1,7 @@
-import "core-js/es6/map";
-import "core-js/es6/set";
-import "raf/polyfill";
+import "@testing-library/jest-dom/extend-expect";
+import "regenerator-runtime/runtime";
 
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-
-Enzyme.configure({ adapter: new Adapter() });
+//Fix for "matchMedia not present, legacy browsers require a polyfill jest" error
 window.matchMedia =
   window.matchMedia ||
   function() {
@@ -14,10 +10,4 @@ window.matchMedia =
       addListener: function() {},
       removeListener: function() {}
     };
-  };
-
-window.requestAnimationFrame =
-  window.requestAnimationFrame ||
-  function(callback) {
-    setTimeout(callback, 0);
   };

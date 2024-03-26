@@ -9,7 +9,7 @@ var opn = require("opn");
 
 var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-const DEV_PORT = 8080;
+const DEV_PORT = process.env.DEV_PORT || 8080;
 
 gulp.task("clean", function() {
   return del(["./build/*"]);

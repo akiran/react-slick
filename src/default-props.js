@@ -50,7 +50,8 @@ let defaultProps = {
   useTransform: true,
   variableWidth: false,
   vertical: false,
-  waitForAnimate: true
+  waitForAnimate: true,
+  asNavFor: null
 };
 
 export default defaultProps;

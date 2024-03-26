@@ -27,7 +27,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      "react-slick": path.resolve(__dirname, "src/index.js")
+    }
   },
   plugins: [new webpack.IgnorePlugin(/vertx/)],
   devServer: {

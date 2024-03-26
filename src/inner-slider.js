@@ -35,7 +35,8 @@ export class InnerSlider extends React.Component {
     this.state = {
       ...initialState,
       currentSlide: this.props.initialSlide,
-      slideCount: React.Children.count(this.props.children),
+      targetSlide: this.props.initialSlide ? this.props.initialSlide : 0,
+      slideCount: React.Children.count(this.props.children)
     };
     this.callbackTimers = [];
     this.clickable = true;
@@ -134,7 +135,8 @@ export class InnerSlider extends React.Component {
       }
       if (
         typeof prevProps[key] === "object" ||
-        typeof prevProps[key] === "function"
+        typeof prevProps[key] === "function" ||
+        isNaN(prevProps[key])
       ) {
         continue;
       }
@@ -325,7 +327,7 @@ export class InnerSlider extends React.Component {
         image.onclick = () => image.parentNode.focus();
       } else {
         const prevClickHandler = image.onclick;
-        image.onclick = (e) => {
+        image.onclick = e => {
           prevClickHandler(e);
           image.parentNode.focus();
         };
