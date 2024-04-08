@@ -51,7 +51,8 @@ let defaultProps = {
   variableWidth: false,
   vertical: false,
   waitForAnimate: true,
-  asNavFor: null
+  asNavFor: null,
+  unslick: false
 };
 
 export default defaultProps;
