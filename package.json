@@ -83,6 +83,10 @@
     "why-did-you-update": "^0.1.1",
     "regenerator-runtime": "^0.14.1"
   },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "enquire.js": "^2.1.6",
