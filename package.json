@@ -1,6 +1,6 @@
 {
-  "name": "@mikecodessomething/react-slick",
-  "version": "0.30.2",
+  "name": "nea-react-slick",
+  "version": "0.30.3",
   "description": " React port of slick carousel",
   "main": "./lib",
   "files": [

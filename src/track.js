@@ -128,6 +128,7 @@ const renderSlides = spec => {
         style: {
           outline: "none",
           visibility: `${slideClasses["slick-active"] ? "visible" : "hidden"}`,
+          transition: "visibility 0.3s linear",
           ...(child.props.style || {}),
           ...childStyle
         },
@@ -161,6 +162,7 @@ const renderSlides = spec => {
               visibility: `${
                 slideClasses["slick-active"] ? "visible" : "hidden"
               }`,
+              transition: "visibility 0.3s linear",
               ...childStyle
             },
             onClick: e => {
@@ -190,6 +192,7 @@ const renderSlides = spec => {
             visibility: `${
               slideClasses["slick-active"] ? "visible" : "hidden"
             }`,
+            transition: "visibility 0.3s linear",
             ...childStyle
           },
           onClick: e => {
