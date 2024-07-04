@@ -125,6 +125,7 @@ const renderSlides = spec => {
         className: classnames(slideClasses, slideClass),
         tabIndex: "-1",
         "aria-hidden": !slideClasses["slick-active"],
+        visible: slideClasses["slick-active"],
         style: { outline: "none", ...(child.props.style || {}), ...childStyle },
         onClick: e => {
           child.props && child.props.onClick && child.props.onClick(e);
@@ -151,6 +152,7 @@ const renderSlides = spec => {
             tabIndex: "-1",
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
+            visible: slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
             onClick: e => {
               child.props && child.props.onClick && child.props.onClick(e);
@@ -174,6 +176,7 @@ const renderSlides = spec => {
           tabIndex: "-1",
           className: classnames(slideClasses, slideClass),
           "aria-hidden": !slideClasses["slick-active"],
+          visible: slideClasses["slick-active"],
           style: { ...(child.props.style || {}), ...childStyle },
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e);
