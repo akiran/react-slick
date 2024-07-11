@@ -125,7 +125,13 @@ const renderSlides = spec => {
         className: classnames(slideClasses, slideClass),
         tabIndex: "-1",
         "aria-hidden": !slideClasses["slick-active"],
-        style: { outline: "none", ...(child.props.style || {}), ...childStyle },
+        style: {
+          outline: "none",
+          visibility: `${slideClasses["slick-active"] ? "visible" : "hidden"}`,
+          transition: "visibility 0.3s linear",
+          ...(child.props.style || {}),
+          ...childStyle
+        },
         onClick: e => {
           child.props && child.props.onClick && child.props.onClick(e);
           if (spec.focusOnSelect) {
@@ -151,7 +157,14 @@ const renderSlides = spec => {
             tabIndex: "-1",
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
-            style: { ...(child.props.style || {}), ...childStyle },
+            style: {
+              ...(child.props.style || {}),
+              visibility: `${
+                slideClasses["slick-active"] ? "visible" : "hidden"
+              }`,
+              transition: "visibility 0.3s linear",
+              ...childStyle
+            },
             onClick: e => {
               child.props && child.props.onClick && child.props.onClick(e);
               if (spec.focusOnSelect) {
@@ -174,7 +187,14 @@ const renderSlides = spec => {
           tabIndex: "-1",
           className: classnames(slideClasses, slideClass),
           "aria-hidden": !slideClasses["slick-active"],
-          style: { ...(child.props.style || {}), ...childStyle },
+          style: {
+            ...(child.props.style || {}),
+            visibility: `${
+              slideClasses["slick-active"] ? "visible" : "hidden"
+            }`,
+            transition: "visibility 0.3s linear",
+            ...childStyle
+          },
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e);
             if (spec.focusOnSelect) {
