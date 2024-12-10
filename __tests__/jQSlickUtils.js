@@ -39,9 +39,9 @@ function simulateActions(actions) {
 
 // takes an object of keys and returns those details
 /* Possible keys can be one of the following
-currentSlide(index and value), activeSlides(index and value), 
-allSlides(index and value), clonedSlides(index and value)
-*/
+  currentSlide(index and value), activeSlides(index and value), 
+  allSlides(index and value), clonedSlides(index and value)
+  */
 function fetchDetails(keys) {
   let details = {};
   let currentSlide = null,
@@ -96,10 +96,10 @@ function fetchDetails(keys) {
 export function getJQuerySlickDetails(settings, actions, keys) {
   // create new slider
   document.body.innerHTML = `
-  <section class="regular slider">
-  ${createJQuerySliderChildren(settings.noOfSlides)}
-  </section>
-  `;
+    <section class="regular slider">
+    ${createJQuerySliderChildren(settings.noOfSlides)}
+    </section>
+    `;
   $(".regular.slider").slick({
     ...settings
   });

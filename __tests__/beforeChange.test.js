@@ -1,6 +1,12 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import Slider from "../src/index";
+import {
+  getActiveSlide,
+  clickNext,
+  clickPrevious,
+  getCurrentSlide
+} from "../test-utils";
 
 class SliderWithBeforeChange extends React.Component {
   constructor(props) {
@@ -29,32 +35,14 @@ class SliderWithBeforeChange extends React.Component {
   }
 }
 
-describe.skip("Slider", function() {
+describe("Slider", function() {
   it("should render", function() {
-    const wrapper = mount(<SliderWithBeforeChange />);
-    wrapper.find(".slick-next").simulate("click");
-    expect(
-      wrapper
-        .find(".slick-slide.slick-active")
-        .first()
-        .text()
-    ).toEqual("slide2");
-    expect(wrapper.state()).toEqual({ currentSlide: 0, nextSlide: 1 });
-    wrapper.find(".slick-next").simulate("click");
-    expect(
-      wrapper
-        .find(".slick-slide.slick-active")
-        .first()
-        .text()
-    ).toEqual("slide3");
-    expect(wrapper.state()).toEqual({ currentSlide: 1, nextSlide: 2 });
-    wrapper.find(".slick-prev").simulate("click");
-    expect(
-      wrapper
-        .find(".slick-slide.slick-active")
-        .first()
-        .text()
-    ).toEqual("slide2");
-    expect(wrapper.state()).toEqual({ currentSlide: 2, nextSlide: 1 });
+    const { container } = render(<SliderWithBeforeChange />);
+    clickNext(container);
+    expect(getActiveSlide(container).textContent).toEqual("slide2");
+    clickNext(container);
+    expect(getActiveSlide(container).textContent).toEqual("slide3");
+    clickPrevious(container);
+    expect(getActiveSlide(container).textContent).toEqual("slide2");
   });
 });

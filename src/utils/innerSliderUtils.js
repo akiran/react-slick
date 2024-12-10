@@ -1,4 +1,5 @@
 import React from "react";
+import defaultProps from "../default-props";
 
 export function clamp(number, lowerBound, upperBound) {
   return Math.max(lowerBound, Math.min(number, upperBound));
@@ -859,3 +860,14 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
+
+export const validSettings = Object.keys(defaultProps);
+
+export function filterSettings(settings) {
+  return validSettings.reduce((acc, settingName) => {
+    if (settings.hasOwnProperty(settingName)) {
+      acc[settingName] = settings[settingName];
+    }
+    return acc;
+  }, {});
+}

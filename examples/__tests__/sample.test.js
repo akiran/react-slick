@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { fireEvent, render } from "@testing-library/react";
 
 export default class Counter extends React.Component {
   constructor(props) {
@@ -19,8 +19,22 @@ export default class Counter extends React.Component {
 
 describe("sample counter test", function() {
   it("mutliple counts", function() {
-    const wrapper = mount(<Counter />);
-    wrapper.simulate("click").simulate("click");
-    expect(wrapper.text()).toEqual("Count 2");
+    const { container } = render(<Counter />);
+    const button = container.getElementsByTagName("Button")[0];
+    fireEvent(
+      button,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true
+      })
+    );
+    fireEvent(
+      button,
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true
+      })
+    );
+    expect(button.textContent).toEqual("Count 2");
   });
 });

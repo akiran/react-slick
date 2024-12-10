@@ -1,26 +1,27 @@
 {
   "name": "react-slick",
-  "version": "0.28.1",
+  "version": "0.30.2",
   "description": " React port of slick carousel",
   "main": "./lib",
   "scripts": {
-    "start": "gulp server",
-    "demo": "SINGLE_DEMO=true gulp server",
-    "build-dev": "gulp clean && gulp sass && gulp copy && webpack",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider gulp server",
+    "demo": "SINGLE_DEMO=true DEV_PORT=8000 NODE_OPTIONS=--openssl-legacy-provider gulp server",
+    "build-dev": "gulp clean && gulp copy && webpack",
     "lib": "babel ./src --out-dir ./lib",
-    "build": "npm run lib && gulp dist",
-    "prepublish": "npm run build",
-    "test": "npm run lint && jest",
-    "test:watch": "jest --watch",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider npm run lib && NODE_OPTIONS=--openssl-legacy-provider gulp dist",
+    "prepublishOnly": "npm run build",
     "lint": "eslint src",
-    "gen": "node examples/scripts/generateExampleConfigs.js && node examples/scripts/generateExamples.js && xdg-open docs/jquery.html",
-    "precommit": "lint-staged"
+    "gen": "node docs/scripts/generateExampleConfigs.js && node docs/scripts/generateExamples.js && xdg-open docs/jquery.html",
+    "precommit": "lint-staged",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "clear-jest": "jest --clearCache"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/akiran/react-slick"
+    "url": "git+https://github.com/akiran/react-slick.git"
   },
   "keywords": [
     "slick",
@@ -32,47 +33,42 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.1.2",
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.3.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^9.0.0",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.4",
     "babel-preset-airbnb": "^2.1.1",
     "css-loader": "^2.1.1",
     "deepmerge": "^1.1.0",
     "del": "^2.2.2",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0",
     "es5-shim": "^4.5.9",
-    "eslint": "^5.9.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-react": "^6.3.0",
+    "eslint": "^8.4.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-react": "^7.27.1",
     "express": "^4.14.0",
     "foundation-apps": "^1.2.0",
     "gulp": "^4.0.0",
-    "gulp-sass": "^4.0.0",
     "husky": "^0.14.3",
-    "jasmine-core": "^2.5.2",
-    "jest": "^24.8.0",
-    "jquery": "^3.2.1",
+    "jest": "^28.1.3",
+    "jest-environment-jsdom": "^28.1.3",
     "js-beautify": "^1.7.5",
     "json-loader": "^0.5.4",
-    "lint-staged": "^7.0.3",
-    "node-sass": "^4.5.2",
+    "lint-staged": "^12.1.2",
     "opn": "^5.4.0",
     "postcss-loader": "^1.3.3",
     "prettier": "^1.14.3",
     "raf": "^3.4.0",
-    "react": "^16.0.0",
-    "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0",
-    "sass-loader": "^6.0.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "sinon": "^2.1.0",
     "slick-carousel": "^1.8.1",
     "style-loader": "^0.16.1",
@@ -80,7 +76,8 @@
     "webpack": "^4.21.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9",
-    "why-did-you-update": "^0.1.1"
+    "why-did-you-update": "^0.1.1",
+    "regenerator-runtime": "^0.14.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -90,17 +87,8 @@
     "resize-observer-polyfill": "^1.5.0"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0",
-    "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "./test-setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/__tests__/scripts.js",
-      "/__tests__/testUtils.js"
-    ]
+    "react": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0"
   },
   "lint-staged": {
     "*.{js,json,md}": [

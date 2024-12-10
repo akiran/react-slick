@@ -1,6 +1,5 @@
 // includes tests of
 // SimpleSlider, MultipleItems
-import { mount } from "enzyme";
 import { testSlider } from "./testUtils";
 
 describe("SimpleSlider with combinations of possibilities", function() {

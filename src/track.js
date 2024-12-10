@@ -67,6 +67,7 @@ const getSlideStyle = spec => {
       style.left = -spec.index * parseInt(spec.slideWidth);
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
+    style.zIndex = spec.currentSlide === spec.index ? 999 : 998;
     if (spec.useCSS) {
       style.transition =
         "opacity " +
@@ -140,10 +141,7 @@ const renderSlides = spec => {
     // if slide needs to be precloned or postcloned
     if (spec.infinite && spec.fade === false) {
       let preCloneNo = childrenCount - index;
-      if (
-        preCloneNo <= getPreClones(spec) &&
-        childrenCount !== spec.slidesToShow
-      ) {
+      if (preCloneNo <= getPreClones(spec)) {
         key = -preCloneNo;
         if (key >= startIndex) {
           child = elem;
@@ -167,29 +165,27 @@ const renderSlides = spec => {
         );
       }
 
-      if (childrenCount !== spec.slidesToShow) {
-        key = childrenCount + index;
-        if (key < endIndex) {
-          child = elem;
-        }
-        slideClasses = getSlideClasses({ ...spec, index: key });
-        postCloneSlides.push(
-          React.cloneElement(child, {
-            key: "postcloned" + getKey(child, key),
-            "data-index": key,
-            tabIndex: "-1",
-            className: classnames(slideClasses, slideClass),
-            "aria-hidden": !slideClasses["slick-active"],
-            style: { ...(child.props.style || {}), ...childStyle },
-            onClick: e => {
-              child.props && child.props.onClick && child.props.onClick(e);
-              if (spec.focusOnSelect) {
-                spec.focusOnSelect(childOnClickOptions);
-              }
-            }
-          })
-        );
+      key = childrenCount + index;
+      if (key < endIndex) {
+        child = elem;
       }
+      slideClasses = getSlideClasses({ ...spec, index: key });
+      postCloneSlides.push(
+        React.cloneElement(child, {
+          key: "postcloned" + getKey(child, key),
+          "data-index": key,
+          tabIndex: "-1",
+          className: classnames(slideClasses, slideClass),
+          "aria-hidden": !slideClasses["slick-active"],
+          style: { ...(child.props.style || {}), ...childStyle },
+          onClick: e => {
+            child.props && child.props.onClick && child.props.onClick(e);
+            if (spec.focusOnSelect) {
+              spec.focusOnSelect(childOnClickOptions);
+            }
+          }
+        })
+      );
     }
   });
 
