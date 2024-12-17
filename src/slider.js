@@ -176,6 +176,7 @@ export default class Slider extends React.Component {
               key: 100 * i + 10 * j + k,
               tabIndex: -1,
               style: {
+                ...children[k].props.style,
                 width: `${100 / settings.slidesPerRow}%`,
                 display: "inline-block"
               }
