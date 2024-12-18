@@ -177,7 +177,8 @@ export default class Slider extends React.Component {
               tabIndex: -1,
               style: {
                 width: `${100 / settings.slidesPerRow}%`,
-                display: "inline-block"
+                display: "inline-block",
+                ...children[k].props.style
               }
             })
           );
