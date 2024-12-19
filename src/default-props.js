@@ -49,6 +49,7 @@ let defaultProps = {
   useCSS: true,
   useTransform: true,
   variableWidth: false,
+  verticalSwiping: false,
   vertical: false,
   waitForAnimate: true,
   asNavFor: null,
