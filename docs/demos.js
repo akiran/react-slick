@@ -26,6 +26,7 @@ import CustomArrows from "../examples/CustomArrows";
 import PreviousNextMethods from "../examples/PreviousNextMethods";
 import DynamicSlides from "../examples/DynamicSlides";
 import VerticalMode from "../examples/VerticalMode";
+import VerticalModeWhenUnslick from "../examples/VerticalModeWhenUnslick";
 import SwipeToSlide from "../examples/SwipeToSlide";
 import VerticalSwipeToSlide from "../examples/VerticalSwipeToSlide";
 import CustomPaging from "../examples/CustomPaging";
@@ -62,6 +63,7 @@ export default class App extends React.Component {
         <PreviousNextMethods />
         <DynamicSlides />
         <VerticalMode />
+        <VerticalModeWhenUnslick />
         <SwipeToSlide />
         <VerticalSwipeToSlide />
         <AsNavFor />

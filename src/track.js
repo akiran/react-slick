@@ -136,7 +136,7 @@ const renderSlides = spec => {
     );
 
     // if slide needs to be precloned or postcloned
-    if (spec.infinite && spec.fade === false) {
+    if (spec.infinite && spec.fade === false && !spec.unslick) {
       let preCloneNo = childrenCount - index;
       if (preCloneNo <= getPreClones(spec)) {
         key = -preCloneNo;
