@@ -646,7 +646,7 @@ export class InnerSlider extends React.Component {
       "targetSlide",
       "useCSS"
     ]);
-    const { pauseOnHover } = this.props;
+    const { pauseOnHover, slide = "div" } = this.props;
     trackProps = {
       ...trackProps,
       onMouseEnter: pauseOnHover ? this.onTrackOver : null,
@@ -752,8 +752,11 @@ export class InnerSlider extends React.Component {
       listProps = { className: "slick-list" };
       innerSliderProps = { className };
     }
-    return (
-      <div {...innerSliderProps}>
+
+    return React.createElement(
+      slide,
+      innerSliderProps,
+      <>
         {!this.props.unslick ? prevArrow : ""}
         <div ref={this.listRefHandler} {...listProps}>
           <Track ref={this.trackRefHandler} {...trackProps}>
@@ -762,7 +765,7 @@ export class InnerSlider extends React.Component {
         </div>
         {!this.props.unslick ? nextArrow : ""}
         {!this.props.unslick ? dots : ""}
-      </div>
+      </>
     );
   };
 }
