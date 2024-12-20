@@ -9,7 +9,8 @@ module.exports = {
   output: {
     library: "Slider",
     libraryTarget: "umd",
-    path: path.join(__dirname, "dist")
+    path: path.join(__dirname, "dist"),
+    umdNamedDefine: true
   },
 
   module: {
