@@ -436,7 +436,7 @@ export class InnerSlider extends React.Component {
       this.slideHandler(targetSlide);
     }
     this.props.autoplay && this.autoPlay("update");
-    if (this.props.focusOnSelect) {
+    if (this.props.focusOnChange) {
       const nodes = this.list.querySelectorAll(".slick-current");
       nodes[0] && nodes[0].focus();
     }
@@ -627,7 +627,7 @@ export class InnerSlider extends React.Component {
       "speed",
       "infinite",
       "centerMode",
-      "focusOnSelect",
+      "focusOnChange",
       "currentSlide",
       "lazyLoad",
       "lazyLoadedList",
@@ -652,8 +652,7 @@ export class InnerSlider extends React.Component {
       onMouseEnter: pauseOnHover ? this.onTrackOver : null,
       onMouseLeave: pauseOnHover ? this.onTrackLeave : null,
       onMouseOver: pauseOnHover ? this.onTrackOver : null,
-      focusOnSelect:
-        this.props.focusOnSelect && this.clickable ? this.selectHandler : null
+      focusOnChange: this.props.focusOnChange ? this.focusOnChange : null
     };
 
     var dots;
