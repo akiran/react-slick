@@ -19,7 +19,9 @@
     "precommit": "lint-staged",
     "test": "jest",
     "test-watch": "jest --watch",
-    "clear-jest": "jest --clearCache"
+    "clear-jest": "jest --clearCache",
+    "test-ct": "playwright test -c playwright-ct.config.js",
+    "test-clear": "jest --clearCache && rm -rf ./playwright/.cache"
   },
   "author": "Kiran Abburi",
   "license": "MIT",
@@ -43,9 +45,11 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@playwright/experimental-ct-react": "^1.49.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.3.0",
+    "@types/node": "^22.10.2",
     "autoprefixer": "^7.1.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.8.0",
