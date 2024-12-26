@@ -20,7 +20,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "clear-jest": "jest --clearCache",
-    "test-ct": "playwright test -c playwright-ct.config.js",
+    "test-ct": "npm run prepare-playwright && playwright test -c playwright-ct.config.js",
     "test-clear": "jest --clearCache && rm -rf ./playwright/.cache",
     "prepare-playwright": "rm -rf ./src-jsx && gulp prepare-playwright"
   },

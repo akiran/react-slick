@@ -26,7 +26,6 @@ export default class Slider extends React.Component {
       }
     };
     mql.addListener(listener);
-    // listener(mql);
     this._responsiveMediaHandlers.push({ mql, query, listener });
   }
 
