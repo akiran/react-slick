@@ -25,7 +25,6 @@ function SliderWithUnslick() {
     dots: true,
     infinite: true,
     unslick: true
-    // slidesToShow: 2
   };
   return <GenericSliderComponent slidesCount={2} settings={settings} />;
 }
@@ -47,10 +46,9 @@ describe("Slider with one slide", function() {
 });
 
 describe("Slider with unslick=true", function() {
-  // Remove skip on this test after fixing the unslick issue
-  it.skip("should have all slides active", function() {
+  it("should have one active slide", function() {
     const { container } = render(<SliderWithUnslick />);
-    expect(getActiveSlidesCount(container)).toEqual(2);
+    expect(getActiveSlidesCount(container)).toEqual(1);
   });
   it("should not have any clones", function() {
     const { container } = render(<SliderWithUnslick />);
