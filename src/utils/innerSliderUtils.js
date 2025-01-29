@@ -298,7 +298,13 @@ export const changeSlide = (spec, options) => {
     }
   } else if (options.message === "dots") {
     // Click on dots
-    targetSlide = options.index * options.slidesToScroll;
+    if (options.index === currentSlide) {
+      targetSlide = options.index;
+    } else if (slideCount === options.index + 1 && currentSlide === 0) {
+      targetSlide = -1;
+    } else {
+      targetSlide = options.index * options.slidesToScroll || slideCount;
+    }
   } else if (options.message === "children") {
     // Click on the slides
     targetSlide = options.index;
