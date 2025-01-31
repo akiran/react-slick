@@ -50,6 +50,7 @@ let defaultProps = {
   useTransform: true,
   variableWidth: false,
   vertical: false,
+  verticalSwiping: false,
   waitForAnimate: true,
   asNavFor: null,
   unslick: false

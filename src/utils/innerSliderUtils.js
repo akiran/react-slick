@@ -594,10 +594,12 @@ export const getTrackCSS = spec => {
     "slideWidth"
   ]);
   let trackWidth, trackHeight;
-  const trackChildren = spec.slideCount + 2 * spec.slidesToShow;
   if (!spec.vertical) {
     trackWidth = getTotalSlides(spec) * spec.slideWidth;
   } else {
+    const trackChildren = spec.unslick
+      ? spec.slideCount
+      : spec.slideCount + 2 * spec.slidesToShow;
     trackHeight = trackChildren * spec.slideHeight;
   }
   let style = {

@@ -84,3 +84,14 @@ export function clickPrevious(container) {
     })
   );
 }
+
+export function hasDots(container) {
+  return Boolean(container.querySelectorAll(".slick-dots")[0]);
+}
+
+export function hasArrows(container) {
+  return Boolean(
+    container.getElementsByClassName("slick-next")[0] ||
+      container.getElementsByClassName("slick-prev")[0]
+  );
+}
