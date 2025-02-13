@@ -123,9 +123,13 @@ const renderSlides = spec => {
         key: "original" + getKey(child, index),
         "data-index": index,
         className: classnames(slideClasses, slideClass),
-        tabIndex: "-1",
+        tabIndex: !slideClasses["slick-active"] ? "-1" : "1",
         "aria-hidden": !slideClasses["slick-active"],
-        style: { outline: "none", ...(child.props.style || {}), ...childStyle },
+        style: {
+          outline: "none",
+          ...(child.props.style || {}),
+          ...childStyle
+        },
         onClick: e => {
           child.props && child.props.onClick && child.props.onClick(e);
           if (spec.focusOnSelect) {
@@ -153,7 +157,7 @@ const renderSlides = spec => {
           React.cloneElement(child, {
             key: "precloned" + getKey(child, key),
             "data-index": key,
-            tabIndex: "-1",
+            tabIndex: !slideClasses["slick-active"] ? "-1" : "1",
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
@@ -176,7 +180,7 @@ const renderSlides = spec => {
         React.cloneElement(child, {
           key: "postcloned" + getKey(child, key),
           "data-index": key,
-          tabIndex: "-1",
+          tabIndex: !slideClasses["slick-active"] ? "-1" : "1",
           className: classnames(slideClasses, slideClass),
           "aria-hidden": !slideClasses["slick-active"],
           style: { ...(child.props.style || {}), ...childStyle },
