@@ -35,7 +35,7 @@ export default class Slider extends React.Component {
       }
     );
     this.childRefs.forEach(element => {
-      if (element) {
+      if (element && element instanceof Element) {
         this.observer.observe(element);
       }
     });
