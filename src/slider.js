@@ -26,7 +26,7 @@ export default class Slider extends React.Component {
     this.observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          entry.target.tabIndex = entry.isIntersecting ? 1 : -1;
+          entry.target.tabIndex = entry.isIntersecting ? 0 : -1;
         });
       },
       {

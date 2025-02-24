@@ -95,6 +95,7 @@ const renderSlides = spec => {
   let childrenCount = React.Children.count(spec.children);
   let startIndex = lazyStartIndex(spec);
   let endIndex = lazyEndIndex(spec);
+  const childRefs = spec.childRefs;
 
   React.Children.forEach(spec.children, (elem, index) => {
     let child;
@@ -122,8 +123,12 @@ const renderSlides = spec => {
       React.cloneElement(child, {
         key: "original" + getKey(child, index),
         "data-index": index,
+        ref: el => {
+          if (el) {
+            childRefs.add(el);
+          }
+        },
         className: classnames(slideClasses, slideClass),
-        tabIndex: !slideClasses["slick-active"] ? "-1" : "1",
         "aria-hidden": !slideClasses["slick-active"],
         style: {
           outline: "none",
@@ -157,7 +162,6 @@ const renderSlides = spec => {
           React.cloneElement(child, {
             key: "precloned" + getKey(child, key),
             "data-index": key,
-            tabIndex: !slideClasses["slick-active"] ? "-1" : "1",
             className: classnames(slideClasses, slideClass),
             "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
@@ -180,7 +184,6 @@ const renderSlides = spec => {
         React.cloneElement(child, {
           key: "postcloned" + getKey(child, key),
           "data-index": key,
-          tabIndex: !slideClasses["slick-active"] ? "-1" : "1",
           className: classnames(slideClasses, slideClass),
           "aria-hidden": !slideClasses["slick-active"],
           style: { ...(child.props.style || {}), ...childStyle },
@@ -205,12 +208,54 @@ const renderSlides = spec => {
 export class Track extends React.PureComponent {
   node = null;
 
+  constructor(props) {
+    super(props);
+    this.childRefs = new Set();
+    this.observer = null;
+  }
+
   handleRef = ref => {
     this.node = ref;
   };
 
+  componentDidMount() {
+    window.addEventListener("resize", this.setupIntersectionObserver);
+    window.addEventListener("scroll", this.setupIntersectionObserver);
+    setTimeout(() => this.setupIntersectObserver(), 0);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.setupIntersectionObserver);
+    window.removeEventListener("scroll", this.setupIntersectionObserver);
+  }
+
+  setupIntersectObserver() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    this.observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          entry.target.tabIndex = entry.isIntersecting ? 0 : -1;
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1
+      }
+    );
+    this.childRefs.forEach(element => {
+      if (element && element instanceof Element) {
+        this.observer.observe(element);
+      }
+    });
+  }
+
   render() {
-    const slides = renderSlides(this.props);
+    const slides = renderSlides({
+      childRefs: this.childRefs,
+      ...this.props
+    });
     const { onMouseEnter, onMouseOver, onMouseLeave } = this.props;
     const mouseEvents = { onMouseEnter, onMouseOver, onMouseLeave };
     return (
