@@ -27,6 +27,10 @@ export default class Slider extends React.Component {
       entries => {
         entries.forEach(entry => {
           entry.target.tabIndex = entry.isIntersecting ? 0 : -1;
+          entry.target.setAttribute(
+            "aria-hidden",
+            entry.isIntersecting ? "false" : "true"
+          );
         });
       },
       {

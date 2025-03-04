@@ -129,7 +129,6 @@ const renderSlides = spec => {
           }
         },
         className: classnames(slideClasses, slideClass),
-        "aria-hidden": !slideClasses["slick-active"],
         style: {
           outline: "none",
           ...(child.props.style || {}),
@@ -185,7 +184,6 @@ const renderSlides = spec => {
           key: "postcloned" + getKey(child, key),
           "data-index": key,
           className: classnames(slideClasses, slideClass),
-          "aria-hidden": !slideClasses["slick-active"],
           style: { ...(child.props.style || {}), ...childStyle },
           onClick: e => {
             child.props && child.props.onClick && child.props.onClick(e);
@@ -237,6 +235,10 @@ export class Track extends React.PureComponent {
       entries => {
         entries.forEach(entry => {
           entry.target.tabIndex = entry.isIntersecting ? 0 : -1;
+          entry.target.setAttribute(
+            "aria-hidden",
+            entry.isIntersecting ? "false" : "true"
+          );
         });
       },
       {
