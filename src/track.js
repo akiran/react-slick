@@ -161,8 +161,12 @@ const renderSlides = spec => {
           React.cloneElement(child, {
             key: "precloned" + getKey(child, key),
             "data-index": key,
+            ref: el => {
+              if (el) {
+                childRefs.add(el);
+              }
+            },
             className: classnames(slideClasses, slideClass),
-            "aria-hidden": !slideClasses["slick-active"],
             style: { ...(child.props.style || {}), ...childStyle },
             onClick: e => {
               child.props && child.props.onClick && child.props.onClick(e);
@@ -183,6 +187,11 @@ const renderSlides = spec => {
         React.cloneElement(child, {
           key: "postcloned" + getKey(child, key),
           "data-index": key,
+          ref: el => {
+            if (el) {
+              childRefs.add(el);
+            }
+          },
           className: classnames(slideClasses, slideClass),
           style: { ...(child.props.style || {}), ...childStyle },
           onClick: e => {
