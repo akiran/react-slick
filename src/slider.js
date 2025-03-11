@@ -13,9 +13,37 @@ export default class Slider extends React.Component {
       breakpoint: null
     };
     this._responsiveMediaHandlers = [];
+    this.childRefs = new Set();
+    this.observer = null;
   }
 
   innerSliderRefHandler = ref => (this.innerSlider = ref);
+
+  setupIntersectObserver() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    this.observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          entry.target.tabIndex = entry.isIntersecting ? 0 : -1;
+          entry.target.setAttribute(
+            "aria-hidden",
+            entry.isIntersecting ? "false" : "true"
+          );
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1
+      }
+    );
+    this.childRefs.forEach(element => {
+      if (element && element instanceof Element) {
+        this.observer.observe(element);
+      }
+    });
+  }
 
   media(query, handler) {
     // javascript handler for  css media query
@@ -31,6 +59,9 @@ export default class Slider extends React.Component {
 
   // handles responsive breakpoints
   componentDidMount() {
+    window.addEventListener("resize", this.setupIntersectionObserver);
+    window.addEventListener("scroll", this.setupIntersectionObserver);
+    setTimeout(() => this.setupIntersectObserver(), 0);
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
@@ -76,6 +107,8 @@ export default class Slider extends React.Component {
     this._responsiveMediaHandlers.forEach(function(obj) {
       obj.mql.removeListener(obj.listener);
     });
+    window.removeEventListener("resize", this.setupIntersectionObserver);
+    window.removeEventListener("scroll", this.setupIntersectionObserver);
   }
 
   slickPrev = () => this.innerSlider.slickPrev();
@@ -179,7 +212,11 @@ export default class Slider extends React.Component {
           row.push(
             React.cloneElement(children[k], {
               key: 100 * i + 10 * j + k,
-              tabIndex: -1,
+              ref: el => {
+                if (el) {
+                  this.childRefs.add(el);
+                }
+              },
               style: {
                 width: `${100 / settings.slidesPerRow}%`,
                 display: "inline-block"
