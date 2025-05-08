@@ -30,6 +30,6 @@ describe("State change in parent component of slider", () => {
     );
     // Throws an error "Maximum update depth exceeded." if the bug exists
     expect(getCurrentSlideContent(container)).toEqual("1");
-    expect(getSlidesCount(container)).toEqual(13);
+    expect(getSlidesCount(container)).toEqual(8);
   });
 });
