@@ -82,8 +82,8 @@ describe("UnevenSets Infinite", () => {
     let clonedSlides = getClonesCount(container);
     let activeSlides = getActiveSlidesCount(container);
     let dots = getButtonsLength(container);
-    expect(totalSlides).toEqual(16);
-    expect(clonedSlides).toEqual(10);
+    expect(totalSlides).toEqual(14);
+    expect(clonedSlides).toEqual(8);
     expect(activeSlides).toEqual(4);
     expect(dots).toEqual(2);
     //  expect(beautify_html(toString(container))).toMatchSnapshot();

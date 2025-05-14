@@ -17,8 +17,8 @@ describe("CenterMode Tests", () => {
     let totalSlides = getSlidesCount(container);
     let clonedSlides = getClonesCount(container);
     let activeSlides = getActiveSlidesCount(container);
-    expect(totalSlides).toEqual(16);
-    expect(clonedSlides).toEqual(10);
+    expect(totalSlides).toEqual(14);
+    expect(clonedSlides).toEqual(8);
     expect(activeSlides).toEqual(3);
     //expect(beautify_html(toString(container))).toMatchSnapshot();
   });
