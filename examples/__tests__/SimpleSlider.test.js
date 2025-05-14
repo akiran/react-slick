@@ -16,7 +16,7 @@ import {
 } from "../../test-utils";
 
 describe("SimpleSlider example", () => {
-  it("should have 13 slides (1(preclone) + 6(actual) + 6(postclone))", function() {
+  it("should have 13 slides (1(preclone) + 6(actual) + 1(postclone))", function() {
     const { container } = render(<SimpleSlider />);
     expect(container.getElementsByClassName("slick-slide").length).toBe(8);
   });
