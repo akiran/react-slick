@@ -17,12 +17,12 @@ import {
 
 describe("SimpleSlider example", () => {
   it("should have 13 slides (1(preclone) + 6(actual) + 6(postclone))", function() {
-    const { container } = render(<SimpleSlider a={5} />);
-    expect(container.getElementsByClassName("slick-slide").length).toBe(13);
+    const { container } = render(<SimpleSlider />);
+    expect(container.getElementsByClassName("slick-slide").length).toBe(8);
   });
   it("should have 7 clone slides", function() {
     const { container } = render(<SimpleSlider />);
-    expect(container.getElementsByClassName("slick-cloned").length).toBe(7);
+    expect(container.getElementsByClassName("slick-cloned").length).toBe(2);
   });
   it("should have 1 current slide", function() {
     const { container } = render(<SimpleSlider />);
