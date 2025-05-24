@@ -385,7 +385,8 @@ export class InnerSlider extends React.Component {
       beforeChange,
       onLazyLoad,
       speed,
-      afterChange
+      afterChange,
+      waitForAnimate
     } = this.props;
     // capture currentslide before state is updated
     const currentSlide = this.state.currentSlide;
@@ -402,9 +403,8 @@ export class InnerSlider extends React.Component {
       value => this.state.lazyLoadedList.indexOf(value) < 0
     );
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
-    if (!this.props.waitForAnimate && this.animationEndCallback) {
+    if (!waitForAnimate && this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
-      afterChange && afterChange(currentSlide);
       delete this.animationEndCallback;
     }
     this.setState(state, () => {
@@ -413,17 +413,32 @@ export class InnerSlider extends React.Component {
         this.asNavForIndex = index;
         asNavFor.innerSlider.slideHandler(index);
       }
+
+      // Ensure we always fire afterChange callbacks even if we are not
+      // animating
+      if (!waitForAnimate && afterChange) {
+        afterChange(state.currentSlide);
+      }
+
       if (!nextState) return;
+
       this.animationEndCallback = setTimeout(() => {
         const { animating, ...firstBatch } = nextState;
         this.setState(firstBatch, () => {
           this.callbackTimers.push(
             setTimeout(() => this.setState({ animating }), 10)
           );
-          afterChange && afterChange(state.currentSlide);
           delete this.animationEndCallback;
         });
       }, speed);
+
+      // Ensure we always fire afterChange callbacks even if animation gets
+      // interrupted by a window resize.
+      if (waitForAnimate && afterChange) {
+        this.callbackTimers.push(
+          setTimeout(() => afterChange(state.currentSlide), speed)
+        );
+      }
     });
   };
   changeSlide = (options, dontAnimate = false) => {
