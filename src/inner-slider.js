@@ -420,6 +420,7 @@ export class InnerSlider extends React.Component {
           this.callbackTimers.push(
             setTimeout(() => this.setState({ animating }), 10)
           );
+          this.clickable = true;
           afterChange && afterChange(state.currentSlide);
           delete this.animationEndCallback;
         });
