@@ -212,8 +212,8 @@ export const slideHandler = spec => {
     } else if (!canGoNext(spec) && animationSlide > currentSlide) {
       animationSlide = finalSlide = currentSlide;
     } else if (centerMode && animationSlide >= slideCount) {
-      animationSlide = infinite ? slideCount : slideCount - 1;
-      finalSlide = infinite ? 0 : slideCount - 1;
+      animationSlide = infinite ? animationSlide : slideCount - 1;
+      finalSlide = infinite ? animationSlide : slideCount - 1;
     } else if (animationSlide >= slideCount) {
       finalSlide = animationSlide - slideCount;
       if (!infinite) finalSlide = slideCount - slidesToShow;
