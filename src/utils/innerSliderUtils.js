@@ -595,7 +595,11 @@ export const getTrackCSS = spec => {
   ]);
   let trackWidth, trackHeight;
   if (!spec.vertical) {
-    trackWidth = getTotalSlides(spec) * spec.slideWidth;
+    if (!spec.variableWidth) {
+      trackWidth = getTotalSlides(spec) * spec.slideWidth;
+    } else {
+      trackWidth = getTotalSlides(spec) * 5000;
+    }
   } else {
     const trackChildren = spec.unslick
       ? spec.slideCount
