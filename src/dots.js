@@ -70,7 +70,7 @@ export class Dots extends React.PureComponent {
 
       let onClick = this.clickHandler.bind(this, dotOptions);
       dots = dots.concat(
-        <li key={i} className={className}>
+        <li key={i} className={className} role="listitem">
           {React.cloneElement(this.props.customPaging(i), { onClick })}
         </li>
       );
