@@ -76,8 +76,9 @@ export class Dots extends React.PureComponent {
       );
     }
 
-    return React.cloneElement(this.props.appendDots(dots), {
-      className: this.props.dotsClass,
+    const dotsList = this.props.appendDots(dots);
+    return React.cloneElement(dotsList, {
+      className: dotsList.props.className + " " + this.props.dotClass,
       ...mouseEvents
     });
   }
