@@ -13,26 +13,26 @@ test("Responsive settings", async ({ mount, page }) => {
   await expect(await activeSlidesCount(component)).toEqual(4);
 
   await page.setViewportSize({ width: 1000, height: 500 });
-  await page.waitForTimeout(10);
+  await page.waitForTimeout(100);
   await expect(await activeSlidesCount(component)).toEqual(3);
 
   await page.setViewportSize({ width: 600, height: 500 });
-  await page.waitForTimeout(10);
+  await page.waitForTimeout(100);
   await expect(await activeSlidesCount(component)).toEqual(2);
 
   await page.setViewportSize({ width: 400, height: 500 });
-  await page.waitForTimeout(10);
+  await page.waitForTimeout(100);
   await expect(await activeSlidesCount(component)).toEqual(1);
 
   await page.setViewportSize({ width: 600, height: 500 });
-  await page.waitForTimeout(10);
+  await page.waitForTimeout(100);
   await expect(await activeSlidesCount(component)).toEqual(2);
 
   await page.setViewportSize({ width: 1000, height: 500 });
-  await page.waitForTimeout(10);
+  await page.waitForTimeout(100);
   await expect(await activeSlidesCount(component)).toEqual(3);
 
   await page.setViewportSize({ width: 1500, height: 500 });
-  await page.waitForTimeout(10);
+  await page.waitForTimeout(100);
   await expect(await activeSlidesCount(component)).toEqual(4);
 });
