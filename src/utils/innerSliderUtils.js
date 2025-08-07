@@ -755,7 +755,7 @@ export const getTrackLeft = spec => {
     const trackElem = trackRef && trackRef.node;
     targetSlideIndex = slideIndex + getPreClones(spec);
     targetSlide = trackElem && trackElem.childNodes[targetSlideIndex];
-    targetLeft = targetSlide ? targetSlide.offsetLeft * -1 : 0;
+    targetLeft = targetSlide ? (targetSlide.getBoundingClientRect().left - targetSlide.offsetParent.getBoundingClientRect().left) * -1 : 0;
     if (centerMode === true) {
       targetSlideIndex = infinite
         ? slideIndex + getPreClones(spec)
