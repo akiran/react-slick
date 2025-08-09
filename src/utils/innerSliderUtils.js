@@ -87,17 +87,18 @@ export const getSwipeDirection = (touchObject, verticalSwiping = false) => {
 export const canGoNext = spec => {
   let canGo = true;
   if (!spec.infinite) {
-    if (spec.centerMode && spec.currentSlide >= spec.slideCount - 1) {
-      canGo = false;
-    } else if (
-      spec.slideCount <= spec.slidesToShow ||
-      spec.currentSlide >= spec.slideCount - spec.slidesToShow
-    ) {
-      canGo = false;
+    if (spec.centerMode) {
+      if (spec.currentSlide >= spec.slideCount - 1) {
+        canGo = false;
+      } else if (spec.slideCount <= spec.slidesToShow || spec.currentSlide >= spec.slideCount - spec.slidesToShow / 2) {
+        canGo = false;
+      }
+    } else if (spec.slideCount <= spec.slidesToShow || spec.currentSlide >= spec.slideCount - spec.slidesToShow) {
+        canGo = false;
     }
   }
   return canGo;
-};
+ };
 
 // given an object and a list of keys, return new object with given keys
 export const extractObject = (spec, keys) => {
